@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataClient", "DataClient\Da
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocConnectApp", "DocConnectApp\DocConnectApp.csproj", "{0BEF7578-6C96-4967-AA0A-EECB69774919}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsole", "ConsoleApplication1\TestConsole.csproj", "{974E9808-14C2-4EFD-B170-E3D0A592C694}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsole", "TestConsole\TestConsole.csproj", "{974E9808-14C2-4EFD-B170-E3D0A592C694}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
