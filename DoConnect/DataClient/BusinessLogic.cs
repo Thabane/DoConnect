@@ -11,10 +11,9 @@ namespace DataClient
 {
     public class BusinessLogic
     {
-        private string Conn = string.Empty;
+        private string Conn = "DB";
         public BusinessLogic()
         {
-            Conn = "DB";
         }
         public int CreateUser()
         {
