@@ -14,12 +14,11 @@ namespace DataClient
         private string Conn = string.Empty;
         public BusinessLogic()
         {
-            Conn = ConfigurationManager.ConnectionStrings["DB"].ConnectionString;
+            Conn = "DB";
         }
         public int CreateUser()
         {
             DataAccess da = new DataAccess();
-            da.ExecuteNonQuery(Conn,new List<SqlParameter>(),"[CreateUser]");
             int userId = 0;
             using (var reader = da.ExecuteReader(Conn, "[CreateUser]", new List<SqlParameter>()))
             {
