@@ -11,7 +11,7 @@ namespace TestConsole
     {
         static void Main(string[] args)
         {
-            BusinessLogic bl = new BusinessLogic();
+            DataLayer bl = new DataLayer();
             bl.CreateUser();
             Console.WriteLine("User Created.");
             Console.ReadKey();

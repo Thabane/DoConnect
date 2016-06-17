@@ -5,10 +5,6 @@ namespace ObjectModel
 {   
     public class Patient_Medical_Aid
     {
-        public Patient_Medical_Aid()
-        {            
-        }
-
         public int ID { get; set; }
         public string Scheme_Name { get; set; }
         public string Membership_Number { get; set; }
