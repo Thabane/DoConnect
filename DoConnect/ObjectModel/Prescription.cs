@@ -5,9 +5,6 @@ namespace ObjectModel
 {
     public class Prescription
     {
-        public Prescription()
-        {            
-        }
         public int ID { get; set; }
         public string Description { get; set; }
         public DateTime Date { get; set; }

@@ -5,10 +5,6 @@ namespace ObjectModel
 {
     public class Doctors
     {
-        public Doctors()
-        {
-        }
-    
         public int ID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

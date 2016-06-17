@@ -9,12 +9,9 @@ using System.Threading.Tasks;
 
 namespace DataClient
 {
-    public class BusinessLogic
+    public class DataLayer
     {
         private string Conn = "DB";
-        public BusinessLogic()
-        {
-        }
         public int CreateUser()
         {
             DataAccess da = new DataAccess();
