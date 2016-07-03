@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
+using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
+//using System.Net
 
 namespace DataClient
 {
@@ -56,6 +59,16 @@ namespace DataClient
                 con.Open();
                 command.ExecuteNonQuery();
             }
-        } 
+        }
+
+        internal void LogEntry()
+        {
+            JObject o1 = JObject.Parse(File.ReadAllText(@"c:\videogames.json"));
+            //using (StreamReader r = new StreamReader(@"C:\Users\thabane.n\Source\Repos\DoConnect\DoConnect\DataClient\LogFiles\Log.json"))
+            //{
+            //    var text = r.Read();
+            //    var hold = JSON.Parse(text);
+            //}
+        }
     }
 }
