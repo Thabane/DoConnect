@@ -14,6 +14,34 @@ app.config(
                 templateUrl: "App/Views/Patients/patients.html",
                 controller: "PatientsController"
             })
+            .when("/Employees", {
+                templateUrl: "App/Views/Employees/Employees.html",
+                controller: "EmployeesController"
+            })
+            .when("/Appointments", {
+                templateUrl: "App/Views/Appointments/Appointments.html",
+                controller: "AppointmentsController"
+            })
+            .when("/MedicineInventory", {
+                templateUrl: "App/Views/MedicineInventory/MedicineInventory.html",
+                controller: "MedicineInventoryController"
+            })
+            .when("/Accounting", {
+                templateUrl: "App/Views/Accounting/Accounting.html",
+                controller: "AccountingController"
+            })
+            .when("/Events", {
+                templateUrl: "App/Views/Events/Events.html",
+                controller: "EventsController"
+            })
+            .when("/DiagnosisExpertSystem", {
+                templateUrl: "App/Views/DiagnosisExpertSystem/DiagnosisExpertSystem.html",
+                controller: "DiagnosisExpertSystemController"
+            })
+            .when("/Reports", {
+                templateUrl: "App/Views/Reports/Reports.html",
+                controller: "ReportsController"
+            })
             .otherwise({
                 redirectTo: "/Dashboard"
             });

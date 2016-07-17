@@ -15,7 +15,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DoConnectAdmin</RootNamespace>
     <AssemblyName>DoConnectAdmin</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -51,11 +51,17 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DataClient">
+      <HintPath>..\..\..\DataClient\bin\Debug\DataClient.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="ObjectModel">
+      <HintPath>..\..\..\ObjectModel\bin\Debug\ObjectModel.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -129,29 +135,56 @@
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AccountingController.cs" />
+    <Compile Include="Controllers\AppointmentsController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\DiagnosisExpertSystemController.cs" />
+    <Compile Include="Controllers\EmployeesController.cs" />
+    <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MedicineInventoryController.cs" />
     <Compile Include="Controllers\PatientsController.cs" />
+    <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App\Controllers\AccountingController.js" />
+    <Content Include="App\Controllers\AppointmentsController.js" />
     <Content Include="App\Controllers\DashboardController.js" />
+    <Content Include="App\Controllers\DiagnosisExpertSystemController.js" />
+    <Content Include="App\Controllers\EmployeesController.js" />
+    <Content Include="App\Controllers\EventsController.js" />
+    <Content Include="App\Controllers\MedicineInventoryController.js" />
     <Content Include="App\Controllers\PatientsController.js" />
+    <Content Include="App\Controllers\Reports.js" />
+    <Content Include="App\Services\AccountingService.js" />
+    <Content Include="App\Services\AppointmentsService.js" />
+    <Content Include="App\Services\DiagnosisExpertSystemService.js" />
+    <Content Include="App\Services\EmployeesService.js" />
+    <Content Include="App\Services\EventsService.js" />
+    <Content Include="App\Services\MedicineInventoryService.js" />
     <Content Include="App\Services\PatientsService.js" />
     <Content Include="App\Services\AuthHttpResponseInterceptor.js" />
     <Content Include="App\Services\DashboardService.js" />
+    <Content Include="App\Services\ReportsService.js" />
+    <Content Include="App\Views\Accounting\Accounting.html" />
+    <Content Include="App\Views\Appointments\Appointments.html" />
     <Content Include="App\Views\Dashboard\dashboard.html" />
+    <Content Include="App\Views\DiagnosisExpertSystem\DiagnosisExpertSystem.html" />
+    <Content Include="App\Views\Employees\Employees.html" />
+    <Content Include="App\Views\Events\Events.html" />
+    <Content Include="App\Views\MedicineInventory\MedicineInventory.html" />
     <Content Include="App\Views\Patients\patients.html" />
+    <Content Include="App\Views\Reports\Reports.html" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\metisMenu.min.css" />
     <Content Include="Content\morris.css" />
@@ -198,6 +231,9 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Employees\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
