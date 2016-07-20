@@ -1,3 +1,272 @@
-﻿<div ng-controller="EventsController">
+﻿<div>
+    <div id="page-wrapper" ng-controller="EventsController">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header">Events</h2>
+            </div>
+        </div>
 
+        <ul class="nav nav-tabs">
+            <li role="presentation" class="active"><a href="/Events"><i class="fa fa-align-justify"></i>Events List</a></li>
+            <li role="presentation"><a href="#" onclick="myFunctionAddEvent()"><i class="fa fa-plus-circle"></i>New Event</a></li>
+        </ul>
+
+        <div class="panel panel-default">
+            <table class="table-bordered" style="float:right; border:0; margin-bottom:5px;">
+                <tbody>
+                    <tr>
+                        <td style="border: 0;">
+                            <div class="btn-group">
+                                <a class="btn btn-default dropdown-toggle btn-select2" href="#" data-toggle="dropdown" style="font-size:13px;" aria-expanded="false">Search field <span class="caret"></span></a>
+                                <ul class="dropdown-menu" style="font-size:13px;">
+                                    <li><a href="#">Title</a></li>
+                                    <li><a href="#">Details</a></li>
+                                    <li><a href="#">Start Date</a></li>
+                                    <li><a href="#">End Date</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                        <td style="border:0;">
+                            <div class="form-group input-group" style="margin-top:4px; margin-bottom:4px;">
+                                <input class="form-control" type="text" style="font-size:13px;"><span class="input-group-btn">
+                                    <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+                                </span>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table class="table table-hover" style="font-size: 12px;">
+                <thead style="background-color: #f8f8f8;">
+                    <tr>
+                        <th style="padding-right: 0px; padding-left: 20px;">Title</th>
+                        <th style="padding-right: 0px; padding-left: 20px;">Event Details</th>
+                        <th style="width: 15%; padding-right: 0px; padding-left: 20px;">Start Date</th>
+                        <th style="width: 15%; padding-right: 0px; padding-left: 20px;">End Date</th>
+                        <th style="width: 15%; padding-right: 0px; padding-left: 20px;">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="tr_dblclick">
+                        <td><input name="Fistname" class="form-control readonly" value="Staff Meeting"></td>
+                        <td><input name="Lastname" class="form-control readonly" value="Staff Meeting"></td>
+                        <td><input name="Email Addres" class="form-control readonly" value="94-07-21"></td>
+                        <td><input name="ID_Number" class="form-control readonly" value="94-07-21"></td>
+                        <td>
+                            <button class="btn btn-info btn-xs" id="myFunctionEvents_Edit" onclick="myFunctionEvents_Edit()" href="#"><i class="fa fa-pencil"></i></button>
+                            <button class="btn btn-info btn-xs" id="myFunctionEvents_Save" onclick="myFunctionEvents_Save()" href="#"><i class="fa fa-floppy-o"></i></button>
+                            <button class="btn btn-danger btn-xs" onclick="myFunctionEvents_Delete()"><i class="fa fa-trash-o"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <ul class="pager">
+                <li class="previous"><a href="#">Previous</a></li>
+                <li class="next"><a href="#">Next</a></li>
+            </ul>
+        </div>
+
+        <!--View Events Modal-->
+        <div id="View_Event_Modal" class="modal fade">
+            <form>
+                <div class="modal-dialog" style="width:40%">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Event Details</h4>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table" style="width:100%;">
+                                <tbody>
+                                    <tr>
+                                        <td style="border-top-width: 0px; width:5%; padding-left:30px;"><h5 class="form-control-label">Title:</h5></td>
+                                        <td style="border-top-width: 0px; width:95%; padding-right:20px;"><input name="View_Title" class="form-control readonly_ViewEvent" type="text"></td>
+                                     </tr>
+                                    <tr>
+                                        <td style="border-top-width: 0px; padding-left:30px;"><h5>Details:</h5></td>
+                                        <td style="border-top-width: 0px; padding-right:20px;"><textarea class="form-control readonly_ViewEvent" rows="3" cols="20" name="View_Details"></textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border-top-width: 0px; padding-left:30px;"><h5 class="form-control-label">Start Date & Time:</h5></td>
+                                        <td style="border-top-width: 0px; padding-right:20px;"><div class="form-group">
+                                                                                                    <div class='input-group date' id='datetimepicker6'>
+                                                                                                        <input type='text' class="form-control readonly_ViewEvent" name="View_StartDateTime"/>
+                                                                                                        <span class="input-group-addon">
+                                                                                                            <span class="glyphicon glyphicon-calendar btnDatetimepicker_View"></span>
+                                                                                                        </span>
+                                                                                                    </div>
+                                                                                                </div></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border-top-width: 0px; padding-left:30px;"><h5 class="form-control-label">End Date & Time:</h5></td>
+                                        <td style="border-top-width: 0px; padding-right:20px;"><div class="form-group">
+                                                                                                    <div class='input-group date' id='datetimepicker7'>
+                                                                                                        <input type='text' class="form-control readonly_ViewEvent" name="View_EndDateTime"/>
+                                                                                                        <span class="input-group-addon">
+                                                                                                            <span class="glyphicon glyphicon-calendar btnDatetimepicker_View"></span>
+                                                                                                        </span>
+                                                                                                    </div>
+                                                                                                </div></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border-top-width: 0px; padding-left:30px;"><h5>Appointment Status:</h5></td>
+                                        <td style="border-top-width: 0px; padding-right:20px;"><select class="form-control readonly_ViewEvent required input-sm">
+                                                                                                    <option value="">Status</option>
+                                                                                                    <option value="1">Approve</option>
+                                                                                                    <option value="2">Decline</option>
+                                                                                                </select>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" onclick="function_btnUpdateEvent()" id="function_btnUpdateEvent">Update</button>
+                            <button type="button" class="btn btn-danger" onclick="function_btnDeleteEvent()">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div><!--View Event Modal Ends-->
+        <!--New Event Modal-->
+        <div id="New_Event_Modal" class="modal fade">
+            <form>
+                <div class="modal-dialog" style="width:40%">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">New Event Details</h4>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table" style="width:100%;">
+                                <tbody>
+                                    <tr>
+                                        <td style="border-top-width: 0px; width:5%; padding-left:30px;"><h5 class="form-control-label">Title:</h5></td>
+                                        <td style="border-top-width: 0px; width:95%; padding-right:20px;"><input name="New_Title" class="form-control" type="text"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border-top-width: 0px; padding-left:30px;"><h5>Details:</h5></td>
+                                        <td style="border-top-width: 0px; padding-right:20px;"><textarea class="form-control" rows="3" cols="20" name="New_Details"></textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border-top-width: 0px; padding-left:30px;"><h5 class="form-control-label">Start Date & Time:</h5></td>
+                                        <td style="border-top-width: 0px; padding-right:20px;">
+                                            <div class="form-group">
+                                                <div class='input-group date' id='datetimepicker6'>
+                                                    <input type='text' class="form-control" name="New_StartDateTime"/>
+                                                    <span class="input-group-addon">
+                                                        <span class="glyphicon glyphicon-calendar btnDatetimepicker_View"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border-top-width: 0px; padding-left:30px;"><h5 class="form-control-label">End Date & Time:</h5></td>
+                                        <td style="border-top-width: 0px; padding-right:20px;">
+                                            <div class="form-group">
+                                                <div class='input-group date' id='datetimepicker7'>
+                                                    <input type='text' class="form-control" name="New_EndDateTime"/>
+                                                    <span class="input-group-addon">
+                                                        <span class="glyphicon glyphicon-calendar btnDatetimepicker_View"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border-top-width: 0px; padding-left:30px;"><h5>Appointment Status:</h5></td>
+                                        <td style="border-top-width: 0px; padding-right:20px;">
+                                            <select class="form-control required input-sm" name="New_AppointmentStatus">
+                                                <option value="">Status</option>
+                                                <option value="1">Approve</option>
+                                                <option value="2">Decline</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" onclick="function_btnNewEvent()">Add Event</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div><!--New Event Modal Ends-->
+    </div>
 </div>
+<script type="text/javascript">
+    $('.readonly').css('border', 'none');
+    $('.readonly').css('background-color', 'transparent');
+    $('.readonly').css('font-size', '13px');
+    $('.readonly').css('padding-right', '0px');
+    $('#myFunctionEvents_Edit').show(); $('#myFunctionEvents_Save').hide();
+
+    $('#myFunctionEvents_Edit').click(function () {
+
+        $('#myFunctionEvents_Edit').hide(); $('#myFunctionEvents_Save').show();
+
+        $('.readonly').attr("readonly", false)
+        $('.readonly').css('border', '1px solid #ccc');
+    });
+
+    $('#myFunctionEvents_Save').click(function () {
+
+        $('#myFunctionEvents_Edit').show(); $('#myFunctionEvents_Save').hide();
+
+        $('.readonly').attr("readonly", true)
+        $('.readonly').css('border', 'none');
+        $('.readonly').css('background-color', 'transparent');
+    });
+
+    function myFunctionAddEvent() {//<!--Show New Event Modal-->
+        $("#New_Event_Modal").modal('show');
+    };
+
+    $('.tr_dblclick').dblclick(function () {//<!--Show View Event Modal when a user double clicks a row-->
+        $("#View_Event_Modal").modal('show');
+        $('.readonly_ViewEvent').css('border', 'none');
+        $('.readonly_ViewEvent').attr("readonly", true)
+        $('.readonly_ViewEvent').css('background-color', 'transparent');
+    });
+
+    $('#function_btnUpdateEvent').click(function () {//<!--When a User clicks Update button on Show View Event Modal when a user double clicks a row-->
+        var btnText = $(this).html();
+        if (btnText == "Update") {
+            $('.readonly_ViewEvent').attr("readonly", false)
+            $('.readonly_ViewEvent').css('border', '1px solid #ccc');
+            $("#function_btnUpdateEvent").html('Save');
+        }
+        else {
+            $('.readonly_ViewEvent').attr("readonly", true)
+            $('.readonly_ViewEvent').css('border', 'none');
+            $('.readonly_ViewEvent').css('background-color', 'transparent');
+            $("#function_btnUpdateEvent").html('Update');
+        }
+    });
+
+    //$('.btnDatetimepicker_View').click(function () {       
+    //    $('.myDatetimepicker').datetimepicker();
+    //}); 
+
+    $('.btnDatetimepicker_View').click(function () {
+        $('#datetimepicker6').datetimepicker();
+        $('#datetimepicker7').datetimepicker({
+            useCurrent: false //Important! See issue #1075
+        });
+        $("#datetimepicker6").on("dp.change", function (e) {
+            $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+        });
+        $("#datetimepicker7").on("dp.change", function (e) {
+            $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+        });
+    });
+
+</script>
+
+

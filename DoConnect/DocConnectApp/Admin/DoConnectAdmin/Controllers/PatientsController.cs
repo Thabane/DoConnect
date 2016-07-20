@@ -1,4 +1,4 @@
-﻿using ObjectModel;
+﻿//using ObjectModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +12,11 @@ namespace DoConnectAdmin.Controllers
     {
         //call db method
 
-        [HttpGet]
-        [Route("service/GetAllPatients")]
-        public List<Patient> GetAllPatients()
-        {
-            return new List<Patient>();
-        }
+        //[HttpGet]
+        //[Route("service/GetAllPatients")]
+        //public List<Patient> GetAllPatients()
+        //{
+        //    return new List<Patient>();
+        //}
     }
 }
