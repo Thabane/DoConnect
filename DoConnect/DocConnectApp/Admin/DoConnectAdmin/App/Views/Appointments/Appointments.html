@@ -91,50 +91,47 @@
                             <h4 class="modal-title">Appointment Details</h4>
                         </div>
                         <div class="modal-body">
-                            <table class="table" style="width:100%;">
-                                <tbody>
-                                    <tr>
-                                        <td style="border-top-width: 0px; padding-left:30px;"><h5>Date & Time:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><div class="container" style="padding-left:0px; padding-right:0px;">
-                                                                                                    <div class="row">
-                                                                                                        <div class="col-md-12">
-                                                                                                            <div class="form-group">
-                                                                                                                <div class="input-group date datetimepicker">
-                                                                                                                    <input class="form-control" type="text">
-                                                                                                                    <span class="input-group-addon">
-                                                                                                                        <span class="glyphicon glyphicon-calendar"></span>
-                                                                                                                    </span>
-                                                                                                                </div>
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border-top-width: 0px; padding-left:30px;"><h5>Patient Name:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input name="View_PatientName" class="form-control readonly_ViewAppointment" type="text"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border-top-width: 0px; padding-left:30px;"><h5 class="form-control-label">Patient Email:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input name="View_EmailAddress" class="form-control readonly_ViewAppointment" type="email"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border-top-width: 0px; padding-left:30px;"><h5 class="form-control-label">Appointment Details:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input name="View_Details" class="form-control readonly_ViewAppointment" type="text"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border-top-width: 0px; padding-left:30px;"><h5 class="form-control-label">Appointment Status:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;">
-                                            <select class="form-control readonly_ViewAppointment required input-sm">
-                                                <option value="">Choose Status</option>
-                                                <option value="1">Approved</option>
-                                                <option value="2">Denied</option>
-                                            </select>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <div class="row" style="margin-top:5px; margin-bottom:5px;">
+                                <div class="col-md-3"><h5>Date & Time:</h5></div>
+                                <div class="col-md-8">
+                                    <div class="container" style="padding-left:0px; padding-right:0px;">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <div class="input-group date datetimepicker">
+                                                        <input class="form-control" type="text">
+                                                        <span class="input-group-addon">
+                                                            <span class="glyphicon glyphicon-calendar"></span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:5px; margin-bottom:5px;">
+                                <div class="col-md-3"><h5>Patient Name:</h5></div>
+                                <div class="col-md-8"><input name="View_PatientName" class="form-control readonly_ViewAppointment" type="text"></div>
+                            </div>
+                            <div class="row" style="margin-top:5px; margin-bottom:5px;">
+                                <div class="col-md-3"><h5 class="form-control-label">Patient Email:</h5></div>
+                                <div class="col-md-8"><input name="View_EmailAddress" class="form-control readonly_ViewAppointment" type="email"></div>
+                            </div>
+                            <div class="row" style="margin-top:5px; margin-bottom:5px;">
+                                <div class="col-md-3"><h5 class="form-control-label">Appointment Details:</h5></div>
+                                <div class="col-md-8"><input name="View_Details" class="form-control readonly_ViewAppointment" type="text"></div>
+                            </div>
+                            <div class="row" style="margin-top:5px; margin-bottom:5px;">
+                                <div class="col-md-3"><h5 class="form-control-label">Appointment Status:</h5></div>
+                                <div class="col-md-8">
+                                    <select class="form-control readonly_ViewAppointment required input-sm">
+                                        <option value="">Choose Status</option>
+                                        <option value="1">Approved</option>
+                                        <option value="2">Denied</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -145,6 +142,7 @@
                 </div>
             </form>
         </div><!--View Appointment Modal Ends-->
+
         <!--New Appointment Modal-->
         <div id="New_Appointment_Modal" class="modal fade">
             <form>
@@ -155,49 +153,47 @@
                             <h4 class="modal-title">New Appointment Details</h4>
                         </div>
                         <div class="modal-body">
-                            <table class="table" style="width:100%;">
-                                <tbody>
-                                    <tr>
-                                        <td style="border-top-width: 0px; padding-left:30px;"><h5>Date & Time:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><div class="container" style="padding-left:0px; padding-right:0px;">
-                                                                                                    <div class="row">
-                                                                                                        <div class="col-md-12">
-                                                                                                            <div class="form-group">
-                                                                                                                <div class="input-group date datetimepicker">
-                                                                                                                    <input class="form-control" type="text">
-                                                                                                                    <span class="input-group-addon">
-                                                                                                                        <span class="glyphicon glyphicon-calendar"></span>
-                                                                                                                    </span>
-                                                                                                                </div>
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                </div></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border-top-width: 0px; padding-left:30px;"><h5>Patient Name:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input name="View_PatientName" class="form-control" type="text"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border-top-width: 0px; padding-left:30px;"><h5 class="form-control-label">Patient Email:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input name="View_EmailAddress" class="form-control" type="email"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border-top-width: 0px; padding-left:30px;"><h5 class="form-control-label">Appointment Details:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input name="View_Details" class="form-control" type="text"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border-top-width: 0px; padding-left:30px;"><h5 class="form-control-label">Appointment Status:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;">
-                                            <select class="form-control required input-sm">
-                                                <option value="">Choose Status</option>
-                                                <option value="1">Approved</option>
-                                                <option value="2">Denied</option>
-                                            </select>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <div class="row" style="margin-top:5px; margin-bottom:5px;">
+                                <div class="col-md-3"><h5>Date & Time:</h5></div>
+                                <div class="col-md-8">
+                                    <div class="container" style="padding-left:0px; padding-right:0px;">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <div class="input-group date datetimepicker">
+                                                        <input class="form-control" type="text">
+                                                        <span class="input-group-addon">
+                                                            <span class="glyphicon glyphicon-calendar"></span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:5px; margin-bottom:5px;">
+                                <div class="col-md-3"><h5>Patient Name:</h5></div>
+                                <div class="col-md-8"><input name="View_PatientName" class="form-control" type="text"></div>
+                            </div>
+                            <div class="row" style="margin-top:5px; margin-bottom:5px;">
+                                <div class="col-md-3"><h5 class="form-control-label">Patient Email:</h5></div>
+                                <div class="col-md-8"><input name="View_EmailAddress" class="form-control" type="email"></div>
+                            </div>
+                            <div class="row" style="margin-top:5px; margin-bottom:5px;">
+                                <div class="col-md-3"><h5 class="form-control-label">Appointment Details:</h5></div>
+                                <div class="col-md-8"><input name="View_Details" class="form-control" type="text"></div>
+                            </div>
+                            <div class="row" style="margin-top:5px;">
+                                <div class="col-md-3"><h5 class="form-control-label">Appointment Status:</h5></div>
+                                <div class="col-md-8">
+                                    <select class="form-control required input-sm">
+                                        <option value="">Choose Status</option>
+                                        <option value="1">Approved</option>
+                                        <option value="3">Denied</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

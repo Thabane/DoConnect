@@ -22,126 +22,124 @@
                             <h4 class="modal-title">Patient Details</h4>
                         </div>
                         <div class="modal-body">
-                            <table class="table" style="width:100%;">
-                                <tbody>
-                                    <tr><td style="border-top-width: 0px;" colspan="3"><label>General Information</label></td></tr>
-                                    <tr>
-                                        <td style="border-top-width: 0px; width:10%;"><h5 class="form-control-label">Firstname:</h5></td>
-                                        <td style="border-top-width: 0px; width:20%; padding-right:20px;"><input type="text" class="form-control" name="P_Fistname" id="Text9"></td>
-                                        <td style="border-top-width: 0px; width:10%;"><h5 class="form-control-label">Lastname:</h5></td>
-                                        <td style="border-top-width: 0px; width:20%; padding-right:20px;"><input type="text" class="form-control" name="P_Lastname" id="Text11"></td>
-                                        <td style="border-top-width: 0px; width:5%;"><h5 class="form-control-label">Email:</h5></td>
-                                        <td style="border-top-width: 0px; width:20%; padding-right:20px;"><input type="email" class="form-control" name="P_EmailAddress" id="Email2"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border-top-width: 0px;"><h5>ID Number:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control" name="P_IDNumber" id="Text14"></td>
-                                        <td style="border-top-width: 0px;"><h5>Cell Number:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control" name="P_CellNumber" id="Text12"></td>
-                                        <td style="border-top-width: 0px;"><h5>DOB:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><div class="container" style="padding-left:0px; padding-right:0px;">
-                                                                                                    <div class="row">
-                                                                                                        <div class="col-md-12">
-                                                                                                            <div class="form-group">
-                                                                                                                <div class="input-group date datetimepicker">
-                                                                                                                    <input class="form-control" type="text" data-format="MM/dd/yyyy">
-                                                                                                                    <span class="input-group-addon">
-                                                                                                                        <span class="glyphicon glyphicon-calendar"></span>
-                                                                                                                    </span>
-                                                                                                                </div>
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                </div></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border-top-width: 0px;"><h5>Gender:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;">
-                                            <select class="form-control required input-sm">
-                                                <option value="">Please choose a gender</option>
-                                                <option value="1">Male</option>
-                                                <option value="2">Female</option>
-                                            </select>
-                                        </td>
-                                        <td style="border-top-width: 0px;"><h5>Street Address:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control" name="P_StreetAddress"></td>
-                                        <td style="border-top-width: 0px;"><h5>Suburb:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control" name="P_Suburb"></td>
+                            <div class="row col-md-12" style="margin-top:6px; margin-bottom:6px;"><label>General Information</label></div>
+                            <div class="row" style="margin-top:6px; margin-bottom:6px;">
+                                <div class="col-md-1"><h5 class="form-control-label">Firstname:</h5></div>
+                                <div class="col-md-3"><input type="text" class="form-control" name="P_Fistname" id="Text9"></div>
+                                <div class="col-md-1"><h5 class="form-control-label">Lastname:</h5></div>
+                                <div class="col-md-3"><input type="text" class="form-control" name="P_Lastname" id="Text11"></div>
+                                <div class="col-md-1"><h5 class="form-control-label">Email:</h5></div>
+                                <div class="col-md-3"><input type="email" class="form-control" name="P_EmailAddress" id="Email2"></div>
+                            </div>
+                            <div class="row" style="margin-top:6px; margin-bottom:6px;">
+                                <div class="col-md-1"><h5>ID Number:</h5></div>
+                                <div class="col-md-3"><input type="text" class="form-control" name="P_IDNumber" id="Text14"></div>
+                                <div class="col-md-1"><h5>Cell Number:</h5></div>
+                                <div class="col-md-3"><input type="text" class="form-control" name="P_CellNumber" id="Text12"></div>
+                                <div class="col-md-1"><h5>DOB:</h5></div>
+                                <div class="col-md-3">
+                                    <div class="container" style="padding-left:0px; padding-right:0px;">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <div class="input-group date datetimepicker">
+                                                        <input class="form-control" type="text" data-format="MM/dd/yyyy">
+                                                        <span class="input-group-addon">
+                                                            <span class="glyphicon glyphicon-calendar"></span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:6px; margin-bottom:6px;">
+                                <div class="col-md-1"><h5>Gender:</h5></div>
+                                <div class="col-md-3">
+                                    <select class="form-control required input-sm">
+                                        <option value="">Please choose a gender</option>
+                                        <option value="1">Male</option>
+                                        <option value="2">Female</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-1"><h5>Street Address:</h5></div>
+                                <div class="col-md-3"><input type="text" class="form-control" name="P_StreetAddress"></div>
+                                <div class="col-md-1"><h5>Suburb:</h5></div>
+                                <div class="col-md-3"><input type="text" class="form-control" name="P_Suburb"></div>
+                            </div>
+                            <div class="row" style="margin-top:6px; margin-bottom:15px; padding-bottom:15px; border-bottom: 1px solid #ddd;">
+                                <div class="col-md-1"><h5>City:</h5></div>
+                                <div class="col-md-3"><input type="text" class="form-control" name="P_City"></div>
+                                <div class="col-md-1"><h5>Country:</h5></div>
+                                <div class="col-md-3"><input type="text" class="form-control" name="P_Country"></div>
+                            </div>
 
-                                    </tr>
-                                    <tr style="border-bottom: 1px solid #ddd;">
-                                        <td style="border-top-width: 0px;"><h5>City:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control" name="P_City"></td>
-                                        <td style="border-top-width: 0px;"><h5>Country:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control" name="P_Country"></td>
-                                        <td style="border-top-width: 0px;"></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"></td>
+                            <div class="row col-md-12" style="margin-top:6px; margin-bottom:10px;"><label>Insurance Information</label></div>
+                            <div class="row" style="margin-top:6px; margin-bottom:6px;">
+                                <div class="col-md-1"><h5>Medical Aid Provider:</h5></div>
+                                <div class="col-md-3">
+                                    <select class="form-control required input-sm" name="P_MedicalAidProvider" id="Select2">
+                                        <option value="">Please choose Medical Aid Provider</option>
+                                        <option value="1">Discovery</option>
+                                        <option value="2">A</option>
+                                        <option value="3">B</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-1"><h5>Scheme Name:</h5></div>
+                                <div class="col-md-3"><input type="text" class="form-control" name="P_Scheme_Name"></div>
+                                <div class="col-md-1"><h5>Membership Number:</h5></div>
+                                <div class="col-md-3"><input type="text" class="form-control" name="P_MedicalAidMembershipNumber"></div>
+                            </div>
+                            <div class="row" style="margin-top:6px; margin-bottom:15px; border-bottom: 1px solid #ddd;">
+                                <div class="col-md-1"><h5>Registration Date:</h5></div>
+                                <div class="col-md-3">
+                                    <div class="container" style="padding-left:0px; padding-right:0px;">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <div class="input-group date datetimepicker">
+                                                        <input class="form-control" type="text" data-format="MM/dd/yyyy">
+                                                        <span class="input-group-addon">
+                                                            <span class="glyphicon glyphicon-calendar"></span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-1"><h5>Expiry Date:</h5></div>
+                                <div class="col-md-3">
+                                    <div class="container" style="padding-left:0px; padding-right:0px;">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <div class="input-group date datetimepicker">
+                                                        <input class="form-control" type="text" data-format="MM/dd/yyyy">
+                                                        <span class="input-group-addon">
+                                                            <span class="glyphicon glyphicon-calendar"></span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-                                    </tr>
-                                    <tr><td style="border-top-width: 0px;" colspan="3"><label>Insurance Information</label></td></tr>
-                                    <tr>
-                                        <td style="border-top-width: 0px;"><h5>Medical Aid Provider:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;">
-                                            <select class="form-control required input-sm" name="P_MedicalAidProvider" id="Select2">
-                                                <option value="">Please choose Medical Aid Provider</option>
-                                                <option value="1">Discovery</option>
-                                                <option value="2">A</option>
-                                                <option value="3">B</option>
-                                            </select>
-                                        </td>
-                                        <td style="border-top-width: 0px;"><h5>Scheme Name:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control" name="P_Scheme_Name"></td>
-                                        <td style="border-top-width: 0px;"><h5>Membership Number:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control" name="P_MedicalAidMembershipNumber"></td>
-                                        
-                                    </tr>
-                                    <tr style="border-bottom: 1px solid #ddd;">
-                                        <td style="border-top-width: 0px;"><h5>Registration Date:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><div class="container" style="padding-left:0px; padding-right:0px;">
-                                                                                                    <div class="row">
-                                                                                                        <div class="col-md-12">
-                                                                                                            <div class="form-group">
-                                                                                                                <div class="input-group date datetimepicker">
-                                                                                                                    <input class="form-control" type="text" data-format="MM/dd/yyyy">
-                                                                                                                    <span class="input-group-addon">
-                                                                                                                        <span class="glyphicon glyphicon-calendar"></span>
-                                                                                                                    </span>
-                                                                                                                </div>
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                </div></td>
-                                        <td style="border-top-width: 0px;"><h5>Expiry Date:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><div class="container" style="padding-left:0px; padding-right:0px;">
-                                                                                                    <div class="row">
-                                                                                                        <div class="col-md-12">
-                                                                                                            <div class="form-group">
-                                                                                                                <div class="input-group date datetimepicker">
-                                                                                                                    <input class="form-control" type="text" data-format="MM/dd/yyyy">
-                                                                                                                    <span class="input-group-addon">
-                                                                                                                        <span class="glyphicon glyphicon-calendar"></span>
-                                                                                                                    </span>
-                                                                                                                </div>
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                </div></td>
-                                        <td style="border-top-width: 0px;"></td>
-                                        <td style="border-top-width: 0px;"></td>
-                                    </tr>
-                                    <tr><td style="border-top-width: 0px;" colspan="3"><label>Health Summary</label></td></tr>
-                                    <tr style="border-bottom: 1px solid #ddd;">
-                                        <td style="border-top-width: 0px; padding-right:20px;" colspan="2"><h5>Allergies:</h5> <textarea class="form-control" rows="3" cols="20" name="P_Allergies"></textarea>
-                                        <td style="border-top-width: 0px; padding-right:20px;" colspan="2"><h5>Previous Medication:</h5> <textarea class="form-control" rows="3" cols="20" name="P_PreviousMedication"></textarea>
-                                        <td style="border-top-width: 0px; padding-right:20px;" colspan="2"><h5>Previous Illnesses:</h5> <textarea class="form-control" rows="3" cols="20" name="P_PreviousIllnesses"></textarea>
-                                    </tr>
-                                    <tr>
-                                        <td style="border-top-width: 0px; padding-right:20px;" colspan="2"><h5>Risk Factors:</h5> <textarea class="form-control" rows="3" cols="20" name="P_RiskFactors"></textarea>
-                                        <td style="border-top-width: 0px; padding-right:20px;" colspan="2"><h5>Social History:</h5> <textarea class="form-control" rows="3" cols="20" name="P_SocialHistory"></textarea>
-                                        <td style="border-top-width: 0px; padding-right:20px;" colspan="2"><h5>Family History:</h5> <textarea class="form-control" rows="3" cols="20" name="P_FamilyHistory"></textarea>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <div class="row col-md-12" style="margin-top:6px; margin-bottom:10px;"><label>Health Summary</label></div>
+                            <div class="row" style="margin-top:6px; margin-bottom:10px;">
+                                <div class="col-md-4"><h5>Allergies:</h5> <textarea class="form-control" rows="3" cols="20" name="P_Allergies"></textarea></div>
+                                <div class="col-md-4"><h5>Previous Medication:</h5> <textarea class="form-control" rows="3" cols="20" name="P_PreviousMedication"></textarea></div>
+                                <div class="col-md-4"><h5>Previous Illnesses:</h5> <textarea class="form-control" rows="3" cols="20" name="P_PreviousIllnesses"></textarea></div>
+                            </div>
+                            <div class="row" style="margin-top:6px;">
+                                <div class="col-md-4"><h5>Risk Factors:</h5> <textarea class="form-control" rows="3" cols="20" name="P_RiskFactors"></textarea></div>
+                                <div class="col-md-4"><h5>Social History:</h5> <textarea class="form-control" rows="3" cols="20" name="P_SocialHistory"></textarea></div>
+                                <div class="col-md-4"><h5>Family History:</h5> <textarea class="form-control" rows="3" cols="20" name="P_FamilyHistory"></textarea></div>
+                            </div>
+
                         </div>  
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -167,126 +165,123 @@
                             </ul>
                         </div>
                         <div class="modal-body">
-                            <table class="table" style="width:100%;">
-                                <tbody>
-                                    <tr><td style="border-top-width: 0px;" colspan="3"><label>General Information</label></td></tr>
-                                    <tr>
-                                        <td style="border-top-width: 0px; width:10%;"><h5 class="form-control-label">Firstname:</h5></td>
-                                        <td style="border-top-width: 0px; width:20%; padding-right:20px;"><input type="text" class="form-control View_readonly" name="P_Fistname" id="Text9"></td>
-                                        <td style="border-top-width: 0px; width:10%;"><h5 class="form-control-label">Lastname:</h5></td>
-                                        <td style="border-top-width: 0px; width:20%; padding-right:20px;"><input type="text" class="form-control View_readonly" name="P_Lastname" id="Text11"></td>
-                                        <td style="border-top-width: 0px; width:5%;"><h5 class="form-control-label">Email:</h5></td>
-                                        <td style="border-top-width: 0px; width:20%; padding-right:20px;"><input type="email" class="form-control View_readonly" name="P_EmailAddress" id="Email2"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border-top-width: 0px;"><h5>ID Number:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control View_readonly" name="P_IDNumber" id="Text14"></td>
-                                        <td style="border-top-width: 0px;"><h5>Cell Number:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control View_readonly" name="P_CellNumber" id="Text12"></td>
-                                        <td style="border-top-width: 0px;"><h5>DOB:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><div class="container" style="padding-left:0px; padding-right:0px;">
-                                                                                                    <div class="row">
-                                                                                                        <div class="col-md-12">
-                                                                                                            <div class="form-group">
-                                                                                                                <div class="input-group date datetimepicker">
-                                                                                                                    <input class="form-control" type="text" data-format="MM/dd/yyyy">
-                                                                                                                    <span class="input-group-addon">
-                                                                                                                        <span class="glyphicon glyphicon-calendar"></span>
-                                                                                                                    </span>
-                                                                                                                </div>
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                </div></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border-top-width: 0px;"><h5>Gender:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;">
-                                            <select class="form-control required input-sm View_readonly">
-                                                <option value="">Please choose a gender</option>
-                                                <option value="1">Male</option>
-                                                <option value="2">Female</option>
-                                            </select>
-                                        </td>
-                                        <td style="border-top-width: 0px;"><h5>Street Address:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control View_readonly" name="P_StreetAddress"></td>
-                                        <td style="border-top-width: 0px;"><h5>Suburb:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control View_readonly" name="P_Suburb"></td>
+                            <div class="row col-md-12" style="margin-top:6px; margin-bottom:6px;"><label>General Information</label></div>
+                            <div class="row" style="margin-top:6px; margin-bottom:6px;">
+                                <div class="col-md-1"><h5 class="form-control-label">Firstname:</h5></div>
+                                <div class="col-md-3"><input type="text" class="form-control" name="P_Fistname" id="Text9"></div>
+                                <div class="col-md-1"><h5 class="form-control-label">Lastname:</h5></div>
+                                <div class="col-md-3"><input type="text" class="form-control" name="P_Lastname" id="Text11"></div>
+                                <div class="col-md-1"><h5 class="form-control-label">Email:</h5></div>
+                                <div class="col-md-3"><input type="email" class="form-control" name="P_EmailAddress" id="Email2"></div>
+                            </div>
+                            <div class="row" style="margin-top:6px; margin-bottom:6px;">
+                                <div class="col-md-1"><h5>ID Number:</h5></div>
+                                <div class="col-md-3"><input type="text" class="form-control" name="P_IDNumber" id="Text14"></div>
+                                <div class="col-md-1"><h5>Cell Number:</h5></div>
+                                <div class="col-md-3"><input type="text" class="form-control" name="P_CellNumber" id="Text12"></div>
+                                <div class="col-md-1"><h5>DOB:</h5></div>
+                                <div class="col-md-3">
+                                    <div class="container" style="padding-left:0px; padding-right:0px;">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <div class="input-group date datetimepicker">
+                                                        <input class="form-control" type="text" data-format="MM/dd/yyyy">
+                                                        <span class="input-group-addon">
+                                                            <span class="glyphicon glyphicon-calendar"></span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:6px; margin-bottom:6px;">
+                                <div class="col-md-1"><h5>Gender:</h5></div>
+                                <div class="col-md-3">
+                                    <select class="form-control required input-sm">
+                                        <option value="">Please choose a gender</option>
+                                        <option value="1">Male</option>
+                                        <option value="2">Female</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-1"><h5>Street Address:</h5></div>
+                                <div class="col-md-3"><input type="text" class="form-control" name="P_StreetAddress"></div>
+                                <div class="col-md-1"><h5>Suburb:</h5></div>
+                                <div class="col-md-3"><input type="text" class="form-control" name="P_Suburb"></div>
+                            </div>
+                            <div class="row" style="margin-top:6px; margin-bottom:15px; padding-bottom:15px; border-bottom: 1px solid #ddd;">
+                                <div class="col-md-1"><h5>City:</h5></div>
+                                <div class="col-md-3"><input type="text" class="form-control" name="P_City"></div>
+                                <div class="col-md-1"><h5>Country:</h5></div>
+                                <div class="col-md-3"><input type="text" class="form-control" name="P_Country"></div>
+                            </div>
 
-                                    </tr>
-                                    <tr style="border-bottom: 1px solid #ddd;">
-                                        <td style="border-top-width: 0px;"><h5>City:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control View_readonly" name="P_City"></td>
-                                        <td style="border-top-width: 0px;"><h5>Country:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control View_readonly" name="P_Country"></td>
-                                        <td style="border-top-width: 0px;"></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"></td>
+                            <div class="row col-md-12" style="margin-top:6px; margin-bottom:10px;"><label>Insurance Information</label></div>
+                            <div class="row" style="margin-top:6px; margin-bottom:6px;">
+                                <div class="col-md-1"><h5>Medical Aid Provider:</h5></div>
+                                <div class="col-md-3">
+                                    <select class="form-control required input-sm" name="P_MedicalAidProvider" id="Select2">
+                                        <option value="">Please choose Medical Aid Provider</option>
+                                        <option value="1">Discovery</option>
+                                        <option value="2">A</option>
+                                        <option value="3">B</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-1"><h5>Scheme Name:</h5></div>
+                                <div class="col-md-3"><input type="text" class="form-control" name="P_Scheme_Name"></div>
+                                <div class="col-md-1"><h5>Membership Number:</h5></div>
+                                <div class="col-md-3"><input type="text" class="form-control" name="P_MedicalAidMembershipNumber"></div>
+                            </div>
+                            <div class="row" style="margin-top:6px; margin-bottom:15px; border-bottom: 1px solid #ddd;">
+                                <div class="col-md-1"><h5>Registration Date:</h5></div>
+                                <div class="col-md-3">
+                                    <div class="container" style="padding-left:0px; padding-right:0px;">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <div class="input-group date datetimepicker">
+                                                        <input class="form-control" type="text" data-format="MM/dd/yyyy">
+                                                        <span class="input-group-addon">
+                                                            <span class="glyphicon glyphicon-calendar"></span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-1"><h5>Expiry Date:</h5></div>
+                                <div class="col-md-3">
+                                    <div class="container" style="padding-left:0px; padding-right:0px;">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <div class="input-group date datetimepicker">
+                                                        <input class="form-control" type="text" data-format="MM/dd/yyyy">
+                                                        <span class="input-group-addon">
+                                                            <span class="glyphicon glyphicon-calendar"></span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-                                    </tr>
-                                    <tr><td style="border-top-width: 0px;" colspan="3"><label>Insurance Information</label></td></tr>
-                                    <tr>
-                                        <td style="border-top-width: 0px;"><h5>Medical Aid Provider:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;">
-                                            <select class="form-control required input-sm View_readonly" name="P_MedicalAidProvider" id="Select2">
-                                                <option value="">Please choose Medical Aid Provider</option>
-                                                <option value="1">Discovery</option>
-                                                <option value="2">A</option>
-                                                <option value="3">B</option>
-                                            </select>
-                                        </td>
-                                        <td style="border-top-width: 0px;"><h5>Scheme Name:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control View_readonly" name="P_Scheme_Name"></td>
-                                        <td style="border-top-width: 0px;"><h5>Membership Number:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control View_readonly" name="P_MedicalAidMembershipNumber"></td>
-
-                                    </tr>
-                                    <tr style="border-bottom: 1px solid #ddd;">
-                                        <td style="border-top-width: 0px;"><h5>Registration Date:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><div class="container" style="padding-left:0px; padding-right:0px;">
-                                                                                                    <div class="row">
-                                                                                                        <div class="col-md-12">
-                                                                                                            <div class="form-group">
-                                                                                                                <div class="input-group date datetimepicker">
-                                                                                                                    <input class="form-control" type="text" data-format="MM/dd/yyyy">
-                                                                                                                    <span class="input-group-addon">
-                                                                                                                        <span class="glyphicon glyphicon-calendar"></span>
-                                                                                                                    </span>
-                                                                                                                </div>
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                </div></td>
-                                        <td style="border-top-width: 0px;"><h5>Expiry Date:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><div class="container" style="padding-left:0px; padding-right:0px;">
-                                                                                                    <div class="row">
-                                                                                                        <div class="col-md-12">
-                                                                                                            <div class="form-group">
-                                                                                                                <div class="input-group date datetimepicker">
-                                                                                                                    <input class="form-control" type="text" data-format="MM/dd/yyyy">
-                                                                                                                    <span class="input-group-addon">
-                                                                                                                        <span class="glyphicon glyphicon-calendar"></span>
-                                                                                                                    </span>
-                                                                                                                </div>
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                </div></td>
-                                        <td style="border-top-width: 0px;"></td>
-                                        <td style="border-top-width: 0px;"></td>
-                                    </tr>
-                                    <tr><td style="border-top-width: 0px;" colspan="3"><label>Health Summary</label></td></tr>
-                                    <tr>
-                                        <td style="border-top-width: 0px; padding-right:20px;" colspan="2"><h5>Allergies:</h5> <textarea class="form-control View_readonly" rows="3" cols="20" name="P_Allergies"></textarea>
-                                        <td style="border-top-width: 0px; padding-right:20px;" colspan="2"><h5>Previous Medication:</h5> <textarea class="form-control View_readonly" rows="3" cols="20" name="P_PreviousMedication"></textarea>
-                                        <td style="border-top-width: 0px; padding-right:20px;" colspan="2"><h5>Previous Illnesses:</h5> <textarea class="form-control View_readonly" rows="3" cols="20" name="P_PreviousIllnesses"></textarea>
-                                    </tr>
-                                    <tr>
-                                        <td style="border-top-width: 0px; padding-right:20px;" colspan="2"><h5>Risk Factors:</h5> <textarea class="form-control View_readonly" rows="3" cols="20" name="P_RiskFactors"></textarea>
-                                        <td style="border-top-width: 0px; padding-right:20px;" colspan="2"><h5>Social History:</h5> <textarea class="form-control View_readonly" rows="3" cols="20" name="P_SocialHistory"></textarea>
-                                        <td style="border-top-width: 0px; padding-right:20px;" colspan="2"><h5>Family History:</h5> <textarea class="form-control View_readonly" rows="3" cols="20" name="P_FamilyHistory"></textarea>
-                                    </tr>
-                                </tbody>
-                            </table> 
+                            <div class="row col-md-12" style="margin-top:6px; margin-bottom:10px;"><label>Health Summary</label></div>
+                            <div class="row" style="margin-top:6px; margin-bottom:10px;">
+                                <div class="col-md-4"><h5>Allergies:</h5> <textarea class="form-control" rows="3" cols="20" name="P_Allergies"></textarea></div>
+                                <div class="col-md-4"><h5>Previous Medication:</h5> <textarea class="form-control" rows="3" cols="20" name="P_PreviousMedication"></textarea></div>
+                                <div class="col-md-4"><h5>Previous Illnesses:</h5> <textarea class="form-control" rows="3" cols="20" name="P_PreviousIllnesses"></textarea></div>
+                            </div>
+                            <div class="row" style="margin-top:6px;">
+                                <div class="col-md-4"><h5>Risk Factors:</h5> <textarea class="form-control" rows="3" cols="20" name="P_RiskFactors"></textarea></div>
+                                <div class="col-md-4"><h5>Social History:</h5> <textarea class="form-control" rows="3" cols="20" name="P_SocialHistory"></textarea></div>
+                                <div class="col-md-4"><h5>Family History:</h5> <textarea class="form-control" rows="3" cols="20" name="P_FamilyHistory"></textarea></div>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
