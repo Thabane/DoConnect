@@ -30,9 +30,25 @@ app.config(
                 templateUrl: "App/Views/Accounting/Accounting.html",
                 controller: "AccountingController"
             })
+            .when("/Expenses", {
+                templateUrl: "App/Views/Accounting/Expenses.html",
+                controller: "AccountingController"
+            })
+            .when("/NewExpenceInvoice", {
+                templateUrl: "App/Views/Accounting/NewExpenceInvoice.html",
+                controller: "AccountingController"
+            })
+            .when("/NewPatientInvoice", {
+                templateUrl: "App/Views/Accounting/NewPatientInvoice.html",
+                controller: "AccountingController"
+            })
             .when("/Events", {
                 templateUrl: "App/Views/Events/Events.html",
                 controller: "EventsController"
+            })
+            .when("/Messages", {
+                templateUrl: "App/Views/Messages/Messages.html",
+                controller: "MessagesController"
             })
             .when("/DiagnosisExpertSystem", {
                 templateUrl: "App/Views/DiagnosisExpertSystem/DiagnosisExpertSystem.html",
@@ -41,6 +57,14 @@ app.config(
             .when("/Reports", {
                 templateUrl: "App/Views/Reports/Reports.html",
                 controller: "ReportsController"
+            })
+            .when("/UserProfile", {
+                templateUrl: "App/Views/UserProfile/UserProfile.html",
+                controller: "UserProfileController"
+            })
+            .when("/Login", {
+                templateUrl: "App/Views/Login/Login.html",
+                controller: "LoginController"
             })
             .otherwise({
                 redirectTo: "/Dashboard"

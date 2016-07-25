@@ -39,9 +39,22 @@
                                         <td style="border-top-width: 0px;"><h5>Cell Number:</h5></td>
                                         <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control" name="P_CellNumber" id="Text12"></td>
                                         <td style="border-top-width: 0px;"><h5>DOB:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="date" class="form-control" name="P_DOB" id="Date2"></td>
+                                        <td style="border-top-width: 0px; padding-right:20px;"><div class="container" style="padding-left:0px; padding-right:0px;">
+                                                                                                    <div class="row">
+                                                                                                        <div class="col-md-12">
+                                                                                                            <div class="form-group">
+                                                                                                                <div class="input-group date datetimepicker">
+                                                                                                                    <input class="form-control" type="text" data-format="MM/dd/yyyy">
+                                                                                                                    <span class="input-group-addon">
+                                                                                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                                                                                    </span>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div></td>
                                     </tr>
-                                    <tr style="border-bottom: 1px solid #ddd;">
+                                    <tr>
                                         <td style="border-top-width: 0px;"><h5>Gender:</h5></td>
                                         <td style="border-top-width: 0px; padding-right:20px;">
                                             <select class="form-control required input-sm">
@@ -50,10 +63,20 @@
                                                 <option value="2">Female</option>
                                             </select>
                                         </td>
+                                        <td style="border-top-width: 0px;"><h5>Street Address:</h5></td>
+                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control" name="P_StreetAddress"></td>
+                                        <td style="border-top-width: 0px;"><h5>Suburb:</h5></td>
+                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control" name="P_Suburb"></td>
+
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid #ddd;">
+                                        <td style="border-top-width: 0px;"><h5>City:</h5></td>
+                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control" name="P_City"></td>
+                                        <td style="border-top-width: 0px;"><h5>Country:</h5></td>
+                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control" name="P_Country"></td>
                                         <td style="border-top-width: 0px;"></td>
-                                        <td style="border-top-width: 0px;"></td>
-                                        <td style="border-top-width: 0px;"></td>
-                                        <td style="border-top-width: 0px;"></td>
+                                        <td style="border-top-width: 0px; padding-right:20px;"></td>
+
                                     </tr>
                                     <tr><td style="border-top-width: 0px;" colspan="3"><label>Insurance Information</label></td></tr>
                                     <tr>
@@ -66,25 +89,43 @@
                                                 <option value="3">B</option>
                                             </select>
                                         </td>
+                                        <td style="border-top-width: 0px;"><h5>Scheme Name:</h5></td>
+                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control" name="P_Scheme_Name"></td>
                                         <td style="border-top-width: 0px;"><h5>Membership Number:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control" name="P_MedicalAidMembershipNumber" id="Text16"></td>
-                                        <td style="border-top-width: 0px;"><h5>Expiry Date:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control" name="P_ExpiryDate" id="Text16"></td>
-
-                                    </tr>
-                                    <tr>
-                                        <td style="border-top-width: 0px;"><h5>Street Address:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control" name="P_StreetAddress"></td>
-                                        <td style="border-top-width: 0px;"><h5>Suburb</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control" name="P_Suburb"></td>
-                                        <td style="border-top-width: 0px;"><h5>City</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control" name="P_City"></td>
+                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control" name="P_MedicalAidMembershipNumber"></td>
+                                        
                                     </tr>
                                     <tr style="border-bottom: 1px solid #ddd;">
-                                        <td style="border-top-width: 0px;"><h5>Country:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control" name="P_Country"></td>
-                                        <td style="border-top-width: 0px;"></td>
-                                        <td style="border-top-width: 0px;"></td>
+                                        <td style="border-top-width: 0px;"><h5>Registration Date:</h5></td>
+                                        <td style="border-top-width: 0px; padding-right:20px;"><div class="container" style="padding-left:0px; padding-right:0px;">
+                                                                                                    <div class="row">
+                                                                                                        <div class="col-md-12">
+                                                                                                            <div class="form-group">
+                                                                                                                <div class="input-group date datetimepicker">
+                                                                                                                    <input class="form-control" type="text" data-format="MM/dd/yyyy">
+                                                                                                                    <span class="input-group-addon">
+                                                                                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                                                                                    </span>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div></td>
+                                        <td style="border-top-width: 0px;"><h5>Expiry Date:</h5></td>
+                                        <td style="border-top-width: 0px; padding-right:20px;"><div class="container" style="padding-left:0px; padding-right:0px;">
+                                                                                                    <div class="row">
+                                                                                                        <div class="col-md-12">
+                                                                                                            <div class="form-group">
+                                                                                                                <div class="input-group date datetimepicker">
+                                                                                                                    <input class="form-control" type="text" data-format="MM/dd/yyyy">
+                                                                                                                    <span class="input-group-addon">
+                                                                                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                                                                                    </span>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div></td>
                                         <td style="border-top-width: 0px;"></td>
                                         <td style="border-top-width: 0px;"></td>
                                     </tr>
@@ -131,193 +172,135 @@
                                     <tr><td style="border-top-width: 0px;" colspan="3"><label>General Information</label></td></tr>
                                     <tr>
                                         <td style="border-top-width: 0px; width:10%;"><h5 class="form-control-label">Firstname:</h5></td>
-                                        <td style="border-top-width: 0px; width:20%; padding-right:20px;"><input type="text" class="form-control" name="P_Fistname" id="Text9"></td>
+                                        <td style="border-top-width: 0px; width:20%; padding-right:20px;"><input type="text" class="form-control View_readonly" name="P_Fistname" id="Text9"></td>
                                         <td style="border-top-width: 0px; width:10%;"><h5 class="form-control-label">Lastname:</h5></td>
-                                        <td style="border-top-width: 0px; width:20%; padding-right:20px;"><input type="text" class="form-control" name="P_Lastname" id="Text11"></td>
+                                        <td style="border-top-width: 0px; width:20%; padding-right:20px;"><input type="text" class="form-control View_readonly" name="P_Lastname" id="Text11"></td>
                                         <td style="border-top-width: 0px; width:5%;"><h5 class="form-control-label">Email:</h5></td>
-                                        <td style="border-top-width: 0px; width:20%; padding-right:20px;"><input type="email" class="form-control" name="P_EmailAddress" id="Email2"></td>
+                                        <td style="border-top-width: 0px; width:20%; padding-right:20px;"><input type="email" class="form-control View_readonly" name="P_EmailAddress" id="Email2"></td>
                                     </tr>
                                     <tr>
                                         <td style="border-top-width: 0px;"><h5>ID Number:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control" name="P_IDNumber" id="Text14"></td>
+                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control View_readonly" name="P_IDNumber" id="Text14"></td>
                                         <td style="border-top-width: 0px;"><h5>Cell Number:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control" name="P_CellNumber" id="Text12"></td>
+                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control View_readonly" name="P_CellNumber" id="Text12"></td>
                                         <td style="border-top-width: 0px;"><h5>DOB:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="date" class="form-control" name="P_DOB" id="Date2"></td>
+                                        <td style="border-top-width: 0px; padding-right:20px;"><div class="container" style="padding-left:0px; padding-right:0px;">
+                                                                                                    <div class="row">
+                                                                                                        <div class="col-md-12">
+                                                                                                            <div class="form-group">
+                                                                                                                <div class="input-group date datetimepicker">
+                                                                                                                    <input class="form-control" type="text" data-format="MM/dd/yyyy">
+                                                                                                                    <span class="input-group-addon">
+                                                                                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                                                                                    </span>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div></td>
                                     </tr>
-                                    <tr style="border-bottom: 1px solid #ddd;">
+                                    <tr>
                                         <td style="border-top-width: 0px;"><h5>Gender:</h5></td>
                                         <td style="border-top-width: 0px; padding-right:20px;">
-                                            <select class="form-control required input-sm">
+                                            <select class="form-control required input-sm View_readonly">
                                                 <option value="">Please choose a gender</option>
                                                 <option value="1">Male</option>
                                                 <option value="2">Female</option>
                                             </select>
                                         </td>
+                                        <td style="border-top-width: 0px;"><h5>Street Address:</h5></td>
+                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control View_readonly" name="P_StreetAddress"></td>
+                                        <td style="border-top-width: 0px;"><h5>Suburb:</h5></td>
+                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control View_readonly" name="P_Suburb"></td>
+
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid #ddd;">
+                                        <td style="border-top-width: 0px;"><h5>City:</h5></td>
+                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control View_readonly" name="P_City"></td>
+                                        <td style="border-top-width: 0px;"><h5>Country:</h5></td>
+                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control View_readonly" name="P_Country"></td>
                                         <td style="border-top-width: 0px;"></td>
-                                        <td style="border-top-width: 0px;"></td>
-                                        <td style="border-top-width: 0px;"></td>
-                                        <td style="border-top-width: 0px;"></td>
+                                        <td style="border-top-width: 0px; padding-right:20px;"></td>
+
                                     </tr>
                                     <tr><td style="border-top-width: 0px;" colspan="3"><label>Insurance Information</label></td></tr>
                                     <tr>
                                         <td style="border-top-width: 0px;"><h5>Medical Aid Provider:</h5></td>
                                         <td style="border-top-width: 0px; padding-right:20px;">
-                                            <select class="form-control required input-sm" name="P_MedicalAidProvider" id="Select2">
+                                            <select class="form-control required input-sm View_readonly" name="P_MedicalAidProvider" id="Select2">
                                                 <option value="">Please choose Medical Aid Provider</option>
                                                 <option value="1">Discovery</option>
                                                 <option value="2">A</option>
                                                 <option value="3">B</option>
                                             </select>
                                         </td>
+                                        <td style="border-top-width: 0px;"><h5>Scheme Name:</h5></td>
+                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control View_readonly" name="P_Scheme_Name"></td>
                                         <td style="border-top-width: 0px;"><h5>Membership Number:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control" name="P_MedicalAidMembershipNumber" id="Text16"></td>
-                                        <td style="border-top-width: 0px;"><h5>Expiry Date:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control" name="P_ExpiryDate" id="Text16"></td>
+                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control View_readonly" name="P_MedicalAidMembershipNumber"></td>
 
                                     </tr>
-                                    <tr>
-                                        <td style="border-top-width: 0px;"><h5>Street Address:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control" name="P_StreetAddress"></td>
-                                        <td style="border-top-width: 0px;"><h5>Suburb</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control" name="P_Suburb"></td>
-                                        <td style="border-top-width: 0px;"><h5>City</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control" name="P_City"></td>
-                                    </tr>
                                     <tr style="border-bottom: 1px solid #ddd;">
-                                        <td style="border-top-width: 0px;"><h5>Country:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control" name="P_Country"></td>
-                                        <td style="border-top-width: 0px;"></td>
-                                        <td style="border-top-width: 0px;"></td>
+                                        <td style="border-top-width: 0px;"><h5>Registration Date:</h5></td>
+                                        <td style="border-top-width: 0px; padding-right:20px;"><div class="container" style="padding-left:0px; padding-right:0px;">
+                                                                                                    <div class="row">
+                                                                                                        <div class="col-md-12">
+                                                                                                            <div class="form-group">
+                                                                                                                <div class="input-group date datetimepicker">
+                                                                                                                    <input class="form-control" type="text" data-format="MM/dd/yyyy">
+                                                                                                                    <span class="input-group-addon">
+                                                                                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                                                                                    </span>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div></td>
+                                        <td style="border-top-width: 0px;"><h5>Expiry Date:</h5></td>
+                                        <td style="border-top-width: 0px; padding-right:20px;"><div class="container" style="padding-left:0px; padding-right:0px;">
+                                                                                                    <div class="row">
+                                                                                                        <div class="col-md-12">
+                                                                                                            <div class="form-group">
+                                                                                                                <div class="input-group date datetimepicker">
+                                                                                                                    <input class="form-control" type="text" data-format="MM/dd/yyyy">
+                                                                                                                    <span class="input-group-addon">
+                                                                                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                                                                                    </span>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div></td>
                                         <td style="border-top-width: 0px;"></td>
                                         <td style="border-top-width: 0px;"></td>
                                     </tr>
                                     <tr><td style="border-top-width: 0px;" colspan="3"><label>Health Summary</label></td></tr>
                                     <tr>
-                                        <td style="border-top-width: 0px; padding-right:20px;" colspan="2"><h5>Allergies:</h5> <textarea class="form-control" rows="3" cols="20" name="P_Allergies"></textarea>
-                                        <td style="border-top-width: 0px; padding-right:20px;" colspan="2"><h5>Previous Medication:</h5> <textarea class="form-control" rows="3" cols="20" name="P_PreviousMedication"></textarea>
-                                        <td style="border-top-width: 0px; padding-right:20px;" colspan="2"><h5>Previous Illnesses:</h5> <textarea class="form-control" rows="3" cols="20" name="P_PreviousIllnesses"></textarea>
+                                        <td style="border-top-width: 0px; padding-right:20px;" colspan="2"><h5>Allergies:</h5> <textarea class="form-control View_readonly" rows="3" cols="20" name="P_Allergies"></textarea>
+                                        <td style="border-top-width: 0px; padding-right:20px;" colspan="2"><h5>Previous Medication:</h5> <textarea class="form-control View_readonly" rows="3" cols="20" name="P_PreviousMedication"></textarea>
+                                        <td style="border-top-width: 0px; padding-right:20px;" colspan="2"><h5>Previous Illnesses:</h5> <textarea class="form-control View_readonly" rows="3" cols="20" name="P_PreviousIllnesses"></textarea>
                                     </tr>
                                     <tr>
-                                        <td style="border-top-width: 0px; padding-right:20px;" colspan="2"><h5>Risk Factors:</h5> <textarea class="form-control" rows="3" cols="20" name="P_RiskFactors"></textarea>
-                                        <td style="border-top-width: 0px; padding-right:20px;" colspan="2"><h5>Social History:</h5> <textarea class="form-control" rows="3" cols="20" name="P_SocialHistory"></textarea>
-                                        <td style="border-top-width: 0px; padding-right:20px;" colspan="2"><h5>Family History:</h5> <textarea class="form-control" rows="3" cols="20" name="P_FamilyHistory"></textarea>
+                                        <td style="border-top-width: 0px; padding-right:20px;" colspan="2"><h5>Risk Factors:</h5> <textarea class="form-control View_readonly" rows="3" cols="20" name="P_RiskFactors"></textarea>
+                                        <td style="border-top-width: 0px; padding-right:20px;" colspan="2"><h5>Social History:</h5> <textarea class="form-control View_readonly" rows="3" cols="20" name="P_SocialHistory"></textarea>
+                                        <td style="border-top-width: 0px; padding-right:20px;" colspan="2"><h5>Family History:</h5> <textarea class="form-control View_readonly" rows="3" cols="20" name="P_FamilyHistory"></textarea>
                                     </tr>
                                 </tbody>
                             </table> 
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <a class="btn btn-primary" onclick="myFunctionViewPatient_Update()" href="#">Update</a><!--type="submit"-->
+                            <a class="btn btn-primary" href="#" id="btnUpdateMedicalRecord">Update</a>
                         </div>
                     </div>
                 </div>
             </form>
         </div><!-- Show Medical History ~ View Patient Record Ends-->
 
-        <!--Update Patient Modal-->
-        <div id="div_Medical_History_Update" class="modal fadeout" style="display: none;">
-            <form class="ng-pristine ng-valid">
-                <div class="modal-dialog" style="width:75%; margin-top:-45px">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h4 class="modal-title">Update Medical Record</h4>
-                        </div>
-                        <div class="modal-body">
-                            <table class="table" style="width:100%;">
-                                <tbody>
-                                    <tr><td style="border-top-width: 0px;" colspan="3"><label>General Information</label></td></tr>
-                                    <tr>
-                                        <td style="border-top-width: 0px; width:10%;"><h5 class="form-control-label">Firstname:</h5></td>
-                                        <td style="border-top-width: 0px; width:20%; padding-right:20px;"><input type="text" class="form-control" name="P_Fistname" id="Text9"></td>
-                                        <td style="border-top-width: 0px; width:10%;"><h5 class="form-control-label">Lastname:</h5></td>
-                                        <td style="border-top-width: 0px; width:20%; padding-right:20px;"><input type="text" class="form-control" name="P_Lastname" id="Text11"></td>
-                                        <td style="border-top-width: 0px; width:5%;"><h5 class="form-control-label">Email:</h5></td>
-                                        <td style="border-top-width: 0px; width:20%; padding-right:20px;"><input type="email" class="form-control" name="P_EmailAddress" id="Email2"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border-top-width: 0px;"><h5>ID Number:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control" name="P_IDNumber" id="Text14"></td>
-                                        <td style="border-top-width: 0px;"><h5>Cell Number:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control" name="P_CellNumber" id="Text12"></td>
-                                        <td style="border-top-width: 0px;"><h5>DOB:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="date" class="form-control" name="P_DOB" id="Date2"></td>
-                                    </tr>
-                                    <tr style="border-bottom: 1px solid #ddd;">
-                                        <td style="border-top-width: 0px;"><h5>Gender:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;">
-                                            <select class="form-control required input-sm">
-                                                <option value="">Please choose a gender</option>
-                                                <option value="1">Male</option>
-                                                <option value="2">Female</option>
-                                            </select>
-                                        </td>
-                                        <td style="border-top-width: 0px;"></td>
-                                        <td style="border-top-width: 0px;"></td>
-                                        <td style="border-top-width: 0px;"></td>
-                                        <td style="border-top-width: 0px;"></td>
-                                    </tr>
-                                    <tr><td style="border-top-width: 0px;" colspan="3"><label>Insurance Information</label></td></tr>
-                                    <tr>
-                                        <td style="border-top-width: 0px;"><h5>Medical Aid Provider:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;">
-                                            <select class="form-control required input-sm" name="P_MedicalAidProvider" id="Select2">
-                                                <option value="">Please choose Medical Aid Provider</option>
-                                                <option value="1">Discovery</option>
-                                                <option value="2">A</option>
-                                                <option value="3">B</option>
-                                            </select>
-                                        </td>
-                                        <td style="border-top-width: 0px;"><h5>Membership Number:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control" name="P_MedicalAidMembershipNumber" id="Text16"></td>
-                                        <td style="border-top-width: 0px;"><h5>Expiry Date:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control" name="P_ExpiryDate" id="Text16"></td>
-
-                                    </tr>
-                                    <tr>
-                                        <td style="border-top-width: 0px;"><h5>Street Address:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control" name="P_StreetAddress"></td>
-                                        <td style="border-top-width: 0px;"><h5>Suburb</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control" name="P_Suburb"></td>
-                                        <td style="border-top-width: 0px;"><h5>City</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control" name="P_City"></td>
-                                    </tr>
-                                    <tr style="border-bottom: 1px solid #ddd;">
-                                        <td style="border-top-width: 0px;"><h5>Country:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control" name="P_Country"></td>
-                                        <td style="border-top-width: 0px;"></td>
-                                        <td style="border-top-width: 0px;"></td>
-                                        <td style="border-top-width: 0px;"></td>
-                                        <td style="border-top-width: 0px;"></td>
-                                    </tr>
-                                    <tr><td style="border-top-width: 0px;" colspan="3"><label>Health Summary</label></td></tr>
-                                    <tr style="border-bottom: 1px solid #ddd;">
-                                        <td style="border-top-width: 0px; padding-right:20px;" colspan="2"><h5>Allergies:</h5> <textarea class="form-control" rows="3" cols="20" name="P_Allergies"></textarea>
-                                        <td style="border-top-width: 0px; padding-right:20px;" colspan="2"><h5>Previous Medication:</h5> <textarea class="form-control" rows="3" cols="20" name="P_PreviousMedication"></textarea>
-                                        <td style="border-top-width: 0px; padding-right:20px;" colspan="2"><h5>Previous Illnesses:</h5> <textarea class="form-control" rows="3" cols="20" name="P_PreviousIllnesses"></textarea>
-                                    </tr>
-                                    <tr>
-                                        <td style="border-top-width: 0px; padding-right:20px;" colspan="2"><h5>Risk Factors:</h5> <textarea class="form-control" rows="3" cols="20" name="P_RiskFactors"></textarea>
-                                        <td style="border-top-width: 0px; padding-right:20px;" colspan="2"><h5>Social History:</h5> <textarea class="form-control" rows="3" cols="20" name="P_SocialHistory"></textarea>
-                                        <td style="border-top-width: 0px; padding-right:20px;" colspan="2"><h5>Family History:</h5> <textarea class="form-control" rows="3" cols="20" name="P_FamilyHistory"></textarea>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button class="btn btn-primary" onclick="myFunctionViewPatient_Save()" type="submit">Save</button>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div><!--Update Patient Modal Ends-->
-
         <!-- Show Patients Prescriptions -->
         <div id="div_Prescriptions" class="modal fadeout" style="display: none;">
             <form class="ng-pristine ng-valid">
-                <div class="modal-dialog" style="width:75%">
+                <div class="modal-dialog" style="width:90%">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -337,7 +320,7 @@
 
                             <div class="bs-example" data-example-id="simple-table">
                                 <table class="table table-hover">
-                                    <caption><b><u>Prescribed Medication</u></b></caption>
+                                    <caption style="font-size:18px;"><b><u>Prescribed Medication</u></b></caption>
                                     <thead>
                                         <tr>
                                             <th>Treatment</th>
@@ -403,81 +386,79 @@
         <!-- Show Update Prescription Modal -->
         <div id="div_Prescriptions_Update" class="modal fadeout" style="display: none;">
             <form class="ng-pristine ng-valid">
-                <div class="modal-dialog" style="width:75%">
+                <div class="modal-dialog" style="width:65%">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                             <h4 class="modal-title">Update Prescription Details</h4>
                         </div>
                         <div class="modal-body">
-                            <table class="table" style="width:90%;">
-                                <tbody>
-                                    <tr>
-                                        <td style="border-top-width: 0px; width:10%;"><h5 class="form-control-label">Treatment for:</h5></td>
-                                        <td style="border-top-width: 0px; width:20%; padding-right:20px;"><input type="text" class="form-control" name="P_Treatmentfor"></td>
-                                        <td style="border-top-width: 0px; width:10%;"><h5 class="form-control-label">Medicine Name:</h5></td>
-                                        <td style="border-top-width: 0px; width:20%; padding-right:20px;"><input type="text" class="form-control" name="PMedicineName"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border-top-width: 0px;"><h5>Drug Strength:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control" name="P_DrugStrength"></td>
-                                        <td style="border-top-width: 0px;"><h5>Intake Route:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;">
-                                            <select class="form-control required input-sm" name="P_IntakeRoute">
-                                                <option value="">Please choose intake route</option>
-                                                <option value="1">PO (By mouth)</option>
-                                                <option value="2">PR (Per rectum)</option>
-                                                <option value="3">IM (Intramuscular)</option>
-                                                <option value="4">IV (Intravenous)</option>
-                                                <option value="5">ID (Intradermal)</option>
-                                                <option value="6">IN (Intranasal)</option>
-                                                <option value="7">TP (Topical)</option>
-                                                <option value="8">SL (Sublingual)</option>
-                                                <option value="9">BUCC (Buccal)</option>
-                                                <option value="10">IP (Intraperitoneal)</option>
-                                            </select>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border-top-width: 0px;"><h5>Intake Frequency:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;">
-                                            <select class="form-control required input-sm" name="P_Frequency">
-                                                <option value="">Please choose Intake Frequency</option>
-                                                <option value="1">Daily</option>
-                                                <option value="2">Every other day</option>
-                                                <option value="3">BID/b.i.d. (Twice a Day)</option>
-                                                <option value="4">TID/t.id. (Three Times a Day)</option>
-                                                <option value="5">QID/q.i.d. (Four Times a Day)</option>
-                                                <option value="6">QHS (Every Bedtime)</option>
-                                                <option value="7">Q4h (Every 4 hours))</option>
-                                                <option value="8">Q4-6h (Every 4 to 6 hours)</option>
-                                                <option value="9">QWK (Every Week))</option>
-                                            </select>
-                                        </td>
-                                        <td style="border-top-width: 0px;"><h5>Dispence Amount:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input type="text" class="form-control" name="P_Dispence Amount"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border-top-width: 0px;"><h5>Number of Refills:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;">
-                                            <select class="form-control required input-sm" name="P_NumberOfRefills">
-                                                <option value="">Please choose Number of Refills</option>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
-                                                <option value="6">6</option>
-                                                <option value="7">7</option>
-                                                <option value="8">8</option>
-                                                <option value="9">9</option>
-                                                <option value="10">10</option>
-                                                <option value="10">11</option>
-                                            </select>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                                <div class="col-md-2"><h5 class="form-control-label">Treatment for:</h5></div>
+                                <div class="col-md-4"><input type="text" class="form-control" name="P_Treatmentfor"></div>
+                                <div class="col-md-2"><h5 class="form-control-label">Medicine Name:</h5></div>
+                                <div class="col-md-4"><input type="text" class="form-control" name="PMedicineName"></div>
+                            </div>
+                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                                <div class="col-md-2"><h5>Drug Strength:</h5></div>
+                                <div class="col-md-4"><input type="text" class="form-control" name="P_DrugStrength"></div>
+                                <div class="col-md-2"><h5>Intake Route:</h5></div>
+                                <div class="col-md-4">
+                                    <select class="form-control required input-sm" name="P_IntakeRoute">
+                                        <option value="">Please choose intake route</option>
+                                        <option value="1">PO (By mouth)</option>
+                                        <option value="2">PR (Per rectum)</option>
+                                        <option value="3">IM (Intramuscular)</option>
+                                        <option value="4">IV (Intravenous)</option>
+                                        <option value="5">ID (Intradermal)</option>
+                                        <option value="6">IN (Intranasal)</option>
+                                        <option value="7">TP (Topical)</option>
+                                        <option value="8">SL (Sublingual)</option>
+                                        <option value="9">BUCC (Buccal)</option>
+                                        <option value="10">IP (Intraperitoneal)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                                <div class="col-md-2"><h5>Intake Frequency:</h5></div>
+                                <div class="col-md-4">
+                                    <select class="form-control required input-sm" name="P_Frequency">
+                                        <option value="">Please choose Intake Frequency</option>
+                                        <option value="1">Daily</option>
+                                        <option value="2">Every other day</option>
+                                        <option value="3">BID/b.i.d. (Twice a Day)</option>
+                                        <option value="4">TID/t.id. (Three Times a Day)</option>
+                                        <option value="5">QID/q.i.d. (Four Times a Day)</option>
+                                        <option value="6">QHS (Every Bedtime)</option>
+                                        <option value="7">Q4h (Every 4 hours))</option>
+                                        <option value="8">Q4-6h (Every 4 to 6 hours)</option>
+                                        <option value="9">QWK (Every Week))</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2"><h5>Dispence Amount:</h5></div>
+                                <div class="col-md-4"><input type="text" class="form-control" name="P_Dispence Amount"></div>
+                            </div>
+                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                                <div class="col-md-2"><h5>Number of Refills:</h5></div>
+                                <div class="col-md-4">
+                                    <select class="form-control required input-sm" name="P_NumberOfRefills">
+                                        <option value="">Please choose Number of Refills</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                        <option value="10">11</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2"></div>
+                                <div class="col-md-4"></div>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -491,7 +472,7 @@
         <!-- Show Consultation Notes -->
         <div id="div_Consultations" class="modal fadeout" style="display: none;">
             <form class="ng-pristine ng-valid">
-                <div class="modal-dialog" style="width:800px">
+                <div class="modal-dialog" style="width:60%">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -502,72 +483,63 @@
                             </ul>
                         </div>
                         <div class="modal-body">
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td style="border-top-width: 0px; width:50%">
-                                            <label class="form-control-label">Consultation Date:</label>
-                                            <label class="form-control-label">@Date</label>
-                                        </td>
-                                        <td style="border-top-width: 0px; width:50%">
-                                            <label class="form-control-label">Doctor Name:</label>
-                                            <label class="form-control-label">@Doctor Name</label>
-                                        </td>
+                            <div class="row" style="margin-top:8px; margin-bottom:8px;">
+                                <div class="col-md-3"><label class="form-control-label">Consultation Date:</label></div>
+                                <div class="col-md-3" style="margin-top:-6px;"><h5>@Date</h5></div>
+                                <div class="col-md-3"><label class="form-control-label">Doctor Name:</label></div>
+                                <div class="col-md-3" style="margin-top:-6px;"><h5>@Doctor Name</h5></div>
+                            </div>
+                            <div class="row" style="margin-top:8px; margin-bottom:8px;">
+                                <div class="col-md-6">
+                                    <label class="form-control-label">Reason for consultation:</label>
+                                    <textarea class="form-control View_readonly" rows="3" cols="20"></textarea>
+                                </div>
 
-                                    </tr>
-                                    <tr>
-                                        <td style="border-top-width: 0px;">
-                                            <label class="form-control-label">Reason for consultation:</label>
-                                            <textarea class="form-control" rows="3" cols="20"></textarea>
-                                        </td>
-                                        <td style="border-top-width: 0px;">
-                                            <label class="form-control-label">Symptoms:</label>
-                                            <textarea class="form-control" rows="3"></textarea>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border-top-width: 0px;">
-                                            <label class="form-control-label">Clinical findings:</label>
-                                            <textarea class="form-control" rows="3"></textarea>
-                                        </td>
-                                        <td style="border-top-width: 0px;">
-                                            <label class="col-sm-1">Test</label><div><br></div>
-                                            <div class="col-sm-10">
-                                                <div class="radio">
-                                                    <label>
-                                                        <input type="radio" name="gridRadios" id="gridRadios1" value="option1">
-                                                        Enter test result summary.
-                                                    </label>
-                                                </div>
-                                                <div class="radio">
-                                                    <label>
-                                                        <input type="radio" name="gridRadios" id="gridRadios2" value="option2" checked="">
-                                                        No tests performed.
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border-top-width: 0px;">
-                                            <label class="form-control-label">Diagnosis:</label>
-                                            <textarea class="form-control" rows="3"></textarea>
-                                        </td>
-                                        <td style="border-top-width: 0px;">
-                                            <label class="form-control-label">Treatment plan:</label>
-                                            <textarea class="form-control" rows="3"></textarea>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border-top-width: 0px;">
-                                            <button class="btn btn-primary btn-xs" onclick="myFunctionConsultation_NewReferral()">New Referral</button>
-                                            <button class="btn btn-info btn-xs" onclick="myFunctionConsultation_NewPrescribeMedication()">Prescribe Medication</button>
-                                            <button class="btn btn-danger btn-xs" onclick="myFunctionConsultation_Print()">Print</button>
-                                        </td>
-                                        <td style="border-top-width: 0px;"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                                <div class="col-md-6">
+                                    <label class="form-control-label">Symptoms:</label>
+                                    <textarea class="form-control View_readonly" rows="3"></textarea>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:8px; margin-bottom:8px;">
+                                <div class="col-md-6">
+                                    <label class="form-control-label">Clinical findings:</label>
+                                    <textarea class="form-control View_readonly" rows="3"></textarea>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Test Results</label><div><br></div>
+                                    <div style="margin-top:-10px;">
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="gridRadios" id="gridRadios1" value="option1">
+                                                Enter test result summary.
+                                            </label>
+                                        </div>
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="gridRadios" id="gridRadios2" value="option2" checked="">
+                                                No tests performed.
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:8px; margin-bottom:8px;">
+                                <div class="col-md-6">
+                                    <label class="form-control-label">Diagnosis:</label>
+                                    <textarea class="form-control View_readonly" rows="3"></textarea>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-control-label">Treatment plan:</label>
+                                    <textarea class="form-control View_readonly" rows="3"></textarea>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:16px; margin-bottom:8px;">
+                                <div class="col-md-12">
+                                    <button class="btn btn-info btn-xs" onclick="myFunctionConsultation_NewReferral()">New Referral</button>
+                                    <button class="btn btn-info btn-xs" onclick="myFunctionConsultation_NewPrescribeMedication()">Prescribe Medication</button>
+                                    <button class="btn btn-info btn-xs" onclick="myFunctionConsultation_Print()">Print</button>
+                                </div>
+                            </div>
                             <ul class="pager">
                                 <li class="previous"><a href="#">Previous</a></li>
                                 <li class="next"><a href="#">Next</a></li>
@@ -576,106 +548,14 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                             <a class="btn btn-info" onclick="myFunctionConsultation_NewConsultation()" href="#" type="submit">New</a>
-                            <a class="btn btn-primary" onclick="myFunctionConsultation_Update()" href="#" type="submit">Update</a>
+                            <a class="btn btn-primary" href="#" type="submit" id="btnUpdateConsultation">Update</a>
                             <a class="btn btn-danger" onclick="myFunctionConsultation_Delete()" href="#" type="submit">Delete</a>
                         </div>
                     </div>
                 </div>
             </form>
         </div><!-- Show Consultation Notes Ends -->
-
-        <!-- Show Update Consultation Notes -->
-        <div id="div_Consultations_Update" class="modal fadeout" style="display: none;">
-            <form class="ng-pristine ng-valid">
-                <div class="modal-dialog" style="width:800px">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h4 class="modal-title">Edit Consultation Notes</h4>
-                        </div>
-                        <div class="modal-body">
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td style="border-top-width: 0px; width:50%">
-                                            <label class="form-control-label">Consultation Date:</label>
-                                            <label class="form-control-label">@Date</label>
-                                        </td>
-                                        <td style="border-top-width: 0px; width:50%">
-                                            <label class="form-control-label">Doctor Name:</label>
-                                            <label class="form-control-label">@Doctor Name</label>
-                                        </td>
-
-                                    </tr>
-                                    <tr>
-                                        <td style="border-top-width: 0px;">
-                                            <label class="form-control-label">Reason for consultation:</label>
-                                            <textarea class="form-control" rows="3" cols="20"></textarea>
-                                        </td>
-                                        <td style="border-top-width: 0px;">
-                                            <label class="form-control-label">Symptoms:</label>
-                                            <textarea class="form-control" rows="3"></textarea>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border-top-width: 0px;">
-                                            <label class="form-control-label">Clinical findings:</label>
-                                            <textarea class="form-control" rows="3"></textarea>
-                                        </td>
-                                        <td style="border-top-width: 0px;">
-                                            <label class="col-sm-1">Test</label><div><br></div>
-                                            <div class="col-sm-10">
-                                                <div class="radio">
-                                                    <label>
-                                                        <input type="radio" name="gridRadios" id="gridRadios1" value="option1">
-                                                        Enter test result summary.
-                                                    </label>
-                                                </div>
-                                                <div class="radio">
-                                                    <label>
-                                                        <input type="radio" name="gridRadios" id="gridRadios2" value="option2" checked="">
-                                                        No tests performed.
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border-top-width: 0px;">
-                                            <label class="form-control-label">Diagnosis:</label>
-                                            <textarea class="form-control" rows="3"></textarea>
-                                        </td>
-                                        <td style="border-top-width: 0px;">
-                                            <label class="form-control-label">Treatment plan:</label>
-                                            <textarea class="form-control" rows="3"></textarea>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border-top-width: 0px;">
-                                            <button class="btn btn-primary btn-xs" onclick="myFunctionConsultation_NewReferral()">New Referral</button>
-                                            <button class="btn btn-info btn-xs" onclick="myFunctionConsultation_NewPrescribeMedication()">Prescribe Medication</button>
-                                            <button class="btn btn-danger btn-xs" onclick="myFunctionConsultation_Print()">Print</button>
-                                        </td>
-                                        <td style="border-top-width: 0px;"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <ul class="pager">
-                                <li class="previous"><a href="#">Previous</a></li>
-                                <li class="next"><a href="#">Next</a></li>
-                            </ul>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button class="btn btn-info" onclick="myFunctionConsultation_NewConsultation()" type="submit">New</button>
-                            <button class="btn btn-primary" onclick="myFunctionConsultation_Update()" type="submit">Update</button>
-                            <button class="btn btn-warning" onclick="myFunctionConsultation_Delete()" type="submit">Delete</button>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div><!-- Show Edit Consultation Notes Ends -->
-
+        
         <script>
             //***************************//
             $('.readonly').css('border', 'none');
@@ -688,7 +568,7 @@
 
                 $('#myFunctionPatients_Edit').hide(); $('#myFunctionPatients_Save').show();
 
-                $('.readonly').attr("readonly", false)
+                $('.readonly').attr("readonly", false);
                 $('.readonly').css('border', '1px solid #ccc');
             });
 
@@ -696,7 +576,7 @@
 
                 $('#myFunctionPatients_Edit').show(); $('#myFunctionPatients_Save').hide();
 
-                $('.readonly').attr("readonly", true)
+                $('.readonly').attr("readonly", true);
                 $('.readonly').css('border', 'none');
                 $('.readonly').css('background-color', 'transparent');
             });//******************************//
@@ -715,6 +595,39 @@
             function myFunctionViewPatient_Update() {
                 $("#div_Medical_History_Update").modal('show');
             };
+
+            $(".View_readonly").attr("readonly", true);
+            $(".View_readonly").css("border", "1px solid #ccc");
+            $(".View_readonly").css("background-color", "transparent");
+
+            $(".View_readonly").attr("readonly", true);//Make all textboxes readonly in view mode.
+            $("#btnUpdateMedicalRecord").click(function () {//When a user clicks Update button on Medical Record Modal, textbox readonly changes to false and button text changes to "Save".
+                var btnText = $(this).html();
+                if (btnText == "Update") {
+                    $(".View_readonly").attr("readonly", false);
+                    $("#btnUpdateMedicalRecord").html('Save');
+                    $('.View_readonly').css('border', '1px solid #ccc');
+                }
+                else {
+                    $(".View_readonly").attr("readonly", true);
+                    $("#btnUpdateMedicalRecord").html('Update');
+                    $('.View_readonly').css('border', '1px solid #ccc');
+                }
+            });
+
+            $('#btnUpdateConsultation').click(function () {//When a user clicks Update button on Consultation Modal, textbox readonly changes to false and button text changes to "Save".
+                var btnText = $(this).html();
+                if (btnText == "Update") {
+                    $(".View_readonly").attr("readonly", false);
+                    $("#btnUpdateConsultation").html('Save');
+                    $('.View_readonly').css('border', '1px solid #ccc');
+                }
+                else {
+                    $(".View_readonly").attr("readonly", true);
+                    $("#btnUpdateConsultation").html('Update');
+                    $('.View_readonly').css('border', '1px solid #ccc');
+                }
+            });
 
             function myFunctionShowMedical_History() {
                 $("#div_Medical_History").modal('show');
@@ -737,9 +650,9 @@
                 $("#div_Prescriptions").modal('hide');
             };
 
-            function myFunctionConsultation_Update() {
-                $("#div_Consultations_Update").modal('show');
-            };
+            $(function () {
+                $('.datetimepicker').datetimepicker({ format: 'L' });
+            });
         </script>
 
         <div class="panel panel-default">

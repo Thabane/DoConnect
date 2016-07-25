@@ -58,7 +58,20 @@
                         <td><input name="Email Addres" class="form-control readonly" value="Josie@gmail.com"></td>
                         <td><input name="ID_Number" class="form-control readonly" value="965844586547"></td>
                         <td><input name="Gender" class="form-control readonly" value="Female"></td>
-                        <td><input name="DOB" class="form-control readonly" value="94-07-21"></td>
+                        <td><div class="container" style="padding-left:0px; padding-right:0px;">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="input-group date datetimepicker">
+                                                <input class="form-control" type="text" data-format="MM/dd/yyyy">
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div></td>
                         <td><input name="Cell_Number" class="form-control readonly" value="0837135032"></td>
                         <td><input name="Employee_Type" class="form-control readonly" value="Nurse"></td>
                         <td>
@@ -86,60 +99,70 @@
                             <h4 class="modal-title">Employee Details</h4>
                         </div>
                         <div class="modal-body">
-                            <table class="table" style="width:100%;">
-                                <tbody>
-                                    <tr>
-                                        <td style="border-top-width: 0px; width:5%; padding-left:30px;"><h5 class="form-control-label">Firstname:</h5></td>
-                                        <td style="border-top-width: 0px; width:10%; padding-right:20px;"><input name="P_Fistname" class="form-control readonly_ViewEmployee" type="text"></td>
-                                        <td style="border-top-width: 0px; width:5%; padding-left:30px;"><h5>Cell Number:</h5></td>
-                                        <td style="border-top-width: 0px; width:10%; padding-right:20px;"><input name="P_CellNumber" class="form-control readonly_ViewEmployee" type="text"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border-top-width: 0px; padding-left:30px;"><h5 class="form-control-label">Lastname:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input name="P_Lastname" class="form-control readonly_ViewEmployee" id="Text11" type="text"></td>
-                                        <td style="border-top-width: 0px; padding-left:30px; padding-top:2px;"><h5>Street Address:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input name="P_StreetAddress" class="form-control readonly_ViewEmployee" type="text"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border-top-width: 0px; padding-left:30px;"><h5 class="form-control-label">Email:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input name="P_EmailAddress" class="form-control readonly_ViewEmployee" id="Email2" type="email"></td>
-                                        <td style="border-top-width: 0px; padding-left:30px;"><h5>Suburb:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input name="P_Suburb" class="form-control readonly_ViewEmployee" type="text"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border-top-width: 0px; padding-left:30px;"><h5>ID Number:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input name="P_IDNumber" class="form-control readonly_ViewEmployee" id="Text14" type="text"></td>
-                                        <td style="border-top-width: 0px; padding-left:30px;"><h5>City:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input name="P_City" class="form-control readonly_ViewEmployee" type="text"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border-top-width: 0px; padding-left:30px;"><h5>DOB:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input name="P_DOB" class="form-control readonly_ViewEmployee" id="Date2" type="date"></td>
-                                        <td style="border-top-width: 0px; padding-left:30px;"><h5>Country:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input name="P_Country" class="form-control readonly_ViewEmployee" type="text"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border-top-width: 0px; padding-left:30px;"><h5>Gender:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;">
-                                            <select class="form-control readonly_ViewEmployee required input-sm">
-                                                <option value="">Please choose a gender</option>
-                                                <option value="1">Male</option>
-                                                <option value="2">Female</option>
-                                            </select>
-                                        </td>
-                                        <td style="border-top-width: 0px; padding-left:30px;"><h5>Employee Type:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;">
-                                            <select class="form-control readonly_ViewEmployee required input-sm">
-                                                <option value="">Choose Employee Type</option>
-                                                <option value="1">Nurse</option>
-                                                <option value="2">Cleaner</option>
-                                                <option value="3">Doctor</option>
-                                                <option value="4">Receptionist</option>                                                
-                                            </select>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                                <div class="col-md-2"><h5 class="form-control-label">Firstname:</h5></div>
+                                <div class="col-md-4"><input name="P_Fistname" class="form-control readonly_ViewEmployee" type="text"></div>
+                                <div class="col-md-2"><h5>Cell Number:</h5></div>
+                                <div class="col-md-4"><input name="P_CellNumber" class="form-control readonly_ViewEmployee" type="text"></div>
+                            </div>
+                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                                <div class="col-md-2"><h5 class="form-control-label">Lastname:</h5></div>
+                                <div class="col-md-4"><input name="P_Lastname" class="form-control readonly_ViewEmployee" id="Text11" type="text"></div>
+                                <div class="col-md-2"><h5>Street Address:</h5></div>
+                                <div class="col-md-4"><input name="P_StreetAddress" class="form-control readonly_ViewEmployee" type="text"></div>
+                            </div>
+                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                                <div class="col-md-2"><h5 class="form-control-label">Email:</h5></div>
+                                <div class="col-md-4"><input name="P_EmailAddress" class="form-control readonly_ViewEmployee" id="Email2" type="email"></div>
+                                <div class="col-md-2"><h5>Suburb:</h5></div>
+                                <div class="col-md-4"><input name="P_Suburb" class="form-control readonly_ViewEmployee" type="text"></div>
+                            </div>
+                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                                <div class="col-md-2"><h5>ID Number:</h5></div>
+                                <div class="col-md-4"><input name="P_IDNumber" class="form-control readonly_ViewEmployee" id="Text14" type="text"></div>
+                                <div class="col-md-2"><h5>City:</h5></div>
+                                <div class="col-md-4"><input name="P_City" class="form-control readonly_ViewEmployee" type="text"></div>
+                            </div>
+                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                                <div class="col-md-2"><h5>DOB:</h5></div>
+                                <div class="col-md-4"><div class="container" style="padding-left:0px; padding-right:0px;">
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group">
+                                                                        <div class="input-group date datetimepicker">
+                                                                            <input class="form-control" type="text" data-format="MM/dd/yyyy">
+                                                                            <span class="input-group-addon">
+                                                                                <span class="glyphicon glyphicon-calendar"></span>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div></div>
+                                <div class="col-md-2"><h5>Country:</h5></div>
+                                <div class="col-md-4"><input name="P_Country" class="form-control readonly_ViewEmployee" type="text"></div>
+                            </div>
+                            <div class="row" style="margin-top:4px;">
+                                <div class="col-md-2"><h5>Gender:</h5></div>
+                                <div class="col-md-4">
+                                    <select class="form-control readonly_ViewEmployee required input-sm">
+                                        <option value="">Please choose a gender</option>
+                                        <option value="1">Male</option>
+                                        <option value="2">Female</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2"><h5>Employee Type:</h5></div>
+                                <div class="col-md-4">
+                                    <select class="form-control readonly_ViewEmployee required input-sm">
+                                        <option value="">Choose Employee Type</option>
+                                        <option value="1">Nurse</option>
+                                        <option value="2">Cleaner</option>
+                                        <option value="3">Doctor</option>
+                                        <option value="4">Receptionist</option>
+                                        <option value="5">Administrator</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -161,60 +184,70 @@
                             <h4 class="modal-title">New Employee Details</h4>
                         </div>
                         <div class="modal-body">
-                            <table class="table" style="width:100%;">
-                                <tbody>
-                                    <tr>
-                                        <td style="border-top-width: 0px; width:5%; padding-left:30px;"><h5 class="form-control-label">Firstname:</h5></td>
-                                        <td style="border-top-width: 0px; width:10%; padding-right:20px;"><input name="P_Fistname" class="form-control" type="text"></td>
-                                        <td style="border-top-width: 0px; width:5%; padding-left:30px;"><h5>Cell Number:</h5></td>
-                                        <td style="border-top-width: 0px; width:10%; padding-right:20px;"><input name="P_CellNumber" class="form-control" type="text"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border-top-width: 0px; padding-left:30px;"><h5 class="form-control-label">Lastname:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input name="P_Lastname" class="form-control" id="Text11" type="text"></td>
-                                        <td style="border-top-width: 0px; padding-left:30px; padding-top:2px;"><h5>Street Address:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input name="P_StreetAddress" class="form-control" type="text"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border-top-width: 0px; padding-left:30px;"><h5 class="form-control-label">Email:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input name="P_EmailAddress" class="form-control" id="Email2" type="email"></td>
-                                        <td style="border-top-width: 0px; padding-left:30px;"><h5>Suburb:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input name="P_Suburb" class="form-control" type="text"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border-top-width: 0px; padding-left:30px;"><h5>ID Number:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input name="P_IDNumber" class="form-control" id="Text14" type="text"></td>
-                                        <td style="border-top-width: 0px; padding-left:30px;"><h5>City:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input name="P_City" class="form-control" type="text"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border-top-width: 0px; padding-left:30px;"><h5>DOB:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input name="P_DOB" class="form-control" id="Date2" type="date"></td>
-                                        <td style="border-top-width: 0px; padding-left:30px;"><h5>Country:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><input name="P_Country" class="form-control" type="text"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border-top-width: 0px; padding-left:30px;"><h5>Gender:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;">
-                                            <select class="form-control required input-sm">
-                                                <option value="">Please choose a gender</option>
-                                                <option value="1">Male</option>
-                                                <option value="2">Female</option>
-                                            </select>
-                                        </td>
-                                        <td style="border-top-width: 0px; padding-left:30px;"><h5>Employee Type:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;">
-                                            <select class="form-control readonly required input-sm">
-                                                <option value="">Choose Employee Type</option>
-                                                <option value="1">Nurse</option>
-                                                <option value="2">Cleaner</option>
-                                                <option value="3">Doctor</option>
-                                                <option value="4">Receptionist</option>
-                                            </select>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                                <div class="col-md-2"><h5 class="form-control-label">Firstname:</h5></div>
+                                <div class="col-md-4"><input name="P_Fistname" class="form-control" type="text"></div>
+                                <div class="col-md-2"><h5>Cell Number:</h5></div>
+                                <div class="col-md-4"><input name="P_CellNumber" class="form-control" type="text"></div>
+                            </div>
+                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                                <div class="col-md-2"><h5 class="form-control-label">Lastname:</h5></div>
+                                <div class="col-md-4"><input name="P_Lastname" class="form-control" id="Text11" type="text"></div>
+                                <div class="col-md-2"><h5>Street Address:</h5></div>
+                                <div class="col-md-4"><input name="P_StreetAddress" class="form-control" type="text"></div>
+                            </div>
+                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                                <div class="col-md-2"><h5 class="form-control-label">Email:</h5></div>
+                                <div class="col-md-4"><input name="P_EmailAddress" class="form-control" id="Email2" type="email"></div>
+                                <div class="col-md-2"><h5>Suburb:</h5></div>
+                                <div class="col-md-4"><input name="P_Suburb" class="form-control" type="text"></div>
+                            </div>
+                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                                <div class="col-md-2"><h5>ID Number:</h5></div>
+                                <div class="col-md-4"><input name="P_IDNumber" class="form-control" id="Text14" type="text"></div>
+                                <div class="col-md-2"><h5>City:</h5></div>
+                                <div class="col-md-4"><input name="P_City" class="form-control" type="text"></div>
+                            </div>
+                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                                <div class="col-md-2"><h5>DOB:</h5></div>
+                                <div class="col-md-4"><div class="container" style="padding-left:0px; padding-right:0px;">
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group">
+                                                                        <div class="input-group date datetimepicker">
+                                                                            <input class="form-control" type="text" data-format="MM/dd/yyyy">
+                                                                            <span class="input-group-addon">
+                                                                                <span class="glyphicon glyphicon-calendar"></span>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div></div>
+                                <div class="col-md-2"><h5>Country:</h5></div>
+                                <div class="col-md-4"><input name="P_Country" class="form-control" type="text"></div>
+                            </div>
+                            <div class="row" style="margin-top:4px;">
+                                <div class="col-md-2"><h5>Gender:</h5></div>
+                                <div class="col-md-4">
+                                    <select class="form-control required input-sm">
+                                        <option value="">Please choose a gender</option>
+                                        <option value="1">Male</option>
+                                        <option value="2">Female</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2"><h5>Employee Type:</h5></div>
+                                <div class="col-md-4">
+                                    <select class="form-control required input-sm">
+                                        <option value="">Choose Employee Type</option>
+                                        <option value="1">Nurse</option>
+                                        <option value="2">Cleaner</option>
+                                        <option value="3">Doctor</option>
+                                        <option value="4">Receptionist</option>
+                                        <option value="5">Administrator</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -237,7 +270,7 @@
 
         $('#myFunctionEmployees_Edit').hide(); $('#myFunctionEmployees_Save').show();
 
-        $('.readonly').attr("readonly", false)
+        $('.readonly').attr("readonly", false);
         $('.readonly').css('border', '1px solid #ccc');
     });
 
@@ -245,7 +278,7 @@
 
         $('#myFunctionEmployees_Edit').show(); $('#myFunctionEmployees_Save').hide();
 
-        $('.readonly').attr("readonly", true)
+        $('.readonly').attr("readonly", true);
         $('.readonly').css('border', 'none');
         $('.readonly').css('background-color', 'transparent');
     });
@@ -256,25 +289,27 @@
 
     $('.tr_dblclick').dblclick(function () {//<!--Show View Employee Modal when a user double clicks a row-->
         $("#View_Employee_Modal").modal('show');
-        $('.readonly_ViewEmployee').css('border', 'none');
-        $('.readonly_ViewEmployee').attr("readonly", true)
-        $('.readonly_ViewEmployee').css('background-color', 'transparent');
+        $(".readonly_ViewEmployee").attr("readonly", true);
+        $(".readonly_ViewEmployee").css("background-color", "transparent");
     });
 
     $('#function_btnUpdateEmployee').click(function () {//<!--When a User clicks Update button on Show View Employee Modal when a user double clicks a row-->
         var btnText = $(this).html();
         if (btnText == "Update") {
-            $('.readonly_ViewEmployee').attr("readonly", false)
-            $('.readonly_ViewEmployee').css('border', '1px solid #ccc');
+            $(".readonly_ViewEmployee").attr("readonly", false);
+            $(".readonly_ViewEmployee").css("border", "1px solid #ccc");
             $("#function_btnUpdateEmployee").html('Save');
         }
         else {
-            $('.readonly_ViewEmployee').attr("readonly", true)
+            $('.readonly_ViewEmployee').attr("readonly", true);
             $('.readonly_ViewEmployee').css('border', 'none');
             $('.readonly_ViewEmployee').css('background-color', 'transparent');
             $("#function_btnUpdateEmployee").html('Update');
         }
+    });
 
+    $(function () {
+        $('.datetimepicker').datetimepicker({ format: 'L' });
     });
 </script>
 

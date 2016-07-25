@@ -10,7 +10,7 @@
             <li role="presentation" class="active"><a href="/Events"><i class="fa fa-align-justify"></i>Events List</a></li>
             <li role="presentation"><a href="#" onclick="myFunctionAddEvent()"><i class="fa fa-plus-circle"></i>New Event</a></li>
         </ul>
-
+        
         <div class="panel panel-default">
             <table class="table-bordered" style="float:right; border:0; margin-bottom:5px;">
                 <tbody>
@@ -42,19 +42,47 @@
                     <tr>
                         <th style="padding-right: 0px; padding-left: 20px;">Title</th>
                         <th style="padding-right: 0px; padding-left: 20px;">Event Details</th>
-                        <th style="width: 15%; padding-right: 0px; padding-left: 20px;">Start Date</th>
-                        <th style="width: 15%; padding-right: 0px; padding-left: 20px;">End Date</th>
+                        <th style="width: 15%; padding-right: 0px; padding-left: 20px;">Start Date & Time</th>
+                        <th style="width: 15%; padding-right: 0px; padding-left: 20px;">End Date & Time</th>
                         <th style="width: 15%; padding-right: 0px; padding-left: 20px;">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr class="tr_dblclick">
-                        <td><input name="Fistname" class="form-control readonly" value="Staff Meeting"></td>
-                        <td><input name="Lastname" class="form-control readonly" value="Staff Meeting"></td>
-                        <td><input name="Email Addres" class="form-control readonly" value="94-07-21"></td>
-                        <td><input name="ID_Number" class="form-control readonly" value="94-07-21"></td>
+                        <td><input name="Title" class="form-control readonly" value="I am so over this event"></td>
+                        <td><input name="EventDetails" class="form-control readonly" value="Staff Meeting2"></td>
+                        <td style="border-top-width: 0px; width: 20%; padding-right:20px;"><div class="container" style="padding-left:0px; padding-right:0px;">
+                                                                                                <div class="row">
+                                                                                                    <div class="col-md-12">
+                                                                                                        <div class="form-group">
+                                                                                                            <div class="input-group date datetimepicker">
+                                                                                                                <input class="form-control" type="text">
+                                                                                                                <span class="input-group-addon">
+                                                                                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                                                                                </span>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                        </td>
+                        <td style="border-top-width: 0px; width: 20%; padding-right:20px;"><div class="container" style="padding-left:0px; padding-right:0px;">
+                                                                                                <div class="row">
+                                                                                                    <div class="col-md-12">
+                                                                                                        <div class="form-group">
+                                                                                                            <div class="input-group date datetimepicker">
+                                                                                                                <input class="form-control" type="text">
+                                                                                                                <span class="input-group-addon">
+                                                                                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                                                                                </span>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                        </td>
                         <td>
-                            <button class="btn btn-info btn-xs" id="myFunctionEvents_Edit" onclick="myFunctionEvents_Edit()" href="#"><i class="fa fa-pencil"></i></button>
+                            <button class="btn btn-info btn-xs" id="myFunctionEvents_Edit" href="#"><i class="fa fa-pencil"></i></button>
                             <button class="btn btn-info btn-xs" id="myFunctionEvents_Save" onclick="myFunctionEvents_Save()" href="#"><i class="fa fa-floppy-o"></i></button>
                             <button class="btn btn-danger btn-xs" onclick="myFunctionEvents_Delete()"><i class="fa fa-trash-o"></i></button>
                         </td>
@@ -90,23 +118,35 @@
                                     </tr>
                                     <tr>
                                         <td style="border-top-width: 0px; padding-left:30px;"><h5 class="form-control-label">Start Date & Time:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><div class="form-group">
-                                                                                                    <div class='input-group date' id='datetimepicker6'>
-                                                                                                        <input type='text' class="form-control readonly_ViewEvent" name="View_StartDateTime"/>
-                                                                                                        <span class="input-group-addon">
-                                                                                                            <span class="glyphicon glyphicon-calendar btnDatetimepicker_View"></span>
-                                                                                                        </span>
+                                        <td style="border-top-width: 0px; padding-right:20px;"><div class="container" style="padding-left:0px; padding-right:0px;">
+                                                                                                    <div class="row">
+                                                                                                        <div class="col-md-12">
+                                                                                                            <div class="form-group">
+                                                                                                                <div class="input-group date datetimepicker">
+                                                                                                                    <input class="form-control" type="text">
+                                                                                                                    <span class="input-group-addon">
+                                                                                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                                                                                    </span>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
                                                                                                     </div>
                                                                                                 </div></td>
                                     </tr>
                                     <tr>
                                         <td style="border-top-width: 0px; padding-left:30px;"><h5 class="form-control-label">End Date & Time:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;"><div class="form-group">
-                                                                                                    <div class='input-group date' id='datetimepicker7'>
-                                                                                                        <input type='text' class="form-control readonly_ViewEvent" name="View_EndDateTime"/>
-                                                                                                        <span class="input-group-addon">
-                                                                                                            <span class="glyphicon glyphicon-calendar btnDatetimepicker_View"></span>
-                                                                                                        </span>
+                                        <td style="border-top-width: 0px; padding-right:20px;"><div class="container" style="padding-left:0px; padding-right:0px;">
+                                                                                                    <div class="row">
+                                                                                                        <div class="col-md-12">
+                                                                                                            <div class="form-group">
+                                                                                                                <div class="input-group date datetimepicker">
+                                                                                                                    <input class="form-control" type="text">
+                                                                                                                    <span class="input-group-addon">
+                                                                                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                                                                                    </span>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
                                                                                                     </div>
                                                                                                 </div></td>
                                     </tr>
@@ -153,28 +193,38 @@
                                     </tr>
                                     <tr>
                                         <td style="border-top-width: 0px; padding-left:30px;"><h5 class="form-control-label">Start Date & Time:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;">
-                                            <div class="form-group">
-                                                <div class='input-group date' id='datetimepicker6'>
-                                                    <input type='text' class="form-control" name="New_StartDateTime"/>
-                                                    <span class="input-group-addon">
-                                                        <span class="glyphicon glyphicon-calendar btnDatetimepicker_View"></span>
-                                                    </span>
-                                                </div>
-                                            </div>
+                                        <td style="border-top-width: 0px; padding-right:20px;"><div class="container" style="padding-left:0px; padding-right:0px;">
+                                                                                                    <div class="row">
+                                                                                                        <div class="col-md-12">
+                                                                                                            <div class="form-group">
+                                                                                                                <div class="input-group date datetimepicker">
+                                                                                                                    <input class="form-control" type="text">
+                                                                                                                    <span class="input-group-addon">
+                                                                                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                                                                                    </span>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td style="border-top-width: 0px; padding-left:30px;"><h5 class="form-control-label">End Date & Time:</h5></td>
-                                        <td style="border-top-width: 0px; padding-right:20px;">
-                                            <div class="form-group">
-                                                <div class='input-group date' id='datetimepicker7'>
-                                                    <input type='text' class="form-control" name="New_EndDateTime"/>
-                                                    <span class="input-group-addon">
-                                                        <span class="glyphicon glyphicon-calendar btnDatetimepicker_View"></span>
-                                                    </span>
-                                                </div>
-                                            </div>
+                                        <td style="border-top-width: 0px; padding-right:20px;"><div class="container" style="padding-left:0px; padding-right:0px;">
+                                                                                                    <div class="row">
+                                                                                                        <div class="col-md-12">
+                                                                                                            <div class="form-group">
+                                                                                                                <div class="input-group date datetimepicker">
+                                                                                                                    <input class="form-control" type="text">
+                                                                                                                    <span class="input-group-addon">
+                                                                                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                                                                                    </span>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
                                         </td>
                                     </tr>
                                     <tr>
@@ -255,7 +305,7 @@
     //}); 
 
     $('.btnDatetimepicker_View').click(function () {
-        $('#datetimepicker6').datetimepicker();
+        $('#datetimepicker6').data('datetimepicker');
         $('#datetimepicker7').datetimepicker({
             useCurrent: false //Important! See issue #1075
         });
@@ -266,6 +316,11 @@
             $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
         });
     });
+
+    $(function () {
+        $('.datetimepicker').datetimepicker();
+    });
+
 
 </script>
 

@@ -3,6 +3,6 @@
 
         AccountingService.GetAllAccounting().then
         (function (results) {
-            $scope.Accounting = result.data;
+            $scope.accounting = result.data;
         });
     }]);
