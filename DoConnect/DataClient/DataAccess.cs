@@ -8,7 +8,8 @@ using System.Linq;
 using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
-//using System.Net
+using Newtonsoft.Json;
+using ObjectModel;
 
 namespace DataClient
 {
@@ -61,14 +62,25 @@ namespace DataClient
             }
         }
 
-        internal void LogEntry()
+        internal void LogEntry(int UserId, string value)
         {
-            JObject o1 = JObject.Parse(File.ReadAllText(@"c:\videogames.json"));
-            //using (StreamReader r = new StreamReader(@"C:\Users\thabane.n\Source\Repos\DoConnect\DoConnect\DataClient\LogFiles\Log.json"))
-            //{
-            //    var text = r.Read();
-            //    var hold = JSON.Parse(text);
-            //}
+            var filePath = @"C:\Users\Thabane.n\Source\Repos\DoConnect\DoConnect\DataClient\LogFiles\Log.json";
+            var jsonData = File.ReadAllText(filePath);
+            var logData = JsonConvert.DeserializeObject<List<Log>>(jsonData)
+                        ?? new List<Log>();
+
+            var previousId = logData.LastOrDefault().Key;
+            var newId = Convert.ToInt32(previousId);
+            newId++;
+
+            logData.Add(new Log() { Key = newId.ToString(), Value = value,UserId = UserId.ToString()});
+
+            var data = JsonConvert.SerializeObject(logData);
+            using (StreamWriter writer = new StreamWriter(filePath))
+            {
+                writer.Write(data);
+            }
+
         }
     }
 }

@@ -22,8 +22,7 @@ namespace DataClient
         }
         
         public int CreateUser()
-        {
-            access.LogEntry();
+        {            
             int userId = 0;
             using (var reader = access.ExecuteReader(Conn, "[CreateUser]", new List<SqlParameter>()))
             {
@@ -31,7 +30,8 @@ namespace DataClient
                 {
                    userId = reader.GetInt32(reader.GetOrdinal("ID"));
                 }    
-            }            
+            }
+            access.LogEntry(userId, "New User Created");
             return userId;
         }
 

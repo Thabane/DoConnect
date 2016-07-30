@@ -33,6 +33,9 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\..\..\Downloads\Json90r1\Bin\Portable40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -47,17 +50,16 @@
     <Compile Include="DataLayer.cs" />
     <Compile Include="DataAccess.cs" />
     <Compile Include="IDataLayer.cs" />
-    <Compile Include="ILogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="LogFiles\Log.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ObjectModel\ObjectModel.csproj">
       <Project>{171b67fd-6810-48a2-ab91-c12dca6e06bf}</Project>
       <Name>ObjectModel</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="LogFiles\Log.json" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

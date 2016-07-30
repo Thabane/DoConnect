@@ -45,6 +45,7 @@
     <Compile Include="Appointments.cs" />
     <Compile Include="Doctors.cs" />
     <Compile Include="Invoice.cs" />
+    <Compile Include="Log.cs" />
     <Compile Include="Medical_Aid.cs" />
     <Compile Include="Patient.cs" />
     <Compile Include="Patient_Medical_Aid.cs" />
