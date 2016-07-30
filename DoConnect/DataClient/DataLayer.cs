@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ObjectModel;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -66,6 +67,21 @@ namespace DataClient
 
             return false;
 
+        }
+
+        public List<Patient> GetAllPatients()
+        {
+            DataAccess da = new DataAccess();
+            //int userId = 0;
+            //using (var reader = da.ExecuteReader(Conn, "[CreateUser]", new List<SqlParameter>()))
+            //{
+            //    if (reader.Read())
+            //    {
+            //        userId = reader.GetInt32(reader.GetOrdinal("ID"));
+            //    }
+            //}
+            //return userId;
+            return new List<Patient>();
         }
     }
 }
