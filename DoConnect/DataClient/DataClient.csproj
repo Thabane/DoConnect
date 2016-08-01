@@ -47,6 +47,12 @@
     <Compile Include="DataAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ObjectModel\ObjectModel.csproj">
+      <Project>{171b67fd-6810-48a2-ab91-c12dca6e06bf}</Project>
+      <Name>ObjectModel</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
