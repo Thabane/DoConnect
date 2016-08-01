@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 
 namespace ObjectModel
-{    
+{
     public class Patient
-    {    
+    {
         public int ID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
