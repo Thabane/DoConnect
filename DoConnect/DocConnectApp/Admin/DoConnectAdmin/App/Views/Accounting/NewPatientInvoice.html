@@ -1,0 +1,66 @@
+﻿<div>
+    <div id="page-wrapper" ng-controller="AccountingController">
+        <!--Expenses Section Begins-->
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header">New Patient Invoice Entry</h2>
+            </div>
+        </div>
+
+        <ul class="nav nav-tabs">
+            <li role="presentation"><a href="/Accounting"><i class="fa fa-align-justify"></i>Invoice List</a></li>
+            <li role="presentation" class="active"><a href="/NewPatientInvoice"><i class="fa fa-plus-circle"></i>New Invoice</a></li>
+            <li role="presentation"><a href="/Expenses"><i class="fa fa-align-justify"></i>Expense List</a></li>
+            <li role="presentation"><a href="/NewExpenceInvoice"><i class="fa fa-plus-circle"></i>New Expense</a></li>
+        </ul>
+
+        <!--New Invoice Modal-->
+        
+        <form>
+            <div style="margin:auto; width:45%;">
+                <div class="modal-header" style="border-bottom:0px;"></div>
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        <input type="hidden" name="action" value="insert">
+                        <input type="hidden" name="invoice_id" value="0">
+                        <div class="form-group">
+                            <h5 class="col-sm-4 control-label" for="invoice_number" style="text-align:left">Invoice ID<span class="require-field" style="color:red">*</span></h5>
+                            <div class="col-sm-8"><input id="New_InvoiceNumber" class="form-control validate[required] text-input" type="text" readonly="" value="16072096" name="New_InvoiceNumber"></div>
+                        </div>
+                        <div class="form-group">
+                            <h5 class="col-sm-4 control-label" style="text-align:left">Treatment Details<span class="require-field" style="color:red">*</span></h5>
+                            <div class="col-sm-8"><input id="invice_title" class="form-control validate[required,custom[onlyLetterSp]] text-input" type="text" value="" name="New_TreatmentDetails"></div>
+                        </div>
+                        <div class="form-group">
+                            <h5 class="col-sm-4 control-label" for="patient" style="text-align:left">Patient<span class="require-field" style="color:red">*</span></h5>
+                            <div class="col-sm-8">
+                                <select name="New_Patient" class="form-control">
+                                    <option value="">Select Patient</option>
+                                    <option value="1">@@@</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <h5 class="col-sm-4 control-label" for="discount" style="text-align:left">Discount Amount</h5>
+                            <div class="col-sm-8"><input class="form-control " type="text" value="" name="New_Discount"></div>
+                        </div>
+                        <div class="form-group">
+                            <h5 class="col-sm-4 control-label" for="payment_status" style="text-align:left">Status<span class="require-field" style="color:red">*</span></h5>
+                            <div class="col-sm-8">
+                                <select name="New_PaymentStatus" id="payment_status" class="form-control validate[required]">
+                                    <option value="Fully-Paid">Fully-Paid</option>
+                                    <option value="Partly-Paid">Partly-Paid</option>
+                                    <option value="Unpaid">Unpaid</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="function_btnNewEmployee()">Create Invoice Entry</button>
+                </div>
+            </div>
+        </form><!--New Invoice Modal Ends-->
+
+    </div>
+</div>
