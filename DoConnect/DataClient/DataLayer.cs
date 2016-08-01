@@ -47,17 +47,25 @@ namespace DataClient
             SqlParameter jobTitleParameter = new SqlParameter("@JobTitle", SqlDbType.NVarChar);
 
             firstNameParameter.Value = doc.FirstName;
+            parameters.Add(firstNameParameter);
             lastNameParameter.Value = doc.LastName;
+            parameters.Add(lastNameParameter);
             genderParameter.Value = doc.Gender;
+            parameters.Add(genderParameter);
             addressParameter.Value = doc.Address;
+            parameters.Add(addressParameter);
             practiceIdParameter.Value = doc.PracticeId;
+            parameters.Add(practiceIdParameter);
             userIdParameter.Value = doc.UserId;
+            parameters.Add(userIdParameter);
             jobTitleParameter.Value = doc.Job_Title;
+            parameters.Add(jobTitleParameter);
 
             try
             {
                 access.ExecuteNonQuery(Conn, parameters, "[NewUpdateDoctor]");
                 access.LogEntry(UserId, "User Added new Doctor");
+                return true;
             }
             catch (Exception ex)
             {

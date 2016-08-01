@@ -76,5 +76,6 @@
     <Build Include="dbo\Tables\Users.sql" />
     <Build Include="dbo\Stored Procedures\CreateUser.sql" />
     <Build Include="dbo\Stored Procedures\NewUpdateDoctor.sql" />
+    <Build Include="dbo\Stored Procedures\GetAllPatients.sql" />
   </ItemGroup>
 </Project>
