@@ -7,9 +7,7 @@ using System.Web.Http;
 
 namespace DoConnectAdmin.Controllers
 {
-    public class AppointmentsController : ApiController
+    public class MedicalAidController : ApiController
     {
-
-
     }
 }

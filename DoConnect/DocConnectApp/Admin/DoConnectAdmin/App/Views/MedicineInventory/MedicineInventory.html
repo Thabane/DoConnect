@@ -1,3 +1,212 @@
-﻿<div ng-controller="MedicineInventoryController">
+﻿<div>
+    <div id="page-wrapper" ng-controller="MedicineInventoryController">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header">Medicine Inventory</h2>
+            </div>
+        </div>
 
+        <ul class="nav nav-tabs">
+            <li role="presentation" class="active"><a href="/MedicineInventory"><i class="fa fa-align-justify"></i>Invoice List</a></li>
+            <li role="presentation"><a href="/NewMedicine"><i class="fa fa-plus-circle"></i>Add Medicine</a></li>
+        </ul>
+
+        <div class="panel panel-default">
+            <table class="table-bordered" style="float:right; border:0; margin-bottom:5px;">
+                <tbody>
+                    <tr>
+                        <td style="border: 0;">
+                            <div class="btn-group">
+                                <a class="btn btn-default dropdown-toggle btn-select2" href="#" data-toggle="dropdown" style="font-size:13px;" aria-expanded="false">Select search field <span class="caret"></span></a>
+                                <ul class="dropdown-menu" style="font-size:13px;">
+                                    <li><a href="#">Email Address</a></li>
+                                    <li><a href="#">Firstname</a></li>
+                                    <li><a href="#">Lastname</a></li>
+                                    <li><a href="#">ID Number</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                        <td style="border:0;">
+                            <div class="form-group input-group" style="margin-top:4px; margin-bottom:4px;">
+                                <input class="form-control" type="text" style="font-size:13px;"><span class="input-group-btn">
+                                    <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+                                </span>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table class="table table-hover" style="font-size: 12px;">
+                <thead style="background-color: #f8f8f8;">
+                    <tr>
+                        <th style="width: 10%; padding-right: 0px; padding-left: 20px;">Drug Name</th>
+                        <th style="width: 15%; padding-right: 0px; padding-left: 20px;">Drug Concentration</th>
+                        <th style="width: 13%; padding-right: 0px; padding-left: 20px;">Qty In Stock</th>
+                        <th style="width: 10%; padding-right: 0px; padding-left: 20px;">Practice Name</th>
+                        <th style="width: 12%; padding-right: 0px; padding-left: 20px;">Expiry Date</th>
+                        <th style="width: 11%; padding-right: 0px; padding-left: 20px;">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="tr_dblclick">
+                        <td><input name="Fistname" class="form-control readonly" value="Josephine"></td>
+                        <td><input name="Lastname" class="form-control readonly" value="Chivinge"></td>
+                        <td><input name="Email Addres" class="form-control readonly" value="Josie@gmail.com"></td>
+                        <td><input name="ID_Number" class="form-control readonly" value="965844586547"></td>
+                        <td>
+                            <div class="container" style="padding-left:0px; padding-right:0px;">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="input-group date datetimepicker">
+                                                <input class="form-control" type="text" data-format="MM/dd/yyyy">
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <button class="btn btn-info btn-xs" id="myFunctionMedicineInventory_Edit" onclick="myFunctionMedicineInventory_Edit()" href="#"><i class="fa fa-pencil"></i></button>
+                            <button class="btn btn-info btn-xs" id="myFunctionMedicineInventory_Save" onclick="myFunctionMedicineInventory_Save()" href="#"><i class="fa fa-floppy-o"></i></button>
+                            <button class="btn btn-danger btn-xs" onclick="myFunctionMedicineInventory_Delete()"><i class="fa fa-trash-o"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <ul class="pager">
+                <li class="previous"><a href="#">Previous</a></li>
+                <li class="next"><a href="#">Next</a></li>
+            </ul>
+        </div>
+
+        <!--View Medicine Modal-->
+        <div id="View_Medicine_Modal" class="modal fade">
+            <form>
+                <div class="modal-dialog" style="width:60%">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Medicine Details</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                                <div class="col-md-2"><h5 class="form-control-label">Drug Name:</h5></div>
+                                <div class="col-md-4"><input class="form-control readonly_ViewMedicine" type="text"></div>
+                                <div class="col-md-2"><h5>Description:</h5></div>
+                                <div class="col-md-4"><input class="form-control readonly_ViewMedicine" type="text"></div>
+                            </div>
+                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                                <div class="col-md-2"><h5 class="form-control-label">Drug Concentration:</h5></div>
+                                <div class="col-md-4"><input class="form-control readonly_ViewMedicine" type="text"></div>
+                                <div class="col-md-2"><h5>Quantity In Stock:</h5></div>
+                                <div class="col-md-4"><input class="form-control readonly_ViewMedicine" type="text"></div>
+                            </div>
+                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                                <div class="col-md-2"><h5 class="form-control-label">Date Of Purchase:</h5></div>
+                                <div class="col-md-4">
+                                    <div class="container" style="padding-left:0px; padding-right:0px;">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <div class="input-group date datetimepicker">
+                                                        <input class="form-control" type="text" data-format="MM/dd/yyyy">
+                                                        <span class="input-group-addon">
+                                                            <span class="glyphicon glyphicon-calendar"></span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2"><h5>Expiry Date:</h5></div>
+                                <div class="col-md-4">
+                                    <div class="container" style="padding-left:0px; padding-right:0px;">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <div class="input-group date datetimepicker">
+                                                        <input class="form-control" type="text" data-format="MM/dd/yyyy">
+                                                        <span class="input-group-addon">
+                                                            <span class="glyphicon glyphicon-calendar"></span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                                <div class="col-md-2"><h5>Practice Name:</h5></div>
+                                <div class="col-md-4"><input class="form-control readonly_ViewMedicine" type="text"></div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" onclick="function_btnUpdateMedicine()" id="function_btnUpdateMedicine">Update</button>
+                            <button type="button" class="btn btn-danger" onclick="function_btnDeleteEmployee()">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div><!--View Medicine Modal Ends--> 
+    </div>
 </div>
+
+<script type="text/javascript">
+    $('.readonly').css('border', 'none');
+    $('.readonly').css('background-color', 'transparent');
+    $('.readonly').css('font-size', '13px');
+    $('.readonly').css('padding-right', '0px');
+    $('.readonly_ViewMedicine').attr("readonly", true);
+    $('#myFunctionMedicineInventory_Edit').show(); $('#myFunctionMedicineInventory_Save').hide();
+
+    $('#myFunctionMedicineInventory_Edit').click(function () {
+
+        $('#myFunctionMedicineInventory_Edit').hide(); $('#myFunctionMedicineInventory_Save').show();
+
+        $('.readonly').attr("readonly", false);
+        $('.readonly').css('border', '1px solid #ccc');
+    });
+
+    $('#myFunctionMedicineInventory_Save').click(function () {
+
+        $('#myFunctionMedicineInventory_Edit').show(); $('#myFunctionMedicineInventory_Save').hide();
+
+        $('.readonly').attr("readonly", true);
+        $('.readonly').css('border', 'none');
+        $('.readonly').css('background-color', 'transparent');
+    });
+
+    $('.tr_dblclick').dblclick(function () {
+        $("#View_Medicine_Modal").modal('show');
+        $(".readonly_ViewMedicine").attr("readonly", true);
+        $(".readonly_ViewMedicine").css("background-color", "transparent");
+    });
+
+    $('#function_btnUpdateMedicine').click(function () {
+        var btnText = $(this).html();
+        if (btnText == "Update") {
+            $(".readonly_ViewMedicine").attr("readonly", false);
+            $(".readonly_ViewMedicine").css("border", "1px solid #ccc");
+            $("#function_btnUpdateMedicine").html('Save');
+        }
+        else {
+            $('.readonly_ViewMedicine').attr("readonly", true);
+            $('.readonly_ViewMedicine').css('border', 'none');
+            $('.readonly_ViewMedicine').css('background-color', 'transparent');
+            $("#function_btnUpdateMedicine").html('Update');
+        }
+    });
+
+    $(function () {
+        $('.datetimepicker').datetimepicker({ format: 'L' });
+    });
+</script>
