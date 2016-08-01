@@ -10,6 +10,8 @@ namespace DataClient
     public interface IDataLayer
     {
         int CreateUser();
-        bool NewUpdateDoctor(Doctor doc);
+        bool NewUpdateDoctor(Doctor doc, int UserId);
+        Doctor GetDoctor(int DocID);
+        List<Patient> GetAllPatients();
     }
 }

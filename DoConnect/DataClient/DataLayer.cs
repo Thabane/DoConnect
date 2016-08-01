@@ -20,25 +20,25 @@ namespace DataClient
         {
             access = new DataAccess();
         }
-        
+
         public int CreateUser()
-        {            
+        {
             int userId = 0;
             using (var reader = access.ExecuteReader(Conn, "[CreateUser]", new List<SqlParameter>()))
             {
                 if (reader.Read())
                 {
-                   userId = reader.GetInt32(reader.GetOrdinal("ID"));
-                }    
+                    userId = reader.GetInt32(reader.GetOrdinal("ID"));
+                }
             }
             access.LogEntry(userId, "New User Created");
             return userId;
         }
 
-        public bool NewUpdateDoctor(Doctor doc)
+        public bool NewUpdateDoctor(Doctor doc, int UserId)
         {
             List<SqlParameter> parameters = new List<SqlParameter>();
-            SqlParameter firstNameParameter = new SqlParameter("@FirstName",SqlDbType.NVarChar);
+            SqlParameter firstNameParameter = new SqlParameter("@FirstName", SqlDbType.NVarChar);
             SqlParameter lastNameParameter = new SqlParameter("@LastName", SqlDbType.NVarChar);
             SqlParameter genderParameter = new SqlParameter("@Gender", SqlDbType.Char);
             SqlParameter addressParameter = new SqlParameter("@Address", SqlDbType.NVarChar);
@@ -54,33 +54,34 @@ namespace DataClient
             userIdParameter.Value = doc.UserId;
             jobTitleParameter.Value = doc.Job_Title;
 
-
             try
             {
                 access.ExecuteNonQuery(Conn, parameters, "[NewUpdateDoctor]");
+                access.LogEntry(UserId, "User Added new Doctor");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                access.LogEntry(UserId, ex.ToString());
                 return false;
             }
-
             return false;
-
         }
 
         public List<Patient> GetAllPatients()
         {
-            DataAccess da = new DataAccess();
-            //int userId = 0;
-            //using (var reader = da.ExecuteReader(Conn, "[CreateUser]", new List<SqlParameter>()))
-            //{
-            //    if (reader.Read())
-            //    {
-            //        userId = reader.GetInt32(reader.GetOrdinal("ID"));
-            //    }
-            //}
-            //return userId;
-            return new List<Patient>();
+            List<Patient> pats =  new List<Patient>();
+
+            using (var reader = access.ExecuteReader(Conn, "[GetAllPatients]", new List<SqlParameter>()))
+            {
+                if (reader.Read())
+                {
+                    while (reader.Read())
+                    {
+                        pats.Add(new Patient(reader));
+                    }                    
+                }
+            }
+            return pats;
         }
     }
 }
