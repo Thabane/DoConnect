@@ -3,13 +3,15 @@ using System.Collections.Generic;
 
 namespace ObjectModel
 {
-    public class Doctors
+    public class Doctor
     {
         public int ID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Gender { get; set; }
+        public char Gender { get; set; }
         public string Address { get; set; }
         public string Job_Title { get; set; }
+        public int UserId { get; set; }
+        public int PracticeId { get; set; }
     }
 }
