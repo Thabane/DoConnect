@@ -157,6 +157,8 @@ namespace DataClient
             parameters.Add(suburbParameter);
             cellNumberParameter.Value = pat.Cell_Number;
             parameters.Add(cellNumberParameter);
+            dobParameter.Value = pat.DOB;
+            parameters.Add(dobParameter);
 
 
             if (pat.User_ID != 0)
@@ -168,8 +170,8 @@ namespace DataClient
 
             try
             {
-                access.ExecuteNonQuery(Conn, parameters, "[NewUpdateDoctor]");
-                access.LogEntry(UserId, "User Added new Doctor");
+                access.ExecuteNonQuery(Conn, parameters, "[NewUpdatePatient]");
+                access.LogEntry(UserId, "User Added new Patient");
                 return true;
             }
             catch (Exception ex)
