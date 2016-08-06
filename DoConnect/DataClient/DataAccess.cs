@@ -73,7 +73,7 @@ namespace DataClient
             var newId = Convert.ToInt32(previousId);
             newId++;
 
-            logData.Add(new Log() { Key = newId.ToString(), Value = value,UserId = UserId.ToString()});
+            logData.Add(new Log() { Key = newId.ToString(), Value = value,UserId = UserId.ToString(), DateTime = DateTime.Now.ToString()});
 
             var data = JsonConvert.SerializeObject(logData);
             using (StreamWriter writer = new StreamWriter(filePath))

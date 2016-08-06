@@ -21,10 +21,14 @@ namespace DataClient
             access = new DataAccess();
         }
 
-        public int CreateUser()
+        public int CreateUser(int AccessLevel)
         {
             int userId = 0;
-            using (var reader = access.ExecuteReader(Conn, "[CreateUser]", new List<SqlParameter>()))
+
+            SqlParameter levelParameter = new SqlParameter("@AccessLevel", SqlDbType.Int);
+            levelParameter.Value = AccessLevel;
+
+            using (var reader = access.ExecuteReader(Conn, "[CreateUser]", new List<SqlParameter>() { levelParameter }))
             {
                 if (reader.Read())
                 {
@@ -35,6 +39,13 @@ namespace DataClient
             return userId;
         }
 
+        /// <summary>
+        /// Creates a new Doctor or updates an existing doctor.
+        /// Using the UserId and not the doctor ID
+        /// </summary>
+        /// <param name="doc">The document.</param>
+        /// <param name="UserId">The user identifier.</param>
+        /// <returns></returns>
         public bool NewUpdateDoctor(Doctor doc, int UserId)
         {
             List<SqlParameter> parameters = new List<SqlParameter>();
@@ -56,8 +67,13 @@ namespace DataClient
             parameters.Add(addressParameter);
             practiceIdParameter.Value = doc.PracticeId;
             parameters.Add(practiceIdParameter);
-            userIdParameter.Value = doc.UserId;
-            parameters.Add(userIdParameter);
+
+            if (doc.UserId != 0)
+            {
+                userIdParameter.Value = doc.UserId;
+                parameters.Add(userIdParameter);
+            }
+
             jobTitleParameter.Value = doc.Job_Title;
             parameters.Add(jobTitleParameter);
 
@@ -72,12 +88,11 @@ namespace DataClient
                 access.LogEntry(UserId, ex.ToString());
                 return false;
             }
-            return false;
         }
 
         public List<Patient> GetAllPatients()
         {
-            List<Patient> pats =  new List<Patient>();
+            List<Patient> pats = new List<Patient>();
 
             using (var reader = access.ExecuteReader(Conn, "[GetAllPatients]", new List<SqlParameter>()))
             {
@@ -87,7 +102,7 @@ namespace DataClient
                     {
                         pats.Add(new Patient(reader));
                     }                    
-                }
+                }               
             }
             return pats;
         }
