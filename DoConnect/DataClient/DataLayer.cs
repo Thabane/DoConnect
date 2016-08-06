@@ -21,6 +21,12 @@ namespace DataClient
             access = new DataAccess();
         }
 
+        /// <summary>
+        /// Creates a user.
+        /// Returns the UserId of the new user
+        /// </summary>
+        /// <param name="AccessLevel">The access level.</param>
+        /// <returns></returns>
         public int CreateUser(int AccessLevel)
         {
             int userId = 0;
@@ -90,6 +96,10 @@ namespace DataClient
             }
         }
 
+        /// <summary>
+        /// Gets all patients.
+        /// </summary>
+        /// <returns></returns>
         public List<Patient> GetAllPatients()
         {
             List<Patient> pats = new List<Patient>();
@@ -105,6 +115,68 @@ namespace DataClient
                 }               
             }
             return pats;
+        }
+
+        public bool NewUpdatePatient(Patient pat, int UserId)
+        {
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            SqlParameter firstNameParameter = new SqlParameter("@FirstName", SqlDbType.NVarChar);
+            SqlParameter lastNameParameter = new SqlParameter("@LastName", SqlDbType.NVarChar);
+            SqlParameter genderParameter = new SqlParameter("@Gender", SqlDbType.Char);
+            SqlParameter addressParameter = new SqlParameter("@Street_Address", SqlDbType.NVarChar);
+            SqlParameter cityParameter = new SqlParameter("@City", SqlDbType.NVarChar);
+            SqlParameter countryParameter = new SqlParameter("@Country", SqlDbType.NVarChar);
+            SqlParameter suburbParameter = new SqlParameter("@Suburb", SqlDbType.NVarChar);
+            SqlParameter medicalAidIdParameter = new SqlParameter("@Medical_Aid_ID", SqlDbType.Int);
+            SqlParameter userIdParameter = new SqlParameter("@UserID", SqlDbType.Int);
+            SqlParameter doctorIdParameter = new SqlParameter("@Doctor_ID", SqlDbType.Int);
+            SqlParameter idNumberParameter = new SqlParameter("@ID_Number", SqlDbType.NVarChar);
+            SqlParameter cellNumberParameter = new SqlParameter("@Cell_Number", SqlDbType.NVarChar);
+            SqlParameter dobParameter = new SqlParameter("@DOB", SqlDbType.Date);
+
+
+            firstNameParameter.Value = pat.FirstName;
+            parameters.Add(firstNameParameter);
+            lastNameParameter.Value = pat.LastName;
+            parameters.Add(lastNameParameter);
+            genderParameter.Value = pat.Gender;
+            parameters.Add(genderParameter);
+            addressParameter.Value = pat.Street_Address;
+            parameters.Add(addressParameter);
+            medicalAidIdParameter.Value = pat.Medical_Aid_ID;
+            parameters.Add(medicalAidIdParameter);
+            doctorIdParameter.Value = pat.Doctor_ID;
+            parameters.Add(doctorIdParameter);
+            idNumberParameter.Value = pat.ID_Number;
+            parameters.Add(idNumberParameter);
+            cityParameter.Value = pat.City;
+            parameters.Add(cityParameter);
+            countryParameter.Value = pat.Country;
+            parameters.Add(countryParameter);
+            suburbParameter.Value = pat.Suburb;
+            parameters.Add(suburbParameter);
+            cellNumberParameter.Value = pat.Cell_Number;
+            parameters.Add(cellNumberParameter);
+
+
+            if (pat.User_ID != 0)
+            {
+                userIdParameter.Value = pat.User_ID;
+                parameters.Add(userIdParameter);
+            }
+
+
+            try
+            {
+                access.ExecuteNonQuery(Conn, parameters, "[NewUpdateDoctor]");
+                access.LogEntry(UserId, "User Added new Doctor");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                access.LogEntry(UserId, ex.ToString());
+                return false;
+            }
         }
     }
 }
