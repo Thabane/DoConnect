@@ -151,6 +151,7 @@
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MedicalAidController.cs" />
     <Compile Include="Controllers\MedicineInventoryController.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Controllers\PatientsController.cs" />
@@ -169,6 +170,7 @@
     <Content Include="App\Controllers\EmployeesController.js" />
     <Content Include="App\Controllers\EventsController.js" />
     <Content Include="App\Controllers\LoginController.js" />
+    <Content Include="App\Controllers\MedicalAidController.js" />
     <Content Include="App\Controllers\MedicineInventoryController.js" />
     <Content Include="App\Controllers\MessagesController.js" />
     <Content Include="App\Controllers\PatientsController.js" />
@@ -180,6 +182,7 @@
     <Content Include="App\Services\EmployeesService.js" />
     <Content Include="App\Services\EventsService.js" />
     <Content Include="App\Services\LoginService.js" />
+    <Content Include="App\Services\MedicalAidService.js" />
     <Content Include="App\Services\MedicineInventoryService.js" />
     <Content Include="App\Services\MessagesService.js" />
     <Content Include="App\Services\PatientsService.js" />
@@ -193,11 +196,15 @@
     <Content Include="App\Views\Accounting\NewPatientInvoice.html" />
     <Content Include="App\Views\Appointments\Appointments.html" />
     <Content Include="App\Views\Dashboard\dashboard.html" />
+    <Content Include="App\Views\Dashboard\DashboardSecretary.html" />
     <Content Include="App\Views\DiagnosisExpertSystem\DiagnosisExpertSystem.html" />
     <Content Include="App\Views\Employees\Employees.html" />
     <Content Include="App\Views\Events\Events.html" />
     <Content Include="App\Views\Login\Login.html" />
+    <Content Include="App\Views\MedicalAid\MedicalAid.html" />
+    <Content Include="App\Views\MedicalAid\NewMedicalAidProvider.html" />
     <Content Include="App\Views\MedicineInventory\MedicineInventory.html" />
+    <Content Include="App\Views\MedicineInventory\NewMedicine.html" />
     <Content Include="App\Views\Messages\Messages.html" />
     <Content Include="App\Views\Patients\patients.html" />
     <Content Include="App\Views\Reports\Reports.html" />

@@ -1,9 +1,15 @@
 ﻿<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    
+    <script src="~/Scripts/Index/jquery.min.js"></script>
+    <script src="~/Scripts/Index/bootstrap.min.js"></script>
+
+    @*<link rel="stylesheet" type="text/css" media="screen" href="~/Scripts/Index/components.min.css">*@
+    @*<link rel="stylesheet" type="text/css" media="screen" href="~/Scripts/Index/theme.css">*@
+    <link rel="stylesheet" type="text/css" media="screen" href="~/Scripts/Index/SalesSummary.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/Scripts/Index/QuickActionsAppointments.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/Scripts/Index/To Do List.css">
+
     <script src="~/Scripts/DateTimePicker/moment-with-locales.js"></script>
     <link rel="stylesheet" type="text/css" media="screen" href="~/Scripts/DateTimePicker/bootstrap-datetimepicker.min.css">
     <script type="text/javascript" src="~/Scripts/DateTimePicker/bootstrap-datetimepicker.min.js"></script>    
@@ -16,7 +22,7 @@
     <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Labs Ops</span>
+                <i class="fa fa-bars fa-fw"></i>
             </button>
             <a class="navbar-brand">DoConnect - Admin</a>
         </div>
@@ -179,15 +185,16 @@
                         <!-- /input-group -->
                     </li>
                     <li><a href="/Dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a></li>
+                    <li><a href="/Messages"><i class="fa fa-envelope-o fa-fw"></i> Messages</a></li>
                     <li><a href="/Patients"><i class="fa fa-users fa-fw"></i> Patients</a></li>
                     <li><a href="/Employees"><i class="fa fa-female fa-fw"></i> Employees</a></li>
-                    <li><a href="/Appointments"><i class="fa fa-tasks fa-fw"></i> Appointments</a></li>
-                    <li><a href="/MedicineInventory"><i class="fa fa-medkit fa-fw"></i> Medicine Inventory</a></li>
-                    <li><a href="/Accounting"><i class="fa fa-money fa-fw"></i> Accounting</a></li>
-                    <li><a href="/Events"><i class="fa fa-calendar fa-fw"></i> Events</a></li>
-                    <li><a href="/Messages"><i class="fa fa-envelope-o fa-fw"></i> Messages</a></li>
+                    <li><a href="/Events"><i class="fa fa-calendar fa-fw"></i> Events</a></li>                   
+                    <li><a href="/Appointments"><i class="fa fa-calendar-o fa-fw"></i> Appointments</a></li>
+                    <li><a href="/Accounting"><i class="fa fa-money fa-fw"></i> Accounting</a></li>  
+                    <li><a href="/MedicalAid"><i class="fa fa-plus-square-o fa-fw"></i> Medical Aid</a></li>
+                    <li><a href="/MedicineInventory"><i class="fa fa-medkit fa-fw"></i> Medicine Inventory</a></li>                                      
                     <li><a href="/DiagnosisExpertSystem"><i class="fa fa-stethoscope fa-fw"></i> Diagnosis Expert System</a></li>
-                    <li><a href="/Reports"><i class="fa fa-file-text fa-fw"></i> Reports</a></li>
+                    <li><a href="/Reports"><i class="fa fa-bar-chart-o fa-fw"></i> Reports</a></li>
                 </ul>
             </div>
         </div>

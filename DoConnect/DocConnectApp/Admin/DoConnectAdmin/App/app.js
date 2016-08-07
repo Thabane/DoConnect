@@ -10,6 +10,10 @@ app.config(
                 templateUrl: "App/Views/Dashboard/dashboard.html",
                 controller: "DashboardController"
             })
+            .when("/DashboardSecretary", {
+                templateUrl: "App/Views/Dashboard/DashboardSecretary.html",
+                controller: "DashboardController"
+            })
             .when("/Patients", {
                 templateUrl: "App/Views/Patients/patients.html",
                 controller: "PatientsController"
@@ -25,6 +29,18 @@ app.config(
             .when("/MedicineInventory", {
                 templateUrl: "App/Views/MedicineInventory/MedicineInventory.html",
                 controller: "MedicineInventoryController"
+            })
+            .when("/NewMedicine", {
+                templateUrl: "App/Views/MedicineInventory/NewMedicine.html",
+                controller: "MedicineInventoryController"
+            })
+            .when("/MedicalAid", {
+                templateUrl: "App/Views/MedicalAid/MedicalAid.html",
+                controller: "MedicalAidController"
+            })
+            .when("/NewMedicalAidProvider", {
+                templateUrl: "App/Views/MedicalAid/NewMedicalAidProvider.html",
+                controller: "MedicalAidController"
             })
             .when("/Accounting", {
                 templateUrl: "App/Views/Accounting/Accounting.html",
