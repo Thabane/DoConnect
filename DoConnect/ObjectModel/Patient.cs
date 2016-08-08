@@ -21,9 +21,9 @@ namespace ObjectModel
         public int Doctor_ID { get; set; }
         public int User_ID { get; set; }
 
-        public Patient Create(SqlDataReader reader)
-        {
-        }
+        //public Patient Create(SqlDataReader reader)
+        //{
+        //}
 
         public Patient(SqlDataReader reader)
         {
