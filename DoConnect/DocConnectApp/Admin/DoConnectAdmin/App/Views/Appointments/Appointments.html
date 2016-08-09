@@ -1,0 +1,268 @@
+﻿<div>
+    <div id="page-wrapper" ng-controller="AppointmentsController">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header">Appointments</h2>
+            </div>
+        </div>
+
+        <ul class="nav nav-tabs">
+            <li role="presentation" class="active"><a href="/Appointments"><i class="fa fa-align-justify"></i>Appointments List</a></li>
+            <li role="presentation"><a href="#" onclick="myFunctionAddAppointment()"><i class="fa fa-plus-circle"></i>New Appointment</a></li>
+        </ul>
+
+        <div class="panel panel-default">
+            <table class="table-bordered" style="float:right; border:0; margin-bottom:5px;">
+                <tbody>
+                    <tr>
+                        <td style="border: 0;">
+                            <div class="btn-group">
+                                <a class="btn btn-default dropdown-toggle btn-select2" href="#" data-toggle="dropdown" style="font-size:13px;" aria-expanded="false">Select search field <span class="caret"></span></a>
+                                <ul class="dropdown-menu" style="font-size:13px;">
+                                    <li><a href="#">App Date/Time</a></li>
+                                    <li><a href="#">Patient Name</a></li>
+                                    <li><a href="#">Patient Email</a></li>
+                                    <li><a href="#">Details</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                        <td style="border:0;">
+                            <div class="form-group input-group" style="margin-top:4px; margin-bottom:4px;">
+                                <input class="form-control" type="text" style="font-size:13px;"><span class="input-group-btn">
+                                    <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+                                </span>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table class="table table-hover" style="font-size: 12px;">
+                <thead style="background-color: #f8f8f8;">
+                    <tr>
+                        <th style="width: 15%; padding-right: 0px; padding-left: 20px;">App Date/Time</th>
+                        <th style="width: 15%; padding-right: 0px; padding-left: 20px;">Patient Name</th>
+                        <th style="width: 15%; padding-right: 0px; padding-left: 20px;">Patient Email</th>
+                        <th style="width: 20%; padding-right: 0px; padding-left: 20px;">App Details</th>
+                        <th style="width: 15%; padding-right: 0px; padding-left: 20px;">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="tr_dblclick">
+                        <td><div class="container" style="padding-left:0px; padding-right:0px;">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="input-group date datetimepicker">
+                                                <input class="form-control" type="text">
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div></td>
+                        <td><input name="Lastname" class="form-control readonly" value="Josephine Chivinge"></td>
+                        <td><input name="Email Addres" class="form-control readonly" value="Josie@gmail.com"></td>
+                        <td><input name="ID_Number" class="form-control readonly" value="I have a back pain"></td>
+                        <td>
+                            <button class="btn btn-info btn-xs" id="myFunctionAppointments_Edit" onclick="myFunctionAppointments_Edit()" href="#"><i class="fa fa-pencil"></i></button>
+                            <button class="btn btn-info btn-xs" id="myFunctionAppointments_Save" onclick="myFunctionAppointments_Save()" href="#"><i class="fa fa-floppy-o"></i></button>
+                            <button class="btn btn-danger btn-xs" onclick="myFunctionAppointment_Delete()"><i class="fa fa-trash-o"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <ul class="pager">
+                <li class="previous"><a href="#">Previous</a></li>
+                <li class="next"><a href="#">Next</a></li>
+            </ul>
+        </div>
+
+        <!--View Appointment Modal-->
+        <div id="View_Appointment_Modal" class="modal fade">
+            <form>
+                <div class="modal-dialog" style="width:40%">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Appointment Details</h4>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table" style="width:100%;">
+                                <tbody>
+                                    <tr>
+                                        <td style="border-top-width: 0px; padding-left:30px;"><h5>Date & Time:</h5></td>
+                                        <td style="border-top-width: 0px; padding-right:20px;"><div class="container" style="padding-left:0px; padding-right:0px;">
+                                                                                                    <div class="row">
+                                                                                                        <div class="col-md-12">
+                                                                                                            <div class="form-group">
+                                                                                                                <div class="input-group date datetimepicker">
+                                                                                                                    <input class="form-control" type="text">
+                                                                                                                    <span class="input-group-addon">
+                                                                                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                                                                                    </span>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border-top-width: 0px; padding-left:30px;"><h5>Patient Name:</h5></td>
+                                        <td style="border-top-width: 0px; padding-right:20px;"><input name="View_PatientName" class="form-control readonly_ViewAppointment" type="text"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border-top-width: 0px; padding-left:30px;"><h5 class="form-control-label">Patient Email:</h5></td>
+                                        <td style="border-top-width: 0px; padding-right:20px;"><input name="View_EmailAddress" class="form-control readonly_ViewAppointment" type="email"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border-top-width: 0px; padding-left:30px;"><h5 class="form-control-label">Appointment Details:</h5></td>
+                                        <td style="border-top-width: 0px; padding-right:20px;"><input name="View_Details" class="form-control readonly_ViewAppointment" type="text"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border-top-width: 0px; padding-left:30px;"><h5 class="form-control-label">Appointment Status:</h5></td>
+                                        <td style="border-top-width: 0px; padding-right:20px;">
+                                            <select class="form-control readonly_ViewAppointment required input-sm">
+                                                <option value="">Choose Status</option>
+                                                <option value="1">Approved</option>
+                                                <option value="2">Denied</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" onclick="function_btnUpdateAppointment()" id="function_btnUpdateAppointment">Update</button>
+                            <button type="button" class="btn btn-danger" onclick="function_btnDeleteAppointment()">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div><!--View Appointment Modal Ends-->
+        <!--New Appointment Modal-->
+        <div id="New_Appointment_Modal" class="modal fade">
+            <form>
+                <div class="modal-dialog" style="width:40%">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">New Appointment Details</h4>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table" style="width:100%;">
+                                <tbody>
+                                    <tr>
+                                        <td style="border-top-width: 0px; padding-left:30px;"><h5>Date & Time:</h5></td>
+                                        <td style="border-top-width: 0px; padding-right:20px;"><div class="container" style="padding-left:0px; padding-right:0px;">
+                                                                                                    <div class="row">
+                                                                                                        <div class="col-md-12">
+                                                                                                            <div class="form-group">
+                                                                                                                <div class="input-group date datetimepicker">
+                                                                                                                    <input class="form-control" type="text">
+                                                                                                                    <span class="input-group-addon">
+                                                                                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                                                                                    </span>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border-top-width: 0px; padding-left:30px;"><h5>Patient Name:</h5></td>
+                                        <td style="border-top-width: 0px; padding-right:20px;"><input name="View_PatientName" class="form-control" type="text"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border-top-width: 0px; padding-left:30px;"><h5 class="form-control-label">Patient Email:</h5></td>
+                                        <td style="border-top-width: 0px; padding-right:20px;"><input name="View_EmailAddress" class="form-control" type="email"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border-top-width: 0px; padding-left:30px;"><h5 class="form-control-label">Appointment Details:</h5></td>
+                                        <td style="border-top-width: 0px; padding-right:20px;"><input name="View_Details" class="form-control" type="text"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border-top-width: 0px; padding-left:30px;"><h5 class="form-control-label">Appointment Status:</h5></td>
+                                        <td style="border-top-width: 0px; padding-right:20px;">
+                                            <select class="form-control required input-sm">
+                                                <option value="">Choose Status</option>
+                                                <option value="1">Approved</option>
+                                                <option value="2">Denied</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" onclick="function_btnNewAppointment()">Add Appointment</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div><!--New Appointment Modal Ends-->
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(".readonly").css("border", "none");
+    $(".readonly").attr("readonly", true);
+    $(".readonly").css("background-color", "transparent");
+    $(".readonly").css("font-size", "13px");
+    $(".readonly").css("padding-right", "0px");
+    $("#myFunctionAppointments_Edit").show();
+    $("#myFunctionAppointments_Save").hide();
+
+    $("#myFunctionAppointments_Edit").click(function () {
+
+        $("#myFunctionAppointments_Edit").hide(); $("#myFunctionAppointments_Save").show();
+
+        $(".readonly").attr("readonly", false);
+        $(".readonly").css("border", "1px solid #ccc");
+    });
+
+    $("#myFunctionAppointments_Save").click(function () {
+
+        $("#myFunctionAppointments_Edit").show(); $("#myFunctionAppointments_Save").hide();
+
+        $(".readonly").attr("readonly", true);
+        $(".readonly").css("border", "none");
+        $(".readonly").css("background-color", "transparent");
+    });
+
+    function myFunctionAddAppointment() {//<!--Show New Appointment Modal-->
+        $("#New_Appointment_Modal").modal('show');
+    };
+
+    $('.tr_dblclick').dblclick(function () {//<!--Show View Appointment Modal when a user double clicks a row-->
+        $("#View_Appointment_Modal").modal('show');
+        $(".readonly_ViewAppointment").css('border', 'none');
+        $(".readonly_ViewAppointment").attr("readonly", true);
+        $(".readonly_ViewAppointment").css('background-color', 'transparent');
+    });
+
+    $('#function_btnUpdateAppointment').click(function () {//<!--When a User clicks Update button on Show View Appointment Modal when a user double clicks a row-->
+        var btnText = $(this).html();
+        if (btnText == "Update") {
+            $('.readonly_ViewAppointment').attr("readonly", false);
+            $('.readonly_ViewAppointment').css('border', '1px solid #ccc');
+            $("#function_btnUpdateAppointment").html('Save');
+        }
+        else {
+            $('.readonly_ViewAppointment').attr("readonly", true);
+            $('.readonly_ViewAppointment').css('border', 'none');
+            $('.readonly_ViewAppointment').css('background-color', 'transparent');
+            $("#function_btnUpdateAppointment").html('Update');
+        }
+    });
+
+    $(function () {
+        $('.datetimepicker').datetimepicker();
+    });
+</script>
