@@ -1,4 +1,5 @@
-﻿app.factory('ReportsService',
+﻿
+app.factory('ReportsService',
     ['$http',
         function ($http) {
             return GetReports = function () {

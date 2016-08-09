@@ -1,27 +1,87 @@
-﻿app.controller("PatientsController", ["$scope", "PatientService", "$interval",
-    function ($scope, PatientService, $interval) {
-        $scope.firstName;
-        $scope.lastName;
-        $scope.id_Number;
-        $scope.gender;
-        $scope.dob;
-        $scope.cell_number;
-        $scope.street_address;
-        $scope.suburb;
-        $scope.city;
-        $scope.country;
+﻿app.controller("PatientsController", ["$scope", "PatientsService", "$interval", 
+    function ($scope, PatientsService, $interval) {
+        
+        $scope.PageTitle_Patients = 'Patients';
+        $scope.PageTitle_NewPatient = 'New Patient Details';
 
-        $scope.InsertPatient = function (firstName, lastName, id_Number, gender, dob, cell_number, street_address, suburb, city, country) {
-            var dobControl = document.getElementById("dob");
-            dobValue = dobControl.value;
-            
-            PatientService.InsertPatient(firstName, lastName, id_Number, gender, dob, cell_number, street_address, suburb, city, country).then
+        var init_ControlSettings = function () {
+            angular.element(".readonly").css("border", "none");	        
+	        angular.element(".readonly").css("font-size", "13px");
+	        angular.element(".readonly").css("padding-right", "0px");
+            angular.element(".readonly").css("background-color", "transparent");   
+
+	        angular.element(".View_readonly").attr("readonly", true);
+	        angular.element(".View_readonly").css("border", "1px solid #ccc");
+	        angular.element(".View_readonly").css("background-color", "transparent");	        
+        };
+        init_ControlSettings();//Excecute the function on page load.
+
+        $scope.myFunctionPatients_Edit = function (btnEdit, btnSave) {
+            angular.element(".readonly").attr("readonly", false);
+            angular.element(".readonly").css("border", "1px solid #ccc");
+            angular.element('#' + btnSave).removeClass("hide"); angular.element('#' + btnSave).addClass("show");
+            angular.element('#' + btnEdit).removeClass("show"); angular.element('#' + btnEdit).addClass("hide");
+        };
+
+        $scope.myFunctionPatients_Save = function (btnEdit, btnSave) {
+            angular.element(".readonly").attr("readonly", true);
+            angular.element(".readonly").css("border", "none");
+            angular.element(".readonly").css("background-color", "transparent");
+            angular.element('#' + btnSave).addClass("hide"); angular.element('#' + btnSave).removeClass("show");
+            angular.element('#' + btnEdit).addClass("show"); angular.element('#' + btnEdit).removeClass("hide");
+        };
+
+        $scope.btnUpdateMedicalRecord = function () {
+            var btnText = angular.element("#btnUpdateMedicalRecord").html();
+            if (btnText == "Update") {
+                angular.element(".View_readonly").attr("readonly", false);
+                angular.element("#btnUpdateMedicalRecord").html("Save");
+            }
+            else {
+                angular.element(".View_readonly").attr("readonly", true);
+                angular.element("#btnUpdateMedicalRecord").html("Update");
+            }
+        };
+
+        $scope.btnUpdateConsultation = function () {
+            var btnText = angular.element("#btnUpdateConsultation").html();
+            if (btnText == "Update") {
+                angular.element(".View_readonly").attr("readonly", false);
+                angular.element("#btnUpdateConsultation").html("Save");
+            }
+            else {
+                angular.element(".View_readonly").attr("readonly", true);
+                angular.element("#btnUpdateConsultation").html("Update");
+            }
+        };
+
+        $scope.GetPatients = function () {
+            PatientsService.GetAllPatients().then
             (function (result) {
-                console.log(result);
+                $scope.Patients = result.data;
             });
-        };        
+        };
+        $scope.GetPatients();
 
-        $scope.status;//"Active";
-        //Function Calls
-        //$interval($scope.GetStuff, 300000);
+        
+        $scope.myFunctionViewPatient = function (ID) {
+            var ID = ID;
+            $scope.GetPatient = function (ID) {
+                PatientsService.GetPatient(ID).then
+                (function (result) {
+                    $scope.Patient = result.data;
+                });
+            };
+            $scope.GetPatient();
+        };
+
+
+
+
+        
+        
+        $scope.patientID = function (patientID) {
+            alert("patientID is " + patientID);
+        };
+
     }]);

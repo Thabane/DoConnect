@@ -1,21 +1,22 @@
 ﻿<div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Dashboard</h1>
+            <h2 class="page-header text-primary">Dashboard</h2>
         </div>
     </div>
-    <!-- /.row -->
+
+    <!-- first row -->
     <div class="row">
         <div class="col-lg-3 col-md-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-3">
-                            <i class="fa fa-comments fa-5x"></i>
+                            <i class="fa fa-globe fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge">26</div>
-                            <div>New Comments!</div>
+                            <div class="huge">12</div>
+                            <div>Site Visits</div>
                         </div>
                     </div>
                 </div>
@@ -34,15 +35,15 @@
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-3">
-                            <i class="fa fa-tasks fa-5x"></i>
+                            <i class="fa fa-user-plus fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
                             <div class="huge">12</div>
-                            <div>New Tasks!</div>
+                            <div>New Patients</div>
                         </div>
                     </div>
                 </div>
-                <a href="#">
+                <a href="/patients">
                     <div class="panel-footer">
                         <span class="pull-left">View Details</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -95,15 +96,26 @@
                 </a>
             </div>
         </div>
-    </div>
+    </div><!-- /.first row -->
 
+    <!-- 2nd row -->
     <div class="row">
-        <!--Sales Summary-->
-        <div class="col-md-8 col-sm-6">
+        <!-- Appointment Statistics Pie Chart -->
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading"><i class="fa fa-bell fa-fw"></i>Appointment Statistics</div>
+                <div class="panel-body">
+                    <div id="piechart_3d" style="width: 400px; height: 200px;"></div>
+                </div>
+            </div>
+        </div>
+        <!-- /.Appointment Statistics Pie Chart -->
+
+        <!-- Sales Summary Graph-->
+        <div class="col-lg-6 col-md-6 col-sm-6">
             <div class="portlet light" style="border: 1px solid #ddd; border-radius: 4px;">
                 <div class="portlet-title">
-                    <div class="caption caption-md">
-                        <i class="icon-bar-chart font-dark hide"></i>
+                    <div class="caption caption-md"><i class="icon-bar-chart font-dark hide"></i>
                         <span class="caption-subject font-green-steel uppercase bold">Revenue Summary</span>
                         <span class="caption-helper hide">weekly stats...</span>
                     </div>
@@ -125,148 +137,132 @@
                     <div class="row list-separated">
                         <div class="col-md-3 col-sm-3 col-xs-6">
                             <div class="font-grey-mint font-sm"> Total Sales </div>
-                            <div class="uppercase font-hg font-red-flamingo">
-                                13,760
-                                <span class="font-lg font-grey-mint">$</span>
-                            </div>
+                            <div class="uppercase font-hg font-red-flamingo">13,760<span class="font-lg font-grey-mint">$</span></div>
                         </div>
                         <div class="col-md-3 col-sm-3 col-xs-6">
                             <div class="font-grey-mint font-sm"> Revenue </div>
-                            <div class="uppercase font-hg theme-font">
-                                4,760
-                                <span class="font-lg font-grey-mint">$</span>
-                            </div>
+                            <div class="uppercase font-hg theme-font">5,760<span class="font-lg font-grey-mint">$</span></div>
                         </div>
                         <div class="col-md-3 col-sm-3 col-xs-6">
                             <div class="font-grey-mint font-sm"> Expenses </div>
-                            <div class="uppercase font-hg font-purple">
-                                11,760
-                                <span class="font-lg font-grey-mint">$</span>
-                            </div>
+                            <div class="uppercase font-hg font-purple">11,760<span class="font-lg font-grey-mint">$</span></div>
                         </div>
                         <div class="col-md-3 col-sm-3 col-xs-6">
                             <div class="font-grey-mint font-sm"> Growth </div>
-                            <div class="uppercase font-hg font-blue-sharp">
-                                9,760
-                                <span class="font-lg font-grey-mint">$</span>
-                            </div>
+                            <div class="uppercase font-hg font-blue-sharp">9,760<span class="font-lg font-grey-mint">$</span></div>
                         </div>
                     </div>
                     <ul class="list-separated list-inline-xs hide">
                         <li>
                             <div class="font-grey-mint font-sm"> Total Sales </div>
-                            <div class="uppercase font-hg font-red-flamingo">
-                                13,760
-                                <span class="font-lg font-grey-mint">$</span>
-                            </div>
+                            <div class="uppercase font-hg font-red-flamingo">13,760<span class="font-lg font-grey-mint">$</span></div>
                         </li>
                         <li> </li>
                         <li class="border">
                             <div class="font-grey-mint font-sm"> Revenue </div>
-                            <div class="uppercase font-hg theme-font">
-                                4,760
-                                <span class="font-lg font-grey-mint">$</span>
-                            </div>
+                            <div class="uppercase font-hg theme-font">4,760<span class="font-lg font-grey-mint">$</span></div>
                         </li>
                         <li class="divider"> </li>
                         <li>
                             <div class="font-grey-mint font-sm"> Expenses </div>
-                            <div class="uppercase font-hg font-purple">
-                                11,760
-                                <span class="font-lg font-grey-mint">$</span>
-                            </div>
+                            <div class="uppercase font-hg font-purple">11,760<span class="font-lg font-grey-mint">$</span></div>
                         </li>
                         <li class="divider"> </li>
                         <li>
                             <div class="font-grey-mint font-sm"> Growth </div>
-                            <div class="uppercase font-hg font-blue-sharp">
-                                9,760
-                                <span class="font-lg font-grey-mint">$</span>
-                            </div>
+                            <div class="uppercase font-hg font-blue-sharp">9,760<span class="font-lg font-grey-mint">$</span></div>
                         </li>
                     </ul>
-                    <div class="portlet-body-morris-fit morris-chart" id="sales_statistics" style="height: 267px; position: relative; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
-                        <svg xmlns="http://www.w3.org/2000/svg" style="top: -0.41px; overflow: hidden; position: relative;" width="555" height="267" version="1.1"><desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Created with Raphaël 2.1.2</desc><defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" /><path style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" fill="none" stroke="none" stroke-width="0.5" d="M 0 267 H 555" /><path style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" fill="none" stroke="none" stroke-width="0.5" d="M 0 200.25 H 555" /><path style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" fill="none" stroke="none" stroke-width="0.5" d="M 0 133.5 H 555" /><path style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" fill="none" stroke="none" stroke-width="0.5" d="M 0 66.75 H 555" /><path style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" fill="none" stroke="none" stroke-width="0.5" d="M 0 0 H 555" /><path style="fill-opacity: 1; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);" fill="#e3f5f3" fill-opacity="1" stroke="none" d="M 0 106.8 C 34.877 109.025 104.631 119.037 139.508 115.7 C 174.385 112.363 244.139 78.9814 279.016 80.1 C 313.514 81.2064 382.51 127.381 417.008 124.6 C 451.506 121.819 520.502 74.5375 555 57.85 L 555 267 L 0 267 Z" /><path style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" fill="none" stroke="#92e9dc" stroke-width="0" d="M 0 106.8 C 34.877 109.025 104.631 119.037 139.508 115.7 C 174.385 112.363 244.139 78.9814 279.016 80.1 C 313.514 81.2064 382.51 127.381 417.008 124.6 C 451.506 121.819 520.502 74.5375 555 57.85" /><circle style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" fill="#92e9dc" stroke="#ffffff" stroke-width="1" cx="0" cy="106.8" r="0" /><circle style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" fill="#92e9dc" stroke="#ffffff" stroke-width="1" cx="139.508" cy="115.7" r="0" /><circle style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" fill="#92e9dc" stroke="#ffffff" stroke-width="1" cx="279.016" cy="80.1" r="0" /><circle style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" fill="#92e9dc" stroke="#ffffff" stroke-width="1" cx="417.008" cy="124.6" r="0" /><circle style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" fill="#92e9dc" stroke="#ffffff" stroke-width="1" cx="555" cy="57.85" r="0" /><path style="fill-opacity: 1; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);" fill="#59aea2" fill-opacity="1" stroke="none" d="M 0 142.4 C 34.877 149.075 104.631 171.325 139.508 169.1 C 174.385 166.875 244.139 125.719 279.016 124.6 C 313.514 123.494 382.51 159.644 417.008 160.2 C 451.506 160.756 520.502 136.837 555 129.05 L 555 267 L 0 267 Z" /><path style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" fill="none" stroke="#399a8c" stroke-width="0" d="M 0 142.4 C 34.877 149.075 104.631 171.325 139.508 169.1 C 174.385 166.875 244.139 125.719 279.016 124.6 C 313.514 123.494 382.51 159.644 417.008 160.2 C 451.506 160.756 520.502 136.837 555 129.05" /><circle style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" fill="#399a8c" stroke="#ffffff" stroke-width="1" cx="0" cy="142.4" r="0" /><circle style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" fill="#399a8c" stroke="#ffffff" stroke-width="1" cx="139.508" cy="169.1" r="0" /><circle style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" fill="#399a8c" stroke="#ffffff" stroke-width="1" cx="279.016" cy="124.6" r="0" /><circle style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" fill="#399a8c" stroke="#ffffff" stroke-width="1" cx="417.008" cy="160.2" r="0" /><circle style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" fill="#399a8c" stroke="#ffffff" stroke-width="1" cx="555" cy="129.05" r="0" /></svg> <div class="morris-hover morris-default-style" style="left: 93.5px; top: 71px; display: none;">
-                            <div class="morris-hover-row-label">2011 Q2</div><div class="morris-hover-point" style="color: #399a8c">
-                                Sales:
-                                1,100
-                            </div><div class="morris-hover-point" style="color: #92e9dc">
-                                Profit:
-                                600
-                            </div>
-                        </div>
+                    <!-- / Vertical Bar Graph -->
+                    <div class="container" style="width:450px"> <!-- ref http://www.jqueryrain.com/?NhzHB5Vf -->                   
+                        <div class="charts charts--vertical">
+                            <div class="charts__chart chart--p80  chart--blue    chart--hover"><span class="charts__percent"></span></div>
+
+                            <div class="charts__chart chart--p60  chart--green   chart--hover"><span class="charts__percent"></span></div>
+
+                            <div class="charts__chart chart--p40  chart--red     chart--hover"><span class="charts__percent"></span></div>
+
+                            <div class="charts__chart chart--p20  chart--yellow  chart--hover"><span class="charts__percent"></span></div>
+                        </div><!-- /.Vertical Bar Graph -->
                     </div>
                 </div>
             </div>
+        </div><!-- /.Sales Summary -->
+    </div><!-- /.2nd row -->
+    <!--
+    <div class="circles-wrp" style="position: relative; display: inline-block;"> 
+        <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80">
+            <path fill="transparent" stroke="#D3B6C6" stroke-width="7" d="M 39.992565928065126 3.500000757060633 A 36.5 36.5 0 1 1 39.949302232260386 3.500035209108127 Z"></path>
+            <path fill="transparent" stroke="#4B253A" stroke-width="7" d="M 39.992565928065126 3.500000757060633 A 36.5 36.5 0 0 1 59.07174573163989 71.12103010421852 "></path>
+        </svg>
+        <div class="circles-text" style="position: absolute; top: 0px; left: 0px; text-align: center; width: 100%; font-size: 28px; height: 80px; line-height: 80px;">
+            <span class="circles-integer">0</span>.<span class="circles-decimals">0</span>
         </div>
-        <!--Sales Summary Ends-->
+    </div>
+    <script>
+        Circles.create({
+            id:           'circles-1',
+            radius:       2,
+            value:        0,
+            maxValue:     3,
+            width:        10,
+            text:         function(value){return value + '%';},
+            colors:       ['#D3B6C6', '#4B253A'],
+            duration:     2,
+            wrpClass:     'circles-wrp',
+            textClass:    'circles-text',
+            styleWrapper: true,
+        styleText:    true
+        })
+    </script>-->
+
+    <!-- 3rd row -->
+    <div class="row">
+        <!-- /.Notifications Panel -->
         <div class="col-lg-4">
             <div class="panel panel-default">
-                <div class="panel-heading">
-                    <i class="fa fa-bell fa-fw"></i> Notifications Panel
-                </div>
-                <!-- /.panel-heading -->
+                <div class="panel-heading"><i class="fa fa-bell fa-fw"></i> Notifications Panel</div>
                 <div class="panel-body">
                     <div class="list-group">
                         <a class="list-group-item" href="#">
                             <i class="fa fa-comment fa-fw"></i> New Comment
-                            <span class="pull-right text-muted small">
-                                <em>4 minutes ago</em>
-                            </span>
+                            <span class="pull-right text-muted small"><em>4 minutes ago</em></span>
                         </a>
                         <a class="list-group-item" href="#">
                             <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                            <span class="pull-right text-muted small">
-                                <em>12 minutes ago</em>
-                            </span>
+                            <span class="pull-right text-muted small"><em>12 minutes ago</em></span>
                         </a>
                         <a class="list-group-item" href="#">
                             <i class="fa fa-envelope fa-fw"></i> Message Sent
-                            <span class="pull-right text-muted small">
-                                <em>27 minutes ago</em>
-                            </span>
+                            <span class="pull-right text-muted small"><em>27 minutes ago</em></span>
                         </a>
                         <a class="list-group-item" href="#">
                             <i class="fa fa-tasks fa-fw"></i> New Task
-                            <span class="pull-right text-muted small">
-                                <em>43 minutes ago</em>
-                            </span>
+                            <span class="pull-right text-muted small"><em>43 minutes ago</em></span>
                         </a>
                         <a class="list-group-item" href="#">
                             <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                            <span class="pull-right text-muted small">
-                                <em>11:32 AM</em>
-                            </span>
+                            <span class="pull-right text-muted small"><em>11:32 AM</em></span>
                         </a>
                         <a class="list-group-item" href="#">
                             <i class="fa fa-bolt fa-fw"></i> Server Crashed!
-                            <span class="pull-right text-muted small">
-                                <em>11:13 AM</em>
-                            </span>
+                            <span class="pull-right text-muted small"><em>11:13 AM</em></span>
                         </a>
                         <a class="list-group-item" href="#">
                             <i class="fa fa-warning fa-fw"></i> Server Not Responding
-                            <span class="pull-right text-muted small">
-                                <em>10:57 AM</em>
-                            </span>
+                            <span class="pull-right text-muted small"><em>10:57 AM</em></span>
                         </a>
                         <a class="list-group-item" href="#">
                             <i class="fa fa-shopping-cart fa-fw"></i> New Order Placed
-                            <span class="pull-right text-muted small">
-                                <em>9:49 AM</em>
-                            </span>
+                            <span class="pull-right text-muted small"><em>9:49 AM</em></span>
                         </a>
-                    </div>
-                    <!-- /.list-group -->
+                    </div><!-- /.list-group -->
                     <a class="btn btn-default btn-block" href="#">View All Alerts</a>
-                </div>
-                <!-- /.panel-body -->
-            </div>
-            <!-- /.panel -->
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
         </div>
-    </div>
+        <!-- /.Notifications Panel -->
 
-    <div class="row">
         <!-- Quick Action Appointments-->
         <div class="col-md-6 col-sm-6">
             <div class="portlet light" style="border: 1px solid #ddd; border-radius: 4px;">
@@ -280,14 +276,6 @@
                         <li role="presentation" class="active"><a href="#tab_actions_pending" data-toggle="tab"> Pending </a></li>
                         <li role="presentation"><a href="#tab_actions_completed" data-toggle="tab"> Approved </a></li>
                     </ul>
-                    <!--<ul class="nav nav-tabs">
-                        <li class="active">
-                            <a href="#tab_actions_pending" data-toggle="tab"> Pending </a>
-                        </li>
-                        <li>
-                            <a href="#tab_actions_completed" data-toggle="tab"> Approved </a>
-                        </li>
-                    </ul>-->
                 </div>
                 <div class="portlet-body">
                     <div class="tab-content">
@@ -343,13 +331,11 @@
                                         <div class="mt-action-row">
                                             <div class="mt-action-info ">
                                                 <div class="mt-action-details ">
-                                                    <span class="mt-action-author">Natasha Kim</span>
-                                                    <p class="mt-action-desc">Dummy text of the printing</p>
+                                                    <span class="mt-action-author">Natasha Kim</span><p class="mt-action-desc">Dummy text of the printing</p>
                                                 </div>
                                             </div>
                                             <div class="mt-action-datetime ">
-                                                <span class="mt-action-date">3 jun</span>
-                                                <span class="mt=action-time">9:30-13:00</span>
+                                                <span class="mt-action-date">3 jun</span><span class="mt=action-time">9:30-13:00</span>
                                             </div>
                                             <div class="mt-action-buttons ">
                                                 <div class="btn-group btn-group-circle">
@@ -365,13 +351,11 @@
                                         <div class="mt-action-row">
                                             <div class="mt-action-info ">
                                                 <div class="mt-action-details ">
-                                                    <span class="mt-action-author">Natasha Kim</span>
-                                                    <p class="mt-action-desc">Dummy text of the printing</p>
+                                                    <span class="mt-action-author">Natasha Kim</span><p class="mt-action-desc">Dummy text of the printing</p>
                                                 </div>
                                             </div>
                                             <div class="mt-action-datetime ">
-                                                <span class="mt-action-date">3 jun</span>
-                                                <span class="mt=action-time">9:30-13:00</span>
+                                                <span class="mt-action-date">3 jun</span><span class="mt=action-time">9:30-13:00</span>
                                             </div>
                                             <div class="mt-action-buttons ">
                                                 <div class="btn-group btn-group-circle">
@@ -387,13 +371,11 @@
                                         <div class="mt-action-row">
                                             <div class="mt-action-info ">
                                                 <div class="mt-action-details ">
-                                                    <span class="mt-action-author">Natasha Kim</span>
-                                                    <p class="mt-action-desc">Dummy text of the printing</p>
+                                                    <span class="mt-action-author">Natasha Kim</span><p class="mt-action-desc">Dummy text of the printing</p>
                                                 </div>
                                             </div>
                                             <div class="mt-action-datetime ">
-                                                <span class="mt-action-date">3 jun</span>
-                                                <span class="mt=action-time">9:30-13:00</span>
+                                                <span class="mt-action-date">3 jun</span><span class="mt=action-time">9:30-13:00</span>
                                             </div>
                                             <div class="mt-action-buttons ">
                                                 <div class="btn-group btn-group-circle">
@@ -409,13 +391,11 @@
                                         <div class="mt-action-row">
                                             <div class="mt-action-info ">
                                                 <div class="mt-action-details ">
-                                                    <span class="mt-action-author">Natasha Kim</span>
-                                                    <p class="mt-action-desc">Dummy text of the printing</p>
+                                                    <span class="mt-action-author">Natasha Kim</span><p class="mt-action-desc">Dummy text of the printing</p>
                                                 </div>
                                             </div>
                                             <div class="mt-action-datetime ">
-                                                <span class="mt-action-date">3 jun</span>
-                                                <span class="mt=action-time">9:30-13:00</span>
+                                                <span class="mt-action-date">3 jun</span><span class="mt=action-time">9:30-13:00</span>
                                             </div>
                                             <div class="mt-action-buttons ">
                                                 <div class="btn-group btn-group-circle">
@@ -426,8 +406,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!-- END: Actions -->
+                            </div><!-- END: Actions -->
                         </div>
                         <div class="tab-pane" id="tab_actions_completed">
                             <!-- BEGIN:Completed-->
@@ -437,13 +416,11 @@
                                         <div class="mt-action-row">
                                             <div class="mt-action-info ">
                                                 <div class="mt-action-details ">
-                                                    <span class="mt-action-author">Approved</span>
-                                                    <p class="mt-action-desc">Dummy text of the printing</p>
+                                                    <span class="mt-action-author">Approved</span><p class="mt-action-desc">Dummy text of the printing</p>
                                                 </div>
                                             </div>
                                             <div class="mt-action-datetime ">
-                                                <span class="mt-action-date">3 jun</span>
-                                                <span class="mt=action-time">9:30-13:00</span>
+                                                <span class="mt-action-date">3 jun</span><span class="mt=action-time">9:30-13:00</span>
                                             </div>
                                             <div class="mt-action-buttons ">
                                                 <div class="btn-group btn-group-circle">
@@ -459,13 +436,11 @@
                                         <div class="mt-action-row">
                                             <div class="mt-action-info ">
                                                 <div class="mt-action-details ">
-                                                    <span class="mt-action-author">Natasha Kim</span>
-                                                    <p class="mt-action-desc">Dummy text of the printing</p>
+                                                    <span class="mt-action-author">Natasha Kim</span><p class="mt-action-desc">Dummy text of the printing</p>
                                                 </div>
                                             </div>
                                             <div class="mt-action-datetime ">
-                                                <span class="mt-action-date">3 jun</span>
-                                                <span class="mt=action-time">9:30-13:00</span>
+                                                <span class="mt-action-date">3 jun</span><span class="mt=action-time">9:30-13:00</span>
                                             </div>
                                             <div class="mt-action-buttons ">
                                                 <div class="btn-group btn-group-circle">
@@ -481,13 +456,11 @@
                                         <div class="mt-action-row">
                                             <div class="mt-action-info ">
                                                 <div class="mt-action-details ">
-                                                    <span class="mt-action-author">Natasha Kim</span>
-                                                    <p class="mt-action-desc">Dummy text of the printing</p>
+                                                    <span class="mt-action-author">Natasha Kim</span><p class="mt-action-desc">Dummy text of the printing</p>
                                                 </div>
                                             </div>
                                             <div class="mt-action-datetime ">
-                                                <span class="mt-action-date">3 jun</span>
-                                                <span class="mt=action-time">9:30-13:00</span>
+                                                <span class="mt-action-date">3 jun</span><span class="mt=action-time">9:30-13:00</span>
                                             </div>
                                             <div class="mt-action-buttons ">
                                                 <div class="btn-group btn-group-circle">
@@ -503,13 +476,11 @@
                                         <div class="mt-action-row">
                                             <div class="mt-action-info ">
                                                 <div class="mt-action-details ">
-                                                    <span class="mt-action-author">Natasha Kim</span>
-                                                    <p class="mt-action-desc">Dummy text of the printing</p>
+                                                    <span class="mt-action-author">Natasha Kim</span><p class="mt-action-desc">Dummy text of the printing</p>
                                                 </div>
                                             </div>
                                             <div class="mt-action-datetime ">
-                                                <span class="mt-action-date">3 jun</span>
-                                                <span class="mt=action-time">9:30-13:00</span>
+                                                <span class="mt-action-date">3 jun</span><span class="mt=action-time">9:30-13:00</span>
                                             </div>
                                             <div class="mt-action-buttons ">
                                                 <div class="btn-group btn-group-circle">
@@ -519,130 +490,67 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <!-- END: Completed -->
+                                </div><!-- END: Completed -->
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div><!-- /.Quick Action Appointments -->
+    </div><!-- /.3rd row -->
 
-
-        <div class="col-lg-6"><!--To Do List-->
-            <div class="widget">
-                <div class="widget-header">
-                    <i class="icon-check"></i>
-                    <h3>To Do List </h3>
-                </div>
-                <div class="widget-content">
-                    <ul class="to-do-list ui-sortable" id="sortable-todo">
-                        <li class="clearfix">
-                            <span class="drag-marker"> <i></i> </span>
-                            <div class="todo-check pull-left">
-                                <input id="todo-check" type="checkbox" value="None">
-                                <label for="todo-check"></label>
-                            </div>
-                            <p class="todo-title"> Lorem ipsum dolor sit amet, consectetuer adipiscing </p>
-                            <div class="todo-actionlist pull-right clearfix"> <a class="todo-done" href="#"><i class="fa fa-check"></i></a> <a class="todo-edit" href="#"><i class="fa fa-pencil"></i></a> <a class="todo-remove"><i class="fa fa-times"></i></a></div>
-                        </li>
-                        <li class="clearfix">
-                            <span class="drag-marker"> <i></i> </span>
-                            <div class="todo-check pull-left">
-                                <input id="todo-check1" type="checkbox" value="None">
-                                <label for="todo-check1"></label>
-                            </div>
-                            <p class="todo-title"> Lorem ipsum dolor sit amet, consectetuer adipiscing </p>
-                            <div class="todo-actionlist pull-right clearfix"> <a class="todo-done" href="#"><i class="fa fa-check"></i></a> <a class="todo-edit" href="#"><i class="fa fa-pencil"></i></a> <a class="todo-remove"><i class="fa fa-times"></i></a> </div>
-                        </li>
-                        <li class="clearfix">
-                            <span class="drag-marker"> <i></i> </span>
-                            <div class="todo-check pull-left">
-                                <input id="todo-check2" type="checkbox" value="None">
-                                <label for="todo-check2"></label>
-                            </div>
-                            <p class="todo-title"> Lorem ipsum dolor sit amet, consectetuer adipiscing </p>
-                            <div class="todo-actionlist pull-right clearfix"> <a class="todo-done" href="#"><i class="fa fa-check"></i></a> <a class="todo-edit" href="#"><i class="fa fa-pencil"></i></a> <a class="todo-remove"><i class="fa fa-times"></i></a> </div>
-                        </li>
-                        <li class="clearfix">
-                            <span class="drag-marker"> <i></i> </span>
-                            <div class="todo-check pull-left">
-                                <input id="todo-check3" type="checkbox" value="None">
-                                <label for="todo-check3"></label>
-                            </div>
-                            <p class="todo-title"> Lorem ipsum dolor sit amet, consectetuer adipiscing </p>
-                            <div class="todo-actionlist pull-right clearfix"> <a class="todo-done" href="#"><i class="fa fa-check"></i></a> <a class="todo-edit" href="#"><i class="fa fa-pencil"></i></a> <a class="todo-remove"><i class="fa fa-times"></i></a> </div>
-                        </li>
-                        <li class="clearfix">
-                            <span class="drag-marker"> <i></i> </span>
-                            <div class="todo-check pull-left">
-                                <input id="todo-check4" type="checkbox" value="None">
-                                <label for="todo-check4"></label>
-                            </div>
-                            <p class="todo-title"> Lorem ipsum dolor sit amet, consectetuer adipiscing </p>
-                            <div class="todo-actionlist pull-right clearfix"> <a class="todo-done" href="#"><i class="fa fa-check"></i></a> <a class="todo-edit" href="#"><i class="fa fa-pencil"></i></a> <a class="todo-remove"><i class="fa fa-times"></i></a> </div>
-                        </li>
-                        <li class="clearfix">
-                            <span class="drag-marker"> <i></i> </span>
-                            <div class="todo-check pull-left">
-                                <input id="todo-check5" type="checkbox" value="None">
-                                <label for="todo-check5"></label>
-                            </div>
-                            <p class="todo-title"> Lorem ipsum dolor sit amet, consectetuer adipiscing </p>
-                            <div class="todo-actionlist pull-right clearfix"> <a class="todo-done" href="#"><i class="fa fa-check"></i></a> <a class="todo-edit" href="#"><i class="fa fa-pencil"></i></a> <a class="todo-remove"><i class="fa fa-times"></i></a> </div>
-                        </li>
-                    </ul>
-                    <div class="todo-action-bar">
-                        <!--row start-->
-                        <div class="row">
-                            <div class="col-xs-3 btn-todo-select">
-                                <button class="btn btn-info" type="submit"><i class="fa fa-check"></i> Select All</button>
-                            </div>
-                            <div class="col-xs-6 todo-search-wrap">
-                                <input class="form-control todo-search pull-right" type="text" placeholder="Search">
-                            </div>
-                            <div class="col-xs-3 btn-add-task">
-                                <button class="btn btn-default btn-success" type="submit"><i class="icon-plus"></i> Add Task</button>
-                            </div>
-                        </div>
-                        <!--row end-->
-                    </div>
+    <div class="col-lg-6">
+        <!--To Do List-->
+        <div class="widget">
+            <div class="widget-header"><i class="icon-check"></i><h3>To Do List </h3></div>
+            <div class="widget-content">
+                <ul class="to-do-list ui-sortable" id="sortable-todo">
+                    <li class="clearfix">
+                        <span class="drag-marker"><i></i></span>
+                        <div class="todo-check pull-left"><input id="todo-check" type="checkbox" value="None"><label for="todo-check"></label></div>
+                        <p class="todo-title"> Lorem ipsum dolor sit amet, consectetuer adipiscing </p>
+                        <div class="todo-actionlist pull-right clearfix"> <a class="todo-done" href="#"><i class="fa fa-check"></i></a> <a class="todo-edit" href="#"><i class="fa fa-pencil"></i></a> <a class="todo-remove"><i class="fa fa-times"></i></a></div>
+                    </li>
+                    <li class="clearfix">
+                        <span class="drag-marker"> <i></i> </span>
+                        <div class="todo-check pull-left"><input id="todo-check1" type="checkbox" value="None"><label for="todo-check1"></label></div>
+                        <p class="todo-title"> Lorem ipsum dolor sit amet, consectetuer adipiscing </p>
+                        <div class="todo-actionlist pull-right clearfix"> <a class="todo-done" href="#"><i class="fa fa-check"></i></a> <a class="todo-edit" href="#"><i class="fa fa-pencil"></i></a> <a class="todo-remove"><i class="fa fa-times"></i></a> </div>
+                    </li>
+                    <li class="clearfix">
+                        <span class="drag-marker"> <i></i> </span>
+                        <div class="todo-check pull-left"><input id="todo-check2" type="checkbox" value="None"><label for="todo-check2"></label></div>
+                        <p class="todo-title"> Lorem ipsum dolor sit amet, consectetuer adipiscing </p>
+                        <div class="todo-actionlist pull-right clearfix"> <a class="todo-done" href="#"><i class="fa fa-check"></i></a> <a class="todo-edit" href="#"><i class="fa fa-pencil"></i></a> <a class="todo-remove"><i class="fa fa-times"></i></a> </div>
+                    </li>
+                    <li class="clearfix">
+                        <span class="drag-marker"> <i></i> </span>
+                        <div class="todo-check pull-left"><input id="todo-check3" type="checkbox" value="None"><label for="todo-check3"></label></div>
+                        <p class="todo-title"> Lorem ipsum dolor sit amet, consectetuer adipiscing </p>
+                        <div class="todo-actionlist pull-right clearfix"> <a class="todo-done" href="#"><i class="fa fa-check"></i></a> <a class="todo-edit" href="#"><i class="fa fa-pencil"></i></a> <a class="todo-remove"><i class="fa fa-times"></i></a> </div>
+                    </li>
+                    <li class="clearfix">
+                        <span class="drag-marker"> <i></i> </span>
+                        <div class="todo-check pull-left"><input id="todo-check4" type="checkbox" value="None"><label for="todo-check4"></label></div>
+                        <p class="todo-title"> Lorem ipsum dolor sit amet, consectetuer adipiscing </p>
+                        <div class="todo-actionlist pull-right clearfix"> <a class="todo-done" href="#"><i class="fa fa-check"></i></a> <a class="todo-edit" href="#"><i class="fa fa-pencil"></i></a> <a class="todo-remove"><i class="fa fa-times"></i></a> </div>
+                    </li>
+                    <li class="clearfix">
+                        <span class="drag-marker"> <i></i> </span>
+                        <div class="todo-check pull-left"><input id="todo-check5" type="checkbox" value="None"><label for="todo-check5"></label></div>
+                        <p class="todo-title"> Lorem ipsum dolor sit amet, consectetuer adipiscing </p>
+                        <div class="todo-actionlist pull-right clearfix"> <a class="todo-done" href="#"><i class="fa fa-check"></i></a> <a class="todo-edit" href="#"><i class="fa fa-pencil"></i></a> <a class="todo-remove"><i class="fa fa-times"></i></a> </div>
+                    </li>
+                </ul>
+                <div class="todo-action-bar">
+                    <!--row start-->
+                    <div class="row">
+                        <div class="col-xs-3 btn-todo-select"><button class="btn btn-info" type="submit"><i class="fa fa-check"></i> Select All</button></div>
+                        <div class="col-xs-6 todo-search-wrap"><input class="form-control todo-search pull-right" type="text" placeholder="Search"></div>
+                        <div class="col-xs-3 btn-add-task"><button class="btn btn-default btn-success" type="submit"><i class="icon-plus"></i> Add Task</button></div>
+                    </div><!--row end-->
                 </div>
             </div>
-        </div><!--/.To Do List-->
+        </div>
+    </div><!--/.To Do List-->
     </div>
-</div>
-<script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawVisualization);
-
-
-      function drawVisualization() {
-        // Some raw data (not necessarily accurate)
-        var data = google.visualization.arrayToDataTable([
-         ['Month', 'Bolivia', 'Ecuador', 'Madagascar', 'Papua New Guinea', 'Rwanda', 'Average'],
-         ['2004/05',  165,      938,         522,             998,           450,      614.6],
-         ['2005/06',  135,      1120,        599,             1268,          288,      682],
-         ['2006/07',  157,      1167,        587,             807,           397,      623],
-         ['2007/08',  139,      1110,        615,             968,           215,      609.4],
-         ['2008/09',  136,      691,         629,             1026,          366,      569.6]
-      ]);
-
-    var options = {
-      title : 'Monthly Coffee Production by Country',
-      vAxis: {title: 'Cups'},
-      hAxis: {title: 'Month'},
-      seriesType: 'bars',
-      series: {5: {type: 'line'}}
-    };
-
-    var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
-    chart.draw(data, options);
-      }
-
-      $(".nav li").on("click", function () {
-          $(".nav li").removeClass("active");
-          $(this).addClass("active");
-      });
- </script>
-

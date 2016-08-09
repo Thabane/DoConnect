@@ -1,14 +1,26 @@
 ﻿<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>*@
     <script src="~/Scripts/Index/jquery.min.js"></script>
     <script src="~/Scripts/Index/bootstrap.min.js"></script>
 
     @*<link rel="stylesheet" type="text/css" media="screen" href="~/Scripts/Index/components.min.css">*@
     @*<link rel="stylesheet" type="text/css" media="screen" href="~/Scripts/Index/theme.css">*@
-    <link rel="stylesheet" type="text/css" media="screen" href="~/Scripts/Index/SalesSummary.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="~/Scripts/Index/QuickActionsAppointments.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="~/Scripts/Index/To Do List.css">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="~/Scripts/DashboardWidgets/SalesSummary.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/Scripts/DashboardWidgets/QuickActionsAppointments.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/Scripts/DashboardWidgets/To Do List.css">
+
+    @*<script type="text/javascript" src="~/Scripts/Graphs/jquery.flot.pie.js"></script>
+    <script type="text/javascript" src="~/Scripts/Graphs/jquery.flot.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/Graphs/flot-data.js"></script>*@
+    
+    @*<link rel="stylesheet" type="text/css" media="screen" href="~/Scripts/Graphs/PieChart/PieChart-pipe.css">
+    <script type="text/javascript" src="~/Scripts/Graphs/PieChart/PieChart-pipe.js"></script>*@
+
+    <link rel="stylesheet" href="https://cdn.rawgit.com/theus/chart.css/v1.0.0/dist/chart.css" />
 
     <script src="~/Scripts/DateTimePicker/moment-with-locales.js"></script>
     <link rel="stylesheet" type="text/css" media="screen" href="~/Scripts/DateTimePicker/bootstrap-datetimepicker.min.css">
@@ -18,6 +30,98 @@
 </head>
 
 <div id="wrapper">
+    <script type="text/javascript">
+        //Accounting
+            function tr_dblclick_Accounting() {
+                $("#View_Invoice_Modal").modal("show");
+            };
+            function tr_dblclick_Expenses() {
+                $("#View_ExpensesInvoice_Modal").modal("show");
+            };
+        //.Accounting
+        //Appointments Page
+            function tr_dblclick_Appointment() {
+                $("#View_Appointment_Modal").modal("show");
+                $(".readonly_ViewAppointment").attr("readonly", true);
+                $(".readonly_ViewAppointment").css("background-color", "transparent");
+            };
+        //.Appointments Page
+        //Employee Page
+            function tr_dblclick_Employee() {
+                $("#View_Employee_Modal").modal("show");
+                $(".readonly_ViewEmployee").attr("readonly", true);
+                $(".readonly_ViewEmployee").css("background-color", "transparent");
+            };
+        //.Employee Page
+
+        //Events Page
+            function tr_dblclick_Event() {
+                $("#View_Event_Modal").modal("show");
+                $(".readonly_ViewEvent").attr("readonly", true);
+                $(".readonly_ViewEvent").css("background-color", "transparent");
+            };
+
+            
+            
+        //.Events Page
+
+        //Medical Aid Page
+            function tr_dblclick_MedicalAid() {
+                $("#View_MedicalAid_Modal").modal("show");
+            };
+        //.Medical Aid Page
+
+        //Medicine Inventory Page
+            function tr_dblclick_Medicine() {
+                $("#View_Medicine_Modal").modal("show");
+                $(".readonly_ViewMedicine").attr("readonly", true);
+                $(".readonly_ViewMedicine").css("background-color", "transparent");
+            };
+        //.Medicine Inventory Page
+
+        //Messages Page
+            function tr_dblclick_InboxMail() {
+                $("#View_SelectedInboxMail").modal("show");
+                $(".readonly_ViewEvent").attr("readonly", true);
+                $(".readonly_ViewEvent").css("background-color", "transparent");
+            };
+        //.Messages Page
+        //Patients
+        function myFunctionViewPatient() {
+            $("#div_Medical_History").modal("show");
+        };
+
+        function myFunctionShowMedical_History() {
+            $("#div_Medical_History").modal("show");
+            $("#div_Prescriptions").modal("hide");
+            $("#div_Consultations").modal("hide");
+        };
+
+        function myFunctionShowPrescriptions() {
+            $("#div_Prescriptions").modal("show");
+            $("#div_Medical_History").modal("hide");
+            $("#div_Consultations").modal("hide");
+        };
+
+        function myFunctionPrescriptions_Edit() {
+            $("#div_Prescriptions_Update").modal("show");
+        };
+        function myFunctionShowConsultations() {
+            $("#div_Consultations").modal("show");
+            $("#div_Medical_History").modal("hide");
+            $("#div_Prescriptions").modal("hide");
+        };
+
+        function DT() {
+            $(".datetimepicker").datetimepicker({ format: "L" });
+        };
+
+        $(".nav li").on("click", function () {
+            $(".nav li").removeClass("active");
+            $(this).addClass("active");
+        });
+        //.Patients
+    </script>
 
     <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
@@ -347,8 +451,6 @@
                 </div>                
             </div>
         </div>@*User Profile Modal Ends*@
-
-
     </div>
 @{
     ViewBag.Title = "Doctor Connect";
@@ -358,68 +460,3 @@
         
     </div>
 </div>
-
-<script type="text/javascript">
-    $('.readonly').attr("readonly", true);
-    $('.readonly').css('border', 'none');
-    $('.readonly').css('background-color', 'transparent');
-
-    $("#View_Profile_Modal").modal('hide');
-
-    $("#div_PracticeInformation").hide();
-    function FunctionShowPersonalInfo() {
-        $("#div_PersonalInfo").show();
-        $("#div_PracticeInformation").hide();
-    };
-
-    function FunctionShowPracticeInfo() {
-        $("#div_PracticeInformation").show();
-        $("#div_PersonalInfo").hide();
-    };
-
-    $(".nav li").on("click", function () {
-        $(".nav li").removeClass("active");
-        $(this).addClass("active");
-    });
-
-    function btnViewUserProfile() {
-        $("#View_Profile_Modal").modal('show');
-    };
-
-    $("#div_ChangePassword").hide();
-    $("#btnCancel_PasswordChange").hide(); 
-    $("#btnChangePassword").click(function () {
-        var btnText = $(this).html();
-        if (btnText == "Change Password") {
-            $("#div_ChangePassword").show();
-            $("#btnChangePassword").html("Save Password");
-            $("#btnCancel_PasswordChange").show();
-        }
-        else {
-            $("#div_ChangePassword").hide();
-            $("#btnChangePassword").html("Change Password");
-            $("#btnCancel_PasswordChange").hide();
-        }
-    });
-
-    $("#btnCancel_PasswordChange").click(function () {
-        $("#div_ChangePassword").hide();
-        $("#btnCancel_PasswordChange").hide();
-        $("#btnChangePassword").html("Change Password");
-    });
-
-    $('#btnUpdateProfile').click(function () {//<!--When a User clicks Update button on Show View Employee Modal when a user double clicks a row-->
-        var btnText = $(this).html();
-        if (btnText == "Update") {
-            $('.readonly').attr("readonly", false);
-            $('.readonly').css('border', '1px solid #ccc');
-            $("#btnUpdateProfile").html('Save');
-        }
-        else {
-            $('.readonly').attr("readonly", true);
-            $('.readonly').css('border', 'none');
-            $('.readonly').css('background-color', 'transparent');
-            $("#btnUpdateProfile").html('Update');
-        }
-    });
-</script>
