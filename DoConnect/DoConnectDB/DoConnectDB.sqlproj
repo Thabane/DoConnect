@@ -78,5 +78,9 @@
     <Build Include="dbo\Stored Procedures\NewUpdateDoctor.sql" />
     <Build Include="dbo\Stored Procedures\GetAllPatients.sql" />
     <Build Include="dbo\Stored Procedures\NewUpdatePatient.sql" />
+    <Build Include="dbo\Stored Procedures\NewUpdatePractice.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="DoConnectDB.refactorlog" />
   </ItemGroup>
 </Project>
