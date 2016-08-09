@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [NewUpdatePatient] 
+﻿CREATE PROCEDURE [dbo].[NewUpdatePatient] 
 
 	    @FirstName NVARCHAR(50),
 		@LastName NVARCHAR(50),
@@ -18,21 +18,72 @@ BEGIN
 
 	SET NOCOUNT ON;
 
-	INSERT INTO Patient
-    (
-		[FirstName], 
-		[LastName], 
-		[ID_Number], 
-		[Gender], 
-		[DOB], 
-		[Cell_Number], 
-		[Street_Address], 
-		[Suburb], 
-		[City], 
-		[Country], 
-		[Medical_Aid_ID], 
-		[Doctor_ID], 
-		[User_ID]
+    MERGE [Patient] AS TARGET
+	USING
+	(
+		SELECT
+		    @FirstName,
+			@LastName,
+			@ID_Number,
+			@Gender,
+			@DOB,
+			@Cell_Number,
+			@Street_Address,
+			@Suburb,
+			@City,
+			@Country,
+			@Medical_Aid_ID,
+			@Doctor_ID,
+			@User_ID
+	)
+	AS
+    [SOURCE]
+	(
+       [FirstName]
+      ,[LastName]
+      ,[ID_Number]
+      ,[Gender]
+      ,[DOB]
+      ,[Cell_Number]
+      ,[Street_Address]
+      ,[Suburb]
+      ,[City]
+      ,[Country]
+      ,[Medical_Aid_ID]
+      ,[Doctor_ID]
+      ,[User_ID]
+	)
+	ON
+		[TARGET].[User_ID] = [SOURCE].[User_ID]
+	WHEN MATCHED THEN
+	UPDATE
+	SET
+	   [FirstName] = @FirstName
+      ,[LastName] = @LastName
+      ,[ID_Number] = @ID_Number
+      ,[Gender] = @Gender
+      ,[DOB] = @DOB
+      ,[Cell_Number] = @Cell_Number
+      ,[Street_Address] = @Street_Address
+      ,[Suburb] = @Suburb
+      ,[City] = @City
+      ,[Country] = @Country
+	WHEN NOT MATCHED THEN
+	INSERT
+	(
+       [FirstName]
+      ,[LastName]
+      ,[ID_Number]
+      ,[Gender]
+      ,[DOB]
+      ,[Cell_Number]
+      ,[Street_Address]
+      ,[Suburb]
+      ,[City]
+      ,[Country]
+      ,[Medical_Aid_ID]
+      ,[Doctor_ID]
+      ,[User_ID]
 	)
 	VALUES        
 	(
@@ -49,7 +100,6 @@ BEGIN
 		@Medical_Aid_ID,
 		@Doctor_ID,
 		@User_ID
-	)
+	);
 
 END
-GO
