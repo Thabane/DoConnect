@@ -84,6 +84,13 @@
     <Build Include="dbo\Stored Procedures\GetPracticeById.sql" />
     <Build Include="dbo\Stored Procedures\GetAllPractices.sql" />
     <Build Include="dbo\Stored Procedures\GetAllAppointments.sql" />
+    <Build Include="dbo\Stored Procedures\GetAppointmentById.sql" />
+    <Build Include="dbo\Stored Procedures\GetAllInvoices.sql" />
+    <Build Include="dbo\Stored Procedures\GetInvoiceById.sql" />
+    <Build Include="dbo\Stored Procedures\GetInvoiceByPatientId.sql" />
+    <Build Include="dbo\Stored Procedures\GetInvoiceByDoctorId.sql" />
+    <Build Include="dbo\Stored Procedures\GetInvoiceByMedAidId.sql" />
+    <Build Include="dbo\Stored Procedures\GetPatientById.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="DoConnectDB.refactorlog" />
