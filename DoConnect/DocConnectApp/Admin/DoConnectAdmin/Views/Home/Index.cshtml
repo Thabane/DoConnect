@@ -1,23 +1,123 @@
 ﻿<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>*@
     <script src="~/Scripts/Index/jquery.min.js"></script>
     <script src="~/Scripts/Index/bootstrap.min.js"></script>
 
     @*<link rel="stylesheet" type="text/css" media="screen" href="~/Scripts/Index/components.min.css">*@
     @*<link rel="stylesheet" type="text/css" media="screen" href="~/Scripts/Index/theme.css">*@
-    <link rel="stylesheet" type="text/css" media="screen" href="~/Scripts/Index/SalesSummary.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="~/Scripts/Index/QuickActionsAppointments.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="~/Scripts/Index/To Do List.css">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="~/Scripts/DashboardWidgets/SalesSummary.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/Scripts/DashboardWidgets/QuickActionsAppointments.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/Scripts/DashboardWidgets/To Do List.css">
+
+    @*<script type="text/javascript" src="~/Scripts/Graphs/jquery.flot.pie.js"></script>
+    <script type="text/javascript" src="~/Scripts/Graphs/jquery.flot.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/Graphs/flot-data.js"></script>*@
+    
+    @*<link rel="stylesheet" type="text/css" media="screen" href="~/Scripts/Graphs/PieChart/PieChart-pipe.css">
+    <script type="text/javascript" src="~/Scripts/Graphs/PieChart/PieChart-pipe.js"></script>*@
+
+    <link rel="stylesheet" href="https://cdn.rawgit.com/theus/chart.css/v1.0.0/dist/chart.css" />
+
+    @*<link rel="stylesheet" type="text/css" href="~/Scripts/Pagination/bootstrap-theme.min.css">*@
+    <link rel="stylesheet" type="text/css" href="~/Scripts/Pagination/styles.css">
+    <script src="~/Scripts/Pagination/dirPagination.js"></script>
 
     <script src="~/Scripts/DateTimePicker/moment-with-locales.js"></script>
     <link rel="stylesheet" type="text/css" media="screen" href="~/Scripts/DateTimePicker/bootstrap-datetimepicker.min.css">
-    <script type="text/javascript" src="~/Scripts/DateTimePicker/bootstrap-datetimepicker.min.js"></script>    
+    <script type="text/javascript" src="~/Scripts/DateTimePicker/bootstrap-datetimepicker.min.js"></script>
     <link href="~/Scripts/DateTimePicker/bootstrap-datetimepicker.css" rel="stylesheet">
     <script src="~/Scripts/DateTimePicker/bootstrap-datetimepicker.js"></script>
 </head>
 
 <div id="wrapper">
+    <script type="text/javascript">
+        //Accounting
+            function ViewInvoice() {
+                $("#View_Invoice_Modal").modal("show");
+            };
+            function ViewExpense() {
+                $("#View_ExpensesInvoice_Modal").modal("show");
+            };
+
+        //Appointments Page
+            function ViewAppointment() {
+                $("#View_Appointment_Modal").modal("show");
+                $(".readonly_ViewAppointment").attr("readonly", true);
+                $(".readonly_ViewAppointment").css("background-color", "transparent");
+            };
+
+        //Employee Page
+            function ViewEmployee() {
+                $("#View_Employee_Modal").modal("show");
+                $(".readonly_ViewEmployee").attr("readonly", true);
+                $(".readonly_ViewEmployee").css("background-color", "transparent");
+            };
+
+        //Events Page
+            function ViewEvent() {
+                $("#View_Event_Modal").modal("show");
+                $(".readonly_ViewEvent").attr("readonly", true);
+                $(".readonly_ViewEvent").css("background-color", "transparent");
+            };
+
+        //Medical Aid Page
+            function ViewMedicalAid() {
+                $("#View_MedicalAid_Modal").modal("show");
+            };
+
+        //Medicine Inventory Page
+            function ViewMedicine() {
+                $("#View_Medicine_Modal").modal("show");
+                $(".readonly_ViewMedicine").attr("readonly", true);
+                $(".readonly_ViewMedicine").css("background-color", "transparent");
+            };
+
+        //Messages Page
+            function tr_dblclick_InboxMail() {
+                $("#View_SelectedInboxMail").modal("show");
+                $(".readonly_ViewEvent").attr("readonly", true);
+                $(".readonly_ViewEvent").css("background-color", "transparent");
+            };
+
+        //Patients
+            function ViewPatient() {
+            $("#div_Medical_History").modal("show");
+        };
+
+        function myFunctionShowMedical_History() {
+            $("#div_Medical_History").modal("show");
+            $("#div_Prescriptions").modal("hide");
+            $("#div_Consultations").modal("hide");
+        };
+
+        function myFunctionShowPrescriptions() {
+            $("#div_Prescriptions").modal("show");
+            $("#div_Medical_History").modal("hide");
+            $("#div_Consultations").modal("hide");
+        };
+
+        function myFunctionPrescriptions_Edit() {
+            $("#div_Prescriptions_Update").modal("show");
+        };
+        function myFunctionShowConsultations() {
+            $("#div_Consultations").modal("show");
+            $("#div_Medical_History").modal("hide");
+            $("#div_Prescriptions").modal("hide");
+        };
+
+        function DT() {
+            $(".datetimepicker").datetimepicker({ format: "L" });
+        };
+
+        $(".nav li").on("click", function () {
+            $(".nav li").removeClass("active");
+            $(this).addClass("active");
+        });
+    </script>
 
     <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
@@ -188,11 +288,11 @@
                     <li><a href="/Messages"><i class="fa fa-envelope-o fa-fw"></i> Messages</a></li>
                     <li><a href="/Patients"><i class="fa fa-users fa-fw"></i> Patients</a></li>
                     <li><a href="/Employees"><i class="fa fa-female fa-fw"></i> Employees</a></li>
-                    <li><a href="/Events"><i class="fa fa-calendar fa-fw"></i> Events</a></li>                   
+                    <li><a href="/Events"><i class="fa fa-calendar fa-fw"></i> Events</a></li>
                     <li><a href="/Appointments"><i class="fa fa-calendar-o fa-fw"></i> Appointments</a></li>
-                    <li><a href="/Accounting"><i class="fa fa-money fa-fw"></i> Accounting</a></li>  
+                    <li><a href="/Accounting"><i class="fa fa-money fa-fw"></i> Accounting</a></li>
                     <li><a href="/MedicalAid"><i class="fa fa-plus-square-o fa-fw"></i> Medical Aid</a></li>
-                    <li><a href="/MedicineInventory"><i class="fa fa-medkit fa-fw"></i> Medicine Inventory</a></li>                                      
+                    <li><a href="/MedicineInventory"><i class="fa fa-medkit fa-fw"></i> Medicine Inventory</a></li>
                     <li><a href="/DiagnosisExpertSystem"><i class="fa fa-stethoscope fa-fw"></i> Diagnosis Expert System</a></li>
                     <li><a href="/Reports"><i class="fa fa-bar-chart-o fa-fw"></i> Reports</a></li>
                 </ul>
@@ -335,7 +435,7 @@
                                                     </form>
                                                 </div>
                                             </div>
-                                        </div><!--Practice Info Ends-->                                
+                                        </div><!--Practice Info Ends-->
                                     </div>
                                 </div>
                             </div>
@@ -344,82 +444,15 @@
                                 <button type="button" class="btn btn-primary" onclick="btnUpdateProfile()" id="btnUpdateProfile">Update</button>
                                 <button type="button" class="btn btn-danger" onclick="btnDeleteProfile()">Delete</button>
                             </div>
-                </div>                
+                </div>
             </div>
         </div>@*User Profile Modal Ends*@
-
-
     </div>
 @{
     ViewBag.Title = "Doctor Connect";
 }
 <div>
     <div ng-view>
-        
+
     </div>
 </div>
-
-<script type="text/javascript">
-    $('.readonly').attr("readonly", true);
-    $('.readonly').css('border', 'none');
-    $('.readonly').css('background-color', 'transparent');
-
-    $("#View_Profile_Modal").modal('hide');
-
-    $("#div_PracticeInformation").hide();
-    function FunctionShowPersonalInfo() {
-        $("#div_PersonalInfo").show();
-        $("#div_PracticeInformation").hide();
-    };
-
-    function FunctionShowPracticeInfo() {
-        $("#div_PracticeInformation").show();
-        $("#div_PersonalInfo").hide();
-    };
-
-    $(".nav li").on("click", function () {
-        $(".nav li").removeClass("active");
-        $(this).addClass("active");
-    });
-
-    function btnViewUserProfile() {
-        $("#View_Profile_Modal").modal('show');
-    };
-
-    $("#div_ChangePassword").hide();
-    $("#btnCancel_PasswordChange").hide(); 
-    $("#btnChangePassword").click(function () {
-        var btnText = $(this).html();
-        if (btnText == "Change Password") {
-            $("#div_ChangePassword").show();
-            $("#btnChangePassword").html("Save Password");
-            $("#btnCancel_PasswordChange").show();
-        }
-        else {
-            $("#div_ChangePassword").hide();
-            $("#btnChangePassword").html("Change Password");
-            $("#btnCancel_PasswordChange").hide();
-        }
-    });
-
-    $("#btnCancel_PasswordChange").click(function () {
-        $("#div_ChangePassword").hide();
-        $("#btnCancel_PasswordChange").hide();
-        $("#btnChangePassword").html("Change Password");
-    });
-
-    $('#btnUpdateProfile').click(function () {//<!--When a User clicks Update button on Show View Employee Modal when a user double clicks a row-->
-        var btnText = $(this).html();
-        if (btnText == "Update") {
-            $('.readonly').attr("readonly", false);
-            $('.readonly').css('border', '1px solid #ccc');
-            $("#btnUpdateProfile").html('Save');
-        }
-        else {
-            $('.readonly').attr("readonly", true);
-            $('.readonly').css('border', 'none');
-            $('.readonly').css('background-color', 'transparent');
-            $("#btnUpdateProfile").html('Update');
-        }
-    });
-</script>

@@ -1,0 +1,90 @@
+﻿<div>
+    <div id="page-wrapper" ng-controller="EmployeesController">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header text-primary">New Employee Details</h2>
+            </div>
+        </div>
+
+        <ul class="nav nav-tabs">
+            <li role="presentation"><a href="/Employees"><i class="fa fa-align-justify"></i>Employees List</a></li>
+            <li role="presentation" class="active"><a href="/NewEmployee"><i class="fa fa-plus-circle"></i>New Employee</a></li>
+        </ul>
+                
+        <!--New Employee Section-->
+        <form>
+            <div style="margin:auto; width:80%;">
+                <div class="modal-header" style="border-bottom:0px;"></div>
+                <div class="modal-body">
+                    <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                        <div class="col-lg-2 col-sm-2 col-md-2"><h5 class="form-control-label">Firstname:</h5></div>
+                        <div class="col-lg-4 col-sm-4 col-md-4"><input name="P_Fistname" class="form-control" type="text"></div>
+                        <div class="col-lg-2 col-sm-2 col-md-2"><h5>Cell Number:</h5></div>
+                        <div class="col-lg-4 col-sm-4 col-md-4"><input name="P_CellNumber" class="form-control" type="text"></div>
+                    </div>
+                    <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                        <div class="col-lg-2 col-sm-2 col-md-2"><h5 class="form-control-label">Lastname:</h5></div>
+                        <div class="col-lg-4 col-sm-4 col-md-4"><input name="P_Lastname" class="form-control" id="Text11" type="text"></div>
+                        <div class="col-lg-2 col-sm-2 col-md-2"><h5>Street Address:</h5></div>
+                        <div class="col-lg-4 col-sm-4 col-md-4"><input name="P_StreetAddress" class="form-control" type="text"></div>
+                    </div>
+                    <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                        <div class="col-lg-2 col-sm-2 col-md-2"><h5 class="form-control-label">Email:</h5></div>
+                        <div class="col-lg-4 col-sm-4 col-md-4"><input name="P_EmailAddress" class="form-control" id="Email2" type="email"></div>
+                        <div class="col-lg-2 col-sm-2 col-md-2"><h5>Suburb:</h5></div>
+                        <div class="col-lg-4 col-sm-4 col-md-4"><input name="P_Suburb" class="form-control" type="text"></div>
+                    </div>
+                    <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                        <div class="col-lg-2 col-sm-2 col-md-2"><h5>ID Number:</h5></div>
+                        <div class="col-lg-4 col-sm-4 col-md-4"><input name="P_IDNumber" class="form-control" id="Text14" type="text"></div>
+                        <div class="col-lg-2 col-sm-2 col-md-2"><h5>City:</h5></div>
+                        <div class="col-lg-4 col-sm-4 col-md-4"><input name="P_City" class="form-control" type="text"></div>
+                    </div>
+                    <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                        <div class="col-lg-2 col-sm-2 col-md-2"><h5>DOB:</h5></div>
+                        <div class="col-lg-4 col-sm-4 col-md-4">
+                            <div class="row" style="padding-left:0px; padding-right:0px;">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <div class="input-group date datetimepicker" onclick="DT()">
+                                            <input class="form-control" type="text">
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-sm-2 col-md-2"><h5>Country:</h5></div>
+                        <div class="col-lg-4 col-sm-4 col-md-4"><input name="P_Country" class="form-control" type="text"></div>
+                    </div>
+                    <div class="row" style="margin-top:4px;">
+                        <div class="col-lg-2 col-sm-2 col-md-2"><h5>Gender:</h5></div>
+                        <div class="col-lg-4 col-sm-4 col-md-4">
+                            <select class="form-control required input-sm">
+                                <option value="">Please choose a gender</option>
+                                <option value="1">Male</option>
+                                <option value="2">Female</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-2 col-sm-2 col-md-2"><h5>Employee Type:</h5></div>
+                        <div class="col-lg-4 col-sm-4 col-md-4">
+                            <select class="form-control required input-sm">
+                                <option value="">Choose Employee Type</option>
+                                <option value="1">Nurse</option>
+                                <option value="2">Cleaner</option>
+                                <option value="3">Doctor</option>
+                                <option value="4">Receptionist</option>
+                                <option value="5">Administrator</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="function_btnNewEmployee()">Add Employee</button>
+                </div>
+            </div>
+        </form><!--New Employee Modal Ends-->
+    </div>
+</div>

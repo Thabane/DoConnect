@@ -11,6 +11,7 @@ namespace DoConnectAdmin
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
+            /*"~/Scripts/Views/Controls.js"*/
 
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
@@ -28,7 +29,6 @@ namespace DoConnectAdmin
             bundles.Add(new ScriptBundle("~/bundles/angular").Include(
                    "~/Scripts/angular.js",
                    "~/Scripts/jquery.dataTables.js",
-                   "~/Scripts/DoConnect.js",
                    "~/Scripts/angular-route.js",
                    "~/Scripts/angular-location-update.min.js",
                    "~/App/app.js",
@@ -42,7 +42,6 @@ namespace DoConnectAdmin
                       "~/Scripts/morris.min.js",
                       "~/Scripts/sb-admin-2.js",
                       "~/Scripts/raphael-min.js",
-                      "~/Scripts/DoConnect.js",
                       "~/Scripts/xml2json.js"));
 
         }

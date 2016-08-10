@@ -1,8 +1,9 @@
 ﻿app.controller("AccountingController", ["$scope", "AccountingService", "$interval",
     function ($scope, AccountingService, $interval) {
 
-        AccountingService.GetAllAccounting().then
-        (function (results) {
-            $scope.accounting = result.data;
-        });
+        $scope.PageTitleAccounting = 'Accounting';
+        $scope.PageTitleExpenses = 'Expenses';
+        $scope.PageTitleNewExpenseEntry = 'New Expense Entry';
+        $scope.PageTitleNewPatientInvoiceEntry = 'New Patient Invoice Entry';
+        
     }]);

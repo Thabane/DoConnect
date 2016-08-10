@@ -27,8 +27,9 @@ namespace DataClient
         /// <returns></returns>
         internal SqlDataReader ExecuteReader(string connectionString, string procName, List<SqlParameter> commandParameters)
         {
-            string connStr = ConfigurationManager.ConnectionStrings[connectionString].ConnectionString;
-            var conn = new SqlConnection(connStr);
+            //string connStr = ConfigurationManager.ConnectionStrings[connectionString].ConnectionString;
+
+            var conn = new SqlConnection(connectionString);
             SqlCommand command = new SqlCommand(procName, conn);
 
             if (commandParameters != null)

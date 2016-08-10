@@ -1,23 +1,16 @@
-﻿app.factory('PatientService',
+﻿app.factory('PatientsService',
     ['$http',
         function ($http) {
-            var InsertPatient = function (firstName, lastName, id_Number, gender, dob, cell_number, street_address, suburb, city, country) {//GetPatients must be the same as the method name in the controller
-                $http.Post("api/Patients/InsertPatient",
-                {
-                    "FirstName": firstName,
-                    "LastName": lastName,
-                    "ID_Number": id_Number,
-                    "Gender": gender,
-                    "DOB": dob,
-                    "Cell_Number": cell_number,
-                    "Street_address": street_address,
-                    "Suburb": suburb,
-                    "City": city,
-                    "Country": country
-                });
+            var GetAllPatients = function () {
+                return  $http.get("api/Patients/GetAllPatients");
             }
-            return {
-                InsertPatient : InsertPatient
+            return { GetAllPatients: GetAllPatients }
+
+            var GetPatient = function (ID) {
+                return $http.get("api/Patients/GetPatient?ID"+ID);
             }
+            return { GetPatient: GetPatient }
         }
     ]);
+
+

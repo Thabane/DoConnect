@@ -2,13 +2,13 @@
     <div id="page-wrapper" ng-controller="EventsController">
         <div class="row">
             <div class="col-lg-12">
-                <h2 class="page-header">Events</h2>
+                <h2 class="page-header text-primary">Events</h2>
             </div>
         </div>
 
         <ul class="nav nav-tabs">
             <li role="presentation" class="active"><a href="/Events"><i class="fa fa-align-justify"></i>Events List</a></li>
-            <li role="presentation"><a href="#" onclick="myFunctionAddEvent()"><i class="fa fa-plus-circle"></i>New Event</a></li>
+            <li role="presentation"><a href="/NewEvent"><i class="fa fa-plus-circle"></i>New Event</a></li>
         </ul>
         
         <div class="panel panel-default">
@@ -37,54 +37,25 @@
                 </tbody>
             </table>
 
-            <table class="table table-hover" style="font-size: 12px;">
+            <table class="table table-hover">
                 <thead style="background-color: #f8f8f8;">
                     <tr>
-                        <th style="padding-right: 0px; padding-left: 20px;">Title</th>
-                        <th style="padding-right: 0px; padding-left: 20px;">Event Details</th>
-                        <th style="width: 15%; padding-right: 0px; padding-left: 20px;">Start Date & Time</th>
-                        <th style="width: 15%; padding-right: 0px; padding-left: 20px;">End Date & Time</th>
-                        <th style="width: 15%; padding-right: 0px; padding-left: 20px;">Action</th>
+                        <th style="width: 20%;">Title</th>
+                        <th style="width: 25%;">Event Details</th>
+                        <th style="width: 20%;">Start Date & Time</th>
+                        <th style="width: 20%;">End Date & Time</th>
+                        <th style="width: 15%;">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="tr_dblclick">
-                        <td><input name="Title" class="form-control readonly" value="I am so over this event"></td>
-                        <td><input name="EventDetails" class="form-control readonly" value="Staff Meeting2"></td>
-                        <td style="border-top-width: 0px; width: 20%; padding-right:20px;"><div class="container" style="padding-left:0px; padding-right:0px;">
-                                                                                                <div class="row">
-                                                                                                    <div class="col-md-12">
-                                                                                                        <div class="form-group">
-                                                                                                            <div class="input-group date" id='datetimepicker1'>
-                                                                                                                <input class="form-control" type="text">
-                                                                                                                <span class="input-group-addon">
-                                                                                                                    <span class="glyphicon glyphicon-calendar"></span>
-                                                                                                                </span>
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
-                        </td>
-                        <td style="border-top-width: 0px; width: 20%; padding-right:20px;"><div class="container" style="padding-left:0px; padding-right:0px;">
-                                                                                                <div class="row">
-                                                                                                    <div class="col-md-12">
-                                                                                                        <div class="form-group">
-                                                                                                            <div class="input-group date" id='datetimepicker2'>
-                                                                                                                <input class="form-control" type="text">
-                                                                                                                <span class="input-group-addon">
-                                                                                                                    <span class="glyphicon glyphicon-calendar"></span>
-                                                                                                                </span>
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
-                        </td>
+                    <tr ng-repeat="Event in Events">
+                        <td>{{Event.Title}}</td>
+                        <td>{{Event.EventDetails}}</td>
+                        <td>{{Event.StartDate_Time}}</td>
+                        <td>{{Event.EndDate_Time}}</td>
                         <td>
-                            <button class="btn btn-info btn-xs" id="myFunctionEvents_Edit" href="#"><i class="fa fa-pencil"></i></button>
-                            <button class="btn btn-info btn-xs" id="myFunctionEvents_Save" onclick="myFunctionEvents_Save()" href="#"><i class="fa fa-floppy-o"></i></button>
-                            <button class="btn btn-danger btn-xs" onclick="myFunctionEvents_Delete()"><i class="fa fa-trash-o"></i></button>
+                            <button class="btn btn-primary btn-xs" ng-click="ViewEvent(Event.ID)" onclick="ViewEvent()"><i class="glyphicon glyphicon-new-window"></i></button>
+                            <button class="btn btn-danger btn-xs" ng-click="DeleteEvent(Event.ID)"><i class="fa fa-trash-o"></i></button>
                         </td>
                     </tr>
                 </tbody>
@@ -103,53 +74,47 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title">Event Details</h4>
+                            <h4 class="modal-title text-primary">Event Details</h4>
                         </div>
                         <div class="modal-body">
                             <div class="row" style="margin-top:5px; margin-bottom:5px;">
                                 <div class="col-md-3"><h5 class="form-control-label">Title:</h5></div>
-                                <div class="col-md-8"><input name="View_Title" class="form-control readonly_ViewEvent" type="text"></div>
+                                <div class="col-md-8"><input class="form-control readonly_ViewEvent" type="text"></div>
                             </div>
                             <div class="row" style="margin-top:5px; margin-bottom:5px;">
                                 <div class="col-md-3"><h5>Details:</h5></div>
-                                <div class="col-md-8"><textarea class="form-control readonly_ViewEvent" rows="3" cols="20" name="View_Details"></textarea></div>
+                                <div class="col-md-8"><textarea class="form-control readonly_ViewEvent" rows="3" cols="20" ></textarea></div>
                             </div>
                             <div class="row" style="margin-top:5px; margin-bottom:0px;">
                                 <div class="col-md-3"><h5 class="form-control-label">Start Date & Time:</h5></div>
-                                <div class="col-md-8">
-                                    <div class="container" style="padding-left:0px; padding-right:0px;">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <div class="input-group date" id='datetimepicker3'>
-                                                        <input class="form-control" type="text">
-                                                        <span class="input-group-addon">
-                                                            <span class="glyphicon glyphicon-calendar"></span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="col-md-8"><div class="row" style="padding-left:0px; padding-right:0px;">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <div class="input-group date" id='datetimepicker3' ng-click="DT_View_Events()">
+                                                                        <input class="form-control" type="text">
+                                                                        <span class="input-group-addon">
+                                                                            <span class="glyphicon glyphicon-calendar"></span>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                 </div>
                             </div>
                             <div class="row" style="margin-top:0px; margin-bottom:0px;">
                                 <div class="col-md-3"><h5 class="form-control-label">End Date & Time:</h5></div>
-                                <div class="col-md-8">
-                                    <div class="container" style="padding-left:0px; padding-right:0px;">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <div class="input-group date" id='datetimepicker4'>
-                                                        <input class="form-control" type="text">
-                                                        <span class="input-group-addon">
-                                                            <span class="glyphicon glyphicon-calendar"></span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="col-md-8"><div class="row" style="padding-left:0px; padding-right:0px;">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <div class="input-group date" id="datetimepicker4" ng-click="DT_View_Events()">
+                                                                        <input class="form-control" type="text">
+                                                                        <span class="input-group-addon">
+                                                                            <span class="glyphicon glyphicon-calendar"></span>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                 </div>
                             </div>
                             <div class="row" style="margin-top:0px; margin-bottom:5px;">
@@ -165,182 +130,14 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" onclick="function_btnUpdateEvent()" id="function_btnUpdateEvent">Update</button>
-                            <button type="button" class="btn btn-danger" onclick="function_btnDeleteEvent()">Delete</button>
+                            <button type="button" class="btn btn-primary" ng-click="function_btnUpdateEvent()" id="function_btnUpdateEvent">Update</button>
+                            <button type="button" class="btn btn-danger" ng-click="function_btnDeleteEvent()">Delete</button>
                         </div>
                     </div>
                 </div>
             </form>
-        </div><!--View Event Modal Ends-->
-        <!--New Event Modal-->
-        <div id="New_Event_Modal" class="modal fade">
-            <form>
-                <div class="modal-dialog" style="width:40%">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title">New Event Details</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row" style="margin-top:5px; margin-bottom:5px;">
-                                <div class="col-md-3"><h5 class="form-control-label">Title:</h5></div>
-                                <div class="col-md-8"><input name="New_Title" class="form-control" type="text"></div>
-                            </div>
-                            <div class="row" style="margin-top:5px; margin-bottom:5px;">
-                                <div class="col-md-3"><h5>Details:</h5></div>
-                                <div class="col-md-8"><textarea class="form-control" rows="3" cols="20" name="New_Details"></textarea></div>
-                            </div>
-                            <div class="row" style="margin-top:5px; margin-bottom:0px;">
-                                <div class="col-md-3"><h5 class="form-control-label">Start Date & Time:</h5></div>
-                                <div class="col-md-8">
-                                    <div class="container" style="padding-left:0px; padding-right:0px;">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <div class="input-group date" id='datetimepicker5'>
-                                                        <input class="form-control" type="text">
-                                                        <span class="input-group-addon">
-                                                            <span class="glyphicon glyphicon-calendar"></span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row" style="margin-top:0px; margin-bottom:0px;">
-                                <div class="col-md-3"><h5 class="form-control-label">End Date & Time:</h5></div>
-                                <div class="col-md-8">
-                                    <div class="container" style="padding-left:0px; padding-right:0px;">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <div class="input-group date" id='datetimepicker6'>
-                                                        <input class="form-control" type="text">
-                                                        <span class="input-group-addon">
-                                                            <span class="glyphicon glyphicon-calendar"></span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row" style="margin-top:0px; margin-bottom:5px;">
-                                <div class="col-md-3"><h5>Appointment Status:</h5></div>
-                                <div class="col-md-8">
-                                    <select class="form-control required input-sm" name="New_AppointmentStatus">
-                                        <option value="">Status</option>
-                                        <option value="1">Approve</option>
-                                        <option value="2">Decline</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" onclick="function_btnNewEvent()">Add Event</button>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div><!--New Event Modal Ends-->
+        </div><!--View Event Modal Ends-->       
     </div>
 </div>
-<script type="text/javascript">
-    $('.readonly').css('border', 'none');
-    $('.readonly').css('background-color', 'transparent');
-    $('.readonly').css('font-size', '13px');
-    $('.readonly').css('padding-right', '0px');
-    $('#myFunctionEvents_Edit').show(); $('#myFunctionEvents_Save').hide();
-
-    $('#myFunctionEvents_Edit').click(function () {
-
-        $('#myFunctionEvents_Edit').hide(); $('#myFunctionEvents_Save').show();
-
-        $('.readonly').attr("readonly", false)
-        $('.readonly').css('border', '1px solid #ccc');
-    });
-
-    $('#myFunctionEvents_Save').click(function () {
-
-        $('#myFunctionEvents_Edit').show(); $('#myFunctionEvents_Save').hide();
-
-        $('.readonly').attr("readonly", true)
-        $('.readonly').css('border', 'none');
-        $('.readonly').css('background-color', 'transparent');
-    });
-
-    function myFunctionAddEvent() {//<!--Show New Event Modal-->
-        $("#New_Event_Modal").modal('show');
-    };
-
-    $('.tr_dblclick').dblclick(function () {//<!--Show View Event Modal when a user double clicks a row-->
-        $("#View_Event_Modal").modal('show');
-        $('.readonly_ViewEvent').css('border', 'none');
-        $('.readonly_ViewEvent').attr("readonly", true)
-        $('.readonly_ViewEvent').css('background-color', 'transparent');
-    });
-
-    $('#function_btnUpdateEvent').click(function () {//<!--When a User clicks Update button on Show View Event Modal when a user double clicks a row-->
-        var btnText = $(this).html();
-        if (btnText == "Update") {
-            $('.readonly_ViewEvent').attr("readonly", false)
-            $('.readonly_ViewEvent').css('border', '1px solid #ccc');
-            $("#function_btnUpdateEvent").html('Save');
-        }
-        else {
-            $('.readonly_ViewEvent').attr("readonly", true)
-            $('.readonly_ViewEvent').css('border', 'none');
-            $('.readonly_ViewEvent').css('background-color', 'transparent');
-            $("#function_btnUpdateEvent").html('Update');
-        }
-    });
-
-    $(function () {
-        $('#datetimepicker1').datetimepicker();
-        $('#datetimepicker2').datetimepicker({
-            useCurrent: false //Important! See issue #1075
-        });
-        $("#datetimepicker1").on("dp.change", function (e) {
-            $('#datetimepicker2').data("DateTimePicker").minDate(e.date);
-        });
-        $("#datetimepicker2").on("dp.change", function (e) {
-            $('#datetimepicker1').data("DateTimePicker").maxDate(e.date);
-        });
-    });
-
-    $(function () {
-        $('#datetimepicker3').datetimepicker();
-        $('#datetimepicker4').datetimepicker({
-            useCurrent: false
-        });
-        $("#datetimepicker3").on("dp.change", function (e) {
-            $('#datetimepicker4').data("DateTimePicker").minDate(e.date);
-        });
-        $("#datetimepicker4").on("dp.change", function (e) {
-            $('#datetimepicker3').data("DateTimePicker").maxDate(e.date);
-        });
-    });
-
-    $(function () {
-        $('#datetimepicker5').datetimepicker();
-        $('#datetimepicker6').datetimepicker({
-            useCurrent: false
-        });
-        $("#datetimepicker5").on("dp.change", function (e) {
-            $('#datetimepicker6').data("DateTimePicker").minDate(e.date);
-        });
-        $("#datetimepicker6").on("dp.change", function (e) {
-            $('#datetimepicker5').data("DateTimePicker").maxDate(e.date);
-        });
-    });
-
-    //$(function () {
-    //    $('.datetimepicker').datetimepicker();
-    //});
-</script>
 
 

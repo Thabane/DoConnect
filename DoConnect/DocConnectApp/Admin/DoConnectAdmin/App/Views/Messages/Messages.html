@@ -2,21 +2,21 @@
     <div id="page-wrapper" ng-controller="MessagesController">
         <div class="row">
             <div class="col-lg-12">
-                <h2 class="page-header">Messages</h2>
+                <h2 class="page-header text-primary">Messages</h2>
             </div>
         </div>       
 
         <div class="right_side message">
             <div class="row mailbox-header">
                 <div class="col-md-2">
-                    <a class="btn btn-info btn-block" href="#" onclick="FunctionComposeMessage()">Compose</a>
+                    <a class="btn btn-info btn-block" href="#" ng-click="FunctionComposeMessage()">Compose</a>
                 </div>
                 <div class="col-md-8"><h2 style="margin-top:0px;" id="h2_ContentHeading">Inbox</h2></div>
             </div>
             <div class="col-md-2">
                 <ul class="list-unstyled mailbox-nav">
-                    <li><a href="#" onclick="FunctionInbox()"><i class="fa fa-inbox"></i> Inbox<span class="badge badge-success pull-right">1</span></a></li>
-                    <li><a href="#" onclick="FunctionSent()"><i class="fa fa-sign-out"></i> Sent</a></li>
+                    <li><a href="#" ng-click="FunctionInbox()"><i class="fa fa-inbox"></i> Inbox<span class="badge badge-success pull-right">1</span></a></li>
+                    <li><a href="#" ng-click="FunctionSent()"><i class="fa fa-sign-out"></i> Sent</a></li>
                 </ul>
             </div>
 
@@ -33,7 +33,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="tr_dblclick">
+                            <tr ondblclick="tr_dblclick_InboxMail()">
                                 <td>john@example.com</td>
                                 <td>Message....</td>
                                 <td>07-08-2016</td>
@@ -41,14 +41,14 @@
                                 <td><button class="btn btn-danger btn-xs" onclick="FunctionMessage_Delete()"><i class="fa fa-trash-o"></i></button></td>
 
                             </tr>
-                            <tr class="tr_dblclick">
+                            <tr ondblclick="tr_dblclick_InboxMail()">
                                 <td>Mary</td>
                                 <td>Moe</td>
                                 <td>mary@example.com</td>
                                 <td><button class="btn btn-info btn-xs" id="FunctionMessage_Reply" onclick="FunctionMessage_Reply()" href="#"><i class="fa fa-reply"></i></button></td>
                                 <td><button class="btn btn-danger btn-xs" onclick="FunctionMessage_Delete()"><i class="fa fa-trash-o"></i></button></td>
                             </tr>
-                            <tr class="tr_dblclick">
+                            <tr ondblclick="tr_dblclick_InboxMail()">
                                 <td>July</td>
                                 <td>Dooley</td>
                                 <td>july@example.com</td>
@@ -92,9 +92,7 @@
                     </div>
                 </div>
             </div><!--Compose message div Ends-->
-
         </div>
-
 
         <!--View_SelectedInboxMail Modal-->
         <div id="View_SelectedInboxMail" class="modal fade">
@@ -144,21 +142,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="tr_dblclick_SentMail">
+                        <tr ondblclick="tr_dblclick_SentMail()">
                             <td>john@example.com</td>
                             <td>Message....</td>
                             <td>07-08-2016</td>
                             <td><button class="btn btn-info btn-xs" id="FunctionMessage_Reply" onclick="FunctionMessage_Reply()" href="#"><i class="fa fa-reply"></i></button></td>
                             <td><button class="btn btn-danger btn-xs" onclick="FunctionMessage_Delete()"><i class="fa fa-trash-o"></i></button></td>
                         </tr>
-                        <tr class="tr_dblclick_SentMail">
+                        <tr ondblclick="tr_dblclick_SentMail()">
                             <td>Mary</td>
                             <td>Moe</td>
                             <td>mary@example.com</td>
                             <td><button class="btn btn-info btn-xs" id="FunctionMessage_Reply" onclick="FunctionMessage_Reply()" href="#"><i class="fa fa-reply"></i></button></td>
                             <td><button class="btn btn-danger btn-xs" onclick="FunctionMessage_Delete()"><i class="fa fa-trash-o"></i></button></td>
                         </tr>
-                        <tr class="tr_dblclick_SentMail">
+                        <tr ondblclick="tr_dblclick_SentMail()">
                             <td>July</td>
                             <td>Dooley</td>
                             <td>july@example.com</td>
@@ -171,35 +169,3 @@
         </div><!--Sent Modal Ends  -->
     </div>
 </div>
-<script type="text/javascript">
-    $("#div_Compose_Message").hide();
-    $("#div_Sent_list").hide();
-
-    function FunctionInbox() {
-        $("#div_Message_list").show();
-        $("#h2_ContentHeading").html("Inbox");
-        $("#div_Compose_Message").hide();
-        $("#div_Sent_list").hide();
-    };
-
-    function FunctionComposeMessage() {
-        $("#div_Compose_Message").show();
-        $("#h2_ContentHeading").html("Compose Message");
-        $("#div_Message_list").hide();
-        $("#div_Sent_list").hide();
-    };
-
-    function FunctionSent() {
-        $("#div_Sent_list").show();
-        $("#div_Message_list").hide();
-        $("#h2_ContentHeading").html("Sent Messages");
-        $("#div_Compose_Message").hide();
-    };
-
-    $('.tr_dblclick').dblclick(function () {//<!--Show View Inbox Modal when a user double clicks a row-->
-        $("#View_SelectedInboxMail").modal('show');
-        $('.readonly_ViewEvent').css('border', 'none');
-        $('.readonly_ViewEvent').attr("readonly", true)
-        $('.readonly_ViewEvent').css('background-color', 'transparent');
-    });    
-</script>

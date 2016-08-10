@@ -18,12 +18,24 @@ app.config(
                 templateUrl: "App/Views/Patients/patients.html",
                 controller: "PatientsController"
             })
+            .when("/NewPatient", {
+                templateUrl: "App/Views/Patients/NewPatient.html",
+                controller: "PatientsController"
+            })
             .when("/Employees", {
                 templateUrl: "App/Views/Employees/Employees.html",
                 controller: "EmployeesController"
             })
+            .when("/NewEmployee", {
+                templateUrl: "App/Views/Employees/NewEmployee.html",
+                controller: "EmployeesController"
+            })
             .when("/Appointments", {
                 templateUrl: "App/Views/Appointments/Appointments.html",
+                controller: "AppointmentsController"
+            })
+            .when("/NewAppointment", {
+                templateUrl: "App/Views/Appointments/NewAppointment.html",
                 controller: "AppointmentsController"
             })
             .when("/MedicineInventory", {
@@ -60,6 +72,10 @@ app.config(
             })
             .when("/Events", {
                 templateUrl: "App/Views/Events/Events.html",
+                controller: "EventsController"
+            })
+            .when("/NewEvent", {
+                templateUrl: "App/Views/Events/NewEvent.html",
                 controller: "EventsController"
             })
             .when("/Messages", {

@@ -3,7 +3,7 @@
         <!--Expenses Section Begins-->
         <div class="row">
             <div class="col-lg-12">
-                <h2 class="page-header">Expenses</h2>
+                <h2 class="page-header text-primary">{{PageTitleExpenses}}</h2>
             </div>
         </div>
 
@@ -12,7 +12,7 @@
             <li role="presentation"><a href="/NewPatientInvoice"><i class="fa fa-plus-circle"></i>New Invoice</a></li>
             <li role="presentation" class="active"><a href="/Expenses"><i class="fa fa-align-justify"></i>Expense List</a></li>
             <li role="presentation"><a href="/NewExpenceInvoice"><i class="fa fa-plus-circle"></i>New Expense</a></li>
-        </ul>
+        </ul>       
 
         <div class="panel panel-default">
             <table class="table-bordered" style="float:right; border:0; margin-bottom:5px;">
@@ -20,7 +20,7 @@
                     <tr>
                         <td style="border: 0;">
                             <div class="btn-group">
-                                <a class="btn btn-default dropdown-toggle btn-select2" href="#" data-toggle="dropdown" style="font-size:13px;" aria-expanded="false">Select search field <span class="caret"></span></a>
+                                <a class="btn btn-default dropdown-toggle btn-select2" href="#" data-toggle="dropdown" style="font-size:13px;" aria-expanded="false">Search field <span class="caret"></span></a>
                                 <ul class="dropdown-menu" style="font-size:13px;">
                                     <li><a href="#">Expense Description</a></li>
                                     <li><a href="#">Date</a></li>
@@ -39,37 +39,23 @@
                 </tbody>
             </table>
 
-            <table class="table table-hover" style="font-size: 12px;">
+            <table class="table table-hover">
                 <thead style="background-color: #f8f8f8;">
                     <tr>
-                        <th style="width: 50%; padding-right: 0px; padding-left: 20px;">Expense Description</th>
-                        <th style="width: 15%; padding-right: 0px; padding-left: 20px;">Date</th>
-                        <th style="width: 15%; padding-right: 0px; padding-left: 20px;">Amount (R)</th>
-                        <th style="width: 15%; padding-right: 0px; padding-left: 20px;">Action</th>
+                        <th style="width: 50%;">Expense Description</th>
+                        <th style="width: 15%;">Date</th>
+                        <th style="width: 15%;">Amount (R)</th>
+                        <th style="width: 15%;">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="tr_dblclick">
-                        <td><input name="ExpenseDescription" class="form-control readonly" value="Expense Description"></td>
-                        <td><div class="container" style="padding-left:0px; padding-right:0px;">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <div class="input-group date datetimepicker">
-                                                <input class="form-control" type="text" data-format="MM/dd/yyyy">
-                                                <span class="input-group-addon">
-                                                    <span class="glyphicon glyphicon-calendar"></span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div></td>
-                        <td><input name="Amount" class="form-control readonly" value="200.00"></td>
+                    <tr ng-repeat="Expense in Expenses">
+                        <td>{{Expense.Description}}</td>
+                        <td>{{Expense.Date}}</td>
+                        <td>{{Expense.Amount}}</td>
                         <td>
-                            <button class="btn btn-info btn-xs" id="myFunctionExpenses_Edit" onclick="myFunctionExpenses_Edit()" href="#"><i class="fa fa-pencil"></i></button>
-                            <button class="btn btn-info btn-xs" id="myFunctionExpenses_Save" onclick="myFunctionExpenses_Save()" href="#"><i class="fa fa-floppy-o"></i></button>
-                            <button class="btn btn-danger btn-xs" onclick="myFunctionExpenses_Delete()"><i class="fa fa-trash-o"></i></button>
+                            <button class="btn btn-primary btn-xs" ng-click="ViewExpense(Expense.ID)" onclick="ViewExpense()"><i class="glyphicon glyphicon-new-window"></i></button>
+                            <button class="btn btn-danger btn-xs" ng-click="DeleteExpense(Expense.ID)"><i class="fa fa-trash-o"></i></button>
                         </td>
                     </tr>
                 </tbody>
@@ -83,13 +69,13 @@
         <!--Expenses Section Ends -->   
 
         <!--View  Expenses Invoice Modal-->
-        <div id="View_Invoice_Modal" class="modal fade">
+        <div id="View_ExpensesInvoice_Modal" class="modal fade">
             <form>
                 <div class="modal-dialog" style="width:70%;">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title">Expense Invoice</h4>
+                            <h4 class="modal-title text-primary">Expense Invoice</h4>
                         </div>
                         <div class="modal-body">
                             <div id="invoice_print">
@@ -169,49 +155,10 @@
                         </div>
                         <div class="modal-footer">
                             <div class="print-button pull-left"><a href="#" target="_blank" class="btn btn-success">Print</a></div>
-
-                            <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" onclick="function_btnUpdateEmployee()" id="function_btnUpdateEmployee">Update</button>
-                        <button type="button" class="btn btn-danger" onclick="function_btnDeleteEmployee()">Delete</button>-->
                         </div>
                     </div>
                 </div>
             </form>
         </div><!--View Expense Invoice Modal Ends-->
-
-        
     </div>
 </div>
-
-<script type="text/javascript">
-    $('.readonly').css('border', 'none');
-    $('.readonly').css('background-color', 'transparent');
-    $('.readonly').css('font-size', '13px');
-    $('.readonly').css('padding-right', '0px');
-    $('#myFunctionExpenses_Edit').show(); $('#myFunctionExpenses_Save').hide();
-
-    $('#myFunctionExpenses_Edit').click(function () {
-
-        $('#myFunctionExpenses_Edit').hide(); $('#myFunctionExpenses_Save').show();
-
-        $('.readonly').attr("readonly", false);
-        $('.readonly').css('border', '1px solid #ccc');
-    });
-
-    $('#myFunctionExpenses_Save').click(function () {
-
-        $('#myFunctionExpenses_Edit').show(); $('#myFunctionExpenses_Save').hide();
-
-        $('.readonly').attr("readonly", true);
-        $('.readonly').css('border', 'none');
-        $('.readonly').css('background-color', 'transparent');
-    });
-
-    $('.tr_dblclick').dblclick(function () {//<!--Show View Invoice Modal when a user double clicks a row-->
-        $("#View_Invoice_Modal").modal('show');
-    });
-
-    $(function () {
-        $('.datetimepicker').datetimepicker({ format: 'L' });
-    });
-</script>

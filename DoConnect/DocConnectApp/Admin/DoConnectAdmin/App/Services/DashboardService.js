@@ -3,7 +3,7 @@
         function($http) {
             var getStuff = function ()
             {
-                return "";//$http.get('/api/BuildState');
+                return "";
             }
             return {
                 getStuff: getStuff

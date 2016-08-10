@@ -14,32 +14,37 @@ namespace DataClient
     public class DataLayer : IDataLayer
     {
         private DataAccess access;
-        private string Conn = "DB";
+
+        //private DataAccess _dataAccess;
+        //private List<SqlParameter> _parameters = new List<SqlParameter>();
+        //private string _conn = "DB";
+
+        private string Conn = @"Data Source=DESKTOP-6Gu3I3G\SQLEXPRESS;Initial Catalog=DoConnect;Integrated Security=True";
 
         public DataLayer()
         {
             access = new DataAccess();
         }
 
+        #region
         public int CreateUser()
         {
-            DataAccess da = new DataAccess();
             int userId = 0;
-            using (var reader = da.ExecuteReader(Conn, "[CreateUser]", new List<SqlParameter>()))
+            using (var reader = access.ExecuteReader(Conn, "[CreateUser]", new List<SqlParameter>()))
             {
                 if (reader.Read())
-                   userId = reader.GetInt32(reader.GetOrdinal("ID"));
+                    userId = reader.GetInt32(reader.GetOrdinal("ID"));
             }
             return userId;
         }
         #endregion
 
         #region patient
-        public int CreatePatient(string firstName, string lastName, string id_Number, string gender, DateTime dob, string cell_number, string street_address, string suburb, string city, string country)
+        public void CreatePatient(string firstName, string lastName, string id_Number, string gender, DateTime dob, string cell_number, string street_address, string suburb, string city, string country, int UserId)
         {
-            _dataAccess = new DataAccess();
-            int userId = 0;
-            _parameters = new List<SqlParameter>();
+
+            //state params
+            List<SqlParameter> _parameters = new List<SqlParameter>();
             SqlParameter firstNameParameter = new SqlParameter("@FirstName", SqlDbType.NVarChar);
             SqlParameter lastNameParameter = new SqlParameter("@LastName", SqlDbType.NVarChar);
             SqlParameter id_NumberParameter = new SqlParameter("@ID_Number", SqlDbType.NVarChar);
@@ -50,6 +55,7 @@ namespace DataClient
             SqlParameter suburbParameter = new SqlParameter("@Suburb", SqlDbType.NVarChar);
             SqlParameter cityParameter = new SqlParameter("@City", SqlDbType.NVarChar);
             SqlParameter countryParameter = new SqlParameter("@Country", SqlDbType.NVarChar);
+            //assign values
             firstNameParameter.Value = firstName;
             lastNameParameter.Value = lastName;
             id_NumberParameter.Value = id_Number;
@@ -60,6 +66,7 @@ namespace DataClient
             suburbParameter.Value = suburb;
             cityParameter.Value = city;
             countryParameter.Value = country;
+            //add to list
             _parameters.Add(firstNameParameter);
             _parameters.Add(lastNameParameter);
             _parameters.Add(id_NumberParameter);
@@ -70,16 +77,17 @@ namespace DataClient
             _parameters.Add(suburbParameter);
             _parameters.Add(cityParameter);
             _parameters.Add(countryParameter);
-            
-            using (var reader = _dataAccess.ExecuteReader(_conn, "[CreatePatient]", new List<SqlParameter>()))
+
+            try
             {
-                if (reader.Read())
-                {
-                    userId = reader.GetInt32(reader.GetOrdinal("ID"));
-                }
+                access.ExecuteNonQuery(Conn, _parameters, "[CreatePatient]");
+                access.LogEntry(UserId, "Created Patient");
             }
-            access.LogEntry(userId, "New User Created");
-            return userId;
+            catch (Exception ex)
+            {
+                access.LogEntry(UserId, ex.ToString());
+            }                  
+            
         }
 
         public bool NewUpdateDoctor(Doctor doc, int UserId)
@@ -119,18 +127,17 @@ namespace DataClient
                 access.LogEntry(UserId, ex.ToString());
                 return false;
             }
-            return false;
+            //return false;
         }
 
         public Patient GetPatient(int id)
         {
-            _parameters = new List<SqlParameter>();
+            List<SqlParameter> _parameters = new List<SqlParameter>();
             SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
             idParameter.Value = id;
             _parameters.Add(idParameter);
-            _dataAccess = new DataAccess();
             Patient patientInfo = new Patient();
-            using (var reader = _dataAccess.ExecuteReader(_conn, "[GetPatient]", new List<SqlParameter>()))
+            using (var reader = access.ExecuteReader(Conn, "[GetPatient]", new List<SqlParameter>()))
             {
                 if (reader.Read())
                 {
@@ -153,9 +160,8 @@ namespace DataClient
 
         public List<Patient> GetAllPatients()
         {
-            _dataAccess = new DataAccess();
             List<Patient> patientInfo = new List<Patient>();
-            using (var reader = _dataAccess.ExecuteReader(_conn, "[GetAllPatients]", new List<SqlParameter>()))
+            using (var reader = access.ExecuteReader(Conn, "[GetAllPatients]", new List<SqlParameter>()))
             {
                 while (reader.Read())
                 {
@@ -167,13 +173,12 @@ namespace DataClient
 
         public bool DeletePatient(int id)
         {
-            _parameters = new List<SqlParameter>();
+            List<SqlParameter> _parameters = new List<SqlParameter>();
             SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
             idParameter.Value = id;
             _parameters.Add(idParameter);
-            _dataAccess = new DataAccess();
             int userId = 0;
-            using (var reader = _dataAccess.ExecuteReader(_conn, "[DeletePatient]", new List<SqlParameter>()))
+            using (var reader = access.ExecuteReader(Conn, "[DeletePatient]", new List<SqlParameter>()))
             {
                 if (reader.Read())
                 {
@@ -185,7 +190,7 @@ namespace DataClient
 
         public bool UpdatePatient(int id, string firstName, string lastName, string id_Number, string gender, DateTime dob, string cell_number, string street_address, string suburb, string city, string country)
         {
-            _parameters = new List<SqlParameter>();
+            List<SqlParameter> _parameters = new List<SqlParameter>();
             SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
             SqlParameter firstNameParameter = new SqlParameter("@FirstName", SqlDbType.NVarChar);
             SqlParameter lastNameParameter = new SqlParameter("@LastName", SqlDbType.NVarChar);
@@ -220,9 +225,9 @@ namespace DataClient
             _parameters.Add(cityParameter);
             _parameters.Add(countryParameter);
 
-            _dataAccess = new DataAccess();
+            
             int userId = 0;
-            using (var reader = _dataAccess.ExecuteReader(_conn, "[UpdatePatient]", new List<SqlParameter>()))
+            using (var reader = access.ExecuteReader(Conn, "[UpdatePatient]", new List<SqlParameter>()))
             {
                 if (reader.Read())
                 {
@@ -236,7 +241,7 @@ namespace DataClient
         #region patient medical aid
         public int Create_Patient_Medical_Aid(string scheme_name, string member_number, bool status, DateTime registration_date, DateTime deregistration, int patient_ID, int medical_Aid_ID)
         {
-            _parameters = new List<SqlParameter>();
+            List<SqlParameter> _parameters = new List<SqlParameter>();
             SqlParameter scheme_nameParameter = new SqlParameter("@Scheme_Name", SqlDbType.NVarChar);
             SqlParameter member_numberParameter = new SqlParameter("@Membership_Number", SqlDbType.NVarChar);
             SqlParameter statusParameter = new SqlParameter("@Status", SqlDbType.Bit);
@@ -258,9 +263,8 @@ namespace DataClient
             _parameters.Add(deregistrationParameter);
             _parameters.Add(patient_IDParameter);
             _parameters.Add(medical_Aid_IDParameter);
-            _dataAccess = new DataAccess();
             int userId = 0;
-            using (var reader = _dataAccess.ExecuteReader(_conn, "[Create_Patient_Medical_Aid]", new List<SqlParameter>()))
+            using (var reader = access.ExecuteReader(Conn, "[Create_Patient_Medical_Aid]", new List<SqlParameter>()))
             {
                 if (reader.Read())
                 {
@@ -272,14 +276,14 @@ namespace DataClient
 
         public Patient_Medical_Aid Get_Patient_Medical_Aid(int id)
         {
-            _parameters = new List<SqlParameter>();
+            List<SqlParameter> _parameters = new List<SqlParameter>();
             SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
             idParameter.Value = id;
             _parameters.Add(idParameter);
-            _dataAccess = new DataAccess();
+
             Patient_Medical_Aid patientMedicalAidInfo = new Patient_Medical_Aid();
             int userId = 0;
-            using (var reader = _dataAccess.ExecuteReader(_conn, "[Get_Patient_Medical_Aid]", new List<SqlParameter>()))
+            using (var reader = access.ExecuteReader(Conn, "[Get_Patient_Medical_Aid]", new List<SqlParameter>()))
             {
                 if (reader.Read())
                 {
@@ -291,10 +295,9 @@ namespace DataClient
 
         public List<Patient_Medical_Aid> GetAll_Patient_Medical_Aids()
         {
-            _dataAccess = new DataAccess();
             List<Patient_Medical_Aid> patientInfo = new List<Patient_Medical_Aid>();
             int userId = 0;
-            using (var reader = _dataAccess.ExecuteReader(_conn, "[GetAll_Patient_Medical_Aids]", new List<SqlParameter>()))
+            using (var reader = access.ExecuteReader(Conn, "[GetAll_Patient_Medical_Aids]", new List<SqlParameter>()))
             {
                 if (reader.Read())
                 {
@@ -306,13 +309,12 @@ namespace DataClient
 
         public bool Delete_Patient_Medical_Aid(int id)
         {
-            _parameters = new List<SqlParameter>();
+            List<SqlParameter> _parameters = new List<SqlParameter>();
             SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
             idParameter.Value = id;
             _parameters.Add(idParameter);
-            _dataAccess = new DataAccess();
             int userId = 0;
-            using (var reader = _dataAccess.ExecuteReader(_conn, "[Delete_Patient_Medical_Aid]", new List<SqlParameter>()))
+            using (var reader = access.ExecuteReader(Conn, "[Delete_Patient_Medical_Aid]", new List<SqlParameter>()))
             {
                 if (reader.Read())
                 {
@@ -324,7 +326,7 @@ namespace DataClient
 
         public bool Update_Patient_Medical_Aid(int id, string scheme_name, string member_number, bool status, DateTime registration_date, DateTime deregistration, int patient_ID, int medical_Aid_ID)
         {
-            _parameters = new List<SqlParameter>();
+            List<SqlParameter> _parameters = new List<SqlParameter>();
             SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
             SqlParameter scheme_nameParameter = new SqlParameter("@Scheme_Name", SqlDbType.NVarChar);
             SqlParameter member_numberParameter = new SqlParameter("@Membership_Number", SqlDbType.NVarChar);
@@ -347,9 +349,8 @@ namespace DataClient
             _parameters.Add(statusParameter);
             _parameters.Add(registration_dateParameter);
             _parameters.Add(deregistrationParameter);
-            _dataAccess = new DataAccess();
             int userId = 0;
-            using (var reader = _dataAccess.ExecuteReader(_conn, "[Update_Patient_Medical_Aid]", new List<SqlParameter>()))
+            using (var reader = access.ExecuteReader(Conn, "[Update_Patient_Medical_Aid]", new List<SqlParameter>()))
             {
                 if (reader.Read())
                 {
@@ -363,7 +364,7 @@ namespace DataClient
         #region practice
         public int CreatePractice(string name, string cell_number, string fax_number, string street_address, string suburb, string city, string country, string latitude, string longitude, string trading_Times)
         {
-            _parameters = new List<SqlParameter>();
+            List<SqlParameter> _parameters = new List<SqlParameter>();
             SqlParameter nameParameter = new SqlParameter("@Name", SqlDbType.Int);
             SqlParameter cell_numberParameter = new SqlParameter("@Cell_Number", SqlDbType.NVarChar);
             SqlParameter fax_numberParameter = new SqlParameter("@Fax_Number", SqlDbType.NVarChar);
@@ -395,9 +396,8 @@ namespace DataClient
             _parameters.Add(longitudeParameter);
             _parameters.Add(trading_TimesParameter);
 
-            _dataAccess = new DataAccess();
             int userId = 0;
-            using (var reader = _dataAccess.ExecuteReader(_conn, "[CreatePractice]", new List<SqlParameter>()))
+            using (var reader = access.ExecuteReader(Conn, "[CreatePractice]", new List<SqlParameter>()))
             {
                 if (reader.Read())
                 {
@@ -409,14 +409,14 @@ namespace DataClient
 
         public Practice GetPractice(int id)
         {
-            _parameters = new List<SqlParameter>();
+            List<SqlParameter> _parameters = new List<SqlParameter>();
             SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
             idParameter.Value = id;
             _parameters.Add(idParameter);
-            _dataAccess = new DataAccess();
+
             Practice patientMedicalAidInfo = new Practice();
             int userId = 0;
-            using (var reader = _dataAccess.ExecuteReader(_conn, "[GetPractice]", new List<SqlParameter>()))
+            using (var reader = access.ExecuteReader(Conn, "[GetPractice]", new List<SqlParameter>()))
             {
                 if (reader.Read())
                 {
@@ -428,10 +428,9 @@ namespace DataClient
 
         public List<Practice> GetAllPractices()
         {
-            _dataAccess = new DataAccess();
             List<Practice> patientInfo = new List<Practice>();
             int userId = 0;
-            using (var reader = _dataAccess.ExecuteReader(_conn, "[GetAllPractices]", new List<SqlParameter>()))
+            using (var reader = access.ExecuteReader(Conn, "[GetAllPractices]", new List<SqlParameter>()))
             {
                 if (reader.Read())
                 {
@@ -443,13 +442,13 @@ namespace DataClient
 
         public bool DeletePractice(int id)
         {
-            _parameters = new List<SqlParameter>();
+            List<SqlParameter> _parameters = new List<SqlParameter>();
             SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
             idParameter.Value = id;
             _parameters.Add(idParameter);
-            _dataAccess = new DataAccess();
+            
             int userId = 0;
-            using (var reader = _dataAccess.ExecuteReader(_conn, "[DeletePractice]", new List<SqlParameter>()))
+            using (var reader = access.ExecuteReader(Conn, "[DeletePractice]", new List<SqlParameter>()))
             {
                 if (reader.Read())
                 {
@@ -461,6 +460,7 @@ namespace DataClient
 
         public bool UpdatePractice(int id, string name, string cell_number, string fax_number, string street_address, string suburb, string city, string country, string latitude, string longitude, string trading_Times)
         {
+            List<SqlParameter> _parameters = new List<SqlParameter>();
             SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
             SqlParameter nameParameter = new SqlParameter("@Name", SqlDbType.Int);
             SqlParameter cell_numberParameter = new SqlParameter("@Cell_Number", SqlDbType.NVarChar);
@@ -494,9 +494,8 @@ namespace DataClient
             _parameters.Add(latitudeParameter);
             _parameters.Add(longitudeParameter);
             _parameters.Add(trading_TimesParameter);
-            _dataAccess = new DataAccess();
             int userId = 0;
-            using (var reader = _dataAccess.ExecuteReader(_conn, "[UpdatePractice]", new List<SqlParameter>()))
+            using (var reader = access.ExecuteReader(Conn, "[UpdatePractice]", new List<SqlParameter>()))
             {
                 if (reader.Read())
                 {
@@ -510,7 +509,7 @@ namespace DataClient
         #region Prescription
         public int CreatePrescription(string description, DateTime date, int patient_ID, int doctor_ID)
         {
-            _parameters = new List<SqlParameter>();
+            List<SqlParameter> _parameters = new List<SqlParameter>();
             SqlParameter descriptionParameter = new SqlParameter("@Description", SqlDbType.VarChar);
             SqlParameter dateParamerter = new SqlParameter("@Date", SqlDbType.DateTime);
             SqlParameter patient_IDParameter = new SqlParameter("@Patient_ID", SqlDbType.Int);
@@ -523,9 +522,8 @@ namespace DataClient
             _parameters.Add(dateParamerter);
             _parameters.Add(patient_IDParameter);
             _parameters.Add(doctor_IDParameter);
-            _dataAccess = new DataAccess();
             int userId = 0;
-            using (var reader = _dataAccess.ExecuteReader(_conn, "[CreatePrescription]", new List<SqlParameter>()))
+            using (var reader = access.ExecuteReader(Conn, "[CreatePrescription]", new List<SqlParameter>()))
             {
                 if (reader.Read())
                 {
@@ -537,14 +535,13 @@ namespace DataClient
 
         public Prescription GetPrescription(int id)
         {
-            _parameters = new List<SqlParameter>();
+            List<SqlParameter> _parameters = new List<SqlParameter>();
             SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
             idParameter.Value = id;
             _parameters.Add(idParameter);
-            _dataAccess = new DataAccess();
             Prescription prescriptionInfo = new Prescription();
             int userId = 0;
-            using (var reader = _dataAccess.ExecuteReader(_conn, "[GetPrescription]", new List<SqlParameter>()))
+            using (var reader = access.ExecuteReader(Conn, "[GetPrescription]", new List<SqlParameter>()))
             {
                 if (reader.Read())
                 {
@@ -556,10 +553,9 @@ namespace DataClient
 
         public List<Prescription> GetAllPrescriptions()
         {
-            _dataAccess = new DataAccess();
             List<Prescription> prescriptionInfo = new List<Prescription>();
             int userId = 0;
-            using (var reader = _dataAccess.ExecuteReader(_conn, "[GetAllPrescriptions]", new List<SqlParameter>()))
+            using (var reader = access.ExecuteReader(Conn, "[GetAllPrescriptions]", new List<SqlParameter>()))
             {
                 if (reader.Read())
                 {
@@ -571,13 +567,12 @@ namespace DataClient
 
         public bool DeletePrescription(int id)
         {
-            _parameters = new List<SqlParameter>();
+            List<SqlParameter> _parameters = new List<SqlParameter>();
             SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
             idParameter.Value = id;
             _parameters.Add(idParameter);
-            _dataAccess = new DataAccess();
             int userId = 0;
-            using (var reader = _dataAccess.ExecuteReader(_conn, "[DeletePrescription]", new List<SqlParameter>()))
+            using (var reader = access.ExecuteReader(Conn, "[DeletePrescription]", new List<SqlParameter>()))
             {
                 if (reader.Read())
                 {
@@ -589,7 +584,7 @@ namespace DataClient
 
         public bool UpdatePrescription(int id, string description, DateTime date, int patient_ID, int doctor_ID)
         {
-            _parameters = new List<SqlParameter>();
+            List<SqlParameter> _parameters = new List<SqlParameter>();
             SqlParameter idParameter = new SqlParameter("@", SqlDbType.Int);
             SqlParameter descriptionParameter = new SqlParameter("@Description", SqlDbType.VarChar);
             SqlParameter dateParamerter = new SqlParameter("@Date", SqlDbType.DateTime);
@@ -605,9 +600,8 @@ namespace DataClient
             _parameters.Add(dateParamerter);
             _parameters.Add(patient_IDParameter);
             _parameters.Add(doctor_IDParameter);
-            _dataAccess = new DataAccess();
             int userId = 0;
-            using (var reader = _dataAccess.ExecuteReader(_conn, "[UpdatePrescription]", new List<SqlParameter>()))
+            using (var reader = access.ExecuteReader(Conn, "[UpdatePrescription]", new List<SqlParameter>()))
             {
                 if (reader.Read())
                 {
@@ -621,7 +615,7 @@ namespace DataClient
         #region Staff
         public int CreateStaff(string firstName, string lastName, string id_Number, string gender, DateTime dob, string phone, string employee_Type, int practice_ID, int user_ID)
         {
-            _parameters = new List<SqlParameter>();
+            List<SqlParameter> _parameters = new List<SqlParameter>();
             SqlParameter firstNameParameter = new SqlParameter("@FirstName", SqlDbType.NVarChar);
             SqlParameter lastNameParameter = new SqlParameter("@LastName", SqlDbType.NVarChar);
             SqlParameter id_NumberParameter = new SqlParameter("@ID_Number", SqlDbType.NVarChar);
@@ -649,9 +643,8 @@ namespace DataClient
             _parameters.Add(employee_TypeParameter);
             _parameters.Add(practice_IDParameter);
             _parameters.Add(user_IDParameter);
-            _dataAccess = new DataAccess();
             int userId = 0;
-            using (var reader = _dataAccess.ExecuteReader(_conn, "[CreateStaff]", new List<SqlParameter>()))
+            using (var reader = access.ExecuteReader(Conn, "[CreateStaff]", new List<SqlParameter>()))
             {
                 if (reader.Read())
                 {
@@ -663,14 +656,13 @@ namespace DataClient
 
         public Staff GetStaff(int id)
         {
-            _parameters = new List<SqlParameter>();
+            List<SqlParameter> _parameters = new List<SqlParameter>();
             SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
             idParameter.Value = id;
             _parameters.Add(idParameter);
-            _dataAccess = new DataAccess();
             Staff staffInfo = new Staff();
             int userId = 0;
-            using (var reader = _dataAccess.ExecuteReader(_conn, "[GetStaff]", new List<SqlParameter>()))
+            using (var reader = access.ExecuteReader(Conn, "[GetStaff]", new List<SqlParameter>()))
             {
                 if (reader.Read())
                 {
@@ -682,10 +674,9 @@ namespace DataClient
 
         public List<Staff> GetAllStaffMembers()
         {
-            _dataAccess = new DataAccess();
             List<Staff> staffInfo = new List<Staff>();
             int userId = 0;
-            using (var reader = _dataAccess.ExecuteReader(_conn, "[GetAllStaffMembers]", new List<SqlParameter>()))
+            using (var reader = access.ExecuteReader(Conn, "[GetAllStaffMembers]", new List<SqlParameter>()))
             {
                 if (reader.Read())
                 {
@@ -697,13 +688,12 @@ namespace DataClient
 
         public bool DeleteStaff(int id)
         {
-            _parameters = new List<SqlParameter>();
+            List<SqlParameter> _parameters = new List<SqlParameter>();
             SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
             idParameter.Value = id;
             _parameters.Add(idParameter);
-            _dataAccess = new DataAccess();
             int userId = 0;
-            using (var reader = _dataAccess.ExecuteReader(_conn, "[DeleteStaff]", new List<SqlParameter>()))
+            using (var reader = access.ExecuteReader(Conn, "[DeleteStaff]", new List<SqlParameter>()))
             {
                 if (reader.Read())
                 {
@@ -715,7 +705,7 @@ namespace DataClient
 
         public bool UpdateStaff(int id, string firstName, string lastName, string id_Number, string gender, DateTime dob, string phone, string employee_Type, int practice_ID, int user_ID)
         {
-            _parameters = new List<SqlParameter>();
+            List<SqlParameter> _parameters = new List<SqlParameter>();
             SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
             SqlParameter firstNameParameter = new SqlParameter("@FirstName", SqlDbType.NVarChar);
             SqlParameter lastNameParameter = new SqlParameter("@LastName", SqlDbType.NVarChar);
@@ -746,9 +736,8 @@ namespace DataClient
             _parameters.Add(employee_TypeParameter);
             _parameters.Add(practice_IDParameter);
             _parameters.Add(user_IDParameter);
-            _dataAccess = new DataAccess();
             int userId = 0;
-            using (var reader = _dataAccess.ExecuteReader(_conn, "[UpdateStaff]", new List<SqlParameter>()))
+            using (var reader = access.ExecuteReader(Conn, "[UpdateStaff]", new List<SqlParameter>()))
             {
                 if (reader.Read())
                 {
@@ -756,6 +745,11 @@ namespace DataClient
                 }
             }
             return true;
+        }
+
+        public Doctor GetDoctor(int DocID)
+        {
+            throw new NotImplementedException();
         }
         #endregion
     }
