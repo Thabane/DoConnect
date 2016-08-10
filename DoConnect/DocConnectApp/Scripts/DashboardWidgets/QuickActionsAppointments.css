@@ -1,0 +1,359 @@
+.portlet.light {
+    padding: 12px 20px 15px;
+    background-color: #fff;
+}
+.portlet {
+    margin-top: 0px;
+    margin-bottom: 25px;
+    padding: 0;
+    border-radius: 4px;
+}
+.dashboard-stat, .portlet {
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+}
+
+/*a, button, code, div, img, input, label, li, p, pre, select, span, svg, table, td, textarea, th, ul {
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    border-radius: 0 !important;
+}*/
+
+.portlet.light > .portlet-title {
+    padding: 0;
+    min-height: 48px;
+}
+
+.portlet > .portlet-title::after {
+    clear: both;
+}
+
+.portlet > .portlet-title::after, .portlet > .portlet-title::before {
+    content: " ";
+    display: table;
+}
+
+.portlet > .portlet-title {
+    border-bottom: 1px solid #eee;
+    padding: 0;
+    margin-bottom: 10px;
+    min-height: 41px;
+    -webkit-border-radius: 4px 4px 0 0;
+    -moz-border-radius: 4px 4px 0 0;
+    -ms-border-radius: 4px 4px 0 0;
+    -o-border-radius: 4px 4px 0 0;
+    border-radius: 4px 4px 0 0;
+}
+
+.portlet.light > .portlet-title > .caption {
+    color: #666;
+    padding: 10px 0;
+}
+
+.portlet > .portlet-title > .caption {
+    float: left;
+    display: inline-block;
+    font-size: 18px;
+    line-height: 18px;
+    padding: 10px 0;
+}
+
+.portlet.light > .portlet-title > .caption > i {
+    color: #777;
+    font-size: 15px;
+    font-weight: 300;
+    margin-top: 3px;
+}
+
+.portlet > .portlet-title > .caption > i {
+    float: left;
+    margin-top: 4px;
+    display: inline-block;
+    font-size: 13px;
+    margin-right: 5px;
+    color: #666;
+}
+
+.icon-social-twitter::before {
+    content: "\e009";
+}
+
+.font-dark {
+    color: #2f353b !important;
+}
+
+.icon-action-redo, .icon-action-undo, .icon-anchor, .icon-arrow-down, .icon-arrow-left, .icon-arrow-right, .icon-arrow-up, .icon-badge, .icon-bag, .icon-ban, .icon-bar-chart, .icon-basket, .icon-basket-loaded, .icon-bell, .icon-book-open, .icon-briefcase, .icon-bubble, .icon-bubbles, .icon-bulb, .icon-calculator, .icon-calendar, .icon-call-end, .icon-call-in, .icon-call-out, .icon-camcorder, .icon-camera, .icon-check, .icon-chemistry, .icon-clock, .icon-close, .icon-cloud-download, .icon-cloud-upload, .icon-compass, .icon-control-end, .icon-control-forward, .icon-control-pause, .icon-control-play, .icon-control-rewind, .icon-control-start, .icon-credit-card, .icon-crop, .icon-cup, .icon-cursor, .icon-cursor-move, .icon-diamond, .icon-direction, .icon-directions, .icon-disc, .icon-dislike, .icon-doc, .icon-docs, .icon-drawer, .icon-drop, .icon-earphones, .icon-earphones-alt, .icon-emoticon-smile, .icon-energy, .icon-envelope, .icon-envelope-letter, .icon-envelope-open, .icon-equalizer, .icon-eye, .icon-eyeglasses, .icon-feed, .icon-film, .icon-fire, .icon-flag, .icon-folder, .icon-folder-alt, .icon-frame, .icon-game-controller, .icon-ghost, .icon-globe, .icon-globe-alt, .icon-graduation, .icon-graph, .icon-grid, .icon-handbag, .icon-heart, .icon-home, .icon-hourglass, .icon-info, .icon-key, .icon-layers, .icon-like, .icon-link, .icon-list, .icon-lock, .icon-lock-open, .icon-login, .icon-logout, .icon-loop, .icon-magic-wand, .icon-magnet, .icon-magnifier, .icon-magnifier-add, .icon-magnifier-remove, .icon-map, .icon-microphone, .icon-mouse, .icon-moustache, .icon-music-tone, .icon-music-tone-alt, .icon-note, .icon-notebook, .icon-paper-clip, .icon-paper-plane, .icon-pencil, .icon-picture, .icon-pie-chart, .icon-pin, .icon-plane, .icon-playlist, .icon-plus, .icon-pointer, .icon-power, .icon-present, .icon-printer, .icon-puzzle, .icon-question, .icon-refresh, .icon-reload, .icon-rocket, .icon-screen-desktop, .icon-screen-smartphone, .icon-screen-tablet, .icon-settings, .icon-share, .icon-share-alt, .icon-shield, .icon-shuffle, .icon-size-actual, .icon-size-fullscreen, .icon-social-dribbble, .icon-social-dropbox, .icon-social-facebook, .icon-social-tumblr, .icon-social-twitter, .icon-social-youtube, .icon-speech, .icon-speedometer, .icon-star, .icon-support, .icon-symbol-female, .icon-symbol-male, .icon-tag, .icon-target, .icon-trash, .icon-trophy, .icon-umbrella, .icon-user, .icon-user-female, .icon-user-follow, .icon-user-following, .icon-user-unfollow, .icon-users, .icon-vector, .icon-volume-1, .icon-volume-2, .icon-volume-off, .icon-wallet, .icon-wrench {
+    font-family: Simple-Line-Icons;
+    speak: none;
+    font-style: normal;
+    font-weight: 400;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+}
+
+.portlet.light > .portlet-title > .caption > .caption-subject {
+    font-size: 16px;
+}
+
+.font-dark {
+    color: #2f353b !important;
+}
+
+.uppercase {
+    text-transform: uppercase !important;
+}
+
+.bold {
+    font-weight: 700 !important;
+}
+
+.portlet > .portlet-title > .nav-tabs {
+    background: 0 0;
+    margin: 1px 0 0;
+    float: right;
+    display: inline-block;
+    border: 0;
+}
+
+.tabbable-line > .nav-tabs {
+    border: none;
+    margin: 0;
+}
+
+.nav-pills, .nav-tabs {
+    margin-bottom: 10px;
+}
+
+.portlet.light > .portlet-title > .nav-tabs > li {
+    margin: 0;
+    padding: 0;
+}
+
+.tabbable-line > .nav-tabs > li.active {
+    background: 0 0;
+    border-bottom: 4px solid #36c6d3;
+    position: relative;
+}
+
+.portlet > .portlet-title > .nav-tabs > li {
+    background: 0 0;
+    margin: 0;
+    border: 0;
+}
+
+.tabbable-line > .nav-tabs > li {
+    margin: 0;
+    border-bottom: 4px solid transparent;
+}
+
+.portlet.light > .portlet-title > .nav-tabs > li.active > a, .portlet.light > .portlet-title > .nav-tabs > li:hover > a {
+    margin: 0;
+    background: 0 0;
+    color: #333;
+}
+
+.portlet.light > .portlet-title > .nav-tabs > li > a {
+    margin: 0;
+    padding: 12px 13px 13px;
+    font-size: 13px;
+    color: #666;
+}
+
+.portlet > .portlet-title > .nav-tabs > li.active > a, .portlet > .portlet-title > .nav-tabs > li:hover > a {
+    color: #333;
+    background: #fff;
+    border: 0;
+}
+
+.tabbable-line > .nav-tabs > li.active > a {
+    border: 0;
+    color: #333;
+}
+
+.portlet > .portlet-title > .nav-tabs > li > a {
+    background: 0 0;
+    margin: 5px 0 0 1px;
+    border: 0;
+    padding: 8px 10px;
+    color: #fff;
+}
+
+.tabbable-line > .nav-tabs > li > a {
+    background: 0 0 !important;
+    border: 0;
+    margin: 0;
+    padding-left: 15px;
+    padding-right: 15px;
+    color: #737373;
+}
+
+.nav-pills > li > a, .nav-tabs > li > a {
+    font-size: 14px;
+    -webkit-border-radius: 4px 4px 0 0;
+    -moz-border-radius: 4px 4px 0 0;
+    -ms-border-radius: 4px 4px 0 0;
+    -o-border-radius: 4px 4px 0 0;
+    border-radius: 4px 4px 0 0;
+}
+
+.portlet.light .portlet-body {
+    padding-top: 8px;
+}
+
+.portlet > .portlet-body {
+    clear: both;
+    -webkit-border-radius: 0 0 4px 4px;
+    -moz-border-radius: 0 0 4px 4px;
+    -ms-border-radius: 0 0 4px 4px;
+    -o-border-radius: 0 0 4px 4px;
+    border-radius: 0 0 4px 4px;
+}
+
+.mt-actions .mt-action {
+    margin: 0;
+    padding: 15px 0;
+    border-bottom: 1px solid #f7f8f9;
+}
+
+.mt-actions .mt-action .mt-action-img {
+    width: 40px;
+    float: left;
+}
+.mt-actions .mt-action .mt-action-img > img {
+    border-radius: 50% !important;
+    margin-bottom: 2px;
+}
+.mt-actions .mt-action .mt-action-body {
+    padding-left: 15px;
+    position: relative;
+    overflow: hidden;
+}
+
+.mt-actions .mt-action .mt-action-body .mt-action-row {
+    display: table;
+    width: 100%;
+}
+
+.mt-actions .mt-action .mt-action-body .mt-action-row .mt-action-info {
+    display: table-cell;
+    vertical-align: top;
+}
+.mt-actions .mt-action .mt-action-body .mt-action-row .mt-action-info .mt-action-icon {
+    display: table-cell;
+    padding: 6px 20px 6px 6px;
+}
+.mt-actions .mt-action .mt-action-body .mt-action-row .mt-action-info .mt-action-icon > i {
+    display: inline-block;
+    position: relative;
+    top: 10px;
+    font-size: 25px;
+    color: #78e0e8;
+}
+
+.mt-actions .mt-action .mt-action-body .mt-action-row .mt-action-info .mt-action-details {
+    display: table-cell;
+    vertical-align: top;
+}
+.mt-actions .mt-action .mt-action-body .mt-action-row .mt-action-info .mt-action-details .mt-action-author {
+    color: #060606;
+    font-weight: 600;
+}
+
+.mt-actions .mt-action .mt-action-body .mt-action-row .mt-action-info .mt-action-details .mt-action-desc {
+    margin-bottom: 0px;
+    color: #999b9b;
+}
+.mt-actions .mt-action .mt-action-body .mt-action-row .mt-action-datetime {
+    vertical-align: top;
+    display: table-cell;
+    text-align: center;
+    width: 150px;
+    white-space: nowrap;
+    padding-top: 15px;
+    color: #a6a8a8;
+}
+
+.mt-actions .mt-action .mt-action-body .mt-action-row .mt-action-datetime {
+    vertical-align: top;
+    display: table-cell;
+    text-align: center;
+    width: 150px;
+    white-space: nowrap;
+    padding-top: 15px;
+    color: #a6a8a8;
+}
+
+.mt-actions .mt-action .mt-action-body .mt-action-row .mt-action-datetime .mt-action-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    border-radius: 50% !important;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.bg-green {
+    background: #32c5d2 !important;
+}
+
+.mt-actions .mt-action .mt-action-body .mt-action-row .mt-action-datetime {
+    vertical-align: top;
+    display: table-cell;
+    text-align: center;
+    width: 150px;
+    white-space: nowrap;
+    padding-top: 15px;
+    color: #a6a8a8;
+}
+
+.mt-actions .mt-action .mt-action-body .mt-action-row .mt-action-buttons {
+    vertical-align: top;
+    display: table-cell;
+    text-align: center;
+    width: 160px;
+    white-space: nowrap;
+    padding-top: 10px;
+}
+
+.btn-group.btn-group-circle > :first-child.btn {
+    border-radius: 25px 0 0 25px !important;
+}
+
+.btn.btn-outline.green {
+    border-color: #32c5d2;
+    color: #32c5d2;
+    background: 0 0;
+}
+
+.btn {
+    outline: 0 !important;
+}
+
+.btn, .form-control {
+    box-shadow: none !important;
+}
+
+.btn-group.btn-group-circle > :last-child.btn {
+    border-radius: 0 25px 25px 0 !important;
+}
+
+.btn.btn-outline.red {
+    border-color: #e7505a;
+    color: #e7505a;
+    background: 0 0;
+}
+.btn.btn-outline.red.active, .btn.btn-outline.red:active, .btn.btn-outline.red:focus:active, .btn.btn-outline.red:hover:active, .btn.btn-outline.red:focus, .btn.btn-outline.red:hover {
+    border-color: #e7505a;
+    color: #fff;
+    background-color: #e7505a;
+}
+
+.btn.btn-outline.green.active, .btn.btn-outline.green:active, .btn.btn-outline.green:focus:active, .btn.btn-outline.green:hover:active, .btn.btn-outline.green:focus, .btn.btn-outline.green:hover {
+    border-color: #32c5d2;
+    color: #fff;
+    background-color: #32c5d2;
+}
