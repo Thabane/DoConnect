@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
+using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using ObjectModel;
 
 namespace DataClient
 {
@@ -23,8 +27,9 @@ namespace DataClient
         /// <returns></returns>
         internal SqlDataReader ExecuteReader(string connectionString, string procName, List<SqlParameter> commandParameters)
         {
-            string connStr = ConfigurationManager.ConnectionStrings[connectionString].ConnectionString;
-            var conn = new SqlConnection(connStr);
+            //string connStr = ConfigurationManager.ConnectionStrings[connectionString].ConnectionString;
+
+            var conn = new SqlConnection(connectionString);
             SqlCommand command = new SqlCommand(procName, conn);
 
             if (commandParameters != null)
@@ -56,6 +61,27 @@ namespace DataClient
                 con.Open();
                 command.ExecuteNonQuery();
             }
-        } 
+        }
+
+        internal void LogEntry(int UserId, string value)
+        {
+            var filePath = @"C:\Users\Thabane.n\Source\Repos\DoConnect\DoConnect\DataClient\LogFiles\Log.json";
+            var jsonData = File.ReadAllText(filePath);
+            var logData = JsonConvert.DeserializeObject<List<Log>>(jsonData)
+                        ?? new List<Log>();
+
+            var previousId = logData.LastOrDefault().Key;
+            var newId = Convert.ToInt32(previousId);
+            newId++;
+
+            logData.Add(new Log() { Key = newId.ToString(), Value = value,UserId = UserId.ToString()});
+
+            var data = JsonConvert.SerializeObject(logData);
+            using (StreamWriter writer = new StreamWriter(filePath))
+            {
+                writer.Write(data);
+            }
+
+        }
     }
 }
