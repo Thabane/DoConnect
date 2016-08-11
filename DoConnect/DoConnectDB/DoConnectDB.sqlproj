@@ -64,6 +64,24 @@
     <Folder Include="dbo\Stored Procedures\" />
   </ItemGroup>
   <ItemGroup>
+    <Build Include="dbo\Stored Procedures\CreateUser.sql" />
+    <Build Include="dbo\Stored Procedures\GetAllAppointments.sql" />
+    <Build Include="dbo\Stored Procedures\GetAllDocotors.sql" />
+    <Build Include="dbo\Stored Procedures\GetAllInvoices.sql" />
+    <Build Include="dbo\Stored Procedures\GetAllPatients.sql" />
+    <Build Include="dbo\Stored Procedures\GetAllPractices.sql" />
+    <Build Include="dbo\Stored Procedures\GetAppointmentById.sql" />
+    <Build Include="dbo\Stored Procedures\GetDocotorById.sql" />
+    <Build Include="dbo\Stored Procedures\GetInvoiceByDoctorId.sql" />
+    <Build Include="dbo\Stored Procedures\GetInvoiceById.sql" />
+    <Build Include="dbo\Stored Procedures\GetInvoiceByMedAidId.sql" />
+    <Build Include="dbo\Stored Procedures\GetInvoiceByPatientId.sql" />
+    <Build Include="dbo\Stored Procedures\GetPatientById.sql" />
+    <Build Include="dbo\Stored Procedures\GetPracticeById.sql" />
+    <Build Include="dbo\Stored Procedures\NewUpdateAppointment.sql" />
+    <Build Include="dbo\Stored Procedures\NewUpdateDoctor.sql" />
+    <Build Include="dbo\Stored Procedures\NewUpdatePatient.sql" />
+    <Build Include="dbo\Stored Procedures\NewUpdatePractice.sql" />
     <Build Include="dbo\Tables\Appointments.sql" />
     <Build Include="dbo\Tables\Doctors.sql" />
     <Build Include="dbo\Tables\Invoice.sql" />
@@ -74,8 +92,5 @@
     <Build Include="dbo\Tables\Prescription.sql" />
     <Build Include="dbo\Tables\Staff.sql" />
     <Build Include="dbo\Tables\Users.sql" />
-    <Build Include="dbo\Stored Procedures\CreateUser.sql" />
-    <Build Include="dbo\Stored Procedures\NewUpdateDoctor.sql" />
-    <Build Include="dbo\Stored Procedures\GetAllPatients.sql" />
   </ItemGroup>
 </Project>

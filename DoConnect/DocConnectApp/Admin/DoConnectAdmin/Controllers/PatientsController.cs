@@ -10,21 +10,21 @@ using DataClient;
 namespace DoConnectAdmin.Controllers
 {
     public class PatientsController : ApiController
-    {
-        //[HttpPost]
-        //[Route("api/Patients/InsertPatient")]
-        //public int InsertPatient(Patient patient)
-        //{
-        //    DataLayer dtLayer = new DataLayer();
-        //    return dtLayer.CreatePatient(patient.FirstName, patient.LastName, patient.ID_Number, patient.Gender, patient.DOB, patient.Cell_Number, patient.Street_Address, patient.Suburb, patient.City, patient.Country);
-        //}
-        
+    {        
         [HttpGet]
         [Route("api/Patients/GetAllPatients")]
         public List<Patient> GetAllPatients()
         {
             DataLayer dtLayer = new DataLayer();
             return dtLayer.GetAllPatients();            
+        }
+
+        [HttpPost]
+        [Route("api/Patients/InsertPatient")]
+        public bool InsertPatient(Patient patient)
+        {
+            DataLayer dtLayer = new DataLayer();
+            return dtLayer.CreatePatient(patient.FirstName, patient.LastName, patient.ID_Number, patient.Gender, patient.DOB, patient.Cell_Number, patient.Street_Address, patient.Suburb, patient.City, patient.Country, patient.Allergies, patient.PreviousIllnesses, patient.PreviousMedication, patient.RiskFactors, patient.SocialHistory, patient.FamilyHistory, patient.Medical_Aid_ID, patient.Doctor_ID, patient.User_ID);
         }
 
         //[HttpGet]

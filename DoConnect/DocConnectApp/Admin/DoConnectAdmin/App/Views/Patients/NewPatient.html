@@ -19,24 +19,24 @@
                     <div class="row col-md-12" style="margin-top:6px; margin-bottom:6px;"><label class="caption-subject font-green-steel uppercase bold">General Information</label></div>
                     <div class="row" style="margin-top:6px; margin-bottom:6px;">
                         <div class="col-md-1"><h5 class="form-control-label">Firstname:</h5></div>
-                        <div class="col-md-3"><input type="text" class="form-control" ng-model="firstName"></div>
+                        <div class="col-md-3"><input type="text" class="form-control" ng-model="FirstName"></div>
                         <div class="col-md-1"><h5 class="form-control-label">Lastname:</h5></div>
-                        <div class="col-md-3"><input type="text" class="form-control" ng-model="lastName"></div>
+                        <div class="col-md-3"><input type="text" class="form-control" ng-model="LastName"></div>
                         <div class="col-md-1"><h5 class="form-control-label">Email:</h5></div>
-                        <div class="col-md-3"><input type="email" class="form-control" name="P_EmailAddress"></div>
+                        <div class="col-md-3"><input type="email" class="form-control" ng-model="User_ID"></div>
                     </div>
                     <div class="row" style="margin-top:6px; margin-bottom:6px;">
                         <div class="col-md-1"><h5>ID Number:</h5></div>
-                        <div class="col-md-3"><input type="text" class="form-control" ng-model="id_Number"></div>
+                        <div class="col-md-3"><input type="text" class="form-control" ng-model="ID_Number"></div>
                         <div class="col-md-1"><h5>Cell Number:</h5></div>
-                        <div class="col-md-3"><input type="text" class="form-control" ng-model="cell_number"></div>
+                        <div class="col-md-3"><input type="text" class="form-control" ng-model="Cell_Number"></div>
                         <div class="col-md-1"><h5>DOB:</h5></div>
                         <div class="col-md-3">
                             <div class="row" style="padding-left:0px; padding-right:0px;">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <div class="input-group date datetimepicker" onclick="DT()">
-                                            <input class="form-control" type="text" data-format="MM/dd/yyyy">
+                                            <input class="form-control" type="text" data-format="MM/dd/yyyy" ng-model="DOB">
                                             <span class="input-group-addon">
                                                 <span class="glyphicon glyphicon-calendar"></span>
                                             </span>
@@ -49,29 +49,29 @@
                     <div class="row" style="margin-top:6px; margin-bottom:6px;">
                         <div class="col-md-1"><h5>Gender:</h5></div>
                         <div class="col-md-3">
-                            <select ng-model="gender" class="form-control required input-sm">
+                            <select ng-model="Gender" class="form-control required input-sm">
                                 <option value="">Please choose a gender</option>
                                 <option value="1">Male</option>
                                 <option value="2">Female</option>
                             </select>
                         </div>
                         <div class="col-md-1"><h5>Street Address:</h5></div>
-                        <div class="col-md-3"><input type="text" class="form-control" ng-model="street_address"></div>
+                        <div class="col-md-3"><input type="text" class="form-control" ng-model="Street_Address"></div>
                         <div class="col-md-1"><h5>Suburb:</h5></div>
-                        <div class="col-md-3"><input type="text" class="form-control" ng-model="suburb"></div>
+                        <div class="col-md-3"><input type="text" class="form-control" ng-model="Suburb"></div>
                     </div>
                     <div class="row" style="margin-top:6px; margin-bottom:15px; padding-bottom:15px; border-bottom: 1px solid #ddd;">
                         <div class="col-md-1"><h5>City:</h5></div>
-                        <div class="col-md-3"><input type="text" class="form-control" ng-model="city"></div>
+                        <div class="col-md-3"><input type="text" class="form-control" ng-model="City"></div>
                         <div class="col-md-1"><h5>Country:</h5></div>
-                        <div class="col-md-3"><input type="text" class="form-control" ng-model="country"></div>
+                        <div class="col-md-3"><input type="text" class="form-control" ng-model="Country"></div>
                     </div>
 
                     <div class="row col-md-12" style="margin-top:6px; margin-bottom:10px;"><label class="caption-subject font-green-steel uppercase bold">Insurance Information</label></div>
                     <div class="row" style="margin-top:6px; margin-bottom:6px;">
                         <div class="col-md-1"><h5>Medical Aid Provider:</h5></div>
                         <div class="col-md-3">
-                            <select class="form-control required input-sm" name="P_MedicalAidProvider" id="Select2">
+                            <select class="form-control required input-sm" ng-model="Medical_Aid_ID">
                                 <option value="">Please choose Medical Aid Provider</option>
                                 <option value="1">Discovery</option>
                                 <option value="2">A</option>
@@ -79,9 +79,9 @@
                             </select>
                         </div>
                         <div class="col-md-1"><h5>Scheme Name:</h5></div>
-                        <div class="col-md-3"><input type="text" class="form-control" name="P_Scheme_Name"></div>
+                        <div class="col-md-3"><input type="text" class="form-control" ng-model="SchemeName"></div>
                         <div class="col-md-1"><h5>Membership Number:</h5></div>
-                        <div class="col-md-3"><input type="text" class="form-control" name="P_MedicalAidMembershipNumber"></div>
+                        <div class="col-md-3"><input type="text" class="form-control" ng-model="MembershipNumber"></div>
                     </div>
                     <div class="row" style="margin-top:6px; margin-bottom:15px; border-bottom: 1px solid #ddd;">
                         <div class="col-md-1"><h5>Registration Date:</h5></div>
@@ -90,7 +90,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <div class="input-group date datetimepicker" onclick="DT()">
-                                            <input class="form-control" type="text" data-format="MM/dd/yyyy">
+                                            <input class="form-control" type="text" data-format="MM/dd/yyyy" ng-model="RegistrationDate">
                                             <span class="input-group-addon">
                                                 <span class="glyphicon glyphicon-calendar"></span>
                                             </span>
@@ -105,7 +105,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <div class="input-group date datetimepicker" onclick="DT()">
-                                            <input class="form-control" type="text" data-format="MM/dd/yyyy">
+                                            <input class="form-control" type="text" data-format="MM/dd/yyyy" ng-model="ExpiryDate">
                                             <span class="input-group-addon">
                                                 <span class="glyphicon glyphicon-calendar"></span>
                                             </span>
@@ -118,18 +118,18 @@
 
                     <div class="row col-md-12" style="margin-top:6px; margin-bottom:10px;"><label class="caption-subject font-green-steel uppercase bold">Health Summary</label></div>
                     <div class="row" style="margin-top:6px; margin-bottom:10px;">
-                        <div class="col-md-4"><h5>Allergies:</h5> <textarea class="form-control" rows="3" cols="20" name="P_Allergies"></textarea></div>
-                        <div class="col-md-4"><h5>Previous Medication:</h5> <textarea class="form-control" rows="3" cols="20" name="P_PreviousMedication"></textarea></div>
-                        <div class="col-md-4"><h5>Previous Illnesses:</h5> <textarea class="form-control" rows="3" cols="20" name="P_PreviousIllnesses"></textarea></div>
+                        <div class="col-md-4"><h5>Allergies:</h5> <textarea class="form-control" rows="3" cols="20" ng-model="Allergies"></textarea></div>
+                        <div class="col-md-4"><h5>Previous Medication:</h5> <textarea class="form-control" rows="3" cols="20" ng-model="PreviousMedication"></textarea></div>
+                        <div class="col-md-4"><h5>Previous Illnesses:</h5> <textarea class="form-control" rows="3" cols="20" ng-model="PreviousIllnesses"></textarea></div>
                     </div>
                     <div class="row" style="margin-top:6px;">
-                        <div class="col-md-4"><h5>Risk Factors:</h5> <textarea class="form-control" rows="3" cols="20" name="P_RiskFactors"></textarea></div>
-                        <div class="col-md-4"><h5>Social History:</h5> <textarea class="form-control" rows="3" cols="20" name="P_SocialHistory"></textarea></div>
-                        <div class="col-md-4"><h5>Family History:</h5> <textarea class="form-control" rows="3" cols="20" name="P_FamilyHistory"></textarea></div>
+                        <div class="col-md-4"><h5>Risk Factors:</h5> <textarea class="form-control" rows="3" cols="20" ng-model="RiskFactors"></textarea></div>
+                        <div class="col-md-4"><h5>Social History:</h5> <textarea class="form-control" rows="3" cols="20" ng-model="SocialHistory"></textarea></div>
+                        <div class="col-md-4"><h5>Family History:</h5> <textarea class="form-control" rows="3" cols="20" ng-model="FamilyHistory"></textarea></div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" ng-click="InsertPatient(firstName, lastName, id_Number, gender, dob, cell_number, street_address, suburb, city, country)">Add Patient</button>
+                    <button type="button" class="btn btn-primary" ng-click="InsertPatient(FirstName, LastName, ID_Number, Gender, DOB, Cell_Number, Street_Address, Suburb, City, Country, Allergies, PreviousIllnesses, PreviousMedication, RiskFactors, SocialHistory, FamilyHistory, Medical_Aid_ID, Doctor_ID, User_ID)">Add Patient</button>
                 </div>
             </div>
         </form><!--Add Patient Modal Ends-->

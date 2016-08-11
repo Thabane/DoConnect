@@ -17,6 +17,15 @@ namespace ObjectModel
         public string Suburb { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
+        public string Allergies { get; set; }
+        public string PreviousIllnesses { get; set; }
+        public string PreviousMedication { get; set; }
+        public string RiskFactors { get; set; }
+        public string SocialHistory { get; set; }
+        public string FamilyHistory { get; set; }
+        public int Medical_Aid_ID { get; set; }
+        public int Doctor_ID { get; set; }
+        public int User_ID { get; set; }
 
         public Patient Create(SqlDataReader reader)
         {
@@ -33,6 +42,15 @@ namespace ObjectModel
                 Suburb = reader.GetString(reader.GetOrdinal("Suburb")),
                 City = reader.GetString(reader.GetOrdinal("City")),
                 Country = reader.GetString(reader.GetOrdinal("Country")),
+                Allergies = reader.GetString(reader.GetOrdinal("Allergies")),
+                PreviousIllnesses = reader.GetString(reader.GetOrdinal("PreviousIllnesses")),
+                PreviousMedication = reader.GetString(reader.GetOrdinal("PreviousMedication")),
+                RiskFactors = reader.GetString(reader.GetOrdinal("RiskFactors")),
+                SocialHistory = reader.GetString(reader.GetOrdinal("SocialHistory")),
+                FamilyHistory = reader.GetString(reader.GetOrdinal("FamilyHistory")),
+                Medical_Aid_ID = reader.GetInt32(reader.GetOrdinal("Medical_Aid_ID")),
+                Doctor_ID = reader.GetInt32(reader.GetOrdinal("Doctor_ID")),
+                User_ID = reader.GetInt32(reader.GetOrdinal("User_ID")),
             };
         }
     }
