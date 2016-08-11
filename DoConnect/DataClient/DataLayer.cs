@@ -14,12 +14,8 @@ namespace DataClient
     public class DataLayer : IDataLayer
     {
         private DataAccess access;
-
-        //private DataAccess _dataAccess;
-        //private List<SqlParameter> _parameters = new List<SqlParameter>();
-        //private string _conn = "DB";
-
-        private string Conn = @"Data Source=DESKTOP-6Gu3I3G\SQLEXPRESS;Initial Catalog=DoConnect;Integrated Security=True";
+        private List<SqlParameter> _parameters = new List<SqlParameter>();
+        private string Conn = "DB";
 
         public DataLayer()
         {
@@ -27,14 +23,18 @@ namespace DataClient
         }
 
         #region
-        public int CreateUser()
+        public int CreateUser(int AccessLevel)
         {
             int userId = 0;
-            using (var reader = access.ExecuteReader(Conn, "[CreateUser]", new List<SqlParameter>()))
+            SqlParameter levelParameter = new SqlParameter("@AccessLevel", SqlDbType.Int);
+            levelParameter.Value = AccessLevel;
+
+            using (var reader = access.ExecuteReader(Conn, "[CreateUser]", new List<SqlParameter>() { levelParameter }))
             {
                 if (reader.Read())
                     userId = reader.GetInt32(reader.GetOrdinal("ID"));
             }
+            access.LogEntry(userId, "New User Created");
             return userId;
         }
         #endregion
@@ -749,7 +749,7 @@ namespace DataClient
 
         public Doctor GetDoctor(int DocID)
         {
-            throw new NotImplementedException();
+            return null;
         }
         #endregion
     }

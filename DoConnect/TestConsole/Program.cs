@@ -12,7 +12,7 @@ namespace TestConsole
         static void Main(string[] args)
         {
             DataLayer bl = new DataLayer();
-            bl.CreateUser();
+            bl.CreateUser(1);
             Console.WriteLine("User Created.");
             Console.ReadKey();
         }

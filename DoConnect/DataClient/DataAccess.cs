@@ -27,9 +27,8 @@ namespace DataClient
         /// <returns></returns>
         internal SqlDataReader ExecuteReader(string connectionString, string procName, List<SqlParameter> commandParameters)
         {
-            //string connStr = ConfigurationManager.ConnectionStrings[connectionString].ConnectionString;
-
-            var conn = new SqlConnection(connectionString);
+            string connStr = ConfigurationManager.ConnectionStrings[connectionString].ConnectionString;
+            var conn = new SqlConnection(connStr);
             SqlCommand command = new SqlCommand(procName, conn);
 
             if (commandParameters != null)
@@ -65,7 +64,7 @@ namespace DataClient
 
         internal void LogEntry(int UserId, string value)
         {
-            var filePath = @"C:\Users\Thabane.n\Source\Repos\DoConnect\DoConnect\DataClient\LogFiles\Log.json";
+            var filePath = ConfigurationManager.AppSettings["LogFile"];
             var jsonData = File.ReadAllText(filePath);
             var logData = JsonConvert.DeserializeObject<List<Log>>(jsonData)
                         ?? new List<Log>();

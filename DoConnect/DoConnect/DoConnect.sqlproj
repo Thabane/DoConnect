@@ -71,5 +71,23 @@
     <Build Include="Tables\Prescription.sql" />
     <Build Include="Tables\Staff.sql" />
     <Build Include="Tables\Users.sql" />
+    <Build Include="Stored Procedures\CreateUser.sql" />
+    <Build Include="Stored Procedures\GetAllAppointments.sql" />
+    <Build Include="Stored Procedures\GetAllDocotors.sql" />
+    <Build Include="Stored Procedures\GetAllInvoices.sql" />
+    <Build Include="Stored Procedures\GetAllPatients.sql" />
+    <Build Include="Stored Procedures\GetAllPractices.sql" />
+    <Build Include="Stored Procedures\GetAppointmentById.sql" />
+    <Build Include="Stored Procedures\GetDocotorById.sql" />
+    <Build Include="Stored Procedures\GetInvoiceByDoctorId.sql" />
+    <Build Include="Stored Procedures\GetInvoiceById.sql" />
+    <Build Include="Stored Procedures\GetInvoiceByMedAidId.sql" />
+    <Build Include="Stored Procedures\GetInvoiceByPatientId.sql" />
+    <Build Include="Stored Procedures\GetPatientById.sql" />
+    <Build Include="Stored Procedures\GetPracticeById.sql" />
+    <Build Include="Stored Procedures\NewUpdateAppointment.sql" />
+    <Build Include="Stored Procedures\NewUpdateDoctor.sql" />
+    <Build Include="Stored Procedures\NewUpdatePatient.sql" />
+    <Build Include="Stored Procedures\NewUpdatePractice.sql" />
   </ItemGroup>
 </Project>
