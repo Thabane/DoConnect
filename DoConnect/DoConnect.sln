@@ -5,13 +5,13 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataClient", "DataClient\DataClient.csproj", "{8C1AAF48-0805-405B-B58E-91FCE15E96A7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocConnectApp", "DocConnectApp\DocConnectApp.csproj", "{0BEF7578-6C96-4967-AA0A-EECB69774919}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsole", "TestConsole\TestConsole.csproj", "{974E9808-14C2-4EFD-B170-E3D0A592C694}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectModel", "ObjectModel\ObjectModel.csproj", "{171B67FD-6810-48A2-AB91-C12DCA6E06BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoConnectAdmin", "DocConnectApp\Admin\DoConnectAdmin\DoConnectAdmin.csproj", "{DEB30058-A7BA-4FFD-8E64-D05CCB7FF3C0}"
-EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DoConnectDB", "DoConnectDB\DoConnectDB.sqlproj", "{6247CEAC-EF10-4DFD-8D4C-DE8533D04B18}"
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DoConnect", "DoConnect\DoConnect.sqlproj", "{61D69D0C-DB3B-42AD-B1C1-A925F7582C01}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +23,10 @@ Global
 		{8C1AAF48-0805-405B-B58E-91FCE15E96A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C1AAF48-0805-405B-B58E-91FCE15E96A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C1AAF48-0805-405B-B58E-91FCE15E96A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BEF7578-6C96-4967-AA0A-EECB69774919}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BEF7578-6C96-4967-AA0A-EECB69774919}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BEF7578-6C96-4967-AA0A-EECB69774919}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BEF7578-6C96-4967-AA0A-EECB69774919}.Release|Any CPU.Build.0 = Release|Any CPU
 		{974E9808-14C2-4EFD-B170-E3D0A592C694}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{974E9808-14C2-4EFD-B170-E3D0A592C694}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{974E9808-14C2-4EFD-B170-E3D0A592C694}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -31,16 +35,12 @@ Global
 		{171B67FD-6810-48A2-AB91-C12DCA6E06BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{171B67FD-6810-48A2-AB91-C12DCA6E06BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{171B67FD-6810-48A2-AB91-C12DCA6E06BF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DEB30058-A7BA-4FFD-8E64-D05CCB7FF3C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DEB30058-A7BA-4FFD-8E64-D05CCB7FF3C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DEB30058-A7BA-4FFD-8E64-D05CCB7FF3C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DEB30058-A7BA-4FFD-8E64-D05CCB7FF3C0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6247CEAC-EF10-4DFD-8D4C-DE8533D04B18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6247CEAC-EF10-4DFD-8D4C-DE8533D04B18}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6247CEAC-EF10-4DFD-8D4C-DE8533D04B18}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{6247CEAC-EF10-4DFD-8D4C-DE8533D04B18}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6247CEAC-EF10-4DFD-8D4C-DE8533D04B18}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6247CEAC-EF10-4DFD-8D4C-DE8533D04B18}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{61D69D0C-DB3B-42AD-B1C1-A925F7582C01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61D69D0C-DB3B-42AD-B1C1-A925F7582C01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61D69D0C-DB3B-42AD-B1C1-A925F7582C01}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{61D69D0C-DB3B-42AD-B1C1-A925F7582C01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61D69D0C-DB3B-42AD-B1C1-A925F7582C01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61D69D0C-DB3B-42AD-B1C1-A925F7582C01}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

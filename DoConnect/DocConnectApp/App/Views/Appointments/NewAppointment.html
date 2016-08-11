@@ -1,0 +1,65 @@
+﻿<div>
+    <div id="page-wrapper" ng-controller="AppointmentsController">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header text-primary">New Appointment Details</h2>
+            </div>
+        </div>
+
+        <ul class="nav nav-tabs">
+            <li role="presentation"><a href="/Appointments"><i class="fa fa-align-justify"></i>Appointments List</a></li>
+            <li role="presentation" class="active"><a href="/NewAppointment"><i class="fa fa-plus-circle"></i>New Appointment</a></li>
+        </ul>
+        
+        <!--New Appointment Modal-->
+        <form>
+            <div style="margin:auto; width:60%;">
+                <div class="modal-header" style="border-bottom:0px;"></div>
+                <div class="modal-body">
+                    <div class="row" style="margin-top:5px; margin-bottom:5px;">
+                    <div class="col-md-3"><h5>Date & Time:</h5></div>
+                        <div class="col-md-8">
+                            <div class="row" style="padding-left:0px; padding-right:0px;">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <div class="input-group date datetimepicker" onclick="DT()">
+                                            <input class="form-control" type="text">
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top:5px; margin-bottom:5px;">
+                        <div class="col-md-3"><h5>Patient Name:</h5></div>
+                        <div class="col-md-8"><input name="View_PatientName" class="form-control" type="text"></div>
+                    </div>
+                    <div class="row" style="margin-top:5px; margin-bottom:5px;">
+                        <div class="col-md-3"><h5 class="form-control-label">Patient Email:</h5></div>
+                        <div class="col-md-8"><input name="View_EmailAddress" class="form-control" type="email"></div>
+                    </div>
+                    <div class="row" style="margin-top:5px; margin-bottom:5px;">
+                        <div class="col-md-3"><h5 class="form-control-label">Appointment Details:</h5></div>
+                        <div class="col-md-8"><input name="View_Details" class="form-control" type="text"></div>
+                    </div>
+                    <div class="row" style="margin-top:5px;">
+                        <div class="col-md-3"><h5 class="form-control-label">Appointment Status:</h5></div>
+                        <div class="col-md-8">
+                            <select class="form-control required input-sm">
+                                <option value="">Choose Status</option>
+                                <option value="1">Approved</option>
+                                <option value="3">Denied</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="function_btnNewAppointment()">Add Appointment</button>
+                </div>
+            </div>
+        </form><!--New Appointment Modal Ends-->
+    </div>
+</div>
