@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 
 namespace ObjectModel
 {    
@@ -7,7 +8,7 @@ namespace ObjectModel
     {   
         public int ID { get; set; }
         public string Name { get; set; }
-        public string Cell_Number { get; set; }
+        public string Phone_Number { get; set; }
         public string Fax_Number { get; set; }
         public string Street_Address { get; set; }
         public string Suburb { get; set; }
