@@ -752,5 +752,14 @@ namespace DataClient
             return null;
         }
         #endregion
+
+        public bool Login(string username, string password)
+        {
+            if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }
