@@ -1,0 +1,262 @@
+.widget {
+    position: relative;
+    clear: both;
+    padding-bottom: 30px;
+    width: auto;
+    overflow: hidden;
+}
+/*media screen*/
+.page-content {
+    color: #fff;
+    padding: 20px 30px;
+    display: table-cell;
+    float: none !important;
+}
+.widget-header {
+    position: relative;
+    height: 60px;
+    line-height: 40px;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+}
+.widget-header [class^='icon-'], .widget-header [class*=' icon-'] {
+    display: inline-block;
+    margin-left: 13px;
+    margin-right: -2px;
+    font-size: 16px;
+    color: #fff;
+    vertical-align: middle;
+}
+.widget-header + .widget-content {
+    border-top: none;
+    -webkit-border-top-left-radius: 0px;
+    -webkit-border-top-right-radius: 0px;
+    -moz-border-radius-topleft: 0;
+    -moz-border-radius-topright: 0;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+.widget-header h3 {
+    position: relative;
+    top: 2px;
+    left: 10px;
+    display: inline-block;
+    margin-right: 3em;
+    font-size: 18px;
+    font-weight: 300;
+    color: #29b4b6!important;
+    line-height: 18px;
+}
+
+.widget-content::after {
+    clear: both;
+}
+.widget-content::before, .widget-content::after {
+    content: "";
+    display: table;
+}
+.widget-content {
+    zoom: 1;
+}
+.widget-content {
+    padding: 20px 15px 15px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+	border-radius: 4px;
+}
+/*media screen*/
+#sortable-todo {
+    margin: 0;
+    padding: 0;
+}
+/*media screen*/
+.to-do-list li {
+    background: #fff;
+    cursor: move;
+    list-style: none outside none;
+    margin-bottom: 3px;
+    padding: 13px;
+    position: relative;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+}
+/*media screen*/
+.drag-marker {
+    display: block;
+    float: left;
+    height: 17px;
+    position: relative;
+    top: 2px;
+    width: 7px;
+}
+/*media screen*/
+.drag-marker i {
+    background: none repeat scroll 0 0 #CCCCCC;
+    box-shadow: 5px 0px 0px 0px #cccccc, 0px 5px 0px 0px #cccccc, 5px 5px 0px 0px #cccccc, 0px 10px 0px 0px #cccccc, 5px 10px 0px 0px #cccccc, 0px 15px 0px 0px #cccccc, 5px 15px 0px 0px #cccccc;
+    display: block;
+    height: 2px;
+    width: 2px;
+}
+/*media screen*/
+.todo-check {
+    margin-left: 10px;
+    margin-right: 10px;
+    position: relative;
+    width: 20px;
+}
+/*media screen*/
+.to-do-list li .todo-check input[type='checkbox'] {
+    visibility: hidden;
+}
+/*media screen*/
+.todo-check label::after {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border-color: -moz-use-text-color -moz-use-text-color #CFCFCF #CFCFCF;
+    border-image: none;
+    border-style: none none solid solid;
+    border-width: medium medium 3px 3px;
+    content: "";
+    height: 8px;
+    left: 3px;
+    opacity: 0;
+    position: absolute;
+    top: 3px;
+    transform: rotate(-45deg);
+    width: 13px;
+}
+/*media screen*/
+.todo-check label {
+    border: 1px solid #CCCCCC;
+    border-radius: 2px;
+    cursor: pointer;
+    height: 20px;
+    left: 0px;
+    position: absolute;
+    top: 0px;
+    width: 20px;
+}
+/*media screen*/
+.to-do-list li p {
+    margin-bottom: 0px;
+}
+/*media screen*/
+.todo-title {
+    margin-right: 70px;
+}
+/*media screen*/
+.todo-actionlist {
+    position: absolute;
+    right: 15px;
+    top: 13px;
+}
+/*media screen*/
+.todo-actionlist a {
+    display: inline-block;
+    float: left;
+    height: 24px;
+    width: 24px;
+}
+/*media screen*/
+.todo-actionlist a i {
+    color: #cccccc;
+    display: inline-block;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    width: 24px;
+}
+/*media screen*/
+.todo-actionlist a {
+    display: inline-block;
+    float: left;
+    height: 24px;
+    width: 24px;
+}
+/*media screen*/
+.todo-actionlist a i {
+    color: #cccccc;
+    display: inline-block;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    width: 24px;
+}
+/*media screen*/
+.todo-actionlist a {
+    display: inline-block;
+    float: left;
+    height: 24px;
+    width: 24px;
+}
+/*media screen*/
+.todo-actionlist a i {
+    color: #cccccc;
+    display: inline-block;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    width: 24px;
+}
+/*media screen*/
+.todo-remove i {
+    cursor: pointer;
+}
+/*media screen*/
+.todo-action-bar {
+    margin-top: 20px;
+}
+/*media screen*/
+.btn-todo-select button, .btn-add-task button {
+    width: 100%;
+}
+/*media screen*/
+.todo-search-wrap {
+    padding: 0;
+}
+/*media screen*/
+textarea, input[type='text'], input[type='password'], input[type='datetime'], input[type='datetime-local'], input[type='date'], input[type='month'], input[type='time'], input[type='week'], input[type='number'], input[type='email'], input[type='url'], input[type='search'], input[type='tel'], input[type='color'], .uneditable-input {
+    /*background-color: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: #fff;*/
+    min-height: 30px;
+    padding-left: 6px;
+    padding-right: 6px;
+    transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
+}
+/*media screen*/
+.todo-search {
+    border-radius: 3px !important;
+}
+/*media screen*/
+.todo-search {
+    padding: 0px;
+    margin: 0px;
+}
+/*media screen*/
+.btn-todo-select button, .btn-add-task button {
+    width: 100%;
+}
+
+/*media screen*/
+.todo-list-active {
+    background: rgba(255,255,255,0.25) !important;
+}
+/*media screen*/
+.todo-check input[type='checkbox']:checked + label::after {
+    opacity: 1;
+}
+/*media screen*/
+.todo-check label {
+    border: 1px solid #CCCCCC;
+    border-radius: 2px;
+    cursor: pointer;
+    height: 20px;
+    left: 0px;
+    position: absolute;
+    top: 0px;
+    width: 20px;
+}

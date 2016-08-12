@@ -131,21 +131,94 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AccountingController.cs" />
+    <Compile Include="Controllers\AppointmentsController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\DiagnosisExpertSystemController.cs" />
+    <Compile Include="Controllers\EmployeesController.cs" />
+    <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MedicalAidController.cs" />
+    <Compile Include="Controllers\MedicineInventoryController.cs" />
+    <Compile Include="Controllers\MessagesController.cs" />
+    <Compile Include="Controllers\PatientsController.cs" />
+    <Compile Include="Controllers\ReportsController.cs" />
+    <Compile Include="Controllers\UserProfileController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App\app.js" />
+    <Content Include="App\Controllers\AccountingController.js" />
+    <Content Include="App\Controllers\AppointmentsController.js" />
+    <Content Include="App\Controllers\DashboardController.js" />
+    <Content Include="App\Controllers\DiagnosisExpertSystemController.js" />
+    <Content Include="App\Controllers\EmployeesController.js" />
+    <Content Include="App\Controllers\EventsController.js" />
+    <Content Include="App\Controllers\LoginController.js" />
+    <Content Include="App\Controllers\MedicalAidController.js" />
+    <Content Include="App\Controllers\MedicineInventoryController.js" />
+    <Content Include="App\Controllers\MessagesController.js" />
+    <Content Include="App\Controllers\PatientsController.js" />
+    <Content Include="App\Controllers\Reports.js" />
+    <Content Include="App\Controllers\UserProfileController.js" />
+    <Content Include="App\Services\AccountingService.js" />
+    <Content Include="App\Services\AppointmentsService.js" />
+    <Content Include="App\Services\AuthHttpResponseInterceptor.js" />
+    <Content Include="App\Services\DashboardService.js" />
+    <Content Include="App\Services\DiagnosisExpertSystemService.js" />
+    <Content Include="App\Services\EmployeesService.js" />
+    <Content Include="App\Services\EventsService.js" />
+    <Content Include="App\Services\LoginService.js" />
+    <Content Include="App\Services\MedicalAidService.js" />
+    <Content Include="App\Services\MedicineInventoryService.js" />
+    <Content Include="App\Services\MessagesService.js" />
+    <Content Include="App\Services\PatientsService.js" />
+    <Content Include="App\Services\ReportsService.js" />
+    <Content Include="App\Services\UserProfileService.js" />
+    <Content Include="App\Views\Accounting\Accounting.html" />
+    <Content Include="App\Views\Accounting\Expenses.html" />
+    <Content Include="App\Views\Accounting\NewExpenceInvoice.html" />
+    <Content Include="App\Views\Accounting\NewPatientInvoice.html" />
+    <Content Include="App\Views\Appointments\Appointments.html" />
+    <Content Include="App\Views\Appointments\NewAppointment.html" />
+    <Content Include="App\Views\Dashboard\dashboard.html" />
+    <Content Include="App\Views\Dashboard\DashboardSecretary.html" />
+    <Content Include="App\Views\DiagnosisExpertSystem\DiagnosisExpertSystem.html" />
+    <Content Include="App\Views\Employees\Employees.html" />
+    <Content Include="App\Views\Employees\NewEmployee.html" />
+    <Content Include="App\Views\Events\Events.html" />
+    <Content Include="App\Views\Events\NewEvent.html" />
+    <Content Include="App\Views\Login\Login.html" />
+    <Content Include="App\Views\MedicalAid\MedicalAid.html" />
+    <Content Include="App\Views\MedicalAid\NewMedicalAidProvider.html" />
+    <Content Include="App\Views\MedicineInventory\MedicineInventory.html" />
+    <Content Include="App\Views\MedicineInventory\NewMedicine.html" />
+    <Content Include="App\Views\Messages\Messages.html" />
+    <Content Include="App\Views\Patients\NewPatient.html" />
+    <Content Include="App\Views\Patients\patients.html" />
+    <Content Include="App\Views\Reports\Reports.html" />
+    <Content Include="App\Views\UserProfile\UserProfile.html" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\metisMenu.min.css" />
+    <Content Include="Content\morris.css" />
+    <Content Include="Content\sb-admin-2.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -172,6 +245,9 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Login\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -184,6 +260,16 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataClient\DataClient.csproj">
+      <Project>{8c1aaf48-0805-405b-b58e-91fce15e96a7}</Project>
+      <Name>DataClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ObjectModel\ObjectModel.csproj">
+      <Project>{171b67fd-6810-48a2-ab91-c12dca6e06bf}</Project>
+      <Name>ObjectModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

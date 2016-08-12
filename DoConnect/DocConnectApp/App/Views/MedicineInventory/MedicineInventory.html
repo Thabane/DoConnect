@@ -1,0 +1,139 @@
+﻿<div>
+    <div id="page-wrapper" ng-controller="MedicineInventoryController">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header text-primary">Medicine Inventory</h2>
+            </div>
+        </div>
+
+        <ul class="nav nav-tabs">
+            <li role="presentation" class="active"><a href="/MedicineInventory"><i class="fa fa-align-justify"></i>Invoice List</a></li>
+            <li role="presentation"><a href="/NewMedicine"><i class="fa fa-plus-circle"></i>Add Medicine</a></li>
+        </ul>
+        
+        <div class="panel panel-default">
+            <table class="table-bordered" style="float:right; border:0; margin-bottom:5px;">
+                <tbody>
+                    <tr>
+                        <td style="border: 0;">
+                            <div class="btn-group">
+                                <a class="btn btn-default dropdown-toggle btn-select2" href="#" data-toggle="dropdown" style="font-size:13px;" aria-expanded="false">Search field <span class="caret"></span></a>
+                                <ul class="dropdown-menu" style="font-size:13px;">
+                                    <li><a href="#">Email Address</a></li>
+                                    <li><a href="#">Firstname</a></li>
+                                    <li><a href="#">Lastname</a></li>
+                                    <li><a href="#">ID Number</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                        <td style="border:0;">
+                            <div class="form-group input-group" style="margin-top:4px; margin-bottom:4px;">
+                                <input class="form-control" type="text" style="font-size:13px;"><span class="input-group-btn">
+                                    <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+                                </span>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table class="table table-hover">
+                <thead style="background-color: #f8f8f8;">
+                    <tr>
+                        <th style="width: 25%;">Drug Name</th>
+                        <th style="width: 10%;">Drug Concentration</th>
+                        <th style="width: 10%;">Qty In Stock</th>
+                        <th style="width: 25%;">Practice Name</th>
+                        <th style="width: 15%;">Expiry Date</th>
+                        <th style="width: 15%;">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="Medicine in Medicines">
+                        <td>{{Medicine.DrugName}}</td>
+                        <td>{{Medicine.DrugConcentration}}</td>
+                        <td>{{Medicine.QuantityInStock}}</td>
+                        <td>{{Medicine.PracticeName}}</td>
+                        <td>{{Medicine.ExpiryDate}}</td>
+                        <td>
+                            <button class="btn btn-primary btn-xs" ng-click="ViewMedicine(Medicine.ID)" onclick="ViewMedicine()"><i class="glyphicon glyphicon-new-window"></i></button>
+                            <button class="btn btn-danger btn-xs" ng-click="DeleteMedicine(Medicine.ID)"><i class="fa fa-trash-o"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <ul class="pager">
+                <li class="previous"><a href="#">Previous</a></li>
+                <li class="next"><a href="#">Next</a></li>
+            </ul>
+        </div>
+
+        <!--View Medicine Modal-->
+        <div id="View_Medicine_Modal" class="modal fade">
+            <form>
+                <div class="modal-dialog" style="width:60%">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title text-primary">Medicine Details</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                                <div class="col-md-2"><h5 class="form-control-label">Drug Name:</h5></div>
+                                <div class="col-md-4"><input class="form-control readonly_ViewMedicine" type="text"></div>
+                                <div class="col-md-2"><h5>Description:</h5></div>
+                                <div class="col-md-4"><input class="form-control readonly_ViewMedicine" type="text"></div>
+                            </div>
+                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                                <div class="col-md-2"><h5 class="form-control-label">Drug Concentration:</h5></div>
+                                <div class="col-md-4"><input class="form-control readonly_ViewMedicine" type="text"></div>
+                                <div class="col-md-2"><h5>Quantity In Stock:</h5></div>
+                                <div class="col-md-4"><input class="form-control readonly_ViewMedicine" type="text"></div>
+                            </div>
+                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                                <div class="col-md-2"><h5 class="form-control-label">Date Of Purchase:</h5></div>
+                                <div class="col-md-4"><div class="row" style="padding-left:0px; padding-right:0px;">
+                                                           <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <div class="input-group date datetimepicker" onclick="DT()">
+                                                                        <input class="form-control" type="text" data-format="MM/dd/yyyy">
+                                                                        <span class="input-group-addon">
+                                                                            <span class="glyphicon glyphicon-calendar"></span>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                </div>
+                                <div class="col-md-2"><h5>Expiry Date:</h5></div>
+                                <div class="col-md-4"><div class="row" style="padding-left:0px; padding-right:0px;">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <div class="input-group date datetimepicker" onclick="DT()">
+                                                                        <input class="form-control" type="text" data-format="MM/dd/yyyy">
+                                                                        <span class="input-group-addon">
+                                                                            <span class="glyphicon glyphicon-calendar"></span>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                                <div class="col-md-2"><h5>Practice Name:</h5></div>
+                                <div class="col-md-4"><input class="form-control readonly_ViewMedicine" type="text"></div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" ng-click="function_btnUpdateMedicine()" id="function_btnUpdateMedicine">Update</button>
+                            <button type="button" class="btn btn-danger" ng-click="function_btnDeleteEmployee()">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div><!--View Medicine Modal Ends--> 
+    </div>
+</div>
