@@ -90,4 +90,12 @@
     <Build Include="Stored Procedures\NewUpdatePatient.sql" />
     <Build Include="Stored Procedures\NewUpdatePractice.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Tables\Consultation.sql" />
+    <None Include="Tables\Expenses.sql" />
+    <None Include="Tables\Medicine_Inventory.sql" />
+    <None Include="Tables\Messages.sql" />
+    <None Include="Tables\Patient_Consultation.sql" />
+    <None Include="Tables\Prescription_DrugDetails.sql" />
+  </ItemGroup>
 </Project>
