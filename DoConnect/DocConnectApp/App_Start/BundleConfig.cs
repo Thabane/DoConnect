@@ -1,16 +1,15 @@
-﻿using System.Web.Optimization;
+﻿using System.Web;
+using System.Web.Optimization;
 
-namespace DoConnectAdmin
+namespace DocConnectApp
 {
-    /// <summary>
-    /// Class BundleConfig. Loads the bundles needed by the project.
-    /// </summary>
     public class BundleConfig
     {
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
+            /*"~/Scripts/Views/Controls.js"*/
 
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
@@ -27,6 +26,7 @@ namespace DoConnectAdmin
 
             bundles.Add(new ScriptBundle("~/bundles/angular").Include(
                    "~/Scripts/angular.js",
+                   "~/Scripts/jquery.dataTables.js",
                    "~/Scripts/angular-route.js",
                    "~/Scripts/angular-location-update.min.js",
                    "~/App/app.js",

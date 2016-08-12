@@ -1,9 +1,128 @@
-﻿<div id="wrapper">
+﻿<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>*@
+    <script src="~/Scripts/Index/jquery.min.js"></script>
+    <script src="~/Scripts/Index/bootstrap.min.js"></script>
+
+    @*<link rel="stylesheet" type="text/css" media="screen" href="~/Scripts/Index/components.min.css">*@
+    @*<link rel="stylesheet" type="text/css" media="screen" href="~/Scripts/Index/theme.css">*@
+
+    <link rel="stylesheet" type="text/css" media="screen" href="~/Scripts/DashboardWidgets/SalesSummary.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/Scripts/DashboardWidgets/QuickActionsAppointments.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/Scripts/DashboardWidgets/To Do List.css">
+
+    @*<script type="text/javascript" src="~/Scripts/Graphs/jquery.flot.pie.js"></script>
+    <script type="text/javascript" src="~/Scripts/Graphs/jquery.flot.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/Graphs/flot-data.js"></script>*@
+    
+    @*<link rel="stylesheet" type="text/css" media="screen" href="~/Scripts/Graphs/PieChart/PieChart-pipe.css">
+    <script type="text/javascript" src="~/Scripts/Graphs/PieChart/PieChart-pipe.js"></script>*@
+
+    <link rel="stylesheet" href="https://cdn.rawgit.com/theus/chart.css/v1.0.0/dist/chart.css" />
+
+    @*<link rel="stylesheet" type="text/css" href="~/Scripts/Pagination/bootstrap-theme.min.css">*@
+    <link rel="stylesheet" type="text/css" href="~/Scripts/Pagination/styles.css">
+    <script src="~/Scripts/Pagination/dirPagination.js"></script>
+
+    <script src="~/Scripts/DateTimePicker/moment-with-locales.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="~/Scripts/DateTimePicker/bootstrap-datetimepicker.min.css">
+    <script type="text/javascript" src="~/Scripts/DateTimePicker/bootstrap-datetimepicker.min.js"></script>
+    <link href="~/Scripts/DateTimePicker/bootstrap-datetimepicker.css" rel="stylesheet">
+    <script src="~/Scripts/DateTimePicker/bootstrap-datetimepicker.js"></script>
+</head>
+
+<div id="wrapper">
+    <script type="text/javascript">
+        //Accounting
+            function ViewInvoice() {
+                $("#View_Invoice_Modal").modal("show");
+            };
+            function ViewExpense() {
+                $("#View_ExpensesInvoice_Modal").modal("show");
+            };
+
+        //Appointments Page
+            function ViewAppointment() {
+                $("#View_Appointment_Modal").modal("show");
+                $(".readonly_ViewAppointment").attr("readonly", true);
+                $(".readonly_ViewAppointment").css("background-color", "transparent");
+            };
+
+        //Employee Page
+            function ViewEmployee() {
+                $("#View_Employee_Modal").modal("show");
+                $(".readonly_ViewEmployee").attr("readonly", true);
+                $(".readonly_ViewEmployee").css("background-color", "transparent");
+            };
+
+        //Events Page
+            function ViewEvent() {
+                $("#View_Event_Modal").modal("show");
+                $(".readonly_ViewEvent").attr("readonly", true);
+                $(".readonly_ViewEvent").css("background-color", "transparent");
+            };
+
+        //Medical Aid Page
+            function ViewMedicalAid() {
+                $("#View_MedicalAid_Modal").modal("show");
+            };
+
+        //Medicine Inventory Page
+            function ViewMedicine() {
+                $("#View_Medicine_Modal").modal("show");
+                $(".readonly_ViewMedicine").attr("readonly", true);
+                $(".readonly_ViewMedicine").css("background-color", "transparent");
+            };
+
+        //Messages Page
+            function tr_dblclick_InboxMail() {
+                $("#View_SelectedInboxMail").modal("show");
+                $(".readonly_ViewEvent").attr("readonly", true);
+                $(".readonly_ViewEvent").css("background-color", "transparent");
+            };
+
+        //Patients
+            function ViewPatient() {
+            $("#div_Medical_History").modal("show");
+        };
+
+        function myFunctionShowMedical_History() {
+            $("#div_Medical_History").modal("show");
+            $("#div_Prescriptions").modal("hide");
+            $("#div_Consultations").modal("hide");
+        };
+
+        function myFunctionShowPrescriptions() {
+            $("#div_Prescriptions").modal("show");
+            $("#div_Medical_History").modal("hide");
+            $("#div_Consultations").modal("hide");
+        };
+
+        function myFunctionPrescriptions_Edit() {
+            $("#div_Prescriptions_Update").modal("show");
+        };
+        function myFunctionShowConsultations() {
+            $("#div_Consultations").modal("show");
+            $("#div_Medical_History").modal("hide");
+            $("#div_Prescriptions").modal("hide");
+        };
+
+        function DT() {
+            $(".datetimepicker").datetimepicker({ format: "L" });
+        };
+
+        $(".nav li").on("click", function () {
+            $(".nav li").removeClass("active");
+            $(this).addClass("active");
+        });
+    </script>
 
     <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Labs Ops</span>
+                <i class="fa fa-bars fa-fw"></i>
             </button>
             <a class="navbar-brand">DoConnect - Admin</a>
         </div>
@@ -11,7 +130,7 @@
         <!-- navbar-top-links -->
         <ul class="nav navbar-top-links navbar-right">
             <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <a class="dropdown-toggle" aria-expanded="false" href="#" data-toggle="dropdown">
                     <i class="fa fa-envelope fa-fw"></i>  <i class="fa fa-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-messages">
@@ -28,31 +147,7 @@
                     </li>
                     <li class="divider"></li>
                     <li>
-                        <a href="#">
-                            <div>
-                                <strong>John Smith</strong>
-                                <span class="pull-right text-muted">
-                                    <em>Yesterday</em>
-                                </span>
-                            </div>
-                            <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                        </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="#">
-                            <div>
-                                <strong>John Smith</strong>
-                                <span class="pull-right text-muted">
-                                    <em>Yesterday</em>
-                                </span>
-                            </div>
-                            <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                        </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a class="text-center" href="#">
+                        <a class="text-center" href="/messages">
                             <strong>Read All Messages</strong>
                             <i class="fa fa-angle-right"></i>
                         </a>
@@ -62,7 +157,7 @@
             </li>
             <!-- /.dropdown -->
             <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <a class="dropdown-toggle" aria-expanded="false" href="#" data-toggle="dropdown">
                     <i class="fa fa-tasks fa-fw"></i>  <i class="fa fa-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-tasks">
@@ -73,11 +168,7 @@
                                     <strong>Task 1</strong>
                                     <span class="pull-right text-muted">40% Complete</span>
                                 </p>
-                                <div class="progress progress-striped active">
-                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                                        <span class="sr-only">40% Complete (success)</span>
-                                    </div>
-                                </div>
+                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
                             </div>
                         </a>
                     </li>
@@ -89,43 +180,7 @@
                                     <strong>Task 2</strong>
                                     <span class="pull-right text-muted">20% Complete</span>
                                 </p>
-                                <div class="progress progress-striped active">
-                                    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-                                        <span class="sr-only">20% Complete</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="#">
-                            <div>
-                                <p>
-                                    <strong>Task 3</strong>
-                                    <span class="pull-right text-muted">60% Complete</span>
-                                </p>
-                                <div class="progress progress-striped active">
-                                    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                                        <span class="sr-only">60% Complete (warning)</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="#">
-                            <div>
-                                <p>
-                                    <strong>Task 4</strong>
-                                    <span class="pull-right text-muted">80% Complete</span>
-                                </p>
-                                <div class="progress progress-striped active">
-                                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-                                        <span class="sr-only">80% Complete (danger)</span>
-                                    </div>
-                                </div>
+                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
                             </div>
                         </a>
                     </li>
@@ -141,7 +196,7 @@
             </li>
             <!-- /.dropdown -->
             <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <a class="dropdown-toggle" href="#" data-toggle="dropdown">
                     <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-alerts">
@@ -201,39 +256,15 @@
             </li>
             <!-- /.dropdown -->
             <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <a class="dropdown-toggle" href="#" data-toggle="dropdown">
                     <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
-                    <li>
-                        <a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                    </li>
+                    <li><a href="#" onclick="btnViewUserProfile()"><i class="fa fa-user fa-fw"></i> User Profile</a></li>
                     <li class="divider"></li>
-                    <li>
-                        <a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                    </li>
+                    <li><a href="/Login"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
                 </ul>
                 <!-- /.dropdown-user -->
-            </li>
-            <!-- /.dropdown -->
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown">a<span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li><a ui-sref="a">a</a></li>
-                    <li><a ui-sref="b">b</a></li>
-                    <li><a ui-sref="c">c</a></li>
-                    <li><a ui-sref="d">d</a></li>
-                    <li><a ui-sref="e">e</a></li>
-                    <li><a ui-sref="f">f</a></li>
-                    <li><a ui-sref="g">g</a></li>
-                    <li><a ui-sref="h">h</a></li>
-                    <li><a ui-sref="i">i</a></li>
-                    <li><a ui-sref="j">j</a></li>
-                    <li><a ui-sref="k">k</a></li>
-                </ul>
             </li>
             <!-- /.dropdown -->
         </ul>
@@ -253,22 +284,175 @@
                         </div>
                         <!-- /input-group -->
                     </li>
-                    <li>
-                        <a href="/Dashboard"><i class="fa fa-dashboard fa-fw"></i>Dashboard</a>
-                    </li>
-                    <li>
-                        <a href="/Patients"><i class="fa fa-tasks fa-fw"></i> Patients</a>
-                    </li>
+                    <li><a href="/Dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a></li>
+                    <li><a href="/Messages"><i class="fa fa-envelope-o fa-fw"></i> Messages</a></li>
+                    <li><a href="/Patients"><i class="fa fa-users fa-fw"></i> Patients</a></li>
+                    <li><a href="/Employees"><i class="fa fa-female fa-fw"></i> Employees</a></li>
+                    <li><a href="/Events"><i class="fa fa-calendar fa-fw"></i> Events</a></li>
+                    <li><a href="/Appointments"><i class="fa fa-calendar-o fa-fw"></i> Appointments</a></li>
+                    <li><a href="/Accounting"><i class="fa fa-money fa-fw"></i> Accounting</a></li>
+                    <li><a href="/MedicalAid"><i class="fa fa-plus-square-o fa-fw"></i> Medical Aid</a></li>
+                    <li><a href="/MedicineInventory"><i class="fa fa-medkit fa-fw"></i> Medicine Inventory</a></li>
+                    <li><a href="/DiagnosisExpertSystem"><i class="fa fa-stethoscope fa-fw"></i> Diagnosis Expert System</a></li>
+                    <li><a href="/Reports"><i class="fa fa-bar-chart-o fa-fw"></i> Reports</a></li>
                 </ul>
             </div>
         </div>
     </nav>
-</div>
+
+    @*User Profile Modal Starts*@
+    <div id="View_Profile_Modal" class="modal fade">
+        <div class="modal-dialog" style="width:50%">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Profile</h4>
+                </div>
+
+                <div class="modal-body">
+                    <ul class="nav nav-pills" style="margin-bottom: 20px;">
+                        <li role="presentation" class="active"><a href="#" onclick="FunctionShowPersonalInfo()">Personal Infor</a></li>
+                        <li role="presentation"><a href="#" onclick="FunctionShowPracticeInfo()">Practice Info</a></li>
+                    </ul>
+
+                    <div class="container" style="padding-top: 0px;">
+                        <div class="row">
+                            <!-- left column -->
+                            <div class="col-md-4 col-sm-6 col-xs-12">
+                                <div class="text-center">
+                                    <img src="http://lorempixel.com/200/200/people/9/" class="avatar img-circle img-thumbnail" alt="avatar">
+                                    <h6>Upload a different photo...</h6>
+                                    <input type="file" class="text-center center-block">
+                                </div>
+                            </div>
+
+                            <!-- edit form column -->
+                            <div class="col-md-8 col-sm-6 col-xs-12 personal-info" id="div_PersonalInfo">
+                                    <div class="panel-heading">
+                                        <h3>Personal info</h3></div>
+                                        <div class="panel-body">
+
+                                            <form class="form-horizontal">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-4" style="text-align:left;">Firstname:</label>
+                                                    <div class="col-md-8"><input class="form-control readonly" type="text" name="Firstname" value="Jossy" style="border: none; font-size: 13px; padding-right: 0px; background-color: transparent;"></div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-4" style="text-align:left;">Lastname:</label>
+                                                    <div class="col-md-8"><input class="form-control readonly" type="text" name="Lastname" value="doctor" style="border: none; font-size: 13px; padding-right: 0px; background-color: transparent;"></div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-4" style="text-align:left;">Email Address:</label>
+                                                    <div class="col-md-8"><input class="form-control readonly" type="email" name="Email_Address" value="josie@gmail.com" style="border: none; font-size: 13px; padding-right: 0px; background-color: transparent;"></div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-4" style="text-align:left;">ID Number:</label>
+                                                    <div class="col-md-8"><input class="form-control readonly" type="text" name="ID_Number" value="94072124589652" style="border: none; font-size: 13px; padding-right: 0px; background-color: transparent;"></div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-4" style="text-align:left;">Gender:</label>
+                                                    <div class="col-md-8">
+                                                        <select name="Gender" class="form-control readonly">
+                                                            <option value=""></option>
+                                                            <option value="1">Male</option>
+                                                            <option value="2">Female</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-4" style="text-align:left;">Cell Number:</label>
+                                                    <div class="col-md-8"><input class="form-control readonly" type="text" name="Cell_Number" value="0837135032" style="border: none; font-size: 13px; padding-right: 0px; background-color: transparent;"></div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-4" style="text-align:left;">Home Address:</label>
+                                                    <div class="col-md-8"><input class="form-control readonly" type="text" name="Home_Address" value="94072124589652" style="border: none; font-size: 13px; padding-right: 0px; background-color: transparent;"></div>
+                                                </div>
+                                                <div id="div_ChangePassword">
+                                                    <div class="form-group">
+                                                        <label class="control-label col-md-4" for="inputPassword" style="text-align:left;">Current Password:</label>
+                                                        <div class="col-md-8"><input name="current_pass" class="form-control" id="inputPassword" type="password" placeholder="Password"></div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="control-label col-md-4" for="inputPassword" style="text-align:left;">New Password:</label>
+                                                        <div class="col-md-8"><input name="new_pass" class="validate[required] form-control" id="inputPassword" type="password" placeholder="New Password"></div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="control-label col-md-4" for="inputPassword" style="text-align:left;">Confirm Password:</label>
+                                                        <div class="col-md-8"><input name="conform_pass" class="validate[required] form-control" id="inputPassword" type="password" placeholder="Conform Password"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-xs-offset-6 col-md-12">
+                                                        <button name="Save_change" id="btnChangePassword" class="btn btn-info">Change Password</button>
+                                                        <button type="button" class="btn btn-default" id="btnCancel_PasswordChange">Cancel</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div></div><!--Personal Info Ends-->
+
+                                        <!--Practice Info starts-->
+                                        <div class="col-md-8 col-sm-6 col-xs-12" id="div_PracticeInformation">
+                                            <div class="panel-heading">
+                                                <h3>Practice info</h3>
+                                                <div class="panel-body">
+                                                    <form class="form-horizontal">
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-6" style="text-align:left;">Practice Name:</label>
+                                                            <div class="col-md-6"><input class="form-control readonly" type="text" name="Practice_Name" value=""></div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-6" style="text-align:left;">Phone Number:</label>
+                                                            <div class="col-md-6"><input class="form-control readonly" type="text" name="Practice_Phone_Number" value="doctor"></div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-6" style="text-align:left;">Fax Number:</label>
+                                                            <div class="col-md-6"><input class="form-control readonly" type="text" name="Practice_Fax_Number" value=""></div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-6" style="text-align:left;">Email Address:</label>
+                                                            <div class="col-md-6"><input class="form-control readonly" type="email" name="Practice_Email_Address" value=""></div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-6" style="text-align:left;">Street Address:</label>
+                                                            <div class="col-md-6"><input class="form-control readonly" type="text" name="Practice_Street_Address" value=""></div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-6" style="text-align:left;">Suburb:</label>
+                                                            <div class="col-md-6"><input class="form-control readonly" type="text" name="Practice_Suburb" value=""></div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-6" style="text-align:left;">City:</label>
+                                                            <div class="col-md-6"><input class="form-control readonly" type="text" name="Practice_City" value=""></div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-6" style="text-align:left;">Country:</label>
+                                                            <div class="col-md-6"><input class="form-control readonly" type="text" name="Practice_Country" value=""></div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-6" style="text-align:left;">Trading Times:</label>
+                                                            <div class="col-md-6"><input class="form-control readonly" type="text" name="Practice_Trading_Times" value=""></div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div><!--Practice Info Ends-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" onclick="btnUpdateProfile()" id="btnUpdateProfile">Update</button>
+                                <button type="button" class="btn btn-danger" onclick="btnDeleteProfile()">Delete</button>
+                            </div>
+                </div>
+            </div>
+        </div>@*User Profile Modal Ends*@
+    </div>
 @{
     ViewBag.Title = "Doctor Connect";
 }
 <div>
     <div ng-view>
-        
+
     </div>
 </div>

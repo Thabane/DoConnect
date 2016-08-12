@@ -1,0 +1,119 @@
+﻿<div>
+    <div id="page-wrapper" ng-controller="MedicalAidController">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header text-primary">Medical Aid</h2>
+            </div>
+        </div>
+
+        <ul class="nav nav-tabs">
+            <li role="presentation" class="active"><a href="/MedicalAid"><i class="fa fa-align-justify"></i>Medical Aid Provider List</a></li>
+            <li role="presentation"><a href="/NewMedicalAidProvider"><i class="fa fa-plus-circle"></i>New Provider</a></li>
+        </ul>
+
+        <div class="panel panel-default">
+            <table class="table-bordered" style="float:right; border:0; margin-bottom:5px;">
+                <tbody>
+                    <tr>
+                        <td style="border: 0;">
+                            <div class="btn-group">
+                                <a class="btn btn-default dropdown-toggle btn-select2" href="#" data-toggle="dropdown" style="font-size:13px;" aria-expanded="false">Search field <span class="caret"></span></a>
+                                <ul class="dropdown-menu" style="font-size:13px;">
+                                    <li><a href="#">Title</a></li>
+                                    <li><a href="#">Date</a></li>
+                                    <li><a href="#">Amount</a></li>
+                                    <li><a href="#">Medical Aid</a></li>
+                                    <li><a href="#">Patient</a></li>
+                                    <li><a href="#">Doctor</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                        <td style="border:0;">
+                            <div class="form-group input-group" style="margin-top:4px; margin-bottom:4px;">
+                                <input class="form-control" type="text" style="font-size:13px;"><span class="input-group-btn">
+                                    <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+                                </span>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table class="table table-hover">
+                <thead style="background-color: #f8f8f8;">
+                    <tr>
+                        <th style="width: 30%;">Provider Name</th>
+                        <th style="width: 15%;">Phone Number</th>
+                        <th style="width: 25%;">Email Address</th>
+                        <th style="width: 15%;">Fax Number</th>
+                        <th style="width: 15%;">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="MedicalAid in MedicalAids">                        
+                        <td>{{MedicalAid.Name}}</td>
+                        <td>{{MedicalAid.Cell_Number}}</td>
+                        <td>{{MedicalAid.Email_Address}}</td>
+                        <td>{{MedicalAid.Fax_Number}}</td>
+                        <td>
+                            <button class="btn btn-primary btn-xs" ng-click="ViewMedicalAid(MedicalAid.ID)" onclick="ViewMedicalAid()"><i class="glyphicon glyphicon-new-window"></i></button>
+                            <button class="btn btn-danger btn-xs" ng-click="DeleteMedicalAid(MedicalAid.ID)"><i class="fa fa-trash-o"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <ul class="pager">
+                <li class="previous"><a href="#">Previous</a></li>
+                <li class="next"><a href="#">Next</a></li>
+            </ul>
+        </div>
+
+        <!--View Medical Aid Modal-->
+        <div id="View_MedicalAid_Modal" class="modal fade">
+            <form>
+                <div class="modal-dialog" style="width:70%;">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title text-primary">Medical Aid Details</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                                <div class="col-md-2"><h5 class="form-control-label">Provider Name:</h5></div>
+                                <div class="col-md-4"><input class="form-control readonly_View" type="text"></div>
+                                <div class="col-md-2"><h5 class="form-control-label">Cell Number:</h5></div>
+                                <div class="col-md-4"><input class="form-control readonly_View" type="text"></div>
+                            </div>
+                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                                <div class="col-md-2"><h5 class="form-control-label">Email Address:</h5></div>
+                                <div class="col-md-4"><input class="form-control readonly_View" type="text"></div>
+                                <div class="col-md-2"><h5>Fax Number:</h5></div>
+                                <div class="col-md-4"><input class="form-control readonly_View" type="text"></div>
+                            </div>
+                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                                <div class="col-md-2"><h5>Scheme Names:</h5></div>
+                                <div class="col-md-4">
+                                    <select class="form-control readonly_View" size="4">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2"><h5 class="form-control-label">Physical Address:</h5></div>
+                                <div class="col-md-4"><textarea class="form-control readonly_View" rows="3"></textarea></div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" ng-click="function_btnUpdateMedicalAid()" id="function_btnUpdateMedicalAid">Update</button>
+                            <button type="button" class="btn btn-danger" ng-click="function_btnDeleteMedicalAid()">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div><!--View Medical Aid Modal Ends-->
+    </div>
+</div>

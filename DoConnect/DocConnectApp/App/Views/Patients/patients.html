@@ -1,0 +1,472 @@
+﻿<div>
+    <div id="page-wrapper" ng-controller="PatientsController">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header text-primary">{{PageTitle_Patients}}</h2>
+            </div>
+        </div>
+        
+        <ul class="nav nav-tabs">
+          <li role="presentation" class="active"><a href="/Patients"><i class="fa fa-align-justify"></i>Patient List</a></li>
+          <li role="presentation"><a href="/NewPatient"><i class="fa fa-plus-circle"></i>New Patient</a></li>
+        </ul>
+        
+        <!--Show Medical History ~ View Patient Record-->
+        <div id="div_Medical_History" class="modal fadeout" style="display: none;">
+            <form class="ng-pristine ng-valid">
+                <div class="modal-dialog" style="width:75%">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <ul class="nav nav-tabs">
+                                <li role="presentation" class="active"><a href="#" onclick="myFunctionShowMedical_History()">Medical Record</a></li>
+                                <li role="presentation"><a href="#" onclick="myFunctionShowPrescriptions()">Prescriptions</a></li>
+                                <li role="presentation"><a href="#" onclick="myFunctionShowConsultations()">Consultation Notes</a></li>
+                            </ul>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row col-md-12" style="margin-top:6px; margin-bottom:6px;"><label class="caption-subject font-green-steel uppercase bold">General Information</label></div>
+                            <div class="row" style="margin-top:6px; margin-bottom:6px;">
+                                <div class="col-md-1"><h5 class="form-control-label">Firstname:</h5></div>
+                                <div class="col-md-3"><input type="text" class="form-control" name="P_Fistname" id="Text9"></div>
+                                <div class="col-md-1"><h5 class="form-control-label">Lastname:</h5></div>
+                                <div class="col-md-3"><input type="text" class="form-control" name="P_Lastname" id="Text11"></div>
+                                <div class="col-md-1"><h5 class="form-control-label">Email:</h5></div>
+                                <div class="col-md-3"><input type="email" class="form-control" name="P_EmailAddress" id="Email2"></div>
+                            </div>
+                            <div class="row" style="margin-top:6px; margin-bottom:6px;">
+                                <div class="col-md-1"><h5>ID Number:</h5></div>
+                                <div class="col-md-3"><input type="text" class="form-control" name="P_IDNumber" id="Text14"></div>
+                                <div class="col-md-1"><h5>Cell Number:</h5></div>
+                                <div class="col-md-3"><input type="text" class="form-control" name="P_CellNumber" id="Text12"></div>
+                                <div class="col-md-1"><h5>DOB:</h5></div>
+                                <div class="col-md-3"><div class="row" style="padding-left:0px; padding-right:0px;">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <div class="input-group date datetimepicker" onclick="DT()">
+                                                                        <input class="form-control" type="text" data-format="MM/dd/yyyy">
+                                                                        <span class="input-group-addon">
+                                                                            <span class="glyphicon glyphicon-calendar"></span>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:6px; margin-bottom:6px;">
+                                <div class="col-md-1"><h5>Gender:</h5></div>
+                                <div class="col-md-3">
+                                    <select class="form-control required input-sm">
+                                        <option value="">Please choose a gender</option>
+                                        <option value="1">Male</option>
+                                        <option value="2">Female</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-1"><h5>Street Address:</h5></div>
+                                <div class="col-md-3"><input type="text" class="form-control" name="P_StreetAddress"></div>
+                                <div class="col-md-1"><h5>Suburb:</h5></div>
+                                <div class="col-md-3"><input type="text" class="form-control" name="P_Suburb"></div>
+                            </div>
+                            <div class="row" style="margin-top:6px; margin-bottom:15px; padding-bottom:15px; border-bottom: 1px solid #ddd;">
+                                <div class="col-md-1"><h5>City:</h5></div>
+                                <div class="col-md-3"><input type="text" class="form-control" name="P_City"></div>
+                                <div class="col-md-1"><h5>Country:</h5></div>
+                                <div class="col-md-3"><input type="text" class="form-control" name="P_Country"></div>
+                            </div>
+
+                            <div class="row col-md-12" style="margin-top:6px; margin-bottom:10px;"><label class="caption-subject font-green-steel uppercase bold">Insurance Information</label></div>
+                            <div class="row" style="margin-top:6px; margin-bottom:6px;">
+                                <div class="col-md-1"><h5>Medical Aid Provider:</h5></div>
+                                <div class="col-md-3">
+                                    <select class="form-control required input-sm" name="P_MedicalAidProvider" id="Select2">
+                                        <option value="">Please choose Medical Aid Provider</option>
+                                        <option value="1">Discovery</option>
+                                        <option value="2">A</option>
+                                        <option value="3">B</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-1"><h5>Scheme Name:</h5></div>
+                                <div class="col-md-3"><input type="text" class="form-control" name="P_Scheme_Name"></div>
+                                <div class="col-md-1"><h5>Membership Number:</h5></div>
+                                <div class="col-md-3"><input type="text" class="form-control" name="P_MedicalAidMembershipNumber"></div>
+                            </div>
+                            <div class="row" style="margin-top:6px; margin-bottom:15px; border-bottom: 1px solid #ddd;">
+                                <div class="col-md-1"><h5>Registration Date:</h5></div>
+                                <div class="col-md-3"><div class="row" style="padding-left:0px; padding-right:0px;">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <div class="input-group date datetimepicker" onclick="DT()">
+                                                                        <input class="form-control" type="text" data-format="MM/dd/yyyy">
+                                                                        <span class="input-group-addon">
+                                                                            <span class="glyphicon glyphicon-calendar" ></span>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                </div>
+                                <div class="col-md-1"><h5>Expiry Date:</h5></div>
+                                <div class="col-md-3"><div class="row" style="padding-left:0px; padding-right:0px;">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <div class="input-group date datetimepicker" onclick="DT()">
+                                                                        <input class="form-control" type="text" data-format="MM/dd/yyyy">
+                                                                        <span class="input-group-addon">
+                                                                            <span class="glyphicon glyphicon-calendar"></span>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                </div>
+                            </div>
+
+                            <div class="row col-md-12" style="margin-top:6px; margin-bottom:10px;"><label class="caption-subject font-green-steel uppercase bold">Health Summary</label></div>
+                            <div class="row" style="margin-top:6px; margin-bottom:10px;">
+                                <div class="col-md-4"><h5>Allergies:</h5> <textarea class="form-control" rows="3" cols="20" name="P_Allergies"></textarea></div>
+                                <div class="col-md-4"><h5>Previous Medication:</h5> <textarea class="form-control" rows="3" cols="20" name="P_PreviousMedication"></textarea></div>
+                                <div class="col-md-4"><h5>Previous Illnesses:</h5> <textarea class="form-control" rows="3" cols="20" name="P_PreviousIllnesses"></textarea></div>
+                            </div>
+                            <div class="row" style="margin-top:6px;">
+                                <div class="col-md-4"><h5>Risk Factors:</h5> <textarea class="form-control" rows="3" cols="20" name="P_RiskFactors"></textarea></div>
+                                <div class="col-md-4"><h5>Social History:</h5> <textarea class="form-control" rows="3" cols="20" name="P_SocialHistory"></textarea></div>
+                                <div class="col-md-4"><h5>Family History:</h5> <textarea class="form-control" rows="3" cols="20" name="P_FamilyHistory"></textarea></div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <a class="btn btn-primary" href="#" id="btnUpdateMedicalRecord" ng-click="btnUpdateMedicalRecord()">Update</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div><!-- Show Medical History ~ View Patient Record Ends-->
+
+        <!-- Show Patients Prescriptions -->
+        <div id="div_Prescriptions" class="modal fadeout" style="display: none;">
+            <form class="ng-pristine ng-valid">
+                <div class="modal-dialog" style="width:90%">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <ul class="nav nav-tabs">
+                                <li role="presentation"><a href="#" onclick="myFunctionShowMedical_History()">Medical Record</a></li>
+                                <li role="presentation" class="active"><a href="#" onclick="myFunctionShowPrescriptions()">Prescriptions</a></li><!--Change to button. when clicked, hide -->
+                                <li role="presentation"><a href="#" onclick="myFunctionShowConsultations()">Consultation Notes</a></li>
+                            </ul>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-6">Full Name: @</div><div class="col-md-8"></div>
+                                    <div class="col-md-6">DOB: @</div><div class="col-md-8"></div>
+                                </div>
+                            </div>
+
+                            <div class="bs-example" data-example-id="simple-table">
+                                <table class="table table-hover">
+                                    <caption style="font-size:16px; text-align: center;" class="caption-subject font-green-steel uppercase bold"><b><u>Prescribed Medication</u></b></caption>
+                                    <thead>
+                                        <tr>
+                                            <th>Treatment</th>
+                                            <th>Name</th>
+                                            <th>Drug Strength</th>
+                                            <th>Intake Route</th>
+                                            <th>Frequency</th>
+                                            <th>Dispence #</th>
+                                            <th>Refill #</th>
+                                            <th>Date Of Issue</th>
+                                            <th>Doctor</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Back Pain</td>
+                                            <td>hgfdswertyyuijhg</td>
+                                            <td>5mg</td>
+                                            <td>Mouth</td>
+                                            <td>As needed</td>
+                                            <td>30</td>
+                                            <td>2</td>
+                                            <td>11-07-2016</td>
+                                            <td>Dr Hossan</td>
+                                            <td class="action">
+                                                <a class="btn btn-primary btn-xs" href="#" ng-click="myFunctionPrescriptions_View()">View</a>
+                                                <a class="btn btn-info btn-xs" href="#" onclick="myFunctionPrescriptions_Edit()">Edit</a>
+                                                <a class="btn btn-danger btn-xs" href="#" ng-click="myFunctionPrescriptions_Delete()">Delete</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Back Pain</td>
+                                            <td>hgfdswertyyuijhg</td>
+                                            <td>5mg</td>
+                                            <td>Mouth</td>
+                                            <td>As needed</td>
+                                            <td>30</td>
+                                            <td>2</td>
+                                            <td>11-07-2016</td>
+                                            <td>Dr Hossan</td>
+                                            <td class="action">
+                                                <a class="btn btn-primary btn-xs" href="#" ng-click="myFunctionPrescriptions_View()">View</a>
+                                                <a class="btn btn-info btn-xs" href="#" onclick="myFunctionPrescriptions_Edit()">Edit</a>
+                                                <a class="btn btn-danger btn-xs" href="#" ng-click="myFunctionPrescriptions_Delete()">Delete</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <ul class="pager">
+                                <li class="previous"><a href="#">Previous</a></li>
+                                <li class="next"><a href="#">Next</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div><!-- Show Prescriptions Ends -->
+
+        <!-- Show Update Prescription Modal -->
+        <div id="div_Prescriptions_Update" class="modal fadeout" style="display: none;">
+            <form class="ng-pristine ng-valid">
+                <div class="modal-dialog" style="width:65%">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title ">Update Prescription Details</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                                <div class="col-md-2"><h5 class="form-control-label">Treatment for:</h5></div>
+                                <div class="col-md-4"><input type="text" class="form-control" name="P_Treatmentfor"></div>
+                                <div class="col-md-2"><h5 class="form-control-label">Medicine Name:</h5></div>
+                                <div class="col-md-4"><input type="text" class="form-control" name="PMedicineName"></div>
+                            </div>
+                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                                <div class="col-md-2"><h5>Drug Strength:</h5></div>
+                                <div class="col-md-4"><input type="text" class="form-control" name="P_DrugStrength"></div>
+                                <div class="col-md-2"><h5>Intake Route:</h5></div>
+                                <div class="col-md-4">
+                                    <select class="form-control required input-sm" name="P_IntakeRoute">
+                                        <option value="">Please choose intake route</option>
+                                        <option value="1">PO (By mouth)</option>
+                                        <option value="2">PR (Per rectum)</option>
+                                        <option value="3">IM (Intramuscular)</option>
+                                        <option value="4">IV (Intravenous)</option>
+                                        <option value="5">ID (Intradermal)</option>
+                                        <option value="6">IN (Intranasal)</option>
+                                        <option value="7">TP (Topical)</option>
+                                        <option value="8">SL (Sublingual)</option>
+                                        <option value="9">BUCC (Buccal)</option>
+                                        <option value="10">IP (Intraperitoneal)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                                <div class="col-md-2"><h5>Intake Frequency:</h5></div>
+                                <div class="col-md-4">
+                                    <select class="form-control required input-sm" name="P_Frequency">
+                                        <option value="">Please choose Intake Frequency</option>
+                                        <option value="1">Daily</option>
+                                        <option value="2">Every other day</option>
+                                        <option value="3">BID/b.i.d. (Twice a Day)</option>
+                                        <option value="4">TID/t.id. (Three Times a Day)</option>
+                                        <option value="5">QID/q.i.d. (Four Times a Day)</option>
+                                        <option value="6">QHS (Every Bedtime)</option>
+                                        <option value="7">Q4h (Every 4 hours))</option>
+                                        <option value="8">Q4-6h (Every 4 to 6 hours)</option>
+                                        <option value="9">QWK (Every Week))</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2"><h5>Dispence Amount:</h5></div>
+                                <div class="col-md-4"><input type="text" class="form-control" name="P_Dispence Amount"></div>
+                            </div>
+                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                                <div class="col-md-2"><h5>Number of Refills:</h5></div>
+                                <div class="col-md-4">
+                                    <select class="form-control required input-sm" name="P_NumberOfRefills">
+                                        <option value="">Please choose Number of Refills</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                        <option value="10">11</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2"></div>
+                                <div class="col-md-4"></div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button class="btn btn-primary" ng-click="myFunctionPrescriptions_Save()" type="submit">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div><!-- Show Update Prescription Modal Ends -->
+
+        <!-- Show Consultation Notes -->
+        <div id="div_Consultations" class="modal fadeout" style="display: none;">
+            <form class="ng-pristine ng-valid">
+                <div class="modal-dialog" style="width:60%">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <ul class="nav nav-tabs">
+                                <li role="presentation"><a href="#" onclick="myFunctionShowMedical_History()">Medical Record</a></li>
+                                <li role="presentation"><a href="#" onclick="myFunctionShowPrescriptions()">Prescriptions</a></li>
+                                <li role="presentation" class="active"><a href="#" onclick="myFunctionShowConsultations()">Consultation Notes</a></li>
+                            </ul>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row" style="margin-top:8px; margin-bottom:8px;">
+                                <div class="col-md-3"><label class="form-control-label">Consultation Date:</label></div>
+                                <div class="col-md-3" style="margin-top:-6px;"><h5>@Date</h5></div>
+                                <div class="col-md-3"><label class="form-control-label">Doctor Name:</label></div>
+                                <div class="col-md-3" style="margin-top:-6px;"><h5>@Doctor Name</h5></div>
+                            </div>
+                            <div class="row" style="margin-top:8px; margin-bottom:8px;">
+                                <div class="col-md-6">
+                                    <label class="form-control-label">Reason for consultation:</label>
+                                    <textarea class="form-control View_readonly" rows="3" cols="20"></textarea>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-control-label">Symptoms:</label>
+                                    <textarea class="form-control View_readonly" rows="3"></textarea>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:8px; margin-bottom:8px;">
+                                <div class="col-md-6">
+                                    <label class="form-control-label">Clinical findings:</label>
+                                    <textarea class="form-control View_readonly" rows="3"></textarea>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Test Results</label><div><br></div>
+                                    <div style="margin-top:-10px;">
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="gridRadios" id="gridRadios1" value="option1">
+                                                Enter test result summary.
+                                            </label>
+                                        </div>
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="gridRadios" id="gridRadios2" value="option2" checked="">
+                                                No tests performed.
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:8px; margin-bottom:8px;">
+                                <div class="col-md-6">
+                                    <label class="form-control-label">Diagnosis:</label>
+                                    <textarea class="form-control View_readonly" rows="3"></textarea>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-control-label">Treatment plan:</label>
+                                    <textarea class="form-control View_readonly" rows="3"></textarea>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:16px; margin-bottom:8px;">
+                                <div class="col-md-12">
+                                    <button class="btn btn-info btn-xs" ng-click="myFunctionConsultation_NewReferral()">New Referral</button>
+                                    <button class="btn btn-info btn-xs" ng-click="myFunctionConsultation_NewPrescribeMedication()">Prescribe Medication</button>
+                                    <button class="btn btn-info btn-xs" ng-click="myFunctionConsultation_Print()">Print</button>
+                                </div>
+                            </div>
+                            <ul class="pager">
+                                <li class="previous"><a href="#">Previous</a></li>
+                                <li class="next"><a href="#">Next</a></li>
+                            </ul>  
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <a class="btn btn-info" ng-click="myFunctionConsultation_NewConsultation()">New</a>
+                            <a class="btn btn-primary" ng-click="btnUpdateConsultation()" id="btnUpdateConsultation" >Update</a>
+                            <a class="btn btn-danger" ng-click="myFunctionConsultation_Delete()">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div><!-- Show Consultation Notes Ends -->
+
+        <div class="panel panel-default">
+            <table class="table-bordered" style="float:right; border:0; margin-bottom:5px;">
+                <tbody>
+                    <tr>
+                        <td style="border: 0;">
+                            <div class="btn-group">
+                                <a class="btn btn-default dropdown-toggle btn-select2" href="#" data-toggle="dropdown" style="font-size:13px;" aria-expanded="false">Search field <span class="caret"></span></a>
+                                <ul class="dropdown-menu" style="font-size:13px;">
+                                    <li><a href="#">Email Address</a></li>
+                                    <li><a href="#">Firstname</a></li>
+                                    <li><a href="#">Lastname</a></li>
+                                    <li><a href="#">ID Number</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                        <td style="border:0;">
+                            <div class="form-group input-group" style="margin-top:4px; margin-bottom:4px;">
+                                <input ng-model="search" class="form-control" type="text" style="font-size:13px;"><span class="input-group-btn">
+                                    <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+                                </span>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table class="table table-hover">
+                <thead style="background-color: #f8f8f8;">
+                    <tr>
+                        <th style="width: 15%;" ng-click="setSortKey('FirstName')">Firstname<span class="glyphicon sort-icon" ng-show="sortKey=='FirstName'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+                        <th style="width: 15%;" ng-click="setSortKey('LastName')">Lastname<span class="glyphicon sort-icon" ng-show="sortKey=='LastName'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+                        <th style="width: 15%;" ng-click="setSortKey('Email')">Email Address<span class="glyphicon sort-icon" ng-show="sortKey=='Email'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+                        <th style="width: 15%;" ng-click="setSortKey('ID_Number')">ID Number<span class="glyphicon sort-icon" ng-show="sortKey=='ID_Number'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+                        <th style="width: 10%;" ng-click="setSortKey('Cell_Number')">Cell Number<span class="glyphicon sort-icon" ng-show="sortKey=='Cell_Number'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+                        <th style="width: 15%;">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="Patient in Patients | filter:search | limitTo : getlimitTo() | orderBy : getSortKey()">
+                        <td>{{Patient.FirstName}}</td>
+                        <td>{{Patient.LastName}}</td>
+                        <td>{{Patient.Email}}</td>
+                        <td>{{Patient.ID_Number}}</td>
+                        <td>{{Patient.Cell_Number}}</td>
+                        <td>
+                            <button class="btn btn-primary btn-xs" ng-click="myFunctionViewPatient(Patient.ID)" onclick="ViewPatient()" ><i class="glyphicon glyphicon-new-window"></i></button>
+                            <button class="btn btn-danger btn-xs" ng-click="myFunctionEmployees_Delete(Patient.ID)"><i class="fa fa-trash-o"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>                    
+
+            <!-- viewing options (setlimitTo,getlimitTo) -->
+            <div class="row">
+                <div class="col-lg-4">
+                    <ul class="pagination">
+                        <li><a ng-click="setlimitTo(2)">2</a></li>
+                        <li><a ng-click="setlimitTo(5)">5</a></li>
+                        <li><a ng-click="setlimitTo(50)">50</a></li>
+                        <li><a ng-click="setlimitTo(100)">100</a></li>
+                        <li><a ng-click="setlimitTo(1000000)">all</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

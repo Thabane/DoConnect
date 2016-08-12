@@ -1,0 +1,61 @@
+﻿<div>
+    <div id="page-wrapper" ng-controller="MedicineInventoryController">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header text-primary">Add Medicine</h2>
+            </div>
+        </div>
+
+        <ul class="nav nav-tabs">
+            <li role="presentation"><a href="/MedicineInventory"><i class="fa fa-align-justify"></i>Medicine Inventory List</a></li>
+            <li role="presentation" class="active"><a href="/NewMedicine"><i class="fa fa-plus-circle"></i>Add Medicine</a></li>
+        </ul>        
+        
+        <form>
+            <div style="margin:auto; width:45%;">
+                <div class="modal-header" style="border-bottom:0px;"></div>
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        <input type="hidden" name="action" value="insert">
+                        <input type="hidden" name="invoice_id" value="0">
+                        <div class="form-group">
+                            <h5 class="col-md-4 control-label" style="text-align:left">Drug Name<span class="require-field" style="color:red">*</span></h5>
+                            <div class="col-md-8"><input class="form-control text-input" type="text"></div>
+                        </div>
+                        <div class="form-group">
+                            <h5 class="col-md-4 control-label" style="text-align:left">Description<span class="require-field" style="color:red">*</span></h5>
+                            <div class="col-md-8"><input class="form-control text-input" type="text"></div>
+                        </div>
+                        <div class="form-group">
+                            <h5 class="col-md-4 control-label" style="text-align:left">Drug Concentration<span class="require-field" style="color:red">*</span></h5>
+                            <div class="col-md-8"><input class="form-control text-input" type="text"></div>
+                        </div>
+                        <div class="form-group">
+                            <h5 class="col-md-4 control-label" style="text-align:left">Quantity Purchased<span class="require-field" style="color:red">*</span></h5>
+                            <div class="col-md-8"><input class="form-control text-input" type="text"></div>
+                        </div>
+                        <div class="form-group">
+                            <h5 class="col-md-4 control-label" style="text-align:left">Expiry Date<span class="require-field" style="color:red">*</span></h5>
+                            <div class="col-md-8"><div class="row" style="padding-left:15px; padding-right:15px;">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <div class="input-group date datetimepicker" onclick="DT()">
+                                                                    <input class="form-control" type="text" data-format="MM/dd/yyyy">
+                                                                    <span class="input-group-addon">
+                                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" value="Add Medicine Entry" name="save_NewMedicine" class="btn btn-primary">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
