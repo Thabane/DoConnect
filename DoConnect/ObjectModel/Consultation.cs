@@ -21,5 +21,24 @@ namespace ObjectModel
         public string TreatmentPlan { get; set; }
         public int Presciption_ID { get; set; }
         public int Referral_ID { get; set; }
+
+        public Consultation Create(SqlDataReader reader)
+        {
+            return new Consultation
+            {
+                ID = reader.GetInt32(reader.GetOrdinal("ID")),
+                Patient_ID = reader.GetInt32(reader.GetOrdinal("Patient_ID")),
+                Doctor_ID = reader.GetInt32(reader.GetOrdinal("Doctor_ID")),
+                Date = reader.GetDateTime(reader.GetOrdinal("Date")),
+                ReasonForConsultation = reader.GetString(reader.GetOrdinal("ReasonForConsultation")),
+                Symptoms = reader.GetString(reader.GetOrdinal("Symptoms")),
+                ClinicalFindings = reader.GetString(reader.GetOrdinal("ClinicalFindings")),
+                Diagnosis = reader.GetString(reader.GetOrdinal("Diagnosis")),
+                TestResultSummary = reader.GetString(reader.GetOrdinal("TestResultSummary")),
+                TreatmentPlan = reader.GetString(reader.GetOrdinal("TreatmentPlan")),
+                Presciption_ID = reader.GetInt32(reader.GetOrdinal("Presciption_ID")),
+                Referral_ID = reader.GetInt32(reader.GetOrdinal("Referral_ID")),
+            };
+        }
     }
 }
