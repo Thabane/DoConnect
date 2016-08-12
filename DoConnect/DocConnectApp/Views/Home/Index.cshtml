@@ -64,6 +64,13 @@
                 $(".readonly_ViewEvent").css("background-color", "transparent");
             };
 
+        //Practices Page
+            function ViewPractice() {
+                $("#View_Practice_Modal").modal("show");
+                $(".readonly_ViewPractice").attr("readonly", true);
+                $(".readonly_ViewPractice").css("background-color", "transparent");
+            };
+
         //Medical Aid Page
             function ViewMedicalAid() {
                 $("#View_MedicalAid_Modal").modal("show");
@@ -290,6 +297,7 @@
                     <li><a href="/Employees"><i class="fa fa-female fa-fw"></i> Employees</a></li>
                     <li><a href="/Events"><i class="fa fa-calendar fa-fw"></i> Events</a></li>
                     <li><a href="/Appointments"><i class="fa fa-calendar-o fa-fw"></i> Appointments</a></li>
+                    <li><a href="/Practices"><i class="fa fa-hospital-o fa-fw"></i> Practices</a></li>
                     <li><a href="/Accounting"><i class="fa fa-money fa-fw"></i> Accounting</a></li>
                     <li><a href="/MedicalAid"><i class="fa fa-plus-square-o fa-fw"></i> Medical Aid</a></li>
                     <li><a href="/MedicineInventory"><i class="fa fa-medkit fa-fw"></i> Medicine Inventory</a></li>

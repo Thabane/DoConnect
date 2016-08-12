@@ -1,0 +1,61 @@
+﻿<div>
+    <div id="page-wrapper" ng-controller="PracticesController">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header text-primary">{{PageTitle_NewPractice}}</h2>
+            </div>
+        </div>
+
+        <ul class="nav nav-tabs">
+            <li role="presentation"><a href="/Practices"><i class="fa fa-align-justify"></i>Practice List</a></li>
+            <li role="presentation" class="active"><a href="/NewPractice"><i class="fa fa-plus-circle"></i>New Practice</a></li>
+        </ul>
+
+        <!--Add Practice Modal-->
+        <form>
+            <div style="margin:auto; width:45%;">
+                <div class="modal-header" style="border-bottom:0px;"></div>
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <h5 class="col-md-4 control-label" style="text-align:left">Name:<span style="color:red">*</span></h5>
+                            <div class="col-md-8"><input class="form-control" type="text" ng-model="Name"></div>
+                        </div>
+                        <div class="form-group">
+                            <h5 class="col-md-4 control-label" style="text-align:left">Phone Number:<span style="color:red">*</span></h5>
+                            <div class="col-md-8"><input class="form-control" type="text" ng-model="Phone_Number"></div>
+                        </div>
+                        <div class="form-group">
+                            <h5 class="col-md-4 control-label" style="text-align:left">Fax Number:<span style="color:red">*</span></h5>
+                            <div class="col-md-8"><input class="form-control" type="text" ng-model="Fax_Number"></div>
+                        </div>
+                        <div class="form-group">
+                            <h5 class="col-md-4 control-label" style="text-align:left">Street Address:<span style="color:red">*</span></h5>
+                            <div class="col-md-8"><input class="form-control" type="text" ng-model="Street_Address"></div>
+                        </div>
+                        <div class="form-group">
+                            <h5 class="col-md-4 control-label" style="text-align:left">Suburb:<span style="color:red">*</span></h5>
+                            <div class="col-md-8"><input class="form-control" type="text" ng-model="Suburb"></div>
+                        </div>
+                        <div class="form-group">
+                            <h5 class="col-md-4 control-label" style="text-align:left">City:<span style="color:red">*</span></h5>
+                            <div class="col-md-8"><input class="form-control" type="text" ng-model="City"></div>
+                        </div>
+                        <div class="form-group">
+                            <h5 class="col-md-4 control-label" style="text-align:left">Country:<span style="color:red">*</span></h5>
+                            <div class="col-md-8"><input class="form-control" type="text" ng-model="Country"></div>
+                        </div>
+                        <div class="form-group">
+                            <h5 class="col-md-4 control-label" style="text-align:left">Trading Times:<span style="color:red">*</span></h5>
+                            <div class="col-md-8"><textarea class="form-control" rows="3" cols="20" ng-model="Trading_Times"></textarea></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" ng-click="NewPractice()">Save</button>
+                </div>
+            </div>
+        </form><!-- /.Practice Modal-->
+    </div>
+</div>
+

@@ -54,6 +54,14 @@ app.config(
                 templateUrl: "App/Views/MedicalAid/NewMedicalAidProvider.html",
                 controller: "MedicalAidController"
             })
+            .when("/Practices", {
+                templateUrl: "App/Views/Practices/Practices.html",
+                controller: "PracticesController"
+            })
+            .when("/NewPractice", {
+                templateUrl: "App/Views/Practices/NewPractice.html",
+                controller: "PracticesController"
+            })
             .when("/Accounting", {
                 templateUrl: "App/Views/Accounting/Accounting.html",
                 controller: "AccountingController"

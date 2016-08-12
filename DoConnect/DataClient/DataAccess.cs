@@ -27,7 +27,7 @@ namespace DataClient
         /// <returns></returns>
         internal SqlDataReader ExecuteReader(string connectionString, string procName, List<SqlParameter> commandParameters)
         {
-            string connStr = ConfigurationManager.ConnectionStrings[connectionString].ConnectionString;
+            string connStr = connectionString;
             var conn = new SqlConnection(connStr);
             SqlCommand command = new SqlCommand(procName, conn);
 
@@ -48,7 +48,7 @@ namespace DataClient
         /// <param name="storedProc">The stored proc.</param>
         internal void ExecuteNonQuery(string connectionString, List<SqlParameter> parameters, string storedProc)
         {
-            string connStr = ConfigurationManager.ConnectionStrings[connectionString].ConnectionString;
+            string connStr = connectionString;
             using (var con = new SqlConnection(connStr))
             using (var command = new SqlCommand(storedProc, con))
             {

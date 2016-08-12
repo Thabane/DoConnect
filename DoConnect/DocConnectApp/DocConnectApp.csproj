@@ -144,6 +144,7 @@
     <Compile Include="Controllers\MedicineInventoryController.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Controllers\PatientsController.cs" />
+    <Compile Include="Controllers\PracticesController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\UserProfileController.cs" />
     <Compile Include="Global.asax.cs">
@@ -164,6 +165,7 @@
     <Content Include="App\Controllers\MedicineInventoryController.js" />
     <Content Include="App\Controllers\MessagesController.js" />
     <Content Include="App\Controllers\PatientsController.js" />
+    <Content Include="App\Controllers\PracticesController.js" />
     <Content Include="App\Controllers\Reports.js" />
     <Content Include="App\Controllers\UserProfileController.js" />
     <Content Include="App\Services\AccountingService.js" />
@@ -178,6 +180,7 @@
     <Content Include="App\Services\MedicineInventoryService.js" />
     <Content Include="App\Services\MessagesService.js" />
     <Content Include="App\Services\PatientsService.js" />
+    <Content Include="App\Services\PracticesService.js" />
     <Content Include="App\Services\ReportsService.js" />
     <Content Include="App\Services\UserProfileService.js" />
     <Content Include="App\Views\Accounting\Accounting.html" />
@@ -201,6 +204,8 @@
     <Content Include="App\Views\Messages\Messages.html" />
     <Content Include="App\Views\Patients\NewPatient.html" />
     <Content Include="App\Views\Patients\patients.html" />
+    <Content Include="App\Views\Practices\NewPractice.html" />
+    <Content Include="App\Views\Practices\Practices.html" />
     <Content Include="App\Views\Reports\Reports.html" />
     <Content Include="App\Views\UserProfile\UserProfile.html" />
     <Content Include="Content\bootstrap-theme.css" />

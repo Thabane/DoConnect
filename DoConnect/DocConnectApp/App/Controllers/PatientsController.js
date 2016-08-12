@@ -35,7 +35,6 @@
             }
         };
 
-        $scope.users = []; //declare an empty array
         $scope.GetPatients = function () {
             PatientsService.GetAllPatients().then
             (function (result) {
@@ -66,15 +65,4 @@
             });
 
         };
-
-        //$scope.myFunctionViewPatient = function (ID) {
-        //    var ID = ID;
-        //    $scope.GetPatient = function (ID) {
-        //        PatientsService.GetPatient(ID).then
-        //        (function (result) {
-        //            $scope.Patient = result.data;
-        //        });
-        //    };
-        //    $scope.GetPatient();
-        //};
     }]);

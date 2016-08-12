@@ -15,7 +15,7 @@ namespace DataClient
     {
         private DataAccess access;
         private List<SqlParameter> _parameters = new List<SqlParameter>();
-        private string Conn = "DB";
+        private string Conn = @"Data Source=DESKTOP-6Gu3I3G\SQLEXPRESS;Initial Catalog=DoConnect;Integrated Security=True";
 
         public DataLayer()
         {
@@ -482,16 +482,15 @@ namespace DataClient
 
         public List<Practice> GetAllPractices()
         {
-            List<Practice> patientInfo = new List<Practice>();
-            int userId = 0;
+            List<Practice> PracticeInfo = new List<Practice>();
             using (var reader = access.ExecuteReader(Conn, "[GetAllPractices]", new List<SqlParameter>()))
             {
-                if (reader.Read())
+                while (reader.Read())
                 {
-                    userId = reader.GetInt32(reader.GetOrdinal("ID"));
+                    PracticeInfo.Add(new Practice().Create(reader));
                 }
             }
-            return patientInfo;
+            return PracticeInfo;
         }
 
         public bool DeletePractice(int id)
