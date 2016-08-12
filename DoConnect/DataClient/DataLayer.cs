@@ -40,7 +40,8 @@ namespace DataClient
         #endregion
 
         #region patient
-        public void CreatePatient(string firstName, string lastName, string id_Number, string gender, DateTime dob, string cell_number, string street_address, string suburb, string city, string country, int UserId)
+        public bool CreatePatient(string firstName, string lastName, string id_Number, string gender, DateTime dob, string cell_number, string street_address, string suburb, string city, string country,
+            string Allergies, string PreviousIllnesses, string PreviousMedication, string RiskFactors, string SocialHistory, string FamilyHistory, int Medical_Aid_ID, int Doctor_ID, int UserId)
         {
 
             //state params
@@ -55,6 +56,16 @@ namespace DataClient
             SqlParameter suburbParameter = new SqlParameter("@Suburb", SqlDbType.NVarChar);
             SqlParameter cityParameter = new SqlParameter("@City", SqlDbType.NVarChar);
             SqlParameter countryParameter = new SqlParameter("@Country", SqlDbType.NVarChar);
+
+            SqlParameter AllergiesParameter = new SqlParameter("@Allergies", SqlDbType.NVarChar);
+            SqlParameter PreviousIllnessesParameter = new SqlParameter("@PreviousIllnesses", SqlDbType.NVarChar);
+            SqlParameter PreviousMedicationParameter = new SqlParameter("@PreviousMedication", SqlDbType.NVarChar);
+            SqlParameter RiskFactorsParameter = new SqlParameter("@RiskFactors", SqlDbType.NVarChar);
+            SqlParameter SocialHistoryParameter = new SqlParameter("@SocialHistory", SqlDbType.NVarChar);
+            SqlParameter FamilyHistoryParameter = new SqlParameter("@FamilyHistory", SqlDbType.NVarChar);
+            SqlParameter Medical_Aid_IDParameter = new SqlParameter("@Medical_Aid_ID", SqlDbType.Int);
+            SqlParameter Doctor_IDParameter = new SqlParameter("@Doctor_ID", SqlDbType.Int);
+            SqlParameter UserIdParameter = new SqlParameter("@UserId", SqlDbType.Int);
             //assign values
             firstNameParameter.Value = firstName;
             lastNameParameter.Value = lastName;
@@ -66,6 +77,15 @@ namespace DataClient
             suburbParameter.Value = suburb;
             cityParameter.Value = city;
             countryParameter.Value = country;
+            AllergiesParameter.Value = Allergies;
+            PreviousIllnessesParameter.Value = PreviousIllnesses;
+            PreviousMedicationParameter.Value = PreviousMedication;
+            RiskFactorsParameter.Value = RiskFactors;
+            SocialHistoryParameter.Value = SocialHistory;
+            FamilyHistoryParameter.Value = FamilyHistory;
+            Medical_Aid_IDParameter.Value = Medical_Aid_ID;
+            Doctor_IDParameter.Value = Doctor_ID;
+            UserIdParameter.Value = UserId;
             //add to list
             _parameters.Add(firstNameParameter);
             _parameters.Add(lastNameParameter);
@@ -77,17 +97,27 @@ namespace DataClient
             _parameters.Add(suburbParameter);
             _parameters.Add(cityParameter);
             _parameters.Add(countryParameter);
+            _parameters.Add(AllergiesParameter);
+            _parameters.Add(PreviousIllnessesParameter);
+            _parameters.Add(PreviousMedicationParameter);
+            _parameters.Add(RiskFactorsParameter);
+            _parameters.Add(SocialHistoryParameter);
+            _parameters.Add(FamilyHistoryParameter);
+            _parameters.Add(Medical_Aid_IDParameter);
+            _parameters.Add(Doctor_IDParameter);
+            _parameters.Add(UserIdParameter);
 
             try
             {
                 access.ExecuteNonQuery(Conn, _parameters, "[CreatePatient]");
                 access.LogEntry(UserId, "Created Patient");
+                return true;
             }
             catch (Exception ex)
             {
                 access.LogEntry(UserId, ex.ToString());
-            }                  
-            
+                return false;
+            }
         }
 
         public bool NewUpdateDoctor(Doctor doc, int UserId)
@@ -188,9 +218,10 @@ namespace DataClient
             return true;
         }
 
-        public bool UpdatePatient(int id, string firstName, string lastName, string id_Number, string gender, DateTime dob, string cell_number, string street_address, string suburb, string city, string country)
-        {
-            List<SqlParameter> _parameters = new List<SqlParameter>();
+        public bool UpdatePatient(int id, string firstName, string lastName, string id_Number, string gender, DateTime dob, string cell_number, string street_address, string suburb, string city, string country, string Allergies, string PreviousIllnesses, string PreviousMedication, string RiskFactors, string SocialHistory, string FamilyHistory, int Medical_Aid_ID, int Doctor_ID)
+        { 
+
+           List < SqlParameter> _parameters = new List<SqlParameter>();
             SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
             SqlParameter firstNameParameter = new SqlParameter("@FirstName", SqlDbType.NVarChar);
             SqlParameter lastNameParameter = new SqlParameter("@LastName", SqlDbType.NVarChar);
@@ -202,6 +233,14 @@ namespace DataClient
             SqlParameter suburbParameter = new SqlParameter("@Suburb", SqlDbType.NVarChar);
             SqlParameter cityParameter = new SqlParameter("@City", SqlDbType.NVarChar);
             SqlParameter countryParameter = new SqlParameter("@Country", SqlDbType.NVarChar);
+            SqlParameter AllergiesParameter = new SqlParameter("@Allergies", SqlDbType.NVarChar);
+            SqlParameter PreviousIllnessesParameter = new SqlParameter("@PreviousIllnesses", SqlDbType.NVarChar);
+            SqlParameter PreviousMedicationParameter = new SqlParameter("@PreviousMedication", SqlDbType.NVarChar);
+            SqlParameter RiskFactorsParameter = new SqlParameter("@RiskFactors", SqlDbType.NVarChar);
+            SqlParameter SocialHistoryParameter = new SqlParameter("@SocialHistory", SqlDbType.NVarChar);
+            SqlParameter FamilyHistoryParameter = new SqlParameter("@FamilyHistory", SqlDbType.NVarChar);
+            SqlParameter Medical_Aid_IDParameter = new SqlParameter("@Medical_Aid_ID", SqlDbType.Int);
+            SqlParameter Doctor_IDParameter = new SqlParameter("@Doctor_ID", SqlDbType.Int);
             idParameter.Value = id;
             firstNameParameter.Value = firstName;
             lastNameParameter.Value = lastName;
@@ -213,6 +252,14 @@ namespace DataClient
             suburbParameter.Value = suburb;
             cityParameter.Value = city;
             countryParameter.Value = country;
+            AllergiesParameter.Value = Allergies;
+            PreviousIllnessesParameter.Value = PreviousIllnesses;
+            PreviousMedicationParameter.Value = PreviousMedication;
+            RiskFactorsParameter.Value = RiskFactors;
+            SocialHistoryParameter.Value = SocialHistory;
+            FamilyHistoryParameter.Value = FamilyHistory;
+            Medical_Aid_IDParameter.Value = Medical_Aid_ID;
+            Doctor_IDParameter.Value = Doctor_ID;
             _parameters.Add(idParameter);
             _parameters.Add(firstNameParameter);
             _parameters.Add(lastNameParameter);
@@ -224,8 +271,15 @@ namespace DataClient
             _parameters.Add(suburbParameter);
             _parameters.Add(cityParameter);
             _parameters.Add(countryParameter);
+            _parameters.Add(AllergiesParameter);
+            _parameters.Add(PreviousIllnessesParameter);
+            _parameters.Add(PreviousMedicationParameter);
+            _parameters.Add(RiskFactorsParameter);
+            _parameters.Add(SocialHistoryParameter);
+            _parameters.Add(FamilyHistoryParameter);
+            _parameters.Add(Medical_Aid_IDParameter);
+            _parameters.Add(Doctor_IDParameter);
 
-            
             int userId = 0;
             using (var reader = access.ExecuteReader(Conn, "[UpdatePatient]", new List<SqlParameter>()))
             {

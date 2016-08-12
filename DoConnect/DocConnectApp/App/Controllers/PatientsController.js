@@ -1,6 +1,6 @@
-﻿app.controller("PatientsController", ["$scope", "PatientsService", "$interval", 
+﻿app.controller("PatientsController", ["$scope", "PatientsService", "$interval",
     function ($scope, PatientsService, $interval) {
-        
+
         $scope.PageTitle_Patients = 'Patients';
         $scope.PageTitle_NewPatient = 'New Patient Details';
 
@@ -47,19 +47,25 @@
         $scope.strSort;
         $scope.limitTo = 5;
 
-        $scope.setlimitTo=function(limit){
+        $scope.setlimitTo = function (limit) {
             $scope.limitTo = limit;
         }
-        $scope.getlimitTo=function(){
+        $scope.getlimitTo = function () {
             return $scope.limitTo;
         }
-        $scope.setSortKey=function(key){
+        $scope.setSortKey = function (key) {
             $scope.strSort = key;
         }
-        $scope.getSortKey=function(){
+        $scope.getSortKey = function () {
             return $scope.strSort;
         }
-     
+
+        $scope.InsertPatient = function (FirstName, LastName, ID_Number, Gender, DOB, Cell_Number, Street_Address, Suburb, City, Country, Allergies, PreviousIllnesses, PreviousMedication, RiskFactors, SocialHistory, FamilyHistory, Medical_Aid_ID, Doctor_ID, User_ID) {
+            PatientsService.InsertPatient(FirstName, LastName, ID_Number, Gender, DOB, Cell_Number, Street_Address, Suburb, City, Country, Allergies, PreviousIllnesses, PreviousMedication, RiskFactors, SocialHistory, FamilyHistory, Medical_Aid_ID, Doctor_ID, User_ID).sucess(function (data, status, headers, config) {
+                console.log("data inserted" + data);
+            });
+
+        };
 
         //$scope.myFunctionViewPatient = function (ID) {
         //    var ID = ID;

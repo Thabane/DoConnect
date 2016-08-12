@@ -10,13 +10,14 @@ namespace DataClient
     public interface IDataLayer
     {
         int CreateUser(int AccessLevel);
-        void CreatePatient(string firstName, string lastName, string id_Number, string gender, DateTime dob, string cell_number, string street_address, string suburb, string city, string country, int UserId);
+        bool CreatePatient(string firstName, string lastName, string id_Number, string gender, DateTime dob, string cell_number, string street_address, string suburb, string city, string country,
+            string Allergies, string PreviousIllnesses, string PreviousMedication, string RiskFactors, string SocialHistory, string FamilyHistory, int Medical_Aid_ID, int Doctor_ID, int UserId);
         bool NewUpdateDoctor(Doctor doc, int UserId);
         Patient GetPatient(int id);
         Doctor GetDoctor(int DocID);
         List<Patient> GetAllPatients();
         bool DeletePatient(int id);
-        bool UpdatePatient(int id, string firstName, string lastName, string id_Number, string gender, DateTime dob, string cell_number, string street_address, string suburb, string city, string country);
+        bool UpdatePatient(int id, string firstName, string lastName, string id_Number, string gender, DateTime dob, string cell_number, string street_address, string suburb, string city, string country, string Allergies, string PreviousIllnesses, string PreviousMedication, string RiskFactors, string SocialHistory, string FamilyHistory, int Medical_Aid_ID, int Doctor_ID);
         int Create_Patient_Medical_Aid(string scheme_name, string member_number, bool status, DateTime registration_date, DateTime deregistration, int patient_ID, int medical_Aid_ID);
         Patient_Medical_Aid Get_Patient_Medical_Aid(int id);
         List<Patient_Medical_Aid> GetAll_Patient_Medical_Aids();

@@ -10,6 +10,12 @@
 		@Suburb NVARCHAR(50),
 		@City NVARCHAR(50),
 		@Country NVARCHAR(50),
+		@Allergies NVARCHAR(200),
+		@PreviousIllnesses NVARCHAR(200),
+		@PreviousMedication NVARCHAR(200),
+		@RiskFactors NVARCHAR(200),
+        @SocialHistory NVARCHAR(200),
+        @FamilyHistory NVARCHAR(200),
 		@Medical_Aid_ID INT,
 		@Doctor_ID INT,
 		@User_ID INT
@@ -32,6 +38,12 @@ BEGIN
 			@Suburb,
 			@City,
 			@Country,
+			@Allergies,
+            @PreviousIllnesses,
+            @PreviousMedication,
+		    @RiskFactors,
+            @SocialHistory,
+            @FamilyHistory,
 			@Medical_Aid_ID,
 			@Doctor_ID,
 			@User_ID
@@ -49,6 +61,12 @@ BEGIN
       ,[Suburb]
       ,[City]
       ,[Country]
+	  ,[Allergies]
+      ,[PreviousIllnesses]
+      ,[PreviousMedication]
+      ,[RiskFactors]
+      ,[SocialHistory]
+      ,[FamilyHistory] 
       ,[Medical_Aid_ID]
       ,[Doctor_ID]
       ,[User_ID]
@@ -68,6 +86,12 @@ BEGIN
       ,[Suburb] = @Suburb
       ,[City] = @City
       ,[Country] = @Country
+	  ,[Allergies] = @Allergies
+	  ,[PreviousIllnesses] = @PreviousIllnesses
+	  ,[PreviousMedication] = @PreviousMedication
+      ,[RiskFactors] = @RiskFactors
+	  ,[SocialHistory] = @SocialHistory
+	  ,[FamilyHistory] = @FamilyHistory
 	WHEN NOT MATCHED THEN
 	INSERT
 	(
@@ -81,6 +105,12 @@ BEGIN
       ,[Suburb]
       ,[City]
       ,[Country]
+	  ,[Allergies]
+	  ,[PreviousIllnesses]
+	  ,[PreviousMedication]
+      ,[RiskFactors]
+	  ,[SocialHistory]
+	  ,[FamilyHistory]
       ,[Medical_Aid_ID]
       ,[Doctor_ID]
       ,[User_ID]
@@ -97,9 +127,16 @@ BEGIN
 		@Suburb,
 		@City,
 		@Country,
+		@Allergies,
+        @PreviousIllnesses,
+        @PreviousMedication,
+		@RiskFactors,
+        @SocialHistory,
+        @FamilyHistory,
 		@Medical_Aid_ID,
 		@Doctor_ID,
 		@User_ID
 	);
 
 END
+GO
