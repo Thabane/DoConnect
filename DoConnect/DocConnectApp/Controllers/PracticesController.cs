@@ -17,6 +17,16 @@ namespace DocConnectApp.Controllers
         {
             DataLayer dtLayer = new DataLayer();
             return dtLayer.GetAllPractices();
+        }        
+
+        [HttpPost]
+        [Route("api/Practices/InsertPractice")]
+        public bool InsertPractice(Practice practice)
+        {
+            DataLayer dtLayer = new DataLayer();
+            return dtLayer.InsertPractice(practice.Name, practice.Phone_Number, practice.Fax_Number, practice.Street_Address, practice.Suburb, practice.City, practice.Country, "yu", "uy", practice.Trading_Times);
         }
+
+        
     }
 }

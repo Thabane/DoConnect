@@ -12,4 +12,10 @@
                 angular.element("#function_btnUpdateMedicine").html("Update");
             }
         };
+
+        //Sort Function
+        $scope.sort = function (keyname) {
+            $scope.sortKey = keyname;
+            $scope.reverse = !$scope.reverse;
+        }
     }]);

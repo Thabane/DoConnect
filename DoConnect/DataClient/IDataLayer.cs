@@ -38,5 +38,7 @@ namespace DataClient
         List<Staff> GetAllStaffMembers();
         bool DeleteStaff(int id);
         bool UpdateStaff(int id, string firstName, string lastName, string id_Number, string gender, DateTime dob, string phone, string employee_Type, int practice_ID, int user_ID);
+
+        bool InsertPractice(string Name, string Phone_Number, string Fax_Number, string Street_Address, string Suburb, string City, string Country, string Latitude, string Longitude, string Trading_Times);
     }
 }

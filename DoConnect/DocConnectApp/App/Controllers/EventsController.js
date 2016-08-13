@@ -51,4 +51,11 @@
                 $("#datetimepicker5").data("DateTimePicker").maxDate(e.date);
             });
         };
+
+        //Sort Function
+        $scope.sort = function (keyname) {
+            $scope.sortKey = keyname;
+            $scope.reverse = !$scope.reverse;
+        }
+
     }]);

@@ -22,16 +22,16 @@
             <table class="table table-hover">
                 <thead style="background-color: #f8f8f8;">
                     <tr>
-                        <th style="width: 15%;" ng-click="setSortKey('Name')">Name</th>
-                        <th style="width: 15%;" ng-click="setSortKey('Phone_Number')">Phone Number</th>
-                        <th style="width: 15%;" ng-click="setSortKey('Fax_Number')">Fax Number</th>
-                        <th style="width: 20%;" ng-click="setSortKey('Street_Address')">Physical Address</th>
-                        <th style="width: 20%;" ng-click="setSortKey('Trading_Times')">Trading Times</th>
+                        <th style="width: 15%;" ng-click="sort('Name')">Name<span class="fa sort-icon" ng-show="sortKey=='Name'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                        <th style="width: 15%;" ng-click="sort('Phone_Number')">Phone_Number<span class="fa sort-icon" ng-show="sortKey=='Phone_Number'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                        <th style="width: 15%;" ng-click="sort('Fax_Number')">Fax Number<span class="fa sort-icon" ng-show="sortKey=='Fax_Number'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                        <th style="width: 20%;" ng-click="sort('Street_Address')">Physical Address<span class="fa sort-icon" ng-show="sortKey=='Street_Address'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                        <th style="width: 20%;" ng-click="sort('Trading_Times')">Trading Times<span class="fa sort-icon" ng-show="sortKey=='Trading_Times'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
                         <th style="width: 10%;">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="Practice in Practices | filter:search | limitTo : getlimitTo() | orderBy : getSortKey()">
+                    <tr dir-paginate="Practice in Practices | filter:search | orderBy:sortKey:reverse | itemsPerPage:5">
                         <td>{{Practice.Name}}</td>
                         <td>{{Practice.Phone_Number}}</td>
                         <td>{{Practice.Fax_Number}}</td>
@@ -45,14 +45,8 @@
                 </tbody>
             </table>
             <div class="row">
-                <div class="col-lg-4">
-                    <ul class="pagination">
-                        <li><a ng-click="setlimitTo(5)">5</a></li>
-                        <li><a ng-click="setlimitTo(10)">10</a></li>
-                        <li><a ng-click="setlimitTo(50)">50</a></li>
-                        <li><a ng-click="setlimitTo(100)">100</a></li>
-                        <li><a ng-click="setlimitTo(1000000)">all</a></li>
-                    </ul>
+                <div class="col-md-12">
+                    <dir-pagination-controls class="pull-right" max-size="5" direction-links="true" boundary-links="true" style="margin-right: 20px;"></dir-pagination-controls>
                 </div>
             </div>
         </div>
@@ -66,38 +60,38 @@
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             <h4 class="modal-title text-primary">Practice Details</h4>
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body" ng-repeat="Practice in Practices | filter: { ID: 2 }">
                             <div class="row" style="margin-top:5px; margin-bottom:5px;">
                                 <h5 class="col-md-3">Name:</h5>
-                                <div class="col-md-8"><input class="form-control readonly_ViewPractice" type="text" ng-model="Name"></div>
+                                <div class="col-md-8"><input class="form-control readonly_ViewPractice" type="text" ng-value="Practice.Name" ng-model="Name"></div>
                             </div>
                             <div class="row" style="margin-top:5px; margin-bottom:5px;">
                                 <h5 class="col-md-3">Phone Number:</h5>
-                                <div class="col-md-8"><input class="form-control readonly_ViewPractice" type="text" ng-model="Phone_Number"></div>
+                                <div class="col-md-8"><input class="form-control readonly_ViewPractice"type="text"  ng-value="Practice.Phone_Number" ng-model="Phone_Number"></div>
                             </div>
                             <div class="row" style="margin-top:5px; margin-bottom:5px;">
                                 <h5 class="col-md-3">Fax Number:</h5>
-                                <div class="col-md-8"><input class="form-control readonly_ViewPractice" type="text" ng-model="Fax_Number"></div>
+                                <div class="col-md-8"><input class="form-control readonly_ViewPractice" type="text" ng-value="Practice.Fax_Number" ng-model="Fax_Number"></div>
                             </div>
                             <div class="row" style="margin-top:5px; margin-bottom:5px;">
                                 <h5 class="col-md-3">Street Address:</h5>
-                                <div class="col-md-8"><input class="form-control readonly_ViewPractice" type="text" ng-model="Street_Address"></div>
+                                <div class="col-md-8"><input class="form-control readonly_ViewPractice" rows="3" cols="20" type="text" ng-value="Practice.Street_Address"  ng-model="Street_Address"></div>
                             </div>
                             <div class="row" style="margin-top:5px; margin-bottom:5px;">
                                 <h5 class="col-md-3">Suburb:</h5>
-                                <div class="col-md-8"><input class="form-control readonly_ViewPractice" type="text" ng-model="Suburb"></div>
+                                <div class="col-md-8"><input class="form-control readonly_ViewPractice" type="text" ng-value="Practice.Suburb" ng-model="Suburb"></div>
                             </div>
                             <div class="row" style="margin-top:5px; margin-bottom:5px;">
                                 <h5 class="col-md-3">City:</h5>
-                                <div class="col-md-8"><input class="form-control readonly_ViewPractice" type="text" ng-model="City"></div>
+                                <div class="col-md-8"><input class="form-control readonly_ViewPractice" type="text" ng-value="Practice.City" ng-model="City"></div>
                             </div>
                             <div class="row" style="margin-top:5px; margin-bottom:5px;">
                                 <h5 class="col-md-3">Country:</h5>
-                                <div class="col-md-8"><input class="form-control readonly_ViewPractice" type="text" ng-model="Country"></div>
+                                <div class="col-md-8"><input class="form-control readonly_ViewPractice" type="text" ng-value="Practice.Country" ng-model="Country"></div>
                             </div>
                             <div class="row" style="margin-top:5px; margin-bottom:5px;">
-                                <h5 class="col-md-3">Trading Times:</h5>
-                                <div class="col-md-8"><textarea class="form-control readonly_ViewPractice" rows="3" cols="20" ng-model="Trading_Times"></textarea></div>
+                                <h5 class="col-md-3">Trading Times:</h5>                                                                      
+                                <div class="col-md-8"><textarea class="form-control readonly_ViewPractice" rows="3" cols="20" type="text" ng-model="Trading_Times">thig</textarea></div>
                             </div>
                         </div>
                         <div class="modal-footer">

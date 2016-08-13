@@ -17,6 +17,12 @@
             }
         };
 
+        //Sort Function
+        $scope.sort = function (keyname) {
+            $scope.sortKey = keyname;
+            $scope.reverse = !$scope.reverse;
+        }
+
         $scope.GetAllPractices = function () {
             PracticesService.GetAllPractices().then
             (function (result) {
@@ -25,19 +31,17 @@
         };
         $scope.GetAllPractices();
 
-        $scope.strSort;
-        $scope.limitTo = 5;
+        
 
-        $scope.setlimitTo = function (limit) {
-            $scope.limitTo = limit;
-        }
-        $scope.getlimitTo = function () {
-            return $scope.limitTo;
-        }
-        $scope.setSortKey = function (key) {
-            $scope.strSort = key;
-        }
-        $scope.getSortKey = function () {
-            return $scope.strSort;
-        }        
+        $scope.NewPractice = function (Name, Phone_Number, Fax_Number, Street_Address, Suburb, City, Country, Trading_Times) {
+            PracticesService.InsertPractice(Name, Phone_Number, Fax_Number, Street_Address, Suburb, City, Country, Trading_Times).then
+            (function (result) {
+                console.log(result);
+            });
+            console.log("data inserted" + Name + Phone_Number + Fax_Number + Street_Address + Suburb + City + Country + Trading_Times);
+            //.sucess(function (data, status, headers, config) {
+            //    console.log("data inserted" + data);
+            //});
+        };
+        
     }]);

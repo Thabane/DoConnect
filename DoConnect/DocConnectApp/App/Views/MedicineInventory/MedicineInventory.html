@@ -40,16 +40,16 @@
             <table class="table table-hover">
                 <thead style="background-color: #f8f8f8;">
                     <tr>
-                        <th style="width: 25%;">Drug Name</th>
-                        <th style="width: 10%;">Drug Concentration</th>
-                        <th style="width: 10%;">Qty In Stock</th>
-                        <th style="width: 25%;">Practice Name</th>
-                        <th style="width: 15%;">Expiry Date</th>
+                        <th style="width: 25%;" ng-click="sort('DrugName')">Drug Name<span class="fa sort-icon" ng-show="sortKey=='DrugName'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                        <th style="width: 10%;" ng-click="sort('DrugConcentration')">Drug Concentration<span class="fa sort-icon" ng-show="sortKey=='DrugConcentration'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                        <th style="width: 10%;" ng-click="sort('QuantityInStock')">Qty In Stock<span class="fa sort-icon" ng-show="sortKey=='QuantityInStock'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                        <th style="width: 25%;" ng-click="sort('PracticeName')">Practice Name<span class="fa sort-icon" ng-show="sortKey=='PracticeName'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                        <th style="width: 15%;" ng-click="sort('ExpiryDate')">Expiry Date<span class="fa sort-icon" ng-show="sortKey=='ExpiryDate'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
                         <th style="width: 15%;">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="Medicine in Medicines">
+                    <tr dir-paginate="Medicine in Medicines | filter:search | orderBy:sortKey:reverse | itemsPerPage:5">
                         <td>{{Medicine.DrugName}}</td>
                         <td>{{Medicine.DrugConcentration}}</td>
                         <td>{{Medicine.QuantityInStock}}</td>
@@ -63,10 +63,11 @@
                 </tbody>
             </table>
 
-            <ul class="pager">
-                <li class="previous"><a href="#">Previous</a></li>
-                <li class="next"><a href="#">Next</a></li>
-            </ul>
+            <div class="row">
+                <div class="col-md-12">
+                    <dir-pagination-controls class="pull-right" max-size="5" direction-links="true" boundary-links="true" style="margin-right: 20px;"></dir-pagination-controls>
+                </div>
+            </div>
         </div>
 
         <!--View Medicine Modal-->

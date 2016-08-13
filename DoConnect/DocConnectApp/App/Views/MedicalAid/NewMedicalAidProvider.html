@@ -19,26 +19,22 @@
                     <div class="modal-header" style="border-bottom:0px;"></div>
                     <div class="modal-body">
                         <div class="form-horizontal">
-                            <input type="hidden" name="action" value="insert">
-                            <input type="hidden" name="expense_id" value="0">
-                            <input type="hidden" name="invoice_type" value="expense">
-
                             <div class="row" style="margin-top:4px; margin-bottom:4px;">
-                                <div class="col-md-2"><h5 class="form-control-label">Provider Name:</h5></div>
-                                <div class="col-md-4"><input class="form-control" type="text"></div>
-                                <div class="col-md-2"><h5 class="form-control-label">Cell Number:</h5></div>
-                                <div class="col-md-4"><input class="form-control" type="text"></div>
+                                <div class="col-md-2"><h5>Provider Name:<span style="color:red">*</span></h5></div>
+                                <div class="col-md-4"><input class="form-control" type="text" ng-model="Name"></div>
+                                <div class="col-md-2"><h5>Cell Number:<span style="color:red">*</span></h5></div>
+                                <div class="col-md-4"><input class="form-control" type="text" ng-model="Cell_Number"></div>
                             </div>
                             <div class="row" style="margin-top:4px; margin-bottom:4px;">
-                                <div class="col-md-2"><h5 class="form-control-label">Email Address:</h5></div>
-                                <div class="col-md-4"><input class="form-control" type="text"></div>
-                                <div class="col-md-2"><h5>Fax Number:</h5></div>
-                                <div class="col-md-4"><input class="form-control" type="text"></div>
+                                <div class="col-md-2"><h5>Email Address:<span style="color:red">*</span></h5></div>
+                                <div class="col-md-4"><input class="form-control" type="text" ng-model="Email_Address"></div>
+                                <div class="col-md-2"><h5>Fax Number:<span style="color:red">*</span></h5></div>
+                                <div class="col-md-4"><input class="form-control" type="text" ng-model="Fax_Number"></div>
                             </div>
                             <div class="row" style="margin-top:4px; margin-bottom:4px;">
-                                <div class="col-md-2"><h5>Scheme Names:</h5></div>
+                                <div class="col-md-2"><h5>Scheme Names:<span style="color:red">*</span></h5></div>
                                 <div class="col-md-4">
-                                    <select class="form-control" size="4">
+                                    <select class="form-control" ng-model="SchemeName">
                                         <option>1</option>
                                         <option>2</option>
                                         <option>3</option>
@@ -46,16 +42,17 @@
                                         <option>5</option>
                                     </select>
                                 </div>
-                                <div class="col-md-2"><h5 class="form-control-label">Physical Address:</h5></div>
-                                <div class="col-md-4"><textarea class="form-control" rows="3"></textarea></div>
+                                <div class="col-md-2"><h5>Physical Address:<span style="color:red">*</span></h5></div>
+                                <div class="col-md-4"><textarea class="form-control" rows="3" ng-model="Address"></textarea></div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <input type="submit" value="Create Provider Entry" name="save_provider" class="btn btn-primary">
+                        <button type="button" class="btn btn-primary" ng-click="NewMedicalAidProvider(Name, Cell_Number, Fax_Number, Email_Address, Address)">Create Provider Entry</button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
 </div>
+   

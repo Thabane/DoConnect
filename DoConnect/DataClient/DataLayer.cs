@@ -805,5 +805,39 @@ namespace DataClient
             return null;
         }
         #endregion
+
+        public bool InsertPractice(string Name, string Phone_Number, string Fax_Number, string Street_Address, string Suburb, string City, string Country, string Latitude, string Longitude, string Trading_Times)
+        {
+            
+        int ID = 0;
+            SqlParameter NameParameter = new SqlParameter("@Name", SqlDbType.NVarChar);
+            SqlParameter Phone_NumberParameter = new SqlParameter("@Phone_Number", SqlDbType.NVarChar);
+            SqlParameter Fax_NumberParameter = new SqlParameter("@Fax_Number", SqlDbType.NVarChar);
+            SqlParameter Street_AddressParameter = new SqlParameter("@Street_Address", SqlDbType.NVarChar);
+            SqlParameter SuburbParameter = new SqlParameter("@Suburb", SqlDbType.NVarChar);
+            SqlParameter CityParameter = new SqlParameter("@City", SqlDbType.NVarChar);
+            SqlParameter CountryParameter = new SqlParameter("@Country", SqlDbType.NVarChar);
+            SqlParameter LatitudeParameter = new SqlParameter("@Latitude", SqlDbType.NVarChar);
+            SqlParameter LongitudeParameter = new SqlParameter("@Longitude", SqlDbType.NVarChar);
+            SqlParameter Trading_TimesParameter = new SqlParameter("@Trading_Times", SqlDbType.NVarChar);
+
+            Phone_NumberParameter.Value = Phone_Number;
+            Fax_NumberParameter.Value = Fax_Number;
+            Street_AddressParameter.Value = Street_Address;
+            SuburbParameter.Value = Suburb;
+            CityParameter.Value = City;
+            CountryParameter.Value = Country;
+            LatitudeParameter.Value = Latitude;
+            LongitudeParameter.Value = Longitude;
+            Trading_TimesParameter.Value = Trading_Times;
+
+            using (var reader = access.ExecuteReader(Conn, "[InsertPractice]", new List<SqlParameter>() { Phone_NumberParameter, Fax_NumberParameter, Street_AddressParameter, SuburbParameter, CityParameter, CountryParameter, LatitudeParameter, LongitudeParameter, Trading_TimesParameter }))
+            {
+                if (reader.Read())
+                   ID = reader.GetInt32(reader.GetOrdinal("ID"));
+            }
+            //access.LogEntry(ID, "New User Created");
+            return true;
+        }
     }
 }

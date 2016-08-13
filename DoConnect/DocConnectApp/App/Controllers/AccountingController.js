@@ -6,23 +6,14 @@
         $scope.PageTitleNewExpenseEntry = 'New Expense Entry';
         $scope.PageTitleNewPatientInvoiceEntry = 'New Patient Invoice Entry';
 
-        $scope.strSort;
-        $scope.limitTo = 5;
-        $scope.setlimitTo = function (limit) {
-            $scope.limitTo = limit;
-        }
-        $scope.getlimitTo = function () {
-            return $scope.limitTo;
-        }
-        $scope.setSortKey = function (key) {
-            $scope.strSort = key;
-        }
-        $scope.getSortKey = function () {
-            return $scope.strSort;
+        //Sort Function
+        $scope.sort = function (keyname) {
+            $scope.sortKey = keyname;
+            $scope.reverse = !$scope.reverse;
         }
 
         //Invoice Regin
-        $scope.GetInvoices = function () {
+        /*$scope.GetInvoices = function () {
             InvoicesService.GetAllInvoices().then
             (function (result) {
                 $scope.Invoices = result.data;
@@ -37,6 +28,6 @@
                 console.log("data inserted" + data);
             });
 
-        };
+        };*/
         
     }]);

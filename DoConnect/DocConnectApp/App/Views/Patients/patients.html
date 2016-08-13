@@ -403,44 +403,26 @@
         </div><!-- Show Consultation Notes Ends -->
 
         <div class="panel panel-default">
-            <table class="table-bordered" style="float:right; border:0; margin-bottom:5px;">
-                <tbody>
-                    <tr>
-                        <td style="border: 0;">
-                            <div class="btn-group">
-                                <a class="btn btn-default dropdown-toggle btn-select2" href="#" data-toggle="dropdown" style="font-size:13px;" aria-expanded="false">Search field <span class="caret"></span></a>
-                                <ul class="dropdown-menu" style="font-size:13px;">
-                                    <li><a href="#">Email Address</a></li>
-                                    <li><a href="#">Firstname</a></li>
-                                    <li><a href="#">Lastname</a></li>
-                                    <li><a href="#">ID Number</a></li>
-                                </ul>
-                            </div>
-                        </td>
-                        <td style="border:0;">
-                            <div class="form-group input-group" style="margin-top:4px; margin-bottom:4px;">
-                                <input ng-model="search" class="form-control" type="text" style="font-size:13px;"><span class="input-group-btn">
-                                    <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
-                                </span>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="row" style="margin-top: 10px; margin-right: 10px;">
+                <div class="col-md-4"></div><div class="col-md-4"><h5 class="pull-right">Search:</h5></div>
+                <div class="form-group col-md-4">
+                    <input class="form-control" type="text" style="font-size:13px;" ng-model="search">
+                </div>
+            </div>
 
             <table class="table table-hover">
                 <thead style="background-color: #f8f8f8;">
                     <tr>
-                        <th style="width: 15%;" ng-click="setSortKey('FirstName')">Firstname<span class="glyphicon sort-icon" ng-show="sortKey=='FirstName'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
-                        <th style="width: 15%;" ng-click="setSortKey('LastName')">Lastname<span class="glyphicon sort-icon" ng-show="sortKey=='LastName'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
-                        <th style="width: 15%;" ng-click="setSortKey('Email')">Email Address<span class="glyphicon sort-icon" ng-show="sortKey=='Email'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
-                        <th style="width: 15%;" ng-click="setSortKey('ID_Number')">ID Number<span class="glyphicon sort-icon" ng-show="sortKey=='ID_Number'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
-                        <th style="width: 10%;" ng-click="setSortKey('Cell_Number')">Cell Number<span class="glyphicon sort-icon" ng-show="sortKey=='Cell_Number'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+                        <th style="width: 15%;" ng-click="sort('FirstName')">Firstname<span class="fa sort-icon" ng-show="sortKey=='FirstName'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                        <th style="width: 15%;" ng-click="sort('LastName')">Lastname<span class="fa sort-icon" ng-show="sortKey=='LastName'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                        <th style="width: 15%;" ng-click="sort('Email')">Email Address<span class="fa sort-icon" ng-show="sortKey=='Email'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                        <th style="width: 15%;" ng-click="sort('ID_Number')">ID Number<span class="fa sort-icon" ng-show="sortKey=='ID_Number'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                        <th style="width: 10%;" ng-click="sort('Cell_Number')">Cell Number<span class="fa sort-icon" ng-show="sortKey=='Cell_Number'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
                         <th style="width: 15%;">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="Patient in Patients | filter:search | limitTo : getlimitTo() | orderBy : getSortKey()">
+                    <tr dir-paginate="Patient in Patients | filter:search | orderBy:sortKey:reverse | itemsPerPage:5">
                         <td>{{Patient.FirstName}}</td>
                         <td>{{Patient.LastName}}</td>
                         <td>{{Patient.Email}}</td>
@@ -454,16 +436,9 @@
                 </tbody>
             </table>                    
 
-            <!-- viewing options (setlimitTo,getlimitTo) -->
             <div class="row">
-                <div class="col-lg-4">
-                    <ul class="pagination">
-                        <li><a ng-click="setlimitTo(2)">2</a></li>
-                        <li><a ng-click="setlimitTo(5)">5</a></li>
-                        <li><a ng-click="setlimitTo(50)">50</a></li>
-                        <li><a ng-click="setlimitTo(100)">100</a></li>
-                        <li><a ng-click="setlimitTo(1000000)">all</a></li>
-                    </ul>
+                <div class="col-md-12">
+                    <dir-pagination-controls class="pull-right" max-size="5" direction-links="true" boundary-links="true" style="margin-right: 20px;"></dir-pagination-controls>
                 </div>
             </div>
         </div>

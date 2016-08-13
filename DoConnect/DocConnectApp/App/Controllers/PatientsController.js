@@ -35,6 +35,12 @@
             }
         };
 
+        //Sort Function
+        $scope.sort = function (keyname) {
+            $scope.sortKey = keyname;
+            $scope.reverse = !$scope.reverse;
+        }
+
         $scope.GetPatients = function () {
             PatientsService.GetAllPatients().then
             (function (result) {
@@ -43,21 +49,7 @@
         };
         $scope.GetPatients();
 
-        $scope.strSort;
-        $scope.limitTo = 5;
-
-        $scope.setlimitTo = function (limit) {
-            $scope.limitTo = limit;
-        }
-        $scope.getlimitTo = function () {
-            return $scope.limitTo;
-        }
-        $scope.setSortKey = function (key) {
-            $scope.strSort = key;
-        }
-        $scope.getSortKey = function () {
-            return $scope.strSort;
-        }
+       
 
         $scope.InsertPatient = function (FirstName, LastName, ID_Number, Gender, DOB, Cell_Number, Street_Address, Suburb, City, Country, Allergies, PreviousIllnesses, PreviousMedication, RiskFactors, SocialHistory, FamilyHistory, Medical_Aid_ID, Doctor_ID, User_ID) {
             PatientsService.InsertPatient(FirstName, LastName, ID_Number, Gender, DOB, Cell_Number, Street_Address, Suburb, City, Country, Allergies, PreviousIllnesses, PreviousMedication, RiskFactors, SocialHistory, FamilyHistory, Medical_Aid_ID, Doctor_ID, User_ID).sucess(function (data, status, headers, config) {
