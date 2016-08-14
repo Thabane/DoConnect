@@ -6,27 +6,51 @@ using System.Net.Http;
 using System.Web.Http;
 using ObjectModel;
 using DataClient;
+using System.Web.Http.Description;
 
 namespace DocConnectApp.Controllers
 {
     public class PracticesController : ApiController
     {
-        [HttpGet]
+        [HttpGet]//Select all Practice data
         [Route("api/Practices/GetAllPractices")]
         public List<Practice> GetAllPractices()
         {
             DataLayer dtLayer = new DataLayer();
             return dtLayer.GetAllPractices();
-        }        
+        }
+                    
+        [HttpGet] //Select Practice by ID
+        [Route("api/Practices/GetPractice/{ID}")]
+        public Practice GetPracticeByID(int ID)
+        {
+            DataLayer dtLayer = new DataLayer();
+            return dtLayer.GetPractice(ID);
+        }
 
-        [HttpPost]
+        [HttpPost]//Update Practice
+        [Route("api/Practices/UpdatePractice")]
+        public bool UpdatePractice(Practice practice)
+        {
+            DataLayer dtLayer = new DataLayer();
+            return dtLayer.UpdatePractice(practice.ID, practice.Name, practice.Phone_Number, practice.Fax_Number, practice.Street_Address, practice.Suburb, practice.City, practice.Country, "yu", "uy", practice.Trading_Times);
+        }
+
+        [HttpPost] //Insert Practice
         [Route("api/Practices/InsertPractice")]
         public bool InsertPractice(Practice practice)
         {
             DataLayer dtLayer = new DataLayer();
             return dtLayer.InsertPractice(practice.Name, practice.Phone_Number, practice.Fax_Number, practice.Street_Address, practice.Suburb, practice.City, practice.Country, "yu", "uy", practice.Trading_Times);
-        }
 
+        }        
         
+        [HttpPost]
+        [Route("api/Practices/DeletePractice/{ID}")]
+        public bool DeletePractice(int ID)
+        {
+            DataLayer dtLayer = new DataLayer();
+            return dtLayer.DeletePractice(ID);
+        }
     }
 }

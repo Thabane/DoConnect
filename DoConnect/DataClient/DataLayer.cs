@@ -419,7 +419,7 @@ namespace DataClient
         public int CreatePractice(string name, string cell_number, string fax_number, string street_address, string suburb, string city, string country, string latitude, string longitude, string trading_Times)
         {
             List<SqlParameter> _parameters = new List<SqlParameter>();
-            SqlParameter nameParameter = new SqlParameter("@Name", SqlDbType.Int);
+            SqlParameter nameParameter = new SqlParameter("@Name", SqlDbType.NVarChar);
             SqlParameter cell_numberParameter = new SqlParameter("@Cell_Number", SqlDbType.NVarChar);
             SqlParameter fax_numberParameter = new SqlParameter("@Fax_Number", SqlDbType.NVarChar);
             SqlParameter street_addressParameter = new SqlParameter("@Street_Address", SqlDbType.NVarChar);
@@ -468,16 +468,25 @@ namespace DataClient
             idParameter.Value = id;
             _parameters.Add(idParameter);
 
-            Practice patientMedicalAidInfo = new Practice();
-            int userId = 0;
-            using (var reader = access.ExecuteReader(Conn, "[GetPractice]", new List<SqlParameter>()))
+            Practice PracticeInfo = new Practice();            
+            using (var reader = access.ExecuteReader(Conn, "[GetPracticeById]", _parameters))
             {
                 if (reader.Read())
                 {
-                    userId = reader.GetInt32(reader.GetOrdinal("ID"));
+                        PracticeInfo.ID             = reader.GetInt32(reader.GetOrdinal("ID"));
+                        PracticeInfo.Name           = reader.GetString(reader.GetOrdinal("Name"));
+                        PracticeInfo.Phone_Number   = reader.GetString(reader.GetOrdinal("Phone_Number"));
+                        PracticeInfo.Fax_Number     = reader.GetString(reader.GetOrdinal("Fax_Number"));
+                        PracticeInfo.Street_Address = reader.GetString(reader.GetOrdinal("Street_Address"));
+                        PracticeInfo.Suburb         = reader.GetString(reader.GetOrdinal("Suburb"));
+                        PracticeInfo.City           = reader.GetString(reader.GetOrdinal("City"));
+                        PracticeInfo.Country        = reader.GetString(reader.GetOrdinal("Country"));
+                        PracticeInfo.Latitude       = reader.GetString(reader.GetOrdinal("Latitude"));
+                        PracticeInfo.Longitude      = reader.GetString(reader.GetOrdinal("Longitude"));
+                        PracticeInfo.Trading_Times  = reader.GetString(reader.GetOrdinal("Trading_Times"));
                 }
             }
-            return patientMedicalAidInfo;
+            return PracticeInfo;
         }
 
         public List<Practice> GetAllPractices()
@@ -500,15 +509,18 @@ namespace DataClient
             idParameter.Value = id;
             _parameters.Add(idParameter);
             
-            int userId = 0;
-            using (var reader = access.ExecuteReader(Conn, "[DeletePractice]", new List<SqlParameter>()))
+            using (var reader = access.ExecuteReader(Conn, "[DeletePractice]", _parameters))
             {
                 if (reader.Read())
                 {
-                    userId = reader.GetInt32(reader.GetOrdinal("ID"));
+                    return true;
+                }
+                else
+                {
+                    return false;
                 }
             }
-            return true;
+            
         }
 
         public bool UpdatePractice(int id, string name, string cell_number, string fax_number, string street_address, string suburb, string city, string country, string latitude, string longitude, string trading_Times)
@@ -548,7 +560,7 @@ namespace DataClient
             _parameters.Add(longitudeParameter);
             _parameters.Add(trading_TimesParameter);
             int userId = 0;
-            using (var reader = access.ExecuteReader(Conn, "[UpdatePractice]", new List<SqlParameter>()))
+            using (var reader = access.ExecuteReader(Conn, "[UpdatePractice]", _parameters))
             {
                 if (reader.Read())
                 {
@@ -821,15 +833,27 @@ namespace DataClient
             SqlParameter LongitudeParameter = new SqlParameter("@Longitude", SqlDbType.NVarChar);
             SqlParameter Trading_TimesParameter = new SqlParameter("@Trading_Times", SqlDbType.NVarChar);
 
-            Phone_NumberParameter.Value = Phone_Number;
-            Fax_NumberParameter.Value = Fax_Number;
-            Street_AddressParameter.Value = Street_Address;
-            SuburbParameter.Value = Suburb;
-            CityParameter.Value = City;
-            CountryParameter.Value = Country;
-            LatitudeParameter.Value = Latitude;
-            LongitudeParameter.Value = Longitude;
-            Trading_TimesParameter.Value = Trading_Times;
+            NameParameter           .Value = Name;
+            Phone_NumberParameter   .Value = Phone_Number;
+            Fax_NumberParameter     .Value = Fax_Number;
+            Street_AddressParameter .Value = Street_Address;
+            SuburbParameter         .Value = Suburb;
+            CityParameter           .Value = City;
+            CountryParameter        .Value = Country;
+            LatitudeParameter       .Value = Latitude;
+            LongitudeParameter      .Value = Longitude;
+            Trading_TimesParameter  .Value = Trading_Times;
+
+            _parameters.Add( NameParameter          );
+            _parameters.Add( Phone_NumberParameter  );
+            _parameters.Add( Fax_NumberParameter    );
+            _parameters.Add( Street_AddressParameter);
+            _parameters.Add( SuburbParameter        );
+            _parameters.Add( CityParameter          );
+            _parameters.Add( CountryParameter       );
+            _parameters.Add( LatitudeParameter      );
+            _parameters.Add( LongitudeParameter     );
+            _parameters.Add(Trading_TimesParameter);
 
             using (var reader = access.ExecuteReader(Conn, "[InsertPractice]", new List<SqlParameter>() { Phone_NumberParameter, Fax_NumberParameter, Street_AddressParameter, SuburbParameter, CityParameter, CountryParameter, LatitudeParameter, LongitudeParameter, Trading_TimesParameter }))
             {

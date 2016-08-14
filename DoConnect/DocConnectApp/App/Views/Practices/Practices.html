@@ -60,38 +60,38 @@
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             <h4 class="modal-title text-primary">Practice Details</h4>
                         </div>
-                        <div class="modal-body" ng-repeat="Practice in Practices | filter: { ID: 2 }">
+                        <div class="modal-body">
                             <div class="row" style="margin-top:5px; margin-bottom:5px;">
                                 <h5 class="col-md-3">Name:</h5>
-                                <div class="col-md-8"><input class="form-control readonly_ViewPractice" type="text" ng-value="Practice.Name" ng-model="Name"></div>
+                                <div class="col-md-8"><input class="form-control readonly_ViewPractice" type="text" ng-value="Name" ng-model="Name"></div>
                             </div>
                             <div class="row" style="margin-top:5px; margin-bottom:5px;">
                                 <h5 class="col-md-3">Phone Number:</h5>
-                                <div class="col-md-8"><input class="form-control readonly_ViewPractice"type="text"  ng-value="Practice.Phone_Number" ng-model="Phone_Number"></div>
+                                <div class="col-md-8"><input class="form-control readonly_ViewPractice"type="text"  ng-value="Phone_Number" ng-model="Phone_Number"></div>
                             </div>
                             <div class="row" style="margin-top:5px; margin-bottom:5px;">
                                 <h5 class="col-md-3">Fax Number:</h5>
-                                <div class="col-md-8"><input class="form-control readonly_ViewPractice" type="text" ng-value="Practice.Fax_Number" ng-model="Fax_Number"></div>
+                                <div class="col-md-8"><input class="form-control readonly_ViewPractice" type="text" ng-value="Fax_Number" ng-model="Fax_Number"></div>
                             </div>
                             <div class="row" style="margin-top:5px; margin-bottom:5px;">
                                 <h5 class="col-md-3">Street Address:</h5>
-                                <div class="col-md-8"><input class="form-control readonly_ViewPractice" rows="3" cols="20" type="text" ng-value="Practice.Street_Address"  ng-model="Street_Address"></div>
+                                <div class="col-md-8"><input class="form-control readonly_ViewPractice" rows="3" cols="20" type="text" ng-value="Street_Address"  ng-model="Street_Address"></div>
                             </div>
                             <div class="row" style="margin-top:5px; margin-bottom:5px;">
                                 <h5 class="col-md-3">Suburb:</h5>
-                                <div class="col-md-8"><input class="form-control readonly_ViewPractice" type="text" ng-value="Practice.Suburb" ng-model="Suburb"></div>
+                                <div class="col-md-8"><input class="form-control readonly_ViewPractice" type="text" ng-value="Suburb" ng-model="Suburb"></div>
                             </div>
                             <div class="row" style="margin-top:5px; margin-bottom:5px;">
                                 <h5 class="col-md-3">City:</h5>
-                                <div class="col-md-8"><input class="form-control readonly_ViewPractice" type="text" ng-value="Practice.City" ng-model="City"></div>
+                                <div class="col-md-8"><input class="form-control readonly_ViewPractice" type="text" ng-value="City" ng-model="City"></div>
                             </div>
                             <div class="row" style="margin-top:5px; margin-bottom:5px;">
                                 <h5 class="col-md-3">Country:</h5>
-                                <div class="col-md-8"><input class="form-control readonly_ViewPractice" type="text" ng-value="Practice.Country" ng-model="Country"></div>
+                                <div class="col-md-8"><input class="form-control readonly_ViewPractice" type="text" ng-value="Country" ng-model="Country"></div>
                             </div>
                             <div class="row" style="margin-top:5px; margin-bottom:5px;">
                                 <h5 class="col-md-3">Trading Times:</h5>                                                                      
-                                <div class="col-md-8"><textarea class="form-control readonly_ViewPractice" rows="3" cols="20" type="text" ng-model="Trading_Times">thig</textarea></div>
+                                <div class="col-md-8"><textarea class="form-control readonly_ViewPractice" rows="3" cols="20" type="text"  ng-value="Trading_Times" ng-model="Trading_Times"></textarea></div>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -105,4 +105,11 @@
         </div><!--View Pratice Modal Ends-->
     </div>
 </div>
-
+<script>
+    //Practices Page
+    function ViewPractice() {
+        $("#View_Practice_Modal").modal("show");
+        $(".readonly_ViewPractice").attr("readonly", true);
+        $(".readonly_ViewPractice").css("background-color", "transparent");
+    };
+</script>
