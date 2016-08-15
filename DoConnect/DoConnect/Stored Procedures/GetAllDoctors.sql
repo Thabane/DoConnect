@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [GetAllDocotors] 
+﻿CREATE PROCEDURE [GetAllDoctors] 
 
 AS
 BEGIN
