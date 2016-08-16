@@ -8,12 +8,17 @@ using System.Web.Mvc;
 
 namespace DocConnectApp.Controllers
 {
-    public class LoginController : ApiController
+    public class LoginController : Controller
     {
-        public void Validation()
+        //public void Validation()
+        //{
+        //    //return null;
+        //    //return View();
+        //}
+        public ActionResult Index()
         {
-            //return null;
-            //return View();
+            return View();
         }
+
     }
 }

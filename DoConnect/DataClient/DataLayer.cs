@@ -22,7 +22,6 @@ namespace DataClient
             access = new DataAccess();
         }
 
-        #region
         public int CreateUser(int AccessLevel)
         {
             int userId = 0;
@@ -37,14 +36,13 @@ namespace DataClient
             access.LogEntry(userId, "New User Created");
             return userId;
         }
-        #endregion
 
         #region patient
         public void CreatePatient(string firstName, string lastName, string id_Number, string gender, DateTime dob, string cell_number, string street_address, string suburb, string city, string country, int UserId)
         {
 
             //state params
-            List<SqlParameter> _parameters = new List<SqlParameter>();
+            _parameters = new List<SqlParameter>();
             SqlParameter firstNameParameter = new SqlParameter("@FirstName", SqlDbType.NVarChar);
             SqlParameter lastNameParameter = new SqlParameter("@LastName", SqlDbType.NVarChar);
             SqlParameter id_NumberParameter = new SqlParameter("@ID_Number", SqlDbType.NVarChar);
@@ -55,6 +53,7 @@ namespace DataClient
             SqlParameter suburbParameter = new SqlParameter("@Suburb", SqlDbType.NVarChar);
             SqlParameter cityParameter = new SqlParameter("@City", SqlDbType.NVarChar);
             SqlParameter countryParameter = new SqlParameter("@Country", SqlDbType.NVarChar);
+            SqlParameter userIdParameter = new SqlParameter("@@User_ID", SqlDbType.NVarChar);
             //assign values
             firstNameParameter.Value = firstName;
             lastNameParameter.Value = lastName;
@@ -66,6 +65,7 @@ namespace DataClient
             suburbParameter.Value = suburb;
             cityParameter.Value = city;
             countryParameter.Value = country;
+            userIdParameter.Value = UserId;
             //add to list
             _parameters.Add(firstNameParameter);
             _parameters.Add(lastNameParameter);
@@ -77,10 +77,11 @@ namespace DataClient
             _parameters.Add(suburbParameter);
             _parameters.Add(cityParameter);
             _parameters.Add(countryParameter);
+            _parameters.Add(userIdParameter);
 
             try
             {
-                access.ExecuteNonQuery(Conn, _parameters, "[CreatePatient]");
+                access.ExecuteNonQuery(Conn, _parameters, "[NewUpdatePatient]");
                 access.LogEntry(UserId, "Created Patient");
             }
             catch (Exception ex)
@@ -752,5 +753,30 @@ namespace DataClient
             return null;
         }
         #endregion
+
+        public SystemUser Login(string username, string password, int AccessLevel)
+        {
+            SystemUser user = new SystemUser();
+
+            if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password))
+            {
+                if (AccessLevel == 1)
+                {
+                    SqlParameter usernameParameter = new SqlParameter("@Email", SqlDbType.NVarChar);
+                    SqlParameter passwordParameter = new SqlParameter("@Password", SqlDbType.NVarChar);
+                    usernameParameter.Value = username;
+                    passwordParameter.Value = password;
+
+                    using (var reader = access.ExecuteReader(Conn, "[CreateUser]", new List<SqlParameter>() { usernameParameter, passwordParameter }))
+                    {
+                        //if (reader.Read())
+                        //    userId = reader.GetInt32(reader.GetOrdinal("ID"));
+                    }
+                }
+            }
+
+            
+            return user;
+        }
     }
 }
