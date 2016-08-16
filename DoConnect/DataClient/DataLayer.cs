@@ -754,13 +754,29 @@ namespace DataClient
         }
         #endregion
 
-        public bool Login(string username, string password)
+        public SystemUser Login(string username, string password, int AccessLevel)
         {
+            SystemUser user = new SystemUser();
+
             if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password))
             {
-                return true;
+                if (AccessLevel == 1)
+                {
+                    SqlParameter usernameParameter = new SqlParameter("@Email", SqlDbType.NVarChar);
+                    SqlParameter passwordParameter = new SqlParameter("@Password", SqlDbType.NVarChar);
+                    usernameParameter.Value = username;
+                    passwordParameter.Value = password;
+
+                    using (var reader = access.ExecuteReader(Conn, "[CreateUser]", new List<SqlParameter>() { usernameParameter, passwordParameter }))
+                    {
+                        //if (reader.Read())
+                        //    userId = reader.GetInt32(reader.GetOrdinal("ID"));
+                    }
+                }
             }
-            return false;
+
+            
+            return user;
         }
     }
 }
