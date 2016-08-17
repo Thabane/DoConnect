@@ -47,7 +47,6 @@
     <Compile Include="Invoice.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Medical_Aid.cs" />
-    <Compile Include="OperationStatus.cs" />
     <Compile Include="Patient.cs" />
     <Compile Include="Patient_Medical_Aid.cs" />
     <Compile Include="Practice.cs" />

@@ -22,7 +22,6 @@ namespace DocConnectApp
                       "~/Content/bootstrap.min.css",
                       "~/Content/metisMenu.min.css",
                       "~/Content/morris.min.css",
-                      "~/Content/AdminLTE.min.css",
                       "~/Content/sb-admin-2.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/angular").Include(
@@ -30,7 +29,6 @@ namespace DocConnectApp
                    "~/Scripts/jquery.dataTables.js",
                    "~/Scripts/angular-route.js",
                    "~/Scripts/angular-location-update.min.js",
-                   "~/Scripts/icheck.min.js",
                    "~/App/app.js",
                    "~/App/Services/*.js",
                    "~/App/Controllers/*.js"
