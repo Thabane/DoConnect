@@ -527,8 +527,8 @@ namespace DataClient
         {
             List<SqlParameter> _parameters = new List<SqlParameter>();
             SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
-            SqlParameter nameParameter = new SqlParameter("@Name", SqlDbType.Int);
-            SqlParameter cell_numberParameter = new SqlParameter("@Cell_Number", SqlDbType.NVarChar);
+            SqlParameter nameParameter = new SqlParameter("@Name", SqlDbType.NVarChar);
+            SqlParameter phone_numberParameter = new SqlParameter("@Phone_Number", SqlDbType.NVarChar);
             SqlParameter fax_numberParameter = new SqlParameter("@Fax_Number", SqlDbType.NVarChar);
             SqlParameter street_addressParameter = new SqlParameter("@Street_Address", SqlDbType.NVarChar);
             SqlParameter suburbParameter = new SqlParameter("@Suburb", SqlDbType.NVarChar);
@@ -539,7 +539,7 @@ namespace DataClient
             SqlParameter trading_TimesParameter = new SqlParameter("@Trading_Times", SqlDbType.NVarChar);
             idParameter.Value = id;
             nameParameter.Value = name;
-            cell_numberParameter.Value = cell_number;
+            phone_numberParameter.Value = cell_number;
             fax_numberParameter.Value = fax_number;
             street_addressParameter.Value = street_address;
             suburbParameter.Value = suburb;
@@ -550,7 +550,7 @@ namespace DataClient
             trading_TimesParameter.Value = trading_Times;
             _parameters.Add(idParameter);
             _parameters.Add(nameParameter);
-            _parameters.Add(cell_numberParameter);
+            _parameters.Add(phone_numberParameter);
             _parameters.Add(fax_numberParameter);
             _parameters.Add(street_addressParameter);
             _parameters.Add(suburbParameter);
@@ -559,15 +559,19 @@ namespace DataClient
             _parameters.Add(latitudeParameter);
             _parameters.Add(longitudeParameter);
             _parameters.Add(trading_TimesParameter);
-            int userId = 0;
-            using (var reader = access.ExecuteReader(Conn, "[UpdatePractice]", _parameters))
-            {
-                if (reader.Read())
-                {
-                    userId = reader.GetInt32(reader.GetOrdinal("ID"));
-                }
-            }
+            //int userId = 0;
+            //using (var reader = access.ExecuteReader(Conn, "[NewUpdatePractice]", _parameters))
+            //{
+            //    if (reader.Read())
+            //    {
+            //        userId = reader.GetInt32(reader.GetOrdinal("ID"));
+            //    }
+            //}
+            //return true;
+
+            access.ExecuteNonQuery(Conn, _parameters, "[NewUpdatePractice]");
             return true;
+
         }
         #endregion
 
@@ -855,7 +859,7 @@ namespace DataClient
             _parameters.Add( LongitudeParameter     );
             _parameters.Add(Trading_TimesParameter);
 
-            using (var reader = access.ExecuteReader(Conn, "[InsertPractice]", new List<SqlParameter>() { Phone_NumberParameter, Fax_NumberParameter, Street_AddressParameter, SuburbParameter, CityParameter, CountryParameter, LatitudeParameter, LongitudeParameter, Trading_TimesParameter }))
+            using (var reader = access.ExecuteReader(Conn, "[InsertPractice]", new List<SqlParameter>() { NameParameter, Phone_NumberParameter, Fax_NumberParameter, Street_AddressParameter, SuburbParameter, CityParameter, CountryParameter, LatitudeParameter, LongitudeParameter, Trading_TimesParameter }))
             {
                 if (reader.Read())
                    ID = reader.GetInt32(reader.GetOrdinal("ID"));

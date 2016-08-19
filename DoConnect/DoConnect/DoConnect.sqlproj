@@ -90,6 +90,7 @@
     <Build Include="Stored Procedures\NewUpdatePatient.sql" />
     <Build Include="Stored Procedures\NewUpdatePractice.sql" />
     <Build Include="Stored Procedures\InsertPractice.sql" />
+    <Build Include="Tables\AccessLevel.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Tables\Consultation.sql" />

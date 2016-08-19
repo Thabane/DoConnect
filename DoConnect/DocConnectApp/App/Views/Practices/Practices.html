@@ -35,7 +35,7 @@
                         <td>{{Practice.Name}}</td>
                         <td>{{Practice.Phone_Number}}</td>
                         <td>{{Practice.Fax_Number}}</td>
-                        <td>{{Practice.Street_Address}}{{Practice.Suburb}}{{Practice.City}}{{Practice.Country}}</td>
+                        <td>{{Practice.Street_Address}} {{Practice.Suburb}} {{Practice.City}} {{Practice.Country}}</td>
                         <td>{{Practice.Trading_Times}}</td>
                         <td>
                             <button class="btn btn-primary btn-xs" ng-click="ViewPractice(Practice.ID)" onclick="ViewPractice()"><i class="glyphicon glyphicon-new-window"></i></button>
@@ -96,8 +96,10 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" ng-click="function_btnUpdatePractice(Practice.ID)" id="function_btnUpdatePractice">Update</button>
-                            <button type="button" class="btn btn-danger" ng-click="function_btnDeletePractice(Practice.ID)">Delete</button>   
+                            <button type="button" class="btn btn-primary" ng-click="function_btnUpdatePractice(ID)" id="function_btnUpdatePractice">Update</button>
+                           
+                            <button type="button" class="btn btn-danger" id="btnDeleteConfirmed" onclick="btnConfirm()">Delete</button><!--ng-click="DeletePractice(ID)"-->
+                               
                         </div>
                     </div>
                 </div>

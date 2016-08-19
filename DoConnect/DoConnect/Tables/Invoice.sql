@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[Invoice] (
     [ID]             INT   IDENTITY (1, 1) NOT NULL,
     [Date]           DATE  NOT NULL,
-	[InvoiceSummary] NVARCHAR (100) NOT NULL,
+	[InvoiceSummary] NVARCHAR (500) NOT NULL,
     [Total]          MONEY NOT NULL,
     [Medical_Aid_ID] INT   NOT NULL,
     [Patient_ID]     INT   NOT NULL,

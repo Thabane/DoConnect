@@ -40,7 +40,8 @@ namespace DocConnectApp
                       "~/Scripts/morris.min.js",
                       "~/Scripts/sb-admin-2.js",
                       "~/Scripts/raphael-min.js",
-                      "~/Scripts/xml2json.js"));
+                      "~/Scripts/xml2json.js",
+                      "~/Scripts/Alert_Confirm_Prompt_Modal/Alert_Confirm_Prompt_Modal.js"));
 
         }
     }

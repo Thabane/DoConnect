@@ -155,6 +155,7 @@
   <ItemGroup>
     <Content Include="App\app.js" />
     <Content Include="App\Controllers\AccountingController.js" />
+    <Content Include="App\Controllers\Alert_Confirm_Prompt_Modal.js" />
     <Content Include="App\Controllers\AppointmentsController.js" />
     <Content Include="App\Controllers\DashboardController.js" />
     <Content Include="App\Controllers\DiagnosisExpertSystemController.js" />
@@ -219,6 +220,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\Alert_Confirm_Prompt_Modal\Alert_Confirm_Prompt_Modal.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\bootstrap-theme.css.map" />

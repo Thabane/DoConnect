@@ -11,6 +11,16 @@
             <li role="presentation" class="active"><a href="/NewPractice"><i class="fa fa-plus-circle"></i>New Practice</a></li>
         </ul>
 
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <button onclick="btnAlert()" class="btn btn-warning">Alert</button>
+                    <button onclick="btnConfirm()" class="btn btn-info">Confirm</button>
+                    <button onclick="btnPrompt()" class="btn btn-primary">Prompt</button>
+                </div>
+            </div>
+        </div>
+
         <!--Add Practice Modal-->
         <form>
             <div style="margin:auto; width:45%;">
@@ -52,7 +62,7 @@
                     </div>
                 </div>
                 <div class="modal-footer"><!--ng-click="NewPractice(Name, Phone_Number, Fax_Number, Street_Address, Suburb, City, Country, Trading_Times)"-->
-                    <button class="btn btn-primary" ng-click="NewPractice()">Save</button>
+                    <button class="btn btn-primary" ng-click="NewPractice(Name, Phone_Number, Fax_Number, Street_Address, Suburb, City, Country, Trading_Times)">Save</button>
                 </div>
             </div>
         </form><!-- /.Practice Modal-->
