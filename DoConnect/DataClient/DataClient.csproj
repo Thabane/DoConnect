@@ -53,6 +53,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataEdmx\DataEdmx.csproj">
+      <Project>{a5921e25-be04-49eb-a2e1-daad20184432}</Project>
+      <Name>DataEdmx</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ObjectModel\ObjectModel.csproj">
       <Project>{171b67fd-6810-48a2-ab91-c12dca6e06bf}</Project>
       <Name>ObjectModel</Name>

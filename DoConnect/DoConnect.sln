@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectModel", "ObjectModel\
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DoConnect", "DoConnect\DoConnect.sqlproj", "{61D69D0C-DB3B-42AD-B1C1-A925F7582C01}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataEdmx", "DataEdmx\DataEdmx.csproj", "{A5921E25-BE04-49EB-A2E1-DAAD20184432}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{61D69D0C-DB3B-42AD-B1C1-A925F7582C01}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61D69D0C-DB3B-42AD-B1C1-A925F7582C01}.Release|Any CPU.Build.0 = Release|Any CPU
 		{61D69D0C-DB3B-42AD-B1C1-A925F7582C01}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{A5921E25-BE04-49EB-A2E1-DAAD20184432}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5921E25-BE04-49EB-A2E1-DAAD20184432}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5921E25-BE04-49EB-A2E1-DAAD20184432}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5921E25-BE04-49EB-A2E1-DAAD20184432}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
