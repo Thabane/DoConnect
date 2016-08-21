@@ -12,17 +12,19 @@ namespace DataEdmx
     using System;
     using System.Collections.Generic;
     
-    public partial class Invoice
+    public partial class Consultation
     {
         public int ID { get; set; }
-        public System.DateTime Date { get; set; }
-        public string InvoiceSummary { get; set; }
-        public decimal Total { get; set; }
-        public int Medical_Aid_ID { get; set; }
         public int Patient_ID { get; set; }
         public int Doctor_ID { get; set; }
-    
-        public virtual Doctors Doctors { get; set; }
-        public virtual Patient Patient { get; set; }
+        public System.DateTime Date { get; set; }
+        public string ReasonForConsultation { get; set; }
+        public string Symptoms { get; set; }
+        public string ClinicalFindings { get; set; }
+        public string Diagnosis { get; set; }
+        public string TestResultSummary { get; set; }
+        public string TreatmentPlan { get; set; }
+        public Nullable<int> Presciption_ID { get; set; }
+        public Nullable<int> Referral_ID { get; set; }
     }
 }

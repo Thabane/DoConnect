@@ -12,17 +12,15 @@ namespace DataEdmx
     using System;
     using System.Collections.Generic;
     
-    public partial class Invoice
+    public partial class Prescription_DrugDetails
     {
         public int ID { get; set; }
-        public System.DateTime Date { get; set; }
-        public string InvoiceSummary { get; set; }
-        public decimal Total { get; set; }
-        public int Medical_Aid_ID { get; set; }
-        public int Patient_ID { get; set; }
-        public int Doctor_ID { get; set; }
-    
-        public virtual Doctors Doctors { get; set; }
-        public virtual Patient Patient { get; set; }
+        public int Prescription_ID { get; set; }
+        public string DrugName { get; set; }
+        public string Strength { get; set; }
+        public string IntakeRoute { get; set; }
+        public string Frequency { get; set; }
+        public int DispenseNumber { get; set; }
+        public int RefillNumber { get; set; }
     }
 }

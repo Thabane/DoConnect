@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DataClient;
+using ObjectModel;
 
 namespace TestConsole
 {
@@ -12,8 +13,7 @@ namespace TestConsole
         static void Main(string[] args)
         {
             DataLayer bl = new DataLayer();
-            bl.CreateUser(1);
-            Console.WriteLine("User Created.");
+            DoctorProfile doc = bl.GetDoctor(3);
             Console.ReadKey();
         }
     }

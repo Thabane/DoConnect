@@ -10,9 +10,8 @@
 namespace DataEdmx
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Staff
+    public partial class GetAllPatients_Result
     {
         public int ID { get; set; }
         public string FirstName { get; set; }
@@ -20,17 +19,19 @@ namespace DataEdmx
         public string ID_Number { get; set; }
         public string Gender { get; set; }
         public System.DateTime DOB { get; set; }
-        public string Phone { get; set; }
+        public string Cell_Number { get; set; }
         public string Street_Address { get; set; }
         public string Suburb { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
-        public string Employee_Type { get; set; }
-        public int Practice_ID { get; set; }
+        public string Allergies { get; set; }
+        public string PreviousIllnesses { get; set; }
+        public string PreviousMedication { get; set; }
+        public string RiskFactors { get; set; }
+        public string SocialHistory { get; set; }
+        public string FamilyHistory { get; set; }
+        public int Medical_Aid_ID { get; set; }
+        public int Doctor_ID { get; set; }
         public int User_ID { get; set; }
-        public string Email { get; set; }
-    
-        public virtual Practice Practice { get; set; }
-        public virtual Users Users { get; set; }
     }
 }

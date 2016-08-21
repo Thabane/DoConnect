@@ -3,11 +3,19 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
+using DataEdmx;
+using Patient = ObjectModel.Patient;
+using Patient_Medical_Aid = ObjectModel.Patient_Medical_Aid;
+using Practice = ObjectModel.Practice;
+using Prescription = ObjectModel.Prescription;
+using Staff = ObjectModel.Staff;
+
 
 namespace DataClient
 {
@@ -87,8 +95,8 @@ namespace DataClient
             catch (Exception ex)
             {
                 access.LogEntry(UserId, ex.ToString());
-            }                  
-            
+            }
+
         }
 
         public bool NewUpdateDoctor(Doctor doc, int UserId)
@@ -226,7 +234,7 @@ namespace DataClient
             _parameters.Add(cityParameter);
             _parameters.Add(countryParameter);
 
-            
+
             int userId = 0;
             using (var reader = access.ExecuteReader(Conn, "[UpdatePatient]", new List<SqlParameter>()))
             {
@@ -447,7 +455,7 @@ namespace DataClient
             SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
             idParameter.Value = id;
             _parameters.Add(idParameter);
-            
+
             int userId = 0;
             using (var reader = access.ExecuteReader(Conn, "[DeletePractice]", new List<SqlParameter>()))
             {
@@ -748,10 +756,28 @@ namespace DataClient
             return true;
         }
 
-        public Doctor GetDoctor(int DocID)
+        public DoctorProfile GetDoctor(int userID)
         {
-            return null;
+            DoctorProfile getDoctor = new DoctorProfile();
+            using (DoConnectContext context = new DoConnectContext())
+            {
+                try
+                {
+                    var res = context.AllDoctors.FirstOrDefault(x => x.User_ID == userID);
+                    getDoctor.Doc = new Doctor() {ID = res.ID, FirstName = res.FirstName,LastName = res.LastName, Address = res.Address, Gender = Convert.ToChar(res.Gender),Job_Title = res.Job_Title, PracticeId = res.Practice_ID,UserId = res.User_ID};
+                    getDoctor.Execution.Status = true;
+                    access.LogEntry(userID, "Get Doctor");
+                }
+                catch (Exception ex)
+                {
+                    access.LogEntry(userID, ex.ToString());
+                    getDoctor.Execution.Status = false;
+                }
+                return getDoctor;
+
+            }
         }
+
         #endregion
 
         public SystemUser Login(string username, string password, int AccessLevel)
@@ -775,7 +801,7 @@ namespace DataClient
                 }
             }
 
-            
+
             return user;
         }
     }

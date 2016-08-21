@@ -17,7 +17,6 @@ namespace DataEdmx
         public Users()
         {
             this.Doctors = new HashSet<Doctors>();
-            this.Medical_Aid = new HashSet<Medical_Aid>();
             this.Patient = new HashSet<Patient>();
             this.Staff = new HashSet<Staff>();
         }
@@ -29,7 +28,6 @@ namespace DataEdmx
     
         public virtual AccessLevel AccessLevel1 { get; set; }
         public virtual ICollection<Doctors> Doctors { get; set; }
-        public virtual ICollection<Medical_Aid> Medical_Aid { get; set; }
         public virtual ICollection<Patient> Patient { get; set; }
         public virtual ICollection<Staff> Staff { get; set; }
     }

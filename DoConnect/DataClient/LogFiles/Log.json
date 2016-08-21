@@ -10,5 +10,29 @@
     "Value": "New User Created",
     "UserId": "13",
     "DateTime": "2016/08/11 8:03:17 PM"
+  },
+  {
+    "Key": "6",
+    "Value": "System.MissingMethodException: Method not found: 'System.Data.Objects.ObjectContext System.Data.Entity.Infrastructure.IObjectContextAdapter.get_ObjectContext()'.\r\n   at DataEdmx.DoConnectEntities1.GetAllDocotors()\r\n   at DataClient.DataLayer.GetDoctor(Int32 userID) in C:\\Users\\Thabane.n\\Source\\Repos\\DoConnect\\DoConnect\\DataClient\\DataLayer.cs:line 766",
+    "UserId": "3",
+    "DateTime": "2016/08/21 11:19:54 PM"
+  },
+  {
+    "Key": "7",
+    "Value": "System.MissingMethodException: Method not found: 'System.Data.Objects.ObjectContext System.Data.Entity.Infrastructure.IObjectContextAdapter.get_ObjectContext()'.\r\n   at DataEdmx.DoConnectEntities1.GetallDocs()\r\n   at DataClient.DataLayer.GetDoctor(Int32 userID) in C:\\Users\\Thabane.n\\Source\\Repos\\DoConnect\\DoConnect\\DataClient\\DataLayer.cs:line 766",
+    "UserId": "3",
+    "DateTime": "2016/08/21 11:29:04 PM"
+  },
+  {
+    "Key": "8",
+    "Value": "System.MissingMethodException: Method not found: 'System.Data.Objects.ObjectContext System.Data.Entity.Infrastructure.IObjectContextAdapter.get_ObjectContext()'.\r\n   at DataEdmx.DoConnectEntities1.GetAllDoctors()\r\n   at DataClient.DataLayer.GetDoctor(Int32 userID) in C:\\Users\\Thabane.n\\Source\\Repos\\DoConnect\\DoConnect\\DataClient\\DataLayer.cs:line 766",
+    "UserId": "3",
+    "DateTime": "2016/08/21 11:41:19 PM"
+  },
+  {
+    "Key": "9",
+    "Value": "Get Doctor",
+    "UserId": "3",
+    "DateTime": "2016/08/21 11:55:49 PM"
   }
 ]

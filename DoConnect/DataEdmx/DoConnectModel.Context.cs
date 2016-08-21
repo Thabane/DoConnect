@@ -16,10 +16,10 @@ namespace DataEdmx
     using System.Data.Objects.DataClasses;
     using System.Linq;
     
-    public partial class DoConnectEntities : DbContext
+    public partial class DoConnectEntities1 : DbContext
     {
-        public DoConnectEntities()
-            : base("name=DoConnectEntities")
+        public DoConnectEntities1()
+            : base("name=DoConnectEntities1")
         {
         }
     
@@ -30,13 +30,19 @@ namespace DataEdmx
     
         public DbSet<AccessLevel> AccessLevel { get; set; }
         public DbSet<Appointments> Appointments { get; set; }
+        public DbSet<Consultation> Consultation { get; set; }
         public DbSet<Doctors> Doctors { get; set; }
+        public DbSet<Expenses> Expenses { get; set; }
         public DbSet<Invoice> Invoice { get; set; }
         public DbSet<Medical_Aid> Medical_Aid { get; set; }
+        public DbSet<Medicine_Inventory> Medicine_Inventory { get; set; }
+        public DbSet<Messages> Messages { get; set; }
         public DbSet<Patient> Patient { get; set; }
+        public DbSet<Patient_Consultation> Patient_Consultation { get; set; }
         public DbSet<Patient_Medical_Aid> Patient_Medical_Aid { get; set; }
         public DbSet<Practice> Practice { get; set; }
         public DbSet<Prescription> Prescription { get; set; }
+        public DbSet<Prescription_DrugDetails> Prescription_DrugDetails { get; set; }
         public DbSet<Staff> Staff { get; set; }
         public DbSet<Users> Users { get; set; }
     
@@ -49,14 +55,160 @@ namespace DataEdmx
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("CreateUser", accessLevelParameter);
         }
     
+        public virtual int DeletePractice(Nullable<int> iD)
+        {
+            var iDParameter = iD.HasValue ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeletePractice", iDParameter);
+        }
+    
         public virtual ObjectResult<GetAllAppointments_Result> GetAllAppointments()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllAppointments_Result>("GetAllAppointments");
         }
     
+        public virtual ObjectResult<GetAllDocotors_Result> GetAllDocotors()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllDocotors_Result>("GetAllDocotors");
+        }
+    
         public virtual ObjectResult<GetAllDoctors_Result> GetAllDoctors()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllDoctors_Result>("GetAllDoctors");
+        }
+    
+        public virtual ObjectResult<GetAllInvoices_Result> GetAllInvoices()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllInvoices_Result>("GetAllInvoices");
+        }
+    
+        public virtual ObjectResult<GetAllPatients_Result> GetAllPatients()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllPatients_Result>("GetAllPatients");
+        }
+    
+        public virtual ObjectResult<GetAllPractices_Result> GetAllPractices()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllPractices_Result>("GetAllPractices");
+        }
+    
+        public virtual ObjectResult<GetAppointmentById_Result> GetAppointmentById(Nullable<int> appId)
+        {
+            var appIdParameter = appId.HasValue ?
+                new ObjectParameter("AppId", appId) :
+                new ObjectParameter("AppId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAppointmentById_Result>("GetAppointmentById", appIdParameter);
+        }
+    
+        public virtual ObjectResult<GetDocotorById_Result> GetDocotorById(Nullable<int> userId)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetDocotorById_Result>("GetDocotorById", userIdParameter);
+        }
+    
+        public virtual ObjectResult<GetInvoiceByDoctorId_Result> GetInvoiceByDoctorId(Nullable<int> iD)
+        {
+            var iDParameter = iD.HasValue ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetInvoiceByDoctorId_Result>("GetInvoiceByDoctorId", iDParameter);
+        }
+    
+        public virtual ObjectResult<GetInvoiceById_Result> GetInvoiceById(Nullable<int> iD)
+        {
+            var iDParameter = iD.HasValue ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetInvoiceById_Result>("GetInvoiceById", iDParameter);
+        }
+    
+        public virtual ObjectResult<GetInvoiceByMedAidId_Result> GetInvoiceByMedAidId(Nullable<int> iD)
+        {
+            var iDParameter = iD.HasValue ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetInvoiceByMedAidId_Result>("GetInvoiceByMedAidId", iDParameter);
+        }
+    
+        public virtual ObjectResult<GetInvoiceByPatientId_Result> GetInvoiceByPatientId(Nullable<int> iD)
+        {
+            var iDParameter = iD.HasValue ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetInvoiceByPatientId_Result>("GetInvoiceByPatientId", iDParameter);
+        }
+    
+        public virtual ObjectResult<GetPatientById_Result> GetPatientById(Nullable<int> iD)
+        {
+            var iDParameter = iD.HasValue ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetPatientById_Result>("GetPatientById", iDParameter);
+        }
+    
+        public virtual ObjectResult<GetPracticeById_Result> GetPracticeById(Nullable<int> iD)
+        {
+            var iDParameter = iD.HasValue ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetPracticeById_Result>("GetPracticeById", iDParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> InsertPractice(string name, string phone_Number, string fax_Number, string street_Address, string suburb, string city, string country, string latitude, string longitude, string trading_Times)
+        {
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            var phone_NumberParameter = phone_Number != null ?
+                new ObjectParameter("Phone_Number", phone_Number) :
+                new ObjectParameter("Phone_Number", typeof(string));
+    
+            var fax_NumberParameter = fax_Number != null ?
+                new ObjectParameter("Fax_Number", fax_Number) :
+                new ObjectParameter("Fax_Number", typeof(string));
+    
+            var street_AddressParameter = street_Address != null ?
+                new ObjectParameter("Street_Address", street_Address) :
+                new ObjectParameter("Street_Address", typeof(string));
+    
+            var suburbParameter = suburb != null ?
+                new ObjectParameter("Suburb", suburb) :
+                new ObjectParameter("Suburb", typeof(string));
+    
+            var cityParameter = city != null ?
+                new ObjectParameter("City", city) :
+                new ObjectParameter("City", typeof(string));
+    
+            var countryParameter = country != null ?
+                new ObjectParameter("Country", country) :
+                new ObjectParameter("Country", typeof(string));
+    
+            var latitudeParameter = latitude != null ?
+                new ObjectParameter("Latitude", latitude) :
+                new ObjectParameter("Latitude", typeof(string));
+    
+            var longitudeParameter = longitude != null ?
+                new ObjectParameter("Longitude", longitude) :
+                new ObjectParameter("Longitude", typeof(string));
+    
+            var trading_TimesParameter = trading_Times != null ?
+                new ObjectParameter("Trading_Times", trading_Times) :
+                new ObjectParameter("Trading_Times", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("InsertPractice", nameParameter, phone_NumberParameter, fax_NumberParameter, street_AddressParameter, suburbParameter, cityParameter, countryParameter, latitudeParameter, longitudeParameter, trading_TimesParameter);
         }
     
         public virtual ObjectResult<Login_Result> Login(string email, string password, Nullable<int> accessLevel)
@@ -74,6 +226,184 @@ namespace DataEdmx
                 new ObjectParameter("AccessLevel", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Login_Result>("Login", emailParameter, passwordParameter, accessLevelParameter);
+        }
+    
+        public virtual int NewUpdateAppointment(Nullable<int> iD, Nullable<bool> app_Status, Nullable<System.DateTime> date_Time, string details, Nullable<int> patient_ID, Nullable<int> doctor_ID)
+        {
+            var iDParameter = iD.HasValue ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(int));
+    
+            var app_StatusParameter = app_Status.HasValue ?
+                new ObjectParameter("App_Status", app_Status) :
+                new ObjectParameter("App_Status", typeof(bool));
+    
+            var date_TimeParameter = date_Time.HasValue ?
+                new ObjectParameter("Date_Time", date_Time) :
+                new ObjectParameter("Date_Time", typeof(System.DateTime));
+    
+            var detailsParameter = details != null ?
+                new ObjectParameter("Details", details) :
+                new ObjectParameter("Details", typeof(string));
+    
+            var patient_IDParameter = patient_ID.HasValue ?
+                new ObjectParameter("Patient_ID", patient_ID) :
+                new ObjectParameter("Patient_ID", typeof(int));
+    
+            var doctor_IDParameter = doctor_ID.HasValue ?
+                new ObjectParameter("Doctor_ID", doctor_ID) :
+                new ObjectParameter("Doctor_ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("NewUpdateAppointment", iDParameter, app_StatusParameter, date_TimeParameter, detailsParameter, patient_IDParameter, doctor_IDParameter);
+        }
+    
+        public virtual int NewUpdateDoctor(string firstName, string lastName, string gender, string address, Nullable<int> practiceID, Nullable<int> userID, string jobTitle)
+        {
+            var firstNameParameter = firstName != null ?
+                new ObjectParameter("FirstName", firstName) :
+                new ObjectParameter("FirstName", typeof(string));
+    
+            var lastNameParameter = lastName != null ?
+                new ObjectParameter("LastName", lastName) :
+                new ObjectParameter("LastName", typeof(string));
+    
+            var genderParameter = gender != null ?
+                new ObjectParameter("Gender", gender) :
+                new ObjectParameter("Gender", typeof(string));
+    
+            var addressParameter = address != null ?
+                new ObjectParameter("Address", address) :
+                new ObjectParameter("Address", typeof(string));
+    
+            var practiceIDParameter = practiceID.HasValue ?
+                new ObjectParameter("PracticeID", practiceID) :
+                new ObjectParameter("PracticeID", typeof(int));
+    
+            var userIDParameter = userID.HasValue ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(int));
+    
+            var jobTitleParameter = jobTitle != null ?
+                new ObjectParameter("JobTitle", jobTitle) :
+                new ObjectParameter("JobTitle", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("NewUpdateDoctor", firstNameParameter, lastNameParameter, genderParameter, addressParameter, practiceIDParameter, userIDParameter, jobTitleParameter);
+        }
+    
+        public virtual int NewUpdatePatient(string firstName, string lastName, string iD_Number, string gender, Nullable<System.DateTime> dOB, string cell_Number, string street_Address, string suburb, string city, string country, Nullable<int> medical_Aid_ID, Nullable<int> doctor_ID, Nullable<int> user_ID)
+        {
+            var firstNameParameter = firstName != null ?
+                new ObjectParameter("FirstName", firstName) :
+                new ObjectParameter("FirstName", typeof(string));
+    
+            var lastNameParameter = lastName != null ?
+                new ObjectParameter("LastName", lastName) :
+                new ObjectParameter("LastName", typeof(string));
+    
+            var iD_NumberParameter = iD_Number != null ?
+                new ObjectParameter("ID_Number", iD_Number) :
+                new ObjectParameter("ID_Number", typeof(string));
+    
+            var genderParameter = gender != null ?
+                new ObjectParameter("Gender", gender) :
+                new ObjectParameter("Gender", typeof(string));
+    
+            var dOBParameter = dOB.HasValue ?
+                new ObjectParameter("DOB", dOB) :
+                new ObjectParameter("DOB", typeof(System.DateTime));
+    
+            var cell_NumberParameter = cell_Number != null ?
+                new ObjectParameter("Cell_Number", cell_Number) :
+                new ObjectParameter("Cell_Number", typeof(string));
+    
+            var street_AddressParameter = street_Address != null ?
+                new ObjectParameter("Street_Address", street_Address) :
+                new ObjectParameter("Street_Address", typeof(string));
+    
+            var suburbParameter = suburb != null ?
+                new ObjectParameter("Suburb", suburb) :
+                new ObjectParameter("Suburb", typeof(string));
+    
+            var cityParameter = city != null ?
+                new ObjectParameter("City", city) :
+                new ObjectParameter("City", typeof(string));
+    
+            var countryParameter = country != null ?
+                new ObjectParameter("Country", country) :
+                new ObjectParameter("Country", typeof(string));
+    
+            var medical_Aid_IDParameter = medical_Aid_ID.HasValue ?
+                new ObjectParameter("Medical_Aid_ID", medical_Aid_ID) :
+                new ObjectParameter("Medical_Aid_ID", typeof(int));
+    
+            var doctor_IDParameter = doctor_ID.HasValue ?
+                new ObjectParameter("Doctor_ID", doctor_ID) :
+                new ObjectParameter("Doctor_ID", typeof(int));
+    
+            var user_IDParameter = user_ID.HasValue ?
+                new ObjectParameter("User_ID", user_ID) :
+                new ObjectParameter("User_ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("NewUpdatePatient", firstNameParameter, lastNameParameter, iD_NumberParameter, genderParameter, dOBParameter, cell_NumberParameter, street_AddressParameter, suburbParameter, cityParameter, countryParameter, medical_Aid_IDParameter, doctor_IDParameter, user_IDParameter);
+        }
+    
+        public virtual int NewUpdatePractice(Nullable<int> iD, string name, string phone_Number, string fax_Number, string street_Address, string suburb, string city, string country, string latitude, string longitude, string trading_Times)
+        {
+            var iDParameter = iD.HasValue ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(int));
+    
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            var phone_NumberParameter = phone_Number != null ?
+                new ObjectParameter("Phone_Number", phone_Number) :
+                new ObjectParameter("Phone_Number", typeof(string));
+    
+            var fax_NumberParameter = fax_Number != null ?
+                new ObjectParameter("Fax_Number", fax_Number) :
+                new ObjectParameter("Fax_Number", typeof(string));
+    
+            var street_AddressParameter = street_Address != null ?
+                new ObjectParameter("Street_Address", street_Address) :
+                new ObjectParameter("Street_Address", typeof(string));
+    
+            var suburbParameter = suburb != null ?
+                new ObjectParameter("Suburb", suburb) :
+                new ObjectParameter("Suburb", typeof(string));
+    
+            var cityParameter = city != null ?
+                new ObjectParameter("City", city) :
+                new ObjectParameter("City", typeof(string));
+    
+            var countryParameter = country != null ?
+                new ObjectParameter("Country", country) :
+                new ObjectParameter("Country", typeof(string));
+    
+            var latitudeParameter = latitude != null ?
+                new ObjectParameter("Latitude", latitude) :
+                new ObjectParameter("Latitude", typeof(string));
+    
+            var longitudeParameter = longitude != null ?
+                new ObjectParameter("Longitude", longitude) :
+                new ObjectParameter("Longitude", typeof(string));
+    
+            var trading_TimesParameter = trading_Times != null ?
+                new ObjectParameter("Trading_Times", trading_Times) :
+                new ObjectParameter("Trading_Times", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("NewUpdatePractice", iDParameter, nameParameter, phone_NumberParameter, fax_NumberParameter, street_AddressParameter, suburbParameter, cityParameter, countryParameter, latitudeParameter, longitudeParameter, trading_TimesParameter);
+        }
+    
+        public virtual ObjectResult<Doctors> GetallDocs()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Doctors>("GetallDocs");
+        }
+    
+        public virtual ObjectResult<Doctors> GetallDocs(MergeOption mergeOption)
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Doctors>("GetallDocs", mergeOption);
         }
     }
 }

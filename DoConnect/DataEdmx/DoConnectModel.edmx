@@ -23,6 +23,23 @@
           <Property Name="Patient_ID" Type="int" Nullable="false" />
           <Property Name="Doctor_ID" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Consultation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Patient_ID" Type="int" Nullable="false" />
+          <Property Name="Doctor_ID" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="ReasonForConsultation" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Symptoms" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="ClinicalFindings" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Diagnosis" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="TestResultSummary" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="TreatmentPlan" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Presciption_ID" Type="int" />
+          <Property Name="Referral_ID" Type="int" />
+        </EntityType>
         <EntityType Name="Doctors">
           <Key>
             <PropertyRef Name="ID" />
@@ -37,12 +54,24 @@
           <Property Name="User_ID" Type="int" Nullable="false" />
           <Property Name="Job_Title" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="Expenses">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Amount" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Practice_ID" Type="int" Nullable="false" />
+          <Property Name="User_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="Invoice">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="InvoiceSummary" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="Total" Type="money" Nullable="false" />
           <Property Name="Medical_Aid_ID" Type="int" Nullable="false" />
           <Property Name="Patient_ID" Type="int" Nullable="false" />
@@ -58,7 +87,31 @@
           <Property Name="Fax_Number" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Email_Address" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="User_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Medicine_Inventory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DrugName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="QuantityPurchased" Type="int" Nullable="false" />
+          <Property Name="PurchaseDate" Type="date" Nullable="false" />
+          <Property Name="QuantityInStock" Type="int" Nullable="false" />
+          <Property Name="ExpiryDate" Type="date" Nullable="false" />
+          <Property Name="DrugConcentration" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Practice_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Messages">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Sender" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Receiver" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Subject" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="Patient">
           <Key>
@@ -78,13 +131,20 @@
           <Property Name="Medical_Aid_ID" Type="int" Nullable="false" />
           <Property Name="Doctor_ID" Type="int" Nullable="false" />
           <Property Name="User_ID" Type="int" Nullable="false" />
-          <Property Name="Allergies" Type="nvarchar" MaxLength="100" />
-          <Property Name="PreviousIllnesses" Type="nvarchar" MaxLength="100" />
-          <Property Name="PreviousMedication" Type="nvarchar" MaxLength="100" />
-          <Property Name="RiskFactors" Type="nvarchar" MaxLength="100" />
-          <Property Name="SocialHistory" Type="nvarchar" MaxLength="100" />
-          <Property Name="FamilyHistory" Type="nvarchar" MaxLength="100" />
+          <Property Name="Allergies" Type="nvarchar" MaxLength="500" />
+          <Property Name="PreviousIllnesses" Type="nvarchar" MaxLength="500" />
+          <Property Name="PreviousMedication" Type="nvarchar" MaxLength="500" />
+          <Property Name="RiskFactors" Type="nvarchar" MaxLength="500" />
+          <Property Name="SocialHistory" Type="nvarchar" MaxLength="500" />
+          <Property Name="FamilyHistory" Type="nvarchar" MaxLength="500" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Patient_Consultation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Patient_ID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Patient_Medical_Aid">
           <Key>
@@ -125,6 +185,19 @@
           <Property Name="Patient_ID" Type="int" Nullable="false" />
           <Property Name="Doctor_ID" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Prescription_DrugDetails">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Prescription_ID" Type="int" Nullable="false" />
+          <Property Name="DrugName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Strength" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="IntakeRoute" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Frequency" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DispenseNumber" Type="int" Nullable="false" />
+          <Property Name="RefillNumber" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Staff">
           <Key>
             <PropertyRef Name="ID" />
@@ -136,6 +209,10 @@
           <Property Name="Gender" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="DOB" Type="date" Nullable="false" />
           <Property Name="Phone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Street_Address" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Suburb" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Country" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Employee_Type" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Practice_ID" Type="int" Nullable="false" />
           <Property Name="User_ID" Type="int" Nullable="false" />
@@ -210,18 +287,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Invoice_Medical_Aid">
-          <End Role="Medical_Aid" Type="Self.Medical_Aid" Multiplicity="1" />
-          <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Medical_Aid">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Invoice">
-              <PropertyRef Name="Medical_Aid_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Invoice_Patient">
           <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
           <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
@@ -231,18 +296,6 @@
             </Principal>
             <Dependent Role="Invoice">
               <PropertyRef Name="Patient_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Medical_Aid_Users">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
-          <End Role="Medical_Aid" Type="Self.Medical_Aid" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Medical_Aid">
-              <PropertyRef Name="User_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -369,23 +422,117 @@
         <Function Name="CreateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="AccessLevel" Type="int" Mode="In" />
         </Function>
+        <Function Name="DeletePractice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetAllAppointments" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllDocotors" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetAllDoctors" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllInvoices" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllPatients" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllPractices" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAppointmentById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AppId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetDocotorById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetInvoiceByDoctorId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetInvoiceById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetInvoiceByMedAidId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetInvoiceByPatientId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetPatientById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetPracticeById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="InsertPractice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="Phone_Number" Type="nvarchar" Mode="In" />
+          <Parameter Name="Fax_Number" Type="nvarchar" Mode="In" />
+          <Parameter Name="Street_Address" Type="nvarchar" Mode="In" />
+          <Parameter Name="Suburb" Type="nvarchar" Mode="In" />
+          <Parameter Name="City" Type="nvarchar" Mode="In" />
+          <Parameter Name="Country" Type="nvarchar" Mode="In" />
+          <Parameter Name="Latitude" Type="nvarchar" Mode="In" />
+          <Parameter Name="Longitude" Type="nvarchar" Mode="In" />
+          <Parameter Name="Trading_Times" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="Login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Email" Type="nvarchar" Mode="In" />
           <Parameter Name="Password" Type="nvarchar" Mode="In" />
           <Parameter Name="AccessLevel" Type="int" Mode="In" />
         </Function>
+        <Function Name="NewUpdateAppointment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+          <Parameter Name="App_Status" Type="bit" Mode="In" />
+          <Parameter Name="Date_Time" Type="datetime" Mode="In" />
+          <Parameter Name="Details" Type="nvarchar" Mode="In" />
+          <Parameter Name="Patient_ID" Type="int" Mode="In" />
+          <Parameter Name="Doctor_ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="NewUpdateDoctor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FirstName" Type="nvarchar" Mode="In" />
+          <Parameter Name="LastName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Gender" Type="char" Mode="In" />
+          <Parameter Name="Address" Type="nvarchar" Mode="In" />
+          <Parameter Name="PracticeID" Type="int" Mode="In" />
+          <Parameter Name="UserID" Type="int" Mode="In" />
+          <Parameter Name="JobTitle" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="NewUpdatePatient" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FirstName" Type="nvarchar" Mode="In" />
+          <Parameter Name="LastName" Type="nvarchar" Mode="In" />
+          <Parameter Name="ID_Number" Type="nvarchar" Mode="In" />
+          <Parameter Name="Gender" Type="char" Mode="In" />
+          <Parameter Name="DOB" Type="date" Mode="In" />
+          <Parameter Name="Cell_Number" Type="nvarchar" Mode="In" />
+          <Parameter Name="Street_Address" Type="nvarchar" Mode="In" />
+          <Parameter Name="Suburb" Type="nvarchar" Mode="In" />
+          <Parameter Name="City" Type="nvarchar" Mode="In" />
+          <Parameter Name="Country" Type="nvarchar" Mode="In" />
+          <Parameter Name="Medical_Aid_ID" Type="int" Mode="In" />
+          <Parameter Name="Doctor_ID" Type="int" Mode="In" />
+          <Parameter Name="User_ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="NewUpdatePractice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="Phone_Number" Type="nvarchar" Mode="In" />
+          <Parameter Name="Fax_Number" Type="nvarchar" Mode="In" />
+          <Parameter Name="Street_Address" Type="nvarchar" Mode="In" />
+          <Parameter Name="Suburb" Type="nvarchar" Mode="In" />
+          <Parameter Name="City" Type="nvarchar" Mode="In" />
+          <Parameter Name="Country" Type="nvarchar" Mode="In" />
+          <Parameter Name="Latitude" Type="nvarchar" Mode="In" />
+          <Parameter Name="Longitude" Type="nvarchar" Mode="In" />
+          <Parameter Name="Trading_Times" Type="nvarchar" Mode="In" />
+        </Function>
         <EntityContainer Name="DoConnectModelStoreContainer">
           <EntitySet Name="AccessLevel" EntityType="Self.AccessLevel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Appointments" EntityType="Self.Appointments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Consultation" EntityType="Self.Consultation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Doctors" EntityType="Self.Doctors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Expenses" EntityType="Self.Expenses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Invoice" EntityType="Self.Invoice" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Medical_Aid" EntityType="Self.Medical_Aid" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Medicine_Inventory" EntityType="Self.Medicine_Inventory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Messages" EntityType="Self.Messages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Patient" EntityType="Self.Patient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Patient_Consultation" EntityType="Self.Patient_Consultation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Patient_Medical_Aid" EntityType="Self.Patient_Medical_Aid" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Practice" EntityType="Self.Practice" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Prescription" EntityType="Self.Prescription" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Prescription_DrugDetails" EntityType="Self.Prescription_DrugDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Appointments_Doctors" Association="Self.FK_Appointments_Doctors">
@@ -408,17 +555,9 @@
             <End Role="Doctors" EntitySet="Doctors" />
             <End Role="Invoice" EntitySet="Invoice" />
           </AssociationSet>
-          <AssociationSet Name="FK_Invoice_Medical_Aid" Association="Self.FK_Invoice_Medical_Aid">
-            <End Role="Medical_Aid" EntitySet="Medical_Aid" />
-            <End Role="Invoice" EntitySet="Invoice" />
-          </AssociationSet>
           <AssociationSet Name="FK_Invoice_Patient" Association="Self.FK_Invoice_Patient">
             <End Role="Patient" EntitySet="Patient" />
             <End Role="Invoice" EntitySet="Invoice" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Medical_Aid_Users" Association="Self.FK_Medical_Aid_Users">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Medical_Aid" EntitySet="Medical_Aid" />
           </AssociationSet>
           <AssociationSet Name="FK_Patient_Doctors" Association="Self.FK_Patient_Doctors">
             <End Role="Doctors" EntitySet="Doctors" />
@@ -487,6 +626,23 @@
           <NavigationProperty Name="Doctors" Relationship="Self.FK_Appointments_Doctors" FromRole="Appointments" ToRole="Doctors" />
           <NavigationProperty Name="Patient" Relationship="Self.FK_Appointments_Patient" FromRole="Appointments" ToRole="Patient" />
         </EntityType>
+        <EntityType Name="Consultation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Patient_ID" Type="Int32" Nullable="false" />
+          <Property Name="Doctor_ID" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ReasonForConsultation" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Symptoms" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClinicalFindings" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Diagnosis" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TestResultSummary" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TreatmentPlan" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Presciption_ID" Type="Int32" />
+          <Property Name="Referral_ID" Type="Int32" />
+        </EntityType>
         <EntityType Name="Doctors">
           <Key>
             <PropertyRef Name="ID" />
@@ -507,18 +663,29 @@
           <NavigationProperty Name="Patient" Relationship="Self.FK_Patient_Doctors" FromRole="Doctors" ToRole="Patient" />
           <NavigationProperty Name="Prescription" Relationship="Self.FK_Prescription_Doctors" FromRole="Doctors" ToRole="Prescription" />
         </EntityType>
+        <EntityType Name="Expenses">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Amount" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Practice_ID" Type="Int32" Nullable="false" />
+          <Property Name="User_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
         <EntityType Name="Invoice">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="InvoiceSummary" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Total" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="Medical_Aid_ID" Type="Int32" Nullable="false" />
           <Property Name="Patient_ID" Type="Int32" Nullable="false" />
           <Property Name="Doctor_ID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Doctors" Relationship="Self.FK_Invoice_Doctors" FromRole="Invoice" ToRole="Doctors" />
-          <NavigationProperty Name="Medical_Aid" Relationship="Self.FK_Invoice_Medical_Aid" FromRole="Invoice" ToRole="Medical_Aid" />
           <NavigationProperty Name="Patient" Relationship="Self.FK_Invoice_Patient" FromRole="Invoice" ToRole="Patient" />
         </EntityType>
         <EntityType Name="Medical_Aid">
@@ -531,11 +698,33 @@
           <Property Name="Fax_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Email_Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="User_ID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Invoice" Relationship="Self.FK_Invoice_Medical_Aid" FromRole="Medical_Aid" ToRole="Invoice" />
-          <NavigationProperty Name="Users" Relationship="Self.FK_Medical_Aid_Users" FromRole="Medical_Aid" ToRole="Users" />
           <NavigationProperty Name="Patient" Relationship="Self.FK_Patient_Medical_Aid" FromRole="Medical_Aid" ToRole="Patient" />
           <NavigationProperty Name="Patient_Medical_Aid" Relationship="Self.FK_Patient_Medical_Aid_Medical_Aid" FromRole="Medical_Aid" ToRole="Patient_Medical_Aid" />
+        </EntityType>
+        <EntityType Name="Medicine_Inventory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DrugName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="QuantityPurchased" Type="Int32" Nullable="false" />
+          <Property Name="PurchaseDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="QuantityInStock" Type="Int32" Nullable="false" />
+          <Property Name="ExpiryDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DrugConcentration" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Practice_ID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Messages">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Sender" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Receiver" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Subject" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <EntityType Name="Patient">
           <Key>
@@ -555,12 +744,12 @@
           <Property Name="Medical_Aid_ID" Type="Int32" Nullable="false" />
           <Property Name="Doctor_ID" Type="Int32" Nullable="false" />
           <Property Name="User_ID" Type="Int32" Nullable="false" />
-          <Property Name="Allergies" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="PreviousIllnesses" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="PreviousMedication" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="RiskFactors" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="SocialHistory" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="FamilyHistory" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Allergies" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="PreviousIllnesses" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="PreviousMedication" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="RiskFactors" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="SocialHistory" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="FamilyHistory" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Appointments" Relationship="Self.FK_Appointments_Patient" FromRole="Patient" ToRole="Appointments" />
           <NavigationProperty Name="Doctors" Relationship="Self.FK_Patient_Doctors" FromRole="Patient" ToRole="Doctors" />
@@ -569,6 +758,13 @@
           <NavigationProperty Name="Patient_Medical_Aid" Relationship="Self.FK_Patient_Medical_Aid_Patient" FromRole="Patient" ToRole="Patient_Medical_Aid" />
           <NavigationProperty Name="Users" Relationship="Self.FK_Patient_Users" FromRole="Patient" ToRole="Users" />
           <NavigationProperty Name="Prescription" Relationship="Self.FK_Prescription_Patient" FromRole="Patient" ToRole="Prescription" />
+        </EntityType>
+        <EntityType Name="Patient_Consultation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Patient_ID" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Patient_Medical_Aid">
           <Key>
@@ -615,6 +811,19 @@
           <NavigationProperty Name="Doctors" Relationship="Self.FK_Prescription_Doctors" FromRole="Prescription" ToRole="Doctors" />
           <NavigationProperty Name="Patient" Relationship="Self.FK_Prescription_Patient" FromRole="Prescription" ToRole="Patient" />
         </EntityType>
+        <EntityType Name="Prescription_DrugDetails">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Prescription_ID" Type="Int32" Nullable="false" />
+          <Property Name="DrugName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Strength" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IntakeRoute" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Frequency" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DispenseNumber" Type="Int32" Nullable="false" />
+          <Property Name="RefillNumber" Type="Int32" Nullable="false" />
+        </EntityType>
         <EntityType Name="Staff">
           <Key>
             <PropertyRef Name="ID" />
@@ -626,6 +835,10 @@
           <Property Name="Gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="DOB" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Street_Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Suburb" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Employee_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Practice_ID" Type="Int32" Nullable="false" />
           <Property Name="User_ID" Type="Int32" Nullable="false" />
@@ -643,7 +856,6 @@
           <Property Name="AccessLevel" Type="Int32" Nullable="false" />
           <NavigationProperty Name="AccessLevel1" Relationship="Self.FK_Users_AccessLevel" FromRole="Users" ToRole="AccessLevel" />
           <NavigationProperty Name="Doctors" Relationship="Self.FK_Doctors_Users" FromRole="Users" ToRole="Doctors" />
-          <NavigationProperty Name="Medical_Aid" Relationship="Self.FK_Medical_Aid_Users" FromRole="Users" ToRole="Medical_Aid" />
           <NavigationProperty Name="Patient" Relationship="Self.FK_Patient_Users" FromRole="Users" ToRole="Patient" />
           <NavigationProperty Name="Staff" Relationship="Self.FK_Staff_Users" FromRole="Users" ToRole="Staff" />
         </EntityType>
@@ -743,18 +955,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Invoice_Medical_Aid">
-          <End Role="Medical_Aid" Type="Self.Medical_Aid" Multiplicity="1" />
-          <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Medical_Aid">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Invoice">
-              <PropertyRef Name="Medical_Aid_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Invoice_Patient">
           <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
           <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
@@ -764,18 +964,6 @@
             </Principal>
             <Dependent Role="Invoice">
               <PropertyRef Name="Patient_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Medical_Aid_Users">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
-          <End Role="Medical_Aid" Type="Self.Medical_Aid" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Medical_Aid">
-              <PropertyRef Name="User_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -863,16 +1051,22 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="DoConnectEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="DoConnectEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AccessLevel" EntityType="Self.AccessLevel" />
           <EntitySet Name="Appointments" EntityType="Self.Appointments" />
+          <EntitySet Name="Consultation" EntityType="Self.Consultation" />
           <EntitySet Name="Doctors" EntityType="Self.Doctors" />
+          <EntitySet Name="Expenses" EntityType="Self.Expenses" />
           <EntitySet Name="Invoice" EntityType="Self.Invoice" />
           <EntitySet Name="Medical_Aid" EntityType="Self.Medical_Aid" />
+          <EntitySet Name="Medicine_Inventory" EntityType="Self.Medicine_Inventory" />
+          <EntitySet Name="Messages" EntityType="Self.Messages" />
           <EntitySet Name="Patient" EntityType="Self.Patient" />
+          <EntitySet Name="Patient_Consultation" EntityType="Self.Patient_Consultation" />
           <EntitySet Name="Patient_Medical_Aid" EntityType="Self.Patient_Medical_Aid" />
           <EntitySet Name="Practice" EntityType="Self.Practice" />
           <EntitySet Name="Prescription" EntityType="Self.Prescription" />
+          <EntitySet Name="Prescription_DrugDetails" EntityType="Self.Prescription_DrugDetails" />
           <EntitySet Name="Staff" EntityType="Self.Staff" />
           <EntitySet Name="Users" EntityType="Self.Users" />
           <AssociationSet Name="FK_Users_AccessLevel" Association="Self.FK_Users_AccessLevel">
@@ -907,17 +1101,9 @@
             <End Role="Doctors" EntitySet="Doctors" />
             <End Role="Prescription" EntitySet="Prescription" />
           </AssociationSet>
-          <AssociationSet Name="FK_Invoice_Medical_Aid" Association="Self.FK_Invoice_Medical_Aid">
-            <End Role="Medical_Aid" EntitySet="Medical_Aid" />
-            <End Role="Invoice" EntitySet="Invoice" />
-          </AssociationSet>
           <AssociationSet Name="FK_Invoice_Patient" Association="Self.FK_Invoice_Patient">
             <End Role="Patient" EntitySet="Patient" />
             <End Role="Invoice" EntitySet="Invoice" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Medical_Aid_Users" Association="Self.FK_Medical_Aid_Users">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Medical_Aid" EntitySet="Medical_Aid" />
           </AssociationSet>
           <AssociationSet Name="FK_Patient_Medical_Aid" Association="Self.FK_Patient_Medical_Aid">
             <End Role="Medical_Aid" EntitySet="Medical_Aid" />
@@ -950,13 +1136,102 @@
           <FunctionImport Name="CreateUser" ReturnType="Collection(Int32)">
             <Parameter Name="AccessLevel" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="DeletePractice">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="GetAllAppointments" ReturnType="Collection(DoConnectModel.GetAllAppointments_Result)" />
+          <FunctionImport Name="GetAllDocotors" ReturnType="Collection(DoConnectModel.GetAllDocotors_Result)" />
           <FunctionImport Name="GetAllDoctors" ReturnType="Collection(DoConnectModel.GetAllDoctors_Result)" />
+          <FunctionImport Name="GetAllInvoices" ReturnType="Collection(DoConnectModel.GetAllInvoices_Result)" />
+          <FunctionImport Name="GetAllPatients" ReturnType="Collection(DoConnectModel.GetAllPatients_Result)" />
+          <FunctionImport Name="GetAllPractices" ReturnType="Collection(DoConnectModel.GetAllPractices_Result)" />
+          <FunctionImport Name="GetAppointmentById" ReturnType="Collection(DoConnectModel.GetAppointmentById_Result)">
+            <Parameter Name="AppId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetDocotorById" ReturnType="Collection(DoConnectModel.GetDocotorById_Result)">
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetInvoiceByDoctorId" ReturnType="Collection(DoConnectModel.GetInvoiceByDoctorId_Result)">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetInvoiceById" ReturnType="Collection(DoConnectModel.GetInvoiceById_Result)">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetInvoiceByMedAidId" ReturnType="Collection(DoConnectModel.GetInvoiceByMedAidId_Result)">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetInvoiceByPatientId" ReturnType="Collection(DoConnectModel.GetInvoiceByPatientId_Result)">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetPatientById" ReturnType="Collection(DoConnectModel.GetPatientById_Result)">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetPracticeById" ReturnType="Collection(DoConnectModel.GetPracticeById_Result)">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="InsertPractice" ReturnType="Collection(Int32)">
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Phone_Number" Mode="In" Type="String" />
+            <Parameter Name="Fax_Number" Mode="In" Type="String" />
+            <Parameter Name="Street_Address" Mode="In" Type="String" />
+            <Parameter Name="Suburb" Mode="In" Type="String" />
+            <Parameter Name="City" Mode="In" Type="String" />
+            <Parameter Name="Country" Mode="In" Type="String" />
+            <Parameter Name="Latitude" Mode="In" Type="String" />
+            <Parameter Name="Longitude" Mode="In" Type="String" />
+            <Parameter Name="Trading_Times" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="Login" ReturnType="Collection(DoConnectModel.Login_Result)">
             <Parameter Name="Email" Mode="In" Type="String" />
             <Parameter Name="Password" Mode="In" Type="String" />
             <Parameter Name="AccessLevel" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="NewUpdateAppointment">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+            <Parameter Name="App_Status" Mode="In" Type="Boolean" />
+            <Parameter Name="Date_Time" Mode="In" Type="DateTime" />
+            <Parameter Name="Details" Mode="In" Type="String" />
+            <Parameter Name="Patient_ID" Mode="In" Type="Int32" />
+            <Parameter Name="Doctor_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="NewUpdateDoctor">
+            <Parameter Name="FirstName" Mode="In" Type="String" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+            <Parameter Name="Gender" Mode="In" Type="String" />
+            <Parameter Name="Address" Mode="In" Type="String" />
+            <Parameter Name="PracticeID" Mode="In" Type="Int32" />
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+            <Parameter Name="JobTitle" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="NewUpdatePatient">
+            <Parameter Name="FirstName" Mode="In" Type="String" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+            <Parameter Name="ID_Number" Mode="In" Type="String" />
+            <Parameter Name="Gender" Mode="In" Type="String" />
+            <Parameter Name="DOB" Mode="In" Type="DateTime" />
+            <Parameter Name="Cell_Number" Mode="In" Type="String" />
+            <Parameter Name="Street_Address" Mode="In" Type="String" />
+            <Parameter Name="Suburb" Mode="In" Type="String" />
+            <Parameter Name="City" Mode="In" Type="String" />
+            <Parameter Name="Country" Mode="In" Type="String" />
+            <Parameter Name="Medical_Aid_ID" Mode="In" Type="Int32" />
+            <Parameter Name="Doctor_ID" Mode="In" Type="Int32" />
+            <Parameter Name="User_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="NewUpdatePractice">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Phone_Number" Mode="In" Type="String" />
+            <Parameter Name="Fax_Number" Mode="In" Type="String" />
+            <Parameter Name="Street_Address" Mode="In" Type="String" />
+            <Parameter Name="Suburb" Mode="In" Type="String" />
+            <Parameter Name="City" Mode="In" Type="String" />
+            <Parameter Name="Country" Mode="In" Type="String" />
+            <Parameter Name="Latitude" Mode="In" Type="String" />
+            <Parameter Name="Longitude" Mode="In" Type="String" />
+            <Parameter Name="Trading_Times" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetallDocs" EntitySet="Doctors" ReturnType="Collection(DoConnectModel.Doctors)" />
         </EntityContainer>
         <ComplexType Name="GetAllAppointments_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
@@ -965,6 +1240,16 @@
           <Property Type="String" Name="Details" Nullable="false" MaxLength="50" />
           <Property Type="Int32" Name="Patient_ID" Nullable="false" />
           <Property Type="Int32" Name="Doctor_ID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetAllDocotors_Result">
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Gender" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Address" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Practice_ID" Nullable="false" />
+          <Property Type="Int32" Name="User_ID" Nullable="false" />
+          <Property Type="String" Name="Job_Title" Nullable="false" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="GetAllDoctors_Result">
           <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
@@ -976,6 +1261,134 @@
           <Property Type="Int32" Name="User_ID" Nullable="false" />
           <Property Type="String" Name="Job_Title" Nullable="false" MaxLength="50" />
         </ComplexType>
+        <ComplexType Name="GetAllInvoices_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="DateTime" Name="Date" Nullable="false" />
+          <Property Type="Decimal" Name="Total" Nullable="false" Precision="19" />
+          <Property Type="Int32" Name="Medical_Aid_ID" Nullable="false" />
+          <Property Type="Int32" Name="Patient_ID" Nullable="false" />
+          <Property Type="Int32" Name="Doctor_ID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetAllPatients_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ID_Number" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Gender" Nullable="false" MaxLength="1" />
+          <Property Type="DateTime" Name="DOB" Nullable="false" />
+          <Property Type="String" Name="Cell_Number" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Street_Address" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Suburb" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="City" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Country" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Allergies" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="PreviousIllnesses" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="PreviousMedication" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="RiskFactors" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="SocialHistory" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="FamilyHistory" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="Medical_Aid_ID" Nullable="false" />
+          <Property Type="Int32" Name="Doctor_ID" Nullable="false" />
+          <Property Type="Int32" Name="User_ID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetAllPractices_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Phone_Number" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Fax_Number" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Street_Address" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Suburb" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="City" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Country" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Longitude" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Latitude" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Trading_Times" Nullable="false" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="GetAppointmentById_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Boolean" Name="App_Status" Nullable="false" />
+          <Property Type="DateTime" Name="Date_Time" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Details" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Patient_ID" Nullable="false" />
+          <Property Type="Int32" Name="Doctor_ID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetDocotorById_Result">
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Gender" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Address" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Practice_ID" Nullable="false" />
+          <Property Type="Int32" Name="User_ID" Nullable="false" />
+          <Property Type="String" Name="Job_Title" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetInvoiceByDoctorId_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="DateTime" Name="Date" Nullable="false" />
+          <Property Type="Decimal" Name="Total" Nullable="false" Precision="19" />
+          <Property Type="Int32" Name="Medical_Aid_ID" Nullable="false" />
+          <Property Type="Int32" Name="Patient_ID" Nullable="false" />
+          <Property Type="Int32" Name="Doctor_ID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetInvoiceById_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="DateTime" Name="Date" Nullable="false" />
+          <Property Type="Decimal" Name="Total" Nullable="false" Precision="19" />
+          <Property Type="Int32" Name="Medical_Aid_ID" Nullable="false" />
+          <Property Type="Int32" Name="Patient_ID" Nullable="false" />
+          <Property Type="Int32" Name="Doctor_ID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetInvoiceByMedAidId_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="DateTime" Name="Date" Nullable="false" />
+          <Property Type="Decimal" Name="Total" Nullable="false" Precision="19" />
+          <Property Type="Int32" Name="Medical_Aid_ID" Nullable="false" />
+          <Property Type="Int32" Name="Patient_ID" Nullable="false" />
+          <Property Type="Int32" Name="Doctor_ID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetInvoiceByPatientId_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="DateTime" Name="Date" Nullable="false" />
+          <Property Type="Decimal" Name="Total" Nullable="false" Precision="19" />
+          <Property Type="Int32" Name="Medical_Aid_ID" Nullable="false" />
+          <Property Type="Int32" Name="Patient_ID" Nullable="false" />
+          <Property Type="Int32" Name="Doctor_ID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetPatientById_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ID_Number" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Gender" Nullable="false" MaxLength="1" />
+          <Property Type="DateTime" Name="DOB" Nullable="false" />
+          <Property Type="String" Name="Cell_Number" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Street_Address" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Suburb" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="City" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Country" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Allergies" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="PreviousIllnesses" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="PreviousMedication" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="RiskFactors" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="SocialHistory" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="FamilyHistory" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="Medical_Aid_ID" Nullable="false" />
+          <Property Type="Int32" Name="Doctor_ID" Nullable="false" />
+          <Property Type="Int32" Name="User_ID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetPracticeById_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Phone_Number" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Fax_Number" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Street_Address" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Suburb" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="City" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Country" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Longitude" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Latitude" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Trading_Times" Nullable="false" MaxLength="200" />
+        </ComplexType>
         <ComplexType Name="Login_Result">
           <Property Type="String" Name="Email" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="Password" Nullable="false" MaxLength="50" />
@@ -986,7 +1399,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DoConnectModelStoreContainer" CdmEntityContainer="DoConnectEntities">
+        <EntityContainerMapping StorageEntityContainer="DoConnectModelStoreContainer" CdmEntityContainer="DoConnectEntities1">
           <EntitySetMapping Name="AccessLevel">
             <EntityTypeMapping TypeName="DoConnectModel.AccessLevel">
               <MappingFragment StoreEntitySet="AccessLevel">
@@ -1007,6 +1420,24 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Consultation">
+            <EntityTypeMapping TypeName="DoConnectModel.Consultation">
+              <MappingFragment StoreEntitySet="Consultation">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Patient_ID" ColumnName="Patient_ID" />
+                <ScalarProperty Name="Doctor_ID" ColumnName="Doctor_ID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ReasonForConsultation" ColumnName="ReasonForConsultation" />
+                <ScalarProperty Name="Symptoms" ColumnName="Symptoms" />
+                <ScalarProperty Name="ClinicalFindings" ColumnName="ClinicalFindings" />
+                <ScalarProperty Name="Diagnosis" ColumnName="Diagnosis" />
+                <ScalarProperty Name="TestResultSummary" ColumnName="TestResultSummary" />
+                <ScalarProperty Name="TreatmentPlan" ColumnName="TreatmentPlan" />
+                <ScalarProperty Name="Presciption_ID" ColumnName="Presciption_ID" />
+                <ScalarProperty Name="Referral_ID" ColumnName="Referral_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Doctors">
             <EntityTypeMapping TypeName="DoConnectModel.Doctors">
               <MappingFragment StoreEntitySet="Doctors">
@@ -1022,11 +1453,24 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Expenses">
+            <EntityTypeMapping TypeName="DoConnectModel.Expenses">
+              <MappingFragment StoreEntitySet="Expenses">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Practice_ID" ColumnName="Practice_ID" />
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Invoice">
             <EntityTypeMapping TypeName="DoConnectModel.Invoice">
               <MappingFragment StoreEntitySet="Invoice">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="InvoiceSummary" ColumnName="InvoiceSummary" />
                 <ScalarProperty Name="Total" ColumnName="Total" />
                 <ScalarProperty Name="Medical_Aid_ID" ColumnName="Medical_Aid_ID" />
                 <ScalarProperty Name="Patient_ID" ColumnName="Patient_ID" />
@@ -1043,7 +1487,33 @@
                 <ScalarProperty Name="Fax_Number" ColumnName="Fax_Number" />
                 <ScalarProperty Name="Email_Address" ColumnName="Email_Address" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Medicine_Inventory">
+            <EntityTypeMapping TypeName="DoConnectModel.Medicine_Inventory">
+              <MappingFragment StoreEntitySet="Medicine_Inventory">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DrugName" ColumnName="DrugName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="QuantityPurchased" ColumnName="QuantityPurchased" />
+                <ScalarProperty Name="PurchaseDate" ColumnName="PurchaseDate" />
+                <ScalarProperty Name="QuantityInStock" ColumnName="QuantityInStock" />
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+                <ScalarProperty Name="DrugConcentration" ColumnName="DrugConcentration" />
+                <ScalarProperty Name="Practice_ID" ColumnName="Practice_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Messages">
+            <EntityTypeMapping TypeName="DoConnectModel.Messages">
+              <MappingFragment StoreEntitySet="Messages">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Sender" ColumnName="Sender" />
+                <ScalarProperty Name="Receiver" ColumnName="Receiver" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1071,6 +1541,14 @@
                 <ScalarProperty Name="SocialHistory" ColumnName="SocialHistory" />
                 <ScalarProperty Name="FamilyHistory" ColumnName="FamilyHistory" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Patient_Consultation">
+            <EntityTypeMapping TypeName="DoConnectModel.Patient_Consultation">
+              <MappingFragment StoreEntitySet="Patient_Consultation">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Patient_ID" ColumnName="Patient_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1116,6 +1594,20 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Prescription_DrugDetails">
+            <EntityTypeMapping TypeName="DoConnectModel.Prescription_DrugDetails">
+              <MappingFragment StoreEntitySet="Prescription_DrugDetails">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Prescription_ID" ColumnName="Prescription_ID" />
+                <ScalarProperty Name="DrugName" ColumnName="DrugName" />
+                <ScalarProperty Name="Strength" ColumnName="Strength" />
+                <ScalarProperty Name="IntakeRoute" ColumnName="IntakeRoute" />
+                <ScalarProperty Name="Frequency" ColumnName="Frequency" />
+                <ScalarProperty Name="DispenseNumber" ColumnName="DispenseNumber" />
+                <ScalarProperty Name="RefillNumber" ColumnName="RefillNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Staff">
             <EntityTypeMapping TypeName="DoConnectModel.Staff">
               <MappingFragment StoreEntitySet="Staff">
@@ -1126,6 +1618,10 @@
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
                 <ScalarProperty Name="DOB" ColumnName="DOB" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Street_Address" ColumnName="Street_Address" />
+                <ScalarProperty Name="Suburb" ColumnName="Suburb" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
                 <ScalarProperty Name="Employee_Type" ColumnName="Employee_Type" />
                 <ScalarProperty Name="Practice_ID" ColumnName="Practice_ID" />
                 <ScalarProperty Name="User_ID" ColumnName="User_ID" />
@@ -1144,6 +1640,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="CreateUser" FunctionName="DoConnectModel.Store.CreateUser" />
+          <FunctionImportMapping FunctionImportName="DeletePractice" FunctionName="DoConnectModel.Store.DeletePractice" />
           <FunctionImportMapping FunctionImportName="GetAllAppointments" FunctionName="DoConnectModel.Store.GetAllAppointments">
             <ResultMapping>
               <ComplexTypeMapping TypeName="DoConnectModel.GetAllAppointments_Result">
@@ -1153,6 +1650,20 @@
                 <ScalarProperty Name="Details" ColumnName="Details" />
                 <ScalarProperty Name="Patient_ID" ColumnName="Patient_ID" />
                 <ScalarProperty Name="Doctor_ID" ColumnName="Doctor_ID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllDocotors" FunctionName="DoConnectModel.Store.GetAllDocotors">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DoConnectModel.GetAllDocotors_Result">
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Practice_ID" ColumnName="Practice_ID" />
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="Job_Title" ColumnName="Job_Title" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -1170,6 +1681,179 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllInvoices" FunctionName="DoConnectModel.Store.GetAllInvoices">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DoConnectModel.GetAllInvoices_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Medical_Aid_ID" ColumnName="Medical_Aid_ID" />
+                <ScalarProperty Name="Patient_ID" ColumnName="Patient_ID" />
+                <ScalarProperty Name="Doctor_ID" ColumnName="Doctor_ID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllPatients" FunctionName="DoConnectModel.Store.GetAllPatients">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DoConnectModel.GetAllPatients_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="ID_Number" ColumnName="ID_Number" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Cell_Number" ColumnName="Cell_Number" />
+                <ScalarProperty Name="Street_Address" ColumnName="Street_Address" />
+                <ScalarProperty Name="Suburb" ColumnName="Suburb" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Allergies" ColumnName="Allergies" />
+                <ScalarProperty Name="PreviousIllnesses" ColumnName="PreviousIllnesses" />
+                <ScalarProperty Name="PreviousMedication" ColumnName="PreviousMedication" />
+                <ScalarProperty Name="RiskFactors" ColumnName="RiskFactors" />
+                <ScalarProperty Name="SocialHistory" ColumnName="SocialHistory" />
+                <ScalarProperty Name="FamilyHistory" ColumnName="FamilyHistory" />
+                <ScalarProperty Name="Medical_Aid_ID" ColumnName="Medical_Aid_ID" />
+                <ScalarProperty Name="Doctor_ID" ColumnName="Doctor_ID" />
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllPractices" FunctionName="DoConnectModel.Store.GetAllPractices">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DoConnectModel.GetAllPractices_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Phone_Number" ColumnName="Phone_Number" />
+                <ScalarProperty Name="Fax_Number" ColumnName="Fax_Number" />
+                <ScalarProperty Name="Street_Address" ColumnName="Street_Address" />
+                <ScalarProperty Name="Suburb" ColumnName="Suburb" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Trading_Times" ColumnName="Trading_Times" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAppointmentById" FunctionName="DoConnectModel.Store.GetAppointmentById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DoConnectModel.GetAppointmentById_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="App_Status" ColumnName="App_Status" />
+                <ScalarProperty Name="Date_Time" ColumnName="Date_Time" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="Patient_ID" ColumnName="Patient_ID" />
+                <ScalarProperty Name="Doctor_ID" ColumnName="Doctor_ID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetDocotorById" FunctionName="DoConnectModel.Store.GetDocotorById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DoConnectModel.GetDocotorById_Result">
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Practice_ID" ColumnName="Practice_ID" />
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="Job_Title" ColumnName="Job_Title" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetInvoiceByDoctorId" FunctionName="DoConnectModel.Store.GetInvoiceByDoctorId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DoConnectModel.GetInvoiceByDoctorId_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Medical_Aid_ID" ColumnName="Medical_Aid_ID" />
+                <ScalarProperty Name="Patient_ID" ColumnName="Patient_ID" />
+                <ScalarProperty Name="Doctor_ID" ColumnName="Doctor_ID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetInvoiceById" FunctionName="DoConnectModel.Store.GetInvoiceById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DoConnectModel.GetInvoiceById_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Medical_Aid_ID" ColumnName="Medical_Aid_ID" />
+                <ScalarProperty Name="Patient_ID" ColumnName="Patient_ID" />
+                <ScalarProperty Name="Doctor_ID" ColumnName="Doctor_ID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetInvoiceByMedAidId" FunctionName="DoConnectModel.Store.GetInvoiceByMedAidId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DoConnectModel.GetInvoiceByMedAidId_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Medical_Aid_ID" ColumnName="Medical_Aid_ID" />
+                <ScalarProperty Name="Patient_ID" ColumnName="Patient_ID" />
+                <ScalarProperty Name="Doctor_ID" ColumnName="Doctor_ID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetInvoiceByPatientId" FunctionName="DoConnectModel.Store.GetInvoiceByPatientId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DoConnectModel.GetInvoiceByPatientId_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Medical_Aid_ID" ColumnName="Medical_Aid_ID" />
+                <ScalarProperty Name="Patient_ID" ColumnName="Patient_ID" />
+                <ScalarProperty Name="Doctor_ID" ColumnName="Doctor_ID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetPatientById" FunctionName="DoConnectModel.Store.GetPatientById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DoConnectModel.GetPatientById_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="ID_Number" ColumnName="ID_Number" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Cell_Number" ColumnName="Cell_Number" />
+                <ScalarProperty Name="Street_Address" ColumnName="Street_Address" />
+                <ScalarProperty Name="Suburb" ColumnName="Suburb" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Allergies" ColumnName="Allergies" />
+                <ScalarProperty Name="PreviousIllnesses" ColumnName="PreviousIllnesses" />
+                <ScalarProperty Name="PreviousMedication" ColumnName="PreviousMedication" />
+                <ScalarProperty Name="RiskFactors" ColumnName="RiskFactors" />
+                <ScalarProperty Name="SocialHistory" ColumnName="SocialHistory" />
+                <ScalarProperty Name="FamilyHistory" ColumnName="FamilyHistory" />
+                <ScalarProperty Name="Medical_Aid_ID" ColumnName="Medical_Aid_ID" />
+                <ScalarProperty Name="Doctor_ID" ColumnName="Doctor_ID" />
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetPracticeById" FunctionName="DoConnectModel.Store.GetPracticeById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DoConnectModel.GetPracticeById_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Phone_Number" ColumnName="Phone_Number" />
+                <ScalarProperty Name="Fax_Number" ColumnName="Fax_Number" />
+                <ScalarProperty Name="Street_Address" ColumnName="Street_Address" />
+                <ScalarProperty Name="Suburb" ColumnName="Suburb" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Trading_Times" ColumnName="Trading_Times" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="InsertPractice" FunctionName="DoConnectModel.Store.InsertPractice" />
           <FunctionImportMapping FunctionImportName="Login" FunctionName="DoConnectModel.Store.Login">
             <ResultMapping>
               <ComplexTypeMapping TypeName="DoConnectModel.Login_Result">
@@ -1179,6 +1863,11 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="NewUpdateAppointment" FunctionName="DoConnectModel.Store.NewUpdateAppointment" />
+          <FunctionImportMapping FunctionImportName="NewUpdateDoctor" FunctionName="DoConnectModel.Store.NewUpdateDoctor" />
+          <FunctionImportMapping FunctionImportName="NewUpdatePatient" FunctionName="DoConnectModel.Store.NewUpdatePatient" />
+          <FunctionImportMapping FunctionImportName="NewUpdatePractice" FunctionName="DoConnectModel.Store.NewUpdatePractice" />
+          <FunctionImportMapping FunctionImportName="GetallDocs" FunctionName="DoConnectModel.Store.GetAllDoctors" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

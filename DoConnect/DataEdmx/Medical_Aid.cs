@@ -16,7 +16,6 @@ namespace DataEdmx
     {
         public Medical_Aid()
         {
-            this.Invoice = new HashSet<Invoice>();
             this.Patient = new HashSet<Patient>();
             this.Patient_Medical_Aid = new HashSet<Patient_Medical_Aid>();
         }
@@ -27,10 +26,7 @@ namespace DataEdmx
         public string Fax_Number { get; set; }
         public string Email_Address { get; set; }
         public string Address { get; set; }
-        public int User_ID { get; set; }
     
-        public virtual ICollection<Invoice> Invoice { get; set; }
-        public virtual Users Users { get; set; }
         public virtual ICollection<Patient> Patient { get; set; }
         public virtual ICollection<Patient_Medical_Aid> Patient_Medical_Aid { get; set; }
     }

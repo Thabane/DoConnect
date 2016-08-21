@@ -35,8 +35,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -55,6 +62,10 @@
     <ProjectReference Include="..\DataClient\DataClient.csproj">
       <Project>{8c1aaf48-0805-405b-b58e-91fce15e96a7}</Project>
       <Name>DataClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ObjectModel\ObjectModel.csproj">
+      <Project>{171B67FD-6810-48A2-AB91-C12DCA6E06BF}</Project>
+      <Name>ObjectModel</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

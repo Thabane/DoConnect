@@ -14,4 +14,17 @@ namespace ObjectModel
         public int UserId { get; set; }
         public int PracticeId { get; set; }
     }
+
+    public class DoctorProfile : BaseEntity
+    {
+        public Doctor Doc { get; set; }
+
+        public DoctorProfile()
+        {
+            if (Doc == null)
+            {
+                Doc = new Doctor();
+            }
+        }
+    }
 }
