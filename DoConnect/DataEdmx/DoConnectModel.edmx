@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DoConnectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DoConnectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AccessLevel">
           <Key>
             <PropertyRef Name="ID" />
@@ -517,6 +517,23 @@
           <Parameter Name="Longitude" Type="nvarchar" Mode="In" />
           <Parameter Name="Trading_Times" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="NewUpdateStaff" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+          <Parameter Name="FirstName" Type="nvarchar" Mode="In" />
+          <Parameter Name="LastName" Type="nvarchar" Mode="In" />
+          <Parameter Name="ID_Number" Type="nvarchar" Mode="In" />
+          <Parameter Name="Gender" Type="char" Mode="In" />
+          <Parameter Name="DOB" Type="date" Mode="In" />
+          <Parameter Name="Phone" Type="nvarchar" Mode="In" />
+          <Parameter Name="Street_Address" Type="nvarchar" Mode="In" />
+          <Parameter Name="Suburb" Type="nvarchar" Mode="In" />
+          <Parameter Name="City" Type="nvarchar" Mode="In" />
+          <Parameter Name="Country" Type="nvarchar" Mode="In" />
+          <Parameter Name="Employee_Type" Type="nvarchar" Mode="In" />
+          <Parameter Name="Practice_ID" Type="int" Mode="In" />
+          <Parameter Name="User_ID" Type="int" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+        </Function>
         <EntityContainer Name="DoConnectModelStoreContainer">
           <EntitySet Name="AccessLevel" EntityType="Self.AccessLevel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Appointments" EntityType="Self.Appointments" Schema="dbo" store:Type="Tables" />
@@ -600,8 +617,7 @@
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DoConnectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1134,10 +1150,10 @@
             <End Role="Staff" EntitySet="Staff" />
           </AssociationSet>
           <FunctionImport Name="CreateUser" ReturnType="Collection(Int32)">
-            <Parameter Name="AccessLevel" Mode="In" Type="Int32" />
+          <Parameter Name="AccessLevel" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="DeletePractice">
-            <Parameter Name="ID" Mode="In" Type="Int32" />
+          <Parameter Name="ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetAllAppointments" ReturnType="Collection(DoConnectModel.GetAllAppointments_Result)" />
           <FunctionImport Name="GetAllDocotors" ReturnType="Collection(DoConnectModel.GetAllDocotors_Result)" />
@@ -1146,28 +1162,28 @@
           <FunctionImport Name="GetAllPatients" ReturnType="Collection(DoConnectModel.GetAllPatients_Result)" />
           <FunctionImport Name="GetAllPractices" ReturnType="Collection(DoConnectModel.GetAllPractices_Result)" />
           <FunctionImport Name="GetAppointmentById" ReturnType="Collection(DoConnectModel.GetAppointmentById_Result)">
-            <Parameter Name="AppId" Mode="In" Type="Int32" />
+          <Parameter Name="AppId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetDocotorById" ReturnType="Collection(DoConnectModel.GetDocotorById_Result)">
-            <Parameter Name="UserId" Mode="In" Type="Int32" />
+          <Parameter Name="UserId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetInvoiceByDoctorId" ReturnType="Collection(DoConnectModel.GetInvoiceByDoctorId_Result)">
-            <Parameter Name="ID" Mode="In" Type="Int32" />
+          <Parameter Name="ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetInvoiceById" ReturnType="Collection(DoConnectModel.GetInvoiceById_Result)">
-            <Parameter Name="ID" Mode="In" Type="Int32" />
+          <Parameter Name="ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetInvoiceByMedAidId" ReturnType="Collection(DoConnectModel.GetInvoiceByMedAidId_Result)">
-            <Parameter Name="ID" Mode="In" Type="Int32" />
+          <Parameter Name="ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetInvoiceByPatientId" ReturnType="Collection(DoConnectModel.GetInvoiceByPatientId_Result)">
-            <Parameter Name="ID" Mode="In" Type="Int32" />
+          <Parameter Name="ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetPatientById" ReturnType="Collection(DoConnectModel.GetPatientById_Result)">
-            <Parameter Name="ID" Mode="In" Type="Int32" />
+          <Parameter Name="ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetPracticeById" ReturnType="Collection(DoConnectModel.GetPracticeById_Result)">
-            <Parameter Name="ID" Mode="In" Type="Int32" />
+          <Parameter Name="ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="InsertPractice" ReturnType="Collection(Int32)">
             <Parameter Name="Name" Mode="In" Type="String" />
@@ -1232,6 +1248,23 @@
             <Parameter Name="Trading_Times" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetallDocs" EntitySet="Doctors" ReturnType="Collection(DoConnectModel.Doctors)" />
+          <FunctionImport Name="NewUpdateStaff">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+            <Parameter Name="FirstName" Mode="In" Type="String" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+            <Parameter Name="ID_Number" Mode="In" Type="String" />
+            <Parameter Name="Gender" Mode="In" Type="String" />
+            <Parameter Name="DOB" Mode="In" Type="DateTime" />
+            <Parameter Name="Phone" Mode="In" Type="String" />
+            <Parameter Name="Street_Address" Mode="In" Type="String" />
+            <Parameter Name="Suburb" Mode="In" Type="String" />
+            <Parameter Name="City" Mode="In" Type="String" />
+            <Parameter Name="Country" Mode="In" Type="String" />
+            <Parameter Name="Employee_Type" Mode="In" Type="String" />
+            <Parameter Name="Practice_ID" Mode="In" Type="Int32" />
+            <Parameter Name="User_ID" Mode="In" Type="Int32" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetAllAppointments_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
@@ -1868,6 +1901,7 @@
           <FunctionImportMapping FunctionImportName="NewUpdatePatient" FunctionName="DoConnectModel.Store.NewUpdatePatient" />
           <FunctionImportMapping FunctionImportName="NewUpdatePractice" FunctionName="DoConnectModel.Store.NewUpdatePractice" />
           <FunctionImportMapping FunctionImportName="GetallDocs" FunctionName="DoConnectModel.Store.GetAllDoctors" />
+          <FunctionImportMapping FunctionImportName="NewUpdateStaff" FunctionName="DoConnectModel.Store.NewUpdateStaff" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

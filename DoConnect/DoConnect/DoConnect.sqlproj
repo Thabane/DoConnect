@@ -91,6 +91,7 @@
     <Build Include="Stored Procedures\NewUpdatePatient.sql" />
     <Build Include="Stored Procedures\NewUpdatePractice.sql" />
     <Build Include="Tables\AccessLevel.sql" />
+    <Build Include="Stored Procedures\NewUpdateStaff.sql" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ReadMe.cs" />

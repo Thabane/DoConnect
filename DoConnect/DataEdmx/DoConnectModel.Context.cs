@@ -405,5 +405,70 @@ namespace DataEdmx
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Doctors>("GetallDocs", mergeOption);
         }
+    
+        public virtual int NewUpdateStaff(Nullable<int> iD, string firstName, string lastName, string iD_Number, string gender, Nullable<System.DateTime> dOB, string phone, string street_Address, string suburb, string city, string country, string employee_Type, Nullable<int> practice_ID, Nullable<int> user_ID, string email)
+        {
+            var iDParameter = iD.HasValue ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(int));
+    
+            var firstNameParameter = firstName != null ?
+                new ObjectParameter("FirstName", firstName) :
+                new ObjectParameter("FirstName", typeof(string));
+    
+            var lastNameParameter = lastName != null ?
+                new ObjectParameter("LastName", lastName) :
+                new ObjectParameter("LastName", typeof(string));
+    
+            var iD_NumberParameter = iD_Number != null ?
+                new ObjectParameter("ID_Number", iD_Number) :
+                new ObjectParameter("ID_Number", typeof(string));
+    
+            var genderParameter = gender != null ?
+                new ObjectParameter("Gender", gender) :
+                new ObjectParameter("Gender", typeof(string));
+    
+            var dOBParameter = dOB.HasValue ?
+                new ObjectParameter("DOB", dOB) :
+                new ObjectParameter("DOB", typeof(System.DateTime));
+    
+            var phoneParameter = phone != null ?
+                new ObjectParameter("Phone", phone) :
+                new ObjectParameter("Phone", typeof(string));
+    
+            var street_AddressParameter = street_Address != null ?
+                new ObjectParameter("Street_Address", street_Address) :
+                new ObjectParameter("Street_Address", typeof(string));
+    
+            var suburbParameter = suburb != null ?
+                new ObjectParameter("Suburb", suburb) :
+                new ObjectParameter("Suburb", typeof(string));
+    
+            var cityParameter = city != null ?
+                new ObjectParameter("City", city) :
+                new ObjectParameter("City", typeof(string));
+    
+            var countryParameter = country != null ?
+                new ObjectParameter("Country", country) :
+                new ObjectParameter("Country", typeof(string));
+    
+            var employee_TypeParameter = employee_Type != null ?
+                new ObjectParameter("Employee_Type", employee_Type) :
+                new ObjectParameter("Employee_Type", typeof(string));
+    
+            var practice_IDParameter = practice_ID.HasValue ?
+                new ObjectParameter("Practice_ID", practice_ID) :
+                new ObjectParameter("Practice_ID", typeof(int));
+    
+            var user_IDParameter = user_ID.HasValue ?
+                new ObjectParameter("User_ID", user_ID) :
+                new ObjectParameter("User_ID", typeof(int));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("Email", email) :
+                new ObjectParameter("Email", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("NewUpdateStaff", iDParameter, firstNameParameter, lastNameParameter, iD_NumberParameter, genderParameter, dOBParameter, phoneParameter, street_AddressParameter, suburbParameter, cityParameter, countryParameter, employee_TypeParameter, practice_IDParameter, user_IDParameter, emailParameter);
+        }
     }
 }
