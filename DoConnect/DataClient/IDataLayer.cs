@@ -37,6 +37,6 @@ namespace DataClient
         List<Staff> GetAllStaffMembers();
         bool DeleteStaff(int id);
         bool UpdateStaff(int id, string firstName, string lastName, string id_Number, string gender, DateTime dob, string phone, string employee_Type, int practice_ID, int user_ID);
-        SystemUser Login(string email, string password);
+        SystemUser Login(string email, string password, int AccessLevel);
     }
 }
