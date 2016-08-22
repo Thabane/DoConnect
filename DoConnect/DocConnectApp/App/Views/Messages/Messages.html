@@ -20,43 +20,42 @@
                 </ul>
             </div>
 
+            <div class="row" style="margin-top: 10px; margin-right: 10px;">
+                <div class="col-md-4"></div><div class="col-md-4"><h5 class="pull-right">Search:</h5></div>
+                <div class="form-group col-md-4">
+                    <input class="form-control" type="text" style="font-size:13px;" ng-model="search">
+                </div>
+            </div>
+
             <!--Message list (Inbox Table) -->
             <div id="div_Message_list" class="col-md-10">
-                <div class="container">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>From</th>
-                                <th>Message Body</th>
-                                <th>Date</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ondblclick="tr_dblclick_InboxMail()">
-                                <td>john@example.com</td>
-                                <td>Message....</td>
-                                <td>07-08-2016</td>
-                                <td><button class="btn btn-info btn-xs" id="FunctionMessage_Reply" onclick="FunctionMessage_Reply()" href="#"><i class="fa fa-reply"></i></button></td>
-                                <td><button class="btn btn-danger btn-xs" onclick="FunctionMessage_Delete()"><i class="fa fa-trash-o"></i></button></td>
-
-                            </tr>
-                            <tr ondblclick="tr_dblclick_InboxMail()">
-                                <td>Mary</td>
-                                <td>Moe</td>
-                                <td>mary@example.com</td>
-                                <td><button class="btn btn-info btn-xs" id="FunctionMessage_Reply" onclick="FunctionMessage_Reply()" href="#"><i class="fa fa-reply"></i></button></td>
-                                <td><button class="btn btn-danger btn-xs" onclick="FunctionMessage_Delete()"><i class="fa fa-trash-o"></i></button></td>
-                            </tr>
-                            <tr ondblclick="tr_dblclick_InboxMail()">
-                                <td>July</td>
-                                <td>Dooley</td>
-                                <td>july@example.com</td>
-                                <td><button class="btn btn-info btn-xs" id="FunctionMessage_Reply" onclick="FunctionMessage_Reply()" href="#"><i class="fa fa-reply"></i></button></td>
-                                <td><button class="btn btn-danger btn-xs" onclick="FunctionMessage_Delete()"><i class="fa fa-trash-o"></i></button></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <table class="table table-hover">
+                    <thead style="background-color: #f8f8f8;">
+                        <tr>
+                            <th style="width: 15%;" ng-click="sort('Sender')">From<span class="fa sort-icon" ng-show="sortKey=='Sender'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                            <th style="width: 15%;" ng-click="sort('Subject')">Subject<span class="fa sort-icon" ng-show="sortKey=='Subject'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                            <th style="width: 45%;" ng-click="sort('Description')">Message<span class="fa sort-icon" ng-show="sortKey=='Description'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                            <th style="width: 15%;" ng-click="sort('Date')">Date<span class="fa sort-icon" ng-show="sortKey=='Date'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                            <th style="width: 10%;">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr dir-paginate="Message in Messages | filter:search | orderBy:sortKey:reverse | itemsPerPage:5">
+                            <td>{{Message.Sender}}</td>
+                            <td>{{Message.Subject}}</td>
+                            <td>{{Message.Description}}</td>
+                            <td>{{Message.Date}}</td>
+                            <td>
+                                <button class="btn btn-info btn-xs" id="FunctionMessage_Reply" onclick="FunctionMessage_Reply()" href="#"><i class="fa fa-reply"></i></button>
+                                <button class="btn btn-danger btn-xs" onclick="FunctionMessage_Delete()"><i class="fa fa-trash-o"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-md-12">
+                        <dir-pagination-controls class="pull-right" max-size="5" direction-links="true" boundary-links="true" style="margin-right: 20px;"></dir-pagination-controls>
+                    </div>
                 </div>
             </div><!--Message list (Inbox Table) Ends -->
 
@@ -78,11 +77,11 @@
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2" for="inputSubject">Subject</label>
-                            <div class="col-sm-10"><input class="form-control" id="inputSubject" placeholder="Subject" type="text"></div>
+                            <div class="col-sm-10"><input class="form-control insert" id="inputSubject" placeholder="Subject" type="text"></div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-12" for="inputBody">Message</label>
-                            <div class="col-sm-12"><textarea class="form-control" id="inputBody" rows="8"></textarea></div>
+                            <div class="col-sm-12"><textarea class="form-control insert" id="inputBody" rows="8"></textarea></div>
                         </div>
                     </form>
                     <div class="modal-footer">

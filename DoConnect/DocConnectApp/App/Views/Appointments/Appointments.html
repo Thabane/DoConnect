@@ -66,7 +66,7 @@
                                                             <div class="col-md-12">
                                                                 <div class="form-group">
                                                                     <div class="input-group date datetimepicker" onclick="DT()">
-                                                                        <input class="form-control" type="text" ng-model="Date_Time">
+                                                                        <input class="form-control" type="text" ng-value="Date_Time" ng-model="Date_Time">
                                                                         <span class="input-group-addon">
                                                                             <span class="glyphicon glyphicon-calendar"></span>
                                                                         </span>
@@ -78,19 +78,19 @@
                             </div>
                             <div class="row" style="margin-top:5px; margin-bottom:5px;">
                                 <div class="col-md-3"><h5>Patient Name:</h5></div>
-                                <div class="col-md-8"><select class="form-control" ng-model="Patient_ID">
+                                <div class="col-md-8"><select class="form-control" ng-value="Patient_ID" ng-model="Patient_ID">
                                                             <option value="">Choose Patient</option>
                                                         </select>
                                 </div>
                             </div>
                             <div class="row" style="margin-top:5px; margin-bottom:5px;">
                                 <div class="col-md-3"><h5>Appointment Details:</h5></div>
-                                <div class="col-md-8"><input class="form-control readonly_ViewAppointment" type="text" ng-model="Details"></div>
+                                <div class="col-md-8"><input class="form-control readonly_ViewAppointment" type="text" ng-value="Details" ng-model="Details"></div>
                             </div>
                             <div class="row" style="margin-top:5px; margin-bottom:5px;">
                                 <div class="col-md-3"><h5>Appointment Status:</h5></div>
                                 <div class="col-md-8">
-                                    <select class="form-control readonly_ViewAppointment" ng-model="App_Status">
+                                    <select class="form-control readonly_ViewAppointment" ng-value="App_Status" ng-model="App_Status">
                                         <option value="">Choose Status</option>
                                         <option value="1">Approved</option>
                                         <option value="2">Denied</option>
@@ -100,8 +100,8 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" ng-click="function_btnUpdateAppointment(Date_Time, Patient_ID, Details, App_Status)" id="function_btnUpdateAppointment">Update</button>
-                            <button type="button" class="btn btn-danger" ng-click="function_btnDeleteAppointment(Patient_ID)">Delete</button>
+                            <button type="button" class="btn btn-primary" ng-click="function_btnUpdateAppointment(ID)" id="function_btnUpdateAppointment">Update</button>
+                            <button type="button" class="btn btn-danger" id="btnDeleteConfirmed" onclick="btnConfirm('danger', 'Are you sure you want to delete this Practice?')" ng-click="function_btnDeleteAppointment(Patient_ID)">Delete</button>
                         </div>
                     </div>
                 </div>

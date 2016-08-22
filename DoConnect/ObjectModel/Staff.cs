@@ -20,6 +20,7 @@ namespace ObjectModel
         public string Employee_Type { get; set; }
         public int Practice_ID { get; set; }
         public int User_ID { get; set; }
+        public string Email { get; set; }
 
         public Staff Create(SqlDataReader reader)
         {
@@ -39,6 +40,7 @@ namespace ObjectModel
                 Employee_Type = reader.GetString(reader.GetOrdinal("Employee_Type")),
                 Practice_ID = reader.GetInt32(reader.GetOrdinal("Practice_ID")),
                 User_ID = reader.GetInt32(reader.GetOrdinal("User_ID")),
+                Email = reader.GetString(reader.GetOrdinal("Email")),
             };
         }
 

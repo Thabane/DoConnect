@@ -1,4 +1,5 @@
-﻿function ezBSAlert(options) {
+﻿var calbackParam = false;
+function ezBSAlert(options) {
     var deferredObject = $.Deferred();
     var defaults = {
         type: "alert", //alert, prompt,confirm 
@@ -65,7 +66,7 @@
         $('#ezAlerts-message').html(defaults.messageText);
 
         var keyb = "false", backd = "static";
-        var calbackParam = "";
+        
         switch (defaults.type) {
             case 'alert':
                 keyb = "true";
@@ -93,8 +94,6 @@
                         calbackParam = true;
                         angular.element(document.getElementById('btnDeleteConfirmed')).scope().DeletePractice();
                         $('#ezAlerts').modal('hide');
-                        btnSuccess();
-
                     } else if (e.target.id === 'ezclose-btn') {
                         calbackParam = false;
                         $('#ezAlerts').modal('hide');
@@ -116,7 +115,7 @@
             keyboard: keyb
         }).on('hidden.bs.modal', function (e) {
             $('#ezAlerts').remove();
-            deferredObject.resolve(calbackParam);
+           deferredObject.resolve(calbackParam);
         }).on('shown.bs.modal', function (e) {
             if ($('#prompt').length > 0) {
                 $('#prompt').focus();
@@ -128,33 +127,38 @@
     return deferredObject.promise();
 }
 
-function btnAlert() {
+function btnAlert(header_Text, message) {
     var prom = ezBSAlert({
-        messageText: "hello world",
+        headerText: header_Text,
+        messageText: message,
         alertType: "danger"
-    }).done(function (e) {
-        $("body").append('<div>Callback from alert</div>');
     });
 };
 
 function btnSuccess(message) {
-    $('#ezAlerts-title').text("Success Message");
+    $('#ezAlerts-title').text("mySuccess Message");
     var prom = ezBSAlert({
+        headerText: "Success Message",
         messageText: message,
         alertType: "success"
-    }).done(function (e) {
-        $("body").append('<div>Callback from alert</div>');
     });
 };
 
-function btnConfirm() {
+function btnConfirm(alert_Type, message) {
     ezBSAlert({
         type: "confirm",
-        messageText: "Are you sure you want to delete?",
-        alertType: "danger"
-        //alertType: "info"
-    }).done(function (e) {
-        $("body").append('<div>Callback from confirm ' + e + '</div>');
+        messageText: message,
+        alertType: alert_Type
+    }).done(function () {
+        if (calbackParam == true) {
+            alert("calbackParam =" + calbackParam);
+            $("#View_Practice_Modal").modal("hide");
+            ezBSAlert({
+                headerText: "Success Message",
+                    messageText: "Practice successfully deleted.",
+                    alertType: "success"
+            });
+        }        
     });
 };
 
@@ -170,3 +174,94 @@ function btnPrompt() {
         });
     });
 };
+
+//-------------------------------------------------------------------------------//
+//Accounting
+function ViewInvoice() {
+    $("#View_Invoice_Modal").modal("show");
+};
+function ViewExpense() {
+    $("#View_ExpensesInvoice_Modal").modal("show");
+};
+
+//Appointments Page
+function ViewAppointment() {
+    $("#View_Appointment_Modal").modal("show");
+    $(".readonly_ViewAppointment").attr("readonly", true);
+    $(".readonly_ViewAppointment").css("background-color", "transparent");
+};
+
+//Employee Page
+function ViewEmployee() {
+    $("#View_Employee_Modal").modal("show");
+    $(".readonly_ViewEmployee").attr("readonly", true);
+    $(".readonly_ViewEmployee").css("background-color", "transparent");
+};
+
+//Events Page
+function ViewEvent() {
+    $("#View_Event_Modal").modal("show");
+    $(".readonly_ViewEvent").attr("readonly", true);
+    $(".readonly_ViewEvent").css("background-color", "transparent");
+};
+
+//Medical Aid Page
+function ViewMedicalAid() {
+    $("#View_MedicalAid_Modal").modal("show");
+};
+
+//Medicine Inventory Page
+function ViewMedicine() {
+    $("#View_Medicine_Modal").modal("show");
+    $(".readonly_ViewMedicine").attr("readonly", true);
+    $(".readonly_ViewMedicine").css("background-color", "transparent");
+};
+
+//Messages Page
+function tr_dblclick_InboxMail() {
+    $("#View_SelectedInboxMail").modal("show");
+    $(".readonly_ViewEvent").attr("readonly", true);
+    $(".readonly_ViewEvent").css("background-color", "transparent");
+};
+
+//Practices Page
+function ViewPractice() {
+    $("#View_Practice_Modal").modal("show");
+    $(".readonly_ViewPractice").attr("readonly", true);
+    $(".readonly_ViewPractice").css("background-color", "transparent");
+};
+
+//Patients
+function ViewPatient() {
+    $("#div_Medical_History").modal("show");
+};
+
+function myFunctionShowMedical_History() {
+    $("#div_Medical_History").modal("show");
+    $("#div_Prescriptions").modal("hide");
+    $("#div_Consultations").modal("hide");
+};
+
+function myFunctionShowPrescriptions() {
+    $("#div_Prescriptions").modal("show");
+    $("#div_Medical_History").modal("hide");
+    $("#div_Consultations").modal("hide");
+};
+
+function myFunctionPrescriptions_Edit() {
+    $("#div_Prescriptions_Update").modal("show");
+};
+function myFunctionShowConsultations() {
+    $("#div_Consultations").modal("show");
+    $("#div_Medical_History").modal("hide");
+    $("#div_Prescriptions").modal("hide");
+};
+
+function DT() {
+    $(".datetimepicker").datetimepicker({ format: "L" });
+};
+
+$(".nav li").on("click", function () {
+    $(".nav li").removeClass("active");
+    $(this).addClass("active");
+});

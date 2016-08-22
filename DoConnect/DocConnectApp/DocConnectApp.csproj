@@ -155,7 +155,6 @@
   <ItemGroup>
     <Content Include="App\app.js" />
     <Content Include="App\Controllers\AccountingController.js" />
-    <Content Include="App\Controllers\Alert_Confirm_Prompt_Modal.js" />
     <Content Include="App\Controllers\AppointmentsController.js" />
     <Content Include="App\Controllers\DashboardController.js" />
     <Content Include="App\Controllers\DiagnosisExpertSystemController.js" />
@@ -228,6 +227,10 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\FormValidation\bootstrap.js" />
+    <Content Include="Scripts\FormValidation\formValidation.css" />
+    <Content Include="Scripts\FormValidation\formValidation.js" />
+    <Content Include="Scripts\FormValidation\inputValidate.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />

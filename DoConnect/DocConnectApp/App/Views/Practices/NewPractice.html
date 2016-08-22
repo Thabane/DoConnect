@@ -10,58 +10,48 @@
             <li role="presentation"><a href="/Practices"><i class="fa fa-align-justify"></i>Practice List</a></li>
             <li role="presentation" class="active"><a href="/NewPractice"><i class="fa fa-plus-circle"></i>New Practice</a></li>
         </ul>
-
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    <button onclick="btnAlert()" class="btn btn-warning">Alert</button>
-                    <button onclick="btnConfirm()" class="btn btn-info">Confirm</button>
-                    <button onclick="btnPrompt()" class="btn btn-primary">Prompt</button>
-                </div>
-            </div>
-        </div>
-
+                      
         <!--Add Practice Modal-->
-        <form>
+        <form name="Form">
             <div style="margin:auto; width:45%;">
                 <div class="modal-header" style="border-bottom:0px;"></div>
                 <div class="modal-body">
                     <div class="form-horizontal">
-                        <div class="form-group">
+                        <div class="form-group">                            
                             <h5 class="col-md-4 control-label" style="text-align:left">Name:<span style="color:red">*</span></h5>
-                            <div class="col-md-8"><input class="form-control" type="text" ng-model="Name"></div>
+                            <div class="col-md-8"><input class="form-control insert" ng-model="Name" name="Name" required type="text"><span ng-show="Form.Name.$dirty && Form.Name.$invalid">Required!</span></div>
                         </div>
                         <div class="form-group">
                             <h5 class="col-md-4 control-label" style="text-align:left">Phone Number:<span style="color:red">*</span></h5>
-                            <div class="col-md-8"><input class="form-control" type="text" ng-model="Phone_Number"></div>
+                            <div class="col-md-8"><input class="form-control insert" ng-model="Phone_Number" name="Phone_Number" type="text"></div>
                         </div>
                         <div class="form-group">
                             <h5 class="col-md-4 control-label" style="text-align:left">Fax Number:<span style="color:red">*</span></h5>
-                            <div class="col-md-8"><input class="form-control" type="text" ng-model="Fax_Number"></div>
+                            <div class="col-md-8"><input class="form-control insert" ng-model="Fax_Number" name="Fax_Number" type="text"></div>
                         </div>
                         <div class="form-group">
                             <h5 class="col-md-4 control-label" style="text-align:left">Street Address:<span style="color:red">*</span></h5>
-                            <div class="col-md-8"><input class="form-control" type="text" ng-model="Street_Address"></div>
+                            <div class="col-md-8"><input class="form-control insert" ng-model="Street_Address" name="Fax_Number" type="text"></div>
                         </div>
                         <div class="form-group">
                             <h5 class="col-md-4 control-label" style="text-align:left">Suburb:<span style="color:red">*</span></h5>
-                            <div class="col-md-8"><input class="form-control" type="text" ng-model="Suburb"></div>
+                            <div class="col-md-8"><input class="form-control insert" ng-model="Suburb" type="text"></div>
                         </div>
                         <div class="form-group">
                             <h5 class="col-md-4 control-label" style="text-align:left">City:<span style="color:red">*</span></h5>
-                            <div class="col-md-8"><input class="form-control" type="text" ng-model="City"></div>
+                            <div class="col-md-8"><input class="form-control insert" ng-model="City" type="text"></div>
                         </div>
                         <div class="form-group">
                             <h5 class="col-md-4 control-label" style="text-align:left">Country:<span style="color:red">*</span></h5>
-                            <div class="col-md-8"><input class="form-control" type="text" ng-model="Country"></div>
+                            <div class="col-md-8"><input class="form-control insert" ng-model="Country" type="text"></div>
                         </div>
                         <div class="form-group">
                             <h5 class="col-md-4 control-label" style="text-align:left">Trading Times:<span style="color:red">*</span></h5>
-                            <div class="col-md-8"><textarea class="form-control" rows="3" cols="20" ng-model="Trading_Times"></textarea></div>
+                            <div class="col-md-8"><textarea class="form-control insert" ng-model="Trading_Times" rows="3" cols="20"></textarea></div>
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer"><!--ng-click="NewPractice(Name, Phone_Number, Fax_Number, Street_Address, Suburb, City, Country, Trading_Times)"-->
+                <div class="modal-footer">
                     <button class="btn btn-primary" ng-click="NewPractice(Name, Phone_Number, Fax_Number, Street_Address, Suburb, City, Country, Trading_Times)">Save</button>
                 </div>
             </div>

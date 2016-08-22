@@ -12,17 +12,17 @@
         </ul>
 
         <!--New Event Modal-->
-        <form>
+        <form name="Form">
             <div style="margin:auto; width:60%">
                 <div class="modal-header" style="border-bottom:0px;"></div>
                 <div class="modal-body">
                     <div class="row" style="margin-top:5px; margin-bottom:5px;">
                         <div class="col-md-3"><h5>Title:<span style="color:red">*</span></h5></div>
-                        <div class="col-md-8"><input class="form-control" type="text" ng-model="Title"></div>
+                        <div class="col-md-8"><input class="form-control insert" type="text" ng-model="Title" name="Title"></div>
                     </div>
                     <div class="row" style="margin-top:5px; margin-bottom:5px;">
                         <div class="col-md-3"><h5>Details:<span style="color:red">*</span></h5></div>
-                        <div class="col-md-8"><textarea class="form-control" rows="3" cols="20" ng-model="Details"></textarea></div>
+                        <div class="col-md-8"><textarea class="form-control insert" rows="3" cols="20" ng-model="Details" name="Details"></textarea></div>
                     </div>
                     <div class="row" style="margin-top:5px; margin-bottom:0px;">
                         <div class="col-md-3"><h5>Start Date & Time:<span style="color:red">*</span></h5></div>
@@ -31,7 +31,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <div class="input-group date" id='datetimepicker5' ng-click="DT_New_Event()">
-                                            <input class="form-control" type="text" ng-model="StartDateTime">
+                                            <input class="form-control insert" type="text" ng-model="StartDateTime" name="StartDateTime">
                                             <span class="input-group-addon">
                                                 <span class="glyphicon glyphicon-calendar"></span>
                                             </span>
@@ -48,7 +48,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <div class="input-group date" id='datetimepicker6' ng-click="DT_New_Event()">
-                                            <input class="form-control" type="text" ng-model="EndDateTime">
+                                            <input class="form-control insert" type="text" ng-model="EndDateTime" name="EndDateTime">
                                             <span class="input-group-addon">
                                                 <span class="glyphicon glyphicon-calendar"></span>
                                             </span>
@@ -61,7 +61,7 @@
                     <div class="row" style="margin-top:0px; margin-bottom:5px;">
                         <div class="col-md-3"><h5>Appointment Status:<span style="color:red">*</span></h5></div>
                         <div class="col-md-8">
-                            <select class="form-control" ng-model="AppointmentStatus">
+                            <select class="form-control insert" ng-model="AppointmentStatus" name="AppointmentStatus">
                                 <option value="">Status</option>
                                 <option value="1">Approve</option>
                                 <option value="2">Decline</option>

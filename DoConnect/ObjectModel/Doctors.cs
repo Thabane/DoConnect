@@ -9,6 +9,7 @@ namespace ObjectModel
         public int ID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string Email { get; set; }
         public char Gender { get; set; }
         public string Address { get; set; }
         public string Job_Title { get; set; }
@@ -22,6 +23,7 @@ namespace ObjectModel
                 ID = reader.GetInt32(reader.GetOrdinal("ID")),
                 FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
                 LastName = reader.GetString(reader.GetOrdinal("LastName")),
+                Email = reader.GetString(reader.GetOrdinal("Email")),
                 //Gender = reader.GetChars(reader.GetOrdinal("Gender")),
                 Address = reader.GetString(reader.GetOrdinal("Address")),
                 Job_Title = reader.GetString(reader.GetOrdinal("Job_Title")),

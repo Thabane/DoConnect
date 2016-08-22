@@ -13,46 +13,44 @@
         </ul>
 
         <!--New Medical Aid Provider Modal-->
-        <div id="New_MedicalAidProvider_Modal">
-            <form>
-                <div style="margin:auto; width:85%;">
-                    <div class="modal-header" style="border-bottom:0px;"></div>
-                    <div class="modal-body">
-                        <div class="form-horizontal">
-                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
-                                <div class="col-md-2"><h5>Provider Name:<span style="color:red">*</span></h5></div>
-                                <div class="col-md-4"><input class="form-control" type="text" ng-model="Name"></div>
-                                <div class="col-md-2"><h5>Cell Number:<span style="color:red">*</span></h5></div>
-                                <div class="col-md-4"><input class="form-control" type="text" ng-model="Cell_Number"></div>
+        <form name="Form">
+            <div style="margin:auto; width:85%;">
+                <div class="modal-header" style="border-bottom:0px;"></div>
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                            <div class="col-md-2"><h5>Provider Name:<span style="color:red">*</span></h5></div>
+                            <div class="col-md-4"><input class="form-control insert" type="text" ng-model="Name" name="Name"></div>
+                            <div class="col-md-2"><h5>Cell Number:<span style="color:red">*</span></h5></div>
+                            <div class="col-md-4"><input class="form-control insert" type="text" ng-model="Cell_Number" name="Cell_Number"></div>
+                        </div>
+                        <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                            <div class="col-md-2"><h5>Email Address:<span style="color:red">*</span></h5></div>
+                            <div class="col-md-4"><input class="form-control insert" type="text" ng-model="Email_Address" name="Email_Address"></div>
+                            <div class="col-md-2"><h5>Fax Number:<span style="color:red">*</span></h5></div>
+                            <div class="col-md-4"><input class="form-control insert" type="text" ng-model="Fax_Number" name="Fax_Number"></div>
+                        </div>
+                        <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                            <div class="col-md-2"><h5>Scheme Names:<span style="color:red">*</span></h5></div>
+                            <div class="col-md-4">
+                                <select class="form-control insert" ng-model="SchemeName" name="SchemeName">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
                             </div>
-                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
-                                <div class="col-md-2"><h5>Email Address:<span style="color:red">*</span></h5></div>
-                                <div class="col-md-4"><input class="form-control" type="text" ng-model="Email_Address"></div>
-                                <div class="col-md-2"><h5>Fax Number:<span style="color:red">*</span></h5></div>
-                                <div class="col-md-4"><input class="form-control" type="text" ng-model="Fax_Number"></div>
-                            </div>
-                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
-                                <div class="col-md-2"><h5>Scheme Names:<span style="color:red">*</span></h5></div>
-                                <div class="col-md-4">
-                                    <select class="form-control" ng-model="SchemeName">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-2"><h5>Physical Address:<span style="color:red">*</span></h5></div>
-                                <div class="col-md-4"><textarea class="form-control" rows="3" ng-model="Address"></textarea></div>
-                            </div>
+                            <div class="col-md-2"><h5>Physical Address:<span style="color:red">*</span></h5></div>
+                            <div class="col-md-4"><textarea class="form-control insert" rows="3" ng-model="Address" name="Address"></textarea></div>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" ng-click="NewMedicalAidProvider(Name, Cell_Number, Fax_Number, Email_Address, Address)">Create Provider Entry</button>
-                    </div>
                 </div>
-            </form>
-        </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="NewMedicalAidProvider(Name, Cell_Number, Fax_Number, Email_Address, Address)">Create Provider Entry</button>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
    

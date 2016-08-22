@@ -39,12 +39,20 @@
         $scope.NewPractice = function (Name, Phone_Number, Fax_Number, Street_Address, Suburb, City, Country, Trading_Times) {
             PracticesService.InsertPractice(Name, Phone_Number, Fax_Number, Street_Address, Suburb, City, Country, Trading_Times).success(function () {
                 $scope.GetAllPractices();
+                angular.element(".insert").val('');
                 btnSuccess("Practice successfully inserted.");
             },
                 function (error) {
-                    console.log("Error message: " + error);
+                    btnAlert("System Error Message", "Insert unsuccessful.");
             });
         };
+
+        //Validation
+        $scope.pattern_Email = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+        $scope.pattern_Number = /^[0-9]{1,6}$/;
+        $scope.pattern_String = /^[a-zA-Z ]{1,25}$/;
+
+
 
         //Update Practice Funtion
         $scope.function_btnUpdatePractice = function (ID) {
@@ -58,7 +66,7 @@
                     $scope.GetAllPractices();
                     btnSuccess("Practice details successfully updated.");
                 }, function (error) {
-                    console.log("Error message: " + error);
+                    btnAlert("System Error Message", "Update unsuccessful.");
                 });
 
                 angular.element(".readonly_ViewPractice").attr("readonly", true);
@@ -69,12 +77,13 @@
 
         //Delete Practice Funtion
         $scope.DeletePractice = function () {
-            alert("I have been called to delete")
-            PracticesService.DeletePractice($scope.ID).then(function () {
-                console.log("Delete Successful");
-            }, function (error) {
-                console.log("Delete unsuccessful " + error);
-            });
+            //var DeleteStatus = btnConfirm("info", "Are you sure you want to delete this Practice?");
+            //if (DeleteStatus == "true") {
+                PracticesService.DeletePractice($scope.ID).then(function () {
+                    $scope.GetAllPractices();                                       
+                }, function (error) {
+                    btnAlert("System Error Message", "Delete unsuccessful.");
+                });
+            //}            
         };
-
     }]);

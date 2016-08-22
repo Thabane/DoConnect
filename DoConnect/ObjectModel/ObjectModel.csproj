@@ -42,9 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccessLevel.cs" />
     <Compile Include="Appointments.cs" />
     <Compile Include="Consultation.cs" />
     <Compile Include="Doctors.cs" />
+    <Compile Include="Events.cs" />
     <Compile Include="Expenses.cs" />
     <Compile Include="Invoice.cs" />
     <Compile Include="Log.cs" />
@@ -52,6 +54,7 @@
     <Compile Include="Medicine_Inventory.cs" />
     <Compile Include="Messages.cs" />
     <Compile Include="Patient.cs" />
+    <Compile Include="Patient_Consultation.cs" />
     <Compile Include="Patient_Medical_Aid.cs" />
     <Compile Include="Practice.cs" />
     <Compile Include="Prescription.cs" />

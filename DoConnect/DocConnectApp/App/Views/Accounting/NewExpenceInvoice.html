@@ -22,12 +22,12 @@
                     <div class="form-horizontal">
                         <div class="form-group">
                             <h5 class="col-md-4" style="text-align:left">Expense Description:<span style="color:red">*</span></h5>
-                            <div class="col-md-8"><input class="form-control" type="text" ng-model="Description"></div>
+                            <div class="col-md-8"><input class="form-control insert" type="text" ng-model="Description"></div>
                         </div>
                         <div class="form-group">
                             <h5 class="col-md-4" style="text-align:left">Status:<span style="color:red">*</span></h5>
                             <div class="col-md-8">
-                                <select class="form-control" ng-model="Date">
+                                <select class="form-control" ng-model="Status">
                                     <option value="Fully-Paid">Fully-Paid</option>
                                     <option value="Part-Paid">Part-Paid</option>
                                     <option value="Unpaid">Unpaid</option>
@@ -40,7 +40,7 @@
                                                         <div class="col-md-12">
                                                             <div class="form-group">
                                                                 <div class="input-group date datetimepicker" onclick="DT()">
-                                                                    <input class="form-control" type="text" ng-model="Amount">
+                                                                    <input class="form-control" type="text" ng-model="Date">
                                                                     <span class="input-group-addon">
                                                                         <span class="glyphicon glyphicon-calendar"></span>
                                                                     </span>
@@ -53,7 +53,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" ng-click="InsertExpense(Description, Date, Amount, Practice_ID, User_ID)">Create Expense Entry</button>
+                    <button type="button" class="btn btn-primary" ng-click="InsertExpense(Description, Status, Date, Practice_ID, User_ID)">Create Expense Entry</button>
                 </div>
             </div>
         </form>

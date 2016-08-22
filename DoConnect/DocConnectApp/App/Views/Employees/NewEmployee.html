@@ -12,33 +12,33 @@
         </ul>
                 
         <!--New Employee Section-->
-        <form>
+        <form name="Form">
             <div style="margin:auto; width:80%;">
                 <div class="modal-header" style="border-bottom:0px;"></div>
                 <div class="modal-body">
                     <div class="row" style="margin-top:4px; margin-bottom:4px;">
                         <div class="col-lg-2 col-sm-2 col-md-2"><h5>Firstname:<span style="color:red">*</span></h5></div>
-                        <div class="col-lg-4 col-sm-4 col-md-4"><input class="form-control" type="text" ng-model="FirstName"></div>
+                        <div class="col-lg-4 col-sm-4 col-md-4"><input class="form-control insert" type="text" ng-model="FirstName" name="FirstName"></div>
                         <div class="col-lg-2 col-sm-2 col-md-2"><h5>Cell Number:<span style="color:red">*</span></h5></div>
-                        <div class="col-lg-4 col-sm-4 col-md-4"><input class="form-control" type="text" ng-model="Phone"></div>
+                        <div class="col-lg-4 col-sm-4 col-md-4"><input class="form-control insert" type="text" ng-model="Phone" name="Phone"></div>
                     </div>
                     <div class="row" style="margin-top:4px; margin-bottom:4px;">
                         <div class="col-lg-2 col-sm-2 col-md-2"><h5>Lastname:<span style="color:red">*</span></h5></div>
-                        <div class="col-lg-4 col-sm-4 col-md-4"><input class="form-control" type="text" ng-model="LastName"></div>
+                        <div class="col-lg-4 col-sm-4 col-md-4"><input class="form-control insert" type="text" ng-model="LastName" name="LastName"></div>
                         <div class="col-lg-2 col-sm-2 col-md-2"><h5>Street Address:<span style="color:red">*</span></h5></div>
-                        <div class="col-lg-4 col-sm-4 col-md-4"><input class="form-control" type="text" ng-model="Street_Address"></div>
+                        <div class="col-lg-4 col-sm-4 col-md-4"><input class="form-control insert" type="text" ng-model="Street_Address" name="Street_Address"></div>
                     </div>
                     <div class="row" style="margin-top:4px; margin-bottom:4px;">
                         <div class="col-lg-2 col-sm-2 col-md-2"><h5>Email:<span style="color:red">*</span></h5></div>
-                        <div class="col-lg-4 col-sm-4 col-md-4"><input class="form-control" type="email" ng-model="Email"></div>
+                        <div class="col-lg-4 col-sm-4 col-md-4"><input class="form-control insert" type="email" ng-model="Email" name="Email"></div>
                         <div class="col-lg-2 col-sm-2 col-md-2"><h5>Suburb:<span style="color:red">*</span></h5></div>
-                        <div class="col-lg-4 col-sm-4 col-md-4"><input class="form-control" type="text" ng-model="Suburb"></div>
+                        <div class="col-lg-4 col-sm-4 col-md-4"><input class="form-control insert" type="text" ng-model="Suburb" name="Suburb"></div>
                     </div>
                     <div class="row" style="margin-top:4px; margin-bottom:4px;">
                         <div class="col-lg-2 col-sm-2 col-md-2"><h5>ID Number:<span style="color:red">*</span></h5></div>
-                        <div class="col-lg-4 col-sm-4 col-md-4"><input class="form-control" type="text" ng-model="ID_Number"></div>
+                        <div class="col-lg-4 col-sm-4 col-md-4"><input class="form-control insert" type="text" ng-model="ID_Number" name="ID_Number"></div>
                         <div class="col-lg-2 col-sm-2 col-md-2"><h5>City:<span style="color:red">*</span></h5></div>
-                        <div class="col-lg-4 col-sm-4 col-md-4"><input class="form-control" type="text" ng-model="City"></div>
+                        <div class="col-lg-4 col-sm-4 col-md-4"><input class="form-control insert" type="text" ng-model="City" name="City"></div>
                     </div>
                     <div class="row" style="margin-top:4px; margin-bottom:4px;">
                         <div class="col-lg-2 col-sm-2 col-md-2"><h5>DOB:<span style="color:red">*</span></h5></div>
@@ -47,7 +47,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <div class="input-group date datetimepicker" onclick="DT()">
-                                            <input class="form-control" type="text" ng-model="DOB">
+                                            <input class="form-control insert" type="text" ng-model="DOB" name="DOB">
                                             <span class="input-group-addon">
                                                 <span class="glyphicon glyphicon-calendar"></span>
                                             </span>
@@ -57,12 +57,12 @@
                             </div>
                         </div>
                         <div class="col-lg-2 col-sm-2 col-md-2"><h5>Country:<span style="color:red">*</span></h5></div>
-                        <div class="col-lg-4 col-sm-4 col-md-4"><input class="form-control" type="text" ng-model="Country"></div>
+                        <div class="col-lg-4 col-sm-4 col-md-4"><input class="form-control insert" type="text" ng-model="Country" name="Country"></div>
                     </div>
                     <div class="row" style="margin-top:4px;">
                         <div class="col-lg-2 col-sm-2 col-md-2"><h5>Gender:<span style="color:red">*</span></h5></div>
                         <div class="col-lg-4 col-sm-4 col-md-4">
-                            <select class="form-control" ng-model="Gender">
+                            <select class="form-control insert" ng-model="Gender" name="Gender">
                                 <option value="">Please choose a gender</option>
                                 <option value="1">Male</option>
                                 <option value="2">Female</option>
@@ -70,7 +70,7 @@
                         </div>
                         <div class="col-lg-2 col-sm-2 col-md-2"><h5>Employee Type:<span style="color:red">*</span></h5></div>
                         <div class="col-lg-4 col-sm-4 col-md-4">
-                            <select class="form-control" ng-model="Employee_Type">
+                            <select class="form-control insert" ng-model="Employee_Type" name="Employee_Type">
                                 <option value="">Choose Employee Type</option>
                                 <option value="1">Nurse</option>
                                 <option value="2">Cleaner</option>
@@ -83,7 +83,7 @@
                     <div class="row" style="margin-top:4px;">
                         <div class="col-lg-2 col-sm-2 col-md-2"><h5>Practice Name:<span style="color:red">*</span></h5></div>
                         <div class="col-lg-4 col-sm-4 col-md-4">
-                            <select class="form-control" ng-model="Practice_ID">
+                            <select class="form-control insert" ng-model="Practice_ID" name="Practice_ID">
                                 <option value="">Choose Practice</option>
                             </select>
                         </div>

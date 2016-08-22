@@ -12,7 +12,7 @@ namespace DocConnectApp.Controllers
 {
     public class PracticesController : ApiController
     {
-        [HttpGet]//Select all Practice data
+        [HttpGet]
         [Route("api/Practices/GetAllPractices")]
         public List<Practice> GetAllPractices()
         {
@@ -20,7 +20,7 @@ namespace DocConnectApp.Controllers
             return dtLayer.GetAllPractices();
         }
                     
-        [HttpGet] //Select Practice by ID
+        [HttpGet]
         [Route("api/Practices/GetPractice/{ID}")]
         public Practice GetPracticeByID(int ID)
         {
@@ -28,7 +28,7 @@ namespace DocConnectApp.Controllers
             return dtLayer.GetPractice(ID);
         }
 
-        [HttpPost]//Update Practice
+        [HttpPost]
         [Route("api/Practices/UpdatePractice")]
         public bool UpdatePractice(Practice practice)
         {
@@ -36,13 +36,12 @@ namespace DocConnectApp.Controllers
             return dtLayer.UpdatePractice(practice.ID, practice.Name, practice.Phone_Number, practice.Fax_Number, practice.Street_Address, practice.Suburb, practice.City, practice.Country, "yu", "uy", practice.Trading_Times);
         }
 
-        [HttpPost] //Insert Practice
+        [HttpPost]
         [Route("api/Practices/InsertPractice")]
         public bool InsertPractice(Practice practice)
         {
             DataLayer dtLayer = new DataLayer();
             return dtLayer.InsertPractice(practice.Name, practice.Phone_Number, practice.Fax_Number, practice.Street_Address, practice.Suburb, practice.City, practice.Country, "yu", "uy", practice.Trading_Times);
-
         }        
         
         [HttpPost]
