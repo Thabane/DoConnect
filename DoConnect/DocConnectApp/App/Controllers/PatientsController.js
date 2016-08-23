@@ -1,6 +1,6 @@
-﻿app.controller("PatientsController", ["$scope", "PatientsService", "$interval", 
+﻿app.controller("PatientsController", ["$scope", "PatientsService", "$interval",
     function ($scope, PatientsService, $interval) {
-        
+
         $scope.PageTitle_Patients = 'Patients';
         $scope.PageTitle_NewPatient = 'New Patient Details';
 
@@ -35,7 +35,12 @@
             }
         };
 
-        $scope.users = []; //declare an empty array
+        //Sort Function
+        $scope.sort = function (keyname) {
+            $scope.sortKey = keyname;
+            $scope.reverse = !$scope.reverse;
+        }
+
         $scope.GetPatients = function () {
             PatientsService.GetAllPatients().then
             (function (result) {
@@ -44,31 +49,12 @@
         };
         $scope.GetPatients();
 
-        $scope.strSort;
-        $scope.limitTo = 5;
+       
 
-        $scope.setlimitTo=function(limit){
-            $scope.limitTo = limit;
-        }
-        $scope.getlimitTo=function(){
-            return $scope.limitTo;
-        }
-        $scope.setSortKey=function(key){
-            $scope.strSort = key;
-        }
-        $scope.getSortKey=function(){
-            return $scope.strSort;
-        }
-     
+        $scope.InsertPatient = function (FirstName, LastName, ID_Number, Gender, DOB, Cell_Number, Street_Address, Suburb, City, Country, Allergies, PreviousIllnesses, PreviousMedication, RiskFactors, SocialHistory, FamilyHistory, Medical_Aid_ID, Doctor_ID, User_ID) {
+            PatientsService.InsertPatient(FirstName, LastName, ID_Number, Gender, DOB, Cell_Number, Street_Address, Suburb, City, Country, Allergies, PreviousIllnesses, PreviousMedication, RiskFactors, SocialHistory, FamilyHistory, Medical_Aid_ID, Doctor_ID, User_ID).sucess(function (data, status, headers, config) {
+                console.log("data inserted" + data);
+            });
 
-        //$scope.myFunctionViewPatient = function (ID) {
-        //    var ID = ID;
-        //    $scope.GetPatient = function (ID) {
-        //        PatientsService.GetPatient(ID).then
-        //        (function (result) {
-        //            $scope.Patient = result.data;
-        //        });
-        //    };
-        //    $scope.GetPatient();
-        //};
+        };
     }]);

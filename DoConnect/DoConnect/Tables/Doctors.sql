@@ -2,6 +2,7 @@
     [ID]          INT           IDENTITY (1, 1) NOT NULL,
     [FirstName]   NVARCHAR (50) NOT NULL,
     [LastName]    NVARCHAR (50) NOT NULL,
+	[Email]	      NVARCHAR(100) NOT NULL,
     [Gender]      CHAR (1)      NOT NULL,
     [Address]     NVARCHAR (50) NOT NULL,
     [Practice_ID] INT           NOT NULL,

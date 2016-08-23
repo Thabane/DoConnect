@@ -16,38 +16,31 @@
 
         <!--New Invoice Modal-->
         <form>
-            <div class="col-lg-4 col-sm-4 col-md-4"></div>
-            <div class="col-lg-4 col-sm-4 col-md-4">
+            <div style="margin:auto; width:45%;">
                 <div class="modal-header" style="border-bottom:0px;"></div>
                 <div class="modal-body">
                     <div class="form-horizontal">
-                        <input type="hidden" name="action" value="insert">
-                        <input type="hidden" name="invoice_id" value="0">
                         <div class="form-group">
-                            <h5 class="col-sm-4 control-label" for="invoice_number" style="text-align:left">Invoice ID<span class="require-field" style="color:red">*</span></h5>
-                            <div class="col-sm-8"><input id="New_InvoiceNumber" class="form-control validate[required] text-input" type="text" readonly="" value="16072096" name="New_InvoiceNumber"></div>
+                            <h5 class="col-sm-4" style="text-align:left">Treatment Details:<span style="color:red">*</span></h5>
+                            <div class="col-sm-8"><input class="form-control" type="text" ng-model="InvoiceSummary"></div>
                         </div>
                         <div class="form-group">
-                            <h5 class="col-sm-4 control-label" style="text-align:left">Treatment Details<span class="require-field" style="color:red">*</span></h5>
-                            <div class="col-sm-8"><input id="invice_title" class="form-control validate[required,custom[onlyLetterSp]] text-input" type="text" value="" name="New_TreatmentDetails"></div>
-                        </div>
-                        <div class="form-group">
-                            <h5 class="col-sm-4 control-label" for="patient" style="text-align:left">Patient<span class="require-field" style="color:red">*</span></h5>
+                            <h5 class="col-sm-4" style="text-align:left">Patient:<span style="color:red">*</span></h5>
                             <div class="col-sm-8">
-                                <select name="New_Patient" class="form-control">
+                                <select class="form-control" ng-model="Patient_ID">
                                     <option value="">Select Patient</option>
                                     <option value="1">@@@</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <h5 class="col-sm-4 control-label" for="discount" style="text-align:left">Discount Amount</h5>
-                            <div class="col-sm-8"><input class="form-control " type="text" value="" name="New_Discount"></div>
+                            <h5 class="col-sm-4" style="text-align:left">Discount Amount:<span style="color:red">*</span></h5>
+                            <div class="col-sm-8"><input class="form-control" type="text" ng-model="Total"></div>
                         </div>
                         <div class="form-group">
-                            <h5 class="col-sm-4 control-label" for="payment_status" style="text-align:left">Status<span class="require-field" style="color:red">*</span></h5>
+                            <h5 class="col-sm-4" style="text-align:left">Status:<span style="color:red">*</span></h5>
                             <div class="col-sm-8">
-                                <select name="New_PaymentStatus" id="payment_status" class="form-control validate[required]">
+                                <select class="form-control" ng-model="Status">
                                     <option value="Fully-Paid">Fully-Paid</option>
                                     <option value="Partly-Paid">Partly-Paid</option>
                                     <option value="Unpaid">Unpaid</option>
@@ -57,10 +50,9 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" onclick="function_btnNewEmployee()">Create Invoice Entry</button>
+                    <button type="button" class="btn btn-primary" ng-click="NewInvoice(InvoiceSummary, Patient_ID, Total, Status)">Create Invoice Entry</button>
                 </div>
             </div>
-            <div class="col-lg-4 col-sm-4 col-md-4"></div>
         </form><!--New Invoice Modal Ends-->
     </div>
 </div>

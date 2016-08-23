@@ -14,46 +14,26 @@
         </ul>
 
         <div class="panel panel-default">
-            <table class="table-bordered" style="float:right; border:0; margin-bottom:5px;">
-                <tbody>
-                    <tr>
-                        <td style="border: 0;">
-                            <div class="btn-group">
-                                <a class="btn btn-default dropdown-toggle btn-select2" href="#" data-toggle="dropdown" style="font-size:13px;" aria-expanded="false">Search field <span class="caret"></span></a>
-                                <ul class="dropdown-menu" style="font-size:13px;">
-                                    <li><a href="#">Title</a></li>
-                                    <li><a href="#">Date</a></li>
-                                    <li><a href="#">Amount</a></li>
-                                    <li><a href="#">Medical Aid</a></li>
-                                    <li><a href="#">Patient</a></li>
-                                    <li><a href="#">Doctor</a></li>
-                                </ul>
-                            </div>
-                        </td>
-                        <td style="border:0;">
-                            <div class="form-group input-group" style="margin-top:4px; margin-bottom:4px;">
-                                <input class="form-control" type="text" style="font-size:13px;"><span class="input-group-btn">
-                                    <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
-                                </span>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="row" style="margin-top: 10px; margin-right: 10px;">
+                <div class="col-md-4"></div><div class="col-md-4"><h5 class="pull-right">Search:</h5></div>
+                <div class="form-group col-md-4">
+                    <input class="form-control" type="text" style="font-size:13px;" ng-model="search">
+                </div>
+            </div>
 
             <table class="table table-hover">
                 <thead style="background-color: #f8f8f8;">
                     <tr>
-                        <th style="width: 15%;">Date</th>
-                        <th style="width: 25%;">Treatments Details</th>
-                        <th style="width: 20%;">Patient</th>
-                        <th style="width: 10%;">Amount (R)</th>
-                        <th style="width: 20%;">Doctor</th>
+                        <th style="width: 15%;" ng-click="sort('Date')">Date<span class="fa sort-icon" ng-show="sortKey=='Date'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                        <th style="width: 25%;" ng-click="sort('TreatmentsDetails')">Treatments Details<span class="fa sort-icon" ng-show="sortKey=='TreatmentsDetails'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                        <th style="width: 20%;" ng-click="sort('Patient')">Patient<span class="fa sort-icon" ng-show="sortKey=='Patient'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                        <th style="width: 10%;" ng-click="sort('Total')">Amount (R)<span class="fa sort-icon" ng-show="sortKey=='Total'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                        <th style="width: 20%;" ng-click="sort('Doctor')">Doctor<span class="fa sort-icon" ng-show="sortKey=='Doctor'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
                         <th style="width: 15%;">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="Invoice in Invoices">
+                    <tr dir-paginate="Invoice in Invoices | filter:search | orderBy:sortKey:reverse | itemsPerPage:5">
                         <td>{{Invoice.Date}}</td>
                         <td>{{Invoice.TreatmentsDetails}}</td>
                         <td>{{Invoice.Patient}}</td>
@@ -67,10 +47,11 @@
                 </tbody>
             </table>
 
-            <ul class="pager">
-                <li class="previous"><a href="#">Previous</a></li>
-                <li class="next"><a href="#">Next</a></li>
-            </ul>
+            <div class="row">
+                <div class="col-md-12">
+                    <dir-pagination-controls class="pull-right" max-size="5" direction-links="true" boundary-links="true" style="margin-right: 20px;"></dir-pagination-controls>
+                </div>
+            </div>
         </div>
 
         <!--View Invoice Modal-->
@@ -91,9 +72,9 @@
                                                 <img style="max-height:80px;" src="http://www.mobilewebs.net/mojoomla/extend/wordpress/hospital/wp-content/plugins/hospital-management/assets/images/Thumbnail-img.png">
                                             </td>
                                             <td align="right" style="width:24%;">
-                                                <h4>Invoice number : 16071794 </h4>
-                                                <h5>Issue Date : 2016-07-17</h5>
-                                                <h5>Status : Part Paid</h5>
+                                                <h4>Invoice number : {{Invoice.ID}} </h4>
+                                                <h5>Issue Date : {{Invoice.Date}}</h5>
+                                                <h5>Status : {{Invoice.Status}}</h5>
                                             </td>
                                         </tr>
                                     </tbody>

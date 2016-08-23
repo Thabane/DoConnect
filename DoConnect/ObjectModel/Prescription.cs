@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 
 namespace ObjectModel
 {
@@ -8,6 +9,19 @@ namespace ObjectModel
         public int ID { get; set; }
         public string Description { get; set; }
         public DateTime Date { get; set; }
-    
+        public int Patient_ID { get; set; }
+        public int Doctor_ID { get; set; }
+
+        public Prescription Create(SqlDataReader reader)
+        {
+            return new Prescription
+            {
+                ID = reader.GetInt32(reader.GetOrdinal("ID")),
+                Description = reader.GetString(reader.GetOrdinal("Description")),
+                Date = reader.GetDateTime(reader.GetOrdinal("Date")),
+                Patient_ID = reader.GetInt32(reader.GetOrdinal("Patient_ID")),
+                Doctor_ID = reader.GetInt32(reader.GetOrdinal("Doctor_ID")),
+            };
+        }
     }
 }

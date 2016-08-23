@@ -15,53 +15,47 @@
         </ul>
 
         <!--New Expense Modal-->
-        <div id="New_Expense_Modal">
-            <form>
-                <div style="margin:auto; width:45%;">
-                    <div class="modal-header" style="border-bottom:0px;"></div>
-                    <div class="modal-body">
-                        <div class="form-horizontal">
-                            <input type="hidden" name="action" value="insert">
-                            <input type="hidden" name="expense_id" value="0">
-                            <input type="hidden" name="invoice_type" value="expense">
-
-                            <div class="form-group">
-                                <h5 class="col-md-4 control-label" style="text-align:left">Expense Description<span class="require-field" style="color:red">*</span></h5>
-                                <div class="col-md-8"><input id="party_name" class="form-control validate[required] text-input" type="text" value="" name="New_ExpenseDescription"></div>
+        <form>
+            <div style="margin:auto; width:45%;">
+                <div class="modal-header" style="border-bottom:0px;"></div>
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <h5 class="col-md-4" style="text-align:left">Expense Description:<span style="color:red">*</span></h5>
+                            <div class="col-md-8"><input class="form-control insert" type="text" ng-model="Description"></div>
+                        </div>
+                        <div class="form-group">
+                            <h5 class="col-md-4" style="text-align:left">Status:<span style="color:red">*</span></h5>
+                            <div class="col-md-8">
+                                <select class="form-control" ng-model="Status">
+                                    <option value="Fully-Paid">Fully-Paid</option>
+                                    <option value="Part-Paid">Part-Paid</option>
+                                    <option value="Unpaid">Unpaid</option>
+                                </select>
                             </div>
-                            <div class="form-group">
-                                <h5 class="col-md-4 control-label" style="text-align:left">Status<span class="require-field" style="color:red">*</span></h5>
-                                <div class="col-md-8">
-                                    <select name="payment_status" id="payment_status" class="form-control validate[required]">
-                                        <option value="Fully-Paid">Fully-Paid</option>
-                                        <option value="Part-Paid">Part-Paid</option>
-                                        <option value="Unpaid">Unpaid</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <h5 class="col-md-4 control-label" style="text-align:left">Date<span class="require-field" style="color:red">*</span></h5>
-                                <div class="col-md-8"><div class="row" style="padding-left:15px; padding-right:15px;">
-                                                            <div class="col-md-12">
-                                                                <div class="form-group">
-                                                                    <div class="input-group date datetimepicker" onclick="DT()">
-                                                                        <input class="form-control" type="text">
-                                                                        <span class="input-group-addon">
-                                                                            <span class="glyphicon glyphicon-calendar"></span>
-                                                                        </span>
-                                                                    </div>
+                        </div>
+                        <div class="form-group">
+                            <h5 class="col-md-4" style="text-align:left">Date:<span style="color:red">*</span></h5>
+                            <div class="col-md-8"><div class="row" style="padding-left:15px; padding-right:15px;">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <div class="input-group date datetimepicker" onclick="DT()">
+                                                                    <input class="form-control" type="text" ng-model="Date">
+                                                                    <span class="input-group-addon">
+                                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                                    </span>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                </div>
+                                                    </div>
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <input type="submit" value="Create Expense Entry" name="save_expense" class="btn btn-primary">
-                    </div>
                 </div>
-            </form>
-        </div><!--New Expense Modal Ends-->
-   </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="InsertExpense(Description, Status, Date, Practice_ID, User_ID)">Create Expense Entry</button>
+                </div>
+            </div>
+        </form>
+    </div><!--New Expense Modal Ends-->
 </div>
