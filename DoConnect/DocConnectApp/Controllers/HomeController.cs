@@ -22,11 +22,6 @@ namespace DocConnectApp.Controllers
         {
             IDataLayer dl = new DataLayer();
 
-            if (dl.Login(username, password))
-            {
-                return RedirectToAction("Index");
-            }
-
             return RedirectToAction("Login");
 
 
