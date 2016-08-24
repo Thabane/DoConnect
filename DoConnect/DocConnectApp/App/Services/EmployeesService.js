@@ -28,7 +28,7 @@
         };
 
         //Update Employee
-        var UpdateEmployee = function (ID, FirstName, LastName, ID_Number, Gender, DOB, Phone, Employee_Type, Practice_ID, Email) {
+        var UpdateEmployee = function (ID, FirstName, LastName, ID_Number, Gender, DOB, Phone, Employee_Type, Practice_ID, User_Id,  Email) {
             return $http.post("api/Employees/UpdateEmployee",
             {
                 'ID': ID,

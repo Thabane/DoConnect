@@ -21,7 +21,7 @@ namespace DocConnectApp.Controllers
 
         [HttpGet]
         [Route("api/Patients/GetPatient/{ID}")]
-        public Patient GetPatientByID(int ID)
+        public List<Patient> GetPatientByID(int ID)
         {
             DataLayer dtLayer = new DataLayer();
             return dtLayer.GetPatient(ID);
@@ -32,21 +32,16 @@ namespace DocConnectApp.Controllers
         public bool UpdatePatient(Patient patient)
         {
             DataLayer dtLayer = new DataLayer();
-            return dtLayer.UpdatePatient(patient.ID, patient.FirstName, patient.LastName, 
-                patient.ID_Number, patient.Gender, patient.DOB, patient.Cell_Number, 
-                patient.Street_Address, patient.Suburb, patient.City, patient.Country, 
-                patient.Allergies, patient.PreviousIllnesses, patient.PreviousMedication, 
-                patient.RiskFactors, patient.SocialHistory, patient.FamilyHistory, 
-                patient.Medical_Aid_ID, patient.Doctor_ID, patient.User_ID);
+            return dtLayer.UpdatePatient(patient.User_ID, patient.FirstName, patient.LastName, patient.ID_Number, patient.Gender, patient.DOB, patient.Cell_Number, patient.Street_Address, patient.Suburb, patient.City, patient.Country,patient.Allergies, patient.PreviousIllnesses, patient.PreviousMedication, patient.RiskFactors, patient.SocialHistory, patient.FamilyHistory,patient.Medical_Aid_ID, patient.Doctor_ID);
         }
 
-        [HttpPost]
+        /*[HttpPost]
         [Route("api/Patients/InsertPatient")]
         public bool InsertPatient(Patient practice)
         {
             DataLayer dtLayer = new DataLayer();
             return dtLayer.InsertPatient(practice.Name, practice.Phone_Number, practice.Fax_Number, practice.Street_Address, practice.Suburb, practice.City, practice.Country, "yu", "uy", practice.Trading_Times);
-        }
+        }*/
 
         [HttpPost]
         [Route("api/Patients/DeletePatient/{ID}")]

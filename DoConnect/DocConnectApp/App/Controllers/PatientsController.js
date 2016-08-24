@@ -49,7 +49,58 @@
         };
         $scope.GetPatients();
 
-       
+        //Select PatientByID Function
+        $scope.ViewPatient = function (User_ID) {
+            PatientsService.GetPatientByID(User_ID).then(function (result) {
+                $scope.PatientDetails = result.data;
+
+                $scope.ID               = result["ID"];
+                $scope.FirstName        = result["FirstName"];
+                $scope.LastName         = result["LastName"];
+                $scope.ID_Number        = result["ID_Number"];
+                $scope.Gender           = result["Gender"];
+                $scope.DOB              = result["DOB"];
+                $scope.Cell_Number      = result["Cell_Number"];
+                $scope.Street_Address   = result["Street_Address"];
+                $scope.Suburb           = result["Suburb"];
+                $scope.City             = result["City"];
+                $scope.Country          = result["Country"];
+                $scope.Medical_Aid_ID   = result["Medical_Aid_ID"];
+                $scope.Doctor_ID        = result["Doctor_ID"];
+                $scope.User_ID          = result["User_ID"];
+                $scope.Allergies        = PatientDetails.Allergies;
+                $scope.PreviousIllnesses= result["PreviousIllnesses"];
+                $scope.PreviousMedication= result["PreviousMedication"];
+                $scope.RiskFactors      = result["RiskFactors"];
+                $scope.SocialHistory    = result["SocialHistory"];
+                $scope.FamilyHistory    = result["FamilyHistory"];
+                $scope.Email                 = result["Email"];
+                $scope.Scheme_Name = result["Scheme_Name"];
+                $scope.Membership_Number = result["Membership_Number"];
+                $scope.Status = result["Status"];
+                $scope.Registration_Date = result["Registration_Date"];
+                $scope.Deregistration_Date = result["Deregistration_Date"];
+                $scope.Patient_ID = result["Patient_ID "];
+                $scope.Medical_Aid_ID = result["Medical_Aid_ID "];
+
+                //Prescription
+                $scope.Prescription_ID = result["Prescription_ID "];
+                $scope.Description = result["Description "];
+                $scope.Date = result["Date "];
+                $scope.Patient_ID = result["Patient_ID "];
+                $scope.Prescribing_Doctor_ID = result["Prescribing_Doctor_ID "];
+
+                //Prescription_DrugDetails
+                $scope.Prescription_DrugDetails_ID = result["Prescription_DrugDetails_ID "];
+                $scope.DrugName = result["DrugName "];
+                $scope.Strength = result["Strength "];
+                $scope.IntakeRoute = result["IntakeRoute "];
+                $scope.Frequency = result["Frequency "];
+                $scope.DispenseNumber = result["DispenseNumber "];
+                $scope.RefillNumber = result["RefillNumber "];
+
+            });
+        };
 
         $scope.InsertPatient = function (FirstName, LastName, ID_Number, Gender, DOB, Cell_Number, Street_Address, Suburb, City, Country, Allergies, PreviousIllnesses, PreviousMedication, RiskFactors, SocialHistory, FamilyHistory, Medical_Aid_ID, Doctor_ID, User_ID) {
             PatientsService.InsertPatient(FirstName, LastName, ID_Number, Gender, DOB, Cell_Number, Street_Address, Suburb, City, Country, Allergies, PreviousIllnesses, PreviousMedication, RiskFactors, SocialHistory, FamilyHistory, Medical_Aid_ID, Doctor_ID, User_ID).sucess(function (data, status, headers, config) {

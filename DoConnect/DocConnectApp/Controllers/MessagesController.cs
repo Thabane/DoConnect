@@ -10,7 +10,7 @@ namespace DocConnectApp.Controllers
 {
     public class MessagesController : ApiController
     {
-        [HttpGet]
+        /*[HttpGet]
         [Route("api/Messages/GetAllMessages")]
         public List<Messages> GetAllMessages()
         {
@@ -40,6 +40,6 @@ namespace DocConnectApp.Controllers
         {
             DataLayer dtLayer = new DataLayer();
             return dtLayer.DeleteMessage(ID);
-        }
+        }*/
     }
 }

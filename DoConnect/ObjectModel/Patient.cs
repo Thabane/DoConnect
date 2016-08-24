@@ -28,6 +28,28 @@ namespace ObjectModel
         public int User_ID { get; set; }
         public string Email { get; set; }
 
+        public string Scheme_Name { get; set; }
+        public string Membership_Number { get; set; }
+        public bool Status { get; set; }
+        public DateTime Registration_Date { get; set; }
+        public DateTime Deregistration_Date { get; set; }
+        public int Patient_ID { get; set; }
+
+        //Prescription
+        public int Prescription_ID { get; set; }
+        public string Description { get; set; }
+        public string Date { get; set; }
+        public int Prescribing_Doctor_ID { get; set; }
+
+        //Prescription_DrugDetails
+        public int Prescription_DrugDetails_ID { get; set; }
+        public string DrugName { get; set; }
+        public string Strength { get; set; }
+        public string IntakeRoute { get; set; }
+        public string Frequency { get; set; }
+        public int DispenseNumber { get; set; }
+        public int RefillNumber { get; set; }
+
         public Patient Create(SqlDataReader reader)
         {
             return new Patient
@@ -53,6 +75,26 @@ namespace ObjectModel
                 Doctor_ID = reader.GetInt32(reader.GetOrdinal("Doctor_ID")),
                 User_ID = reader.GetInt32(reader.GetOrdinal("User_ID")),
                 Email = reader.GetString(reader.GetOrdinal("Email")),
+
+                Scheme_Name = reader.GetString(reader.GetOrdinal("Scheme_Name")),
+                Membership_Number = reader.GetString(reader.GetOrdinal("Membership_Number")),
+                Status = reader.GetBoolean(reader.GetOrdinal("Status")),
+                Registration_Date = reader.GetDateTime(reader.GetOrdinal("Registration_Date")),
+                Deregistration_Date = reader.GetDateTime(reader.GetOrdinal("Deregistration_Date")),
+                Patient_ID = reader.GetInt32(reader.GetOrdinal("Patient_ID")),
+
+                Prescription_ID = reader.GetInt32(reader.GetOrdinal("Prescription_ID")),
+                Description = reader.GetString(reader.GetOrdinal("Description")),
+                Date = reader.GetDateTime(reader.GetOrdinal("Date")).ToShortDateString(),
+                Prescribing_Doctor_ID = reader.GetInt32(reader.GetOrdinal("Prescribing_Doctor_ID")),
+                
+                Prescription_DrugDetails_ID = reader.GetInt32(reader.GetOrdinal("Prescription_ID")),
+                DrugName = reader.GetString(reader.GetOrdinal("DrugName")),
+                Strength = reader.GetString(reader.GetOrdinal("Strength")),
+                IntakeRoute = reader.GetString(reader.GetOrdinal("IntakeRoute")),
+                Frequency = reader.GetString(reader.GetOrdinal("Frequency")),
+                DispenseNumber = reader.GetInt32(reader.GetOrdinal("DispenseNumber")),
+                RefillNumber = reader.GetInt32(reader.GetOrdinal("RefillNumber")),
             };
         }
     }

@@ -11,7 +11,7 @@ namespace DoConnectAdmin.Controllers
 {
     public class AppointmentsController : ApiController
     {
-        [HttpGet]//Select all Appointments data
+        /*[HttpGet]//Select all Appointments data
         [Route("api/Appointments/GetAllAppointments")]
         public List<Appointments> GetAllAppointments()
         {
@@ -49,7 +49,7 @@ namespace DoConnectAdmin.Controllers
         {
             DataLayer dtLayer = new DataLayer();
             return dtLayer.DeleteAppointment(ID);
-        }
+        }*/
     }
 }
 

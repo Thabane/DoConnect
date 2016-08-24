@@ -28,7 +28,8 @@ namespace DocConnectApp
                       "~/Scripts/DashboardWidgets/To Do List.css",
                       "~/Scripts/Pagination/styles.css",
                       "~/Scripts/DateTimePicker/bootstrap-datetimepicker.min.css",
-                      "~/Scripts/DateTimePicker/bootstrap-datetimepicker.css"
+                      "~/Scripts/DateTimePicker/bootstrap-datetimepicker.css",
+                      "~/Scripts/Alert_Confirm_Prompt_Modal/Modal.css"
                       ));
 
             bundles.Add(new ScriptBundle("~/bundles/angular").Include(

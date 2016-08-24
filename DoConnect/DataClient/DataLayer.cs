@@ -160,29 +160,18 @@ namespace DataClient
             //return false;
         }
 
-        public Patient GetPatient(int id)
+        public List<Patient> GetPatient(int id)
         {
             List<SqlParameter> _parameters = new List<SqlParameter>();
             SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
             idParameter.Value = id;
             _parameters.Add(idParameter);
-            Patient patientInfo = new Patient();
-            using (var reader = access.ExecuteReader(Conn, "[GetPatient]", new List<SqlParameter>()))
+            List<Patient> patientInfo = new List<Patient>();
+            using (var reader = access.ExecuteReader(Conn, "[GetPatientById]", _parameters))
             {
                 if (reader.Read())
                 {
-                    return new Patient().Create(reader);
-                    //patientInfo.ID = reader.GetInt32(reader.GetOrdinal("ID"));
-                    //patientInfo.FirstName = reader.GetString(reader.GetOrdinal("FirstName"));
-                    //patientInfo.LastName = reader.GetString(reader.GetOrdinal("LastName"));
-                    //patientInfo.ID_Number = reader.GetString(reader.GetOrdinal("ID_Number"));
-                    //patientInfo.Gender = reader.GetString(reader.GetOrdinal("Gender"));
-                    //patientInfo.DOB = reader.GetDateTime(reader.GetOrdinal("DOB"));
-                    //patientInfo.Cell_Number = reader.GetString(reader.GetOrdinal("Cell_Number"));
-                    //patientInfo.Street_Address = reader.GetString(reader.GetOrdinal("Street_Address"));
-                    //patientInfo.Suburb = reader.GetString(reader.GetOrdinal("Suburb"));
-                    //patientInfo.City = reader.GetString(reader.GetOrdinal("City"));
-                    //patientInfo.Country = reader.GetString(reader.GetOrdinal("Country"));
+                    patientInfo.Add(new Patient().Create(reader));
                 }
             }
             return patientInfo;
@@ -730,12 +719,11 @@ namespace DataClient
             idParameter.Value = id;
             _parameters.Add(idParameter);
             Staff staffInfo = new Staff();
-            int userId = 0;
             using (var reader = access.ExecuteReader(Conn, "[GetStaff]", new List<SqlParameter>()))
             {
                 if (reader.Read())
                 {
-                    userId = reader.GetInt32(reader.GetOrdinal("ID"));
+                    new Staff().Create(reader);
                 }
             }
             return staffInfo;
@@ -744,12 +732,11 @@ namespace DataClient
         public List<Staff> GetAllStaffMembers()
         {
             List<Staff> staffInfo = new List<Staff>();
-            int userId = 0;
             using (var reader = access.ExecuteReader(Conn, "[GetAllStaffMembers]", new List<SqlParameter>()))
             {
                 if (reader.Read())
                 {
-                    userId = reader.GetInt32(reader.GetOrdinal("ID"));
+                    staffInfo.Add(new Staff().Create(reader));
                 }
             }
             return staffInfo;
@@ -772,7 +759,7 @@ namespace DataClient
             return true;
         }
 
-        public bool UpdateStaff(int id, string firstName, string lastName, string id_Number, string gender, DateTime dob, string phone, string employee_Type, int practice_ID, int user_ID)
+        public bool UpdateStaff(int id, string firstName, string lastName, string id_Number, string gender, DateTime dob, string phone, string employee_Type, int practice_ID, int user_ID, string Email)
         {
             List<SqlParameter> _parameters = new List<SqlParameter>();
             SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
@@ -785,6 +772,7 @@ namespace DataClient
             SqlParameter employee_TypeParameter = new SqlParameter("@Employee_Type", SqlDbType.NVarChar);
             SqlParameter practice_IDParameter = new SqlParameter("@Practice_ID", SqlDbType.Int);
             SqlParameter user_IDParameter = new SqlParameter("@User_ID", SqlDbType.Int);
+            SqlParameter email_TypeParameter = new SqlParameter("@Email", SqlDbType.NVarChar);
             idParameter.Value = id;
             firstNameParameter.Value = firstName;
             lastNameParameter.Value = lastName;
@@ -795,6 +783,7 @@ namespace DataClient
             employee_TypeParameter.Value = employee_Type;
             practice_IDParameter.Value = practice_ID;
             user_IDParameter.Value = user_ID;
+            email_TypeParameter.Value = Email;
             _parameters.Add(idParameter);
             _parameters.Add(firstNameParameter);
             _parameters.Add(lastNameParameter);
@@ -805,6 +794,7 @@ namespace DataClient
             _parameters.Add(employee_TypeParameter);
             _parameters.Add(practice_IDParameter);
             _parameters.Add(user_IDParameter);
+            _parameters.Add(email_TypeParameter);
             int userId = 0;
             using (var reader = access.ExecuteReader(Conn, "[UpdateStaff]", new List<SqlParameter>()))
             {

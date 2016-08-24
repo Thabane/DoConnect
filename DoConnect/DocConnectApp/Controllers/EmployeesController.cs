@@ -34,17 +34,16 @@ namespace DoConnectAdmin.Controllers
         public bool UpdateEmployee(Staff staff)
         {
             DataLayer dtLayer = new DataLayer();
-            return dtLayer.UpdateStaff(staff.ID, staff.FirstName, staff.LastName, staff.ID_Number, staff.Gender, staff.DOB, staff.Phone, staff.Employee_Type, staff.Practice_ID, staff.Email);
+            return dtLayer.UpdateStaff(staff.ID, staff.FirstName, staff.LastName, staff.ID_Number, staff.Gender, staff.DOB, staff.Phone, staff.Employee_Type, staff.Practice_ID, staff.User_ID, staff.Email);
         }
 
-        [HttpPost] //Insert Employee
+        /*[HttpPost]
         [Route("api/Employees/InsertEmployee")]
         public bool InsertEmployee(Staff staff)
         {
             DataLayer dtLayer = new DataLayer();
             return dtLayer.InsertEmployee(staff.FirstName, staff.LastName, staff.ID_Number, staff.Gender, staff.DOB, staff.Phone, staff.Employee_Type, staff.Practice_ID, staff.Email);
-
-        }
+        }*/
 
         [HttpPost]
         [Route("api/Employees/DeleteEmployee/{ID}")]
