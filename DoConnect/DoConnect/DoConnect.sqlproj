@@ -92,6 +92,7 @@
     <Build Include="Stored Procedures\NewUpdatePatient.sql" />
     <Build Include="Stored Procedures\NewUpdatePractice.sql" />
     <Build Include="Tables\AccessLevel.sql" />
+    <Build Include="Stored Procedures\NewUpdateMedicine_Inventory.sql" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ReadMe.cs" />
@@ -112,5 +113,6 @@
     <None Include="Data\dbo.Prescription.data.sql" />
     <None Include="Data\dbo.Staff.data.sql" />
     <None Include="Data\dbo.Users.data.sql" />
+    <None Include="Stored Procedures\NewUpdateExpense.sql" />
   </ItemGroup>
 </Project>
