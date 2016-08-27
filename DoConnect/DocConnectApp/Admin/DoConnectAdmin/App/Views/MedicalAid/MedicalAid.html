@@ -1,0 +1,172 @@
+﻿<div>
+    <div id="page-wrapper" ng-controller="MedicalAidController">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header">Medical Aid</h2>
+            </div>
+        </div>
+
+        <ul class="nav nav-tabs">
+            <li role="presentation" class="active"><a href="/MedicalAid"><i class="fa fa-align-justify"></i>Medical Aid Provider List</a></li>
+            <li role="presentation"><a href="/NewMedicalAidProvider"><i class="fa fa-plus-circle"></i>New Provider</a></li>
+        </ul>
+
+        <div class="panel panel-default">
+            <table class="table-bordered" style="float:right; border:0; margin-bottom:5px;">
+                <tbody>
+                    <tr>
+                        <td style="border: 0;">
+                            <div class="btn-group">
+                                <a class="btn btn-default dropdown-toggle btn-select2" href="#" data-toggle="dropdown" style="font-size:13px;" aria-expanded="false">Select search field <span class="caret"></span></a>
+                                <ul class="dropdown-menu" style="font-size:13px;">
+                                    <li><a href="#">Title</a></li>
+                                    <li><a href="#">Date</a></li>
+                                    <li><a href="#">Amount</a></li>
+                                    <li><a href="#">Medical Aid</a></li>
+                                    <li><a href="#">Patient</a></li>
+                                    <li><a href="#">Doctor</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                        <td style="border:0;">
+                            <div class="form-group input-group" style="margin-top:4px; margin-bottom:4px;">
+                                <input class="form-control" type="text" style="font-size:13px;"><span class="input-group-btn">
+                                    <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+                                </span>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table class="table table-hover" style="font-size: 12px;">
+                <thead style="background-color: #f8f8f8;">
+                    <tr>
+                        <th style="width: 20%; padding-right: 0px; padding-left: 20px;">Provider Name</th>
+                        <th style="width: 15%; padding-right: 0px; padding-left: 20px;">Phone Number</th>
+                        <th style="width: 15%; padding-right: 0px; padding-left: 20px;">Fax Number</th>
+                        <th style="width: 20%; padding-right: 0px; padding-left: 20px;">Email Address</th>
+                        <th style="width: 20%; padding-right: 0px; padding-left: 20px;">Physical Address</th>
+                        <th style="width: 10%; padding-right: 0px; padding-left: 20px;">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="tr_dblclick">                        
+                        <td><input class="form-control readonly" value=""></td>
+                        <td><input class="form-control readonly" value=""></td>
+                        <td><input class="form-control readonly" value=""></td>
+                        <td><input class="form-control readonly" value=""></td>
+                        <td><input class="form-control readonly" value=""></td>
+                        <td>
+                            <button class="btn btn-info btn-xs" id="myFunctionMedicalAid_Edit" onclick="myFunctionMedicalAid_Edit()" href="#"><i class="fa fa-pencil"></i></button>
+                            <button class="btn btn-info btn-xs" id="myFunctionMedicalAid_Save" onclick="myFunctionMedicalAid_Save()" href="#"><i class="fa fa-floppy-o"></i></button>
+                            <button class="btn btn-danger btn-xs" onclick="myFunctionMedicalAid_Delete()"><i class="fa fa-trash-o"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <ul class="pager">
+                <li class="previous"><a href="#">Previous</a></li>
+                <li class="next"><a href="#">Next</a></li>
+            </ul>
+        </div>
+
+        <!--View Medical Aid Modal-->
+        <div id="View_MedicalAid_Modal" class="modal fade">
+            <form>
+                <div class="modal-dialog" style="width:70%;">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Medical Aid Details</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                                <div class="col-md-2"><h5 class="form-control-label">Provider Name:</h5></div>
+                                <div class="col-md-4"><input class="form-control readonly_View" type="text"></div>
+                                <div class="col-md-2"><h5 class="form-control-label">Cell Number:</h5></div>
+                                <div class="col-md-4"><input class="form-control readonly_View" type="text"></div>
+                            </div>
+                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                                <div class="col-md-2"><h5 class="form-control-label">Email Address:</h5></div>
+                                <div class="col-md-4"><input class="form-control readonly_View" type="text"></div>
+                                <div class="col-md-2"><h5>Fax Number:</h5></div>
+                                <div class="col-md-4"><input class="form-control readonly_View" type="text"></div>
+                            </div>
+                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                                <div class="col-md-2"><h5>Scheme Names:</h5></div>
+                                <div class="col-md-4">
+                                    <select class="form-control readonly_View" size="4">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2"><h5 class="form-control-label">Physical Address:</h5></div>
+                                <div class="col-md-4"><textarea class="form-control readonly_View" rows="3"></textarea></div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" onclick="function_btnUpdateMedicalAid()" id="function_btnUpdateMedicalAid">Update</button>
+                            <button type="button" class="btn btn-danger" onclick="function_btnDeleteMedicalAid()">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div><!--View Medical Aid Modal Ends-->
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('.readonly').css('border', 'none');
+    $('.readonly').css('background-color', 'transparent');
+    $('.readonly').css('font-size', '13px');
+    $('.readonly').css('padding-right', '0px');
+    $('.readonly_View').css('background-color', 'transparent');
+    $('.readonly_View').attr("readonly", true);
+    $('#myFunctionMedicalAid_Edit').show(); $('#myFunctionMedicalAid_Save').hide();
+
+    $('#myFunctionMedicalAid_Edit').click(function () {
+
+        $('#myFunctionMedicalAid_Edit').hide(); $('#myFunctionMedicalAid_Save').show();
+
+        $('.readonly').attr("readonly", false);
+        $('.readonly').css('border', '1px solid #ccc');
+    });
+
+    $('#myFunctionMedicalAid_Save').click(function () {
+
+        $('#myFunctionMedicalAid_Edit').show(); $('#myFunctionMedicalAid_Save').hide();
+
+        $('.readonly').attr("readonly", true);
+        $('.readonly').css('border', 'none');
+        $('.readonly').css('background-color', 'transparent');
+    });
+
+    $('.tr_dblclick').dblclick(function () {//<!--Show View Invoice Modal when a user double clicks a row-->
+        $("#View_MedicalAid_Modal").modal('show');
+    });
+
+    $('#function_btnUpdateMedicalAid').click(function () {//<!--When a User clicks Update button on Show View Employee Modal when a user double clicks a row-->
+        var btnText = $(this).html();
+        if (btnText == "Update") {
+            $(".readonly_View").attr("readonly", false);
+            $(".readonly_View").css("border", "1px solid #ccc");
+            $("#function_btnUpdateMedicalAid").html('Save');
+        }
+        else {
+            $('.readonly_View').attr("readonly", true);
+            $('.readonly_View').css('border', 'none');
+            $('.readonly_View').css('background-color', 'transparent');
+            $("#function_btnUpdateMedicalAid").html('Update');
+        }
+    });
+
+    $(function () {
+        $('.datetimepicker').datetimepicker({ format: 'L' });
+    });
+</script>
