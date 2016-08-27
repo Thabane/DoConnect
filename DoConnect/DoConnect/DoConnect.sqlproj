@@ -60,6 +60,7 @@
     <Folder Include="Properties" />
     <Folder Include="Tables" />
     <Folder Include="Stored Procedures" />
+    <Folder Include="Data\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Appointments.sql" />
@@ -90,11 +91,8 @@
     <Build Include="Stored Procedures\NewUpdateDoctor.sql" />
     <Build Include="Stored Procedures\NewUpdatePatient.sql" />
     <Build Include="Stored Procedures\NewUpdatePractice.sql" />
-    <Build Include="Tables\AccessLevel.sql" />
     <Build Include="Stored Procedures\NewUpdateMedicine_Inventory.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="ReadMe.cs" />
+    <Build Include="Tables\AccessLevel.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Data\dbo.AccessLevel.data.sql" />
