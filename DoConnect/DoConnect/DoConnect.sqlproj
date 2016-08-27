@@ -60,7 +60,6 @@
     <Folder Include="Properties" />
     <Folder Include="Tables" />
     <Folder Include="Stored Procedures" />
-    <Folder Include="Data" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Appointments.sql" />
@@ -75,7 +74,7 @@
     <Build Include="Tables\Users.sql" />
     <Build Include="Stored Procedures\CreateUser.sql" />
     <Build Include="Stored Procedures\GetAllAppointments.sql" />
-    <Build Include="Stored Procedures\GetAllDoctors.sql" />
+    <Build Include="Stored Procedures\GetAllDocotors.sql" />
     <Build Include="Stored Procedures\GetAllInvoices.sql" />
     <Build Include="Stored Procedures\GetAllPatients.sql" />
     <Build Include="Stored Procedures\GetAllPractices.sql" />
