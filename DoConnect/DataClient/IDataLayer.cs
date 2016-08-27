@@ -13,7 +13,7 @@ namespace DataClient
         void CreatePatient(string firstName, string lastName, string id_Number, string gender, DateTime dob, string cell_number, string street_address, string suburb, string city, string country, int UserId);
         bool NewUpdateDoctor(Doctor doc, int UserId);
         Patient GetPatient(int id);
-        Doctor GetDoctor(int DocID);
+        Doctor GetDoctor(int UserId);
         List<Patient> GetAllPatients();
         bool DeletePatient(int id);
         bool UpdatePatient(int id, string firstName, string lastName, string id_Number, string gender, DateTime dob, string cell_number, string street_address, string suburb, string city, string country);
@@ -37,5 +37,6 @@ namespace DataClient
         List<Staff> GetAllStaffMembers();
         bool DeleteStaff(int id);
         bool UpdateStaff(int id, string firstName, string lastName, string id_Number, string gender, DateTime dob, string phone, string employee_Type, int practice_ID, int user_ID);
+        List<Doctor> GetAllDoctors();
     }
 }

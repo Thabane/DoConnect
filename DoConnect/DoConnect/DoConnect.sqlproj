@@ -23,6 +23,7 @@
     <SqlServerVerification>False</SqlServerVerification>
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseSet>True</TargetDatabaseSet>
+    <GenerateSqlClrDdl>False</GenerateSqlClrDdl>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -59,6 +60,7 @@
     <Folder Include="Properties" />
     <Folder Include="Tables" />
     <Folder Include="Stored Procedures" />
+    <Folder Include="Data\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Appointments.sql" />
@@ -89,5 +91,25 @@
     <Build Include="Stored Procedures\NewUpdateDoctor.sql" />
     <Build Include="Stored Procedures\NewUpdatePatient.sql" />
     <Build Include="Stored Procedures\NewUpdatePractice.sql" />
+    <Build Include="Stored Procedures\NewUpdateMedicine_Inventory.sql" />
+    <Build Include="Tables\AccessLevel.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Data\dbo.AccessLevel.data.sql" />
+    <None Include="Data\dbo.Appointments.data.sql" />
+    <None Include="Data\dbo.Consultation.data.sql" />
+    <None Include="Data\dbo.Doctors.data.sql" />
+    <None Include="Data\dbo.Expenses.data.sql" />
+    <None Include="Data\dbo.Invoice.data.sql" />
+    <None Include="Data\dbo.Medical_Aid.data.sql" />
+    <None Include="Data\dbo.Medicine_Inventory.data.sql" />
+    <None Include="Data\dbo.Messages.data.sql" />
+    <None Include="Data\dbo.Patient.data.sql" />
+    <None Include="Data\dbo.Patient_Medical_Aid.data.sql" />
+    <None Include="Data\dbo.Practice.data.sql" />
+    <None Include="Data\dbo.Prescription.data.sql" />
+    <None Include="Data\dbo.Staff.data.sql" />
+    <None Include="Data\dbo.Users.data.sql" />
+    <None Include="Stored Procedures\NewUpdateExpense.sql" />
   </ItemGroup>
 </Project>
