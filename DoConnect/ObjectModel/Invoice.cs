@@ -14,7 +14,7 @@ namespace ObjectModel
         public int Patient_ID { get; set; }
         public int Doctor_ID { get; set; }
 
-        public Invoice GetAllInvoice(SqlDataReader reader)
+        public Invoice Create(SqlDataReader reader)
         {
             return new Invoice
             {
