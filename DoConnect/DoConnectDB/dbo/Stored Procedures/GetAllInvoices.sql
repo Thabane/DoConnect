@@ -1,19 +1,14 @@
-﻿CREATE PROCEDURE [GetAllInvoices] 
+CREATE PROCEDURE [GetAllInvoices]
 
 AS
 BEGIN
-
-	SET NOCOUNT ON;
-
 	SELECT 
-	   [ID]
-      ,[Date]
-      ,[Total]
-      ,[Medical_Aid_ID]
-      ,[Patient_ID]
-      ,[Doctor_ID]
+		[Date],
+		[InvoiceSummary],
+		[Total],
+		[Medical_Aid_ID],
+		[Patient_ID],
+		[Doctor_ID]
 	FROM 
-	   [DoConnect].[dbo].[Invoice]
-
+		Invoice
 END
-GO

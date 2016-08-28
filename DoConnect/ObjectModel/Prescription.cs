@@ -12,16 +12,17 @@ namespace ObjectModel
         public int Patient_ID { get; set; }
         public int Doctor_ID { get; set; }
 
-        public Prescription Create(SqlDataReader reader)
+        public Prescription()
+        { }
+
+        public Prescription(SqlDataReader reader)
         {
-            return new Prescription
-            {
-                ID = reader.GetInt32(reader.GetOrdinal("ID")),
-                Description = reader.GetString(reader.GetOrdinal("Description")),
-                Date = reader.GetDateTime(reader.GetOrdinal("Date")),
-                Patient_ID = reader.GetInt32(reader.GetOrdinal("Patient_ID")),
-                Doctor_ID = reader.GetInt32(reader.GetOrdinal("Doctor_ID")),
-            };
+            ID = reader.GetInt32(reader.GetOrdinal("ID"));
+            Description = reader.GetString(reader.GetOrdinal("Description"));
+            Date = reader.GetDateTime(reader.GetOrdinal("Date"));
+            Patient_ID = reader.GetInt32(reader.GetOrdinal("Patient_ID"));
+            Doctor_ID = reader.GetInt32(reader.GetOrdinal("Doctor_ID"));
+
         }
     }
 }

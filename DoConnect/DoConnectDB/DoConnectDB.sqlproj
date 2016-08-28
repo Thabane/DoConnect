@@ -91,6 +91,23 @@
     <Build Include="dbo\Stored Procedures\GetInvoiceByDoctorId.sql" />
     <Build Include="dbo\Stored Procedures\GetInvoiceByMedAidId.sql" />
     <Build Include="dbo\Stored Procedures\GetPatientById.sql" />
+    <Build Include="dbo\Stored Procedures\GetAll_Patient_Medical_Aids.sql" />
+    <Build Include="dbo\Stored Procedures\GetAllConsultations.sql" />
+    <Build Include="dbo\Stored Procedures\GetAllPrescriptions.sql" />
+    <Build Include="dbo\Stored Procedures\GetAllStaffs.sql" />
+    <Build Include="dbo\Stored Procedures\GetConsultation.sql" />
+    <Build Include="dbo\Stored Procedures\GetInvoice.sql" />
+    <Build Include="dbo\Stored Procedures\GetPatient.sql" />
+    <Build Include="dbo\Stored Procedures\GetPatient_Medical_Aid.sql" />
+    <Build Include="dbo\Stored Procedures\GetPractice.sql" />
+    <Build Include="dbo\Stored Procedures\GetPrescription.sql" />
+    <Build Include="dbo\Stored Procedures\GetStaff.sql" />
+    <Build Include="dbo\Stored Procedures\NewUpdateAppointment.sql" />
+    <Build Include="dbo\Stored Procedures\NewUpdateConsultation.sql" />
+    <Build Include="dbo\Stored Procedures\NewUpdateInvoice.sql" />
+    <Build Include="dbo\Stored Procedures\NewUpdatePatient_Medical_Aid.sql" />
+    <Build Include="dbo\Stored Procedures\NewUpdatePrescription.sql" />
+    <Build Include="dbo\Stored Procedures\NewUpdateStaff.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="DoConnectDB.refactorlog" />

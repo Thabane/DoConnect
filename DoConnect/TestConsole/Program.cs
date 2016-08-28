@@ -12,11 +12,19 @@ namespace TestConsole
     {
         static void Main(string[] args)
         {
-            DataLayer bl = new DataLayer();
+            DataLayer dataLayer = new DataLayer();
 
-            var hold =  bl.GetAllPatients();
+            var hold = dataLayer.GetAllPatients();
 
-            Console.WriteLine("Users Created");
+
+            //dataLayer.CreateConsultation(1, 1, DateTime.Now, "reason for consultation", "symptoms", "clinicalfindings", "diagnosis", "testresultsummary", "treatmentplan", 1, 1);
+            //dataLayer.GetConsultation(1);
+            //dataLayer.GetAllConsultations();
+            //dataLayer.NewUpdateConsultation(1,1, 1, DateTime.Now, "reason for consultation", "symptoms", "clinicalfindings", "diagnosis", "testresultsummary", "treatmentplan", 1, 1);
+
+            //dataLayer.
+
+            //Console.WriteLine("Users Created");
             Console.ReadKey();
         }
     }
