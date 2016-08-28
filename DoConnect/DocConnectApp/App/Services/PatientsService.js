@@ -6,10 +6,10 @@
             return  $http.get("api/Patients/GetAllPatients");
         }            
 
-        //Select Patient by ID
+        //Select Patient by PatientID
         var GetPatientByID = function (ID) {
             return $http.get("api/Patients/GetPatient/" + ID);
-        }            
+        }
 
         //Insert New Patient
         /*var InsertPatient = function (FirstName, LastName, ID_Number, Gender, DOB, Cell_Number, Street_Address, Suburb, City, Country, Allergies, PreviousIllnesses, PreviousMedication, RiskFactors, SocialHistory, FamilyHistory, Medical_Aid_ID, Doctor_ID, User_ID) {

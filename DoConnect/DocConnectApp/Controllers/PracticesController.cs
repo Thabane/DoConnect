@@ -25,7 +25,7 @@ namespace DocConnectApp.Controllers
         public Practice GetPracticeByID(int ID)
         {
             DataLayer dtLayer = new DataLayer();
-            return dtLayer.GetPractice(ID);
+            return dtLayer.GetPracticeById(ID);
         }
 
         [HttpPost]

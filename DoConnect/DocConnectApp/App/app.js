@@ -18,6 +18,22 @@ app.config(
                 templateUrl: "App/Views/Patients/patients.html",
                 controller: "PatientsController"
             })
+            .when("/ConsultationNotes", {
+                templateUrl: "App/Views/Patients/PatientRecord/ConsultationNotes.html",
+                controller: "PatientsController"
+            })
+            .when("/NewConsultationNotes", {
+                templateUrl: "App/Views/Patients/PatientRecord/NewConsultationNotes.html",
+                controller: "PatientsController"
+            })
+            .when("/MedicalHistory", {
+                templateUrl: "App/Views/Patients/PatientRecord/MedicalHistory.html",
+                controller: "PatientsController"
+            })
+            .when("/PrescriptionDetails", {
+                templateUrl: "App/Views/Patients/PatientRecord/PrescriptionDetails.html",
+                controller: "PatientsController"
+            })
             .when("/NewPatient", {
                 templateUrl: "App/Views/Patients/NewPatient.html",
                 controller: "PatientsController"

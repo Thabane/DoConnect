@@ -12,47 +12,79 @@
         </ul>
                       
         <!--Add Practice Modal-->
-        <form name="Form">
-            <div style="margin:auto; width:45%;">
+        <form name="Form" novalidate>
+            <div style="margin:auto; width:100%;">
                 <div class="modal-header" style="border-bottom:0px;"></div>
                 <div class="modal-body">
                     <div class="form-horizontal">
-                        <div class="form-group">                            
-                            <h5 class="col-md-4 control-label" style="text-align:left">Name:<span style="color:red">*</span></h5>
-                            <div class="col-md-8"><input class="form-control insert" ng-model="Name" name="Name" required type="text"><span ng-show="Form.Name.$dirty && Form.Name.$invalid">Required!</span></div>
+                        <div class="form-group">
+                            <h5 class="col-md-2 control-label" style="text-align:left">Name:<span style="color:red">*</span></h5>
+                            <div class="col-md-7"><input class="form-control insert" ng-model="Name" name="Name" ng-required="true" ng-pattern="/^[a-zA-Z''-'\s]{3,40}$/" type="text"></div>
+                            <div class="col-md-3">
+                                <small ng-show="Form.Name.$invalid && Form.Name.$touched && Form.Name.$error.required">Required field.<br></small>
+                                <small ng-show="Form.Name.$invalid && Form.Name.$touched && Form.Name.$error.pattern">Only alphabetic letters allowed and atleast 3 charactors.</small>
+                            </div>
                         </div>
                         <div class="form-group">
-                            <h5 class="col-md-4 control-label" style="text-align:left">Phone Number:<span style="color:red">*</span></h5>
-                            <div class="col-md-8"><input class="form-control insert" ng-model="Phone_Number" name="Phone_Number" type="text"></div>
+                            <h5 class="col-md-2 control-label" style="text-align:left">Phone Number:<span style="color:red">*</span></h5>
+                            <div class="col-md-7"><input class="form-control insert" ng-model="Phone_Number" name="Phone_Number" ng-required="true" ng-pattern="/^[01]?[- .]?(\([0-9]\d{2}\)|[0-9]\d{2})[- .]?\d{3}[- .]?\d{4}$/" placeholder="082 999 9999" type="text"></div>
+                            <div class="col-md-3">
+                                <small ng-show="Form.Phone_Number.$invalid && Form.Phone_Number.$touched && Form.Phone_Number.$error.required">Required field.<br></small>
+                                <small ng-show="Form.Phone_Number.$invalid && Form.Phone_Number.$touched && Form.Phone_Number.$error.pattern">Invalid Phone Number.</small>
+                            </div>
                         </div>
                         <div class="form-group">
-                            <h5 class="col-md-4 control-label" style="text-align:left">Fax Number:<span style="color:red">*</span></h5>
-                            <div class="col-md-8"><input class="form-control insert" ng-model="Fax_Number" name="Fax_Number" type="text"></div>
+                            <h5 class="col-md-2 control-label" style="text-align:left">Fax Number:<span style="color:red">*</span></h5>
+                            <div class="col-md-7"><input class="form-control insert" ng-model="Fax_Number" name="Fax_Number" ng-required="true" ng-pattern="/^[01]?[- .]?(\([0-9]\d{2}\)|[0-9]\d{2})[- .]?\d{3}[- .]?\d{4}$/" placeholder="082 999 9999" type="text"></div>
+                            <div class="col-md-3">
+                                <small ng-show="Form.Fax_Number.$invalid && Form.Fax_Number.$touched && Form.Fax_Number.$error.required">Required field.<br></small>
+                                <small ng-show="Form.Fax_Number.$invalid && Form.Fax_Number.$touched && Form.Fax_Number.$error.pattern">Invalid Phone Number.</small>
+                            </div>                        
                         </div>
                         <div class="form-group">
-                            <h5 class="col-md-4 control-label" style="text-align:left">Street Address:<span style="color:red">*</span></h5>
-                            <div class="col-md-8"><input class="form-control insert" ng-model="Street_Address" name="Fax_Number" type="text"></div>
+                            <h5 class="col-md-2 control-label" style="text-align:left">Street Address:<span style="color:red">*</span></h5>
+                            <div class="col-md-7"><input class="form-control insert" ng-model="Street_Address" name="Street_Address" ng-required="true" ng-pattern="/^[0-9a-zA-Z''-'\s]{3,}$/" type="text"></div>
+                            <div class="col-md-3">
+                                <small ng-show="Form.Street_Address.$invalid && Form.Street_Address.$touched && Form.Street_Address.$error.required">Required field.<br></small>
+                                <small ng-show="Form.Street_Address.$invalid && Form.Street_Address.$touched && Form.Street_Address.$error.pattern">Only alphanumeric values allowed and atleast 3 charactors.</small>
+                            </div> 
                         </div>
                         <div class="form-group">
-                            <h5 class="col-md-4 control-label" style="text-align:left">Suburb:<span style="color:red">*</span></h5>
-                            <div class="col-md-8"><input class="form-control insert" ng-model="Suburb" type="text"></div>
+                            <h5 class="col-md-2 control-label" style="text-align:left">Suburb:<span style="color:red">*</span></h5>
+                            <div class="col-md-7"><input class="form-control insert" ng-model="Suburb" name="Suburb" ng-required="true" ng-pattern="/^[A-Za-z\s]{3,}$/" type="text"></div>
+                            <div class="col-md-3">
+                                <small ng-show="Form.Suburb.$invalid && Form.Suburb.$touched && Form.Suburb.$error.required">Required field.<br></small>
+                                <small ng-show="Form.Suburb.$invalid && Form.Suburb.$touched && Form.Suburb.$error.pattern">Only alphabetic letters allowed and atleast 3 charactors.</small>
+                            </div>
                         </div>
                         <div class="form-group">
-                            <h5 class="col-md-4 control-label" style="text-align:left">City:<span style="color:red">*</span></h5>
-                            <div class="col-md-8"><input class="form-control insert" ng-model="City" type="text"></div>
+                            <h5 class="col-md-2 control-label" style="text-align:left">City:<span style="color:red">*</span></h5>
+                            <div class="col-md-7"><input class="form-control insert" ng-model="City" name="City" ng-required="true" ng-pattern="/^[A-Za-z\s]{3,}$/" type="text"></div>
+                            <div class="col-md-3">
+                                <small ng-show="Form.City.$invalid && Form.City.$touched && Form.City.$error.required">Required field.<br></small>
+                                <small ng-show="Form.City.$invalid && Form.City.$touched && Form.City.$error.pattern">Only alphabetic letters allowed and atleast 3 charactors.</small>
+                            </div>
                         </div>
                         <div class="form-group">
-                            <h5 class="col-md-4 control-label" style="text-align:left">Country:<span style="color:red">*</span></h5>
-                            <div class="col-md-8"><input class="form-control insert" ng-model="Country" type="text"></div>
+                            <h5 class="col-md-2 control-label" style="text-align:left">Country:<span style="color:red">*</span></h5>
+                            <div class="col-md-7"><input class="form-control insert" ng-model="Country" name="Country" ng-required="true" ng-pattern="/^[A-Za-z\s]{3,}$/" type="text"></div>
+                            <div class="col-md-3">
+                                <small ng-show="Form.Country.$invalid && Form.Country.$touched && Form.Country.$error.required">Required field.<br></small>
+                                <small ng-show="Form.Country.$invalid && Form.Country.$touched && Form.Country.$error.pattern">Only alphabetic letters allowed and atleast 3 charactors.</small>
+                            </div>
                         </div>
                         <div class="form-group">
-                            <h5 class="col-md-4 control-label" style="text-align:left">Trading Times:<span style="color:red">*</span></h5>
-                            <div class="col-md-8"><textarea class="form-control insert" ng-model="Trading_Times" rows="3" cols="20"></textarea></div>
+                            <h5 class="col-md-2 control-label" style="text-align:left">Trading Times:<span style="color:red">*</span></h5>
+                            <div class="col-md-7"><textarea class="form-control insert" ng-model="Trading_Times" name="Trading_Times" ng-required="true" ng-pattern="/^[0-9a-zA-Z:.'-'\s]{3,}$/" rows="3" cols="20"></textarea></div>
+                            <div class="col-md-3">
+                                <small ng-show="Form.Trading_Times.$invalid && Form.Trading_Times.$touched && Form.Trading_Times.$error.required">Required field.<br></small>
+                                <small ng-show="Form.Trading_Times.$invalid && Form.Trading_Times.$touched && Form.Trading_Times.$error.pattern">Only alphanumeric values allowed and atleast 3 charactors.</small>
+                            </div> 
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-primary" ng-click="NewPractice(Name, Phone_Number, Fax_Number, Street_Address, Suburb, City, Country, Trading_Times)">Save</button>
+                    <button class="btn btn-primary" ng-click="NewPractice(Name, Phone_Number, Fax_Number, Street_Address, Suburb, City, Country, Trading_Times)" ng-disabled="Form.$invalid">Save</button>
                 </div>
             </div>
         </form><!-- /.Practice Modal-->

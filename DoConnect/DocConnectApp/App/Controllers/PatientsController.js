@@ -3,6 +3,17 @@
 
         $scope.PageTitle_Patients = 'Patients';
         $scope.PageTitle_NewPatient = 'New Patient Details';
+        $scope.PageTitle_MedicalHistory = 'Medical Record';
+        $scope.PageTitle_PrescriptionDetails = 'Prescription Details';
+        $scope.PageTitle_ConsultationNotes = 'Consultation Notes';
+
+        $scope.EMAIL_REGEXP = "/^(?=.{1,254}$)(?=.{1,64}@)[-!#$%&'*+\/0-9=?A-Z^_`a-z{|}~]+(\.[-!#$%&'*+\/0-9=?A-Z^_`a-z{|}~]+)*@[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?(\.[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?)*$/";
+        $scope.NUMBER_REGEXP = "/^\s*(\-|\+)?(\d+|(\d*(\.\d*)))([eE][+-]?\d+)?\s*$/";
+        $scope.NAME = "/^[A-Za-z]{3,}$/";
+        $scope.PASSWORD = "/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/";
+        $scope.EMAIL = "/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/";
+        $scope.PHONE = "/^[2-9]\d{2}-\d{3}-\d{4}$/";
+
 
         var init_ControlSettings = function () {
             angular.element(".View_readonly").attr("readonly", true);
@@ -48,13 +59,13 @@
             });
         };
         $scope.GetPatients();
-
+                
         //Select PatientByID Function
-        $scope.ViewPatient = function (User_ID) {
-            PatientsService.GetPatientByID(User_ID).then(function (result) {
+        $scope.ViewPatient = function (PatientID) {
+            PatientsService.GetPatientByID(1).then(function (result) {
                 $scope.PatientDetails = result.data;
-
-                $scope.ID               = result["ID"];
+            //alert($routeParams.PatientID);
+                /*$scope.ID               = result["ID"];
                 $scope.FirstName        = result["FirstName"];
                 $scope.LastName         = result["LastName"];
                 $scope.ID_Number        = result["ID_Number"];
@@ -97,7 +108,7 @@
                 $scope.IntakeRoute = result["IntakeRoute "];
                 $scope.Frequency = result["Frequency "];
                 $scope.DispenseNumber = result["DispenseNumber "];
-                $scope.RefillNumber = result["RefillNumber "];
+                $scope.RefillNumber = result["RefillNumber "];*/
 
             });
         };

@@ -13,7 +13,7 @@ namespace DocConnectApp.Controllers
     {
         [HttpGet]
         [Route("api/Patients/GetAllPatients")]
-        public List<Patient> GetAllPatients()
+        public List<GetAllPatients> GetAllPatients()
         {
             DataLayer dtLayer = new DataLayer();
             return dtLayer.GetAllPatients();
@@ -24,7 +24,7 @@ namespace DocConnectApp.Controllers
         public List<Patient> GetPatientByID(int ID)
         {
             DataLayer dtLayer = new DataLayer();
-            return dtLayer.GetPatient(ID);
+            return dtLayer.GetPatientByID(ID);
         }
 
         [HttpPost]
