@@ -196,6 +196,8 @@ function ViewEmployee() {
     $("#View_Employee_Modal").modal("show");
     $(".readonly_ViewEmployee").attr("readonly", true);
     $(".readonly_ViewEmployee").css("background-color", "transparent");
+    
+    $(".DisplayItem").show(); $(".UpdateItem").hide();
 };
 
 //Events Page
@@ -258,8 +260,9 @@ function myFunctionShowConsultations() {
 };
 
 function DT() {
-    $(".datetimepicker").datetimepicker({ format: "L" });
+    $(".datetimepicker").datetimepicker({ format: "L", format: 'yyyy-MM-dd' });
 };
+
 
 $(".nav li").on("click", function () {
     $(".nav li").removeClass("active");

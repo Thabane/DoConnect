@@ -12,6 +12,8 @@ namespace DataClient
         #region User
         int CreateUser(int AccessLevel);
         string Login(string username, string password, int accessLevel);
+        List<AccessLevel> GetAllAccessLevel();
+        AccessLevel GetAccessLevelById(int id);
         #endregion
 
         #region Expense
@@ -73,9 +75,13 @@ namespace DataClient
         #endregion
 
         #region Staff
-        int NewUpdateStaff(string firstName, string lastName, string id_Number, string gender, DateTime dob, string phone, string street_Address, string suburb, string city, string country, string employee_Type, int practice_ID, int user_ID);
+        
         List<Staff> GetAllStaff();
         Staff GetStaffById(int id);
+        bool InsertStaff(string firstName, string lastName, string id_Number, string gender, DateTime dob, string phone,
+            string street_Address, string suburb, string city, string country, string employee_Type, int practice_ID, int user_ID, string Email);
+        bool UpdateStaff(int ID, string firstName, string lastName, string id_Number, string gender, DateTime dob, string phone,
+            string street_Address, string suburb, string city, string country, string employee_Type, int practice_ID, int user_ID, string Email);
         bool DeleteStaff(int id);
         #endregion
 

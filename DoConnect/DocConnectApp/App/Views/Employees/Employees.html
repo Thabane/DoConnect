@@ -106,31 +106,20 @@
                             <div class="row" style="margin-top:4px;">
                                 <div class="col-md-2"><h5>Gender:</h5></div>
                                 <div class="col-md-4">
-                                    <select class="form-control readonly_ViewEmployee" ng-value="Gender" ng-model="Gender">
-                                        <option value="">Please choose a gender</option>
-                                        <option value="1">Male</option>
-                                        <option value="2">Female</option>
-                                    </select>
-                                </div>
+                                    <select class="form-control readonly_ViewEmployee UpdateItem" ng-model="Gender"
+                                            ng-options="gender for gender in Genders">
+                                    </select> 
+                                    <input class="form-control readonly_ViewEmployee Display" type="text" ng-value="Gender"></div>
                                 <div class="col-md-2"><h5>Employee Type:</h5></div>
                                 <div class="col-md-4">
-                                    <select class="form-control readonly_ViewEmployee" ng-value="Employee_Type" ng-model="Employee_Type">
-                                        <option value="">Choose Employee Type</option>
-                                        <option value="1">Nurse</option>
-                                        <option value="2">Cleaner</option>
-                                        <option value="3">Doctor</option>
-                                        <option value="4">Receptionist</option>
-                                        <option value="5">Administrator</option>
+                                    <select class="form-control readonly_ViewEmployee UpdateItem" ng-model="Employee_Type"
+                                        ng-options="employee_Type for employee_Type in Employee_Types">
                                     </select>
-                                </div>
+                                    <input class="form-control readonly_ViewEmployee DisplayItem" type="text" ng-value="Employee_Type"></div>
                             </div>
                             <div class="row" style="margin-top:4px;">
-                                <div class="col-lg-2 col-sm-2 col-md-2"><h5>Practice Name:<span style="color:red">*</span></h5></div>
-                                <div class="col-lg-4 col-sm-4 col-md-4">
-                                    <select class="form-control" ng-value="Practice_ID" ng-model="Practice_ID">
-                                        <option value="">Choose Practice</option>
-                                    </select>
-                                </div>
+                                <div class="col-md-2"><h5>Practice Name:<span style="color:red">*</span></h5></div>
+                                <div class="col-md-4"><input class="form-control readonly_ViewEmployee" type="text" ng-value="Practice_Name" ng-model="Practice_Name"></div>
                             </div>
                         </div>
                         <div class="modal-footer">

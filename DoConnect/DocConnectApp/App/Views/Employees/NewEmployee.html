@@ -47,7 +47,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <div class="input-group date datetimepicker" onclick="DT()">
-                                            <input class="form-control insert" type="text" ng-model="DOB" name="DOB">
+                                            <input class="form-control insert" type="date" ng-model="DOB" name="DOB" ng-change="changedValueGetDate(DOB)" />
                                             <span class="input-group-addon">
                                                 <span class="glyphicon glyphicon-calendar"></span>
                                             </span>
@@ -62,35 +62,31 @@
                     <div class="row" style="margin-top:4px;">
                         <div class="col-lg-2 col-sm-2 col-md-2"><h5>Gender:<span style="color:red">*</span></h5></div>
                         <div class="col-lg-4 col-sm-4 col-md-4">
-                            <select class="form-control insert" ng-model="Gender" name="Gender">
-                                <option value="">Please choose a gender</option>
-                                <option value="1">Male</option>
-                                <option value="2">Female</option>
+                            <select class="form-control insert" ng-model="Gender" name="Gender" ng-required="true" ng-change="changedValueGetGender(Gender)"
+                                    data-ng-options="gender as gender.Gender for gender in Genders">
+                                <option value="">Select gender</option>
                             </select>
                         </div>
                         <div class="col-lg-2 col-sm-2 col-md-2"><h5>Employee Type:<span style="color:red">*</span></h5></div>
                         <div class="col-lg-4 col-sm-4 col-md-4">
-                            <select class="form-control insert" ng-model="Employee_Type" name="Employee_Type">
-                                <option value="">Choose Employee Type</option>
-                                <option value="1">Nurse</option>
-                                <option value="2">Cleaner</option>
-                                <option value="3">Doctor</option>
-                                <option value="4">Receptionist</option>
-                                <option value="5">Administrator</option>
+                            <select class="form-control insert" ng-model="ACCESSLEVEL_ID" name="ACCESSLEVEL_ID" ng-required="true" ng-change="changedValueGetAccessLevel(ACCESSLEVEL_ID)"
+                                    data-ng-options="accessLevel as accessLevel.Level for accessLevel in AccessLevel">
+                                <option value="">Select Employee Type</option>
                             </select>
                         </div>
                     </div>
                     <div class="row" style="margin-top:4px;">
                         <div class="col-lg-2 col-sm-2 col-md-2"><h5>Practice Name:<span style="color:red">*</span></h5></div>
                         <div class="col-lg-4 col-sm-4 col-md-4">
-                            <select class="form-control insert" ng-model="Practice_ID" name="Practice_ID">
-                                <option value="">Choose Practice</option>
+                            <select class="form-control insert" ng-model="Practice_ID" name="Practice_ID" ng-required="true" ng-change="changedValueGetPractice_ID(Practice_ID)"
+                                    data-ng-options="practice as practice.Name for practice in Practices">
+                                <option value="">Select a practice</option>
                             </select>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" ng-click="NewEmployee(FirstName, LastName, ID_Number, Gender, DOB, Phone, Employee_Type, Practice_ID, Email)">Add Employee</button>
+                    <button type="button" class="btn btn-primary" ng-click="NewEmployee(FirstName, LastName, ID_Number, Gender, DOB, Phone, Street_Address, Suburb, City, Country, Email)">Add Employee</button>
                 </div>
             </div>
         </form><!--New Employee Modal Ends-->

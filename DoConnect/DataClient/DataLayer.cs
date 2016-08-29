@@ -55,6 +55,39 @@ namespace DataClient
             access.LogEntry(userId, "New User Created");
             return "";
         }
+
+        public List<AccessLevel> GetAllAccessLevel()
+        {
+            List<AccessLevel> List = new List<AccessLevel>();
+            using (var reader = access.ExecuteReader(Conn, "[GetAllAccessLevel]", new List<SqlParameter>()))
+            {
+                while (reader.Read())
+                {
+                    List.Add(new AccessLevel().Create(reader));
+                }
+            }
+            return List;
+        }
+
+        public AccessLevel GetAccessLevelById(int id)
+        {
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
+            idParameter.Value = id;
+            _parameters.Add(idParameter);
+
+            AccessLevel Item = new AccessLevel();
+            using (var reader = access.ExecuteReader(Conn, "[GetAccessLevelById]", _parameters))
+            {
+                if (reader.Read())
+                {
+                    Item.ID = reader.GetInt32(reader.GetOrdinal("ID"));
+
+                    Item.Level = reader.GetString(reader.GetOrdinal("Level"));
+                }
+            }
+            return Item;
+        }
         #endregion
 
         #region Expense
@@ -961,17 +994,8 @@ namespace DataClient
             _parameters.Add(latitudeParameter);
             _parameters.Add(longitudeParameter);
             _parameters.Add(trading_TimesParameter);
-            //int userId = 0;
-            //using (var reader = access.ExecuteReader(Conn, "[NewUpdatePractice]", _parameters))
-            //{
-            //    if (reader.Read())
-            //    {
-            //        userId = reader.GetInt32(reader.GetOrdinal("ID"));
-            //    }
-            //}
-            //return true;
 
-            access.ExecuteNonQuery(Conn, _parameters, "[NewUpdatePractice]");
+            access.ExecuteNonQuery(Conn, _parameters, "[UpdatePractice]");
             return true;
         }
 
@@ -1075,12 +1099,45 @@ namespace DataClient
             return true;
         }
         #endregion
-        
-        #region Staff
-        public int NewUpdateStaff(string firstName, string lastName, string id_Number, string gender, DateTime dob, string phone,
-            string street_Address, string suburb, string city, string country, string employee_Type, int practice_ID, int user_ID)
+
+        #region Staff       
+
+        public List<Staff> GetAllStaff()
+        {
+            List<Staff> staffInfo = new List<Staff>();
+            using (var reader = access.ExecuteReader(Conn, "[GetAllStaff]", new List<SqlParameter>()))
+            {
+                while (reader.Read())
+                {
+                    staffInfo.Add(new Staff().Create(reader));
+                }
+            }
+            return staffInfo;
+        }
+
+        public Staff GetStaffById(int id)
         {
             _parameters = new List<SqlParameter>();
+            SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
+            idParameter.Value = id;
+            _parameters.Add(idParameter);
+
+            Staff staffInfo = new Staff();
+            using (var reader = access.ExecuteReader(Conn, "[GetAllStaffById]", _parameters))
+            {
+                if (reader.Read())
+                {
+                    staffInfo = (new Staff().Create(reader));
+                }
+            }
+            return staffInfo;
+        }
+
+        public bool InsertStaff(string firstName, string lastName, string id_Number, string gender, DateTime dob, string phone,
+            string street_Address, string suburb, string city, string country, string employee_Type, int practice_ID, int user_ID, string Email)
+        {
+            _parameters = new List<SqlParameter>();
+            SqlParameter IDParameter = new SqlParameter("@ID", SqlDbType.NVarChar);
             SqlParameter firstNameParameter = new SqlParameter("@FirstName", SqlDbType.NVarChar);
             SqlParameter lastNameParameter = new SqlParameter("@LastName", SqlDbType.NVarChar);
             SqlParameter id_NumberParameter = new SqlParameter("@ID_Number", SqlDbType.NVarChar);
@@ -1109,6 +1166,7 @@ namespace DataClient
             employee_TypeParameter.Value = employee_Type;
             practice_IDParameter.Value = practice_ID;
             user_IDParameter.Value = user_ID;
+            emailParameter.Value = Email;
 
             _parameters.Add(firstNameParameter);
             _parameters.Add(lastNameParameter);
@@ -1123,49 +1181,80 @@ namespace DataClient
             _parameters.Add(employee_TypeParameter);
             _parameters.Add(practice_IDParameter);
             _parameters.Add(user_IDParameter);
+            _parameters.Add(emailParameter);
 
-            int userId = 0;
-            using (var reader = access.ExecuteReader(Conn, "[NewUpdateStaff]", new List<SqlParameter>()))
+            try
             {
-                if (reader.Read())
-                {
-                    userId = reader.GetInt32(reader.GetOrdinal("StaffID"));
-                }
+                access.ExecuteNonQuery(Conn, _parameters, "[InsertStaff]");
+                return true;
             }
-            return userId;
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
-        public List<Staff> GetAllStaff()
-        {
-            List<Staff> staffInfo = new List<Staff>();
-            int userId = 0;
-            using (var reader = access.ExecuteReader(Conn, "[GetAllStaffMembers]", new List<SqlParameter>()))
-            {
-                if (reader.Read())
-                {
-                    userId = reader.GetInt32(reader.GetOrdinal("ID"));
-                }
-            }
-            return staffInfo;
-        }
-
-        public Staff GetStaffById(int id)
+        public bool UpdateStaff(int ID, string firstName, string lastName, string id_Number, string gender, DateTime dob, string phone,
+            string street_Address, string suburb, string city, string country, string employee_Type, int practice_ID, int user_ID, string Email)
         {
             _parameters = new List<SqlParameter>();
-            SqlParameter idParameter = new SqlParameter("@StaffID", SqlDbType.Int);
-            idParameter.Value = id;
-            _parameters.Add(idParameter);
+            SqlParameter IDParameter = new SqlParameter("@ID", SqlDbType.NVarChar);
+            SqlParameter firstNameParameter = new SqlParameter("@FirstName", SqlDbType.NVarChar);
+            SqlParameter lastNameParameter = new SqlParameter("@LastName", SqlDbType.NVarChar);
+            SqlParameter id_NumberParameter = new SqlParameter("@ID_Number", SqlDbType.NVarChar);
+            SqlParameter genderParameter = new SqlParameter("@Gender", SqlDbType.NVarChar);
+            SqlParameter dobParameter = new SqlParameter("@DOB", SqlDbType.DateTime);
+            SqlParameter phoneParameter = new SqlParameter("@Phone", SqlDbType.NVarChar);
+            SqlParameter street_AddressParameter = new SqlParameter("@Street_Address", SqlDbType.NVarChar);
+            SqlParameter suburbParameter = new SqlParameter("@Suburb", SqlDbType.NVarChar);
+            SqlParameter cityParameter = new SqlParameter("@City", SqlDbType.NVarChar);
+            SqlParameter countryParameter = new SqlParameter("@Country", SqlDbType.NVarChar);
+            SqlParameter employee_TypeParameter = new SqlParameter("@Employee_Type", SqlDbType.NVarChar);
+            SqlParameter practice_IDParameter = new SqlParameter("@Practice_ID", SqlDbType.Int);
+            SqlParameter user_IDParameter = new SqlParameter("@User_ID", SqlDbType.Int);
+            SqlParameter emailParameter = new SqlParameter("@Email", SqlDbType.NVarChar);
 
-            Staff staffInfo = new Staff();
-            int userId = 0;
-            using (var reader = access.ExecuteReader(Conn, "[GetStaff]", new List<SqlParameter>()))
+            IDParameter.Value = ID;
+            firstNameParameter.Value = firstName;
+            lastNameParameter.Value = lastName;
+            id_NumberParameter.Value = id_Number;
+            genderParameter.Value = gender;
+            dobParameter.Value = dob;
+            phoneParameter.Value = phone;
+            street_AddressParameter.Value = street_Address;
+            suburbParameter.Value = suburb;
+            cityParameter.Value = city;
+            countryParameter.Value = country;
+            employee_TypeParameter.Value = employee_Type;
+            practice_IDParameter.Value = practice_ID;
+            user_IDParameter.Value = user_ID;
+            emailParameter.Value = Email;
+
+            _parameters.Add(IDParameter);
+            _parameters.Add(firstNameParameter);
+            _parameters.Add(lastNameParameter);
+            _parameters.Add(id_NumberParameter);
+            _parameters.Add(genderParameter);
+            _parameters.Add(dobParameter);
+            _parameters.Add(phoneParameter);
+            _parameters.Add(street_AddressParameter);
+            _parameters.Add(suburbParameter);
+            _parameters.Add(cityParameter);
+            _parameters.Add(countryParameter);
+            _parameters.Add(employee_TypeParameter);
+            _parameters.Add(practice_IDParameter);
+            _parameters.Add(user_IDParameter);
+            _parameters.Add(emailParameter);
+
+            try
             {
-                if (reader.Read())
-                {
-                    userId = reader.GetInt32(reader.GetOrdinal("ID"));
-                }
+                access.ExecuteNonQuery(Conn, _parameters, "[UpdateStaff]");
+                return true;
             }
-            return staffInfo;
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public bool DeleteStaff(int id)

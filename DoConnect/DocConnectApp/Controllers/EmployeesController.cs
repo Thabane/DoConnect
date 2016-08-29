@@ -31,18 +31,42 @@ namespace DoConnectAdmin.Controllers
 
         [HttpPost]//Update Employee
         [Route("api/Employees/UpdateEmployee")]
-        public int UpdateEmployee(Staff staff)
+        public bool UpdateEmployee(Staff staff)
         {
             DataLayer dtLayer = new DataLayer();
-            return dtLayer.NewUpdateStaff(staff.FirstName, staff.LastName, staff.ID_Number, staff.Gender, staff.DOB, staff.Phone, staff.Street_Address, staff.Suburb, staff.City, staff.Country, staff.Employee_Type, staff.Practice_ID, staff.User_ID);
+            return dtLayer.UpdateStaff(staff.ID, staff.FirstName, staff.LastName, staff.ID_Number, staff.Gender, staff.DOB, staff.Phone, staff.Street_Address, staff.Suburb, staff.City, staff.Country, staff.Employee_Type, staff.Practice_ID, staff.User_ID, staff.Email);
+        }
+
+        [HttpGet]
+        [Route("api/Employees/GetAllAccessLevel")]
+        public List<AccessLevel> GetAllAccessLevel()
+        {
+            DataLayer dtLayer = new DataLayer();
+            return dtLayer.GetAllAccessLevel();
+        }
+
+        [HttpGet]
+        [Route("api/Employees/GetAccessLevel/{ID}")]
+        public AccessLevel GetAccessLevelByID(int ID)
+        {
+            DataLayer dtLayer = new DataLayer();
+            return dtLayer.GetAccessLevelById(ID);
+        }
+
+        [HttpGet]
+        [Route("api/Employees/GetAllPractices")]
+        public List<Practice> GetAllPractices()
+        {
+            DataLayer dtLayer = new DataLayer();
+            return dtLayer.GetAllPractices();
         }
 
         [HttpPost]
         [Route("api/Employees/InsertEmployee")]
-        public int InsertEmployee(Staff staff)
+        public bool InsertEmployee(Staff staff)
         {
             DataLayer dtLayer = new DataLayer();
-            return dtLayer.NewUpdateStaff(staff.FirstName, staff.LastName, staff.ID_Number, staff.Gender, staff.DOB, staff.Phone, staff.Street_Address, staff.Suburb, staff.City, staff.Country, staff.Employee_Type, staff.Practice_ID, staff.User_ID);
+            return dtLayer.InsertStaff(staff.FirstName, staff.LastName, staff.ID_Number, staff.Gender, staff.DOB, staff.Phone, staff.Street_Address, staff.Suburb, staff.City, staff.Country, staff.Employee_Type, staff.Practice_ID, staff.User_ID, staff.Email);
         }
 
         [HttpPost]

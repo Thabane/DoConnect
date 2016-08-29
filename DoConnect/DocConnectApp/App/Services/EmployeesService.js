@@ -9,26 +9,43 @@
         //Select Employee by ID
         var GetEmployeeByID = function (ID) {
             return $http.get("api/Employees/GetEmployee/" + ID);
+        }        
+
+        var GetAllAccessLevel = function () {
+            return $http.get("api/Employees/GetAllAccessLevel");
+        };
+
+        var GetAccessLevelByID = function (ID) {
+            return $http.get("api/Employees/GetAccessLevel/" + ID);
+        }
+
+        var GetAllPractices = function () {
+            return $http.get("api/Employees/GetAllPractices");
         };
 
         //Insert new record
-        var InsertEmployee = function (FirstName, LastName, ID_Number, Gender, DOB, Phone, Employee_Type, Practice_ID, Email) {
+        var InsertEmployee = function (FirstName, LastName, ID_Number, Gender, DOB, Phone, Street_Address, Suburb, City, Country, Employee_Type, Practice_ID, User_ID, Email) {
             return $http.post("api/Employees/InsertEmployee",
             {
                 'FirstName': FirstName,
                 'LastName': LastName,
                 'ID_Number': ID_Number,
                 'Gender': Gender,
-                'DOB': DOB,
+                'DOB': DOB,                
                 'Phone': Phone,
+                'Street_Address': Street_Address,
+                'Suburb': Suburb,
+                'City': City,
+                'Country': Country,
                 'Employee_Type': Employee_Type,
                 'Practice_ID': Practice_ID,
+                'User_ID': User_ID,
                 'Email': Email
             });
         };
 
         //Update Employee
-        var UpdateEmployee = function (ID, FirstName, LastName, ID_Number, Gender, DOB, Phone, Employee_Type, Practice_ID, User_Id,  Email) {
+        var UpdateEmployee = function (ID, FirstName, LastName, ID_Number, Gender, DOB, Phone, Street_Address, Suburb, City, Country, Employee_Type, Practice_ID, User_ID, Email) {
             return $http.post("api/Employees/UpdateEmployee",
             {
                 'ID': ID,
@@ -38,8 +55,13 @@
                 'Gender': Gender,
                 'DOB': DOB,
                 'Phone': Phone,
+                'Street_Address': Street_Address,
+                'Suburb': Suburb,
+                'City': City,
+                'Country': Country,
                 'Employee_Type': Employee_Type,
                 'Practice_ID': Practice_ID,
+                'User_ID': User_ID,
                 'Email': Email
             });
         };
@@ -52,6 +74,9 @@
         return {
             GetAllEmployees: GetAllEmployees,
             GetEmployeeByID: GetEmployeeByID,
+            GetAllAccessLevel: GetAllAccessLevel,
+            GetAccessLevelByID: GetAccessLevelByID,
+            GetAllPractices: GetAllPractices,
             InsertEmployee: InsertEmployee,
             UpdateEmployee: UpdateEmployee,
             DeleteEmployee: DeleteEmployee

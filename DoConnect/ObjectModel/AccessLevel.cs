@@ -17,7 +17,7 @@ namespace ObjectModel
             return new AccessLevel
             {
                 ID = reader.GetInt32(reader.GetOrdinal("ID")),
-                Level = reader.GetString(reader.GetOrdinal("App_Status"))                
+                Level = reader.GetString(reader.GetOrdinal("Level"))                
             };
         }
     }
