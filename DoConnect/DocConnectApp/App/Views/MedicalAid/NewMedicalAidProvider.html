@@ -13,49 +13,79 @@
         </ul>
 
         <!--New Medical Aid Provider Modal-->
-        <div id="New_MedicalAidProvider_Modal">
-            <form>
-                <div style="margin:auto; width:85%;">
-                    <div class="modal-header" style="border-bottom:0px;"></div>
-                    <div class="modal-body">
-                        <div class="form-horizontal">
-                            <input type="hidden" name="action" value="insert">
-                            <input type="hidden" name="expense_id" value="0">
-                            <input type="hidden" name="invoice_type" value="expense">
-
-                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
-                                <div class="col-md-2"><h5 class="form-control-label">Provider Name:</h5></div>
-                                <div class="col-md-4"><input class="form-control" type="text"></div>
-                                <div class="col-md-2"><h5 class="form-control-label">Cell Number:</h5></div>
-                                <div class="col-md-4"><input class="form-control" type="text"></div>
+        <form name="Form">
+            <div style="margin:auto; width:85%;">
+                <div class="modal-header" style="border-bottom:0px;"></div>
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        <div class="row" style="margin-top:8px; margin-bottom:8px;">
+                            <div class="col-md-2"><h5>Provider Name:<span style="color:red">*</span></h5></div>
+                            <div class="col-md-4"><input class="form-control insert" type="text" ng-model="Name" name="Name"></div>
+                            <div class="col-md-2"><h5>Cell Number:<span style="color:red">*</span></h5></div>
+                            <div class="col-md-4"><input class="form-control insert" type="text" ng-model="Cell_Number" name="Cell_Number" ng-required="true" ng-pattern="/^[01]?[- .]?(\([0-9]\d{2}\)|[0-9]\d{2})[- .]?\d{3}[- .]?\d{4}$/" placeholder="011 999 9999"></div>
+                        </div>
+                        <div class="row" style="margin-top:0px; margin-bottom:8px;">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-4">
+                                <small ng-show="Form.Name.$invalid && Form.Name.$touched && Form.Name.$error.required">Required field.<br></small>
+                                <small ng-show="Form.Name.$invalid && Form.Name.$touched && Form.Name.$error.pattern">Only alphanumeric letters allowed and atleast 3 charactors.</small>
                             </div>
-                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
-                                <div class="col-md-2"><h5 class="form-control-label">Email Address:</h5></div>
-                                <div class="col-md-4"><input class="form-control" type="text"></div>
-                                <div class="col-md-2"><h5>Fax Number:</h5></div>
-                                <div class="col-md-4"><input class="form-control" type="text"></div>
+                            <div class="col-md-2"></div>
+                            <div class="col-md-4">
+                                <small ng-show="Form.Cell_Number.$invalid && Form.Cell_Number.$touched && Form.Cell_Number.$error.required">Required field.<br></small>
+                                <small ng-show="Form.Cell_Number.$invalid && Form.Cell_Number.$touched && Form.Cell_Number.$error.pattern">Invalid cell number.</small>
                             </div>
-                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
-                                <div class="col-md-2"><h5>Scheme Names:</h5></div>
-                                <div class="col-md-4">
-                                    <select class="form-control" size="4">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-2"><h5 class="form-control-label">Physical Address:</h5></div>
-                                <div class="col-md-4"><textarea class="form-control" rows="3"></textarea></div>
+                        </div>
+                        <div class="row" style="margin-top:8px; margin-bottom:8px;">
+                            <div class="col-md-2"><h5>Email Address:<span style="color:red">*</span></h5></div>
+                            <div class="col-md-4"><input class="form-control insert" type="text" ng-model="Email_Address" name="Email_Address" ng-required="true" ng-pattern="/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/"></div>
+                            <div class="col-md-2"><h5>Fax Number:<span style="color:red">*</span></h5></div>
+                            <div class="col-md-4"><input class="form-control insert" type="text" ng-model="Fax_Number" name="Fax_Number" ng-required="true" ng-pattern="/^[01]?[- .]?(\([0-9]\d{2}\)|[0-9]\d{2})[- .]?\d{3}[- .]?\d{4}$/" placeholder="011 999 9999"></div>
+                        </div>
+                        <div class="row" style="margin-top:0px; margin-bottom:8px;">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-4">
+                                <small ng-show="Form.Email_Address.$invalid && Form.Email_Address.$touched && Form.Email_Address.$error.required">Required field.<br></small>
+                                <small ng-show="Form.Email_Address.$invalid && Form.Email_Address.$touched && Form.Email_Address.$error.pattern">Enter a valid email address.</small>
+                            </div>
+                            <div class="col-md-2"></div>
+                            <div class="col-md-4">
+                                <small ng-show="Form.Fax_Number.$invalid && Form.Fax_Number.$touched && Form.Fax_Number.$error.required">Required field.<br></small>
+                                <small ng-show="Form.Fax_Number.$invalid && Form.Fax_Number.$touched && Form.Fax_Number.$error.pattern">Invalid fax number</small>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:8px; margin-bottom:8px;">
+                            <div class="col-md-2"><h5>Scheme Names:<span style="color:red">*</span></h5></div>
+                            <div class="col-md-4">
+                                <select class="form-control insert" ng-model="SchemeName" name="SchemeName" ng-required="true">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2"><h5>Physical Address:<span style="color:red">*</span></h5></div>
+                            <div class="col-md-4"><textarea class="form-control insert" rows="3" ng-model="Address" name="Address" ng-required="true" ng-pattern="/^[0-9a-zA-Z''-'\s]{3,}$/"></textarea></div>
+                        </div>
+                        <div class="row" style="margin-top:0px; margin-bottom:8px;">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-4">
+                                <small ng-show="Form.SchemeName.$invalid && Form.SchemeName.$touched && Form.SchemeName.$error.required">Required field.<br></small>
+                            </div>
+                            <div class="col-md-2"></div>
+                            <div class="col-md-4">
+                                <small ng-show="Form.Address.$invalid && Form.Address.$touched && Form.Address.$error.required">Required field.<br></small>
+                                <small ng-show="Form.Address.$invalid && Form.Address.$touched && Form.Address.$error.pattern">Only alphanumeric letters allowed and atleast 3 charactors.</small>
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <input type="submit" value="Create Provider Entry" name="save_provider" class="btn btn-primary">
-                    </div>
                 </div>
-            </form>
-        </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="NewMedicalAid(Name, Cell_Number, Fax_Number, Email_Address, Address)" ng-disabled="Form.$invalid">Create Provider Entry</button>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
+   

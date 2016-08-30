@@ -1,0 +1,9 @@
+﻿CREATE TABLE [dbo].[Expenses](
+	[ID]			INT IDENTITY(1,1) NOT NULL,
+	[Description]	 NVARCHAR(200) NOT NULL,
+	[Date]			 DATE NOT NULL,
+	[Amount]		 NVARCHAR(200) NOT NULL,
+	[Practice_ID]    INT NOT NULL,
+	[User_ID]		 NVARCHAR(50) NOT NULL,
+	CONSTRAINT [PK_Expenses] PRIMARY KEY CLUSTERED ([ID] ASC)
+);

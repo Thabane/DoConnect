@@ -6,7 +6,7 @@ BEGIN
 	SET NOCOUNT ON;
 
 	SELECT 
-	   [ID]
+	  [ID]
       ,[FirstName]
       ,[LastName]
       ,[ID_Number]
@@ -17,6 +17,12 @@ BEGIN
       ,[Suburb]
       ,[City]
       ,[Country]
+	  ,[Allergies]
+      ,[PreviousIllnesses]
+      ,[PreviousMedication]
+      ,[RiskFactors]
+      ,[SocialHistory]
+      ,[FamilyHistory]                
       ,[Medical_Aid_ID]
       ,[Doctor_ID]
       ,[User_ID]
