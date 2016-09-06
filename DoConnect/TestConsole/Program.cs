@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -15,12 +16,26 @@ namespace TestConsole
     {
         static void Main(string[] args)
         {
-
             //ConnectToAPI();
-            doStuff();
+           doStuff();
+           //differentApproach();
 
             Console.WriteLine("Connected");
             Console.ReadKey();
+        }
+
+        private static void differentApproach()
+        {
+            var url = "https://api.infermedica.com/v1/diagnosis";
+            var jsonData = "{\"sex\": \"male\",\"age\": \"29\",\"evidence\": []}";
+
+            using (var client = new WebClient())
+            {
+                client.Headers.Add("app_id", ConfigurationManager.AppSettings["app_id"]);
+                client.Headers.Add("app_key", ConfigurationManager.AppSettings["app_key"]);
+                client.Headers.Add("content-type", "application/json");
+                var response = client.UploadString(url, jsonData);
+            }
         }
 
         public static async void ConnectToAPI()
@@ -56,17 +71,21 @@ namespace TestConsole
 
         public static async void doStuff()
         {
-            string url = "https://api.infermedica.com/v2/info";
+            string url = "https://api.infermedica.com/v2/lab_tests";
             WebRequest myReq = WebRequest.Create(url);
+            //myReq.Credentials = new NetworkCredential("152908b1", "63a27bd689544c41f65f35f65bf4c3a2");
+            myReq.Headers["app_id"] = ConfigurationManager.AppSettings["app_id"];
+            myReq.Headers["app_key"] = ConfigurationManager.AppSettings["app_key"];
+            myReq.ContentType = "application/json";
 
-            myReq.Headers["app_id"] = "152908b1";
-            myReq.Headers["app_key"] = "63a27bd689544c41f65f35f65bf4c3a2";
             WebResponse wr = await myReq.GetResponseAsync();
             Stream receiveStream = wr.GetResponseStream();
+
             StreamReader reader = new StreamReader(receiveStream, Encoding.UTF8);
             string content = reader.ReadToEnd();
-            //Console.WriteLine(content);
-            var json = "[" + content + "]"; // change this to array
+            Console.WriteLine(content);
+            var json = content;
+            //var json = "[" + content + "]"; // change this to array
             var objects = JArray.Parse(json); // parse as array  
 
             foreach (JObject o in objects.Children<JObject>())
@@ -80,5 +99,7 @@ namespace TestConsole
             }
             Console.ReadLine();
         }
+
+        
     }
 }
