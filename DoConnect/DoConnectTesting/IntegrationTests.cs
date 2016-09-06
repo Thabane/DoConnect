@@ -10,9 +10,11 @@ namespace DoConnectTesting
         [TestMethod]
         public void Ping()
         {
-            Infermedica med = new Infermedica();
+            DataClient.Infermedica med = new Infermedica();
+            //var userId = dl.CreateUser(1);
             var res = med.GetConditions();
             Assert.IsNotNull(res);
+            //Assert.IsTrue(userId > 0, "Valid User Id");
         }
     }
 }
