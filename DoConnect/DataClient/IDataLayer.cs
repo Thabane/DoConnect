@@ -12,6 +12,7 @@ namespace DataClient
         #region User
         int CreateUser(int AccessLevel);
         string Login(string username, string password, int accessLevel);
+        Login MyLogin(string Email);
         List<AccessLevel> GetAllAccessLevel();
         AccessLevel GetAccessLevelById(int id);
         #endregion
@@ -21,15 +22,17 @@ namespace DataClient
         #endregion
 
         #region Appointments
-        bool NewUpdateApp(Appointments app);
         List<Appointments> GetAppointments();
         Appointments GetAppointmentById(int AppId);
+        bool NewAppointment(string Date_Time, int Patient_ID, string Details, int App_Status, int DoctorID);
+        bool UpdateAppointment(int ID, string Date_Time, int Patient_ID, string Details, int App_Status, int DoctorID);
         #endregion
 
         #region Consultation
         List<Consultation> GetAllConsultations();
-        Consultation GetConsultationById(int id);
-        bool NewUpdateConsultation(int patient_ID, int doctor_ID, DateTime date, string reasonForConsulta, string symptoms, string clinicalFindings, string diagnosis, string testResultSummary, string treatmentPlan, int presciption_ID, int referral_ID);
+        List<Consultation> GetConsultationByPatientId(int id);
+        bool NewConsultationNote(int patient_ID, int doctor_ID, string reasonForConsulta, string symptoms, string clinicalFindings, string diagnosis, string testResultSummary, string treatmentPlan, int presciption_ID, int referral_ID);
+        bool UpdateConsultationNote(int consultationID, string reasonForConsulta, string symptoms, string clinicalFindings, string diagnosis, string testResultSummary, string treatmentPlan);
         bool DeleteConsultation(int id);
         #endregion
 
@@ -41,11 +44,11 @@ namespace DataClient
         #endregion
 
         #region patient
-        int NewUpdatePatient(string firstName, string lastName, string id_Number, string gender, DateTime dob, string cell_number, string street_address, string suburb, string city, string country);
+        int NewUpdatePatient(string firstName, string lastName, string id_Number, string gender, string dob, string cell_number, string street_address, string suburb, string city, string country);
         bool CreatePatient(string firstName, string lastName, string id_Number, string gender, DateTime dob, string cell_number, string street_address, string suburb, string city, string country, string Allergies, string PreviousIllnesses, string PreviousMedication, string RiskFactors, string SocialHistory, string FamilyHistory, int Medical_Aid_ID, int Doctor_ID, int UserId);
         List<GetAllPatients> GetAllPatients();
         List<Patient> GetPatientByID(int id);
-        bool UpdatePatient(int id, string firstName, string lastName, string id_Number, string gender, DateTime dob, string cell_number, string street_address, string suburb, string city, string country, string Allergies, string PreviousIllnesses, string PreviousMedication, string RiskFactors, string SocialHistory, string FamilyHistory, int Medical_Aid_ID, int Doctor_ID);
+        bool UpdatePatient(int id, string firstName, string lastName, string id_Number, string gender, string dob, string cell_number, string street_address, string suburb, string city, string country, string Allergies, string PreviousIllnesses, string PreviousMedication, string RiskFactors, string SocialHistory, string FamilyHistory, int Medical_Aid_ID, int Doctor_ID);
         bool DeletePatient(int id);
         #endregion
 
@@ -67,10 +70,14 @@ namespace DataClient
         bool DeletePractice(int id);
         #endregion
 
-        #region Prescription
-        int NewUpdatePrescription(string description, DateTime date, int patient_ID, int doctor_ID);
-        List<Prescription> GetAllPrescriptions();
-        Prescription GetPrescription(int id);
+        #region Medical Record
+        List<MedicalRecord> GetMedicalRecordByPatientID(int id);
+        #endregion
+
+        #region Prescription 
+        List<Prescription> GetPrescriptionByPatientID(int id);
+        bool NewPrescription(int Patient_ID, int Doctor_ID, int Consultation_ID, string DrugName, string Strength, string IntakeRoute, string Frequency, int DispenseNumber, int RefillNumber);
+        bool UpdatePrescription(int Prescription_ID, string Diagnosis, string DrugName, string Strength, string IntakeRoute, string Frequency, int DispenseNumber, int RefillNumber);
         bool DeletePrescription(int id);
         #endregion
 
@@ -78,10 +85,11 @@ namespace DataClient
         
         List<Staff> GetAllStaff();
         Staff GetStaffById(int id);
-        bool InsertStaff(string firstName, string lastName, string id_Number, string gender, DateTime dob, string phone,
-            string street_Address, string suburb, string city, string country, string employee_Type, int practice_ID, int user_ID, string Email);
-        bool UpdateStaff(int ID, string firstName, string lastName, string id_Number, string gender, DateTime dob, string phone,
-            string street_Address, string suburb, string city, string country, string employee_Type, int practice_ID, int user_ID, string Email);
+        int GetNewUserID();
+        bool InsertStaff(string firstName, string lastName, string id_Number, string gender, string dob, string phone,
+            string street_Address, string suburb, string city, string country, int ACCESSLEVEL_ID, string employee_Type, int practice_ID, int User_ID, string Email);
+        bool UpdateStaff(int ID, string firstName, string lastName, string id_Number, string gender, string dob, string phone,
+            string street_Address, string suburb, string city, string country, string employee_Type, int practice_ID, string Email);
         bool DeleteStaff(int id);
         #endregion
 

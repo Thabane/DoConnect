@@ -176,6 +176,7 @@ function btnPrompt() {
 };
 
 //-------------------------------------------------------------------------------//
+
 //Accounting
 function ViewInvoice() {
     $("#View_Invoice_Modal").modal("show");
@@ -187,17 +188,16 @@ function ViewExpense() {
 //Appointments Page
 function ViewAppointment() {
     $("#View_Appointment_Modal").modal("show");
-    $(".readonly_ViewAppointment").attr("readonly", true);
+    $(".readonly_ViewAppointment").attr("readonly", true); $(".disable_ViewAppointment").prop("disabled", true);
     $(".readonly_ViewAppointment").css("background-color", "transparent");
 };
 
 //Employee Page
 function ViewEmployee() {
     $("#View_Employee_Modal").modal("show");
-    $(".readonly_ViewEmployee").attr("readonly", true);
-    $(".readonly_ViewEmployee").css("background-color", "transparent");
-    
-    $(".DisplayItem").show(); $(".UpdateItem").hide();
+    $(".readonly_ViewEmployee").attr("readonly", true); $(".disable_ViewEmployee").prop("disabled", true);
+    $(".readonly_ViewEmployee").css("background-color", "transparent");    
+    $(".View").show(); $(".Update").hide();
 };
 
 //Events Page
@@ -259,10 +259,25 @@ function myFunctionShowConsultations() {
     $("#div_Prescriptions").modal("hide");
 };
 
-function DT() {
-    $(".datetimepicker").datetimepicker({ format: "L", format: 'yyyy-MM-dd' });
+function btnRedirect(Page, PatientID) {
+    window.location.href = "/#/" + Page + PatientID;
 };
 
+function btnRedirect(Page) {
+    window.location.href = "/#/" + Page;
+};
+
+//function DT() {
+//    $(".datetimepicker").datetimepicker({ format: "L" });
+//};
+
+$(".date").on("change", function () {
+    this.setAttribute(
+        "data-date",
+        moment(this.value, "YYYY-MM-DD")
+        .format(this.getAttribute("data-date-format"))
+    )
+}).trigger("change")
 
 $(".nav li").on("click", function () {
     $(".nav li").removeClass("active");

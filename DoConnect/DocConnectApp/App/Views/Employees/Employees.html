@@ -54,7 +54,7 @@
 
         <!--View Employee Modal-->
         <div id="View_Employee_Modal" class="modal fade">
-            <form>
+            <form name="Form">
                 <div class="modal-dialog" style="width:60%">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -62,64 +62,128 @@
                             <h4 class="modal-title text-primary">Employee Details</h4>
                         </div>
                         <div class="modal-body">
-                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                            <div class="row" style="margin-top:4px; margin-bottom:0px;">
                                 <div class="col-md-2"><h5 class="form-control-label">Firstname:</h5></div>
-                                <div class="col-md-4"><input class="form-control readonly_ViewEmployee" type="text" ng-value="FirstName" ng-model="FirstName"></div>
+                                <div class="col-md-4"><input class="form-control readonly_ViewEmployee" type="text" ng-value="FirstName" ng-model="FirstName" ng-required="true" ng-pattern="/^[a-zA-Z''-'\s]{3,40}$/"></div>
                                 <div class="col-md-2"><h5>Cell Number:</h5></div>
-                                <div class="col-md-4"><input class="form-control readonly_ViewEmployee" type="text" ng-value="Phone" ng-model="Phone"></div>
+                                <div class="col-md-4"><input class="form-control readonly_ViewEmployee" type="text" ng-value="Phone" ng-model="Phone" ng-required="true" ng-pattern="/[0-9]{1}[0-9]{9}/"></div>
                             </div>
-                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                            <div class="row" style="margin-top:0px; margin-bottom:8px;">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-4">
+                                    <small ng-show="Form.FirstName.$invalid && Form.FirstName.$touched && Form.FirstName.$error.required">Required field.<br></small>
+                                    <small ng-show="Form.FirstName.$invalid && Form.FirstName.$touched && Form.FirstName.$error.pattern">Only alphabetic letters allowed and atleast 3 charactors long.</small>
+                                </div>
+                                <div class="col-md-2"></div>
+                                <div class="col-md-4">
+                                    <small ng-show="Form.Phone.$invalid && Form.Phone.$touched && Form.Phone.$error.required">Required field.<br></small>
+                                    <small ng-show="Form.Phone.$invalid && Form.Phone.$touched && Form.Phone.$error.pattern">Only numeric letters allowed and atleast 10 charactors long.</small>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:4px; margin-bottom:0px;">
                                 <div class="col-md-2"><h5 class="form-control-label">Lastname:</h5></div>
-                                <div class="col-md-4"><input class="form-control readonly_ViewEmployee" type="text" ng-value="LastName" ng-model="LastName"></div>
+                                <div class="col-md-4"><input class="form-control readonly_ViewEmployee" type="text" ng-value="LastName" ng-model="LastName" ng-required="true" ng-pattern="/^[a-zA-Z''-'\s]{3,40}$/"></div>
                                 <div class="col-md-2"><h5>Street Address:</h5></div>
-                                <div class="col-md-4"><input class="form-control readonly_ViewEmployee" type="text" ng-value="Street_Address" ng-model="Street_Address"></div>
+                                <div class="col-md-4"><input class="form-control readonly_ViewEmployee" type="text" ng-value="Street_Address" ng-model="Street_Address" ng-required="true" ng-pattern="/^[0-9a-zA-Z''-'\s]{3,}$/"></div>
                             </div>
-                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                            <div class="row" style="margin-top:0px; margin-bottom:8px;">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-4">
+                                    <small ng-show="Form.LastName.$invalid && Form.LastName.$touched && Form.LastName.$error.required">Required field.<br></small>
+                                    <small ng-show="Form.LastName.$invalid && Form.LastName.$touched && Form.LastName.$error.pattern">Only alphabetic letters allowed and atleast 3 charactors long.</small>
+                                </div>
+                                <div class="col-md-2"></div>
+                                <div class="col-md-4">
+                                    <small ng-show="Form.Street_Address.$invalid && Form.Street_Address.$touched && Form.Street_Address.$error.required">Required field.<br></small>
+                                    <small ng-show="Form.Street_Address.$invalid && Form.Street_Address.$touched && Form.Street_Address.$error.pattern">Only alphabetic letters allowed and atleast 3 charactors long.</small>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:4px; margin-bottom:0px;">
                                 <div class="col-md-2"><h5 class="form-control-label">Email:</h5></div>
-                                <div class="col-md-4"><input class="form-control readonly_ViewEmployee" type="email" ng-value="Email" ng-model="Email"></div>
+                                <div class="col-md-4"><input class="form-control readonly_ViewEmployee" type="email" ng-value="Email" ng-model="Email" ng-required="true" ng-pattern="/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/"></div>
                                 <div class="col-md-2"><h5>Suburb:</h5></div>
-                                <div class="col-md-4"><input name="P_Suburb" class="form-control readonly_ViewEmployee" type="text" ng-value="Suburb" ng-model="Suburb"></div>
+                                <div class="col-md-4"><input name="P_Suburb" class="form-control readonly_ViewEmployee" type="text" ng-value="Suburb" ng-model="Suburb" ng-required="true" ng-pattern="/^[a-zA-Z''-'\s]{3,40}$/"></div>
                             </div>
-                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                            <div class="row" style="margin-top:0px; margin-bottom:8px;">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-4">
+                                    <small ng-show="Form.Email.$invalid && Form.Email.$touched && Form.Email.$error.required">Required field.<br></small>
+                                    <small ng-show="Form.Email.$invalid && Form.Email.$touched && Form.Email.$error.pattern">Only alphabetic letters allowed and atleast 3 charactors long.</small>
+                                </div>
+                                <div class="col-md-2"></div>
+                                <div class="col-md-4">
+                                    <small ng-show="Form.Suburb.$invalid && Form.Suburb.$touched && Form.Suburb.$error.required">Required field.<br></small>
+                                    <small ng-show="Form.Suburb.$invalid && Form.Suburb.$touched && Form.Suburb.$error.pattern">Only alphabetic letters allowed and atleast 3 charactors long.</small>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:4px; margin-bottom:0px;">
                                 <div class="col-md-2"><h5>ID Number:</h5></div>
-                                <div class="col-md-4"><input class="form-control readonly_ViewEmployee" type="text" ng-value="ID_Number" ng-model="ID_Number"></div>
+                                <div class="col-md-4"><input class="form-control readonly_ViewEmployee" type="text" ng-value="ID_Number" ng-model="ID_Number" ng-required="true" ng-pattern="/[0-9]{13}/"></div>
                                 <div class="col-md-2"><h5>City:</h5></div>
-                                <div class="col-md-4"><input class="form-control readonly_ViewEmployee" type="text" ng-value="City" ng-model="City"></div>
+                                <div class="col-md-4"><input class="form-control readonly_ViewEmployee" type="text" ng-value="City" ng-model="City" ng-required="true" ng-pattern="/^[a-zA-Z''-'\s]{3,40}$/"></div>
                             </div>
-                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                            <div class="row" style="margin-top:0px; margin-bottom:8px;">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-4">
+                                    <small ng-show="Form.ID_Number.$invalid && Form.ID_Number.$touched && Form.ID_Number.$error.required">Required field.<br></small>
+                                    <small ng-show="Form.ID_Number.$invalid && Form.ID_Number.$touched && Form.ID_Number.$error.pattern">Only numeric letters allowed and 13 charactors long.</small>
+                                </div>
+                                <div class="col-md-2"></div>
+                                <div class="col-md-4">
+                                    <small ng-show="Form.City.$invalid && FormCity.$touched && Form.City.$error.required">Required field.<br></small>
+                                    <small ng-show="Form.City.$invalid && FormCity.$touched && Form.City.$error.pattern">Only alphabetic letters allowed and atleast 3 charactors long.</small>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:4px; margin-bottom:0px;">
                                 <div class="col-md-2"><h5>DOB:</h5></div>
-                                <div class="col-md-4"><div class="row" style="padding-left:0px; padding-right:0px;">
-                                                            <div class="col-md-12">
-                                                                <div class="form-group">
-                                                                    <div class="input-group date datetimepicker" onclick="DT()">
-                                                                        <input class="form-control" type="text" ng-value="DOB" ng-model="DOB">
-                                                                        <span class="input-group-addon">
-                                                                            <span class="glyphicon glyphicon-calendar"></span>
-                                                                        </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div></div>
+                                <div class="col-md-4">
+                                    <input class="form-control readonly_ViewEmployee" type="text" ng-value="DOB">
+                                </div>
                                 <div class="col-md-2"><h5>Country:</h5></div>
-                                <div class="col-md-4"><input class="form-control readonly_ViewEmployee" type="text" ng-value="Country" ng-model="Country"></div>
+                                <div class="col-md-4"><input class="form-control readonly_ViewEmployee" type="text" ng-value="Country" ng-model="Country" ng-required="true" ng-pattern="/^[a-zA-Z''-'\s]{3,40}$/"></div>
                             </div>
-                            <div class="row" style="margin-top:4px;">
+                            <div class="row" style="margin-top:0px; margin-bottom:8px;">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-4">
+                                    <small ng-show="Form.DOB.$invalid && Form.DOB.$touched && Form.DOB.$error.required">Required field.<br></small>
+                                </div>
+                                <div class="col-md-2"></div>
+                                <div class="col-md-4">
+                                    <small ng-show="Form.Country.$invalid && Form.Country.$touched && Form.Country.$error.required">Required field.<br></small>
+                                    <small ng-show="Form.Country.$invalid && Form.Country.$touched && Form.Country.$error.pattern">Only alphabetic letters allowed and atleast 3 charactors long.</small>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:4px; margin-bottom:0px;">
                                 <div class="col-md-2"><h5>Gender:</h5></div>
-                                <div class="col-md-4">
-                                    <select class="form-control readonly_ViewEmployee UpdateItem" ng-model="Gender"
-                                            ng-options="gender for gender in Genders">
-                                    </select> 
-                                    <input class="form-control readonly_ViewEmployee Display" type="text" ng-value="Gender"></div>
+                                <div class="col-md-4"><select class="form-control disable_ViewEmployee readonly_ViewEmployee" ng-model="Gender" name="Gender" ng-required="true" ng-change="changedValueGetGender(Gender)" data-ng-options="gender as gender.Gender for gender in Genders">
+                                                            <option value="">{{Gender}}</option>
+                                                        </select></div>
                                 <div class="col-md-2"><h5>Employee Type:</h5></div>
-                                <div class="col-md-4">
-                                    <select class="form-control readonly_ViewEmployee UpdateItem" ng-model="Employee_Type"
-                                        ng-options="employee_Type for employee_Type in Employee_Types">
-                                    </select>
-                                    <input class="form-control readonly_ViewEmployee DisplayItem" type="text" ng-value="Employee_Type"></div>
+                                <div class="col-md-4"><select class="form-control disable_ViewEmployee readonly_ViewEmployee" ng-model="ACCESSLEVEL_ID" name="ACCESSLEVEL_ID" ng-required="true" ng-change="changedValueGetAccessLevel(ACCESSLEVEL_ID)" data-ng-options="accessLevel as accessLevel.Level for accessLevel in AccessLevel">
+                                                        <option value="">{{Employee_Type}}</option>
+                                                      </select></div>
                             </div>
-                            <div class="row" style="margin-top:4px;">
+                            <div class="row" style="margin-top:0px; margin-bottom:8px;">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-4">
+                                    <small ng-show="Form.Gender.$invalid && Form.Gender.$touched && Form.Gender.$error.required">Required field.<br></small>
+                                </div>
+                                <div class="col-md-2"></div>
+                                <div class="col-md-4">
+                                    <small ng-show="Form.ACCESSLEVEL_ID.$invalid && Form.ACCESSLEVEL_ID.$touched && Form.ACCESSLEVEL_ID.$error.required">Required field.<br></small>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:4px; margin-bottom:0px;">
                                 <div class="col-md-2"><h5>Practice Name:<span style="color:red">*</span></h5></div>
-                                <div class="col-md-4"><input class="form-control readonly_ViewEmployee" type="text" ng-value="Practice_Name" ng-model="Practice_Name"></div>
+                                <div class="col-md-4"><select class="form-control disable_ViewEmployee readonly_ViewEmployee" ng-model="Practice_ID" name="Practice_ID" ng-required="true" ng-change="changedValueGetPractice_ID(Practice_ID)" data-ng-options="practice as practice.Name for practice in Practices">
+                                                            <option value="">{{Practice_Name}}</option>
+                                                        </select></div>
+                            </div>
+                            <div class="row" style="margin-top:0px; margin-bottom:8px;">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-4">
+                                    <small ng-show="Form.Practice_ID.$invalid && Form.Practice_ID.$touched && Form.Practice_ID.$error.required">Required field.<br></small>
+                                </div>
                             </div>
                         </div>
                         <div class="modal-footer">

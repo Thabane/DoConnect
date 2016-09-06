@@ -11,7 +11,7 @@ namespace ObjectModel
         public string LastName { get; set; }
         public string ID_Number { get; set; }
         public string Gender { get; set; }
-        public DateTime DOB { get; set; }
+        public string DOB { get; set; }
         public string Cell_Number { get; set; }
         public string Street_Address { get; set; }
         public string Suburb { get; set; }
@@ -31,13 +31,12 @@ namespace ObjectModel
         public string Scheme_Name { get; set; }
         public string Membership_Number { get; set; }
         public bool Status { get; set; }
-        public DateTime Registration_Date { get; set; }
-        public DateTime Deregistration_Date { get; set; }
+        public string Registration_Date { get; set; }
+        public string Deregistration_Date { get; set; }
         public int Patient_ID { get; set; }
 
         //Prescription
         public int Prescription_ID { get; set; }
-        public string Description { get; set; }
         public string Date { get; set; }
         public int Prescribing_Doctor_ID { get; set; }
 
@@ -59,7 +58,7 @@ namespace ObjectModel
                 LastName = reader.GetString(reader.GetOrdinal("LastName")),
                 ID_Number = reader.GetString(reader.GetOrdinal("ID_Number")),
                 Gender = reader.GetString(reader.GetOrdinal("Gender")),
-                DOB = reader.GetDateTime(reader.GetOrdinal("DOB")),
+                DOB = reader.GetString(reader.GetOrdinal("DOB")),
                 Cell_Number = reader.GetString(reader.GetOrdinal("Cell_Number")),
                 Street_Address = reader.GetString(reader.GetOrdinal("Street_Address")),
                 Suburb = reader.GetString(reader.GetOrdinal("Suburb")),
@@ -79,12 +78,11 @@ namespace ObjectModel
                 Scheme_Name = reader.GetString(reader.GetOrdinal("Scheme_Name")),
                 Membership_Number = reader.GetString(reader.GetOrdinal("Membership_Number")),
                 Status = reader.GetBoolean(reader.GetOrdinal("Status")),
-                Registration_Date = reader.GetDateTime(reader.GetOrdinal("Registration_Date")),
-                Deregistration_Date = reader.GetDateTime(reader.GetOrdinal("Deregistration_Date")),
+                Registration_Date = reader.GetString(reader.GetOrdinal("Registration_Date")),
+                Deregistration_Date = reader.GetString(reader.GetOrdinal("Deregistration_Date")),
                 Patient_ID = reader.GetInt32(reader.GetOrdinal("Patient_ID")),
 
                 Prescription_ID = reader.GetInt32(reader.GetOrdinal("Prescription_ID")),
-                Description = reader.GetString(reader.GetOrdinal("Description")),
                 Date = reader.GetDateTime(reader.GetOrdinal("Date")).ToShortDateString(),
                 Prescribing_Doctor_ID = reader.GetInt32(reader.GetOrdinal("Prescribing_Doctor_ID")),
                 

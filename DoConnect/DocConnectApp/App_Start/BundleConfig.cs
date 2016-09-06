@@ -33,9 +33,9 @@ namespace DocConnectApp
                       ));
 
             bundles.Add(new ScriptBundle("~/bundles/angular").Include(
-                   "~/Scripts/angular.js",
+                   "~/Scripts/angular.min.js",
                    "~/Scripts/jquery.dataTables.js",
-                   "~/Scripts/angular-route.js",
+                   "~/Scripts/angular-route.min.js",
                    "~/Scripts/angular-location-update.min.js",
                    "~/App/app.js",
                    "~/App/Services/*.js",
@@ -48,7 +48,7 @@ namespace DocConnectApp
                       "~/Scripts/morris.min.js",
                       "~/Scripts/sb-admin-2.js",
                       "~/Scripts/raphael-min.js",
-                      "~/Scripts/xml2json.js",
+                      "~/Scripts/xml2json.js",                      
                       "~/Scripts/Alert_Confirm_Prompt_Modal/Alert_Confirm_Prompt_Modal.js",
                       "~/Scripts/Index/jquery.min.js",
                       "~/Scripts/Index/bootstrap.min.js",

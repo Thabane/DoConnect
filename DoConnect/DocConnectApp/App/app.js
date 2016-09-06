@@ -22,6 +22,10 @@ app.config(
                 templateUrl: "App/Views/Patients/PatientRecord/ConsultationNotes.html",
                 controller: "PatientsController"
             })
+            .when("/test/:PatientID", {
+                templateUrl: "App/Views/Patients/test.html",
+                controller: "testController"
+            })
             .when("/NewConsultationNotes", {
                 templateUrl: "App/Views/Patients/PatientRecord/NewConsultationNotes.html",
                 controller: "PatientsController"
@@ -32,6 +36,10 @@ app.config(
             })
             .when("/PrescriptionDetails", {
                 templateUrl: "App/Views/Patients/PatientRecord/PrescriptionDetails.html",
+                controller: "PatientsController"
+            })
+            .when("/NewPrescription", {
+                templateUrl: "App/Views/Patients/PatientRecord/NewPrescription.html",
                 controller: "PatientsController"
             })
             .when("/NewPatient", {
@@ -134,7 +142,6 @@ app.config(
         $httpProvider.interceptors.push('AuthHttpResponseInterceptor');
     }
 ]);
-
 
 app.run(
     [

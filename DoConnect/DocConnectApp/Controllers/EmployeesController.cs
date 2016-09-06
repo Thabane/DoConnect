@@ -1,5 +1,4 @@
-﻿
-using System.Net;
+﻿using System.Net;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -8,6 +7,8 @@ using System.Web.Http.Description;
 using Newtonsoft.Json;
 using ObjectModel;
 using DataClient;
+using System;
+using System.Globalization;
 
 namespace DoConnectAdmin.Controllers
 {
@@ -32,9 +33,9 @@ namespace DoConnectAdmin.Controllers
         [HttpPost]//Update Employee
         [Route("api/Employees/UpdateEmployee")]
         public bool UpdateEmployee(Staff staff)
-        {
+        {            
             DataLayer dtLayer = new DataLayer();
-            return dtLayer.UpdateStaff(staff.ID, staff.FirstName, staff.LastName, staff.ID_Number, staff.Gender, staff.DOB, staff.Phone, staff.Street_Address, staff.Suburb, staff.City, staff.Country, staff.Employee_Type, staff.Practice_ID, staff.User_ID, staff.Email);
+            return dtLayer.UpdateStaff(staff.ID, staff.FirstName, staff.LastName, staff.ID_Number, staff.Gender, staff.DOB, staff.Phone, staff.Street_Address, staff.Suburb, staff.City, staff.Country, staff.Employee_Type, staff.Practice_ID, staff.Email);
         }
 
         [HttpGet]
@@ -66,7 +67,10 @@ namespace DoConnectAdmin.Controllers
         public bool InsertEmployee(Staff staff)
         {
             DataLayer dtLayer = new DataLayer();
-            return dtLayer.InsertStaff(staff.FirstName, staff.LastName, staff.ID_Number, staff.Gender, staff.DOB, staff.Phone, staff.Street_Address, staff.Suburb, staff.City, staff.Country, staff.Employee_Type, staff.Practice_ID, staff.User_ID, staff.Email);
+            return dtLayer.InsertStaff(staff.FirstName, staff.LastName, staff.ID_Number, staff.Gender, formatDate(staff.DOB.ToString()), staff.Phone, staff.Street_Address, staff.Suburb, staff.City, staff.Country, staff.ACCESSLEVEL_ID, staff.Employee_Type, staff.Practice_ID, dtLayer.GetNewUserID(), staff.Email);
+
+            //return dtLayer.InsertStaff("Josephine", "Chivinge", "012456874", "M", "04-20-1994", "0837135032", "A", "B", "C", "D", 1, "Admin", 6, dtLayer.GetNewUserID(), "Jose@gmail.com");
+
         }
 
         [HttpPost]
@@ -75,6 +79,14 @@ namespace DoConnectAdmin.Controllers
         {
             DataLayer dtLayer = new DataLayer();
             return dtLayer.DeleteStaff(ID);
+        }
+
+        public string formatDate(string dt)
+        {
+            string[] date = dt.Split('T');
+            string[] Date = date[0].Split('-');
+            string ftDate = (Date[1] + "-" + Date[2] + "-" + Date[0]);
+            return ftDate;
         }
     }
 }

@@ -167,6 +167,7 @@
     <Content Include="App\Controllers\PatientsController.js" />
     <Content Include="App\Controllers\PracticesController.js" />
     <Content Include="App\Controllers\Reports.js" />
+    <Content Include="App\Controllers\testController.js" />
     <Content Include="App\Controllers\UserProfileController.js" />
     <Content Include="App\Services\AccountingService.js" />
     <Content Include="App\Services\AppointmentsService.js" />
@@ -206,8 +207,10 @@
     <Content Include="App\Views\Patients\PatientRecord\ConsultationNotes.html" />
     <Content Include="App\Views\Patients\PatientRecord\MedicalHistory.html" />
     <Content Include="App\Views\Patients\PatientRecord\NewConsultationNotes.html" />
+    <Content Include="App\Views\Patients\PatientRecord\NewPrescription.html" />
     <Content Include="App\Views\Patients\PatientRecord\PrescriptionDetails.html" />
     <Content Include="App\Views\Patients\patients.html" />
+    <Content Include="App\Views\Patients\test.html" />
     <Content Include="App\Views\Practices\NewPractice.html" />
     <Content Include="App\Views\Practices\Practices.html" />
     <Content Include="App\Views\Reports\Reports.html" />
@@ -224,6 +227,8 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\Alert_Confirm_Prompt_Modal\Alert_Confirm_Prompt_Modal.js" />
+    <Content Include="Scripts\angular-route.min.js" />
+    <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\bootstrap-theme.css.map" />

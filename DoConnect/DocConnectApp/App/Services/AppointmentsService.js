@@ -4,35 +4,45 @@
         //Select all Appointments data
         var GetAllAppointments = function () {
             return $http.get("api/Appointments/GetAllAppointments");
-        };            
+        };
+
+        var GetAllPatients = function () {
+            return $http.get("api/Appointments/GetAllPatients");
+        }
+
+        var GetAllDoctors = function () {
+            return $http.get("api/Appointments/GetAllDoctors");
+        }
                                     
         //Select Appointment by ID
         var GetAppointmentByID = function (ID) {
             return $http.get("api/Appointments/GetAppointment/" + ID);
         };
+
             
         //Insert new record
-        var InsertAppointment = function (Date_Time, Patient_ID, Details, App_Status) {
+        var InsertAppointment = function (Date_Time, Patient_ID, Details, App_Status, DoctorID) {
             return $http.post("api/Appointments/InsertAppointment",
             {
-                'Name': Name,
-                'Date_Time': Date_Time,
+                'Appointments_Date_Time': Date_Time,
                 'Patient_ID': Patient_ID,
-                'Details': Details,
-                'App_Status': App_Status
+                'Appointments_Details': Details,
+                'Appointments_App_Status': App_Status,
+                'Doctors_ID': DoctorID
             });
         };
 
         //Update Practice
-        var UpdateAppointment = function (ID, Date_Time, Patient_ID, Details, App_Status) {
+        var UpdateAppointment = function (ID, Date_Time, Patient_ID, Details, App_Status, DoctorID) {
+            console.log(ID, Date_Time, Patient_ID, Details, App_Status, DoctorID);
             return $http.post("api/Appointments/UpdateAppointment",
             {
-                'ID': ID,
-                'Name': Name,
-                'Date_Time': Date_Time,
+                'Appointments_ID': ID,
+                'Appointments_Date_Time': Date_Time,
                 'Patient_ID': Patient_ID,
-                'Details': Details,
-                'App_Status': App_Status
+                'Appointments_Details': Details,
+                'Appointments_App_Status': App_Status,
+                'Doctors_ID': DoctorID
             });
         };
             
@@ -43,7 +53,9 @@
 
         return {
             GetAllAppointments: GetAllAppointments,
-            GetAppointmentByID: GetAppointmentByID,
+            GetAllPatients: GetAllPatients,
+            GetAllDoctors: GetAllDoctors,
+            GetAppointmentByID: GetAppointmentByID,            
             InsertAppointment: InsertAppointment,
             UpdateAppointment: UpdateAppointment,
             DeleteAppointment: DeleteAppointment

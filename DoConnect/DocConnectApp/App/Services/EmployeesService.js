@@ -24,7 +24,7 @@
         };
 
         //Insert new record
-        var InsertEmployee = function (FirstName, LastName, ID_Number, Gender, DOB, Phone, Street_Address, Suburb, City, Country, Employee_Type, Practice_ID, User_ID, Email) {
+        var InsertEmployee = function (FirstName, LastName, ID_Number, Gender, DOB, Phone, Street_Address, Suburb, City, Country, ACCESSLEVEL_ID, Employee_Type, Practice_ID, Email) {
             return $http.post("api/Employees/InsertEmployee",
             {
                 'FirstName': FirstName,
@@ -37,15 +37,15 @@
                 'Suburb': Suburb,
                 'City': City,
                 'Country': Country,
+                'ACCESSLEVEL_ID': ACCESSLEVEL_ID,
                 'Employee_Type': Employee_Type,
                 'Practice_ID': Practice_ID,
-                'User_ID': User_ID,
                 'Email': Email
             });
         };
 
         //Update Employee
-        var UpdateEmployee = function (ID, FirstName, LastName, ID_Number, Gender, DOB, Phone, Street_Address, Suburb, City, Country, Employee_Type, Practice_ID, User_ID, Email) {
+        var UpdateEmployee = function (ID, FirstName, LastName, ID_Number, Gender, DOB, Phone, Street_Address, Suburb, City, Country, Employee_Type, Practice_ID, Email) {
             return $http.post("api/Employees/UpdateEmployee",
             {
                 'ID': ID,
@@ -61,7 +61,6 @@
                 'Country': Country,
                 'Employee_Type': Employee_Type,
                 'Practice_ID': Practice_ID,
-                'User_ID': User_ID,
                 'Email': Email
             });
         };

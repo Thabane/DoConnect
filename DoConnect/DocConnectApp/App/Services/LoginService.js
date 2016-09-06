@@ -1,8 +1,11 @@
 ﻿app.factory('LoginService',
-    ['$http',
-        function ($http) {
-            return GetLogin = function () {
-                return $http.get("/api/GetAllLogin");
-            }
+    function ($http) {
+        var VerifyUser = function (Email) {
+            return $http.get("api/Login/VerifyUser/" + Email);
         }
-    ]);
+
+        return {
+            VerifyUser: VerifyUser
+        };
+    }
+);
