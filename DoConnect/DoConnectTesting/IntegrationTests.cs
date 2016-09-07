@@ -12,7 +12,8 @@ namespace DoConnectTesting
         {
             Infermedica med = new Infermedica();
             var res = med.GetConditions();
-            Assert.IsNotNull(res);
+            var finalRes = res.Result;
+            Assert.IsTrue(!string.IsNullOrEmpty(finalRes));
         }
     }
 }
