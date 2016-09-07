@@ -10,7 +10,7 @@ namespace DoConnectTesting
         [TestMethod]
         public void Ping()
         {
-            DataClient.Infermedica med = new Infermedica();
+            Infermedica med = new Infermedica();
             var res = med.GetConditions();
             Assert.IsNotNull(res);
         }
