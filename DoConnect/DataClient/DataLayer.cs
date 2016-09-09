@@ -1130,21 +1130,230 @@ namespace DataClient
         #endregion
 
         #region Medical Record
-        public List<MedicalRecord> GetMedicalRecordByPatientID(int id)
+        public MedicalRecord GetMedicalRecordByPatientID(int id)
         {
             List<SqlParameter> _parameters = new List<SqlParameter>();
             SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
             idParameter.Value = id;
             _parameters.Add(idParameter);
-            List<MedicalRecord> MedicalRecordInfo = new List<MedicalRecord>();
+            MedicalRecord MedicalRecordInfo = new MedicalRecord();
             using (var reader = access.ExecuteReader(Conn, "[GetMedicalRecord]", _parameters))
             {
-                while (reader.Read())
+                if (reader.Read())
                 {
-                    MedicalRecordInfo.Add(new MedicalRecord().Create(reader));
+                    MedicalRecordInfo = new MedicalRecord().Create(reader);
                 }
             }
             return MedicalRecordInfo;
+        }
+
+        public List<Medical_Aid> GetMedical_Aid()
+        {
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            List<Medical_Aid> MedicalRecordInfo = new List<Medical_Aid>();
+            using (var reader = access.ExecuteReader(Conn, "[GetMedical_Aid]", _parameters))
+            {
+                while (reader.Read())
+                {
+                    MedicalRecordInfo.Add(new Medical_Aid().Create(reader));
+                }
+            }
+            return MedicalRecordInfo;
+        }
+
+        public bool NewMedicalRecord(int Doctor_ID, string FirstName, string LastName, string Email, string ID_Number, string Cell_Number, string DOB, string Gender, string Street_Address, string Suburb, string City, string Country, int Patient_Medical_Aid_Medical_Aid_ID, string Scheme_Name, string Membership_Number, string Registration_Date, string Deregistration_Date, string Allergies, string PreviousIllnesses, string PreviousMedication, string RiskFactors, string SocialHistory, string FamilyHistory)
+        {
+            int accessLevel = 3;
+            int Status = 0;
+
+            if (Convert.ToDateTime(Deregistration_Date) >= Convert.ToDateTime(Registration_Date))
+            { Status = 1; } //Valid
+            else
+            { Status = 0; } //Invalid
+
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            List<SqlParameter> _parametersCreateUser = new List<SqlParameter>();
+            List<SqlParameter> _parametersPatient_Medical_Aid = new List<SqlParameter>();
+            SqlParameter Doctor_IDParameter = new SqlParameter("@Doctor_ID", SqlDbType.Int);
+            SqlParameter FirstNameParameter = new SqlParameter("@FirstName", SqlDbType.VarChar);
+            SqlParameter LastNameParameter = new SqlParameter("@LastName", SqlDbType.VarChar);
+            SqlParameter EmailParameter = new SqlParameter("@Email", SqlDbType.VarChar);
+            SqlParameter ID_NumberParameter = new SqlParameter("@ID_Number", SqlDbType.VarChar);
+            SqlParameter Cell_NumberParameter = new SqlParameter("@Cell_Number", SqlDbType.VarChar);
+            SqlParameter DOBParameter = new SqlParameter("@DOB", SqlDbType.VarChar);
+            SqlParameter GenderParameter = new SqlParameter("@Gender", SqlDbType.VarChar);
+            SqlParameter Street_AddressParameter = new SqlParameter("@Street_Address", SqlDbType.VarChar);
+            SqlParameter SuburbParameter = new SqlParameter("@Suburb", SqlDbType.VarChar);
+            SqlParameter CityParameter = new SqlParameter("@City", SqlDbType.VarChar);
+            SqlParameter CountryParameter = new SqlParameter("@Country", SqlDbType.VarChar);
+            SqlParameter Patient_Medical_Aid_Medical_Aid_IDParameter = new SqlParameter("@Patient_Medical_Aid_Medical_Aid_ID", SqlDbType.Int);
+            SqlParameter Scheme_NameParameter = new SqlParameter("@Scheme_Name", SqlDbType.VarChar);
+            SqlParameter Membership_NumberParameter = new SqlParameter("@Membership_Number", SqlDbType.VarChar);
+            SqlParameter Registration_DateParameter = new SqlParameter("@Registration_Date", SqlDbType.VarChar);
+            SqlParameter Deregistration_DateParameter = new SqlParameter("@Deregistration_Date", SqlDbType.VarChar);
+            SqlParameter StatusParameter = new SqlParameter("@AccessLevel", SqlDbType.Int);
+            SqlParameter AllergiesParameter = new SqlParameter("@Allergies", SqlDbType.VarChar);
+            SqlParameter PreviousIllnessesParameter = new SqlParameter("@PreviousIllnesses", SqlDbType.VarChar);
+            SqlParameter PreviousMedicationParameter = new SqlParameter("@PreviousMedication", SqlDbType.VarChar);
+            SqlParameter RiskFactorsParameter = new SqlParameter("@RiskFactors", SqlDbType.VarChar);
+            SqlParameter SocialHistoryParameter = new SqlParameter("@SocialHistory", SqlDbType.VarChar);
+            SqlParameter FamilyHistoryParameter = new SqlParameter("@FamilyHistory", SqlDbType.VarChar);
+            SqlParameter accessLevelParameter = new SqlParameter("@AccessLevel", SqlDbType.Int);
+            Doctor_IDParameter.Value = Doctor_ID;
+            FirstNameParameter.Value = FirstName;
+            LastNameParameter.Value = LastName;
+            EmailParameter.Value = Email;
+            ID_NumberParameter.Value = ID_Number;
+            Cell_NumberParameter.Value = Cell_Number;
+            DOBParameter.Value = DOB;
+            GenderParameter.Value = Gender;
+            Street_AddressParameter.Value = Street_Address;
+            SuburbParameter.Value = Suburb;
+            CityParameter.Value = City;
+            CountryParameter.Value = Country;
+            Patient_Medical_Aid_Medical_Aid_IDParameter.Value = Patient_Medical_Aid_Medical_Aid_ID;
+            Scheme_NameParameter.Value = Scheme_Name;
+            Membership_NumberParameter.Value = Membership_Number;
+            Registration_DateParameter.Value = Registration_Date;
+            Deregistration_DateParameter.Value = Deregistration_Date;
+            StatusParameter.Value = Status;
+            AllergiesParameter.Value = Allergies;
+            PreviousIllnessesParameter.Value = PreviousIllnesses;
+            PreviousMedicationParameter.Value = PreviousMedication;
+            RiskFactorsParameter.Value = RiskFactors;
+            SocialHistoryParameter.Value = SocialHistory;
+            FamilyHistoryParameter.Value = FamilyHistory;
+            accessLevelParameter.Value = accessLevel;
+            _parameters.Add(Doctor_IDParameter);
+            _parameters.Add(FirstNameParameter);
+            _parameters.Add(LastNameParameter);
+            _parameters.Add(EmailParameter);
+            _parameters.Add(ID_NumberParameter);
+            _parameters.Add(Cell_NumberParameter);
+            _parameters.Add(DOBParameter);
+            _parameters.Add(GenderParameter);
+            _parameters.Add(Street_AddressParameter);
+            _parameters.Add(SuburbParameter);
+            _parameters.Add(CityParameter);
+            _parameters.Add(CountryParameter);
+            _parameters.Add(Patient_Medical_Aid_Medical_Aid_IDParameter);
+            _parametersPatient_Medical_Aid.Add(Patient_Medical_Aid_Medical_Aid_IDParameter);
+            _parametersPatient_Medical_Aid.Add(Scheme_NameParameter);
+            _parametersPatient_Medical_Aid.Add(Membership_NumberParameter);
+            _parametersPatient_Medical_Aid.Add(Registration_DateParameter);
+            _parametersPatient_Medical_Aid.Add(Deregistration_DateParameter);
+            _parametersPatient_Medical_Aid.Add(StatusParameter);
+            _parameters.Add(AllergiesParameter);
+            _parameters.Add(PreviousIllnessesParameter);
+            _parameters.Add(PreviousMedicationParameter);
+            _parameters.Add(RiskFactorsParameter);
+            _parameters.Add(SocialHistoryParameter);
+            _parameters.Add(FamilyHistoryParameter);
+            _parametersCreateUser.Add(accessLevelParameter);
+
+            int UserID = 0; int PatientID = 0;
+            using (var reader = access.ExecuteReader(Conn, "[CreateUser]", _parametersCreateUser))
+            {
+                if (reader.Read())
+                {
+                    UserID = reader.GetInt32(reader.GetOrdinal("ID"));
+                    SqlParameter UserIDParameter = new SqlParameter("@User_ID", SqlDbType.Int);
+                    UserIDParameter.Value = UserID;
+                    _parameters.Add(UserIDParameter);
+                }
+            }
+            if (UserID != 0)
+            {
+                using (var reader = access.ExecuteReader(Conn, "[InsertMedicalRecord]", _parameters))
+                {
+                    if (reader.Read())
+                    {
+                        PatientID = reader.GetInt32(reader.GetOrdinal("ID"));
+                        SqlParameter PatientIDParameter = new SqlParameter("@Patient_ID", SqlDbType.Int);
+                        PatientIDParameter.Value = PatientID;
+                        _parametersPatient_Medical_Aid.Add(PatientIDParameter);
+                        access.ExecuteNonQuery(Conn, _parametersPatient_Medical_Aid, "[InsertPatient_Medical_Aid]");
+                    }
+                }
+            }
+            return true;
+        }
+
+        public bool UpdateMedicalRecord(int Patient_ID, string FirstName, string LastName, string Email, string ID_Number, string Cell_Number, string DOB, string Gender, string Street_Address, string Suburb, string City, string Country, int Patient_Medical_Aid_Medical_Aid_ID, string Scheme_Name, string Membership_Number, string Registration_Date, string Deregistration_Date, string Allergies, string PreviousIllnesses, string PreviousMedication, string RiskFactors, string SocialHistory, string FamilyHistory)
+        {
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            SqlParameter Patient_IDParameter = new SqlParameter("@Patient_ID", SqlDbType.Int);
+            SqlParameter FirstNameParameter = new SqlParameter("@FirstName", SqlDbType.VarChar);
+            SqlParameter LastNameParameter = new SqlParameter("@LastName", SqlDbType.VarChar);
+            SqlParameter EmailParameter = new SqlParameter("@Email", SqlDbType.VarChar);
+            SqlParameter ID_NumberParameter = new SqlParameter("@ID_Number", SqlDbType.VarChar);
+            SqlParameter Cell_NumberParameter = new SqlParameter("@Cell_Number", SqlDbType.VarChar);
+            SqlParameter DOBParameter = new SqlParameter("@DOB", SqlDbType.VarChar);
+            SqlParameter GenderParameter = new SqlParameter("@Gender", SqlDbType.VarChar);
+            SqlParameter Street_AddressParameter = new SqlParameter("@Street_Address", SqlDbType.VarChar);
+            SqlParameter SuburbParameter = new SqlParameter("@Suburb", SqlDbType.VarChar);
+            SqlParameter CityParameter = new SqlParameter("@City", SqlDbType.VarChar);
+            SqlParameter CountryParameter = new SqlParameter("@Country", SqlDbType.VarChar);
+            SqlParameter Patient_Medical_Aid_Medical_Aid_IDParameter = new SqlParameter("@Patient_Medical_Aid_Medical_Aid_ID", SqlDbType.Int);
+            SqlParameter Scheme_NameParameter = new SqlParameter("@Scheme_Name", SqlDbType.VarChar);
+            SqlParameter Membership_NumberParameter = new SqlParameter("@Membership_Number", SqlDbType.VarChar);
+            SqlParameter Registration_DateParameter = new SqlParameter("@Registration_Date", SqlDbType.VarChar);
+            SqlParameter Deregistration_DateParameter = new SqlParameter("@Deregistration_Date", SqlDbType.VarChar);
+            SqlParameter AllergiesParameter = new SqlParameter("@Allergies", SqlDbType.VarChar);
+            SqlParameter PreviousIllnessesParameter = new SqlParameter("@PreviousIllnesses", SqlDbType.VarChar);
+            SqlParameter PreviousMedicationParameter = new SqlParameter("@PreviousMedication", SqlDbType.VarChar);
+            SqlParameter RiskFactorsParameter = new SqlParameter("@RiskFactors", SqlDbType.VarChar);
+            SqlParameter SocialHistoryParameter = new SqlParameter("@SocialHistory", SqlDbType.VarChar);
+            SqlParameter FamilyHistoryParameter = new SqlParameter("@FamilyHistory", SqlDbType.VarChar);
+            Patient_IDParameter.Value = Patient_ID;
+            FirstNameParameter.Value = FirstName;
+            LastNameParameter.Value = LastName;
+            EmailParameter.Value = Email;
+            ID_NumberParameter.Value = ID_Number;
+            Cell_NumberParameter.Value = Cell_Number;
+            DOBParameter.Value = DOB;
+            GenderParameter.Value = Gender;
+            Street_AddressParameter.Value = Street_Address;
+            SuburbParameter.Value = Suburb;
+            CityParameter.Value = City;
+            CountryParameter.Value = Country;
+            Patient_Medical_Aid_Medical_Aid_IDParameter.Value = Patient_Medical_Aid_Medical_Aid_ID;
+            Scheme_NameParameter.Value = Scheme_Name;
+            Membership_NumberParameter.Value = Membership_Number;
+            Registration_DateParameter.Value = Registration_Date;
+            Deregistration_DateParameter.Value = Deregistration_Date;
+            AllergiesParameter.Value = Allergies;
+            PreviousIllnessesParameter.Value = PreviousIllnesses;
+            PreviousMedicationParameter.Value = PreviousMedication;
+            RiskFactorsParameter.Value = RiskFactors;
+            SocialHistoryParameter.Value = SocialHistory;
+            FamilyHistoryParameter.Value = FamilyHistory;
+            _parameters.Add(Patient_IDParameter);
+            _parameters.Add(FirstNameParameter);
+            _parameters.Add(LastNameParameter);
+            _parameters.Add(EmailParameter);
+            _parameters.Add(ID_NumberParameter);
+            _parameters.Add(Cell_NumberParameter);
+            _parameters.Add(DOBParameter);
+            _parameters.Add(GenderParameter);
+            _parameters.Add(Street_AddressParameter);
+            _parameters.Add(SuburbParameter);
+            _parameters.Add(CityParameter);
+            _parameters.Add(CountryParameter);
+            _parameters.Add(Patient_Medical_Aid_Medical_Aid_IDParameter);
+            _parameters.Add(Scheme_NameParameter);
+            _parameters.Add(Membership_NumberParameter);
+            _parameters.Add(Registration_DateParameter);
+            _parameters.Add(Deregistration_DateParameter);
+            _parameters.Add(AllergiesParameter);
+            _parameters.Add(PreviousIllnessesParameter);
+            _parameters.Add(PreviousMedicationParameter);
+            _parameters.Add(RiskFactorsParameter);
+            _parameters.Add(SocialHistoryParameter);
+            _parameters.Add(FamilyHistoryParameter);
+
+            access.ExecuteNonQuery(Conn, _parameters, "[UpdateMedicalRecord]");
+            return true;
         }
         #endregion
 
@@ -1328,7 +1537,7 @@ namespace DataClient
             SqlParameter cityParameter = new SqlParameter("@City", SqlDbType.NVarChar);
             SqlParameter countryParameter = new SqlParameter("@Country", SqlDbType.NVarChar);
             SqlParameter employee_TypeParameter = new SqlParameter("@Employee_Type", SqlDbType.NVarChar);
-            SqlParameter accessLevelParameter = new SqlParameter("@AccessLevel", SqlDbType.NVarChar);
+            SqlParameter accessLevelParameter = new SqlParameter("@AccessLevel", SqlDbType.Int);
             SqlParameter practice_IDParameter = new SqlParameter("@Practice_ID", SqlDbType.Int);
             SqlParameter User_IDParameter = new SqlParameter("@User_ID", SqlDbType.Int);
             SqlParameter emailParameter = new SqlParameter("@Email", SqlDbType.NVarChar);

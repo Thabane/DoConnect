@@ -32,6 +32,7 @@
             PatientsService.GetAllPatients().then
             (function (result) {
                 $scope.Patients = result.data;
+                
             });
         };
         $scope.GetPatients();
@@ -43,12 +44,7 @@
             });
         };
 
-        $scope.InsertPatient = function (FirstName, LastName, ID_Number, Gender, DOB, Cell_Number, Street_Address, Suburb, City, Country, Allergies, PreviousIllnesses, PreviousMedication, RiskFactors, SocialHistory, FamilyHistory, Medical_Aid_ID, Doctor_ID, User_ID) {
-            PatientsService.InsertPatient(FirstName, LastName, ID_Number, Gender, DOB, Cell_Number, Street_Address, Suburb, City, Country, Allergies, PreviousIllnesses, PreviousMedication, RiskFactors, SocialHistory, FamilyHistory, Medical_Aid_ID, Doctor_ID, User_ID).sucess(function (data, status, headers, config) {
-                console.log("data inserted" + data);
-            });
-
-        };
+        
 
         //---Medical Record------------------------------------------------------------------------------------------------------------/
         $scope.DOB = { value: new Date(2016, 08, 25) };
@@ -60,15 +56,87 @@
         };
         //Select Medical Record by PatientID Funtion
         var GetMedicalRecord = function () {
-            PatientsService.GetMedicalRecord(1).then(function (result) {
-                $scope.MedicalRecord = result.data;
+            PatientsService.GetMedicalRecord(1).then(function (result) {       
+                $scope.ID                                   = result.data["ID"];
+                $scope.FirstName = result.data["FirstName"];
+                $scope.LastName = result.data["LastName"];
+                $scope.ID_Number = result.data["ID_Number"];
+                if (result.data["Gender"] == 'M') {
+                    $scope.Gender = 'Male';
+                }
+                else {
+                    $scope.Gender = 'Female';
+                }
+                $scope.DOB = { value: new Date(result.data["DOB"]) };
+                $scope.Cell_Number = result.data["Cell_Number"];
+                $scope.Street_Address = result.data["Street_Address"];
+                $scope.Suburb = result.data["Suburb"];
+                $scope.City = result.data["City"];
+                $scope.Country = result.data["Country"];
+                $scope.Medical_Aid_ID = result.data["Medical_Aid_ID"];
+                $scope.Medical_Aid_Name = result.data["Name"];
+                $scope.Doctor_ID = result.data["Doctor_ID"];
+                $scope.User_ID = result.data["User_ID"];
+                $scope.Allergies = result.data["Allergies"];
+                $scope.PreviousIllnesses = result.data["PreviousIllnesses"];
+                $scope.PreviousMedication = result.data["PreviousMedication"];
+                $scope.RiskFactors = result.data["RiskFactors"];
+                $scope.SocialHistory = result.data["SocialHistory"];
+                $scope.FamilyHistory = result.data["FamilyHistory"];
+                $scope.Email = result.data["Email"];
+                $scope.Patient_Medical_Aid_Medical_Aid_ID = result.data["Patient_Medical_Aid_Medical_Aid_ID"];
+                $scope.Scheme_Name = result.data["Scheme_Name"];
+                $scope.Membership_Number = result.data["Membership_Number"];
+                if (result.data["Status"] == 'true') {
+                    $scope.Status = 'Valid';
+                }
+                else {
+                    $scope.Status = 'Invalid';
+                }
+                $scope.Registration_Date = { value: new Date(result.data["Registration_Date"]) };
+                $scope.Deregistration_Date = { value: new Date(result.data["Deregistration_Date"]) };
+                $scope.Patient_ID = result.data["Patient_ID"];
             });
         };
         GetMedicalRecord();
 
-        //Insert Medical Record Funtion
-        $scope.InsertMedicalRecord = function () {
-            PatientsService.InsertMedicalRecord().success(function () {
+        $scope.GetMedical_Aid = function () {
+            PatientsService.GetMedical_Aid().then(function (result) {
+                $scope.Medical_Aid = result.data;
+            });
+        };
+        $scope.GetMedical_Aid();
+
+        $scope.Medical_AidID = 0;
+        $scope.changedValueMedical_AidID = function (item) {
+            alert(item.ID);
+            $scope.Medical_AidID = item.ID;
+        };
+
+        $scope._FirstName = "Jossy";
+        $scope._LastName = "Chivinge";
+        $scope._Email = "Josie@gmail.com";
+        $scope._ID_Number = "25478964785";
+        $scope._Cell_Number = "0837135032";
+        $scope._DOB = "1994-07-21";
+        $scope._Street_Address = "40 Monchique Complex";
+        $scope._Suburb = "Paulshof";
+        $scope._City = "Jozi";
+        $scope._Country = "South Africa";
+        $scope._SchemeName = "Long Live";
+        $scope._MembershipNumber = "54789";
+        $scope._Registration_Date = "2016-01-01";
+        $scope._Deregistration_Date = "2017-01-01";
+        $scope._Allergies = "_Allergies";
+        $scope._PreviousMedication = "_PreviousMedication";
+        $scope._PreviousIllnesses = "_PreviousIllnesses";
+        $scope._RiskFactors = "_RiskFactors";
+        $scope._SocialHistory = "_SocialHistory";
+        $scope._FamilyHistory = "_FamilyHistory";
+
+        //Insert Medical Record Funtion ##Doctor_ID
+        $scope.InsertPatient = function (FirstName, LastName, Email, ID_Number, Cell_Number, DOB, Street_Address, Suburb, City, Country, SchemeName, MembershipNumber, Registration_Date, Deregistration_Date, Allergies, PreviousMedication, PreviousIllnesses, RiskFactors, SocialHistory, FamilyHistory) {
+            PatientsService.InsertMedicalRecord(1, FirstName, LastName, Email, ID_Number, Cell_Number, DOB, $scope.Seleceted_Gender, Street_Address, Suburb, City, Country, $scope.Medical_AidID, SchemeName, MembershipNumber, Registration_Date, Deregistration_Date, Allergies, PreviousMedication, PreviousIllnesses, RiskFactors, SocialHistory, FamilyHistory).sucess(function () {
                 GetMedicalRecord();
                 angular.element(".insert").val('');
                 btnSuccess("Medical Record successfully inserted.");
@@ -80,11 +148,24 @@
         $scope.btnUpdateMedicalRecord = function () {
             var btnText = angular.element("#btnUpdateMedicalRecord").html();
             if (btnText == "Update") {
-                angular.element(".View_readonly").attr("readonly", false);
+                angular.element(".View_readonly").attr("readonly", false); angular.element(".disable_View_readonly").prop("disabled", false);
                 angular.element("#btnUpdateMedicalRecord").html("Save");
             }
             else {
-                angular.element(".View_readonly").attr("readonly", true);
+                if ($scope.Medical_AidID == 0) { $scope.Medical_AidID = $scope.Patient_Medical_Aid_Medical_Aid_ID; }
+                if ($scope.Gender == 'Male') {
+                    $scope.G= 'M';
+                }
+                else {
+                    $scope.G = 'F';
+                }
+                PatientsService.UpdateMedicalRecord($scope.ID, $scope.FirstName, $scope.LastName, $scope.Email, $scope.ID_Number, $scope.Cell_Number, $scope.DOB.value, $scope.G, $scope.Street_Address, $scope.Suburb, $scope.City, $scope.Country, $scope.Medical_AidID, $scope.Scheme_Name, $scope.Membership_Number, $scope.Registration_Date.value, $scope.Deregistration_Date.value, $scope.Allergies, $scope.PreviousIllnesses, $scope.PreviousMedication, $scope.RiskFactors, $scope.SocialHistory, $scope.FamilyHistory).success(function () {
+                    GetMedicalRecord();
+                    btnSuccess("Medical Record details successfully updated.");
+                }, function (error) {
+                    btnAlert("System Error Message", "Update unsuccessful.");
+                });
+                angular.element(".View_readonly").attr("readonly", true); angular.element(".disable_View_readonly").prop("disabled", true);
                 angular.element("#btnUpdateMedicalRecord").html("Update");
             }
         };

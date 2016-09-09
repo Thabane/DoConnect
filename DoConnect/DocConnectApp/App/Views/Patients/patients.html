@@ -39,10 +39,8 @@
                         <td>{{Patient.Cell_Number}}</td>
                         <td><!-- onclick="ViewPatient()"-->
                             <!--<button class="btn btn-primary btn-xs" ng-click="ViewPatient(Patient.ID)" onclick="ViewPatient()"><i class="glyphicon glyphicon-new-window"></i></button>-->
-                            <a class="btn btn-primary btn-xs" href="/MedicalHistory/{{Patient.ID}}" ng-click="selectedPatient(Patient.ID)"><i class="glyphicon glyphicon-new-window"></i></a> 
-                            <!--<button class="btn btn-primary btn-xs" onclick="btnRedirectPatientRecord('/PatientRecord/NewConsultationNotes?PatientID=',{{Patient.ID}})"><i class="glyphicon glyphicon-new-window"></i></button>-->    
-                            <!--<a class="btn btn-primary btn-xs" ui-sref="test({ PatientID: Patient.ID})"><i class="glyphicon glyphicon-new-window"></i></a>--> 
-                        
+                            <!--<a class="btn btn-primary btn-xs" href="/MedicalHistory/{{Patient.ID}}" ng-click="selectedPatient(Patient.ID)"><i class="glyphicon glyphicon-new-window"></i></a> -->  
+                            <a class="btn btn-primary btn-xs" href="/test/{{Patient.ID}}" ng-click="selectedPatient(Patient.ID)"><i class="glyphicon glyphicon-new-window"></i></a>
                         
                             <button class="btn btn-danger btn-xs" ng-click="DeletePatient(Patient.ID)"><i class="fa fa-trash-o"></i></button>
                         </td>

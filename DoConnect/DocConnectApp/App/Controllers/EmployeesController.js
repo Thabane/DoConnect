@@ -76,7 +76,7 @@
         $scope.changedValueGetPractice_ID = function (item) {
             $scope.Practice_ID = item.ID;
             $scope.Practice_Name= item.Name;          
-        };
+        }; 
 
         $scope.Seleceted_Gender = 0;
         $scope.changedValueGetGender = function (item) {
