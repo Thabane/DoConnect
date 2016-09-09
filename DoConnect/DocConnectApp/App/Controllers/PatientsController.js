@@ -111,28 +111,7 @@
         $scope.changedValueMedical_AidID = function (item) {
             alert(item.ID);
             $scope.Medical_AidID = item.ID;
-        };
-
-        $scope._FirstName = "Jossy";
-        $scope._LastName = "Chivinge";
-        $scope._Email = "Josie@gmail.com";
-        $scope._ID_Number = "25478964785";
-        $scope._Cell_Number = "0837135032";
-        $scope._DOB = "1994-07-21";
-        $scope._Street_Address = "40 Monchique Complex";
-        $scope._Suburb = "Paulshof";
-        $scope._City = "Jozi";
-        $scope._Country = "South Africa";
-        $scope._SchemeName = "Long Live";
-        $scope._MembershipNumber = "54789";
-        $scope._Registration_Date = "2016-01-01";
-        $scope._Deregistration_Date = "2017-01-01";
-        $scope._Allergies = "_Allergies";
-        $scope._PreviousMedication = "_PreviousMedication";
-        $scope._PreviousIllnesses = "_PreviousIllnesses";
-        $scope._RiskFactors = "_RiskFactors";
-        $scope._SocialHistory = "_SocialHistory";
-        $scope._FamilyHistory = "_FamilyHistory";
+        };        
 
         //Insert Medical Record Funtion ##Doctor_ID
         $scope.InsertPatient = function (FirstName, LastName, Email, ID_Number, Cell_Number, DOB, Street_Address, Suburb, City, Country, SchemeName, MembershipNumber, Registration_Date, Deregistration_Date, Allergies, PreviousMedication, PreviousIllnesses, RiskFactors, SocialHistory, FamilyHistory) {

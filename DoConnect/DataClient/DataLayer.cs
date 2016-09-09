@@ -1187,11 +1187,12 @@ namespace DataClient
             SqlParameter CityParameter = new SqlParameter("@City", SqlDbType.VarChar);
             SqlParameter CountryParameter = new SqlParameter("@Country", SqlDbType.VarChar);
             SqlParameter Patient_Medical_Aid_Medical_Aid_IDParameter = new SqlParameter("@Patient_Medical_Aid_Medical_Aid_ID", SqlDbType.Int);
+            SqlParameter Medical_Aid_IDParameter = new SqlParameter("@Patient_Medical_Aid_Medical_Aid_ID", SqlDbType.Int);
             SqlParameter Scheme_NameParameter = new SqlParameter("@Scheme_Name", SqlDbType.VarChar);
             SqlParameter Membership_NumberParameter = new SqlParameter("@Membership_Number", SqlDbType.VarChar);
             SqlParameter Registration_DateParameter = new SqlParameter("@Registration_Date", SqlDbType.VarChar);
             SqlParameter Deregistration_DateParameter = new SqlParameter("@Deregistration_Date", SqlDbType.VarChar);
-            SqlParameter StatusParameter = new SqlParameter("@AccessLevel", SqlDbType.Int);
+            SqlParameter StatusParameter = new SqlParameter("@Status", SqlDbType.Bit);
             SqlParameter AllergiesParameter = new SqlParameter("@Allergies", SqlDbType.VarChar);
             SqlParameter PreviousIllnessesParameter = new SqlParameter("@PreviousIllnesses", SqlDbType.VarChar);
             SqlParameter PreviousMedicationParameter = new SqlParameter("@PreviousMedication", SqlDbType.VarChar);
@@ -1212,6 +1213,7 @@ namespace DataClient
             CityParameter.Value = City;
             CountryParameter.Value = Country;
             Patient_Medical_Aid_Medical_Aid_IDParameter.Value = Patient_Medical_Aid_Medical_Aid_ID;
+            Medical_Aid_IDParameter.Value = Patient_Medical_Aid_Medical_Aid_ID;
             Scheme_NameParameter.Value = Scheme_Name;
             Membership_NumberParameter.Value = Membership_Number;
             Registration_DateParameter.Value = Registration_Date;
@@ -1237,7 +1239,7 @@ namespace DataClient
             _parameters.Add(CityParameter);
             _parameters.Add(CountryParameter);
             _parameters.Add(Patient_Medical_Aid_Medical_Aid_IDParameter);
-            _parametersPatient_Medical_Aid.Add(Patient_Medical_Aid_Medical_Aid_IDParameter);
+            _parametersPatient_Medical_Aid.Add(Medical_Aid_IDParameter);
             _parametersPatient_Medical_Aid.Add(Scheme_NameParameter);
             _parametersPatient_Medical_Aid.Add(Membership_NumberParameter);
             _parametersPatient_Medical_Aid.Add(Registration_DateParameter);
