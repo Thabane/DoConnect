@@ -9,33 +9,98 @@ namespace DataClient
 {
     public interface IDataLayer
     {
+        #region User
         int CreateUser(int AccessLevel);
-        void CreatePatient(string firstName, string lastName, string id_Number, string gender, DateTime dob, string cell_number, string street_address, string suburb, string city, string country, int UserId);
-        bool NewUpdateDoctor(Doctor doc, int UserId);
-        Patient GetPatient(int id);
-        Doctor GetDoctor(int DocID);
-        List<Patient> GetAllPatients();
+        string Login(string username, string password, int accessLevel);
+        Login MyLogin(string Email);
+        List<AccessLevel> GetAllAccessLevel();
+        AccessLevel GetAccessLevelById(int id);
+        #endregion
+
+        #region Expense
+        bool NewUpdateExpense(Expenses expense, int UserId);
+        #endregion
+
+        #region Appointments
+        List<Appointments> GetAppointments();
+        Appointments GetAppointmentById(int AppId);
+        bool NewAppointment(string Date_Time, int Patient_ID, string Details, int App_Status, int DoctorID);
+        bool UpdateAppointment(int ID, string Date_Time, int Patient_ID, string Details, int App_Status, int DoctorID);
+        #endregion
+
+        #region Consultation
+        List<Consultation> GetAllConsultations();
+        List<Consultation> GetConsultationByPatientId(int id);
+        bool NewConsultationNote(int patient_ID, int doctor_ID, string reasonForConsulta, string symptoms, string clinicalFindings, string diagnosis, string testResultSummary, string treatmentPlan, int presciption_ID, int referral_ID);
+        bool UpdateConsultationNote(int consultationID, string reasonForConsulta, string symptoms, string clinicalFindings, string diagnosis, string testResultSummary, string treatmentPlan);
+        bool DeleteConsultation(int id);
+        #endregion
+
+        #region Invoice
+        List<Invoice> GetAllInvoices();
+        Invoice GetInvoiceById(int id);
+        bool NewUpdateInvoice(DateTime date, string invoiceSummary, string total, int medical_Aid_ID, int patient_ID, int doctor_ID);
+        bool DeleteInvoice(int id);
+        #endregion
+
+        #region patient
+        int NewUpdatePatient(string firstName, string lastName, string id_Number, string gender, string dob, string cell_number, string street_address, string suburb, string city, string country);
+        bool CreatePatient(string firstName, string lastName, string id_Number, string gender, DateTime dob, string cell_number, string street_address, string suburb, string city, string country, string Allergies, string PreviousIllnesses, string PreviousMedication, string RiskFactors, string SocialHistory, string FamilyHistory, int Medical_Aid_ID, int Doctor_ID, int UserId);
+        List<GetAllPatients> GetAllPatients();
+        List<Patient> GetPatientByID(int id);
+        bool UpdatePatient(int id, string firstName, string lastName, string id_Number, string gender, string dob, string cell_number, string street_address, string suburb, string city, string country, string Allergies, string PreviousIllnesses, string PreviousMedication, string RiskFactors, string SocialHistory, string FamilyHistory, int Medical_Aid_ID, int Doctor_ID);
         bool DeletePatient(int id);
-        bool UpdatePatient(int id, string firstName, string lastName, string id_Number, string gender, DateTime dob, string cell_number, string street_address, string suburb, string city, string country);
+        #endregion
+
+        #region patient medical aid
         int Create_Patient_Medical_Aid(string scheme_name, string member_number, bool status, DateTime registration_date, DateTime deregistration, int patient_ID, int medical_Aid_ID);
-        Patient_Medical_Aid Get_Patient_Medical_Aid(int id);
         List<Patient_Medical_Aid> GetAll_Patient_Medical_Aids();
+        Patient_Medical_Aid Get_Patient_Medical_AidById(int id);
+        int NewUpdatePatient_Medical_Aid(string scheme_name, string member_number, bool status, DateTime registration_date, DateTime deregistration, int patient_ID, int medical_Aid_ID);
         bool Delete_Patient_Medical_Aid(int id);
-        bool Update_Patient_Medical_Aid(int id, string scheme_name, string member_number, bool status, DateTime registration_date, DateTime deregistration, int patient_ID, int medical_Aid_ID);
+        #endregion
+
+        #region practice		
+        int NewUpdatePractice(string name, string cell_number, string fax_number, string street_address, string suburb, string city, string country, string latitude, string longitude, string trading_Times);
         int CreatePractice(string name, string cell_number, string fax_number, string street_address, string suburb, string city, string country, string latitude, string longitude, string trading_Times);
-        Practice GetPractice(int id);
         List<Practice> GetAllPractices();
-        bool DeletePractice(int id);
+        Practice GetPracticeById(int id);
+        bool InsertPractice(string Name, string Phone_Number, string Fax_Number, string Street_Address, string Suburb, string City, string Country, string Latitude, string Longitude, string Trading_Times);
         bool UpdatePractice(int id, string name, string cell_number, string fax_number, string street_address, string suburb, string city, string country, string latitude, string longitude, string trading_Times);
-        int CreatePrescription(string description, DateTime date, int patient_ID, int doctor_ID);
-        Prescription GetPrescription(int id);
-        List<Prescription> GetAllPrescriptions();
+        bool DeletePractice(int id);
+        #endregion
+
+        #region Medical Record
+        List<MedicalRecord> GetMedicalRecordByPatientID(int id);
+        #endregion
+
+        #region Prescription 
+        List<Prescription> GetPrescriptionByPatientID(int id);
+        bool NewPrescription(int Patient_ID, int Doctor_ID, int Consultation_ID, string DrugName, string Strength, string IntakeRoute, string Frequency, int DispenseNumber, int RefillNumber);
+        bool UpdatePrescription(int Prescription_ID, string Diagnosis, string DrugName, string Strength, string IntakeRoute, string Frequency, int DispenseNumber, int RefillNumber);
         bool DeletePrescription(int id);
-        bool UpdatePrescription(int id, string description, DateTime date, int patient_ID, int doctor_ID);
-        int CreateStaff(string firstName, string lastName, string id_Number, string gender, DateTime dob, string phone, string employee_Type, int practice_ID, int user_ID);
-        Staff GetStaff(int id);
-        List<Staff> GetAllStaffMembers();
+        #endregion
+
+        #region Staff
+        
+        List<Staff> GetAllStaff();
+        Staff GetStaffById(int id);
+        int GetNewUserID();
+        bool InsertStaff(string firstName, string lastName, string id_Number, string gender, string dob, string phone,
+            string street_Address, string suburb, string city, string country, int ACCESSLEVEL_ID, string employee_Type, int practice_ID, int User_ID, string Email);
+        bool UpdateStaff(int ID, string firstName, string lastName, string id_Number, string gender, string dob, string phone,
+            string street_Address, string suburb, string city, string country, string employee_Type, int practice_ID, string Email);
         bool DeleteStaff(int id);
-        bool UpdateStaff(int id, string firstName, string lastName, string id_Number, string gender, DateTime dob, string phone, string employee_Type, int practice_ID, int user_ID);
+        #endregion
+
+        #region Doctor
+        bool NewUpdateDoctor(Doctor doc, int UserId);
+        List<Doctor> GetAllDoctors();
+        Doctor GetDoctorById(int UserId);
+        #endregion
+
+        #region Medicine_Inventory
+        bool NewUpdateMedicine_Inventory(Medicine_Inventory inventory, int UserId);
+        #endregion
     }
 }

@@ -12,52 +12,73 @@
         </ul>
         
         <!--New Appointment Modal-->
-        <form>
-            <div style="margin:auto; width:60%;">
+        <form name="Form">
+            <div style="margin:auto; width:50%;">
                 <div class="modal-header" style="border-bottom:0px;"></div>
                 <div class="modal-body">
-                    <div class="row" style="margin-top:5px; margin-bottom:5px;">
-                    <div class="col-md-3"><h5>Date & Time:</h5></div>
+                    <div class="row" style="margin-top:4px; margin-bottom:0px;">
+                        <div class="col-md-3"><h5>Date & Time:<span style="color:red">*</span></h5></div>
+                        <div class="col-md-8"><input class="form-control insert" type="datetime-local" name="Date_Time" ng-model="Date_Time" min="1900-01-01" max="2016-12-31" ng-required="true"/></div>
+                    </div>
+                    <div class="row" style="margin-top:0px; margin-bottom:8px;">
+                        <div class="col-md-3"></div>
                         <div class="col-md-8">
-                            <div class="row" style="padding-left:0px; padding-right:0px;">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <div class="input-group date datetimepicker" onclick="DT()">
-                                            <input class="form-control" type="text">
-                                            <span class="input-group-addon">
-                                                <span class="glyphicon glyphicon-calendar"></span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <small ng-show="Form.Date_Time.$invalid && Form.Date_Time.$touched && Form.Date_Time.$error.required">Required field.<br></small>
+                            <small ng-show="Form.Date_Time.$invalid && Form.Date_Time.$touched && Form.Date_Time.$error.pattern">Valid date fomart is ("yyyy-mm-dd").</small>
                         </div>
                     </div>
-                    <div class="row" style="margin-top:5px; margin-bottom:5px;">
-                        <div class="col-md-3"><h5>Patient Name:</h5></div>
-                        <div class="col-md-8"><input name="View_PatientName" class="form-control" type="text"></div>
+                    <div class="row" style="margin-top:4px; margin-bottom:0px;">
+                        <div class="col-md-3"><h5>Patient Name:<span style="color:red">*</span></h5></div>
+                        <div class="col-md-8"><select class="form-control" ng-model="Patient_ID" name="PatientName" ng-change="changedValueGetPatientID(Patient_ID)" data-ng-options="patient as patient.FirstName for patient in Patients" ng-required="true">
+                                                    <option value="">Select Patient</option>
+                                                </select></div>
                     </div>
-                    <div class="row" style="margin-top:5px; margin-bottom:5px;">
-                        <div class="col-md-3"><h5 class="form-control-label">Patient Email:</h5></div>
-                        <div class="col-md-8"><input name="View_EmailAddress" class="form-control" type="email"></div>
-                    </div>
-                    <div class="row" style="margin-top:5px; margin-bottom:5px;">
-                        <div class="col-md-3"><h5 class="form-control-label">Appointment Details:</h5></div>
-                        <div class="col-md-8"><input name="View_Details" class="form-control" type="text"></div>
-                    </div>
-                    <div class="row" style="margin-top:5px;">
-                        <div class="col-md-3"><h5 class="form-control-label">Appointment Status:</h5></div>
+                    <div class="row" style="margin-top:0px; margin-bottom:8px;">
+                        <div class="col-md-3"></div>
                         <div class="col-md-8">
-                            <select class="form-control required input-sm">
-                                <option value="">Choose Status</option>
-                                <option value="1">Approved</option>
-                                <option value="3">Denied</option>
+                            <small ng-show="Form.PatientName.$invalid && Form.PatientName.$touched && Form.PatientName.$error.required">Required field.<br></small>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top:4px; margin-bottom:0px;">
+                        <div class="col-md-3"><h5>Appointment Details:<span style="color:red">*</span></h5></div>
+                        <div class="col-md-8"><input class="form-control insert" type="text" ng-model="Details" name="Details" ng-required="true" ng-pattern="/^[0-9a-zA-Z''-'\s]{3,}$/"></div>
+                    </div>
+                    <div class="row" style="margin-top:0px; margin-bottom:8px;">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-8">
+                            <small ng-show="Form.Details.$invalid && Form.Details.$touched && Form.Details.$error.required">Required field.<br></small>
+                            <small ng-show="Form.Details.$invalid && Form.Details.$touched && Form.Details.$error.pattern">Only alphabetic letters allowed and atleast 3 charactors long.</small>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top:4px; margin-bottom:0px;">
+                        <div class="col-md-3"><h5>Appointment Status:<span style="color:red">*</span></h5></div>
+                        <div class="col-md-8"><select class="form-control" ng-model="App_Status" name="Appointments_App_Status" ng-required="true" ng-change="changedValueGetApp_Status(Appointments_App_Status)" data-ng-options="App_Status as App_Status.Status for App_Status in App_Statusz">
+                                                    <option value="">Select App Status</option>
+                                                </select></div>
+                    </div>
+                    <div class="row" style="margin-top:0px; margin-bottom:8px;">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-8">
+                            <small ng-show="Form.Appointments_App_Status.$invalid && Form.Appointments_App_Status.$touched && Form.Appointments_App_Status.$error.required">Required field.<br></small>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top:4px; margin-bottom:0px;">
+                        <div class="col-md-3"><h5>Doctor Name:</h5></div>
+                        <div class="col-md-8">
+                            <select class="form-control" ng-model="Doctors_ID" name="DoctorName" ng-required="true" ng-change="changedValueGetDoctors_ID(Doctors_ID)" data-ng-options="doctor as doctor.FirstName for doctor in Doctors">
+                                <option value="">Select Doctor</option>
                             </select>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top:0px; margin-bottom:8px;">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-8">
+                            <small ng-show="Form.DoctorName.$invalid && Form.DoctorName.$touched && Form.DoctorName.$error.required">Required field.<br></small>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" onclick="function_btnNewAppointment()">Add Appointment</button>
+                    <button type="button" class="btn btn-primary" ng-click="NewAppointment(Date_Time, Details, App_Status)" ng-disabled="Form.$invalid">Add Appointment</button>
                 </div>
             </div>
         </form><!--New Appointment Modal Ends-->

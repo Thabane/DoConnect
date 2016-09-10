@@ -1,5 +1,5 @@
 ﻿CREATE PROCEDURE [GetPracticeById] 
-		@PracticeId INT
+		@ID INT
 AS
 BEGIN
 
@@ -20,7 +20,7 @@ BEGIN
 	FROM            
 		[Practice]
 	WHERE
-		[ID] = @PracticeId
+		[ID] = @ID
 
 END
 GO

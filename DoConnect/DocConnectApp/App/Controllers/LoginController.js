@@ -1,8 +1,16 @@
-﻿app.controller("LoginController", ["$scope", "LoginService", "$interval",
-    function ($scope, LoginService, $interval) {
+﻿app.controller("LoginController", ["$scope", "LoginService", "$interval", "$location",
+    function ($scope, LoginService, $interval, $location) {
 
-        LoginService.GetAllLogin().then
-        (function (results) {
-            $scope.Login = result.data;
-        });
+        $scope.Email;
+        $scope.Login = function (Username, Password) {
+            LoginService.VerifyUser(Username).success(function (result) {
+                $scope.Email = result["Email"];
+                $scope.UserPassword = result["Password"];
+
+                if ((Username == result["Email"]) && (Password == result["Password"])) {
+                    $location.path('/Patients');
+                }
+                
+            });
+        };
     }]);

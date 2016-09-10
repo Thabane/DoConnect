@@ -15,7 +15,7 @@ namespace DataClient
     {
         private DataAccess access;
         private List<SqlParameter> _parameters = new List<SqlParameter>();
-        private string Conn = "DB";
+        private string Conn = @"Data Source=DESKTOP-6Gu3I3G\SQLEXPRESS;Initial Catalog=DoConnect;Integrated Security=True";
 
         public DataLayer()
         {
@@ -37,10 +37,531 @@ namespace DataClient
             access.LogEntry(userId, "New User Created");
             return userId;
         }
+        
+
+        public string Login(string username, string password, int accessLevel)
+        {
+            int userId = 0;
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            SqlParameter accessLevelParameter = new SqlParameter("@AccessLevel", SqlDbType.Int);
+            accessLevelParameter.Value = accessLevel;
+            _parameters.Add(accessLevelParameter);
+
+            using (var reader = access.ExecuteReader(Conn, "[CreateUser]", _parameters))
+            {
+                if (reader.Read())
+                    userId = reader.GetInt32(reader.GetOrdinal("ID"));
+            }
+            access.LogEntry(userId, "New User Created");
+            return "";
+        }
+
+        public Login MyLogin(string Email)
+        {
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            SqlParameter EmailParameter = new SqlParameter("@Email", SqlDbType.NVarChar);
+            EmailParameter.Value = Email;
+            _parameters.Add(EmailParameter);
+
+            Login Login = new Login();
+            using (var reader = access.ExecuteReader(Conn, "[MyLogin]", _parameters))
+            {
+                if (reader.Read())
+                {
+                    Login = (new Login().Create(reader));
+                }
+            }
+            return Login;
+        }
+
+        public List<AccessLevel> GetAllAccessLevel()
+        {
+            List<AccessLevel> List = new List<AccessLevel>();
+            using (var reader = access.ExecuteReader(Conn, "[GetAllAccessLevel]", new List<SqlParameter>()))
+            {
+                while (reader.Read())
+                {
+                    List.Add(new AccessLevel().Create(reader));
+                }
+            }
+            return List;
+        }
+
+        public AccessLevel GetAccessLevelById(int id)
+        {
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
+            idParameter.Value = id;
+            _parameters.Add(idParameter);
+
+            AccessLevel Item = new AccessLevel();
+            using (var reader = access.ExecuteReader(Conn, "[GetAccessLevelById]", _parameters))
+            {
+                if (reader.Read())
+                {
+                    Item.ID = reader.GetInt32(reader.GetOrdinal("ID"));
+
+                    Item.Level = reader.GetString(reader.GetOrdinal("Level"));
+                }
+            }
+            return Item;
+        }
+        #endregion
+
+        #region Expense
+        public bool NewUpdateExpense(Expenses expense, int UserId)
+        {
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            SqlParameter idParameter = new SqlParameter("@FirstName", SqlDbType.NVarChar);
+            SqlParameter descriptionParameter = new SqlParameter("@LastName", SqlDbType.NVarChar);
+            SqlParameter dateParameter = new SqlParameter("@Gender", SqlDbType.Char);
+            SqlParameter amountParameter = new SqlParameter("@Address", SqlDbType.NVarChar);
+            SqlParameter practiceIdParameter = new SqlParameter("@PracticeID", SqlDbType.Int);
+            SqlParameter userIdParameter = new SqlParameter("@UserID", SqlDbType.Int);
+
+            idParameter.Value = expense.ID;
+            parameters.Add(idParameter);
+            descriptionParameter.Value = expense.Description;
+            parameters.Add(descriptionParameter);
+            dateParameter.Value = expense.Date;
+            parameters.Add(dateParameter);
+            amountParameter.Value = expense.Amount;
+            parameters.Add(amountParameter);
+            practiceIdParameter.Value = expense.Practice_ID;
+            parameters.Add(practiceIdParameter);
+            userIdParameter.Value = expense.User_ID;
+            parameters.Add(userIdParameter);
+
+            try
+            {
+                access.ExecuteNonQuery(Conn, parameters, "[NewUpdateDoctor]");
+                access.LogEntry(UserId, "New or Update Expense");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                access.LogEntry(UserId, ex.ToString());
+                return false;
+            }
+        }
+        #endregion
+
+        #region Appointments
+        
+
+        public List<Appointments> GetAppointments()
+        {
+            List<Appointments> AppointmentsInfo = new List<Appointments>();
+            using (var reader = access.ExecuteReader(Conn, "[GetAllAppointments]", new List<SqlParameter>()))
+            {
+                while (reader.Read())
+                {
+                    AppointmentsInfo.Add(new Appointments().Create(reader));
+                }
+                    
+            }
+            return AppointmentsInfo;
+        }
+
+        public Appointments GetAppointmentById(int AppId)
+        {
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            SqlParameter appIdParameter = new SqlParameter("@AppId", SqlDbType.Int);
+            appIdParameter.Value = AppId;
+            _parameters.Add(appIdParameter);
+            //try
+            //{
+                Appointments AppointmentsInfo = new Appointments();
+                using (var reader = access.ExecuteReader(Conn, "[GetAppointmentById]", _parameters))
+                {
+                    if (reader.Read())
+                    {
+                        AppointmentsInfo = (new Appointments().Create(reader));
+                }
+                }
+            //}
+            //catch (Exception ex)
+            //{
+            //    access.LogEntry(AppId, "Appointment: " + ex.ToString());
+            //}
+            return AppointmentsInfo;
+        }
+
+        public bool NewAppointment(string Date_Time, int Patient_ID, string Details, int App_Status, int DoctorID)
+        {
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            SqlParameter App_StatusParameter = new SqlParameter("@App_Status", SqlDbType.Bit);
+            SqlParameter DetailsParameter = new SqlParameter("@Details", SqlDbType.NVarChar);
+            SqlParameter Date_TimeParameter = new SqlParameter("@Date_Time", SqlDbType.NVarChar);
+            SqlParameter Patient_IDParameter = new SqlParameter("@Patient_ID", SqlDbType.Int);
+            SqlParameter DoctorIDParameter = new SqlParameter("@Doctor_ID", SqlDbType.NVarChar);
+
+            App_StatusParameter.Value = App_Status;
+            DetailsParameter.Value = Details;
+            Date_TimeParameter.Value = Date_Time;
+            Patient_IDParameter.Value = Patient_ID;
+            DoctorIDParameter.Value = DoctorID;
+            parameters.Add(App_StatusParameter);
+            parameters.Add(DetailsParameter);
+            parameters.Add(Date_TimeParameter);
+            parameters.Add(Patient_IDParameter);
+            parameters.Add(DoctorIDParameter);
+
+            //try
+            //{
+            int ID = 0;
+            using (var reader = access.ExecuteReader(Conn, "[InsertAppointment]", parameters))
+            {
+                if (reader.Read())
+                    ID = reader.GetInt32(reader.GetOrdinal("ID"));
+            }
+            return true;
+            //}
+            //catch (Exception ex)
+            //{
+            //    access.LogEntry(app.ID, ex.ToString());
+            //    return false;
+            //}
+        }
+
+        public bool UpdateAppointment(int ID, string Date_Time, int Patient_ID, string Details, int App_Status, int DoctorID)
+        {
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            SqlParameter IDParameter = new SqlParameter("@ID", SqlDbType.Int);
+            SqlParameter App_StatusParameter = new SqlParameter("@App_Status", SqlDbType.Bit);
+            SqlParameter DetailsParameter = new SqlParameter("@Details", SqlDbType.NVarChar);
+            SqlParameter Date_TimeParameter = new SqlParameter("@Date_Time", SqlDbType.NVarChar);
+            SqlParameter Patient_IDParameter = new SqlParameter("@Patient_ID", SqlDbType.Int);
+            SqlParameter DoctorIDParameter = new SqlParameter("@Doctor_ID", SqlDbType.NVarChar);
+
+            IDParameter.Value = ID;
+            App_StatusParameter.Value = App_Status;
+            DetailsParameter.Value = Details;
+            Date_TimeParameter.Value = Date_Time;
+            Patient_IDParameter.Value = Patient_ID;
+            DoctorIDParameter.Value = DoctorID;
+            parameters.Add(IDParameter);
+            parameters.Add(App_StatusParameter);
+            parameters.Add(DetailsParameter);
+            parameters.Add(Date_TimeParameter);
+            parameters.Add(Patient_IDParameter);
+            parameters.Add(DoctorIDParameter);
+
+            access.ExecuteNonQuery(Conn, parameters, "[UpdateAppointment]");
+            return true;
+        }
+
+        public bool DeleteAppointment(int id)
+        {
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
+            idParameter.Value = id;
+            _parameters.Add(idParameter);
+
+            using (var reader = access.ExecuteReader(Conn, "[DeleteAppointment]", _parameters))
+            {
+                if (reader.Read())
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+        #endregion
+
+        #region Consultation
+        public List<Consultation> GetAllConsultations()
+        {
+            List<Consultation> consultationInfo = new List<Consultation>();
+            using (var reader = access.ExecuteReader(Conn, "[GetAllConsultations]", new List<SqlParameter>()))
+            {
+                while (reader.Read())
+                {
+                    consultationInfo.Add(new Consultation().Create(reader));
+                }
+            }
+            return consultationInfo;
+        }
+
+        public List<Consultation> GetConsultationByPatientId(int id)//Get Consultation Notes by Patient ID
+        {
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
+            idParameter.Value = id;
+            _parameters.Add(idParameter);
+            List<Consultation> consultationInfo = new List<Consultation>();
+            using (var reader = access.ExecuteReader(Conn, "[GetConsultationNotes]", _parameters))
+            {
+                while (reader.Read())
+                {
+                    consultationInfo.Add(new Consultation().Create(reader));
+                }
+            }
+            return consultationInfo;
+        }
+
+        public bool NewConsultationNote(int patient_ID, int doctor_ID, string reasonForConsulta, string symptoms, string clinicalFindings, string diagnosis, string testResultSummary, string treatmentPlan, int presciption_ID, int referral_ID)
+        {
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            List<SqlParameter> Patient_Consultation_parameters = new List<SqlParameter>();            
+            SqlParameter patient_IDParameter = new SqlParameter("@Patient_ID", SqlDbType.Int);
+            SqlParameter doctor_IDParameter = new SqlParameter("@Doctor_ID", SqlDbType.Int);
+            SqlParameter reasonForConsultaParameter = new SqlParameter("@ReasonForConsultation", SqlDbType.NVarChar);
+            SqlParameter symptomsParameter = new SqlParameter("@Symptoms", SqlDbType.NVarChar);
+            SqlParameter clinicalFindingsParameter = new SqlParameter("@ClinicalFindings", SqlDbType.NVarChar);
+            SqlParameter diagnosisParameter = new SqlParameter("@Diagnosis", SqlDbType.NVarChar);
+            SqlParameter testResultSummaryParameter = new SqlParameter("@TestResultSummary", SqlDbType.NVarChar);
+            SqlParameter treatmentPlanParameter = new SqlParameter("@TreatmentPlan", SqlDbType.NVarChar);
+            SqlParameter presciption_IDParameter = new SqlParameter("@Presciption_ID", SqlDbType.Int);
+            SqlParameter referral_IDParameter = new SqlParameter("@Referral_ID", SqlDbType.Int);
+            SqlParameter insertedConsultationParameter = new SqlParameter("@ID", SqlDbType.Int);
+            SqlParameter insertedpatient_IDParameter = new SqlParameter("@Patient_ID", SqlDbType.Int);
+
+            patient_IDParameter.Value = patient_ID;
+            doctor_IDParameter.Value = doctor_ID;
+            reasonForConsultaParameter.Value = reasonForConsulta;
+            symptomsParameter.Value = symptoms;
+            clinicalFindingsParameter.Value = clinicalFindings;
+            diagnosisParameter.Value = diagnosis;
+            testResultSummaryParameter.Value = testResultSummary;
+            treatmentPlanParameter.Value = treatmentPlan;
+            presciption_IDParameter.Value = presciption_ID;
+            referral_IDParameter.Value = referral_ID;
+            
+            _parameters.Add(patient_IDParameter);
+            _parameters.Add(doctor_IDParameter);
+            _parameters.Add(reasonForConsultaParameter);
+            _parameters.Add(symptomsParameter);
+            _parameters.Add(clinicalFindingsParameter);
+            _parameters.Add(diagnosisParameter);
+            _parameters.Add(testResultSummaryParameter);
+            _parameters.Add(treatmentPlanParameter);
+            _parameters.Add(presciption_IDParameter);
+            _parameters.Add(referral_IDParameter);
+            
+
+            //try
+            //{
+            int insertedConsultationID = 0;
+            using (var reader = access.ExecuteReader(Conn, "[InsertConsultationNote]", _parameters))
+            {
+                if (reader.Read())
+                {
+                    insertedConsultationID = reader.GetInt32(reader.GetOrdinal("ID"));
+                    insertedConsultationParameter.Value = insertedConsultationID;
+                    Patient_Consultation_parameters.Add(insertedConsultationParameter);
+
+                    insertedpatient_IDParameter.Value = patient_ID;
+                    Patient_Consultation_parameters.Add(insertedpatient_IDParameter);
+                }
+            }
+                access.ExecuteNonQuery(Conn, Patient_Consultation_parameters, "[InsertPatient_Consultation]");
+                //access.LogEntry(1, "Created Consultation");
+                return true;
+            //}
+            //catch (Exception ex)
+            //{
+            //    access.LogEntry(1, ex.ToString());
+            //    return false;
+            //}
+        }
+
+        public bool UpdateConsultationNote(int consultationID, string reasonForConsulta, string symptoms, string clinicalFindings, string diagnosis, string testResultSummary, string treatmentPlan)
+        {
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            SqlParameter consultationIDParameter = new SqlParameter("@ID", SqlDbType.Int);
+            SqlParameter reasonForConsultaParameter = new SqlParameter("@ReasonForConsultation", SqlDbType.NVarChar);
+            SqlParameter symptomsParameter = new SqlParameter("@Symptoms", SqlDbType.NVarChar);
+            SqlParameter clinicalFindingsParameter = new SqlParameter("@ClinicalFindings", SqlDbType.NVarChar);
+            SqlParameter diagnosisParameter = new SqlParameter("@Diagnosis", SqlDbType.NVarChar);
+            SqlParameter testResultSummaryParameter = new SqlParameter("@TestResultSummary", SqlDbType.NVarChar);
+            SqlParameter treatmentPlanParameter = new SqlParameter("@TreatmentPlan", SqlDbType.NVarChar);
+
+            consultationIDParameter.Value = consultationID;
+            reasonForConsultaParameter.Value = reasonForConsulta;
+            symptomsParameter.Value = symptoms;
+            clinicalFindingsParameter.Value = clinicalFindings;
+            diagnosisParameter.Value = diagnosis;
+            testResultSummaryParameter.Value = testResultSummary;
+            treatmentPlanParameter.Value = treatmentPlan;
+
+            _parameters.Add(consultationIDParameter);
+            _parameters.Add(reasonForConsultaParameter);
+            _parameters.Add(symptomsParameter);
+            _parameters.Add(clinicalFindingsParameter);
+            _parameters.Add(diagnosisParameter);
+            _parameters.Add(testResultSummaryParameter);
+            _parameters.Add(treatmentPlanParameter);
+            
+            access.ExecuteNonQuery(Conn, _parameters, "[UpdateConsultationNote]");
+            //access.LogEntry(1, "Updated Consultation");
+            return true;
+        }
+
+        public bool DeleteConsultation(int id)
+        {
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
+            idParameter.Value = id;
+            _parameters.Add(idParameter);
+            int userId = 0;
+            using (var reader = access.ExecuteReader(Conn, "[DeleteConsultation]", new List<SqlParameter>()))
+            {
+                if (reader.Read())
+                {
+                    userId = reader.GetInt32(reader.GetOrdinal("ID"));
+                }
+            }
+            return true;
+        }
+
+        #endregion
+
+        
+
+        #region Invoice
+        public List<Invoice> GetAllInvoices()
+        {
+            List<Invoice> invoiceInfo = new List<Invoice>();
+            using (var reader = access.ExecuteReader(Conn, "[GetAllInvoices]", new List<SqlParameter>()))
+            {
+                while (reader.Read())
+                {
+                    invoiceInfo.Add(new Invoice().Create(reader));
+                }
+            }
+            return invoiceInfo;
+        }
+
+        public Invoice GetInvoiceById(int id)
+        {
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            SqlParameter idParameter = new SqlParameter("@InvoiceID", SqlDbType.Int);
+            idParameter.Value = id;
+            _parameters.Add(idParameter);
+            Invoice invoiceInfo = new Invoice();
+            using (var reader = access.ExecuteReader(Conn, "[GetInvoice]", new List<SqlParameter>()))
+            {
+                if (reader.Read())
+                {
+                    return new Invoice().Create(reader);
+                }
+            }
+            return invoiceInfo;
+        }
+
+        public bool NewUpdateInvoice(DateTime date, string invoiceSummary, string total, int medical_Aid_ID, int patient_ID, int doctor_ID)
+        {
+
+            //state params
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            SqlParameter dateParameter = new SqlParameter("@Date", SqlDbType.DateTime);
+            SqlParameter invoiceSummaryParameter = new SqlParameter("@InvoiceSummary", SqlDbType.NVarChar);
+            SqlParameter totalParameter = new SqlParameter("@Total", SqlDbType.NVarChar);
+            SqlParameter medical_Aid_IDParameter = new SqlParameter("@Medical_Aid_ID", SqlDbType.Int);
+            SqlParameter patient_IDParameter = new SqlParameter("@Patient_ID", SqlDbType.Int);
+            SqlParameter doctor_IDParameter = new SqlParameter("@Doctor_ID", SqlDbType.Int);
+
+            //assign values
+            dateParameter.Value = date;
+            invoiceSummaryParameter.Value = invoiceSummary;
+            totalParameter.Value = total;
+            medical_Aid_IDParameter.Value = medical_Aid_ID;
+            patient_IDParameter.Value = patient_ID;
+            doctor_IDParameter.Value = doctor_ID;
+
+            //add to list
+            _parameters.Add(dateParameter);
+            _parameters.Add(invoiceSummaryParameter);
+            _parameters.Add(totalParameter);
+            _parameters.Add(medical_Aid_IDParameter);
+            _parameters.Add(patient_IDParameter);
+            _parameters.Add(doctor_IDParameter);
+
+            try
+            {
+                access.ExecuteNonQuery(Conn, _parameters, "[NewUpdateInvoice]");
+                access.LogEntry(1, "Created Invoice");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                access.LogEntry(1, ex.ToString());
+                return false;
+            }
+        }
+
+        public bool DeleteInvoice(int id)
+        {
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
+            idParameter.Value = id;
+            _parameters.Add(idParameter);
+            int userId = 0;
+            using (var reader = access.ExecuteReader(Conn, "[DeleteInvoice]", new List<SqlParameter>()))
+            {
+                if (reader.Read())
+                {
+                    userId = reader.GetInt32(reader.GetOrdinal("ID"));
+                }
+            }
+            return true;
+        }
         #endregion
 
         #region patient
-        public void CreatePatient(string firstName, string lastName, string id_Number, string gender, DateTime dob, string cell_number, string street_address, string suburb, string city, string country, int UserId)
+        public int NewUpdatePatient(string firstName, string lastName, string id_Number, string gender, string dob, string cell_number, string street_address, string suburb, string city, string country)
+        {
+            int userId = 0;
+            _parameters = new List<SqlParameter>();
+            SqlParameter firstNameParameter = new SqlParameter("@FirstName", SqlDbType.NVarChar);
+            SqlParameter lastNameParameter = new SqlParameter("@LastName", SqlDbType.NVarChar);
+            SqlParameter id_NumberParameter = new SqlParameter("@ID_Number", SqlDbType.NVarChar);
+            SqlParameter genderParameter = new SqlParameter("@Gender", SqlDbType.NVarChar);
+            SqlParameter dobParameter = new SqlParameter("@DOB", SqlDbType.NVarChar);
+            SqlParameter cell_numberParameter = new SqlParameter("@Cell_Number", SqlDbType.NVarChar);
+            SqlParameter street_addressParameter = new SqlParameter("@Street_Address", SqlDbType.NVarChar);
+            SqlParameter suburbParameter = new SqlParameter("@Suburb", SqlDbType.NVarChar);
+            SqlParameter cityParameter = new SqlParameter("@City", SqlDbType.NVarChar);
+            SqlParameter countryParameter = new SqlParameter("@Country", SqlDbType.NVarChar);
+            firstNameParameter.Value = firstName;
+            lastNameParameter.Value = lastName;
+            id_NumberParameter.Value = id_Number;
+            genderParameter.Value = gender;
+            dobParameter.Value = dob;
+            cell_numberParameter.Value = cell_number;
+            street_addressParameter.Value = street_address;
+            suburbParameter.Value = suburb;
+            cityParameter.Value = city;
+            countryParameter.Value = country;
+
+            _parameters.Add(firstNameParameter);
+            _parameters.Add(lastNameParameter);
+            _parameters.Add(id_NumberParameter);
+            _parameters.Add(genderParameter);
+            _parameters.Add(dobParameter);
+            _parameters.Add(cell_numberParameter);
+            _parameters.Add(street_addressParameter);
+            _parameters.Add(suburbParameter);
+            _parameters.Add(cityParameter);
+            _parameters.Add(countryParameter);
+
+            using (var reader = access.ExecuteReader(Conn, "[NewUpdatePatient]", new List<SqlParameter>()))
+            {
+                if (reader.Read())
+                {
+                    userId = reader.GetInt32(reader.GetOrdinal("ID"));
+                }
+            }
+            access.LogEntry(userId, "New Patient Created");
+            return userId;
+        }
+
+        public bool CreatePatient(string firstName, string lastName, string id_Number, string gender, DateTime dob, string cell_number, string street_address, string suburb, string city, string country,
+            string Allergies, string PreviousIllnesses, string PreviousMedication, string RiskFactors, string SocialHistory, string FamilyHistory, int Medical_Aid_ID, int Doctor_ID, int UserId)
         {
 
             //state params
@@ -55,6 +576,16 @@ namespace DataClient
             SqlParameter suburbParameter = new SqlParameter("@Suburb", SqlDbType.NVarChar);
             SqlParameter cityParameter = new SqlParameter("@City", SqlDbType.NVarChar);
             SqlParameter countryParameter = new SqlParameter("@Country", SqlDbType.NVarChar);
+
+            SqlParameter AllergiesParameter = new SqlParameter("@Allergies", SqlDbType.NVarChar);
+            SqlParameter PreviousIllnessesParameter = new SqlParameter("@PreviousIllnesses", SqlDbType.NVarChar);
+            SqlParameter PreviousMedicationParameter = new SqlParameter("@PreviousMedication", SqlDbType.NVarChar);
+            SqlParameter RiskFactorsParameter = new SqlParameter("@RiskFactors", SqlDbType.NVarChar);
+            SqlParameter SocialHistoryParameter = new SqlParameter("@SocialHistory", SqlDbType.NVarChar);
+            SqlParameter FamilyHistoryParameter = new SqlParameter("@FamilyHistory", SqlDbType.NVarChar);
+            SqlParameter Medical_Aid_IDParameter = new SqlParameter("@Medical_Aid_ID", SqlDbType.Int);
+            SqlParameter Doctor_IDParameter = new SqlParameter("@Doctor_ID", SqlDbType.Int);
+            SqlParameter UserIdParameter = new SqlParameter("@UserId", SqlDbType.Int);
             //assign values
             firstNameParameter.Value = firstName;
             lastNameParameter.Value = lastName;
@@ -66,6 +597,15 @@ namespace DataClient
             suburbParameter.Value = suburb;
             cityParameter.Value = city;
             countryParameter.Value = country;
+            AllergiesParameter.Value = Allergies;
+            PreviousIllnessesParameter.Value = PreviousIllnesses;
+            PreviousMedicationParameter.Value = PreviousMedication;
+            RiskFactorsParameter.Value = RiskFactors;
+            SocialHistoryParameter.Value = SocialHistory;
+            FamilyHistoryParameter.Value = FamilyHistory;
+            Medical_Aid_IDParameter.Value = Medical_Aid_ID;
+            Doctor_IDParameter.Value = Doctor_ID;
+            UserIdParameter.Value = UserId;
             //add to list
             _parameters.Add(firstNameParameter);
             _parameters.Add(lastNameParameter);
@@ -77,49 +617,20 @@ namespace DataClient
             _parameters.Add(suburbParameter);
             _parameters.Add(cityParameter);
             _parameters.Add(countryParameter);
+            _parameters.Add(AllergiesParameter);
+            _parameters.Add(PreviousIllnessesParameter);
+            _parameters.Add(PreviousMedicationParameter);
+            _parameters.Add(RiskFactorsParameter);
+            _parameters.Add(SocialHistoryParameter);
+            _parameters.Add(FamilyHistoryParameter);
+            _parameters.Add(Medical_Aid_IDParameter);
+            _parameters.Add(Doctor_IDParameter);
+            _parameters.Add(UserIdParameter);
 
             try
             {
                 access.ExecuteNonQuery(Conn, _parameters, "[CreatePatient]");
                 access.LogEntry(UserId, "Created Patient");
-            }
-            catch (Exception ex)
-            {
-                access.LogEntry(UserId, ex.ToString());
-            }                  
-            
-        }
-
-        public bool NewUpdateDoctor(Doctor doc, int UserId)
-        {
-            List<SqlParameter> parameters = new List<SqlParameter>();
-            SqlParameter firstNameParameter = new SqlParameter("@FirstName", SqlDbType.NVarChar);
-            SqlParameter lastNameParameter = new SqlParameter("@LastName", SqlDbType.NVarChar);
-            SqlParameter genderParameter = new SqlParameter("@Gender", SqlDbType.Char);
-            SqlParameter addressParameter = new SqlParameter("@Address", SqlDbType.NVarChar);
-            SqlParameter practiceIdParameter = new SqlParameter("@PracticeID", SqlDbType.Int);
-            SqlParameter userIdParameter = new SqlParameter("@UserID", SqlDbType.Int);
-            SqlParameter jobTitleParameter = new SqlParameter("@JobTitle", SqlDbType.NVarChar);
-
-            firstNameParameter.Value = doc.FirstName;
-            parameters.Add(firstNameParameter);
-            lastNameParameter.Value = doc.LastName;
-            parameters.Add(lastNameParameter);
-            genderParameter.Value = doc.Gender;
-            parameters.Add(genderParameter);
-            addressParameter.Value = doc.Address;
-            parameters.Add(addressParameter);
-            practiceIdParameter.Value = doc.PracticeId;
-            parameters.Add(practiceIdParameter);
-            userIdParameter.Value = doc.UserId;
-            parameters.Add(userIdParameter);
-            jobTitleParameter.Value = doc.Job_Title;
-            parameters.Add(jobTitleParameter);
-
-            try
-            {
-                access.ExecuteNonQuery(Conn, parameters, "[NewUpdateDoctor]");
-                access.LogEntry(UserId, "User Added new Doctor");
                 return true;
             }
             catch (Exception ex)
@@ -127,41 +638,29 @@ namespace DataClient
                 access.LogEntry(UserId, ex.ToString());
                 return false;
             }
-            //return false;
         }
 
-        public Patient GetPatient(int id)
+        public List<GetAllPatients> GetAllPatients()
         {
-            List<SqlParameter> _parameters = new List<SqlParameter>();
-            SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
-            idParameter.Value = id;
-            _parameters.Add(idParameter);
-            Patient patientInfo = new Patient();
-            using (var reader = access.ExecuteReader(Conn, "[GetPatient]", new List<SqlParameter>()))
+            List<GetAllPatients> patientInfo = new List<GetAllPatients>();
+            using (var reader = access.ExecuteReader(Conn, "[GetAllPatients]", new List<SqlParameter>()))
             {
-                if (reader.Read())
+                while (reader.Read())
                 {
-                    return new Patient().Create(reader);
-                    //patientInfo.ID = reader.GetInt32(reader.GetOrdinal("ID"));
-                    //patientInfo.FirstName = reader.GetString(reader.GetOrdinal("FirstName"));
-                    //patientInfo.LastName = reader.GetString(reader.GetOrdinal("LastName"));
-                    //patientInfo.ID_Number = reader.GetString(reader.GetOrdinal("ID_Number"));
-                    //patientInfo.Gender = reader.GetString(reader.GetOrdinal("Gender"));
-                    //patientInfo.DOB = reader.GetDateTime(reader.GetOrdinal("DOB"));
-                    //patientInfo.Cell_Number = reader.GetString(reader.GetOrdinal("Cell_Number"));
-                    //patientInfo.Street_Address = reader.GetString(reader.GetOrdinal("Street_Address"));
-                    //patientInfo.Suburb = reader.GetString(reader.GetOrdinal("Suburb"));
-                    //patientInfo.City = reader.GetString(reader.GetOrdinal("City"));
-                    //patientInfo.Country = reader.GetString(reader.GetOrdinal("Country"));
+                    patientInfo.Add(new GetAllPatients().Create(reader));
                 }
             }
             return patientInfo;
         }
 
-        public List<Patient> GetAllPatients()
+        public List<Patient> GetPatientByID(int id)
         {
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
+            idParameter.Value = id;
+            _parameters.Add(idParameter);
             List<Patient> patientInfo = new List<Patient>();
-            using (var reader = access.ExecuteReader(Conn, "[GetAllPatients]", new List<SqlParameter>()))
+            using (var reader = access.ExecuteReader(Conn, "[GetPatientById]", _parameters))
             {
                 while (reader.Read())
                 {
@@ -171,37 +670,29 @@ namespace DataClient
             return patientInfo;
         }
 
-        public bool DeletePatient(int id)
+        public bool UpdatePatient(int id, string firstName, string lastName, string id_Number, string gender, string dob, string cell_number, string street_address, string suburb, string city, string country, string Allergies, string PreviousIllnesses, string PreviousMedication, string RiskFactors, string SocialHistory, string FamilyHistory, int Medical_Aid_ID, int Doctor_ID)
         {
-            List<SqlParameter> _parameters = new List<SqlParameter>();
-            SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
-            idParameter.Value = id;
-            _parameters.Add(idParameter);
-            int userId = 0;
-            using (var reader = access.ExecuteReader(Conn, "[DeletePatient]", new List<SqlParameter>()))
-            {
-                if (reader.Read())
-                {
-                    userId = reader.GetInt32(reader.GetOrdinal("ID"));
-                }
-            }
-            return true;
-        }
 
-        public bool UpdatePatient(int id, string firstName, string lastName, string id_Number, string gender, DateTime dob, string cell_number, string street_address, string suburb, string city, string country)
-        {
             List<SqlParameter> _parameters = new List<SqlParameter>();
             SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
             SqlParameter firstNameParameter = new SqlParameter("@FirstName", SqlDbType.NVarChar);
             SqlParameter lastNameParameter = new SqlParameter("@LastName", SqlDbType.NVarChar);
             SqlParameter id_NumberParameter = new SqlParameter("@ID_Number", SqlDbType.NVarChar);
             SqlParameter genderParameter = new SqlParameter("@Gender", SqlDbType.NVarChar);
-            SqlParameter dobParameter = new SqlParameter("@DOB", SqlDbType.DateTime);
+            SqlParameter dobParameter = new SqlParameter("@DOB", SqlDbType.NVarChar);
             SqlParameter cell_numberParameter = new SqlParameter("@Cell_Number", SqlDbType.NVarChar);
             SqlParameter street_addressParameter = new SqlParameter("@Street_Address", SqlDbType.NVarChar);
             SqlParameter suburbParameter = new SqlParameter("@Suburb", SqlDbType.NVarChar);
             SqlParameter cityParameter = new SqlParameter("@City", SqlDbType.NVarChar);
             SqlParameter countryParameter = new SqlParameter("@Country", SqlDbType.NVarChar);
+            SqlParameter AllergiesParameter = new SqlParameter("@Allergies", SqlDbType.NVarChar);
+            SqlParameter PreviousIllnessesParameter = new SqlParameter("@PreviousIllnesses", SqlDbType.NVarChar);
+            SqlParameter PreviousMedicationParameter = new SqlParameter("@PreviousMedication", SqlDbType.NVarChar);
+            SqlParameter RiskFactorsParameter = new SqlParameter("@RiskFactors", SqlDbType.NVarChar);
+            SqlParameter SocialHistoryParameter = new SqlParameter("@SocialHistory", SqlDbType.NVarChar);
+            SqlParameter FamilyHistoryParameter = new SqlParameter("@FamilyHistory", SqlDbType.NVarChar);
+            SqlParameter Medical_Aid_IDParameter = new SqlParameter("@Medical_Aid_ID", SqlDbType.Int);
+            SqlParameter Doctor_IDParameter = new SqlParameter("@Doctor_ID", SqlDbType.Int);
             idParameter.Value = id;
             firstNameParameter.Value = firstName;
             lastNameParameter.Value = lastName;
@@ -213,6 +704,14 @@ namespace DataClient
             suburbParameter.Value = suburb;
             cityParameter.Value = city;
             countryParameter.Value = country;
+            AllergiesParameter.Value = Allergies;
+            PreviousIllnessesParameter.Value = PreviousIllnesses;
+            PreviousMedicationParameter.Value = PreviousMedication;
+            RiskFactorsParameter.Value = RiskFactors;
+            SocialHistoryParameter.Value = SocialHistory;
+            FamilyHistoryParameter.Value = FamilyHistory;
+            Medical_Aid_IDParameter.Value = Medical_Aid_ID;
+            Doctor_IDParameter.Value = Doctor_ID;
             _parameters.Add(idParameter);
             _parameters.Add(firstNameParameter);
             _parameters.Add(lastNameParameter);
@@ -224,10 +723,35 @@ namespace DataClient
             _parameters.Add(suburbParameter);
             _parameters.Add(cityParameter);
             _parameters.Add(countryParameter);
+            _parameters.Add(AllergiesParameter);
+            _parameters.Add(PreviousIllnessesParameter);
+            _parameters.Add(PreviousMedicationParameter);
+            _parameters.Add(RiskFactorsParameter);
+            _parameters.Add(SocialHistoryParameter);
+            _parameters.Add(FamilyHistoryParameter);
+            _parameters.Add(Medical_Aid_IDParameter);
+            _parameters.Add(Doctor_IDParameter);
 
-            
             int userId = 0;
             using (var reader = access.ExecuteReader(Conn, "[UpdatePatient]", new List<SqlParameter>()))
+            {
+                if (reader.Read())
+                {
+                    userId = reader.GetInt32(reader.GetOrdinal("ID"));
+                }
+            }
+            return true;
+        }
+
+        public bool DeletePatient(int id)
+        {
+            _parameters = new List<SqlParameter>();
+            SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
+            idParameter.Value = id;
+            _parameters.Add(idParameter);
+
+            int userId = 0;
+            using (var reader = access.ExecuteReader(Conn, "[DeletePatient]", new List<SqlParameter>()))
             {
                 if (reader.Read())
                 {
@@ -274,60 +798,46 @@ namespace DataClient
             return userId;
         }
 
-        public Patient_Medical_Aid Get_Patient_Medical_Aid(int id)
-        {
-            List<SqlParameter> _parameters = new List<SqlParameter>();
-            SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
-            idParameter.Value = id;
-            _parameters.Add(idParameter);
-
-            Patient_Medical_Aid patientMedicalAidInfo = new Patient_Medical_Aid();
-            int userId = 0;
-            using (var reader = access.ExecuteReader(Conn, "[Get_Patient_Medical_Aid]", new List<SqlParameter>()))
-            {
-                if (reader.Read())
-                {
-                    userId = reader.GetInt32(reader.GetOrdinal("ID"));
-                }
-            }
-            return patientMedicalAidInfo;
-        }
-
         public List<Patient_Medical_Aid> GetAll_Patient_Medical_Aids()
         {
+
             List<Patient_Medical_Aid> patientInfo = new List<Patient_Medical_Aid>();
-            int userId = 0;
+
             using (var reader = access.ExecuteReader(Conn, "[GetAll_Patient_Medical_Aids]", new List<SqlParameter>()))
             {
                 if (reader.Read())
                 {
-                    userId = reader.GetInt32(reader.GetOrdinal("ID"));
+                    while (reader.Read())
+                    {
+                        patientInfo.Add(new Patient_Medical_Aid().Create(reader));
+                    }
                 }
             }
             return patientInfo;
         }
 
-        public bool Delete_Patient_Medical_Aid(int id)
+        public Patient_Medical_Aid Get_Patient_Medical_AidById(int id)
         {
-            List<SqlParameter> _parameters = new List<SqlParameter>();
-            SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
+            _parameters = new List<SqlParameter>();
+            SqlParameter idParameter = new SqlParameter("@Patient_Medical_Aid_ID", SqlDbType.Int);
             idParameter.Value = id;
             _parameters.Add(idParameter);
-            int userId = 0;
-            using (var reader = access.ExecuteReader(Conn, "[Delete_Patient_Medical_Aid]", new List<SqlParameter>()))
+
+            Patient_Medical_Aid patientMedicalAidInfo = new Patient_Medical_Aid();
+
+            using (var reader = access.ExecuteReader(Conn, "[Get_Patient_Medical_Aid]", new List<SqlParameter>()))
             {
                 if (reader.Read())
                 {
-                    userId = reader.GetInt32(reader.GetOrdinal("ID"));
+                    patientMedicalAidInfo = new Patient_Medical_Aid().Create(reader);
                 }
             }
-            return true;
+            return patientMedicalAidInfo;
         }
 
-        public bool Update_Patient_Medical_Aid(int id, string scheme_name, string member_number, bool status, DateTime registration_date, DateTime deregistration, int patient_ID, int medical_Aid_ID)
+        public int NewUpdatePatient_Medical_Aid(string scheme_name, string member_number, bool status, DateTime registration_date, DateTime deregistration, int patient_ID, int medical_Aid_ID)
         {
-            List<SqlParameter> _parameters = new List<SqlParameter>();
-            SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
+            _parameters = new List<SqlParameter>();
             SqlParameter scheme_nameParameter = new SqlParameter("@Scheme_Name", SqlDbType.NVarChar);
             SqlParameter member_numberParameter = new SqlParameter("@Membership_Number", SqlDbType.NVarChar);
             SqlParameter statusParameter = new SqlParameter("@Status", SqlDbType.Bit);
@@ -335,7 +845,6 @@ namespace DataClient
             SqlParameter deregistrationParameter = new SqlParameter("@Deregistration_Date", SqlDbType.DateTime);
             SqlParameter patient_IDParameter = new SqlParameter("@Patient_ID", SqlDbType.Int);
             SqlParameter medical_Aid_IDParameter = new SqlParameter("@Medical_Aid_ID", SqlDbType.Int);
-            idParameter.Value = id;
             scheme_nameParameter.Value = scheme_name;
             member_numberParameter.Value = member_number;
             statusParameter.Value = status;
@@ -343,14 +852,34 @@ namespace DataClient
             deregistrationParameter.Value = deregistration;
             patient_IDParameter.Value = patient_ID;
             medical_Aid_IDParameter.Value = medical_Aid_ID;
-            _parameters.Add(idParameter);
             _parameters.Add(scheme_nameParameter);
             _parameters.Add(member_numberParameter);
             _parameters.Add(statusParameter);
             _parameters.Add(registration_dateParameter);
             _parameters.Add(deregistrationParameter);
+            _parameters.Add(patient_IDParameter);
+            _parameters.Add(medical_Aid_IDParameter);
+
             int userId = 0;
-            using (var reader = access.ExecuteReader(Conn, "[Update_Patient_Medical_Aid]", new List<SqlParameter>()))
+            using (var reader = access.ExecuteReader(Conn, "[NewUpdatePatient_Medical_Aid]", new List<SqlParameter>()))
+            {
+                if (reader.Read())
+                {
+                    userId = reader.GetInt32(reader.GetOrdinal("Patient_Medical_Aid_ID"));
+                }
+            }
+            return userId;
+        }
+
+        public bool Delete_Patient_Medical_Aid(int id)
+        {
+            _parameters = new List<SqlParameter>();
+            SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
+            idParameter.Value = id;
+            _parameters.Add(idParameter);
+
+            int userId = 0;
+            using (var reader = access.ExecuteReader(Conn, "[Delete_Patient_Medical_Aid]", new List<SqlParameter>()))
             {
                 if (reader.Read())
                 {
@@ -362,10 +891,56 @@ namespace DataClient
         #endregion
 
         #region practice
+
+        public int NewUpdatePractice(string name, string cell_number, string fax_number, string street_address, string suburb, string city, string country, string latitude, string longitude, string trading_Times)
+        {
+            _parameters = new List<SqlParameter>();
+            SqlParameter nameParameter = new SqlParameter("@Name", SqlDbType.Int);
+            SqlParameter cell_numberParameter = new SqlParameter("@Phone_Number", SqlDbType.NVarChar);
+            SqlParameter fax_numberParameter = new SqlParameter("@Fax_Number", SqlDbType.NVarChar);
+            SqlParameter street_addressParameter = new SqlParameter("@Street_Address", SqlDbType.NVarChar);
+            SqlParameter suburbParameter = new SqlParameter("@Suburb", SqlDbType.NVarChar);
+            SqlParameter cityParameter = new SqlParameter("@City", SqlDbType.NVarChar);
+            SqlParameter countryParameter = new SqlParameter("@Country", SqlDbType.NVarChar);
+            SqlParameter latitudeParameter = new SqlParameter("@Latitude", SqlDbType.NVarChar);
+            SqlParameter longitudeParameter = new SqlParameter("@Longitude", SqlDbType.NVarChar);
+            SqlParameter trading_TimesParameter = new SqlParameter("@Trading_Times", SqlDbType.NVarChar);
+            nameParameter.Value = name;
+            cell_numberParameter.Value = cell_number;
+            fax_numberParameter.Value = fax_number;
+            street_addressParameter.Value = street_address;
+            suburbParameter.Value = suburb;
+            cityParameter.Value = city;
+            countryParameter.Value = country;
+            latitudeParameter.Value = latitude;
+            longitudeParameter.Value = longitude;
+            trading_TimesParameter.Value = trading_Times;
+            _parameters.Add(nameParameter);
+            _parameters.Add(cell_numberParameter);
+            _parameters.Add(fax_numberParameter);
+            _parameters.Add(street_addressParameter);
+            _parameters.Add(suburbParameter);
+            _parameters.Add(cityParameter);
+            _parameters.Add(countryParameter);
+            _parameters.Add(latitudeParameter);
+            _parameters.Add(longitudeParameter);
+            _parameters.Add(trading_TimesParameter);
+
+            int userId = 0;
+            using (var reader = access.ExecuteReader(Conn, "[NewUpdatePractice]", new List<SqlParameter>()))
+            {
+                if (reader.Read())
+                {
+                    userId = reader.GetInt32(reader.GetOrdinal("PracticeID"));
+                }
+            }
+            return userId;
+        }
+
         public int CreatePractice(string name, string cell_number, string fax_number, string street_address, string suburb, string city, string country, string latitude, string longitude, string trading_Times)
         {
             List<SqlParameter> _parameters = new List<SqlParameter>();
-            SqlParameter nameParameter = new SqlParameter("@Name", SqlDbType.Int);
+            SqlParameter nameParameter = new SqlParameter("@Name", SqlDbType.NVarChar);
             SqlParameter cell_numberParameter = new SqlParameter("@Cell_Number", SqlDbType.NVarChar);
             SqlParameter fax_numberParameter = new SqlParameter("@Fax_Number", SqlDbType.NVarChar);
             SqlParameter street_addressParameter = new SqlParameter("@Street_Address", SqlDbType.NVarChar);
@@ -407,53 +982,87 @@ namespace DataClient
             return userId;
         }
 
-        public Practice GetPractice(int id)
-        {
-            List<SqlParameter> _parameters = new List<SqlParameter>();
-            SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
-            idParameter.Value = id;
-            _parameters.Add(idParameter);
-
-            Practice patientMedicalAidInfo = new Practice();
-            int userId = 0;
-            using (var reader = access.ExecuteReader(Conn, "[GetPractice]", new List<SqlParameter>()))
-            {
-                if (reader.Read())
-                {
-                    userId = reader.GetInt32(reader.GetOrdinal("ID"));
-                }
-            }
-            return patientMedicalAidInfo;
-        }
-
         public List<Practice> GetAllPractices()
         {
-            List<Practice> patientInfo = new List<Practice>();
-            int userId = 0;
+            List<Practice> PracticeInfo = new List<Practice>();
             using (var reader = access.ExecuteReader(Conn, "[GetAllPractices]", new List<SqlParameter>()))
             {
-                if (reader.Read())
+                while (reader.Read())
                 {
-                    userId = reader.GetInt32(reader.GetOrdinal("ID"));
+                    PracticeInfo.Add(new Practice().Create(reader));
                 }
             }
-            return patientInfo;
+            return PracticeInfo;
         }
 
-        public bool DeletePractice(int id)
+        public Practice GetPracticeById(int id)
         {
             List<SqlParameter> _parameters = new List<SqlParameter>();
             SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
             idParameter.Value = id;
             _parameters.Add(idParameter);
-            
-            int userId = 0;
-            using (var reader = access.ExecuteReader(Conn, "[DeletePractice]", new List<SqlParameter>()))
+
+            Practice PracticeInfo = new Practice();
+            using (var reader = access.ExecuteReader(Conn, "[GetPracticeById]", _parameters))
             {
                 if (reader.Read())
                 {
-                    userId = reader.GetInt32(reader.GetOrdinal("ID"));
+                    PracticeInfo.ID = reader.GetInt32(reader.GetOrdinal("ID"));
+                    PracticeInfo.Name = reader.GetString(reader.GetOrdinal("Name"));
+                    PracticeInfo.Phone_Number = reader.GetString(reader.GetOrdinal("Phone_Number"));
+                    PracticeInfo.Fax_Number = reader.GetString(reader.GetOrdinal("Fax_Number"));
+                    PracticeInfo.Street_Address = reader.GetString(reader.GetOrdinal("Street_Address"));
+                    PracticeInfo.Suburb = reader.GetString(reader.GetOrdinal("Suburb"));
+                    PracticeInfo.City = reader.GetString(reader.GetOrdinal("City"));
+                    PracticeInfo.Country = reader.GetString(reader.GetOrdinal("Country"));
+                    PracticeInfo.Latitude = reader.GetString(reader.GetOrdinal("Latitude"));
+                    PracticeInfo.Longitude = reader.GetString(reader.GetOrdinal("Longitude"));
+                    PracticeInfo.Trading_Times = reader.GetString(reader.GetOrdinal("Trading_Times"));
                 }
+            }
+            return PracticeInfo;
+        }
+
+        public bool InsertPractice(string Name, string Phone_Number, string Fax_Number, string Street_Address, string Suburb, string City, string Country, string Latitude, string Longitude, string Trading_Times)
+        {
+            int ID = 0;
+            SqlParameter NameParameter = new SqlParameter("@Name", SqlDbType.NVarChar);
+            SqlParameter Phone_NumberParameter = new SqlParameter("@Phone_Number", SqlDbType.NVarChar);
+            SqlParameter Fax_NumberParameter = new SqlParameter("@Fax_Number", SqlDbType.NVarChar);
+            SqlParameter Street_AddressParameter = new SqlParameter("@Street_Address", SqlDbType.NVarChar);
+            SqlParameter SuburbParameter = new SqlParameter("@Suburb", SqlDbType.NVarChar);
+            SqlParameter CityParameter = new SqlParameter("@City", SqlDbType.NVarChar);
+            SqlParameter CountryParameter = new SqlParameter("@Country", SqlDbType.NVarChar);
+            SqlParameter LatitudeParameter = new SqlParameter("@Latitude", SqlDbType.NVarChar);
+            SqlParameter LongitudeParameter = new SqlParameter("@Longitude", SqlDbType.NVarChar);
+            SqlParameter Trading_TimesParameter = new SqlParameter("@Trading_Times", SqlDbType.NVarChar);
+
+            NameParameter.Value = Name;
+            Phone_NumberParameter.Value = Phone_Number;
+            Fax_NumberParameter.Value = Fax_Number;
+            Street_AddressParameter.Value = Street_Address;
+            SuburbParameter.Value = Suburb;
+            CityParameter.Value = City;
+            CountryParameter.Value = Country;
+            LatitudeParameter.Value = Latitude;
+            LongitudeParameter.Value = Longitude;
+            Trading_TimesParameter.Value = Trading_Times;
+
+            _parameters.Add(NameParameter);
+            _parameters.Add(Phone_NumberParameter);
+            _parameters.Add(Fax_NumberParameter);
+            _parameters.Add(Street_AddressParameter);
+            _parameters.Add(SuburbParameter);
+            _parameters.Add(CityParameter);
+            _parameters.Add(CountryParameter);
+            _parameters.Add(LatitudeParameter);
+            _parameters.Add(LongitudeParameter);
+            _parameters.Add(Trading_TimesParameter);
+
+            using (var reader = access.ExecuteReader(Conn, "[InsertPractice]", new List<SqlParameter>() { NameParameter, Phone_NumberParameter, Fax_NumberParameter, Street_AddressParameter, SuburbParameter, CityParameter, CountryParameter, LatitudeParameter, LongitudeParameter, Trading_TimesParameter }))
+            {
+                if (reader.Read())
+                    ID = reader.GetInt32(reader.GetOrdinal("ID"));
             }
             return true;
         }
@@ -462,8 +1071,8 @@ namespace DataClient
         {
             List<SqlParameter> _parameters = new List<SqlParameter>();
             SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
-            SqlParameter nameParameter = new SqlParameter("@Name", SqlDbType.Int);
-            SqlParameter cell_numberParameter = new SqlParameter("@Cell_Number", SqlDbType.NVarChar);
+            SqlParameter nameParameter = new SqlParameter("@Name", SqlDbType.NVarChar);
+            SqlParameter phone_numberParameter = new SqlParameter("@Phone_Number", SqlDbType.NVarChar);
             SqlParameter fax_numberParameter = new SqlParameter("@Fax_Number", SqlDbType.NVarChar);
             SqlParameter street_addressParameter = new SqlParameter("@Street_Address", SqlDbType.NVarChar);
             SqlParameter suburbParameter = new SqlParameter("@Suburb", SqlDbType.NVarChar);
@@ -474,7 +1083,7 @@ namespace DataClient
             SqlParameter trading_TimesParameter = new SqlParameter("@Trading_Times", SqlDbType.NVarChar);
             idParameter.Value = id;
             nameParameter.Value = name;
-            cell_numberParameter.Value = cell_number;
+            phone_numberParameter.Value = cell_number;
             fax_numberParameter.Value = fax_number;
             street_addressParameter.Value = street_address;
             suburbParameter.Value = suburb;
@@ -485,7 +1094,7 @@ namespace DataClient
             trading_TimesParameter.Value = trading_Times;
             _parameters.Add(idParameter);
             _parameters.Add(nameParameter);
-            _parameters.Add(cell_numberParameter);
+            _parameters.Add(phone_numberParameter);
             _parameters.Add(fax_numberParameter);
             _parameters.Add(street_addressParameter);
             _parameters.Add(suburbParameter);
@@ -494,83 +1103,156 @@ namespace DataClient
             _parameters.Add(latitudeParameter);
             _parameters.Add(longitudeParameter);
             _parameters.Add(trading_TimesParameter);
-            int userId = 0;
-            using (var reader = access.ExecuteReader(Conn, "[UpdatePractice]", new List<SqlParameter>()))
-            {
-                if (reader.Read())
-                {
-                    userId = reader.GetInt32(reader.GetOrdinal("ID"));
-                }
-            }
+
+            access.ExecuteNonQuery(Conn, _parameters, "[UpdatePractice]");
             return true;
         }
-        #endregion
 
-        #region Prescription
-        public int CreatePrescription(string description, DateTime date, int patient_ID, int doctor_ID)
-        {
-            List<SqlParameter> _parameters = new List<SqlParameter>();
-            SqlParameter descriptionParameter = new SqlParameter("@Description", SqlDbType.VarChar);
-            SqlParameter dateParamerter = new SqlParameter("@Date", SqlDbType.DateTime);
-            SqlParameter patient_IDParameter = new SqlParameter("@Patient_ID", SqlDbType.Int);
-            SqlParameter doctor_IDParameter = new SqlParameter("@Doctor_ID", SqlDbType.Int);
-            descriptionParameter.Value = description;
-            dateParamerter.Value = date;
-            patient_IDParameter.Value = patient_ID;
-            doctor_IDParameter.Value = doctor_ID;
-            _parameters.Add(descriptionParameter);
-            _parameters.Add(dateParamerter);
-            _parameters.Add(patient_IDParameter);
-            _parameters.Add(doctor_IDParameter);
-            int userId = 0;
-            using (var reader = access.ExecuteReader(Conn, "[CreatePrescription]", new List<SqlParameter>()))
-            {
-                if (reader.Read())
-                {
-                    userId = reader.GetInt32(reader.GetOrdinal("ID"));
-                }
-            }
-            return userId;
-        }
-
-        public Prescription GetPrescription(int id)
+        public bool DeletePractice(int id)
         {
             List<SqlParameter> _parameters = new List<SqlParameter>();
             SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
             idParameter.Value = id;
             _parameters.Add(idParameter);
-            Prescription prescriptionInfo = new Prescription();
-            int userId = 0;
-            using (var reader = access.ExecuteReader(Conn, "[GetPrescription]", new List<SqlParameter>()))
+
+            using (var reader = access.ExecuteReader(Conn, "[DeletePractice]", _parameters))
             {
                 if (reader.Read())
                 {
-                    userId = reader.GetInt32(reader.GetOrdinal("ID"));
+                    return true;
+                }
+                else
+                {
+                    return false;
                 }
             }
-            return prescriptionInfo;
+        }
+        #endregion
+
+        #region Medical Record
+        public List<MedicalRecord> GetMedicalRecordByPatientID(int id)
+        {
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
+            idParameter.Value = id;
+            _parameters.Add(idParameter);
+            List<MedicalRecord> MedicalRecordInfo = new List<MedicalRecord>();
+            using (var reader = access.ExecuteReader(Conn, "[GetMedicalRecord]", _parameters))
+            {
+                while (reader.Read())
+                {
+                    MedicalRecordInfo.Add(new MedicalRecord().Create(reader));
+                }
+            }
+            return MedicalRecordInfo;
+        }
+        #endregion
+
+        #region Prescription        
+
+        public List<Prescription> GetPrescriptionByPatientID(int id)
+        {
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
+            idParameter.Value = id;
+            _parameters.Add(idParameter);
+            List<Prescription> PrescriptionInfo = new List<Prescription>();
+            using (var reader = access.ExecuteReader(Conn, "[GetPrescription]", _parameters))
+            {
+                while (reader.Read())
+                {
+                    PrescriptionInfo.Add(new Prescription().Create(reader));
+                }
+            }
+            return PrescriptionInfo;
         }
 
-        public List<Prescription> GetAllPrescriptions()
+        public bool NewPrescription(int Patient_ID, int Doctor_ID, int Consultation_ID, string DrugName, string Strength, string IntakeRoute, string Frequency, int DispenseNumber, int RefillNumber)
         {
-            List<Prescription> prescriptionInfo = new List<Prescription>();
-            int userId = 0;
-            using (var reader = access.ExecuteReader(Conn, "[GetAllPrescriptions]", new List<SqlParameter>()))
+            List<SqlParameter> _parametersPrescription = new List<SqlParameter>();
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            SqlParameter Patient_IDParameter = new SqlParameter("@Patient_ID", SqlDbType.Int);
+            SqlParameter Doctor_IDParameter = new SqlParameter("@Doctor_ID", SqlDbType.Int);
+            SqlParameter Consultation_IDParameter = new SqlParameter("@Consultation_ID", SqlDbType.Int);
+            SqlParameter DrugNameParameter = new SqlParameter("@DrugName", SqlDbType.VarChar);
+            SqlParameter StrengthParameter = new SqlParameter("@Strength", SqlDbType.VarChar);
+            SqlParameter IntakeRouteParameter = new SqlParameter("@IntakeRoute", SqlDbType.VarChar);
+            SqlParameter FrequencyParameter = new SqlParameter("@Frequency", SqlDbType.VarChar);
+            SqlParameter DispenseNumberParameter = new SqlParameter("@DispenseNumber", SqlDbType.Int);
+            SqlParameter RefillNumberParameter = new SqlParameter("@RefillNumber", SqlDbType.Int);
+            Patient_IDParameter.Value = Patient_ID;
+            Doctor_IDParameter.Value = Doctor_ID;
+            Consultation_IDParameter.Value = Consultation_ID;
+            DrugNameParameter.Value = DrugName;
+            StrengthParameter.Value = Strength;
+            IntakeRouteParameter.Value = IntakeRoute;
+            FrequencyParameter.Value = Frequency;
+            DispenseNumberParameter.Value = DispenseNumber;
+            RefillNumberParameter.Value = RefillNumber;
+            _parametersPrescription.Add(Patient_IDParameter);
+            _parametersPrescription.Add(Doctor_IDParameter);
+            _parameters.Add(Consultation_IDParameter);
+            _parameters.Add(DrugNameParameter);
+            _parameters.Add(StrengthParameter);
+            _parameters.Add(IntakeRouteParameter);
+            _parameters.Add(FrequencyParameter);
+            _parameters.Add(DispenseNumberParameter);
+            _parameters.Add(RefillNumberParameter);
+
+            int InsertedPrescription_ID = 0;
+            using (var reader = access.ExecuteReader(Conn, "[InsertPrescription]", _parametersPrescription))
             {
                 if (reader.Read())
                 {
-                    userId = reader.GetInt32(reader.GetOrdinal("ID"));
+                    InsertedPrescription_ID = reader.GetInt32(reader.GetOrdinal("ID"));
+                    SqlParameter Prescription_IDParameter = new SqlParameter("@Prescription_ID", SqlDbType.Int);
+                    Prescription_IDParameter.Value = InsertedPrescription_ID;
+                    _parameters.Add(Prescription_IDParameter);
                 }
             }
-            return prescriptionInfo;
+            access.ExecuteNonQuery(Conn, _parameters, "[InsertPrescription_DrugDetails]");
+            return true;
+        }
+
+        public bool UpdatePrescription(int Prescription_ID, string Diagnosis, string DrugName, string Strength, string IntakeRoute, string Frequency, int DispenseNumber, int RefillNumber)
+        {
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            SqlParameter Prescription_IDParameter = new SqlParameter("@Prescription_ID", SqlDbType.Int);
+            SqlParameter DiagnosisParameter = new SqlParameter("@Diagnosis", SqlDbType.VarChar);
+            SqlParameter DrugNameParameter = new SqlParameter("@DrugName", SqlDbType.VarChar);
+            SqlParameter StrengthParameter = new SqlParameter("@Strength", SqlDbType.VarChar);
+            SqlParameter IntakeRouteParameter = new SqlParameter("@IntakeRoute", SqlDbType.VarChar);
+            SqlParameter FrequencyParameter = new SqlParameter("@Frequency", SqlDbType.VarChar);
+            SqlParameter DispenseNumberParameter = new SqlParameter("@DispenseNumber", SqlDbType.Int);
+            SqlParameter RefillNumberParameter = new SqlParameter("@RefillNumber", SqlDbType.Int);
+            Prescription_IDParameter.Value = Prescription_ID;
+            DiagnosisParameter.Value = Diagnosis;
+            DrugNameParameter.Value = DrugName;
+            StrengthParameter.Value = Strength;
+            IntakeRouteParameter.Value = IntakeRoute;
+            FrequencyParameter.Value = Frequency;
+            DispenseNumberParameter.Value = DispenseNumber;
+            RefillNumberParameter.Value = RefillNumber;
+            _parameters.Add(Prescription_IDParameter);
+            _parameters.Add(DiagnosisParameter);
+            _parameters.Add(DrugNameParameter);
+            _parameters.Add(StrengthParameter);
+            _parameters.Add(IntakeRouteParameter);
+            _parameters.Add(FrequencyParameter);
+            _parameters.Add(DispenseNumberParameter);
+            _parameters.Add(RefillNumberParameter);
+
+            access.ExecuteNonQuery(Conn, _parameters, "[UpdatePrescription]");
+            return true;            
         }
 
         public bool DeletePrescription(int id)
         {
-            List<SqlParameter> _parameters = new List<SqlParameter>();
+            _parameters = new List<SqlParameter>();
             SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
             idParameter.Value = id;
             _parameters.Add(idParameter);
+
             int userId = 0;
             using (var reader = access.ExecuteReader(Conn, "[DeletePrescription]", new List<SqlParameter>()))
             {
@@ -581,117 +1263,194 @@ namespace DataClient
             }
             return true;
         }
+        #endregion
+        
+        #region Staff       
 
-        public bool UpdatePrescription(int id, string description, DateTime date, int patient_ID, int doctor_ID)
+        public List<Staff> GetAllStaff()
         {
-            List<SqlParameter> _parameters = new List<SqlParameter>();
-            SqlParameter idParameter = new SqlParameter("@", SqlDbType.Int);
-            SqlParameter descriptionParameter = new SqlParameter("@Description", SqlDbType.VarChar);
-            SqlParameter dateParamerter = new SqlParameter("@Date", SqlDbType.DateTime);
-            SqlParameter patient_IDParameter = new SqlParameter("@Patient_ID", SqlDbType.Int);
-            SqlParameter doctor_IDParameter = new SqlParameter("@Doctor_ID", SqlDbType.Int);
+            List<Staff> staffInfo = new List<Staff>();
+            using (var reader = access.ExecuteReader(Conn, "[GetAllStaff]", new List<SqlParameter>()))
+            {
+                while (reader.Read())
+                {
+                    staffInfo.Add(new Staff().Create(reader));
+                }
+            }
+            return staffInfo;
+        }
+
+        public Staff GetStaffById(int id)
+        {
+            _parameters = new List<SqlParameter>();
+            SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
             idParameter.Value = id;
-            descriptionParameter.Value = description;
-            dateParamerter.Value = date;
-            patient_IDParameter.Value = patient_ID;
-            doctor_IDParameter.Value = doctor_ID;
             _parameters.Add(idParameter);
-            _parameters.Add(descriptionParameter);
-            _parameters.Add(dateParamerter);
-            _parameters.Add(patient_IDParameter);
-            _parameters.Add(doctor_IDParameter);
-            int userId = 0;
-            using (var reader = access.ExecuteReader(Conn, "[UpdatePrescription]", new List<SqlParameter>()))
+
+            Staff staffInfo = new Staff();
+            using (var reader = access.ExecuteReader(Conn, "[GetAllStaffById]", _parameters))
             {
                 if (reader.Read())
                 {
-                    userId = reader.GetInt32(reader.GetOrdinal("ID"));
+                    staffInfo = (new Staff().Create(reader));
                 }
             }
-            return true;
+            return staffInfo;
         }
-        #endregion
 
-        #region Staff
-        public int CreateStaff(string firstName, string lastName, string id_Number, string gender, DateTime dob, string phone, string employee_Type, int practice_ID, int user_ID)
+        public int GetNewUserID()
         {
-            List<SqlParameter> _parameters = new List<SqlParameter>();
+            int UserID = 0;
+            using (var reader = access.ExecuteReader(Conn, "[GetNewUserID]", new List<SqlParameter>()))
+            {
+                if (reader.Read())
+                {
+                    UserID = reader.GetInt32(reader.GetOrdinal("ID"));
+                }
+            }
+            return (UserID + 1);
+        }
+
+        public bool InsertStaff(string firstName, string lastName, string id_Number, string gender, string dob, string phone,
+            string street_Address, string suburb, string city, string country, int ACCESSLEVEL_ID, string employee_Type, int practice_ID, int User_ID, string Email)
+        {
+            _parameters = new List<SqlParameter>();
+            List<SqlParameter>  _parametersCreateUser = new List<SqlParameter>();
+            SqlParameter IDParameter = new SqlParameter("@ID", SqlDbType.NVarChar);
             SqlParameter firstNameParameter = new SqlParameter("@FirstName", SqlDbType.NVarChar);
             SqlParameter lastNameParameter = new SqlParameter("@LastName", SqlDbType.NVarChar);
             SqlParameter id_NumberParameter = new SqlParameter("@ID_Number", SqlDbType.NVarChar);
             SqlParameter genderParameter = new SqlParameter("@Gender", SqlDbType.NVarChar);
-            SqlParameter dobParameter = new SqlParameter("@DOB", SqlDbType.DateTime);
+            SqlParameter dobParameter = new SqlParameter("@DOB", SqlDbType.NVarChar);
             SqlParameter phoneParameter = new SqlParameter("@Phone", SqlDbType.NVarChar);
+            SqlParameter street_AddressParameter = new SqlParameter("@Street_Address", SqlDbType.NVarChar);
+            SqlParameter suburbParameter = new SqlParameter("@Suburb", SqlDbType.NVarChar);
+            SqlParameter cityParameter = new SqlParameter("@City", SqlDbType.NVarChar);
+            SqlParameter countryParameter = new SqlParameter("@Country", SqlDbType.NVarChar);
             SqlParameter employee_TypeParameter = new SqlParameter("@Employee_Type", SqlDbType.NVarChar);
+            SqlParameter accessLevelParameter = new SqlParameter("@AccessLevel", SqlDbType.NVarChar);
             SqlParameter practice_IDParameter = new SqlParameter("@Practice_ID", SqlDbType.Int);
-            SqlParameter user_IDParameter = new SqlParameter("@User_ID", SqlDbType.Int);
+            SqlParameter User_IDParameter = new SqlParameter("@User_ID", SqlDbType.Int);
+            SqlParameter emailParameter = new SqlParameter("@Email", SqlDbType.NVarChar);
+
             firstNameParameter.Value = firstName;
             lastNameParameter.Value = lastName;
             id_NumberParameter.Value = id_Number;
             genderParameter.Value = gender;
             dobParameter.Value = dob;
             phoneParameter.Value = phone;
+            street_AddressParameter.Value = street_Address;
+            suburbParameter.Value = suburb;
+            cityParameter.Value = city;
+            countryParameter.Value = country;
             employee_TypeParameter.Value = employee_Type;
+            accessLevelParameter.Value = ACCESSLEVEL_ID;
             practice_IDParameter.Value = practice_ID;
-            user_IDParameter.Value = user_ID;
+            User_IDParameter.Value = User_ID;
+            emailParameter.Value = Email;
+
             _parameters.Add(firstNameParameter);
             _parameters.Add(lastNameParameter);
             _parameters.Add(id_NumberParameter);
             _parameters.Add(genderParameter);
             _parameters.Add(dobParameter);
             _parameters.Add(phoneParameter);
+            _parameters.Add(street_AddressParameter);
+            _parameters.Add(suburbParameter);
+            _parameters.Add(cityParameter);
+            _parameters.Add(countryParameter);
+            _parameters.Add(employee_TypeParameter);
+            _parametersCreateUser.Add(accessLevelParameter);
+            _parameters.Add(practice_IDParameter);
+            _parameters.Add(User_IDParameter);
+            _parameters.Add(emailParameter);
+            
+            //try
+            //{
+
+            access.ExecuteNonQuery(Conn, _parametersCreateUser, "[CreateUser]");
+
+
+            if (User_ID != 0)
+            {
+                access.ExecuteNonQuery(Conn, _parameters, "[InsertStaff]");
+            }
+        
+                return true;
+            //}
+            //catch (Exception)
+            //{
+            //    return false;
+            //}
+        }
+
+        public bool UpdateStaff(int ID, string firstName, string lastName, string id_Number, string gender, string dob, string phone,
+            string street_Address, string suburb, string city, string country, string employee_Type, int practice_ID, string Email)
+        {
+            _parameters = new List<SqlParameter>();
+            SqlParameter IDParameter = new SqlParameter("@ID", SqlDbType.NVarChar);
+            SqlParameter firstNameParameter = new SqlParameter("@FirstName", SqlDbType.NVarChar);
+            SqlParameter lastNameParameter = new SqlParameter("@LastName", SqlDbType.NVarChar);
+            SqlParameter id_NumberParameter = new SqlParameter("@ID_Number", SqlDbType.NVarChar);
+            SqlParameter genderParameter = new SqlParameter("@Gender", SqlDbType.NVarChar);
+            SqlParameter dobParameter = new SqlParameter("@DOB", SqlDbType.NVarChar);
+            SqlParameter phoneParameter = new SqlParameter("@Phone", SqlDbType.NVarChar);
+            SqlParameter street_AddressParameter = new SqlParameter("@Street_Address", SqlDbType.NVarChar);
+            SqlParameter suburbParameter = new SqlParameter("@Suburb", SqlDbType.NVarChar);
+            SqlParameter cityParameter = new SqlParameter("@City", SqlDbType.NVarChar);
+            SqlParameter countryParameter = new SqlParameter("@Country", SqlDbType.NVarChar);
+            SqlParameter employee_TypeParameter = new SqlParameter("@Employee_Type", SqlDbType.NVarChar);
+            SqlParameter practice_IDParameter = new SqlParameter("@Practice_ID", SqlDbType.Int);
+            SqlParameter emailParameter = new SqlParameter("@Email", SqlDbType.NVarChar);
+
+            IDParameter.Value = ID;
+            firstNameParameter.Value = firstName;
+            lastNameParameter.Value = lastName;
+            id_NumberParameter.Value = id_Number;
+            genderParameter.Value = gender;
+            dobParameter.Value = dob;
+            phoneParameter.Value = phone;
+            street_AddressParameter.Value = street_Address;
+            suburbParameter.Value = suburb;
+            cityParameter.Value = city;
+            countryParameter.Value = country;
+            employee_TypeParameter.Value = employee_Type;
+            practice_IDParameter.Value = practice_ID;
+            emailParameter.Value = Email;
+
+            _parameters.Add(IDParameter);
+            _parameters.Add(firstNameParameter);
+            _parameters.Add(lastNameParameter);
+            _parameters.Add(id_NumberParameter);
+            _parameters.Add(genderParameter);
+            _parameters.Add(dobParameter);
+            _parameters.Add(phoneParameter);
+            _parameters.Add(street_AddressParameter);
+            _parameters.Add(suburbParameter);
+            _parameters.Add(cityParameter);
+            _parameters.Add(countryParameter);
             _parameters.Add(employee_TypeParameter);
             _parameters.Add(practice_IDParameter);
-            _parameters.Add(user_IDParameter);
-            int userId = 0;
-            using (var reader = access.ExecuteReader(Conn, "[CreateStaff]", new List<SqlParameter>()))
-            {
-                if (reader.Read())
-                {
-                    userId = reader.GetInt32(reader.GetOrdinal("ID"));
-                }
-            }
-            return userId;
-        }
+            _parameters.Add(emailParameter);
 
-        public Staff GetStaff(int id)
-        {
-            List<SqlParameter> _parameters = new List<SqlParameter>();
-            SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
-            idParameter.Value = id;
-            _parameters.Add(idParameter);
-            Staff staffInfo = new Staff();
-            int userId = 0;
-            using (var reader = access.ExecuteReader(Conn, "[GetStaff]", new List<SqlParameter>()))
-            {
-                if (reader.Read())
-                {
-                    userId = reader.GetInt32(reader.GetOrdinal("ID"));
-                }
-            }
-            return staffInfo;
-        }
-
-        public List<Staff> GetAllStaffMembers()
-        {
-            List<Staff> staffInfo = new List<Staff>();
-            int userId = 0;
-            using (var reader = access.ExecuteReader(Conn, "[GetAllStaffMembers]", new List<SqlParameter>()))
-            {
-                if (reader.Read())
-                {
-                    userId = reader.GetInt32(reader.GetOrdinal("ID"));
-                }
-            }
-            return staffInfo;
+            //try
+            //{
+                access.ExecuteNonQuery(Conn, _parameters, "[UpdateStaff]");
+                return true;
+            //}
+            //catch (Exception)
+            //{
+            //    return false;
+            //}
         }
 
         public bool DeleteStaff(int id)
         {
-            List<SqlParameter> _parameters = new List<SqlParameter>();
+            _parameters = new List<SqlParameter>();
             SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
             idParameter.Value = id;
             _parameters.Add(idParameter);
+
             int userId = 0;
             using (var reader = access.ExecuteReader(Conn, "[DeleteStaff]", new List<SqlParameter>()))
             {
@@ -702,55 +1461,129 @@ namespace DataClient
             }
             return true;
         }
+        #endregion
 
-        public bool UpdateStaff(int id, string firstName, string lastName, string id_Number, string gender, DateTime dob, string phone, string employee_Type, int practice_ID, int user_ID)
+        #region Doctor
+        public bool NewUpdateDoctor(Doctor doc, int UserId)
         {
-            List<SqlParameter> _parameters = new List<SqlParameter>();
-            SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
+            List<SqlParameter> parameters = new List<SqlParameter>();
             SqlParameter firstNameParameter = new SqlParameter("@FirstName", SqlDbType.NVarChar);
             SqlParameter lastNameParameter = new SqlParameter("@LastName", SqlDbType.NVarChar);
-            SqlParameter id_NumberParameter = new SqlParameter("@ID_Number", SqlDbType.NVarChar);
-            SqlParameter genderParameter = new SqlParameter("@Gender", SqlDbType.NVarChar);
-            SqlParameter dobParameter = new SqlParameter("@DOB", SqlDbType.DateTime);
-            SqlParameter phoneParameter = new SqlParameter("@Phone", SqlDbType.NVarChar);
-            SqlParameter employee_TypeParameter = new SqlParameter("@Employee_Type", SqlDbType.NVarChar);
-            SqlParameter practice_IDParameter = new SqlParameter("@Practice_ID", SqlDbType.Int);
-            SqlParameter user_IDParameter = new SqlParameter("@User_ID", SqlDbType.Int);
-            idParameter.Value = id;
-            firstNameParameter.Value = firstName;
-            lastNameParameter.Value = lastName;
-            id_NumberParameter.Value = id_Number;
-            genderParameter.Value = gender;
-            dobParameter.Value = dob;
-            phoneParameter.Value = phone;
-            employee_TypeParameter.Value = employee_Type;
-            practice_IDParameter.Value = practice_ID;
-            user_IDParameter.Value = user_ID;
-            _parameters.Add(idParameter);
-            _parameters.Add(firstNameParameter);
-            _parameters.Add(lastNameParameter);
-            _parameters.Add(id_NumberParameter);
-            _parameters.Add(genderParameter);
-            _parameters.Add(dobParameter);
-            _parameters.Add(phoneParameter);
-            _parameters.Add(employee_TypeParameter);
-            _parameters.Add(practice_IDParameter);
-            _parameters.Add(user_IDParameter);
-            int userId = 0;
-            using (var reader = access.ExecuteReader(Conn, "[UpdateStaff]", new List<SqlParameter>()))
+            SqlParameter genderParameter = new SqlParameter("@Gender", SqlDbType.Char);
+            SqlParameter addressParameter = new SqlParameter("@Address", SqlDbType.NVarChar);
+            SqlParameter practiceIdParameter = new SqlParameter("@PracticeID", SqlDbType.Int);
+            SqlParameter userIdParameter = new SqlParameter("@UserID", SqlDbType.Int);
+            SqlParameter jobTitleParameter = new SqlParameter("@JobTitle", SqlDbType.NVarChar);
+
+            firstNameParameter.Value = doc.FirstName;
+            parameters.Add(firstNameParameter);
+            lastNameParameter.Value = doc.LastName;
+            parameters.Add(lastNameParameter);
+            genderParameter.Value = doc.Gender;
+            parameters.Add(genderParameter);
+            addressParameter.Value = doc.Address;
+            parameters.Add(addressParameter);
+            practiceIdParameter.Value = doc.Practice_ID;
+            parameters.Add(practiceIdParameter);
+            userIdParameter.Value = doc.User_Id;
+            parameters.Add(userIdParameter);
+            jobTitleParameter.Value = doc.Job_Title;
+            parameters.Add(jobTitleParameter);
+
+            try
             {
-                if (reader.Read())
-                {
-                    userId = reader.GetInt32(reader.GetOrdinal("ID"));
-                }
+                access.ExecuteNonQuery(Conn, parameters, "[NewUpdateDoctor]");
+                access.LogEntry(UserId, "User Added new Doctor");
+                return true;
             }
-            return true;
+            catch (Exception ex)
+            {
+                access.LogEntry(UserId, ex.ToString());
+                return false;
+            }
         }
 
-        public Doctor GetDoctor(int DocID)
+        public List<Doctor> GetAllDoctors()
         {
-            return null;
+            List<Doctor> DoctorsInfo = new List<Doctor>();
+            using (var reader = access.ExecuteReader(Conn, "[GetAllDoctors]", new List<SqlParameter>()))
+            {
+                while (reader.Read())
+                {
+                    DoctorsInfo.Add(new Doctor().Create(reader));
+                }                   
+            }
+            return DoctorsInfo;
+        }
+
+        public Doctor GetDoctorById(int Id)
+        {
+            List<SqlParameter> _parameter = new List<SqlParameter>();
+            SqlParameter IdParameter = new SqlParameter("@Id", SqlDbType.Int);
+            IdParameter.Value = Id;
+            _parameter.Add(IdParameter);
+
+            Doctor DoctorsInfo = new Doctor();
+            //try
+            //{
+                using (var reader = access.ExecuteReader(Conn, "[GetDoctorById]", _parameter))
+                {
+                    if (reader.Read())
+                    {
+                        DoctorsInfo = new Doctor().Create(reader);
+                    }
+                }
+            //}
+            //catch (Exception ex)
+            //{
+            //    access.LogEntry(UserId, ex.ToString());
+            //}
+            return DoctorsInfo;
         }
         #endregion
+
+        #region Medicine_Inventory
+        public bool NewUpdateMedicine_Inventory(Medicine_Inventory inventory, int UserId)
+        {
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            SqlParameter idParameter = new SqlParameter("@FirstName", SqlDbType.Int);
+            SqlParameter descriptionParameter = new SqlParameter("@LastName", SqlDbType.NVarChar);
+            SqlParameter drugConcentration = new SqlParameter("@Gender", SqlDbType.NVarChar);
+            SqlParameter drugNameParameter = new SqlParameter("@Address", SqlDbType.NVarChar);
+            SqlParameter quantityInStockParameter = new SqlParameter("@PracticeID", SqlDbType.Int);
+            SqlParameter expiryDateParameter = new SqlParameter("@UserID", SqlDbType.DateTime);
+            SqlParameter quantityPurchasedParameter = new SqlParameter("@JobTitle", SqlDbType.Int);
+            SqlParameter purchaseDateParameter = new SqlParameter("@JobTitle", SqlDbType.Int);
+
+            idParameter.Value = inventory.ID;
+            parameters.Add(idParameter);
+            descriptionParameter.Value = inventory.Description;
+            parameters.Add(descriptionParameter);
+            drugConcentration.Value = inventory.DrugConcentration;
+            parameters.Add(drugConcentration);
+            drugNameParameter.Value = inventory.DrugName;
+            parameters.Add(drugNameParameter);
+            quantityInStockParameter.Value = inventory.QuantityInStock;
+            parameters.Add(quantityInStockParameter);
+            expiryDateParameter.Value = inventory.ExpiryDate;
+            parameters.Add(expiryDateParameter);
+            quantityPurchasedParameter.Value = inventory.QuantityPurchased;
+            parameters.Add(quantityPurchasedParameter);
+            purchaseDateParameter.Value = inventory.PurchaseDate;
+            parameters.Add(purchaseDateParameter);
+
+            try
+            {
+                access.ExecuteNonQuery(Conn, parameters, "[NewUpdateMedicine_Inventory]");
+                access.LogEntry(UserId, "User Added new Medicine Inventory");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                access.LogEntry(UserId, ex.ToString());
+                return false;
+            }
+        }
+		#endregion
     }
 }

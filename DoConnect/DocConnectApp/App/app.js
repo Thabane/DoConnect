@@ -1,4 +1,4 @@
-﻿var app = angular.module('app', ['ngRoute', 'ngLocationUpdate']);
+﻿var app = angular.module('app', ['ngRoute', 'ngLocationUpdate', 'angularUtils.directives.dirPagination']);
 
 app.config(
 [
@@ -16,6 +16,30 @@ app.config(
             })
             .when("/Patients", {
                 templateUrl: "App/Views/Patients/patients.html",
+                controller: "PatientsController"
+            })
+            .when("/ConsultationNotes", {
+                templateUrl: "App/Views/Patients/PatientRecord/ConsultationNotes.html",
+                controller: "PatientsController"
+            })
+            .when("/test/:PatientID", {
+                templateUrl: "App/Views/Patients/test.html",
+                controller: "testController"
+            })
+            .when("/NewConsultationNotes", {
+                templateUrl: "App/Views/Patients/PatientRecord/NewConsultationNotes.html",
+                controller: "PatientsController"
+            })
+            .when("/MedicalHistory", {
+                templateUrl: "App/Views/Patients/PatientRecord/MedicalHistory.html",
+                controller: "PatientsController"
+            })
+            .when("/PrescriptionDetails", {
+                templateUrl: "App/Views/Patients/PatientRecord/PrescriptionDetails.html",
+                controller: "PatientsController"
+            })
+            .when("/NewPrescription", {
+                templateUrl: "App/Views/Patients/PatientRecord/NewPrescription.html",
                 controller: "PatientsController"
             })
             .when("/NewPatient", {
@@ -53,6 +77,14 @@ app.config(
             .when("/NewMedicalAidProvider", {
                 templateUrl: "App/Views/MedicalAid/NewMedicalAidProvider.html",
                 controller: "MedicalAidController"
+            })
+            .when("/Practices", {
+                templateUrl: "App/Views/Practices/Practices.html",
+                controller: "PracticesController"
+            })
+            .when("/NewPractice", {
+                templateUrl: "App/Views/Practices/NewPractice.html",
+                controller: "PracticesController"
             })
             .when("/Accounting", {
                 templateUrl: "App/Views/Accounting/Accounting.html",
@@ -110,7 +142,6 @@ app.config(
         $httpProvider.interceptors.push('AuthHttpResponseInterceptor');
     }
 ]);
-
 
 app.run(
     [

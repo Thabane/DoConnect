@@ -15,41 +15,24 @@
         </ul>       
 
         <div class="panel panel-default">
-            <table class="table-bordered" style="float:right; border:0; margin-bottom:5px;">
-                <tbody>
-                    <tr>
-                        <td style="border: 0;">
-                            <div class="btn-group">
-                                <a class="btn btn-default dropdown-toggle btn-select2" href="#" data-toggle="dropdown" style="font-size:13px;" aria-expanded="false">Search field <span class="caret"></span></a>
-                                <ul class="dropdown-menu" style="font-size:13px;">
-                                    <li><a href="#">Expense Description</a></li>
-                                    <li><a href="#">Date</a></li>
-                                    <li><a href="#">Amount</a></li>
-                                </ul>
-                            </div>
-                        </td>
-                        <td style="border:0;">
-                            <div class="form-group input-group" style="margin-top:4px; margin-bottom:4px;">
-                                <input class="form-control" type="text" style="font-size:13px;"><span class="input-group-btn">
-                                    <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
-                                </span>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="row" style="margin-top: 10px; margin-right: 10px;">
+                <div class="col-md-4"></div><div class="col-md-4"><h5 class="pull-right">Search:</h5></div>
+                <div class="form-group col-md-4">
+                    <input class="form-control" type="text" style="font-size:13px;" ng-model="search">
+                </div>
+            </div>
 
             <table class="table table-hover">
                 <thead style="background-color: #f8f8f8;">
                     <tr>
-                        <th style="width: 50%;">Expense Description</th>
-                        <th style="width: 15%;">Date</th>
-                        <th style="width: 15%;">Amount (R)</th>
-                        <th style="width: 15%;">Action</th>
+                        <th style="width: 50%;" ng-click="sort('Description')">Expense Description<span class="fa sort-icon" ng-show="sortKey=='Description'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                        <th style="width: 15%;" ng-click="sort('Date')">Date<span class="fa sort-icon" ng-show="sortKey=='Date'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                        <th style="width: 15%;" ng-click="sort('Amount')">Amount (R)<span class="fa sort-icon" ng-show="sortKey=='Amount'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                        <th style="width: 15%;">Action
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="Expense in Expenses">
+                    <tr dir-paginate="Expense in Expenses | filter:search | orderBy:sortKey:reverse | itemsPerPage:5">
                         <td>{{Expense.Description}}</td>
                         <td>{{Expense.Date}}</td>
                         <td>{{Expense.Amount}}</td>
@@ -61,10 +44,11 @@
                 </tbody>
             </table>
 
-            <ul class="pager">
-                <li class="previous"><a href="#">Previous</a></li>
-                <li class="next"><a href="#">Next</a></li>
-            </ul>
+            <div class="row">
+                <div class="col-md-12">
+                    <dir-pagination-controls class="pull-right" max-size="5" direction-links="true" boundary-links="true" style="margin-right: 20px;"></dir-pagination-controls>
+                </div>
+            </div>
         </div>
         <!--Expenses Section Ends -->   
 

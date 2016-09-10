@@ -13,7 +13,7 @@ BEGIN
       ,[Patient_ID]
       ,[Doctor_ID]
 	FROM 
-	   [DoConnect].[dbo].[Invoice]
+	   [Invoice]
 
 END
 GO

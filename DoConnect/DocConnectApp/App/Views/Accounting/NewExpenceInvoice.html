@@ -15,53 +15,68 @@
         </ul>
 
         <!--New Expense Modal-->
-        <div id="New_Expense_Modal">
-            <form>
-                <div style="margin:auto; width:45%;">
-                    <div class="modal-header" style="border-bottom:0px;"></div>
-                    <div class="modal-body">
-                        <div class="form-horizontal">
-                            <input type="hidden" name="action" value="insert">
-                            <input type="hidden" name="expense_id" value="0">
-                            <input type="hidden" name="invoice_type" value="expense">
-
-                            <div class="form-group">
-                                <h5 class="col-md-4 control-label" style="text-align:left">Expense Description<span class="require-field" style="color:red">*</span></h5>
-                                <div class="col-md-8"><input id="party_name" class="form-control validate[required] text-input" type="text" value="" name="New_ExpenseDescription"></div>
+        <form name="Form">
+            <div style="margin:auto; width:45%;">
+                <div class="modal-header" style="border-bottom:0px;"></div>
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        <div class="row" style="margin-top:8px; margin-bottom:0px;">
+                            <h5 class="col-md-4" style="text-align:left">Expense Description:<span style="color:red">*</span></h5>
+                            <div class="col-md-8"><input class="form-control insert" type="text" ng-model="Description" name="Description" ng-required="true" ng-pattern="/^[0-9a-zA-Z.,'-'\s]{3,}$/"></div>
+                        </div>
+                        <div class="row" style="margin-top:0px; margin-bottom:8px;">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-8">
+                                <small ng-show="Form.Description.$invalid && Form.Description.$touched && Form.Description.$error.required">Required field.<br></small>
+                                <small ng-show="Form.Description.$invalid && Form.Description.$touched && Form.Description.$error.pattern">Only alphanumeric letters allowed and atleast 3 charactors.</small>
                             </div>
-                            <div class="form-group">
-                                <h5 class="col-md-4 control-label" style="text-align:left">Status<span class="require-field" style="color:red">*</span></h5>
-                                <div class="col-md-8">
-                                    <select name="payment_status" id="payment_status" class="form-control validate[required]">
-                                        <option value="Fully-Paid">Fully-Paid</option>
-                                        <option value="Part-Paid">Part-Paid</option>
-                                        <option value="Unpaid">Unpaid</option>
-                                    </select>
-                                </div>
+                        </div>
+                        <div class="form-group" style="margin-top:8px; margin-bottom:0px;">
+                            <h5 class="col-md-4" style="text-align:left">Status:<span style="color:red">*</span></h5>
+                            <div class="col-md-8">
+                                <select class="form-control" ng-model="Status" name="Status" ng-required="true">
+                                    <option value="Fully-Paid">Fully-Paid</option>
+                                    <option value="Part-Paid">Part-Paid</option>
+                                    <option value="Unpaid">Unpaid</option>
+                                </select>
                             </div>
-                            <div class="form-group">
-                                <h5 class="col-md-4 control-label" style="text-align:left">Date<span class="require-field" style="color:red">*</span></h5>
-                                <div class="col-md-8"><div class="row" style="padding-left:15px; padding-right:15px;">
-                                                            <div class="col-md-12">
-                                                                <div class="form-group">
-                                                                    <div class="input-group date datetimepicker" onclick="DT()">
-                                                                        <input class="form-control" type="text">
-                                                                        <span class="input-group-addon">
-                                                                            <span class="glyphicon glyphicon-calendar"></span>
-                                                                        </span>
-                                                                    </div>
+                        </div>
+                        <div class="row" style="margin-top:0px; margin-bottom:8px;">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-8">
+                                <small ng-show="Form.Description.$invalid && Form.Description.$touched && Form.Description.$error.required">Required field.<br></small>
+                                <small ng-show="Form.Description.$invalid && Form.Description.$touched && Form.Description.$error.pattern">Only alphanumeric letters allowed and atleast 3 charactors.</small>
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin-top:8px; margin-bottom:0px;">
+                            <h5 class="col-md-4" style="text-align:left">Date:<span style="color:red">*</span></h5>
+                            <div class="col-md-8"><div class="row" style="padding-left:15px; padding-right:15px;">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <div class="input-group date datetimepicker" onclick="DT()">
+                                                                    <input class="form-control" type="text" ng-model="Date" name="Date" ng-required="true" ng-pattern="/^(0?[1-9]|1\d|2[0-8]|29(?=[-]\d?\d[-](?!1[01345789]00|2[1235679]00)\d\d(?:[02468][048]|[13579][26]))|30(?![-]0?2)|31(?=[-]0?[13578]|[-]1[02]))[-](0?[1-9]|1[0-2])[-]([12]\d{3})$/">
+                                                                    <span class="input-group-addon">
+                                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                                    </span>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                </div>
+                                                    </div>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:0px; margin-bottom:8px;">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-8">
+                                <small ng-show="Form.Date.$invalid && Form.Date.$touched && Form.Date.$error.required">Required field.<br></small>
+                                <small ng-show="Form.Date.$invalid && Form.Date.$touched && Form.Date.$error.pattern">Only alphanumeric letters allowed and atleast 3 charactors.</small>
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <input type="submit" value="Create Expense Entry" name="save_expense" class="btn btn-primary">
-                    </div>
                 </div>
-            </form>
-        </div><!--New Expense Modal Ends-->
-   </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="InsertExpense(Description, Status, Date, Practice_ID, User_ID)">Create Expense Entry</button>
+                </div>
+            </div>
+        </form>
+    </div><!--New Expense Modal Ends-->
 </div>
