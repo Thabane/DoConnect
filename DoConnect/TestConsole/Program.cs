@@ -19,18 +19,6 @@ namespace TestConsole
     {
         static void Main(string[] args)
         {
-            //ConnectToAPI();
-           //doStuff();
-           //differentApproach();
-
-            Infermedica med = new Infermedica();
-            string result = med.GetSymptoms();
-            //var res = med.GetSymptoms();
-            //var result = res.Result;
-            var logData = JsonConvert.DeserializeObject<List<Symptom>>(result)
-            ?? new List<Symptom>();
-
-
             Console.WriteLine("Connected");
             Console.ReadKey();
         }
