@@ -342,7 +342,6 @@ namespace DataClient
             _parameters.Add(presciption_IDParameter);
             _parameters.Add(referral_IDParameter);
             
-
             //try
             //{
             int insertedConsultationID = 0;

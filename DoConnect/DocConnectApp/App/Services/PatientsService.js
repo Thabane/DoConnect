@@ -142,11 +142,11 @@
         }
 
         //Insert new record ##Patient_ID, Doctor_ID,
-        var InsertConsultation = function (ReasonForConsultation, Symptoms, ClinicalFindings, Diagnosis, TestResultSummary, TreatmentPlan, Presciption_ID, Referral_ID) {
+        var InsertConsultation = function (Patient_ID, ReasonForConsultation, Symptoms, ClinicalFindings, Diagnosis, TestResultSummary, TreatmentPlan, Presciption_ID, Referral_ID) {
             console.log(ReasonForConsultation, Symptoms, ClinicalFindings, Diagnosis, TestResultSummary, TreatmentPlan, Presciption_ID, Referral_ID);
             return $http.post("api/Patients/InsertConsultation",
             {
-                //'Consultation_Patient_ID': Patient_ID,
+                'Consultation_Patient_ID': Patient_ID,
                 //'Consultation_Doctor_ID': Doctor_ID,
                 'Consultation_ReasonForConsultation': ReasonForConsultation,
                 'Consultation_Symptoms': Symptoms,

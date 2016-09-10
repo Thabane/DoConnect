@@ -6,7 +6,8 @@
         $scope.PageTitle_MedicalHistory = 'Medical Record';
         $scope.PageTitle_PrescriptionDetails = 'Prescription Details';
         $scope.PageTitle_ConsultationNotes = 'Consultation Notes';
-
+        $scope.intID = $routeParams.PatientID;
+        $scope.intConsultationID = $routeParams.ConsultationID;
         $scope.EMAIL_REGEXP = "/^(?=.{1,254}$)(?=.{1,64}@)[-!#$%&'*+\/0-9=?A-Z^_`a-z{|}~]+(\.[-!#$%&'*+\/0-9=?A-Z^_`a-z{|}~]+)*@[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?(\.[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?)*$/";
         $scope.NUMBER_REGEXP = "/^\s*(\-|\+)?(\d+|(\d*(\.\d*)))([eE][+-]?\d+)?\s*$/";
         $scope.NAME = "/^[A-Za-z]{3,}$/";
@@ -39,7 +40,7 @@
                 
         //Select PatientByID Function
         $scope.ViewPatient = function (PatientID) {
-            PatientsService.GetPatientByID(1).then(function (result) {
+            PatientsService.GetPatientByID($scope.intID).then(function (result) {
                 $scope.PatientDetails = result.data;
             });
         };
@@ -56,7 +57,7 @@
         };
         //Select Medical Record by PatientID Funtion
         var GetMedicalRecord = function () {
-            PatientsService.GetMedicalRecord(1).then(function (result) {       
+            PatientsService.GetMedicalRecord($scope.intID).then(function (result) {
                 $scope.ID                                   = result.data["ID"];
                 $scope.FirstName = result.data["FirstName"];
                 $scope.LastName = result.data["LastName"];
@@ -151,7 +152,7 @@
 
         //Delete MedicalRecord Funtion
         $scope.DeleteMedicalRecord = function () {
-            PatientsService.DeleteMedicalRecord(1).then(function () {
+            PatientsService.DeleteMedicalRecord($scope.intID).then(function () {
                 GetMedicalRecord();
                 btnSuccess("Medical Record details successfully deleted.");
             }, function (error) {
@@ -167,19 +168,19 @@
         $scope.Frequencyz = [{ "Freq": "Daily" }, { "Freq": "Every other day" }, { "Freq": "BID/b.i.d. (Twice a Day)" }, { "Freq": "TID/t.id. (Three Times a Day)" }, { "Freq": "QID/q.i.d. (Four Times a Day)" }, { "Freq": "QHS (Every Bedtime)" }, { "Freq": "Q4h (Every 4 hours)" }, { "Freq": "Q4-6h (Every 4 to 6 hours)" }]
         //Select Prescription Notes by PatientID Funtion
         var GetPrescription = function () {
-            PatientsService.GetPrescription(1).then(function (result) {
-                $scope.PrescriptionDetails = result.data;
+            PatientsService.GetPrescription($scope.intID).then(function (result) {
+                $scope.PrescriptionDetails = result.data;                
             });
         };
         GetPrescription();
 
-        //Insert Prescription Notes Funtion ##$routeParams.PatientID, Logged in DoctorID, Consultation_ID
+        //Insert Prescription Notes Funtion ##Patient_ID, Doctor_ID, Consultation_ID
         $scope.InsertPrescription = function (DrugName, Strength, DispenseNumber, RefillNumber) {
-            PatientsService.InsertPrescription(1, 1, 4, DrugName, Strength, $scope.Seleceted_IntakeRoute, $scope.Seleceted_Frequency, DispenseNumber, RefillNumber).success(function () {
+            PatientsService.InsertPrescription($scope.intID, 4, $scope.intConsultationID, DrugName, Strength, $scope.Seleceted_IntakeRoute, $scope.Seleceted_Frequency, DispenseNumber, RefillNumber).success(function () {
                 GetPrescription();
                 angular.element(".insert").val('');
                 btnSuccess("Prescription Note successfully inserted.");
-                btnRedirect("PrescriptionDetails");
+                btnRedirect("PrescriptionDetails/" + $scope.intID);
             }, function (error) {
                 btnAlert("System Error Message", "Insert unsuccessful.");
             });
@@ -221,7 +222,7 @@
 
         //Delete Prescription Funtion
         $scope.DeleteConsultationNote = function () {
-            PatientsService.DeletePrescription(1).then(function () {
+            PatientsService.DeletePrescription($scope.intID).then(function () {
                 GetPrescription();
                 btnSuccess("Prescription Note details successfully deleted.");
             }, function (error) {
@@ -233,7 +234,7 @@
         
         //Select Consultation Notes by PatientID Funtion
         var GetConsultationNotes = function () {
-            PatientsService.GetConsultationNotes(1).then(function (result) {
+            PatientsService.GetConsultationNotes($scope.intID).then(function (result) {
                 $scope.ConsultationNotes = result.data;
             });
         };
@@ -241,11 +242,11 @@
 
         //Insert Consultation Notes Funtion ##Remember to add Patient_ID, Doctor_ID, 
         $scope.InsertConsultation = function (ReasonForConsultation, Symptoms, ClinicalFindings, Diagnosis, TestResultSummary, TreatmentPlan) {
-            PatientsService.InsertConsultation(ReasonForConsultation, Symptoms, ClinicalFindings, Diagnosis, TestResultSummary, TreatmentPlan).success(function () {
+            PatientsService.InsertConsultation($scope.intID, ReasonForConsultation, Symptoms, ClinicalFindings, Diagnosis, TestResultSummary, TreatmentPlan, 1, 1).success(function () {
                 GetConsultationNotes();
                 angular.element(".insert").val('');
                 btnSuccess("Consultation Note successfully inserted.");
-                btnRedirect("ConsultationNotes");
+                btnRedirect("ConsultationNotes/" + $scope.intID);
             }, function (error) {
                 btnAlert("System Error Message", "Insert unsuccessful.");
             });
@@ -273,7 +274,7 @@
 
         //Delete Consultation Notes Funtion
         $scope.DeleteConsultationNote = function () {
-            PatientsService.DeleteConsultationNote(1).then(function () {
+            PatientsService.DeleteConsultationNote($scope.intID).then(function () {
                 GetConsultationNotes();
                 btnSuccess("Consultation Note details successfully deleted.");
             }, function (error) {

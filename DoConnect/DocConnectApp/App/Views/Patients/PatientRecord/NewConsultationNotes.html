@@ -9,7 +9,7 @@
         <ul class="nav nav-tabs">
             <li role="presentation"><a href="/Patients"><i class="fa fa-align-justify"></i>Patient List</a></li>
             <li role="presentation"><a href="/NewPatient"><i class="fa fa-plus-circle"></i>New Patient</a></li>
-            <li role="presentation" class="active"><a href="/MedicalHistory"><i class="fa fa-align-justify"></i>Patient Record</a></li>
+            <li role="presentation" class="active"><a href="/MedicalHistory/{{intID}}"><i class="fa fa-align-justify"></i>Patient Record</a></li>
         </ul>
 
         <!-- Add Consultation Notes -->
@@ -17,9 +17,10 @@
             <div style="margin:auto; width:80%">
                 <div class="modal-header" style="border-bottom:0px;">
                     <ul class="nav nav-pills">
-                        <li role="presentation"><a href="/MedicalHistory">Medical Record</a></li>
-                        <li role="presentation"><a href="/PrescriptionDetails">Prescriptions</a></li>
-                        <li role="presentation" class="active"><a href="/ConsultationNotes">Consultation Notes</a></li>
+                        <li role="presentation"><a href="/MedicalHistory/{{intID}}">Medical Record</a></li>
+                        <li role="presentation" ng-show="ConsultationNotes.length != '0'"><a href="/PrescriptionDetails/{{intID}}">Prescriptions</a></li>
+                        <li role="presentation" ng-show="ConsultationNotes.length != '0'" class="active"><a href="/ConsultationNotes/{{intID}}">Consultation Notes</a></li>
+                        <li role="presentation" ng-show="ConsultationNotes.length == '0'" class="active"><a href="/NewConsultationNotes/{{intID}}">New Consultation Notes</a></li>
                     </ul>
                 </div>
 
@@ -83,13 +84,13 @@
                             <small ng-show="Form.TreatmentPlan.$invalid && Form.TreatmentPlan.$touched && Form.TreatmentPlan.$error.required">Required field.<br></small>
                             <small ng-show="Form.TreatmentPlan.$invalid && Form.TreatmentPlan.$touched && Form.TreatmentPlan.$error.pattern">Only alphanumeric letters allowed and atleast 3 charactors.</small>
                         </div>
-                    </div>
-                    <div class="row" style="margin-top:16px; margin-bottom:8px;">
+                    </div>                    
+                    <!-- #ToBeRevised# <div class="row" style="margin-top:16px; margin-bottom:8px;">
                         <div class="col-md-12">
                             <button class="btn btn-info btn-xs" ng-click="myFunctionConsultation_NewReferral()">New Referral</button>
                             <button class="btn btn-info btn-xs" ng-click="myFunctionConsultation_NewPrescribeMedication()">Prescribe Medication</button>
                         </div>
-                    </div>               
+                    </div>-->               
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" ng-click="InsertConsultation(ReasonForConsultation, Symptoms, ClinicalFindings, Diagnosis, TestResultSummary, TreatmentPlan)" ng-disabled="Form.$invalid">Add Consultation Notes</button>

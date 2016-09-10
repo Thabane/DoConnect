@@ -145,7 +145,7 @@ namespace DocConnectApp.Controllers
             DataLayer dtLayer = new DataLayer();
             
             //return dtLayer.NewConsultationNote(consultation.Consultation_Patient_ID, consultation.Consultation_Doctor_ID, consultation.Consultation_ReasonForConsultation, consultation.Consultation_Symptoms, consultation.Consultation_ClinicalFindings, consultation.Consultation_Diagnosis, consultation.Consultation_TestResultSummary, consultation.Consultation_TreatmentPlan, consultation.Consultation_Presciption_ID, consultation.Consultation_Referral_ID);
-            return dtLayer.NewConsultationNote(1, 4, consultation.Consultation_ReasonForConsultation, consultation.Consultation_Symptoms, consultation.Consultation_ClinicalFindings, consultation.Consultation_Diagnosis, consultation.Consultation_TestResultSummary, consultation.Consultation_TreatmentPlan, consultation.Consultation_Presciption_ID, consultation.Consultation_Referral_ID);
+            return dtLayer.NewConsultationNote(consultation.Consultation_Patient_ID, 4, consultation.Consultation_ReasonForConsultation, consultation.Consultation_Symptoms, consultation.Consultation_ClinicalFindings, consultation.Consultation_Diagnosis, consultation.Consultation_TestResultSummary, consultation.Consultation_TreatmentPlan, consultation.Consultation_Presciption_ID, consultation.Consultation_Referral_ID);
         }
 
         [HttpPost]//Update Employee
