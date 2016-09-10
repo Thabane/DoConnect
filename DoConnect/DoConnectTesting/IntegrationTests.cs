@@ -15,14 +15,14 @@ namespace DoConnectTesting
             var finalRes = res.Result;
             Assert.IsTrue(!string.IsNullOrEmpty(finalRes));
         }
-        //[TestMethod]
-        //public void GetSymptoms()
-        //{
-        //    Infermedica med = new Infermedica();
-        //    var res = med.GetSymptoms();
-        //    var finalRes = res.Result;
-        //    Assert.IsTrue(!string.IsNullOrEmpty(finalRes));
-        //}
+        [TestMethod]
+        public void GetSymptoms()
+        {
+            Infermedica med = new Infermedica();
+            var res = med.GetSymptoms();
+            var finalRes = res.Result;
+            Assert.IsTrue(!string.IsNullOrEmpty(finalRes));
+        }
         [TestMethod]
         public void GetSymptomById()
         {
