@@ -1,8 +1,13 @@
 ﻿app.controller("DiagnosisExpertSystemController", ["$scope", "DiagnosisExpertSystemService", "$interval",
     function ($scope, DiagnosisExpertSystemService, $interval) {
 
-        DiagnosisExpertSystemService.GetAllDiagnosisExpertSystem().then
-        (function (results) {
-            $scope.DiagnosisExpertSystem = result.data;
-        });
+
+        $scope.GetSymptoms = function () {
+            DiagnosisExpertSystemService.getDiagnosisExpertSystem().then
+            (function (result) {
+                $scope.Symp = result.data;
+                console.log($scope.Symp);
+            });
+        };
+        $scope.GetSymptoms();
     }]);

@@ -45,7 +45,6 @@ namespace DataClient
 
             StreamReader reader = new StreamReader(receiveStream, Encoding.UTF8);
             string content = reader.ReadToEnd();
-            Console.WriteLine(content);
             var json = content;
             return json;
         }

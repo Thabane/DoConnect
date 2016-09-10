@@ -8,7 +8,10 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using DataClient;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using ObjectModel;
+using ObjectModel.Infermedica_Models;
 
 namespace TestConsole
 {
@@ -17,8 +20,16 @@ namespace TestConsole
         static void Main(string[] args)
         {
             //ConnectToAPI();
-           doStuff();
+           //doStuff();
            //differentApproach();
+
+            Infermedica med = new Infermedica();
+            string result = med.GetSymptoms();
+            //var res = med.GetSymptoms();
+            //var result = res.Result;
+            var logData = JsonConvert.DeserializeObject<List<Symptom>>(result)
+            ?? new List<Symptom>();
+
 
             Console.WriteLine("Connected");
             Console.ReadKey();

@@ -49,6 +49,7 @@
     <Compile Include="Events.cs" />
     <Compile Include="Expenses.cs" />
     <Compile Include="GetAllPatients.cs" />
+    <Compile Include="Infermedica Models\Symptom.cs" />
     <Compile Include="Invoice.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Login.cs" />
