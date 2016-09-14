@@ -49,6 +49,10 @@
     <Compile Include="Events.cs" />
     <Compile Include="Expenses.cs" />
     <Compile Include="GetAllPatients.cs" />
+    <Compile Include="Infermedica Models\Condition.cs" />
+    <Compile Include="Infermedica Models\DiagnosisRequest.cs" />
+    <Compile Include="Infermedica Models\DiagnosisResponse.cs" />
+    <Compile Include="Infermedica Models\RiskFactor.cs" />
     <Compile Include="Infermedica Models\Symptom.cs" />
     <Compile Include="Invoice.cs" />
     <Compile Include="Log.cs" />
