@@ -6,7 +6,6 @@
             DiagnosisExpertSystemService.getDiagnosisExpertSystem().then
             (function (result) {
                 $scope.Symp = result.data;
-                console.log($scope.Symp);
             });
         };
         $scope.GetSymptoms();
