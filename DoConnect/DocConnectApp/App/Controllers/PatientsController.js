@@ -15,6 +15,8 @@
         $scope.EMAIL = "/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/";
         $scope.PHONE = "/^[2-9]\d{2}-\d{3}-\d{4}$/";
 
+        $scope.user = JSON.parse(sessionStorage.user);
+        alert($scope.user);
 
         var init_ControlSettings = function () {
             angular.element(".View_readonly").attr("readonly", true);
@@ -32,8 +34,7 @@
         $scope.GetPatients = function () {
             PatientsService.GetAllPatients().then
             (function (result) {
-                $scope.Patients = result.data;
-                
+                $scope.Patients = result.data;                
             });
         };
         $scope.GetPatients();
@@ -110,14 +111,13 @@
 
         $scope.Medical_AidID = 0;
         $scope.changedValueMedical_AidID = function (item) {
-            alert(item.ID);
             $scope.Medical_AidID = item.ID;
         };        
 
         //Insert Medical Record Funtion ##Doctor_ID
         $scope.InsertPatient = function (FirstName, LastName, Email, ID_Number, Cell_Number, DOB, Street_Address, Suburb, City, Country, SchemeName, MembershipNumber, Registration_Date, Deregistration_Date, Allergies, PreviousMedication, PreviousIllnesses, RiskFactors, SocialHistory, FamilyHistory) {
             PatientsService.InsertMedicalRecord(1, FirstName, LastName, Email, ID_Number, Cell_Number, DOB, $scope.Seleceted_Gender, Street_Address, Suburb, City, Country, $scope.Medical_AidID, SchemeName, MembershipNumber, Registration_Date, Deregistration_Date, Allergies, PreviousMedication, PreviousIllnesses, RiskFactors, SocialHistory, FamilyHistory).sucess(function () {
-                GetMedicalRecord();
+                //GetMedicalRecord();
                 angular.element(".insert").val('');
                 btnSuccess("Medical Record successfully inserted.");
             }, function (error) {
@@ -189,13 +189,11 @@
         $scope.Seleceted_IntakeRoute = 0;
         $scope.changedValueGetIntakeRoute = function (item) {
             $scope.Seleceted_IntakeRoute = item.Route;
-            alert($scope.Seleceted_IntakeRoute);
         };
 
         $scope.Seleceted_Frequency = 0;
         $scope.changedValueGetFrequency = function (item) {
             $scope.Seleceted_Frequency = item.Freq;
-            alert($scope.Seleceted_Frequency);
         };
 
         $scope.btnUpdatePrescription = function (Prescription_ID, Consultation_Diagnosis,Prescription_DrugDetails_DrugName,Prescription_DrugDetails_Strength,IntakeRoute,Frequency,Prescription_DrugDetails_DispenseNumber,Prescription_DrugDetails_RefillNumber) {

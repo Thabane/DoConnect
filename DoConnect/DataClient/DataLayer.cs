@@ -56,12 +56,15 @@ namespace DataClient
             return "";
         }
 
-        public Login MyLogin(string Email)
+        public Login MyLogin(string Email, string Password)
         {
             List<SqlParameter> _parameters = new List<SqlParameter>();
             SqlParameter EmailParameter = new SqlParameter("@Email", SqlDbType.NVarChar);
+            SqlParameter PasswordParameter = new SqlParameter("@Password", SqlDbType.NVarChar);
             EmailParameter.Value = Email;
+            PasswordParameter.Value = Password;
             _parameters.Add(EmailParameter);
+            _parameters.Add(PasswordParameter);
 
             Login Login = new Login();
             using (var reader = access.ExecuteReader(Conn, "[MyLogin]", _parameters))
@@ -72,6 +75,24 @@ namespace DataClient
                 }
             }
             return Login;
+        }
+
+        public Staff GetUserDetailsByUser_ID(int User_ID)
+        {
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            SqlParameter User_IDParameter = new SqlParameter("@User_ID", SqlDbType.Int);
+            User_IDParameter.Value = User_ID;
+            _parameters.Add(User_IDParameter);
+
+            Staff List = new Staff();
+            using (var reader = access.ExecuteReader(Conn, "[GetUserDetailsByUser_ID]", _parameters))
+            {
+                if (reader.Read())
+                {
+                    List = new Staff().GetLogginUser(reader);
+                }
+            }
+            return List;
         }
 
         public List<AccessLevel> GetAllAccessLevel()

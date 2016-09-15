@@ -63,18 +63,20 @@
                         <div class="modal-body">
                             <div class="row" style="margin-top:4px; margin-bottom:0px;">
                                 <div class="col-md-3"><h5>Date & Time:</h5></div>
-                                <div class="col-md-8"><input class="form-control readonly_ViewAppointment" type="datetime-local" name="Appointments_Date_Time" ng-model="Appointments_Date_Time.value" ng-required="true" /></div>
+                                <div class="col-md-8"><div class="col-md-6"><input class="form-control readonly_ViewAppointment" type="date" name="Appointments_Date" ng-model="Appointments_Date.value" ng-required="true" /></div>
+                                                      <div class="col-md-6"><input class="form-control readonly_ViewAppointment" type="time" name="Appointments_Time" ng-model="Appointments_Time" ng-required="true" /></div>
+                                 </div>
                             </div>
                             <div class="row" style="margin-top:0px; margin-bottom:8px;">
                                 <div class="col-md-3"></div>
                                 <div class="col-md-8">
-                                    <small ng-show="Form.Appointments_Date_Time.$invalid && Form.Appointments_Date_Time.$touched && Form.Appointments_Date_Time.$error.required">Required field.<br></small>
-                                    <small ng-show="Form.Appointments_Date_Time.$invalid && Form.Appointments_Date_Time.$touched && Form.Appointments_Date_Time.$error.pattern">Valid date fomart is ("yyyy-mm-dd").</small>
+                                    <small ng-show="Form.Appointments_Date.$invalid && Form.Appointments_Date.$touched && Form.Appointments_Date.$error.required">Required field.<br></small>
+                                    <small ng-show="Form.Appointments_Date.$invalid && Form.Appointments_Date.$touched && Form.Appointments_Date.$error.pattern">Valid date fomart is ("yyyy-mm-dd").</small>
                                 </div>
                             </div>
                             <div class="row" style="margin-top:4px; margin-bottom:0px;">
                                 <div class="col-md-3"><h5>Patient Name:</h5></div>
-                                <div class="col-md-8"><select class="form-control disable_ViewAppointment readonly_ViewAppointment" ng-model="Patient_ID" name="PatientName" ng-change="changedValueGetPatientID(Patient_ID)" data-ng-options="patient as patient.FirstName for patient in Patients" ng-required="true">
+                                <div class="col-md-8"><select class="form-control disable_ViewAppointment readonly_ViewAppointment" ng-model="Patient_ID" name="PatientName" ng-change="changedValueGetPatientID(Patient_ID)" data-ng-options="patient as patient.PatientFullName for patient in Patients" ng-required="true">
                                                             <option value="">{{Patient_FirstName}} {{Patient_LastName}}</option></select></div>
                             </div>
                             <div class="row" style="margin-top:0px; margin-bottom:8px;">
@@ -107,7 +109,7 @@
                             </div>
                             <div class="row" style="margin-top:4px; margin-bottom:0px;">
                                 <div class="col-md-3"><h5>Doctor Name:</h5></div>
-                                <div class="col-md-8"><select class="form-control disable_ViewAppointment readonly_ViewAppointment" ng-model="Doctors_ID" name="DoctorName" ng-required="true" ng-change="changedValueGetDoctors_ID(Doctors_ID)" data-ng-options="doctor as doctor.FirstName for doctor in Doctors">
+                                <div class="col-md-8"><select class="form-control disable_ViewAppointment readonly_ViewAppointment" ng-model="Doctors_ID" name="DoctorName" ng-required="true" ng-change="changedValueGetDoctors_ID(Doctors_ID)" data-ng-options="doctor as doctor.DoctorFullName for doctor in Doctors">
                                                             <option value="">{{Doctors_FirstName}} {{Doctors_LastName}}</option>
                                                        </select></div>
                             </div>

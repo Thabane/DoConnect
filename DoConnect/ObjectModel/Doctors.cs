@@ -15,8 +15,9 @@ namespace ObjectModel
         public string Job_Title { get; set; }
         public int User_Id { get; set; }
         public int Practice_ID { get; set; }
+        public string DoctorFullName { get; set; }
 
-        public Doctor Create(SqlDataReader reader)
+    public Doctor Create(SqlDataReader reader)
         {
             return new Doctor
             {
@@ -29,6 +30,7 @@ namespace ObjectModel
                 Job_Title = reader.GetString(reader.GetOrdinal("Job_Title")),
                 User_Id = reader.GetInt32(reader.GetOrdinal("User_Id")),
                 Practice_ID = reader.GetInt32(reader.GetOrdinal("Practice_ID")),
+                DoctorFullName = reader.GetString(reader.GetOrdinal("DoctorFullName")),
             };
         }
     }

@@ -48,7 +48,7 @@
                         <div class="col-md-1"><h5>Cell Number:</h5></div>
                         <div class="col-md-3"><input type="text" class="form-control insert" ng-model="_Cell_Number" name="Cell_Number" ng-required="true" ng-pattern="/^[01]?[- .]?(\([0-9]\d{2}\)|[0-9]\d{2})[- .]?\d{3}[- .]?\d{4}$/" placeholder="089 999 9999"></div>
                         <div class="col-md-1"><h5>DOB:</h5></div>
-                        <div class="col-md-3"><input class="form-control" type="date" name="DOB" ng-model="_DOB" min="1900-01-01" max="2016-12-31" ng-required="true" ng-pattern="/((19|20)\d\d)-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])/" /></div>
+                        <div class="col-md-3"><input class="form-control insert" type="date" name="DOB" ng-model="_DOB" min="1900-01-01" max="2016-12-31" ng-required="true" ng-pattern="/((19|20)\d\d)-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])/" /></div>
                     </div>
                     <div class="row" style="margin-top:0px; margin-bottom:8px;">
                         <div class="col-md-1"></div>
@@ -69,7 +69,7 @@
                     </div>
                     <div class="row" style="margin-top:6px; margin-bottom:6px;">
                         <div class="col-md-1"><h5>Gender:</h5></div>
-                        <div class="col-md-3"><select class="form-control" ng-model="_Gender" name="Gender" ng-required="true" ng-change="changedValueGetGender(_Gender)" data-ng-options="gender as gender.Gender for gender in Genders">
+                        <div class="col-md-3"><select class="form-control insert" ng-model="_Gender" name="Gender" ng-required="true" ng-change="changedValueGetGender(_Gender)" data-ng-options="gender as gender.Gender for gender in Genders">
                                                     <option value=""></option>
                                                 </select></div>
                         <div class="col-md-1"><h5>Street Address:</h5></div>
@@ -113,7 +113,7 @@
                     <div class="row col-md-12" style="margin-top:6px; margin-bottom:10px;"><label class="caption-subject font-green-steel uppercase bold">Insurance Information</label></div>
                     <div class="row" style="margin-top:8px; margin-bottom:0px;">
                         <div class="col-md-1"><h5>Medical Aid Provider:</h5></div>
-                        <div class="col-md-3"><select class="form-control" ng-model="_Medical_Aid_Name" name="Medical_Aid_Name" ng-required="true" ng-change="changedValueMedical_AidID(_Medical_Aid_Name)" data-ng-options="medical_Aid as medical_Aid.Name for medical_Aid in Medical_Aid">
+                        <div class="col-md-3"><select class="form-control insert" ng-model="_Medical_Aid_Name" name="Medical_Aid_Name" ng-required="true" ng-change="changedValueMedical_AidID(_Medical_Aid_Name)" data-ng-options="medical_Aid as medical_Aid.Name for medical_Aid in Medical_Aid">
                                                     <option value=""></option>
                                                 </select></div>
                         <div class="col-md-1"><h5>Scheme Name:</h5></div>
@@ -137,9 +137,9 @@
                     </div>
                     <div class="row" style="margin-top:8px; margin-bottom:15px; border-bottom: 1px solid #ddd;">
                         <div class="col-md-1"><h5>Registration Date:</h5></div>
-                        <div class="col-md-3"><input class="form-control" type="date" name="Registration_Date" ng-model="_Registration_Date" min="1900-01-01" max="2016-12-31" ng-required="true" ng-pattern="/((19|20)\d\d)-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])/" /></div>
+                        <div class="col-md-3"><input class="form-control insert" type="date" name="Registration_Date" ng-model="_Registration_Date" min="1900-01-01" max="2016-12-31" ng-required="true" ng-pattern="/((19|20)\d\d)-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])/" /></div>
                         <div class="col-md-1"><h5>Expiry Date:</h5></div>
-                        <div class="col-md-3"><input class="form-control" type="date" name="Deregistration_Date" ng-model="_Deregistration_Date" min="1900-01-01" max="2016-12-31" ng-required="true" ng-pattern="/((19|20)\d\d)-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])/" /></div>
+                        <div class="col-md-3"><input class="form-control insert" type="date" name="Deregistration_Date" ng-model="_Deregistration_Date" min="1900-01-01" max="2016-12-31" ng-required="true" ng-pattern="/((19|20)\d\d)-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])/" /></div>
                     </div>
                     <div class="row" style="margin-top:0px; margin-bottom:8px;">
                         <div class="col-md-1"></div>
