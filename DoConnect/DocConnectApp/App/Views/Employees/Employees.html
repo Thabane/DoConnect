@@ -64,9 +64,9 @@
                         <div class="modal-body">
                             <div class="row" style="margin-top:4px; margin-bottom:0px;">
                                 <div class="col-md-2"><h5 class="form-control-label">Firstname:</h5></div>
-                                <div class="col-md-4"><input class="form-control readonly_ViewEmployee" type="text" ng-value="FirstName" ng-model="FirstName" ng-required="true" ng-pattern="/^[a-zA-Z''-'\s]{3,40}$/"></div>
+                                <div class="col-md-4"><input class="form-control readonly_ViewEmployee" type="text" name="FirstName" ng-value="FirstName" ng-model="FirstName" ng-required="true" ng-pattern="/^[a-zA-Z''-'\s]{3,40}$/"></div>
                                 <div class="col-md-2"><h5>Cell Number:</h5></div>
-                                <div class="col-md-4"><input class="form-control readonly_ViewEmployee" type="text" ng-value="Phone" ng-model="Phone" ng-required="true" ng-pattern="/[0-9]{1}[0-9]{9}/"></div>
+                                <div class="col-md-4"><input class="form-control readonly_ViewEmployee" type="text" name="Phone" ng-value="Phone" ng-model="Phone" ng-required="true" ng-pattern="/[0-9]{1}[0-9]{9}/"></div>
                             </div>
                             <div class="row" style="margin-top:0px; margin-bottom:8px;">
                                 <div class="col-md-2"></div>
@@ -82,9 +82,9 @@
                             </div>
                             <div class="row" style="margin-top:4px; margin-bottom:0px;">
                                 <div class="col-md-2"><h5 class="form-control-label">Lastname:</h5></div>
-                                <div class="col-md-4"><input class="form-control readonly_ViewEmployee" type="text" ng-value="LastName" ng-model="LastName" ng-required="true" ng-pattern="/^[a-zA-Z''-'\s]{3,40}$/"></div>
+                                <div class="col-md-4"><input class="form-control readonly_ViewEmployee" type="text" name="LastName" ng-value="LastName" ng-model="LastName" ng-required="true" ng-pattern="/^[a-zA-Z''-'\s]{3,40}$/"></div>
                                 <div class="col-md-2"><h5>Street Address:</h5></div>
-                                <div class="col-md-4"><input class="form-control readonly_ViewEmployee" type="text" ng-value="Street_Address" ng-model="Street_Address" ng-required="true" ng-pattern="/^[0-9a-zA-Z''-'\s]{3,}$/"></div>
+                                <div class="col-md-4"><input class="form-control readonly_ViewEmployee" type="text" name="Street_Address" ng-value="Street_Address" ng-model="Street_Address" ng-required="true" ng-pattern="/^[0-9a-zA-Z''-'\s]{3,}$/"></div>
                             </div>
                             <div class="row" style="margin-top:0px; margin-bottom:8px;">
                                 <div class="col-md-2"></div>
@@ -100,9 +100,9 @@
                             </div>
                             <div class="row" style="margin-top:4px; margin-bottom:0px;">
                                 <div class="col-md-2"><h5 class="form-control-label">Email:</h5></div>
-                                <div class="col-md-4"><input class="form-control readonly_ViewEmployee" type="email" ng-value="Email" ng-model="Email" ng-required="true" ng-pattern="/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/"></div>
+                                <div class="col-md-4"><input class="form-control readonly_ViewEmployee" type="email" name="Email" ng-value="Email" ng-model="Email" ng-required="true" ng-pattern="/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/"></div>
                                 <div class="col-md-2"><h5>Suburb:</h5></div>
-                                <div class="col-md-4"><input name="P_Suburb" class="form-control readonly_ViewEmployee" type="text" ng-value="Suburb" ng-model="Suburb" ng-required="true" ng-pattern="/^[a-zA-Z''-'\s]{3,40}$/"></div>
+                                <div class="col-md-4"><input class="form-control readonly_ViewEmployee" type="text" name="Suburb" ng-value="Suburb" ng-model="Suburb" ng-required="true" ng-pattern="/^[a-zA-Z''-'\s]{3,40}$/"></div>
                             </div>
                             <div class="row" style="margin-top:0px; margin-bottom:8px;">
                                 <div class="col-md-2"></div>
@@ -118,9 +118,9 @@
                             </div>
                             <div class="row" style="margin-top:4px; margin-bottom:0px;">
                                 <div class="col-md-2"><h5>ID Number:</h5></div>
-                                <div class="col-md-4"><input class="form-control readonly_ViewEmployee" type="text" ng-value="ID_Number" ng-model="ID_Number" ng-required="true" ng-pattern="/[0-9]{13}/"></div>
+                                <div class="col-md-4"><input class="form-control readonly_ViewEmployee" type="text" name="ID_Number" ng-value="ID_Number" ng-model="ID_Number" ng-required="true" ng-pattern="/[0-9]{13}/"></div>
                                 <div class="col-md-2"><h5>City:</h5></div>
-                                <div class="col-md-4"><input class="form-control readonly_ViewEmployee" type="text" ng-value="City" ng-model="City" ng-required="true" ng-pattern="/^[a-zA-Z''-'\s]{3,40}$/"></div>
+                                <div class="col-md-4"><input class="form-control readonly_ViewEmployee" type="text" name="City" ng-value="City" ng-model="City" ng-required="true" ng-pattern="/^[a-zA-Z''-'\s]{3,40}$/"></div>
                             </div>
                             <div class="row" style="margin-top:0px; margin-bottom:8px;">
                                 <div class="col-md-2"></div>
@@ -136,11 +136,9 @@
                             </div>
                             <div class="row" style="margin-top:4px; margin-bottom:0px;">
                                 <div class="col-md-2"><h5>DOB:</h5></div>
-                                <div class="col-md-4">
-                                    <input class="form-control readonly_ViewEmployee" type="text" ng-value="DOB">
-                                </div>
+                                <div class="col-md-4"><input class="form-control readonly_ViewEmployee" type="date" name="DOB" ng-model="DOB.value" ng-required="true" /></div>
                                 <div class="col-md-2"><h5>Country:</h5></div>
-                                <div class="col-md-4"><input class="form-control readonly_ViewEmployee" type="text" ng-value="Country" ng-model="Country" ng-required="true" ng-pattern="/^[a-zA-Z''-'\s]{3,40}$/"></div>
+                                <div class="col-md-4"><input class="form-control readonly_ViewEmployee" type="text" name="Country" ng-value="Country" ng-model="Country" ng-required="true" ng-pattern="/^[a-zA-Z''-'\s]{3,40}$/"></div>
                             </div>
                             <div class="row" style="margin-top:0px; margin-bottom:8px;">
                                 <div class="col-md-2"></div>

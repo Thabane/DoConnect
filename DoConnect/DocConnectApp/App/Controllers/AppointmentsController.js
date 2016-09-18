@@ -18,7 +18,6 @@
 
         $scope.App_Statusz = [{ "Status": "Approved", "bool": "1" }, { "Status": "Declined", "bool": "0" }, { "Status": "Pending", "bool": "2" }];
 
-        $scope.Appointments_Date_Time;
         //Select AppointmentByID Function
         $scope.ViewAppointment = function (ID) {
             AppointmentsService.GetAppointmentByID(ID).success(function (result) { 
@@ -27,9 +26,10 @@
                 if (result["Appointments_App_Status"] == '1') { $scope.Appointments_App_Status = 'Approved'; }
                 else if (result["Appointments_App_Status"] == '0') { $scope.Appointments_App_Status = 'Declined'; }
                 else { $scope.Appointments_App_Status = 'Pending'; }
-
-                $scope.Appointments_Date_Time = result["Appointments_Date_Time"];
-                $scope.Appointments_Date_Time = { value: new Date($scope.Appointments_Date_Time) };
+                var Array = result["Appointments_Date_Time"].split(' ');                
+                $scope.Appointments_Date = { value: new Date(Array[0]) };
+                $scope.Appointments_Time = { value: new Date(Array[1]) };
+                //$scope.Appointments_Date_Time = { value: new Date(result["Appointments_Date_Time"]) };
                 $scope.Appointments_Details = result["Appointments_Details"];
                 $scope.Patient_ID = result["Patient_ID"];
                 $scope.Patient_FirstName = result["Patient_FirstName"];
@@ -59,7 +59,6 @@
 
         $scope.PatientID = 0;
         $scope.changedValueGetPatientID = function (item) {
-            alert(item.ID);
             $scope.PatientID = item.ID;
         };
 
@@ -73,14 +72,12 @@
 
         $scope.DoctorID = 0;
         $scope.changedValueGetDoctors_ID = function (item) {
-            alert(item.ID);
             $scope.DoctorID = item.ID;
         };
 
         $scope.Seleceted_App_Status = 0;
         $scope.changedValueGetApp_Status = function (item) {
             $scope.Seleceted_App_Status = item.bool;
-            alert($scope.Seleceted_App_Status);
         };
 
         //Insert Appointment Funtion
@@ -109,7 +106,7 @@
                 if ($scope.PatientID == 0) { $scope.PatientID = $scope.Patient_ID }
                 if ($scope.Seleceted_App_Status == 0) { $scope.Seleceted_App_Status = $scope.Appointments_App_Status }
                 
-                AppointmentsService.UpdateAppointment($scope.Appointments_ID, $scope.Appointments_Date_Time.value, $scope.PatientID, $scope.Appointments_Details, $scope.Seleceted_App_Status, $scope.DoctorID).success(function () {
+                AppointmentsService.UpdateAppointment($scope.Appointments_ID, $scope.Appointments_Date.value, $scope.PatientID, $scope.Appointments_Details, $scope.Seleceted_App_Status, $scope.DoctorID).success(function () {
                     $scope.GetAllAppointments();
                     btnSuccess("Appointment details successfully updated.");
                 }, function (error) {

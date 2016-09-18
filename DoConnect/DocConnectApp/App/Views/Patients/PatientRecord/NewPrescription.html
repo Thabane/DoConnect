@@ -9,7 +9,7 @@
         <ul class="nav nav-tabs">
             <li role="presentation"><a href="/Patients"><i class="fa fa-align-justify"></i>Patient List</a></li>
             <li role="presentation"><a href="/NewPatient"><i class="fa fa-plus-circle"></i>New Patient</a></li>
-            <li role="presentation" class="active"><a href="/MedicalHistory"><i class="fa fa-align-justify"></i>Patient Record</a></li>
+            <li role="presentation" class="active"><a href="/MedicalHistory/{{intID}}"><i class="fa fa-align-justify"></i>Patient Record</a></li>
         </ul>
 
         <!-- Add Consultation Notes -->
@@ -17,20 +17,14 @@
             <div style="margin:auto; width:80%">
                 <div class="modal-header" style="border-bottom:0px;">
                     <ul class="nav nav-pills">
-                        <li role="presentation"><a href="/MedicalHistory">Medical Record</a></li>
-                        <li role="presentation" class="active"><a href="/PrescriptionDetails">Prescriptions</a></li>
-                        <li role="presentation"><a href="/ConsultationNotes">Consultation Notes</a></li>
-                    </ul>
+                        <li role="presentation"><a href="/MedicalHistory/{{intID}}">Medical Record</a></li>
+                        <li role="presentation" ng-show="ConsultationNotes.length != '0'" class="active"><a href="/PrescriptionDetails/{{intID}}">Prescriptions</a></li>
+                        <li role="presentation" ng-show="ConsultationNotes.length != '0'"><a href="/ConsultationNotes/{{intID}}">Consultation Notes</a></li>
+                        <li role="presentation" ng-show="ConsultationNotes.length == '0'"><a href="/NewConsultationNotes/{{intID}}">New Consultation Notes</a></li>
+                     </ul>
                 </div>
 
-                <div class="modal-body"> <!--dir-paginate="Prescription in PrescriptionDetails | filter:search | orderBy:sortKey:reverse | itemsPerPage:1"-->
-                    <!--<div class="row">
-                        <div class="col-md-6"><strong>Full Name: {{Prescription.Patient_FirstName}} {{Prescription.Patient_LastName}}</strong></div>
-                        <div class="col-md-6"><strong>DOB: {{Prescription.Patient_DOB}}</strong></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6"><strong>Doctor Name: {{Prescription.Doctors_FirstName}} {{Prescription.Doctors_LastName}}</strong></div>
-                    </div>-->
+                <div class="modal-body">
                     <div class="row" style="margin-top:8px; margin-bottom:0px;">
                         <div class="col-md-2"><h5>Drug Name:</h5></div>
                         <div class="col-md-4"><input class="form-control insert" type="text" ng-model="DrugName" name="DrugName" ng-required="true" ng-pattern="/^[0-9a-zA-Z'.,'-'\s]{3,}$/"></div>
@@ -73,7 +67,6 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary" ng-click="InsertPrescription(DrugName, Strength, DispenseNumber, RefillNumber)" ng-disabled="Form.$invalid">Save</button>
                 </div>
             </div>

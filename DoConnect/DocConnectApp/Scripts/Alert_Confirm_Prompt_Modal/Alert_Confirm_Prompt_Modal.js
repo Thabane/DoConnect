@@ -177,6 +177,7 @@ function btnPrompt() {
 
 //-------------------------------------------------------------------------------//
 
+angular.element(".disable_View_readonly").prop("disabled", true);
 //Accounting
 function ViewInvoice() {
     $("#View_Invoice_Modal").modal("show");

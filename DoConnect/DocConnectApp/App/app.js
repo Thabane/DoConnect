@@ -18,7 +18,7 @@ app.config(
                 templateUrl: "App/Views/Patients/patients.html",
                 controller: "PatientsController"
             })
-            .when("/ConsultationNotes", {
+            .when("/ConsultationNotes/:PatientID", {
                 templateUrl: "App/Views/Patients/PatientRecord/ConsultationNotes.html",
                 controller: "PatientsController"
             })
@@ -26,19 +26,20 @@ app.config(
                 templateUrl: "App/Views/Patients/test.html",
                 controller: "testController"
             })
-            .when("/NewConsultationNotes", {
+            .when("/NewConsultationNotes/:PatientID", {
                 templateUrl: "App/Views/Patients/PatientRecord/NewConsultationNotes.html",
                 controller: "PatientsController"
             })
-            .when("/MedicalHistory", {
+            .when("/MedicalHistory/:PatientID", {
                 templateUrl: "App/Views/Patients/PatientRecord/MedicalHistory.html",
-                controller: "PatientsController"
+                controller: "PatientsController",
+                reloadOnSearch: false
             })
-            .when("/PrescriptionDetails", {
+            .when("/PrescriptionDetails/:PatientID", {
                 templateUrl: "App/Views/Patients/PatientRecord/PrescriptionDetails.html",
                 controller: "PatientsController"
             })
-            .when("/NewPrescription", {
+            .when("/NewPrescription/:PatientID/:ConsultationID", {
                 templateUrl: "App/Views/Patients/PatientRecord/NewPrescription.html",
                 controller: "PatientsController"
             })
@@ -126,13 +127,14 @@ app.config(
                 templateUrl: "App/Views/UserProfile/UserProfile.html",
                 controller: "UserProfileController"
             })
-            .when("/Login", {
+            .when("/Login", {//../Views/Home/Login.cshtml
                 templateUrl: "App/Views/Login/Login.html",
                 controller: "LoginController"
             })
-            .otherwise({
-                redirectTo: "/Dashboard"
-            });
+            //.otherwise({
+            //    redirectTo: "/Dashboard"
+        //})
+        ;
 
         $locationProvider.html5Mode({
             enabled: true,
@@ -159,3 +161,5 @@ app.run(
         };
     }
     ]);
+
+

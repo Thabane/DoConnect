@@ -1,6 +1,6 @@
 ﻿app.controller('DashboardController',['$scope', '$interval', 'DashboardService',
     function ($scope, $interval, DashboardService) {
-
+        angular.element("#wrapper").show();
         google.charts.load("current", { packages: ["corechart"] });
         google.charts.setOnLoadCallback(drawChart); 
         function drawChart() {
@@ -20,5 +20,6 @@
             var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
             chart.draw(data, options);
         }
-
+        $scope.user = JSON.parse(sessionStorage.user);
+        alert($scope.user);
     }]);

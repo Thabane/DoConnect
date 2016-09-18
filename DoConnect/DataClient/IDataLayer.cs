@@ -12,7 +12,8 @@ namespace DataClient
         #region User
         int CreateUser(int AccessLevel);
         string Login(string username, string password, int accessLevel);
-        Login MyLogin(string Email);
+        Login MyLogin(string Email, string Password);
+        Staff GetUserDetailsByUser_ID(int User_ID);
         List<AccessLevel> GetAllAccessLevel();
         AccessLevel GetAccessLevelById(int id);
         #endregion
@@ -71,7 +72,10 @@ namespace DataClient
         #endregion
 
         #region Medical Record
-        List<MedicalRecord> GetMedicalRecordByPatientID(int id);
+        List<Medical_Aid> GetMedical_Aid();
+        MedicalRecord GetMedicalRecordByPatientID(int id);
+        bool NewMedicalRecord(int Doctor_ID, string FirstName, string LastName, string Email, string ID_Number, string Cell_Number, string DOB, string Gender, string Street_Address, string Suburb, string City, string Country, int Patient_Medical_Aid_Medical_Aid_ID, string Scheme_Name, string Membership_Number, string Registration_Date, string Deregistration_Date, string Allergies, string PreviousIllnesses, string PreviousMedication, string RiskFactors, string SocialHistory, string FamilyHistory);
+        bool UpdateMedicalRecord(int Patient_ID, string FirstName, string LastName, string Email, string ID_Number, string Cell_Number, string DOB, string Gender, string Street_Address, string Suburb, string City, string Country, int Patient_Medical_Aid_Medical_Aid_ID, string Scheme_Name, string Membership_Number, string Registration_Date, string Deregistration_Date, string Allergies, string PreviousIllnesses, string PreviousMedication, string RiskFactors, string SocialHistory, string FamilyHistory);
         #endregion
 
         #region Prescription 

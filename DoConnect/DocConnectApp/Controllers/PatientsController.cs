@@ -54,8 +54,16 @@ namespace DocConnectApp.Controllers
         //--Medical Record----------------------------------------------------------------------------------------------------------------/
 
         [HttpGet]
+        [Route("api/Patients/GetMedical_Aid")]
+        public List<Medical_Aid> GetMedical_Aid()
+        {
+            DataLayer dtLayer = new DataLayer();
+            return dtLayer.GetMedical_Aid();
+        }
+
+        [HttpGet]
         [Route("api/Patients/GetMedicalRecord/{ID}")]
-        public List<MedicalRecord> GetMedicalRecord(int ID)
+        public MedicalRecord GetMedicalRecord(int ID)
         {
             DataLayer dtLayer = new DataLayer();
             return dtLayer.GetMedicalRecordByPatientID(ID);
@@ -66,8 +74,7 @@ namespace DocConnectApp.Controllers
         public bool InsertMedicalRecord(MedicalRecord medicalRecord)
         {
             DataLayer dtLayer = new DataLayer();
-            //return dtLayer.NewMedicalRecord();
-            return true;
+            return dtLayer.NewMedicalRecord(medicalRecord.Doctor_ID, medicalRecord.FirstName, medicalRecord.LastName, medicalRecord.Email, medicalRecord.ID_Number, medicalRecord.Cell_Number, formatDate(medicalRecord.DOB).ToString(), medicalRecord.Gender, medicalRecord.Street_Address, medicalRecord.Suburb, medicalRecord.City, medicalRecord.Country, medicalRecord.Patient_Medical_Aid_Medical_Aid_ID, medicalRecord.Scheme_Name, medicalRecord.Membership_Number, formatDate(medicalRecord.Registration_Date).ToString(), formatDate(medicalRecord.Deregistration_Date).ToString(), medicalRecord.Allergies, medicalRecord.PreviousMedication, medicalRecord.PreviousIllnesses, medicalRecord.RiskFactors, medicalRecord.SocialHistory, medicalRecord.FamilyHistory);
         }
 
         [HttpPost]
@@ -75,8 +82,7 @@ namespace DocConnectApp.Controllers
         public bool UpdateMedicalRecord(MedicalRecord medicalRecord)
         {
             DataLayer dtLayer = new DataLayer();
-            //return dtLayer.UpdateMedicalRecord();
-            return true;
+            return dtLayer.UpdateMedicalRecord(medicalRecord.Patient_ID, medicalRecord.FirstName, medicalRecord.LastName, medicalRecord.Email, medicalRecord.ID_Number, medicalRecord.Cell_Number, formatDate(medicalRecord.DOB).ToString(), medicalRecord.Gender, medicalRecord.Street_Address, medicalRecord.Suburb, medicalRecord.City, medicalRecord.Country, medicalRecord.Patient_Medical_Aid_Medical_Aid_ID, medicalRecord.Scheme_Name, medicalRecord.Membership_Number, formatDate(medicalRecord.Registration_Date).ToString(), formatDate(medicalRecord.Deregistration_Date).ToString(), medicalRecord.Allergies, medicalRecord.PreviousIllnesses, medicalRecord.PreviousMedication, medicalRecord.RiskFactors, medicalRecord.SocialHistory, medicalRecord.FamilyHistory);
         }
 
         [HttpPost]
@@ -139,7 +145,7 @@ namespace DocConnectApp.Controllers
             DataLayer dtLayer = new DataLayer();
             
             //return dtLayer.NewConsultationNote(consultation.Consultation_Patient_ID, consultation.Consultation_Doctor_ID, consultation.Consultation_ReasonForConsultation, consultation.Consultation_Symptoms, consultation.Consultation_ClinicalFindings, consultation.Consultation_Diagnosis, consultation.Consultation_TestResultSummary, consultation.Consultation_TreatmentPlan, consultation.Consultation_Presciption_ID, consultation.Consultation_Referral_ID);
-            return dtLayer.NewConsultationNote(1, 4, consultation.Consultation_ReasonForConsultation, consultation.Consultation_Symptoms, consultation.Consultation_ClinicalFindings, consultation.Consultation_Diagnosis, consultation.Consultation_TestResultSummary, consultation.Consultation_TreatmentPlan, consultation.Consultation_Presciption_ID, consultation.Consultation_Referral_ID);
+            return dtLayer.NewConsultationNote(consultation.Consultation_Patient_ID, 4, consultation.Consultation_ReasonForConsultation, consultation.Consultation_Symptoms, consultation.Consultation_ClinicalFindings, consultation.Consultation_Diagnosis, consultation.Consultation_TestResultSummary, consultation.Consultation_TreatmentPlan, consultation.Consultation_Presciption_ID, consultation.Consultation_Referral_ID);
         }
 
         [HttpPost]//Update Employee
@@ -156,6 +162,12 @@ namespace DocConnectApp.Controllers
         {
             DataLayer dtLayer = new DataLayer();
             return dtLayer.DeleteConsultation(ID);
+        }
+
+        public string formatDate(string dt)
+        {
+            string[] date = dt.Split('T');
+            return date[0]; //YYYY-MM-DD
         }
     }
 }

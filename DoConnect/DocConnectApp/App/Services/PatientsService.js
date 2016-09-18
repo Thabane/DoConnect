@@ -11,67 +11,73 @@
             return $http.get("api/Patients/GetPatient/" + ID);
         }
 
-        //Insert New Patient
-        /*var InsertPatient = function (FirstName, LastName, ID_Number, Gender, DOB, Cell_Number, Street_Address, Suburb, City, Country, Allergies, PreviousIllnesses, PreviousMedication, RiskFactors, SocialHistory, FamilyHistory, Medical_Aid_ID, Doctor_ID, User_ID) {
-            $http.post("api/Patients/InsertPatient",
-            {
-                'FirstName': FirstName, 
-                'LastName': LastName, 
-                'ID_Number': ID_Number, 
-                'Gender': Gender, 
-                'DOB': DOB, 
-                'Cell_Number': Cell_Number, 
-                'Street_Address': Street_Address, 
-                'Suburb': Suburb, 
-                'City': City,
-                'Country': Country,
-                'Allergies': Allergies, 
-                'PreviousIllnesses': PreviousIllnesses,
-                'PreviousMedication': PreviousMedication,
-                'RiskFactors': RiskFactors,
-                'SocialHistory': SocialHistory,
-                'FamilyHistory': FamilyHistory,
-                'Medical_Aid_ID': Medical_Aid_ID,
-                'Doctor_ID': Doctor_ID,
-                'User_ID': User_ID
-            });
-        }*/
         //--Medical Record-----------------------------------------------------------------------------------------------------
+        var GetMedical_Aid = function () {
+            return $http.get("api/Patients/GetMedical_Aid");
+        }
+
         //Select Medical Record by PatientID
         var GetMedicalRecord = function (ID) {
             return $http.get("api/Patients/GetMedicalRecord/" + ID);
         }
 
-        //Insert new record 
-        var InsertMedicalRecord = function () {
-            console.log();
+        //Insert new record
+        var InsertMedicalRecord = function (Doctor_ID, FirstName, LastName, Email, ID_Number, Cell_Number, DOB, Gender, Street_Address, Suburb, City, Country, Patient_Medical_Aid_Medical_Aid_ID, Scheme_Name, Membership_Number, Registration_Date, Deregistration_Date, Allergies, PreviousMedication, PreviousIllnesses, RiskFactors, SocialHistory, FamilyHistory) {
             return $http.post("api/Patients/InsertMedicalRecord",
             {
-                'Patient_ID': Patient_ID,
-                'Doctors_ID': Doctor_ID,
-                'Consultation_ID': Consultation_ID,
-                'Prescription_DrugDetails_DrugName': Prescription_DrugDetails_DrugName,
-                'Prescription_DrugDetails_Strength': Prescription_DrugDetails_Strength,
-                'Prescription_DrugDetails_IntakeRoute': Prescription_DrugDetails_IntakeRoute,
-                'Prescription_DrugDetails_Frequency': Prescription_DrugDetails_Frequency,
-                'Prescription_DrugDetails_DispenseNumber': Prescription_DrugDetails_DispenseNumber,
-                'Prescription_DrugDetails_RefillNumber': Prescription_DrugDetails_RefillNumber
+                'Doctor_ID': Doctor_ID,
+                'FirstName': FirstName,
+                'LastName': LastName,
+                'Email': Email,
+                'ID_Number': ID_Number,
+                'Cell_Number': Cell_Number,
+                'DOB': DOB,
+                'Gender': Gender,
+                'Street_Address': Street_Address,
+                'Suburb': Suburb,
+                'City': City,
+                'Country': Country,
+                'Patient_Medical_Aid_Medical_Aid_ID': Patient_Medical_Aid_Medical_Aid_ID,
+                'Scheme_Name': Scheme_Name,
+                'Membership_Number': Membership_Number,
+                'Registration_Date': Registration_Date,
+                'Deregistration_Date': Deregistration_Date,
+                'Allergies': Allergies,
+                'PreviousIllnesses': PreviousIllnesses,
+                'PreviousMedication': PreviousMedication,
+                'RiskFactors': RiskFactors,
+                'SocialHistory': SocialHistory,
+                'FamilyHistory': FamilyHistory
             });
         };
 
         //Update MedicalRecord
-        var UpdateMedicalRecord = function () {
-            console.log();
+        var UpdateMedicalRecord = function (Patient_ID, FirstName, LastName, Email, ID_Number, Cell_Number, DOB, Gender, Street_Address, Suburb, City, Country, Patient_Medical_Aid_Medical_Aid_ID, Scheme_Name, Membership_Number, Registration_Date, Deregistration_Date, Allergies, PreviousIllnesses, PreviousMedication, RiskFactors, SocialHistory, FamilyHistory) {
             return $http.post("api/Patients/UpdateMedicalRecord",
             {
-                'Prescription_ID': Prescription_ID,
-                'Consultation_Diagnosis': Consultation_Diagnosis,
-                'Prescription_DrugDetails_DrugName': Prescription_DrugDetails_DrugName,
-                'Prescription_DrugDetails_Strength': Prescription_DrugDetails_Strength,
-                'Prescription_DrugDetails_IntakeRoute': IntakeRoute,
-                'Prescription_DrugDetails_Frequency': Frequency,
-                'Prescription_DrugDetails_DispenseNumber': Prescription_DrugDetails_DispenseNumber,
-                'Prescription_DrugDetails_RefillNumber': Prescription_DrugDetails_RefillNumber
+                'Patient_ID': Patient_ID,
+                'FirstName': FirstName,
+                'LastName': LastName,
+                'Email': Email,
+                'ID_Number': ID_Number,
+                'Cell_Number': Cell_Number,
+                'DOB': DOB,
+                'Gender': Gender,
+                'Street_Address': Street_Address,
+                'Suburb': Suburb,
+                'City': City,
+                'Country': Country,
+                'Patient_Medical_Aid_Medical_Aid_ID': Patient_Medical_Aid_Medical_Aid_ID,
+                'Scheme_Name': Scheme_Name,
+                'Membership_Number': Membership_Number,
+                'Registration_Date': Registration_Date,
+                'Deregistration_Date': Deregistration_Date,
+                'Allergies': Allergies,
+                'PreviousIllnesses': PreviousIllnesses,
+                'PreviousMedication': PreviousMedication,
+                'RiskFactors': RiskFactors,
+                'SocialHistory': SocialHistory,
+                'FamilyHistory': FamilyHistory
             });
         };
 
@@ -83,6 +89,9 @@
         //---------------------------------------------------------------------------------------------------------/
 
         //--Prescription-------------------------------------------------------------------------------------------------------/
+
+        
+        
         //Select Prescription Notes by PatientID
         var GetPrescription = function (ID) {
             return $http.get("api/Patients/GetPrescription/" + ID);
@@ -133,11 +142,11 @@
         }
 
         //Insert new record ##Patient_ID, Doctor_ID,
-        var InsertConsultation = function (ReasonForConsultation, Symptoms, ClinicalFindings, Diagnosis, TestResultSummary, TreatmentPlan, Presciption_ID, Referral_ID) {
+        var InsertConsultation = function (Patient_ID, ReasonForConsultation, Symptoms, ClinicalFindings, Diagnosis, TestResultSummary, TreatmentPlan, Presciption_ID, Referral_ID) {
             console.log(ReasonForConsultation, Symptoms, ClinicalFindings, Diagnosis, TestResultSummary, TreatmentPlan, Presciption_ID, Referral_ID);
             return $http.post("api/Patients/InsertConsultation",
             {
-                //'Consultation_Patient_ID': Patient_ID,
+                'Consultation_Patient_ID': Patient_ID,
                 //'Consultation_Doctor_ID': Doctor_ID,
                 'Consultation_ReasonForConsultation': ReasonForConsultation,
                 'Consultation_Symptoms': Symptoms,
@@ -176,7 +185,8 @@
             //UpdatePractice: UpdatePractice,
             //DeletePractice: DeletePractice
 
-            //Prescription Details
+            //MedicalRecord Details
+            GetMedical_Aid: GetMedical_Aid,
             GetMedicalRecord: GetMedicalRecord,
             InsertMedicalRecord: InsertMedicalRecord,
             UpdateMedicalRecord: UpdateMedicalRecord,

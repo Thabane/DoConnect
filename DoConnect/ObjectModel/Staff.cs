@@ -48,5 +48,18 @@ namespace ObjectModel
             };
         }
 
+        public Staff GetLogginUser(SqlDataReader reader)
+        {
+            return new Staff
+            {
+                ID = reader.GetInt32(reader.GetOrdinal("ID")),
+                FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
+                LastName = reader.GetString(reader.GetOrdinal("LastName")),                
+                User_ID = reader.GetInt32(reader.GetOrdinal("User_ID")),
+                Email = reader.GetString(reader.GetOrdinal("Email")),
+                PRACTICE_ID = reader.GetInt32(reader.GetOrdinal("PRACTICE_ID")),
+            };
+        }
+
     }
 }

@@ -1,26 +1,35 @@
-﻿<div>
-    <div ng-controller="LoginController">
-        <div class="container" style="margin-top:30px">
-            <div class="col-md-4 col-md-offset-4">
-                <div class="panel panel-default">
+﻿<div ng-controller="LoginController">
+    <div class="row">
+        <h1 class="glyphicon-bold text-primary text-center" style="width:50%; margin-top:70px; margin-left:auto; margin-right:auto;">DoConnect</h1>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div style="width:50%; margin:auto;">
+                <div class="login-panel panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="glyphicon-bold text-info text-center" style="background-color:transparent;">Please Sign In</h3>
+                    </div>
                     <div class="panel-body">
-                        <form name="Form" role="form">
-                            <div class="form-group">
-                                <label class="sr-only">Email address</label>
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                                    <input type="email" class="form-control" ng-model="Username" placeholder="Enter username or email">
+                        <div class="row">
+                            <div class="col-md-12 center-block" style="color:red" ng-show="InvalidCredential != 'null'">{{InvalidCredential}}</div>
+                            <div class="col-md-12 center-block" style="color:red" ng-show="(f1.cUsername.$dirty || Submitted) && f1.cUsername.$error.required">Username required</div>
+                            <div class="col-md-12 center-block" style="color:red" ng-show="(f1.cPassword.$dirty || Submitted) && f1.cPassword.$error.required">Password required</div>
+                            <div class="col-md-12 center-block" style="color:red" ng-show="f1.cUsername.$invalid && f1.cUsername.$touched && f1.cUsername.$error.pattern">Enter a valid email address.</div>
+                            <div class="col-md-12 center-block" style="color:red" ng-show="f1.cPassword.$invalid && f1.cPassword.$touched && f1.cPassword.$error.pattern">Password must be atleast 5 charators long.</div>
+                            
+                        </div>
+                        <form novalidate name="f1" ng-submit="Login()">
+                            <fieldset ng-show="!IsLogedIn">
+                                <div class="row" style="margin-top:8px; margin-bottom:0px;">
+                                    <div class="col-md-2"><h5 class="form-control-label">Username:</h5></div>
+                                    <div class="col-md-10"><input class="form-control" ng-model="LoginData.Username" name="cUsername" ng-class="Submitted?'ng-dirty':''" ng-pattern="/^[\w-\.]+@([\w-]+\.)+[\w-]{2,}$/" ng-required="true" autofocus placeholder="E-mail" type="email"></div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="sr-only">Password</label>
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
-                                    <input type="password" class="form-control" ng-model="Password" placeholder="Password">
+                                <div class="row" style="margin-top:8px; margin-bottom:10px;">
+                                    <div class="col-md-2"><h5 class="form-control-label">Password:</h5></div>
+                                    <div class="col-md-10"><input class="form-control" ng-model="LoginData.Password" name="cPassword" ng-class="Submitted?'ng-dirty':''" ng-pattern="/{5,12}$/" ng-required="true" autofocus placeholder="Password" type="password"></div>
                                 </div>
-                            </div>
-                            <button type="button" class="btn btn-success btn-sm" ng-click="Login(Username, Password)">Sign in</button>
-                            <!--<button type="button" class="btn btn-primary btn-sm">Create account</button>-->
+                                <input class="btn btn-md btn-primary center-block" type="submit" value="Login" ng-disabled="f1.$invalid" />
+                            </fieldset>
                         </form>
                     </div>
                 </div>

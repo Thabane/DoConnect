@@ -33,8 +33,7 @@
                 else {
                     $scope.Gender = 'Female';
                 }
-                
-                $scope.DOB = result["DOB"];
+                $scope.DOB = { value: new Date(result["DOB"]) };
                 $scope.Phone = result["Phone"];
                 $scope.Street_Address = result["Street_Address"];
                 $scope.Suburb = result["Suburb"];
@@ -76,14 +75,12 @@
         $scope.changedValueGetPractice_ID = function (item) {
             $scope.Practice_ID = item.ID;
             $scope.Practice_Name= item.Name;          
-        };
+        }; 
 
         $scope.Seleceted_Gender = 0;
         $scope.changedValueGetGender = function (item) {
             $scope.Seleceted_Gender = item.Char;
         };
-        
-        $scope.DOB = { value: new Date(2016, 08, 25) };
 
         //Insert Employee Funtion
         $scope.NewEmployee = function (FirstName, LastName, ID_Number, Phone, Street_Address, Suburb, City, Country, Email) {
@@ -109,7 +106,7 @@
                 if ($scope.Seleceted_Gender == 0) { $scope.Seleceted_Gender = $scope.G }
                 if ($scope.Practice_ID == 0) { $scope.Practice_ID = $scope.PRACTICE_ID }
                 if ($scope.Seleceted_ACCESSLEVEL_LEVEL == 0) { $scope.Seleceted_ACCESSLEVEL_LEVEL = $scope.Employee_Type }
-                EmployeesService.UpdateEmployee($scope.ID, $scope.FirstName, $scope.LastName, $scope.ID_Number, $scope.Seleceted_Gender, $scope.DOB, $scope.Phone, $scope.Street_Address, $scope.Suburb, $scope.City, $scope.Country, $scope.Seleceted_ACCESSLEVEL_LEVEL, $scope.Practice_ID, $scope.Email).success(function () {
+                EmployeesService.UpdateEmployee($scope.ID, $scope.FirstName, $scope.LastName, $scope.ID_Number, $scope.Seleceted_Gender, $scope.DOB.value, $scope.Phone, $scope.Street_Address, $scope.Suburb, $scope.City, $scope.Country, $scope.Seleceted_ACCESSLEVEL_LEVEL, $scope.Practice_ID, $scope.Email).success(function () {
                         $scope.GetAllEmployees();
                         btnSuccess("Employee details successfully updated.");                        
                     }, function (error) {
