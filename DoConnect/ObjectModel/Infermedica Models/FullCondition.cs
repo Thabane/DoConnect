@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ObjectModel.Infermedica_Models
 {
-    public class Condition
+    public class FullCondition
     {
         public string id { get; set; }
         public string name { get; set; }

@@ -21,9 +21,9 @@ namespace ObjectModel.Infermedica_Models
     }
     public class DiagnosisRequest
     {
-        public Sex sex { get; set; }
+        public string sex { get; set; }
         public int age { get; set; }
-        public Evidence evidence { get; set; }
+        public List<Evidence> evidence { get; set; }
         public object extras { get; set; }
         public string evaluated_at { get; set; } //time when evidence was observed in ISO 8601 
 
@@ -32,6 +32,6 @@ namespace ObjectModel.Infermedica_Models
     public class Evidence
     {
         public string id { get; set; } //id of observation, risk factor or condition 
-        public ChoiceId choice_id { get; set; }
+        public string choice_id { get; set; }
     }
 }

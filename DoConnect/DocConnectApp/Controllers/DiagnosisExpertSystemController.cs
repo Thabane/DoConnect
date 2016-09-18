@@ -61,5 +61,20 @@ namespace DocConnectApp.Controllers
 
             return Symptoms;
         }
+        [HttpGet]
+        [Route("api/DiagnosisExpertSystem/DiagnosePatient")]
+        public DiagnosisResponse DiagnosePatient()
+        {
+            Infermedica med = new Infermedica();
+            DiagnosisRequest dRequest =  new DiagnosisRequest();
+            dRequest.age = 25;
+            dRequest.sex = Sex.male.ToString();
+            dRequest.evaluated_at = "Roodepoort, 15 September 2016";
+            dRequest.evidence = new List<Evidence>();
+            dRequest.evidence.Add(new Evidence() {id = "s_721",choice_id = ChoiceId.present.ToString()});
+            //["s_721", "s_661"]
+            DiagnosisResponse res = med.DiagnosePatient(dRequest);
+            return res;
+        }
     }
 }

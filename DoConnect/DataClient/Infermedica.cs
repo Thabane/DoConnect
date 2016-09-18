@@ -6,7 +6,10 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using ObjectModel;
+using ObjectModel.Infermedica_Models;
 
 namespace DataClient
 {
@@ -67,6 +70,23 @@ namespace DataClient
             Console.WriteLine(content);
             var json = content;
             return json;
+        }
+
+        public DiagnosisResponse DiagnosePatient(DiagnosisRequest request)
+        {
+            var url = "https://api.infermedica.com/v1/diagnosis";
+            var jsonData = JsonConvert.SerializeObject(request);
+            //var jsonData = "{\"sex\": \"male\",\"age\": \"29\",\"evidence\": []}";
+
+            using (var client = new WebClient())
+            {
+                client.Headers.Add("app_id", ConfigurationManager.AppSettings["app_id"]);
+                client.Headers.Add("app_key", ConfigurationManager.AppSettings["app_key"]);
+                client.Headers.Add("content-type", "application/json");
+                var result = client.UploadString(url, jsonData);
+                var response = JsonConvert.DeserializeObject<DiagnosisResponse>(result);
+                return response;
+            }
         }
     }
 }

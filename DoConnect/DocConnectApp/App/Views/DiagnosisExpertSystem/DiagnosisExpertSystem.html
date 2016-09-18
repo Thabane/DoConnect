@@ -5,17 +5,21 @@
         </div>
 
         <h4> Do have any of these Signs of these Symptoms?</h4>
-        <br/>
-        
+        <br />
+        <form>
             <div class="form-group">
                 <div class="form-check" ng-repeat="sym in Symp">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" value="" ng-click="AddEvidence(sym.id)">
+                        <!--<input class="form-check-input" type="checkbox" value="{{sym.id}}">-->
+                        <input type="checkbox" ng-model="sym.SELECTED" ng-true-value="1" ng-false-value="0" ng-checked="checkbox == 1"/>
                         {{sym.name}}
                     </label>
                 </div>
+                <button type="submit" class="btn btn-default" ng-click="AddEvidence(Symp)">Add More Symptoms</button>
+
+                <button type="submit" class="btn btn-default" ng-click="">Check Me!</button>
             </div>
-        
-        </div>
+        </form>
+    </div>
 </div>
-   
+

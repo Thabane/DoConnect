@@ -8,18 +8,32 @@
                 $scope.Symp = result.data;
             });
         };
+        
         $scope.GetSymptoms();
-        //$scope.AddEvidence();
-        $scope.AddEvidence = function (id) {
+        localStorage.clear();
+
+        $scope.AddEvidence = function (data) {
+
+            if (localStorage.getItem('myStorage') === null) {
+                var arr = [];
+            } else {
+                var arr = JSON.parse(localStorage.getItem('myStorage'));
+            }
             
-            //var obj = JSON.parse(localStorage.getItem('myStorage'));
 
-            var evid = [];
-
-            evid.push({"id": id});
-
-            localStorage.setItem('myStorage', JSON.stringify(evid));
-        };
-
+            for (var i in data) {
+                if (data[i].SELECTED == "1") {
+                    arr.push(data[i].id);
+                }
+            }
+            localStorage.setItem('myStorage', JSON.stringify(arr));
+            $scope.getStoredData();
+        }
+        
+        $scope.getStoredData = function () {
+            var obj = JSON.parse(localStorage.getItem('myStorage'));
+            console.log(obj);
+            $scope.GetSymptoms();;
+        }
 
     }]);

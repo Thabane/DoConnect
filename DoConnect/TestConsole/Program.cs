@@ -8,10 +8,9 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using DataClient;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using ObjectModel;
 using ObjectModel.Infermedica_Models;
+
 
 namespace TestConsole
 {
@@ -19,21 +18,22 @@ namespace TestConsole
     {
         static void Main(string[] args)
         {
+            testPost();
             Console.WriteLine("Connected");
             Console.ReadKey();
         }
 
-        private static void differentApproach()
+        private static void differentApproach(string jData)
         {
             var url = "https://api.infermedica.com/v1/diagnosis";
-            var jsonData = "{\"sex\": \"male\",\"age\": \"29\",\"evidence\": []}";
+            //var jsonData = "{\"sex\": \"male\",\"age\": \"29\",\"evidence\": []}";
 
             using (var client = new WebClient())
             {
                 client.Headers.Add("app_id", ConfigurationManager.AppSettings["app_id"]);
                 client.Headers.Add("app_key", ConfigurationManager.AppSettings["app_key"]);
                 client.Headers.Add("content-type", "application/json");
-                var response = client.UploadString(url, jsonData);
+                var response = client.UploadString(url, jData);
             }
         }
 
@@ -85,18 +85,31 @@ namespace TestConsole
             Console.WriteLine(content);
             var json = content;
             //var json = "[" + content + "]"; // change this to array
-            var objects = JArray.Parse(json); // parse as array  
+            //var objects = JArray.Parse(json); // parse as array  
 
-            foreach (JObject o in objects.Children<JObject>())
-            {
-                foreach (JProperty p in o.Properties())
-                {
-                    string name = p.Name;
-                    string value = p.Value.ToString();
-                    Console.Write(name + ": " + value);
-                }
-            }
+            //foreach (JObject o in objects.Children<JObject>())
+            //{
+            //    foreach (JProperty p in o.Properties())
+            //    {
+            //        string name = p.Name;
+            //        string value = p.Value.ToString();
+            //        Console.Write(name + ": " + value);
+            //    }
+            //}
             Console.ReadLine();
+        }
+
+        public static void testPost()
+        {
+            Infermedica med = new Infermedica();
+            DiagnosisRequest dRequest = new DiagnosisRequest();
+            dRequest.age = 25;
+            dRequest.sex = Sex.male.ToString();
+            //dRequest.evaluated_at = "Roodepoort, 15 September 2016";
+            dRequest.evidence = new List<Evidence>();
+            dRequest.evidence.Add(new Evidence() { id = "s_721", choice_id = ChoiceId.present.ToString() });
+            //["s_721", "s_661"]
+            DiagnosisResponse res = med.DiagnosePatient(dRequest);
         }
 
         

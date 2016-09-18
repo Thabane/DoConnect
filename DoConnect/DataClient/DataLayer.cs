@@ -419,9 +419,7 @@ namespace DataClient
         }
 
         #endregion
-
         
-
         #region Invoice
         public List<Invoice> GetAllInvoices()
         {
