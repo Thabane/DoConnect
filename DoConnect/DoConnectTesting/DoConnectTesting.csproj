@@ -51,8 +51,11 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="DataMan.cs" />
     <Compile Include="IntegrationTests.cs" />
+    <Compile Include="MockData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -61,6 +64,10 @@
     <ProjectReference Include="..\DataClient\DataClient.csproj">
       <Project>{8c1aaf48-0805-405b-b58e-91fce15e96a7}</Project>
       <Name>DataClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ObjectModel\ObjectModel.csproj">
+      <Project>{171b67fd-6810-48a2-ab91-c12dca6e06bf}</Project>
+      <Name>ObjectModel</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

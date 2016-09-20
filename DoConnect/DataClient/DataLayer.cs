@@ -39,12 +39,12 @@ namespace DataClient
         }
         
 
-        public string Login(string username, string password, int accessLevel)
+        public bool Login(string username, string password)
         {
             int userId = 0;
             List<SqlParameter> _parameters = new List<SqlParameter>();
             SqlParameter accessLevelParameter = new SqlParameter("@AccessLevel", SqlDbType.Int);
-            accessLevelParameter.Value = accessLevel;
+            //accessLevelParameter.Value = accessLevel;
             _parameters.Add(accessLevelParameter);
 
             using (var reader = access.ExecuteReader(Conn, "[CreateUser]", _parameters))
@@ -53,7 +53,7 @@ namespace DataClient
                     userId = reader.GetInt32(reader.GetOrdinal("ID"));
             }
             access.LogEntry(userId, "New User Created");
-            return "";
+            return true;
         }
 
         public Login MyLogin(string Email, string Password)
