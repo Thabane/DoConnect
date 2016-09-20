@@ -7,7 +7,7 @@ namespace DoConnectTesting
     [TestClass]
     public class IntegrationTests
     {
-        [TestMethod, TestCategory("Smoke")]
+        [TestMethod, TestCategory("Specific")]
         public void GetConditions()
         {
             Infermedica med = new Infermedica();
@@ -15,7 +15,7 @@ namespace DoConnectTesting
             var finalRes = res.Result;
             Assert.IsTrue(!string.IsNullOrEmpty(finalRes));
         }
-        [TestMethod, TestCategory("Smoke")]
+        [TestMethod, TestCategory("Specific")]
         public void GetSymptoms()
         {
             Infermedica med = new Infermedica();
@@ -23,7 +23,7 @@ namespace DoConnectTesting
             var finalRes = res.Result;
             Assert.IsTrue(!string.IsNullOrEmpty(finalRes));
         }
-        [TestMethod, TestCategory("Specific")]
+        [TestMethod, TestCategory("Smoke")]
         public void GetSymptomById()
         {
             Infermedica med = new Infermedica();
