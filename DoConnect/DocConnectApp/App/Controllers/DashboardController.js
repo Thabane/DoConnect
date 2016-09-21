@@ -20,6 +20,5 @@
             var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
             chart.draw(data, options);
         }
-        $scope.user = JSON.parse(sessionStorage.user);
-        alert($scope.user);
+        $scope.User_FullName = JSON.parse(sessionStorage.FirstName) + " " + JSON.parse(sessionStorage.LastName);
     }]);

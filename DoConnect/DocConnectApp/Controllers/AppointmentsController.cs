@@ -17,8 +17,7 @@ namespace DoConnectAdmin.Controllers
         {
             DataLayer dtLayer = new DataLayer();
             return dtLayer.GetAppointments();
-        }
-        
+        }        
 
         [HttpGet]//Select all Appointments data
         [Route("api/Appointments/GetAllDoctors")]
@@ -48,15 +47,8 @@ namespace DoConnectAdmin.Controllers
         [Route("api/Appointments/UpdateAppointment")]
         public bool UpdateAppointment(Appointments appointment)
         {
-            string Date_Time = "";
-            if (appointment.Appointments_Date_Time.Length > 20)
-            {   Date_Time = formatDate(appointment.Appointments_Date_Time); }
-            else
-            { Date_Time = appointment.Appointments_Date_Time;  }
-
-
             DataLayer dtLayer = new DataLayer();
-            return dtLayer.UpdateAppointment(appointment.Appointments_ID, Date_Time, appointment.Patient_ID, appointment.Appointments_Details, appointment.Appointments_App_Status, appointment.Doctors_ID);
+            return dtLayer.UpdateAppointment(appointment.Appointments_ID, appointment.Appointments_Date_Time, appointment.Patient_ID, appointment.Appointments_Details, appointment.Appointments_App_Status, appointment.Doctors_ID);
         }
 
         [HttpPost] //Insert Appointment
@@ -64,7 +56,7 @@ namespace DoConnectAdmin.Controllers
         public bool InsertAppointment(Appointments appointment)
         {
             DataLayer dtLayer = new DataLayer();
-            return dtLayer.NewAppointment(formatDate(appointment.Appointments_Date_Time), appointment.Patient_ID, appointment.Appointments_Details, appointment.Appointments_App_Status, appointment.Doctors_ID);
+            return dtLayer.NewAppointment(appointment.Appointments_Date_Time, appointment.Patient_ID, appointment.Appointments_Details, appointment.Appointments_App_Status, appointment.Doctors_ID);
         }
 
         [HttpPost]
@@ -73,13 +65,6 @@ namespace DoConnectAdmin.Controllers
         {
             DataLayer dtLayer = new DataLayer();
             return dtLayer.DeleteAppointment(ID);
-        }
-
-        public string formatDate(string dt)
-        {
-            string[] date = dt.Split('T');
-            string[] TimeSplit = date[1].Split('.');
-            return (date[0] + " " + TimeSplit[0]); //YYYY-MM-DD HH:MM:SS
         }
     }
 }

@@ -39,12 +39,11 @@
         $scope.GetUserDetails = function (User_ID) {
             LoginService.GetUserDetailsByUser_ID(User_ID).success(function (result) {
                 alert(User_ID);
-                sessionStorage.Staff_ID = result["ID"];
-                sessionStorage.User_ID = result["User_ID"];                
+                sessionStorage.ID = result["ID"];
+                sessionStorage.User_ID = result["User_ID"];
                 sessionStorage.FirstName = result["FirstName"];
                 sessionStorage.LastName = result["LastName"];
-                sessionStorage.Email = result["Email"]; 
-                sessionStorage.Practice_ID = result["PRACTICE_ID"];
+                sessionStorage.Email = result["Email"];
             });
         };
 }]);

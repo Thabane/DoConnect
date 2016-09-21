@@ -269,18 +269,6 @@ function btnRedirect(Page) {
 };
 
 //function DT() {
-//    $(".datetimepicker").datetimepicker({ format: "L" });
+//    $(".date").datepicker({ format: 'yyyy-mm-dd' });
 //};
 
-$(".date").on("change", function () {
-    this.setAttribute(
-        "data-date",
-        moment(this.value, "YYYY-MM-DD")
-        .format(this.getAttribute("data-date-format"))
-    )
-}).trigger("change")
-
-$(".nav li").on("click", function () {
-    $(".nav li").removeClass("active");
-    $(this).addClass("active");
-});

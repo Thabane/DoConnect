@@ -33,7 +33,7 @@
                 else {
                     $scope.Gender = 'Female';
                 }
-                $scope.DOB = { value: new Date(result["DOB"]) };
+                $scope.DOB = result["DOB"];
                 $scope.Phone = result["Phone"];
                 $scope.Street_Address = result["Street_Address"];
                 $scope.Suburb = result["Suburb"];
@@ -84,18 +84,18 @@
 
         //Insert Employee Funtion
         $scope.NewEmployee = function (FirstName, LastName, ID_Number, Phone, Street_Address, Suburb, City, Country, Email) {
-            EmployeesService.InsertEmployee(FirstName, LastName, ID_Number, $scope.Seleceted_Gender, $scope.DOB.value, Phone, Street_Address, Suburb, City, Country, $scope.Seleceted_ACCESSLEVEL_ID, $scope.Seleceted_ACCESSLEVEL_LEVEL, $scope.Practice_ID, Email).success(function () {
+            EmployeesService.InsertEmployee(FirstName, LastName, ID_Number, $scope.Seleceted_Gender, angular.element("#DOB").val(), Phone, Street_Address, Suburb, City, Country, $scope.Seleceted_ACCESSLEVEL_ID, $scope.Seleceted_ACCESSLEVEL_LEVEL, $scope.Practice_ID, Email).success(function () {
                 $scope.GetAllEmployees();
                 angular.element(".insert").val('');
                 btnSuccess("Employee successfully inserted.");
-                btnRedirect("Employees");
+                //btnRedirect("Employees");
             },function (error) {
                     btnAlert("System Error Message", "Insert unsuccessful.");
                 });
         };
 
         //Update Employee Funtion
-        $scope.function_btnUpdateEmployee = function () {
+        $scope.function_btnUpdateEmployee = function () {            
             var btnText = angular.element("#function_btnUpdateEmployee").html();
             if (btnText == "Update") {
                 angular.element(".readonly_ViewEmployee").attr("readonly", false); angular.element(".disable_ViewEmployee").prop("disabled", false);
@@ -106,7 +106,8 @@
                 if ($scope.Seleceted_Gender == 0) { $scope.Seleceted_Gender = $scope.G }
                 if ($scope.Practice_ID == 0) { $scope.Practice_ID = $scope.PRACTICE_ID }
                 if ($scope.Seleceted_ACCESSLEVEL_LEVEL == 0) { $scope.Seleceted_ACCESSLEVEL_LEVEL = $scope.Employee_Type }
-                EmployeesService.UpdateEmployee($scope.ID, $scope.FirstName, $scope.LastName, $scope.ID_Number, $scope.Seleceted_Gender, $scope.DOB.value, $scope.Phone, $scope.Street_Address, $scope.Suburb, $scope.City, $scope.Country, $scope.Seleceted_ACCESSLEVEL_LEVEL, $scope.Practice_ID, $scope.Email).success(function () {
+                console.log($scope.ID, $scope.FirstName, $scope.LastName, $scope.ID_Number, $scope.Seleceted_Gender, angular.element("#DOB").val(), $scope.Phone, $scope.Street_Address, $scope.Suburb, $scope.City, $scope.Country, $scope.Seleceted_ACCESSLEVEL_LEVEL, $scope.Practice_ID, $scope.Email);
+                EmployeesService.UpdateEmployee($scope.ID, $scope.FirstName, $scope.LastName, $scope.ID_Number, $scope.Seleceted_Gender, angular.element("#DOB").val(), $scope.Phone, $scope.Street_Address, $scope.Suburb, $scope.City, $scope.Country, $scope.Seleceted_ACCESSLEVEL_LEVEL, $scope.Practice_ID, $scope.Email).success(function () {
                         $scope.GetAllEmployees();
                         btnSuccess("Employee details successfully updated.");                        
                     }, function (error) {

@@ -168,7 +168,6 @@
     <Content Include="App\Controllers\PatientsController.js" />
     <Content Include="App\Controllers\PracticesController.js" />
     <Content Include="App\Controllers\Reports.js" />
-    <Content Include="App\Controllers\testController.js" />
     <Content Include="App\Controllers\UserProfileController.js" />
     <Content Include="App\Services\AccountingService.js" />
     <Content Include="App\Services\AppointmentsService.js" />
@@ -211,7 +210,6 @@
     <Content Include="App\Views\Patients\PatientRecord\NewPrescription.html" />
     <Content Include="App\Views\Patients\PatientRecord\PrescriptionDetails.html" />
     <Content Include="App\Views\Patients\patients.html" />
-    <Content Include="App\Views\Patients\test.html" />
     <Content Include="App\Views\Practices\NewPractice.html" />
     <Content Include="App\Views\Practices\Practices.html" />
     <Content Include="App\Views\Reports\Reports.html" />
@@ -237,9 +235,14 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\dtPicker\bootstrap-datetimepicker.js" />
+    <Content Include="Scripts\dtPicker\bootstrap-datetimepicker.min.css" />
+    <Content Include="Scripts\dtPicker\bootstrap-datetimepicker.min.js" />
+    <Content Include="Scripts\dtPicker\moment.js" />
     <Content Include="Scripts\FormValidation\FormValidationStyle.css" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -268,7 +271,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Data\" />
     <Folder Include="Views\Signin\" />
   </ItemGroup>
   <ItemGroup>

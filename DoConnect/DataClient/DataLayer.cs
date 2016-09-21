@@ -59,6 +59,7 @@ namespace DataClient
         public Login MyLogin(string Email, string Password)
         {
             List<SqlParameter> _parameters = new List<SqlParameter>();
+            List<SqlParameter> _parametersLog_LastLoginTime = new List<SqlParameter>();
             SqlParameter EmailParameter = new SqlParameter("@Email", SqlDbType.NVarChar);
             SqlParameter PasswordParameter = new SqlParameter("@Password", SqlDbType.NVarChar);
             EmailParameter.Value = Email;
@@ -67,11 +68,26 @@ namespace DataClient
             _parameters.Add(PasswordParameter);
 
             Login Login = new Login();
-            using (var reader = access.ExecuteReader(Conn, "[MyLogin]", _parameters))
+            using (var reader = access.ExecuteReader(Conn, "[Login]", _parameters))
             {
                 if (reader.Read())
                 {
                     Login = (new Login().Create(reader));
+                    int ID = reader.GetInt32(reader.GetOrdinal("ID"));
+                    if (ID != 0)
+                    {
+                        DateTime DateTime = DateTime.Now;
+                        SqlParameter IDParameter = new SqlParameter("@ID", SqlDbType.Int);
+                        SqlParameter DateTimeParameter = new SqlParameter("@Last_Login", SqlDbType.DateTime);
+                        IDParameter.Value = ID;
+                        DateTimeParameter.Value =Convert.ToDateTime(DateTime.ToString("yyyy-MM-dd HH:mm:ss"));
+
+                        DateTime DT = Convert.ToDateTime(DateTime.ToString("yyyy-MM-dd HH:mm:ss"));
+                        _parametersLog_LastLoginTime.Add(IDParameter);
+                        _parametersLog_LastLoginTime.Add(DateTimeParameter);
+                        access.ExecuteReader(Conn, "[Log_LastLoginTime]", _parametersLog_LastLoginTime);
+                    }
+                    
                 }
             }
             return Login;
@@ -763,22 +779,27 @@ namespace DataClient
             return true;
         }
 
-        public bool DeletePatient(int id)
+        public bool DeletePatient(int ID)
         {
             _parameters = new List<SqlParameter>();
-            SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
-            idParameter.Value = id;
-            _parameters.Add(idParameter);
+            SqlParameter IDParameter = new SqlParameter("@ID", SqlDbType.Int);
+            IDParameter.Value = ID;
+            _parameters.Add(IDParameter);
 
             int userId = 0;
-            using (var reader = access.ExecuteReader(Conn, "[DeletePatient]", new List<SqlParameter>()))
+            using (var reader = access.ExecuteReader(Conn, "[DeletePatient]", _parameters))
             {
                 if (reader.Read())
                 {
                     userId = reader.GetInt32(reader.GetOrdinal("ID"));
+                    return true;
+                }
+                else
+                {
+                    return false;
                 }
             }
-            return true;
+            
         }
         #endregion
 

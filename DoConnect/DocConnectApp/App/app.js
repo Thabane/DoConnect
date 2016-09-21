@@ -18,28 +18,24 @@ app.config(
                 templateUrl: "App/Views/Patients/patients.html",
                 controller: "PatientsController"
             })
-            .when("/ConsultationNotes/:PatientID", {
+            .when("/ConsultationNotes", {
                 templateUrl: "App/Views/Patients/PatientRecord/ConsultationNotes.html",
                 controller: "PatientsController"
             })
-            .when("/test/:PatientID", {
-                templateUrl: "App/Views/Patients/test.html",
-                controller: "testController"
-            })
-            .when("/NewConsultationNotes/:PatientID", {
+            .when("/NewConsultationNotes", {
                 templateUrl: "App/Views/Patients/PatientRecord/NewConsultationNotes.html",
                 controller: "PatientsController"
             })
-            .when("/MedicalHistory/:PatientID", {
+            .when("/MedicalHistory", {
                 templateUrl: "App/Views/Patients/PatientRecord/MedicalHistory.html",
                 controller: "PatientsController",
                 reloadOnSearch: false
             })
-            .when("/PrescriptionDetails/:PatientID", {
+            .when("/PrescriptionDetails", {
                 templateUrl: "App/Views/Patients/PatientRecord/PrescriptionDetails.html",
                 controller: "PatientsController"
             })
-            .when("/NewPrescription/:PatientID/:ConsultationID", {
+            .when("/NewPrescription", {
                 templateUrl: "App/Views/Patients/PatientRecord/NewPrescription.html",
                 controller: "PatientsController"
             })

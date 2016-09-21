@@ -27,8 +27,9 @@ namespace DocConnectApp
                       "~/Scripts/DashboardWidgets/QuickActionsAppointments.css",
                       "~/Scripts/DashboardWidgets/To Do List.css",
                       "~/Scripts/Pagination/styles.css",
-                      "~/Scripts/DateTimePicker/bootstrap-datetimepicker.min.css",
-                      "~/Scripts/DateTimePicker/bootstrap-datetimepicker.css",
+                      "~/Scripts/dtPicker/bootstrap-datetimepicker.min.css",
+                      //"~/Scripts/DateTimePicker/bootstrap-datetimepicker.min.css",
+                      //"~/Scripts/DateTimePicker/bootstrap-datetimepicker.css",
                       "~/Scripts/FormValidation/FormValidationStyle.css"
                       ));
 
@@ -48,15 +49,20 @@ namespace DocConnectApp
                       "~/Scripts/morris.min.js",
                       "~/Scripts/sb-admin-2.js",
                       "~/Scripts/raphael-min.js",
-                      "~/Scripts/xml2json.js",                      
+                      "~/Scripts/xml2json.js",
                       "~/Scripts/Alert_Confirm_Prompt_Modal/Alert_Confirm_Prompt_Modal.js",
                       "~/Scripts/Index/jquery.min.js",
+                      "~/Scripts/jquery-ui.min.js",
                       "~/Scripts/Index/bootstrap.min.js",
                       "~/Scripts/Pagination/dirPagination.js",
-                      "~/Scripts/DateTimePicker/moment-with-locales.js",
-                      "~/Scripts/DateTimePicker/bootstrap-datetimepicker.min.js",
-                      "~/Scripts/DateTimePicker/bootstrap-datetimepicker.js",
-                      "~/Scripts/bootstrap.js"
+                      "~/Scripts/dtPicker/moment.js",
+                      "~/Scripts/dtPicker/bootstrap-datetimepicker.min.js",
+                      "~/Scripts/dtPicker/bootstrap-datetimepicker.js"
+                      
+                      //"~/Scripts/DateTimePicker/moment-with-locales.js",
+                      //"~/Scripts/DateTimePicker/bootstrap-datetimepicker.min.js",
+                      //"~/Scripts/DateTimePicker/bootstrap-datetimepicker.js",
+                      //"~/Scripts/bootstrap.js"
                       ));
         }
     }

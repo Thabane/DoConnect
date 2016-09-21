@@ -26,10 +26,10 @@
                 if (result["Appointments_App_Status"] == '1') { $scope.Appointments_App_Status = 'Approved'; }
                 else if (result["Appointments_App_Status"] == '0') { $scope.Appointments_App_Status = 'Declined'; }
                 else { $scope.Appointments_App_Status = 'Pending'; }
+                
                 var Array = result["Appointments_Date_Time"].split(' ');                
-                $scope.Appointments_Date = { value: new Date(Array[0]) };
-                $scope.Appointments_Time = { value: new Date(Array[1]) };
-                //$scope.Appointments_Date_Time = { value: new Date(result["Appointments_Date_Time"]) };
+                $scope.Appointments_Date = Array[0];
+                $scope.Appointments_Time = Array[1];
                 $scope.Appointments_Details = result["Appointments_Details"];
                 $scope.Patient_ID = result["Patient_ID"];
                 $scope.Patient_FirstName = result["Patient_FirstName"];
@@ -81,12 +81,12 @@
         };
 
         //Insert Appointment Funtion
-        $scope.NewAppointment = function (Date_Time, Details, App_Status) {            
-            AppointmentsService.InsertAppointment(Date_Time, $scope.PatientID, Details, App_Status, $scope.DoctorID).success(function () {
+        $scope.NewAppointment = function (Details, App_Status) {            
+            AppointmentsService.InsertAppointment(angular.element("#Appointments_Date").val() + " " + angular.element("#Appointments_Time").val(), $scope.PatientID, Details, App_Status, $scope.DoctorID).success(function () {
                 $scope.GetAllAppointments();
                 angular.element(".insert").val('');
                 btnSuccess("Appointment successfully inserted.");
-                btnRedirect("Appointments");
+                //btnRedirect("Appointments");
             },
                 function (error) {
                     btnAlert("System Error Message", "Insert unsuccessful.");
@@ -106,7 +106,7 @@
                 if ($scope.PatientID == 0) { $scope.PatientID = $scope.Patient_ID }
                 if ($scope.Seleceted_App_Status == 0) { $scope.Seleceted_App_Status = $scope.Appointments_App_Status }
                 
-                AppointmentsService.UpdateAppointment($scope.Appointments_ID, $scope.Appointments_Date.value, $scope.PatientID, $scope.Appointments_Details, $scope.Seleceted_App_Status, $scope.DoctorID).success(function () {
+                AppointmentsService.UpdateAppointment($scope.Appointments_ID, angular.element("#Appointments_Date").val()+" "+angular.element("#Appointments_Time").val(), $scope.PatientID, $scope.Appointments_Details, $scope.Seleceted_App_Status, $scope.DoctorID).success(function () {
                     $scope.GetAllAppointments();
                     btnSuccess("Appointment details successfully updated.");
                 }, function (error) {
