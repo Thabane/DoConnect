@@ -18,7 +18,7 @@ namespace TestConsole
     {
         static void Main(string[] args)
         {
-            testPost();
+            TestPost();
             Console.WriteLine("Connected");
             Console.ReadKey();
         }
@@ -99,15 +99,16 @@ namespace TestConsole
             Console.ReadLine();
         }
 
-        public static void testPost()
+        public static void TestPost()
         {
             Infermedica med = new Infermedica();
             DiagnosisRequest dRequest = new DiagnosisRequest();
-            dRequest.age = 25;
+            dRequest.age = "25";
             dRequest.sex = Sex.male.ToString();
-            //dRequest.evaluated_at = "Roodepoort, 15 September 2016";
             dRequest.evidence = new List<Evidence>();
-            dRequest.evidence.Add(new Evidence() { id = "s_721", choice_id = ChoiceId.present.ToString() });
+            dRequest.evidence.Add(new Evidence() {id = "s_721", choice_id = ChoiceId.present.ToString()});            
+            dRequest.evidence.Add(new Evidence() {id = "s_16", choice_id = ChoiceId.present.ToString()});            
+            dRequest.evidence.Add(new Evidence() {id = "s_661", choice_id = ChoiceId.present.ToString()});            
             //["s_721", "s_661"]
             DiagnosisResponse res = med.DiagnosePatient(dRequest);
         }

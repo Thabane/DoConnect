@@ -22,11 +22,8 @@ namespace ObjectModel.Infermedica_Models
     public class DiagnosisRequest
     {
         public string sex { get; set; }
-        public int age { get; set; }
+        public string age { get; set; }
         public List<Evidence> evidence { get; set; }
-        public object extras { get; set; }
-        public string evaluated_at { get; set; } //time when evidence was observed in ISO 8601 
-
     }
 
     public class Evidence
