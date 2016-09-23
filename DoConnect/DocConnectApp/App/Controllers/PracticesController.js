@@ -22,7 +22,6 @@
         //Select PracticeByID Function
         $scope.ViewPractice = function (ID) {
             PracticesService.GetPracticeByID(ID).success(function (result) {
-                //$(".readonly_ViewPractice").val("");
                 $scope.ID = result["ID"];
                 $scope.Name = result["Name"];
                 $scope.Phone_Number = result["Phone_Number"];
@@ -46,13 +45,6 @@
                     btnAlert("System Error Message", "Insert unsuccessful.");
             });
         };
-
-        //Validation
-        $scope.pattern_Email = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-        $scope.pattern_Number = /^[0-9]{1,6}$/;
-        $scope.pattern_String = /^[a-zA-Z ]{1,25}$/;
-
-
 
         //Update Practice Funtion
         $scope.function_btnUpdatePractice = function (ID) {

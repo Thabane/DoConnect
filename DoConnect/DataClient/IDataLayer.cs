@@ -19,7 +19,11 @@ namespace DataClient
         #endregion
 
         #region Expense
-        bool NewUpdateExpense(Expenses expense, int UserId);
+        List<Expenses> GetAllExpenses();
+        Expenses GetExpenseById(int ID);
+        Expenses GetPracticeIDByUser_ID(int User_ID);
+        bool NewExpense(string Description, string Date, string Amount, int Practice_ID, int User_ID);
+        bool UpdateExpense(int ID, string Description, string Amount);
         #endregion
 
         #region Appointments
@@ -39,8 +43,10 @@ namespace DataClient
 
         #region Invoice
         List<Invoice> GetAllInvoices();
-        Invoice GetInvoiceById(int id);
-        bool NewUpdateInvoice(DateTime date, string invoiceSummary, string total, int medical_Aid_ID, int patient_ID, int doctor_ID);
+        Invoice GetInvoiceById(int ID);
+        List<GetAllPatients> GetAllPatientsForInvoice();
+        List<Invoice> GetAllDiagnosisByPatientID(int ID);
+        bool NewInvoice(string InvoiceSummary, decimal Total, decimal AmountPaid, int Medical_Aid_ID, int Patient_ID, int Doctor_ID);
         bool DeleteInvoice(int id);
         #endregion
 

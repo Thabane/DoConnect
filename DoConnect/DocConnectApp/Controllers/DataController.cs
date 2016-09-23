@@ -21,8 +21,15 @@ namespace DocConnectApp.Controllers
             {
                 Session["User_ID"] = Login.ID;
                 Session["User_Email"] = Login.Email;
+                GetUserDetailsByUser_ID(Login.ID);
             }
             return new JsonResult { Data = Login, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
+        public ViewResult GetUserDetailsByUser_ID(int ID)
+        {
+            DataLayer dtLayer = new DataLayer();
+            return View(dtLayer.GetUserDetailsByUser_ID(ID));
         }
     }
 }

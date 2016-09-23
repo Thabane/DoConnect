@@ -13,7 +13,6 @@
             
         //Insert new record
         var InsertPractice = function (Name, Phone_Number, Fax_Number, Street_Address, Suburb, City, Country, Trading_Times) {
-            console.log("service");
             return $http.post("api/Practices/InsertPractice",
             {
                 'Name': Name,

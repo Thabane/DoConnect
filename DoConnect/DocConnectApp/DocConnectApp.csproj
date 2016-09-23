@@ -225,6 +225,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\Logo\doctorIcon.ico" />
+    <Content Include="Images\Logo\doctorIcon.png" />
     <Content Include="Scripts\Alert_Confirm_Prompt_Modal\Alert_Confirm_Prompt_Modal.js" />
     <Content Include="Scripts\angular-route.min.js" />
     <Content Include="Scripts\angular.min.js" />
