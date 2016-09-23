@@ -2008,6 +2008,123 @@ namespace DataClient
                 return false;
             }
         }
-		#endregion
+        #endregion
+
+        #region Medical Aid
+        public List<Medical_Aid> GetAllMedicalAids()
+        {
+            List<Medical_Aid> MedicalAidInfo = new List<Medical_Aid>();
+            using (var reader = access.ExecuteReader(Conn, "[GetAllMedicalAids]", new List<SqlParameter>()))
+            {
+                while (reader.Read())
+                {
+                    MedicalAidInfo.Add(new Medical_Aid().Create(reader));
+                }
+            }
+            return MedicalAidInfo;
+        }
+
+        public Medical_Aid GetMedicalAidById(int ID)
+        {
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            SqlParameter IDParameter = new SqlParameter("@ID", SqlDbType.Int);
+            IDParameter.Value = ID;
+            _parameters.Add(IDParameter);
+            Medical_Aid MedicalAidInfo = new Medical_Aid();
+            using (var reader = access.ExecuteReader(Conn, "[GetMedicalAidById]", _parameters))
+            {
+                if (reader.Read())
+                {
+                    return new Medical_Aid().Create(reader);
+                }
+            }
+            return MedicalAidInfo;
+        }
+
+        public bool NewMedicalAid(string Name, string Cell_Number, string Fax_Number, string Email_Address, string Address)
+        {
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            SqlParameter NameParameter = new SqlParameter("@Name", SqlDbType.NVarChar);
+            SqlParameter Cell_NumberSummaryParameter = new SqlParameter("@Cell_Number", SqlDbType.NVarChar);
+            SqlParameter Fax_NumberParameter = new SqlParameter("@Fax_Number", SqlDbType.NVarChar);
+            SqlParameter Email_AddressParameter = new SqlParameter("@Email_Address", SqlDbType.NVarChar);
+            SqlParameter AddressParameter = new SqlParameter("@Address", SqlDbType.NVarChar);
+
+            NameParameter.Value = Name;
+            Cell_NumberSummaryParameter.Value = Cell_Number;
+            Fax_NumberParameter.Value = Fax_Number;
+            Email_AddressParameter.Value = Email_Address;
+            AddressParameter.Value = Address;
+
+            _parameters.Add(NameParameter);
+            _parameters.Add(Cell_NumberSummaryParameter);
+            _parameters.Add(Fax_NumberParameter);
+            _parameters.Add(Email_AddressParameter);
+            _parameters.Add(AddressParameter);
+
+            int insertedID = 0;
+            using (var reader = access.ExecuteReader(Conn, "[InsertMedicalAid]", _parameters))
+            {
+                if (reader.Read())
+                {
+                    insertedID = reader.GetInt32(reader.GetOrdinal("ID"));
+                }
+            }
+            return true;
+
+        }
+        public bool UpdateMedicalAid(int ID, string Name, string Cell_Number, string Fax_Number, string Email_Address, string Address)
+        {
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            SqlParameter IDParameter = new SqlParameter("@ID", SqlDbType.Int);
+            SqlParameter NameParameter = new SqlParameter("@Name", SqlDbType.NVarChar);
+            SqlParameter Cell_NumberSummaryParameter = new SqlParameter("@Cell_Number", SqlDbType.NVarChar);
+            SqlParameter Fax_NumberParameter = new SqlParameter("@Fax_Number", SqlDbType.NVarChar);
+            SqlParameter Email_AddressParameter = new SqlParameter("@Email_Address", SqlDbType.NVarChar);
+            SqlParameter AddressParameter = new SqlParameter("@Address", SqlDbType.NVarChar);
+
+            IDParameter.Value = ID;
+            NameParameter.Value = Name;
+            Cell_NumberSummaryParameter.Value = Cell_Number;
+            Fax_NumberParameter.Value = Fax_Number;
+            Email_AddressParameter.Value = Email_Address;
+            AddressParameter.Value = Address;
+
+            _parameters.Add(IDParameter);
+            _parameters.Add(NameParameter);
+            _parameters.Add(Cell_NumberSummaryParameter);
+            _parameters.Add(Fax_NumberParameter);
+            _parameters.Add(Email_AddressParameter);
+            _parameters.Add(AddressParameter);
+
+
+            //try
+            //{
+            access.ExecuteNonQuery(Conn, _parameters, "[UpdateMedicalAid]");
+            return true;
+            //}
+            //catch (Exception)
+            //{
+            //    return false;
+            //}
+        }
+        public bool DeleteMedicalAid(int ID)
+        {
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            SqlParameter IDParameter = new SqlParameter("@ID", SqlDbType.Int);
+            IDParameter.Value = ID;
+            _parameters.Add(IDParameter);
+            int User_ID = 0;
+            using (var reader = access.ExecuteReader(Conn, "[DeleteMedicalAid]", _parameters))
+            {
+                if (reader.Read())
+                {
+                    User_ID = reader.GetInt32(reader.GetOrdinal("ID"));
+                }
+            }
+            return true;
+        }
+        #endregion
+
     }
 }

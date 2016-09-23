@@ -112,5 +112,13 @@ namespace DataClient
         #region Medicine_Inventory
         bool NewUpdateMedicine_Inventory(Medicine_Inventory inventory, int UserId);
         #endregion
+
+        #region Medical Aid
+        List<Medical_Aid> GetAllMedicalAids();
+        Medical_Aid GetMedicalAidById(int ID);
+        bool NewMedicalAid(string Name, string Cell_Number, string Fax_Number, string Email_Address, string Address);
+        bool UpdateMedicalAid(int ID, string Name, string Cell_Number, string Fax_Number, string Email_Address, string Address);
+        bool DeleteMedicalAid(int ID);
+        #endregion
     }
 }
