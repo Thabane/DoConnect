@@ -11,7 +11,7 @@ namespace DoConnectTesting
     [TestClass]
     public class UnitTests
     {
-        [TestMethod]
+        [TestMethod, TestCategory("Smoke")]
         public void When_entering_empty_parameters()
         { 
             DataMan access = new DataMan();
@@ -19,28 +19,28 @@ namespace DoConnectTesting
             Assert.IsTrue(result == false,"Values are empty");
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Smoke")]
         public void When_entering_incorrect_values()
         {
             DataMan access = new DataMan();
             Assert.IsTrue(access.Login("Madam", "Speaker") == false, "Values are incorrect");
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Smoke")]
         public void When_entering_incorrect_username()
         {
             DataMan access = new DataMan();
             Assert.IsTrue(access.Login("Madam", "12345") == false, "Username is Incorrect");
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Smoke")]
         public void When_entering_incorrect_password_for_correct_username()
         {
             DataMan access = new DataMan();
             Assert.IsTrue(access.Login("Bongani", "123455") == false, "Password is Incorrect");
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Smoke")]
         public void When_entering_correct_values()
         {
             DataMan access = new DataMan();
