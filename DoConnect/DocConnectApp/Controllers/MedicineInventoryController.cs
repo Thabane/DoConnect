@@ -11,44 +11,44 @@ namespace DocConnectApp.Controllers
 {
     public class MedicineInventoryController : ApiController
     {
-        /*[HttpGet]
-        [Route("api/Medicines/GetAllMedicines")]
+        [HttpGet]
+        [Route("api/MedicineInventory/GetAllMedicines")]
         public List<Medicine_Inventory> GetAllMedicines()
         {
             DataLayer dtLayer = new DataLayer();
-            return dtLayer.GetAllMedicines();
+            return dtLayer.GetAllMedicine_Inventory();
         }
 
         [HttpGet]
-        [Route("api/Medicines/GetMedicine/{ID}")]
+        [Route("api/MedicineInventory/GetMedicine/{ID}")]
         public Medicine_Inventory GetMedicineByID(int ID)
         {
             DataLayer dtLayer = new DataLayer();
-            return dtLayer.GetMedicine(ID);
+            return dtLayer.GetMedicine_InventoryById(ID);
         }
 
         [HttpPost]
-        [Route("api/Medicines/UpdateMedicine")]
+        [Route("api/MedicineInventory/UpdateMedicine")]
         public bool UpdateMedicine(Medicine_Inventory medicine)
         {
             DataLayer dtLayer = new DataLayer();
-            return dtLayer.UpdateMedicine(medicine.ID, medicine.DrugName, medicine.Description, medicine.DrugConcentration, medicine.QuantityInStock, medicine.PurchaseDate, medicine.ExpiryDate, medicine.Practice_ID);
+            return dtLayer.UpdateMedicine_Inventory(medicine.ID, medicine.DrugName, medicine.Description, medicine.QuantityInStock, medicine.DrugConcentration);
         }
 
         [HttpPost]
-        [Route("api/Medicines/InsertMedicine")]
+        [Route("api/MedicineInventory/InsertMedicine")]
         public bool InsertMedicine(Medicine_Inventory medicine)
         {
             DataLayer dtLayer = new DataLayer();
-            return dtLayer.InsertMedicine(medicine.DrugName, medicine.Description, medicine.DrugConcentration, medicine.QuantityPurchased, medicine.ExpiryDate);
+            return dtLayer.NewMedicine_Inventory(medicine.DrugName, medicine.Description, medicine.QuantityPurchased, medicine.PurchaseDate, medicine.ExpiryDate, medicine.DrugConcentration, medicine.Practice_ID);
         }
 
         [HttpPost]
-        [Route("api/Medicines/DeleteMedicine/{ID}")]
+        [Route("api/MedicineInventory/DeleteMedicine/{ID}")]
         public bool DeleteMedicine(int ID)
         {
             DataLayer dtLayer = new DataLayer();
-            return dtLayer.DeleteMedicine(ID);
-        }*/
+            return dtLayer.DeleteMedicine_Inventory(ID);
+        }
     }
 }

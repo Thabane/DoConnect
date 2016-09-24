@@ -1,5 +1,5 @@
-﻿app.controller("MedicineInventoryController", ["$scope", "MedicineInventoryService", "$interval",
-    function ($scope, MedicineInventoryService, $interval) {
+﻿app.controller("MedicineInventoryController", ["$scope", "MedicineInventoryService", "$interval", "$filter",
+    function ($scope, MedicineInventoryService, $interval, $filter) {
         
         //Sort Function
         $scope.sort = function (keyname) {
@@ -7,33 +7,33 @@
             $scope.reverse = !$scope.reverse;
         }
 
-        //Select All Medicine
-        $scope.GetAllMedicines = function () {
-            MedicineInventoryService.GetAllMedicines().then
-            (function (result) {
+        $scope.GetAllMedicine = function () {
+            MedicineInventoryService.GetAllMedicines().then(function (result) {
                 $scope.Medicines = result.data;
             });
         };
-        $scope.GetAllMedicines();
+        $scope.GetAllMedicine();
 
-        //Select MedicineByID Function
         $scope.ViewMedicine = function (ID) {
             MedicineInventoryService.GetMedicineByID(ID).success(function (result) {
                 $scope.ID = result["ID"];
                 $scope.DrugName = result["DrugName"];
                 $scope.Description = result["Description"];
-                $scope.DrugConcentration = result["DrugConcentration"];
-                $scope.QuantityInStock = result["QuantityInStock"];
+                $scope.QuantityPurchased = result["QuantityPurchased"];
                 $scope.PurchaseDate = result["PurchaseDate"];
+                $scope.QuantityInStock = result["QuantityInStock"];               
                 $scope.ExpiryDate = result["ExpiryDate"];
+                $scope.DrugConcentration = result["DrugConcentration"];
                 $scope.Practice_ID = result["Practice_ID"];
+                $scope.PracticeName = result["PracticeName"];
             });
         };
 
-        //Insert Medicine Funtion
-        $scope.NewMedicine = function (DrugName, Description, DrugConcentration, QuantityPurchased, ExpiryDate) {
-            MedicineInventoryService.InsertMedicine(DrugName, Description, DrugConcentration, QuantityPurchased, ExpiryDate).success(function () {
-                $scope.GetAllMedicines();
+        $scope.today = $filter('date')(new Date(), 'yyyy-MM-dd');
+
+        $scope.NewMedicine = function (_DrugName, _Description, _DrugConcentration, _QuantityPurchased) {
+            MedicineInventoryService.InsertMedicine(_DrugName, _Description, _QuantityPurchased, $scope.today, angular.element("#ExpiryDate").val(), _DrugConcentration, 2).success(function () {
+                $scope.GetAllMedicine();
                 angular.element(".insert").val('');
                 btnSuccess("Medicine successfully inserted.");
             },
@@ -42,7 +42,6 @@
                 });
         };
 
-        //Update Medicine Funtion
         $scope.function_btnUpdateMedicine = function () {
             var btnText = angular.element("#function_btnUpdateMedicine").html();
             if (btnText == "Update") {
@@ -50,8 +49,8 @@
                 angular.element("#function_btnUpdateMedicine").html("Save");
             }
             else {
-                MedicineInventoryService.UpdateMedicine($scope.ID, $scope.DrugName, $scope.Description, $scope.DrugConcentration, $scope.QuantityInStock, $scope.PurchaseDate, $scope.ExpiryDate, $scope.Practice_ID).success(function () {
-                    $scope.GetAllMedicines();
+                MedicineInventoryService.UpdateMedicine($scope.ID, $scope.DrugName, $scope.Description, $scope.QuantityInStock, $scope.DrugConcentration).success(function () {
+                    $scope.GetAllMedicine();
                     btnSuccess("Medicine details successfully updated.");
                 }, function (error) {
                     btnAlert("System Error Message", "Update unsuccessful.");
@@ -61,10 +60,9 @@
             }
         };
 
-        //Delete Medicine Funtion
         $scope.DeleteMedicine = function () {
             MedicineInventoryService.DeleteMedicine($scope.ID).then(function () {
-                $scope.GetAllMedicines();
+                $scope.GetAllMedicine();
             }, function (error) {
                 btnAlert("System Error Message", "Delete unsuccessful.");
             });           

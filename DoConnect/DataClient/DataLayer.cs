@@ -1690,7 +1690,6 @@ namespace DataClient
         #endregion
         
         #region Staff       
-
         public List<Staff> GetAllStaff()
         {
             List<Staff> staffInfo = new List<Staff>();
@@ -1926,7 +1925,6 @@ namespace DataClient
                 return false;
             }
         }
-
         public List<Doctor> GetAllDoctors()
         {
             List<Doctor> DoctorsInfo = new List<Doctor>();
@@ -1939,7 +1937,6 @@ namespace DataClient
             }
             return DoctorsInfo;
         }
-
         public Doctor GetDoctorById(int Id)
         {
             List<SqlParameter> _parameter = new List<SqlParameter>();
@@ -1967,46 +1964,139 @@ namespace DataClient
         #endregion
 
         #region Medicine_Inventory
-        public bool NewUpdateMedicine_Inventory(Medicine_Inventory inventory, int UserId)
+        public List<Medicine_Inventory> GetAllMedicine_Inventory()
+        {
+            List<Medicine_Inventory> Medicine_InventoryInfo = new List<Medicine_Inventory>();
+            using (var reader = access.ExecuteReader(Conn, "[GetAllMedicine_Inventory]", new List<SqlParameter>()))
+            {
+                while (reader.Read())
+                {
+                    Medicine_InventoryInfo.Add(new Medicine_Inventory().Create(reader));
+                }
+            }
+            return Medicine_InventoryInfo;
+        }
+        public Medicine_Inventory GetMedicine_InventoryById(int ID)
+        {
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            SqlParameter IDParameter = new SqlParameter("@ID", SqlDbType.Int);
+            IDParameter.Value = ID;
+            _parameters.Add(IDParameter);
+            Medicine_Inventory Medicine_InventoryInfo = new Medicine_Inventory();
+            using (var reader = access.ExecuteReader(Conn, "[GetMedicine_InventoryById]", _parameters))
+            {
+                if (reader.Read())
+                {
+                    return new Medicine_Inventory().Create(reader);
+                }
+            }
+            return Medicine_InventoryInfo;
+        }
+        public bool NewMedicine_Inventory(string DrugName, string Description, int QuantityPurchased, string PurchaseDate, string ExpiryDate, string DrugConcentration, int Practice_ID)
         {
             List<SqlParameter> parameters = new List<SqlParameter>();
-            SqlParameter idParameter = new SqlParameter("@FirstName", SqlDbType.Int);
-            SqlParameter descriptionParameter = new SqlParameter("@LastName", SqlDbType.NVarChar);
-            SqlParameter drugConcentration = new SqlParameter("@Gender", SqlDbType.NVarChar);
-            SqlParameter drugNameParameter = new SqlParameter("@Address", SqlDbType.NVarChar);
-            SqlParameter quantityInStockParameter = new SqlParameter("@PracticeID", SqlDbType.Int);
-            SqlParameter expiryDateParameter = new SqlParameter("@UserID", SqlDbType.DateTime);
-            SqlParameter quantityPurchasedParameter = new SqlParameter("@JobTitle", SqlDbType.Int);
-            SqlParameter purchaseDateParameter = new SqlParameter("@JobTitle", SqlDbType.Int);
+            SqlParameter DrugNameParameter = new SqlParameter("@DrugName", SqlDbType.NVarChar);
+            SqlParameter DescriptionParameter = new SqlParameter("@Description", SqlDbType.NVarChar);
+            SqlParameter QuantityPurchasedParameter = new SqlParameter("@QuantityPurchased", SqlDbType.NVarChar);
+            SqlParameter PurchaseDateParameter = new SqlParameter("@PurchaseDate", SqlDbType.NVarChar);
+            SqlParameter QuantityInStockParameter = new SqlParameter("@QuantityInStock", SqlDbType.Int);
+            SqlParameter ExpiryDateParameter = new SqlParameter("@ExpiryDate", SqlDbType.NVarChar);
+            SqlParameter DrugConcentrationParameter = new SqlParameter("@DrugConcentration", SqlDbType.NVarChar);
+            SqlParameter Practice_IDParameter = new SqlParameter("@Practice_ID", SqlDbType.Int);
 
-            idParameter.Value = inventory.ID;
-            parameters.Add(idParameter);
-            descriptionParameter.Value = inventory.Description;
-            parameters.Add(descriptionParameter);
-            drugConcentration.Value = inventory.DrugConcentration;
-            parameters.Add(drugConcentration);
-            drugNameParameter.Value = inventory.DrugName;
-            parameters.Add(drugNameParameter);
-            quantityInStockParameter.Value = inventory.QuantityInStock;
-            parameters.Add(quantityInStockParameter);
-            expiryDateParameter.Value = inventory.ExpiryDate;
-            parameters.Add(expiryDateParameter);
-            quantityPurchasedParameter.Value = inventory.QuantityPurchased;
-            parameters.Add(quantityPurchasedParameter);
-            purchaseDateParameter.Value = inventory.PurchaseDate;
-            parameters.Add(purchaseDateParameter);
+            DrugNameParameter.Value = DrugName;
+            DescriptionParameter.Value = Description;
+            QuantityPurchasedParameter.Value = QuantityPurchased;
+            PurchaseDateParameter.Value = PurchaseDate;
+            QuantityInStockParameter.Value = QuantityPurchased;
+            ExpiryDateParameter.Value = ExpiryDate;
+            DrugConcentrationParameter.Value = DrugConcentration;
+            Practice_IDParameter.Value = Practice_ID;
 
-            try
+            parameters.Add(DrugNameParameter);
+            parameters.Add(DescriptionParameter);
+            parameters.Add(QuantityPurchasedParameter);
+            parameters.Add(PurchaseDateParameter);
+            parameters.Add(QuantityInStockParameter);
+            parameters.Add(ExpiryDateParameter);
+            parameters.Add(DrugConcentrationParameter);
+            parameters.Add(Practice_IDParameter);
+
+            //try
+            //{
+            int insertedID = 0;
+            using (var reader = access.ExecuteReader(Conn, "[InsertMedicine_Inventory]", parameters))
             {
-                access.ExecuteNonQuery(Conn, parameters, "[NewUpdateMedicine_Inventory]");
-                access.LogEntry(UserId, "User Added new Medicine Inventory");
+                if (reader.Read())
+                {
+                    insertedID = reader.GetInt32(reader.GetOrdinal("ID"));                    
+                }
+            }
+                //access.LogEntry(UserId, "User Added new Medicine Inventory");
                 return true;
-            }
-            catch (Exception ex)
+            //}
+            //catch (Exception ex)
+            //{
+            //    access.LogEntry(UserId, ex.ToString());
+            //    return false;
+            //}
+        }
+        public bool UpdateMedicine_Inventory(int ID, string DrugName, string Description, int QuantityInStock, string DrugConcentration)
+        {
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            SqlParameter IDParameter = new SqlParameter("@ID", SqlDbType.Int);
+            SqlParameter DrugNameParameter = new SqlParameter("@DrugName", SqlDbType.NVarChar);
+            SqlParameter DescriptionParameter = new SqlParameter("@Description", SqlDbType.NVarChar);
+            SqlParameter QuantityInStockParameter = new SqlParameter("@QuantityInStock", SqlDbType.Int);
+            SqlParameter DrugConcentrationParameter = new SqlParameter("@DrugConcentration", SqlDbType.NVarChar);
+            
+            IDParameter.Value = ID;
+            DrugNameParameter.Value = DrugName;
+            DescriptionParameter.Value = Description;
+            QuantityInStockParameter.Value = QuantityInStock;
+            DrugConcentrationParameter.Value = DrugConcentration;
+
+            parameters.Add(IDParameter);
+            parameters.Add(DrugNameParameter);
+            parameters.Add(DescriptionParameter);
+            parameters.Add(QuantityInStockParameter);
+            parameters.Add(DrugConcentrationParameter);
+
+            //try
+            //{
+
+            int updatedID = 0;
+            using (var reader = access.ExecuteReader(Conn, "[UpdateMedicine_Inventory]", parameters))
             {
-                access.LogEntry(UserId, ex.ToString());
-                return false;
+                if (reader.Read())
+                {
+                    updatedID = reader.GetInt32(reader.GetOrdinal("ID"));
+                }
             }
+            //access.LogEntry(UserId, "User Added new Medicine Inventory");
+            return true;
+            //}
+            //catch (Exception ex)
+            //{
+            //    access.LogEntry(UserId, ex.ToString());
+            //    return false;
+            //}
+        }
+        public bool DeleteMedicine_Inventory(int ID)
+        {
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            SqlParameter IDParameter = new SqlParameter("@ID", SqlDbType.Int);
+            IDParameter.Value = ID;
+            _parameters.Add(IDParameter);
+            int deletedID = 0;
+            using (var reader = access.ExecuteReader(Conn, "[DeleteMedicine_Inventory]", _parameters))
+            {
+                if (reader.Read())
+                {
+                    deletedID = reader.GetInt32(reader.GetOrdinal("ID"));
+                }
+            }
+            return true;
         }
         #endregion
 
@@ -2023,7 +2113,6 @@ namespace DataClient
             }
             return MedicalAidInfo;
         }
-
         public Medical_Aid GetMedicalAidById(int ID)
         {
             List<SqlParameter> _parameters = new List<SqlParameter>();
@@ -2040,7 +2129,6 @@ namespace DataClient
             }
             return MedicalAidInfo;
         }
-
         public bool NewMedicalAid(string Name, string Cell_Number, string Fax_Number, string Email_Address, string Address)
         {
             List<SqlParameter> _parameters = new List<SqlParameter>();

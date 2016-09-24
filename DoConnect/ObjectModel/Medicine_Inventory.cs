@@ -13,11 +13,12 @@ namespace ObjectModel
         public string DrugName { get; set; }
         public string Description { get; set; }
         public int QuantityPurchased { get; set; }
-        public DateTime PurchaseDate { get; set; }
+        public string PurchaseDate { get; set; }
         public int QuantityInStock { get; set; }
-        public DateTime ExpiryDate { get; set; }
+        public string ExpiryDate { get; set; }
         public string DrugConcentration { get; set; }
         public int Practice_ID { get; set; }
+        public string PracticeName { get; set; }
 
         public Medicine_Inventory Create(SqlDataReader reader)
         {
@@ -27,11 +28,12 @@ namespace ObjectModel
                 DrugName = reader.GetString(reader.GetOrdinal("DrugName")),
                 Description = reader.GetString(reader.GetOrdinal("Description")),
                 QuantityPurchased = reader.GetInt32(reader.GetOrdinal("QuantityPurchased")),
-                PurchaseDate = reader.GetDateTime(reader.GetOrdinal("PurchaseDate")),
+                PurchaseDate = reader.GetString(reader.GetOrdinal("PurchaseDate")),
                 QuantityInStock = reader.GetInt32(reader.GetOrdinal("QuantityInStock")),
-                ExpiryDate = reader.GetDateTime(reader.GetOrdinal("ExpiryDate")),
+                ExpiryDate = reader.GetString(reader.GetOrdinal("ExpiryDate")),
                 DrugConcentration = reader.GetString(reader.GetOrdinal("DrugConcentration")),
                 Practice_ID = reader.GetInt32(reader.GetOrdinal("Practice_ID")),
+                PracticeName = reader.GetString(reader.GetOrdinal("PracticeName"))
             };
         }
     }

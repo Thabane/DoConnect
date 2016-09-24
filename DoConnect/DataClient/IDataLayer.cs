@@ -110,7 +110,11 @@ namespace DataClient
         #endregion
 
         #region Medicine_Inventory
-        bool NewUpdateMedicine_Inventory(Medicine_Inventory inventory, int UserId);
+        List<Medicine_Inventory> GetAllMedicine_Inventory();
+        Medicine_Inventory GetMedicine_InventoryById(int ID);
+        bool NewMedicine_Inventory(string DrugName, string Description, int QuantityPurchased, string PurchaseDate, string ExpiryDate, string DrugConcentration, int Practice_ID);
+        bool UpdateMedicine_Inventory(int ID, string DrugName, string Description, int QuantityInStock, string DrugConcentration);
+        bool DeleteMedicine_Inventory(int ID);
         #endregion
 
         #region Medical Aid
