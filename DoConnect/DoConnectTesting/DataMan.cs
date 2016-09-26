@@ -9,7 +9,7 @@ using ObjectModel;
 
 namespace DoConnectTesting
 {
-    class DataMan : IDataLayer
+    class DataMan
     {
         public int CreateUser(int AccessLevel)
         {

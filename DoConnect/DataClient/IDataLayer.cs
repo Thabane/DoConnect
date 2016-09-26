@@ -93,7 +93,7 @@ namespace DataClient
         #endregion
 
         #region Staff
-        
+
         List<Staff> GetAllStaff();
         Staff GetStaffById(int id);
         int GetNewUserID();
