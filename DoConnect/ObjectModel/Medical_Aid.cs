@@ -22,7 +22,7 @@ namespace ObjectModel
                 Cell_Number = reader.GetString(reader.GetOrdinal("Cell_Number")),
                 Fax_Number = reader.GetString(reader.GetOrdinal("Fax_Number")),
                 Email_Address = reader.GetString(reader.GetOrdinal("Email_Address")),
-                Address = reader.GetString(reader.GetOrdinal("Address")),
+                Address = reader.GetString(reader.GetOrdinal("Address"))
             };
         }
     }

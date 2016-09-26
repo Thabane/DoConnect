@@ -10,13 +10,14 @@ namespace ObjectModel
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
-        public char Gender { get; set; }
+        public string Gender { get; set; }
         public string Address { get; set; }
         public string Job_Title { get; set; }
-        public int UserId { get; set; }
-        public int PracticeId { get; set; }
+        public int User_Id { get; set; }
+        public int Practice_ID { get; set; }
+        public string DoctorFullName { get; set; }
 
-        public Doctor Create(SqlDataReader reader)
+    public Doctor Create(SqlDataReader reader)
         {
             return new Doctor
             {
@@ -24,11 +25,12 @@ namespace ObjectModel
                 FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
                 LastName = reader.GetString(reader.GetOrdinal("LastName")),
                 Email = reader.GetString(reader.GetOrdinal("Email")),
-                //Gender = reader.GetChars(reader.GetOrdinal("Gender")),
+                Gender = reader.GetString(reader.GetOrdinal("Gender")),
                 Address = reader.GetString(reader.GetOrdinal("Address")),
                 Job_Title = reader.GetString(reader.GetOrdinal("Job_Title")),
-                UserId = reader.GetInt32(reader.GetOrdinal("UserId")),
-                PracticeId = reader.GetInt32(reader.GetOrdinal("PracticeId")),
+                User_Id = reader.GetInt32(reader.GetOrdinal("User_Id")),
+                Practice_ID = reader.GetInt32(reader.GetOrdinal("Practice_ID")),
+                DoctorFullName = reader.GetString(reader.GetOrdinal("DoctorFullName")),
             };
         }
     }

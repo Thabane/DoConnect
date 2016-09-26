@@ -1,4 +1,4 @@
-﻿var app = angular.module('app', ['ngRoute', 'ngLocationUpdate', 'angularUtils.directives.dirPagination']);
+﻿var app = angular.module('app', ['ngRoute', 'ngLocationUpdate', 'angularUtils.directives.dirPagination', 'ngBootbox']);
 
 app.config(
 [
@@ -28,10 +28,15 @@ app.config(
             })
             .when("/MedicalHistory", {
                 templateUrl: "App/Views/Patients/PatientRecord/MedicalHistory.html",
-                controller: "PatientsController"
+                controller: "PatientsController",
+                reloadOnSearch: false
             })
             .when("/PrescriptionDetails", {
                 templateUrl: "App/Views/Patients/PatientRecord/PrescriptionDetails.html",
+                controller: "PatientsController"
+            })
+            .when("/NewPrescription", {
+                templateUrl: "App/Views/Patients/PatientRecord/NewPrescription.html",
                 controller: "PatientsController"
             })
             .when("/NewPatient", {
@@ -118,13 +123,14 @@ app.config(
                 templateUrl: "App/Views/UserProfile/UserProfile.html",
                 controller: "UserProfileController"
             })
-            .when("/Login", {
+            .when("/Login", {//../Views/Home/Login.cshtml
                 templateUrl: "App/Views/Login/Login.html",
                 controller: "LoginController"
             })
-            .otherwise({
-                redirectTo: "/Dashboard"
-            });
+            //.otherwise({
+            //    redirectTo: "/Dashboard"
+        //})
+        ;
 
         $locationProvider.html5Mode({
             enabled: true,
@@ -134,7 +140,6 @@ app.config(
         $httpProvider.interceptors.push('AuthHttpResponseInterceptor');
     }
 ]);
-
 
 app.run(
     [
@@ -152,3 +157,5 @@ app.run(
         };
     }
     ]);
+
+

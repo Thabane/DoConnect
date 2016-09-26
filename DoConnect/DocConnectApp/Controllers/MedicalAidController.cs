@@ -11,24 +11,24 @@ namespace DocConnectApp.Controllers
 {
     public class MedicalAidController : ApiController
     {
-        /*[HttpGet]
-        [Route("api/MedicalAids/GetAllMedicalAids")]
+        [HttpGet]
+        [Route("api/MedicalAid/GetAllMedicalAids")]
         public List<Medical_Aid> GetAllMedicalAids()
         {
             DataLayer dtLayer = new DataLayer();
-            return dtLayer.GetAllMedicalAid();
+            return dtLayer.GetAllMedicalAids();
         }
 
         [HttpGet]
-        [Route("api/MedicalAids/GetMedicalAid/{ID}")]
+        [Route("api/MedicalAid/GetMedicalAid/{ID}")]
         public Medical_Aid GetMedicalAidByID(int ID)
         {
             DataLayer dtLayer = new DataLayer();
-            return dtLayer.GetMedicalAid(ID);
+            return dtLayer.GetMedicalAidById(ID);
         }
 
         [HttpPost]
-        [Route("api/MedicalAids/UpdateMedicalAid")]
+        [Route("api/MedicalAid/UpdateMedicalAid")]
         public bool UpdateMedicalAid(Medical_Aid medical_Aid)
         {
             DataLayer dtLayer = new DataLayer();
@@ -36,19 +36,19 @@ namespace DocConnectApp.Controllers
         }
 
         [HttpPost]
-        [Route("api/MedicalAids/InsertMedicalAid")]
+        [Route("api/MedicalAid/InsertMedicalAid")]
         public bool InsertMedicalAid(Medical_Aid medical_Aid)
         {
             DataLayer dtLayer = new DataLayer();
-            return dtLayer.InsertMedicalAid(medical_Aid.ID, medical_Aid.Name, medical_Aid.Cell_Number, medical_Aid.Fax_Number, medical_Aid.Email_Address, medical_Aid.Address);
+            return dtLayer.NewMedicalAid(medical_Aid.Name, medical_Aid.Cell_Number, medical_Aid.Fax_Number, medical_Aid.Email_Address, medical_Aid.Address);
         }
 
         [HttpPost]
-        [Route("api/MedicalAids/DeleteMedicalAid/{ID}")]
+        [Route("api/MedicalAid/DeleteMedicalAid/{ID}")]
         public bool DeleteMedicalAid(int ID)
         {
             DataLayer dtLayer = new DataLayer();
             return dtLayer.DeleteMedicalAid(ID);
-        }*/
+        }
     }
 }

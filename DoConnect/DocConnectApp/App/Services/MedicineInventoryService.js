@@ -1,45 +1,39 @@
 ﻿app.factory('MedicineInventoryService',
     function ($http) {
-        //Select all Medicine data
         var GetAllMedicines = function () {
-            return $http.get("api/Medicines/GetAllMedicines");
+            return $http.get("api/MedicineInventory/GetAllMedicines");
         };
 
-        //Select Medicine by ID
         var GetMedicineByID = function (ID) {
-            return $http.get("api/Medicines/GetMedicine/" + ID);
+            return $http.get("api/MedicineInventory/GetMedicine/" + ID);
         };
 
-        //Insert new record
-        var InsertMedicine = function (DrugName, Description, DrugConcentration, QuantityPurchased, ExpiryDate) {
-            return $http.post("api/Medicines/InsertMedicine",
+        var InsertMedicine = function (DrugName, Description, QuantityPurchased, PurchaseDate, ExpiryDate, DrugConcentration, Practice_ID) {
+            return $http.post("api/MedicineInventory/InsertMedicine",
             {
-                'DrugName': DrugName,
-                'Description': Description,
-                'DrugConcentration': DrugConcentration,
-                'QuantityPurchased': QuantityPurchased,
-                'ExpiryDate': ExpiryDate
+                'DrugName' : DrugName,
+                'Description' : Description,
+                'QuantityPurchased' : QuantityPurchased,
+                'PurchaseDate' : PurchaseDate,
+                'ExpiryDate' : ExpiryDate,
+                'DrugConcentration' : DrugConcentration,
+                'Practice_ID' : Practice_ID      
             });
         };
 
-        //Update Medicine
-        var UpdateMedicine = function (ID, DrugName, Description, DrugConcentration, QuantityInStock, PurchaseDate, ExpiryDate, Practice_ID) {
-            return $http.post("api/Medicines/UpdateMedicine",
+        var UpdateMedicine = function (ID, DrugName, Description, QuantityInStock , DrugConcentration) {
+            return $http.post("api/MedicineInventory/UpdateMedicine",
             {
                 'ID': ID,
                 'DrugName': DrugName,
                 'Description': Description,
-                'DrugConcentration': DrugConcentration,
-                'QuantityPurchased': QuantityInStock,
-                'PurchaseDate': PurchaseDate,
-                'ExpiryDate': ExpiryDate,
-                'ExpiryDate': ExpiryDate
+                'QuantityInStock': QuantityInStock,
+                'DrugConcentration': DrugConcentration
             });
         };
 
-        //Delete the Record
         var DeleteMedicine = function (ID) {
-            return $http.post("api/Medicines/DeleteMedicine/" + ID);
+            return $http.post("api/MedicineInventory/DeleteMedicine/" + ID);
         };
 
         return {

@@ -134,12 +134,12 @@
     <Compile Include="Controllers\AccountingController.cs" />
     <Compile Include="Controllers\AppointmentsController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\DataController.cs" />
     <Compile Include="Controllers\DiagnosisExpertSystemController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\ExpensesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MedicalAidController.cs" />
     <Compile Include="Controllers\MedicineInventoryController.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
@@ -150,6 +150,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\LoginData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -206,6 +207,7 @@
     <Content Include="App\Views\Patients\PatientRecord\ConsultationNotes.html" />
     <Content Include="App\Views\Patients\PatientRecord\MedicalHistory.html" />
     <Content Include="App\Views\Patients\PatientRecord\NewConsultationNotes.html" />
+    <Content Include="App\Views\Patients\PatientRecord\NewPrescription.html" />
     <Content Include="App\Views\Patients\PatientRecord\PrescriptionDetails.html" />
     <Content Include="App\Views\Patients\patients.html" />
     <Content Include="App\Views\Practices\NewPractice.html" />
@@ -223,7 +225,13 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\Logo\doctorIcon.ico" />
+    <Content Include="Images\Logo\doctorIcon.png" />
     <Content Include="Scripts\Alert_Confirm_Prompt_Modal\Alert_Confirm_Prompt_Modal.js" />
+    <Content Include="Scripts\Alert_Confirm_Prompt_Modal\bootbox.js" />
+    <Content Include="Scripts\Alert_Confirm_Prompt_Modal\ngBootbox.js" />
+    <Content Include="Scripts\angular-route.min.js" />
+    <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\bootstrap-theme.css.map" />
@@ -231,9 +239,14 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\dtPicker\bootstrap-datetimepicker.js" />
+    <Content Include="Scripts\dtPicker\bootstrap-datetimepicker.min.css" />
+    <Content Include="Scripts\dtPicker\bootstrap-datetimepicker.min.js" />
+    <Content Include="Scripts\dtPicker\moment.js" />
     <Content Include="Scripts\FormValidation\FormValidationStyle.css" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -262,7 +275,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+    <Folder Include="Views\Signin\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

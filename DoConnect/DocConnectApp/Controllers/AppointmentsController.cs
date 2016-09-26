@@ -11,12 +11,20 @@ namespace DoConnectAdmin.Controllers
 {
     public class AppointmentsController : ApiController
     {
-        /*[HttpGet]//Select all Appointments data
+        [HttpGet]//Select all Appointments data
         [Route("api/Appointments/GetAllAppointments")]
         public List<Appointments> GetAllAppointments()
         {
             DataLayer dtLayer = new DataLayer();
-            return dtLayer.GetAllAppointments();
+            return dtLayer.GetAppointments();
+        }        
+
+        [HttpGet]//Select all Appointments data
+        [Route("api/Appointments/GetAllDoctors")]
+        public List<Doctor> GetAllDoctors()
+        {
+            DataLayer dtLayer = new DataLayer();
+            return dtLayer.GetAllDoctors();
         }
 
         [HttpGet] //Select Appointment by ID
@@ -24,23 +32,31 @@ namespace DoConnectAdmin.Controllers
         public Appointments GetAppointmentByID(int ID)
         {
             DataLayer dtLayer = new DataLayer();
-            return dtLayer.GetAppointment(ID);
+            return dtLayer.GetAppointmentById(ID);
+        }
+
+        [HttpGet]
+        [Route("api/Appointments/GetAllPatients")]
+        public List<GetAllPatients> GetAllPatients()
+        {
+            DataLayer dtLayer = new DataLayer();
+            return dtLayer.GetAllPatients();
         }
 
         [HttpPost]//Update Appointment
         [Route("api/Appointments/UpdateAppointment")]
-        public bool UpdateAppointment(Appointment appointment)
+        public bool UpdateAppointment(Appointments appointment)
         {
             DataLayer dtLayer = new DataLayer();
-            return dtLayer.UpdateAppointment(appointment.ID,  appointment.Date_Time, appointment.Patient_ID, appointment.Details, appointment.App_Status);
+            return dtLayer.UpdateAppointment(appointment.Appointments_ID, appointment.Appointments_Date_Time, appointment.Patient_ID, appointment.Appointments_Details, appointment.Appointments_App_Status, appointment.Doctors_ID);
         }
 
         [HttpPost] //Insert Appointment
         [Route("api/Appointments/InsertAppointment")]
-        public bool InsertAppointment(Appointment appointment)
+        public bool InsertAppointment(Appointments appointment)
         {
             DataLayer dtLayer = new DataLayer();
-            return dtLayer.InsertAppointment(appointment.Date_Time, appointment.Patient_ID, appointment.Details, appointment.App_Status);
+            return dtLayer.NewAppointment(appointment.Appointments_Date_Time, appointment.Patient_ID, appointment.Appointments_Details, appointment.Appointments_App_Status, appointment.Doctors_ID);
         }
 
         [HttpPost]
@@ -49,7 +65,7 @@ namespace DoConnectAdmin.Controllers
         {
             DataLayer dtLayer = new DataLayer();
             return dtLayer.DeleteAppointment(ID);
-        }*/
+        }
     }
 }
 
