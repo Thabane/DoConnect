@@ -200,7 +200,6 @@ namespace DataClient
             }
             return ExpensesInfo;
         }
-
         public Expenses GetExpenseById(int ID)
         {
             List<SqlParameter> _parametersGetExpense = new List<SqlParameter>();
@@ -256,7 +255,6 @@ namespace DataClient
             }
             return ExpenseInfo;
         }
-
         public Expenses GetPracticeIDByUser_ID (int User_ID)
         {
             List<SqlParameter> _parametersPracticeID = new List<SqlParameter>();
@@ -314,11 +312,26 @@ namespace DataClient
             access.ExecuteNonQuery(Conn, parameters, "[UpdateExpense]");
             return true;
         }
-
+        public bool DeleteExpense(int ID)
+        {
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            SqlParameter IDParameter = new SqlParameter("@ID", SqlDbType.Int);
+            IDParameter.Value = ID;
+            _parameters.Add(IDParameter);
+            int DeletedID = 0;
+            using (var reader = access.ExecuteReader(Conn, "[DeleteExpense]", _parameters))
+            {
+                if (reader.Read())
+                {
+                    DeletedID = reader.GetInt32(reader.GetOrdinal("ID"));
+                }
+            }
+            return true;
+        }
         #endregion
 
         #region Appointments
-        
+
 
         public List<Appointments> GetAppointments()
         {
@@ -708,12 +721,12 @@ namespace DataClient
             SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
             idParameter.Value = id;
             _parameters.Add(idParameter);
-            int userId = 0;
-            using (var reader = access.ExecuteReader(Conn, "[DeleteInvoice]", new List<SqlParameter>()))
+            int DeletedID = 0;
+            using (var reader = access.ExecuteReader(Conn, "[DeleteInvoice]", _parameters))
             {
                 if (reader.Read())
                 {
-                    userId = reader.GetInt32(reader.GetOrdinal("ID"));
+                    DeletedID = reader.GetInt32(reader.GetOrdinal("ID"));
                 }
             }
             return true;

@@ -1,5 +1,5 @@
-﻿app.controller("AppointmentsController", ["$scope", "AppointmentsService", "$interval",
-    function ($scope, AppointmentsService, $interval) {
+﻿app.controller("AppointmentsController", ["$scope", "AppointmentsService", "$interval", "$ngBootbox",
+    function ($scope, AppointmentsService, $interval, $ngBootbox) {
            
         //Sort Function
         $scope.sort = function (keyname) {

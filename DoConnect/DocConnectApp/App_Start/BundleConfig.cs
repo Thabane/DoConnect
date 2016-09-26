@@ -57,8 +57,9 @@ namespace DocConnectApp
                       "~/Scripts/Pagination/dirPagination.js",
                       "~/Scripts/dtPicker/moment.js",
                       "~/Scripts/dtPicker/bootstrap-datetimepicker.min.js",
-                      "~/Scripts/dtPicker/bootstrap-datetimepicker.js"
-                      
+                      "~/Scripts/dtPicker/bootstrap-datetimepicker.js",
+                      "~/Scripts/Alert_Confirm_Prompt_Modal/bootbox.js",
+                      "~/Scripts/Alert_Confirm_Prompt_Modal/ngBootbox.js"
                       //"~/Scripts/DateTimePicker/moment-with-locales.js",
                       //"~/Scripts/DateTimePicker/bootstrap-datetimepicker.min.js",
                       //"~/Scripts/DateTimePicker/bootstrap-datetimepicker.js",

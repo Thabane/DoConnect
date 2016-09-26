@@ -1,5 +1,5 @@
-﻿app.controller("MedicalAidController", ["$scope", "MedicalAidService", "$interval",
-    function ($scope, MedicalAidService, $interval) {
+﻿app.controller("MedicalAidController", ["$scope", "MedicalAidService", "$interval", "$ngBootbox",
+    function ($scope, MedicalAidService, $interval, $ngBootbox) {
 
         $scope.sort = function (keyname) {
             $scope.sortKey = keyname;
@@ -55,11 +55,25 @@
             }
         };
 
-        $scope.DeleteMedicalAid = function () {
-            MedicalAidService.DeleteMedicalAid($scope.ID).then(function () {
-                $scope.GetAllMedicalAids();
-            }, function (error) {
-                btnAlert("System Error Message", "Delete unsuccessful.");
-            });          
+        $scope.DeleteMedicalAid1 = function (ID, Name) {
+            $ngBootbox.confirm("Are you sure you want to delete this Medical Aid: " + Name + " ?").then(function () {
+                MedicalAidService.DeleteMedicalAid(ID).then(function () {
+                    $scope.GetAllMedicalAids();
+                    btnSuccess("Medical Aid record successfully deleted.");
+                }, function (error) {
+                    btnAlert("System Error Message", "Delete unsuccessful.");
+                });
+            }, function () {});
+        };
+        $scope.DeleteMedicalAid2 = function () {
+            $ngBootbox.confirm("Are you sure you want to delete this Medical Aid: " + $scope.Name + " ?").then(function () {
+                MedicalAidService.DeleteMedicalAid($scope.ID).then(function () {
+                    $scope.GetAllMedicalAids();
+                    angular.element("#CloseModel").trigger("click");
+                    btnSuccess("Medical Aid record successfully deleted.");
+                }, function (error) {
+                    btnAlert("System Error Message", "Delete unsuccessful.");
+                });
+            }, function () {});
         };
     }]);

@@ -52,13 +52,13 @@ namespace DoConnectAdmin.Controllers
             return dtLayer.NewExpense(expense.Description, expense.Date, expense.Amount, expense.Practice_ID, expense.User_ID);
         }
 
-        //[HttpPost]
-        //[Route("api/Expenses/DeleteExpense/{ID}")]
-        //public bool DeleteExpense(int ID)
-        //{
-        //    DataLayer dtLayer = new DataLayer();
-        //    return dtLayer.DeleteExpense(ID);
-        //}
+        [HttpPost]
+        [Route("api/Expenses/DeleteExpense/{ID}")]
+        public bool DeleteExpense(int ID)
+        {
+            DataLayer dtLayer = new DataLayer();
+            return dtLayer.DeleteExpense(ID);
+        }
 
     }
 }
