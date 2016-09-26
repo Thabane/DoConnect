@@ -228,9 +228,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\Logo\doctorIcon.ico" />
+    <Content Include="Images\Logo\doctorIcon.png" />
     <Content Include="Scripts\Alert_Confirm_Prompt_Modal\Alert_Confirm_Prompt_Modal.js" />
-    <Content Include="Scripts\angular-route.min.js" />
-    <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\bootstrap-theme.css.map" />
@@ -238,9 +238,14 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\dtPicker\bootstrap-datetimepicker.js" />
+    <Content Include="Scripts\dtPicker\bootstrap-datetimepicker.min.css" />
+    <Content Include="Scripts\dtPicker\bootstrap-datetimepicker.min.js" />
+    <Content Include="Scripts\dtPicker\moment.js" />
     <Content Include="Scripts\FormValidation\FormValidationStyle.css" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />

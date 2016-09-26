@@ -7,7 +7,7 @@
         </div>
 
         <ul class="nav nav-tabs">
-            <li role="presentation"><a href="/MedicineInventory"><i class="fa fa-align-justify"></i>Medicine Inventory List</a></li>
+            <li role="presentation"><a href="/MedicineInventory"><i class="fa fa-align-justify"></i>Medicine List</a></li>
             <li role="presentation" class="active"><a href="/NewMedicine"><i class="fa fa-plus-circle"></i>Add Medicine</a></li>
         </ul>        
         
@@ -18,7 +18,7 @@
                     <div class="form-horizontal">
                         <div class="form-group" style="margin-bottom:0px;">
                             <h5 class="col-md-4" style="text-align:left">Drug Name<span style="color:red">*</span></h5>
-                            <div class="col-md-8"><input class="form-control insert" ng-model="DrugName" name="DrugName" ng-required="true" ng-pattern="/^[a-zA-Z''-'\s]{3,40}$/" type="text"></div>
+                            <div class="col-md-8"><input class="form-control insert" ng-model="_DrugName" name="DrugName" ng-required="true" ng-pattern="/^[a-zA-Z''-'\s]{3,40}$/" type="text"></div>
                         </div>
                         <div class="row" style="margin-top:0px; margin-bottom:15px">
                             <div class="col-md-4"></div>
@@ -29,29 +29,31 @@
                         </div>
                         <div class="form-group" style="margin-bottom:0px;">
                             <h5 class="col-md-4" style="text-align:left">Description<span style="color:red">*</span></h5>
-                            <div class="col-md-8"><input class="form-control insert" ng-model="Description" name="Description" ng-required="true" ng-pattern="/^[0-9a-zA-Z.,'-'\s]{3,}$/" type="text"></div>
+                            <div class="col-md-8"><input class="form-control insert" ng-model="_Description" name="Description" ng-required="true" ng-pattern="/^[0-9a-zA-Z\.s]{3,40}$/" type="text"></div>
                         </div>
                         <div class="row" style="margin-top:0px; margin-bottom:15px">
                             <div class="col-md-4"></div>
                             <div class="col-md-8">
                                 <small ng-show="Form.Description.$invalid && Form.Description.$touched && Form.Description.$error.required">Required field.<br></small>
-                                <small ng-show="Form.Description.$invalid && Form.Description.$touched && Form.Description.$error.pattern">Only alphanumeric letters allowed and atleast 3 charactors.</small>
+                                <small ng-show="Form.Description.$invalid && Form.Description.$touched && Form.Description.$error.pattern">Only alphanumeric and numeric letters allowed and atleast 3 charactors.</small>
                             </div>
                         </div>
                         <div class="form-group" style="margin-bottom:0px;">
                             <h5 class="col-md-4" style="text-align:left">Drug Concentration<span style="color:red">*</span></h5>
-                            <div class="col-md-8"><input class="form-control insert" ng-model="DrugConcentration" name="DrugConcentration" ng-required="true" ng-pattern="/^[0-9a-zA-Z.,'-'\s]{3,}$/" type="text"></div>
+                            <div class="col-md-8">
+                                <div class="input-group date" style="padding:0px;"><input class="form-control insert" type="text" ng-model="_DrugConcentration" name="DrugConcentration" ng-required="true" ng-pattern="/^[0-9]{1,}$/"><span class="input-group-addon">mg</span></div>
+                            </div>
                         </div>
                         <div class="row" style="margin-top:0px; margin-bottom:15px">
                             <div class="col-md-4"></div>
                             <div class="col-md-8">
                                 <small ng-show="Form.DrugConcentration.$invalid && Form.DrugConcentration.$touched && Form.DrugConcentration.$error.required">Required field.<br></small>
-                                <small ng-show="Form.DrugConcentration.$invalid && Form.DrugConcentration.$touched && Form.DrugConcentration.$error.pattern">Only alphanumeric letters allowed and atleast 3 charactors.</small>
+                                <small ng-show="Form.DrugConcentration.$invalid && Form.DrugConcentration.$touched && Form.DrugConcentration.$error.pattern">Only numeric letters allowed and atleast 3 charactors.</small>
                             </div>
                         </div>
                         <div class="form-group" style="margin-bottom:0px;">
                             <h5 class="col-md-4" style="text-align:left">Quantity Purchased<span style="color:red">*</span></h5>
-                            <div class="col-md-8"><input class="form-control insert" ng-model="QuantityPurchased" name="QuantityPurchased" ng-required="true" ng-pattern="/^[0-9]{1,}$/" type="text"></div>
+                            <div class="col-md-8"><input class="form-control insert" ng-model="_QuantityPurchased" name="QuantityPurchased" ng-required="true" ng-pattern="/^[0-9]{1,}$/" type="text"></div>
                         </div>
                         <div class="row" style="margin-top:0px; margin-bottom:15px">
                             <div class="col-md-4"></div>
@@ -62,17 +64,8 @@
                         </div>
                         <div class="form-group" style="margin-bottom:0px;">
                             <h5 class="col-md-4" style="text-align:left">Expiry Date<span style="color:red">*</span></h5>
-                            <div class="col-md-8"><div class="row" style="padding-left:15px; padding-right:15px;">
-                                                        <div class="col-md-12">
-                                                            <div class="form-group">
-                                                                <div class="input-group date datetimepicker" onclick="DT()">
-                                                                    <input class="form-control insert" ng-model="ExpiryDate" name="ExpiryDate" ng-required="true" ng-pattern="/^(0?[1-9]|1\d|2[0-8]|29(?=[-]\d?\d[-](?!1[01345789]00|2[1235679]00)\d\d(?:[02468][048]|[13579][26]))|30(?![-]0?2)|31(?=[-]0?[13578]|[-]1[02]))[-](0?[1-9]|1[0-2])[-]([12]\d{3})$/">
-                                                                    <span class="input-group-addon">
-                                                                        <span class="glyphicon glyphicon-calendar"></span>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                            <div class="col-md-8"><div class="input-group date datepicker" style="padding:0px;">
+                                                        <input class="form-control insert" type="text" id="ExpiryDate" name="ExpiryDate" data-date-format="yyyy-mm-dd" ng-required="true" ng-readonly="true" style="background-color: transparent"><span class="input-group-addon"><span class="fa fa-calendar"></span></span>
                                                     </div>
                             </div>
                         </div>
@@ -86,9 +79,12 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" ng-click="NewMedicine(DrugName, Description, QuantityPurchased, QuantityInStock, ExpiryDate, DrugConcentration)" ng-disabled="Form.$invalid">Save</button>
+                    <button type="button" class="btn btn-primary" ng-click="NewMedicine(_DrugName, _Description, _DrugConcentration, _QuantityPurchased)" ng-disabled="Form.$invalid">Save</button>
                  </div>
             </div>
         </form>
     </div>
 </div>
+<script>
+    $(".datepicker").datepicker({ format: 'yyyy-mm-dd' });
+</script>

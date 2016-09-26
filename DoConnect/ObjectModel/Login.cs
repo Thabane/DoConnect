@@ -9,10 +9,10 @@ namespace ObjectModel
 {
     public class Login
     {
-        public int      ID 			   { get; set; }
-        public string   Email 		  { get; set; }
-        public string   Password 	  { get; set; }
-        public DateTime Last_Login   { get; set; }
+        public int ID { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public string Last_Login { get; set; }
         public int AccessLevel  { get; set; }
         public Login Create(SqlDataReader reader)
         {
@@ -21,7 +21,6 @@ namespace ObjectModel
                 ID = reader.GetInt32(reader.GetOrdinal("ID")),
                 Email = reader.GetString(reader.GetOrdinal("Email")),
                 Password = reader.GetString(reader.GetOrdinal("Password")),
-                Last_Login = reader.GetDateTime(reader.GetOrdinal("Last_Login")),
                 AccessLevel = reader.GetInt32(reader.GetOrdinal("AccessLevel")),
             };
         }

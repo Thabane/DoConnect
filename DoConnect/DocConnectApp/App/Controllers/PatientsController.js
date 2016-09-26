@@ -1,23 +1,12 @@
-﻿app.controller("PatientsController", ["$scope", "PatientsService", "$interval", "$routeParams", "$route", "$location",
-    function ($scope, PatientsService, $interval, $routeParams, $route, $location) {
-        
+﻿app.controller("PatientsController", ["$scope", "PatientsService", "$interval",
+    function ($scope, PatientsService, $interval) {//, $routeParams, $route, $location
+        //alert("Running");
         $scope.PageTitle_Patients = 'Patients';
         $scope.PageTitle_NewPatient = 'New Patient Details';
         $scope.PageTitle_MedicalHistory = 'Medical Record';
         $scope.PageTitle_PrescriptionDetails = 'Prescription Details';
         $scope.PageTitle_ConsultationNotes = 'Consultation Notes';
-        $scope.intID = $routeParams.PatientID;
-        $scope.intConsultationID = $routeParams.ConsultationID;
-        $scope.EMAIL_REGEXP = "/^(?=.{1,254}$)(?=.{1,64}@)[-!#$%&'*+\/0-9=?A-Z^_`a-z{|}~]+(\.[-!#$%&'*+\/0-9=?A-Z^_`a-z{|}~]+)*@[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?(\.[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?)*$/";
-        $scope.NUMBER_REGEXP = "/^\s*(\-|\+)?(\d+|(\d*(\.\d*)))([eE][+-]?\d+)?\s*$/";
-        $scope.NAME = "/^[A-Za-z]{3,}$/";
-        $scope.PASSWORD = "/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/";
-        $scope.EMAIL = "/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/";
-        $scope.PHONE = "/^[2-9]\d{2}-\d{3}-\d{4}$/";
-
-        $scope.user = JSON.parse(sessionStorage.user);
-        alert($scope.user);
-
+        
         var init_ControlSettings = function () {
             angular.element(".View_readonly").attr("readonly", true);
             angular.element(".View_readonly").css("border", "1px solid #ccc");
@@ -38,18 +27,19 @@
             });
         };
         $scope.GetPatients();
-                
+            
+        
         //Select PatientByID Function
         $scope.ViewPatient = function (PatientID) {
-            PatientsService.GetPatientByID($scope.intID).then(function (result) {
-                $scope.PatientDetails = result.data;
-            });
+            sessionStorage.Selected_PatientID = PatientID;
         };
 
+        //Select PatientByID Function
+        $scope.SetConsultationID = function (ConsultationID) {
+            sessionStorage.Selected_ConsultationID = ConsultationID;
+        };
+        //---#region Medical Record------------------------------------------------------------------------------------------------------------/
         
-
-        //---Medical Record------------------------------------------------------------------------------------------------------------/
-        $scope.DOB = { value: new Date(2016, 08, 25) };
         $scope.Genders = [{ "Gender": "Male", "Char": "M" },
                           { "Gender": "Female", "Char": "F" }];
         $scope.Seleceted_Gender = 0;
@@ -58,8 +48,8 @@
         };
         //Select Medical Record by PatientID Funtion
         var GetMedicalRecord = function () {
-            PatientsService.GetMedicalRecord($scope.intID).then(function (result) {
-                $scope.ID                                   = result.data["ID"];
+            PatientsService.GetMedicalRecord(sessionStorage.Selected_PatientID).then(function (result) {
+                $scope.ID = result.data["ID"];
                 $scope.FirstName = result.data["FirstName"];
                 $scope.LastName = result.data["LastName"];
                 $scope.ID_Number = result.data["ID_Number"];
@@ -69,7 +59,7 @@
                 else {
                     $scope.Gender = 'Female';
                 }
-                $scope.DOB = { value: new Date(result.data["DOB"]) };
+                $scope.DOB = result.data["DOB"];
                 $scope.Cell_Number = result.data["Cell_Number"];
                 $scope.Street_Address = result.data["Street_Address"];
                 $scope.Suburb = result.data["Suburb"];
@@ -95,12 +85,13 @@
                 else {
                     $scope.Status = 'Invalid';
                 }
-                $scope.Registration_Date = { value: new Date(result.data["Registration_Date"]) };
-                $scope.Deregistration_Date = { value: new Date(result.data["Deregistration_Date"]) };
+                $scope.Registration_Date = result.data["Registration_Date"];
+                $scope.Deregistration_Date = result.data["Deregistration_Date"];
                 $scope.Patient_ID = result.data["Patient_ID"];
             });
         };
         GetMedicalRecord();
+        
 
         $scope.GetMedical_Aid = function () {
             PatientsService.GetMedical_Aid().then(function (result) {
@@ -112,11 +103,11 @@
         $scope.Medical_AidID = 0;
         $scope.changedValueMedical_AidID = function (item) {
             $scope.Medical_AidID = item.ID;
-        };        
+        }; 
 
-        //Insert Medical Record Funtion ##Doctor_ID
-        $scope.InsertPatient = function (FirstName, LastName, Email, ID_Number, Cell_Number, DOB, Street_Address, Suburb, City, Country, SchemeName, MembershipNumber, Registration_Date, Deregistration_Date, Allergies, PreviousMedication, PreviousIllnesses, RiskFactors, SocialHistory, FamilyHistory) {
-            PatientsService.InsertMedicalRecord(1, FirstName, LastName, Email, ID_Number, Cell_Number, DOB, $scope.Seleceted_Gender, Street_Address, Suburb, City, Country, $scope.Medical_AidID, SchemeName, MembershipNumber, Registration_Date, Deregistration_Date, Allergies, PreviousMedication, PreviousIllnesses, RiskFactors, SocialHistory, FamilyHistory).sucess(function () {
+        //Insert Medical Record Funtion ##Doctor_ID     
+        $scope.InsertPatient = function (FirstName, LastName, Email, ID_Number, Cell_Number, Street_Address, Suburb, City, Country, SchemeName, MembershipNumber, Allergies, PreviousMedication, PreviousIllnesses, RiskFactors, SocialHistory, FamilyHistory) {
+            PatientsService.InsertMedicalRecord(1, FirstName, LastName, Email, ID_Number, Cell_Number, angular.element("#DOB").val(), $scope.Seleceted_Gender, Street_Address, Suburb, City, Country, $scope.Medical_AidID, SchemeName, MembershipNumber, angular.element("#Registration_Date").val(), angular.element("#Deregistration_Date").val(), Allergies, PreviousMedication, PreviousIllnesses, RiskFactors, SocialHistory, FamilyHistory).then(function () {
                 //GetMedicalRecord();
                 angular.element(".insert").val('');
                 btnSuccess("Medical Record successfully inserted.");
@@ -139,7 +130,7 @@
                 else {
                     $scope.G = 'F';
                 }
-                PatientsService.UpdateMedicalRecord($scope.ID, $scope.FirstName, $scope.LastName, $scope.Email, $scope.ID_Number, $scope.Cell_Number, $scope.DOB.value, $scope.G, $scope.Street_Address, $scope.Suburb, $scope.City, $scope.Country, $scope.Medical_AidID, $scope.Scheme_Name, $scope.Membership_Number, $scope.Registration_Date.value, $scope.Deregistration_Date.value, $scope.Allergies, $scope.PreviousIllnesses, $scope.PreviousMedication, $scope.RiskFactors, $scope.SocialHistory, $scope.FamilyHistory).success(function () {
+                PatientsService.UpdateMedicalRecord($scope.ID, $scope.FirstName, $scope.LastName, $scope.Email, $scope.ID_Number, $scope.Cell_Number, angular.element("#DOB").val(), $scope.G, $scope.Street_Address, $scope.Suburb, $scope.City, $scope.Country, $scope.Medical_AidID, $scope.Scheme_Name, $scope.Membership_Number, angular.element("#Registration_Date").val(), angular.element("#Deregistration_Date").val(), $scope.Allergies, $scope.PreviousIllnesses, $scope.PreviousMedication, $scope.RiskFactors, $scope.SocialHistory, $scope.FamilyHistory).success(function () {
                     GetMedicalRecord();
                     btnSuccess("Medical Record details successfully updated.");
                 }, function (error) {
@@ -152,14 +143,15 @@
 
         //Delete MedicalRecord Funtion
         $scope.DeleteMedicalRecord = function () {
-            PatientsService.DeleteMedicalRecord($scope.intID).then(function () {
+            PatientsService.DeleteMedicalRecord(sessionStorage.Selected_PatientID).then(function () {
                 GetMedicalRecord();
                 btnSuccess("Medical Record details successfully deleted.");
+                btnRedirect("Patients");
             }, function (error) {
                 btnAlert("System Error Message", "Delete unsuccessful.");
             });
         };
-    //---.Medical Record------------------------------------------------------------------------------------------------------------/
+        //---#endregion------------------------------------------------------------------------------------------------------------/
         //---Prescription------------------------------------------------------------------------------------------------------------/
 
         angular.element(".readonly_ViewPrescription").attr("readonly", true); angular.element(".disable_ViewPrescription").prop("disabled", true);
@@ -168,7 +160,7 @@
         $scope.Frequencyz = [{ "Freq": "Daily" }, { "Freq": "Every other day" }, { "Freq": "BID/b.i.d. (Twice a Day)" }, { "Freq": "TID/t.id. (Three Times a Day)" }, { "Freq": "QID/q.i.d. (Four Times a Day)" }, { "Freq": "QHS (Every Bedtime)" }, { "Freq": "Q4h (Every 4 hours)" }, { "Freq": "Q4-6h (Every 4 to 6 hours)" }]
         //Select Prescription Notes by PatientID Funtion
         var GetPrescription = function () {
-            PatientsService.GetPrescription($scope.intID).then(function (result) {
+            PatientsService.GetPrescription(sessionStorage.Selected_PatientID).then(function (result) {
                 $scope.PrescriptionDetails = result.data;                
             });
         };
@@ -176,11 +168,11 @@
 
         //Insert Prescription Notes Funtion ##Patient_ID, Doctor_ID, Consultation_ID
         $scope.InsertPrescription = function (DrugName, Strength, DispenseNumber, RefillNumber) {
-            PatientsService.InsertPrescription($scope.intID, 4, $scope.intConsultationID, DrugName, Strength, $scope.Seleceted_IntakeRoute, $scope.Seleceted_Frequency, DispenseNumber, RefillNumber).success(function () {
+            PatientsService.InsertPrescription(sessionStorage.Selected_PatientID, 4, sessionStorage.Selected_ConsultationID, DrugName, Strength, $scope.Seleceted_IntakeRoute, $scope.Seleceted_Frequency, DispenseNumber, RefillNumber).success(function () {
                 GetPrescription();
                 angular.element(".insert").val('');
                 btnSuccess("Prescription Note successfully inserted.");
-                btnRedirect("PrescriptionDetails/" + $scope.intID);
+                btnRedirect("PrescriptionDetails");
             }, function (error) {
                 btnAlert("System Error Message", "Insert unsuccessful.");
             });
@@ -220,7 +212,7 @@
 
         //Delete Prescription Funtion
         $scope.DeleteConsultationNote = function () {
-            PatientsService.DeletePrescription($scope.intID).then(function () {
+            PatientsService.DeletePrescription(sessionStorage.Selected_PatientID).then(function () {
                 GetPrescription();
                 btnSuccess("Prescription Note details successfully deleted.");
             }, function (error) {
@@ -232,7 +224,7 @@
         
         //Select Consultation Notes by PatientID Funtion
         var GetConsultationNotes = function () {
-            PatientsService.GetConsultationNotes($scope.intID).then(function (result) {
+            PatientsService.GetConsultationNotes(sessionStorage.Selected_PatientID).then(function (result) {
                 $scope.ConsultationNotes = result.data;
             });
         };
@@ -240,11 +232,11 @@
 
         //Insert Consultation Notes Funtion ##Remember to add Patient_ID, Doctor_ID, 
         $scope.InsertConsultation = function (ReasonForConsultation, Symptoms, ClinicalFindings, Diagnosis, TestResultSummary, TreatmentPlan) {
-            PatientsService.InsertConsultation($scope.intID, ReasonForConsultation, Symptoms, ClinicalFindings, Diagnosis, TestResultSummary, TreatmentPlan, 1, 1).success(function () {
+            PatientsService.InsertConsultation(sessionStorage.Selected_PatientID, ReasonForConsultation, Symptoms, ClinicalFindings, Diagnosis, TestResultSummary, TreatmentPlan, 1, 1).success(function () {
                 GetConsultationNotes();
                 angular.element(".insert").val('');
                 btnSuccess("Consultation Note successfully inserted.");
-                btnRedirect("ConsultationNotes/" + $scope.intID);
+                btnRedirect("ConsultationNotes");
             }, function (error) {
                 btnAlert("System Error Message", "Insert unsuccessful.");
             });
@@ -272,7 +264,7 @@
 
         //Delete Consultation Notes Funtion
         $scope.DeleteConsultationNote = function () {
-            PatientsService.DeleteConsultationNote($scope.intID).then(function () {
+            PatientsService.DeleteConsultationNote(sessionStorage.Selected_PatientID).then(function () {
                 GetConsultationNotes();
                 btnSuccess("Consultation Note details successfully deleted.");
             }, function (error) {

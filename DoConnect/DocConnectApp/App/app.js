@@ -1,4 +1,4 @@
-﻿var app = angular.module('app', ['ngRoute', 'ngLocationUpdate', 'angularUtils.directives.dirPagination']);
+﻿var app = angular.module('app', ['ngRoute', 'ngLocationUpdate', 'angularUtils.directives.dirPagination', 'ngBootbox']);
 
 app.config(
 [
@@ -35,11 +35,11 @@ app.config(
                 controller: "PatientsController",
                 reloadOnSearch: false
             })
-            .when("/PrescriptionDetails/:PatientID", {
-                templateUrl: "App/Views/Patients/PatientRecord/PrescriptionDetails.html",
+            .when("/NewPrescription/:PatientID/:ConsultationID", {
+                templateUrl: "App/Views/Patients/PatientRecord/NewPrescription.html",
                 controller: "PatientsController"
             })
-            .when("/NewPrescription/:PatientID/:ConsultationID", {
+            .when("/NewPrescription", {
                 templateUrl: "App/Views/Patients/PatientRecord/NewPrescription.html",
                 controller: "PatientsController"
             })

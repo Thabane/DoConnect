@@ -18,13 +18,26 @@
                 <div class="modal-body">
                     <div class="row" style="margin-top:4px; margin-bottom:0px;">
                         <div class="col-md-3"><h5>Date & Time:<span style="color:red">*</span></h5></div>
-                        <div class="col-md-8"><input class="form-control insert" type="datetime-local" name="Date_Time" ng-model="Date_Time" min="1900-01-01" max="2016-12-31" ng-required="true"/></div>
+                        <div class="col-md-8">
+                            <div class="col-md-5" style="padding:0px;">
+                                <div class="input-group date" id="date" style="padding:0px;">
+                                    <input class="form-control insert" type="text" id="Appointments_Date" name="Appointments_Date" ng-required="true"><span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                                </div>
+                            </div>
+                            <div class="col-md-2"></div>
+                            <div class="col-md-5" style="padding:0px;">
+                                <div class="input-group date" id="datetime" style="padding:0px;">
+                                    <input class="form-control insert" type="text" id="Appointments_Time" name="Appointments_Time" ng-required="true"><span class="input-group-addon"><span class="fa fa-clock-o"></span></span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="row" style="margin-top:0px; margin-bottom:8px;">
                         <div class="col-md-3"></div>
                         <div class="col-md-8">
-                            <small ng-show="Form.Date_Time.$invalid && Form.Date_Time.$touched && Form.Date_Time.$error.required">Required field.<br></small>
-                            <small ng-show="Form.Date_Time.$invalid && Form.Date_Time.$touched && Form.Date_Time.$error.pattern">Valid date fomart is ("yyyy-mm-dd").</small>
+                            <div class="col-md-5" style="padding:0px;"><small ng-show="Form.Appointments_Date.$invalid && Form.Appointments_Date.$touched && Form.Appointments_Date.$error.required">Required field.<br></small></div>
+                            <div class="col-md-2"></div>
+                            <div class="col-md-5" style="padding:0px;"><small ng-show="Form.Appointments_Time.$invalid && Form.Appointments_Time.$touched && Form.Appointments_Time.$error.required">Required field.<br></small></div>
                         </div>
                     </div>
                     <div class="row" style="margin-top:4px; margin-bottom:0px;">
@@ -58,9 +71,7 @@
                     </div>
                     <div class="row" style="margin-top:0px; margin-bottom:8px;">
                         <div class="col-md-3"></div>
-                        <div class="col-md-8">
-                            <small ng-show="Form.Appointments_App_Status.$invalid && Form.Appointments_App_Status.$touched && Form.Appointments_App_Status.$error.required">Required field.<br></small>
-                        </div>
+                        <div class="col-md-8"><small ng-show="Form.Appointments_App_Status.$invalid && Form.Appointments_App_Status.$touched && Form.Appointments_App_Status.$error.required">Required field.<br></small></div>
                     </div>
                     <div class="row" style="margin-top:4px; margin-bottom:0px;">
                         <div class="col-md-3"><h5>Doctor Name:</h5></div>
@@ -78,9 +89,22 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" ng-click="NewAppointment(Date_Time, Details, App_Status)" ng-disabled="Form.$invalid">Add Appointment</button>
+                    <button type="button" class="btn btn-primary" ng-click="NewAppointment(Details, App_Status)" ng-disabled="Form.$invalid">Add Appointment</button>
                 </div>
             </div>
         </form><!--New Appointment Modal Ends-->
     </div>
 </div>
+<script>
+    $("#date").datepicker({
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+        orientation: "bottom"
+    });
+
+    $(function () {
+        $("#datetime").datetimepicker({
+            format: 'HH:mm'
+        });
+    });
+</script>

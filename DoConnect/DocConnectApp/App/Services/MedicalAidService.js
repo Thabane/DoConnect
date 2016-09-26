@@ -1,19 +1,16 @@
 ﻿app.factory('MedicalAidService',
     function ($http) {
 
-        //Select all MedicalAid data
-        var GetAllMedicalAid = function () {
-            return $http.get("api/MedicalAids/GetAllMedicalAids");
+        var GetAllMedicalAids = function () {
+            return $http.get("api/MedicalAid/GetAllMedicalAids");
         };
 
-        //Select MedicalAid by ID
         var GetMedicalAidByID = function (ID) {
-            return $http.get("api/MedicalAids/GetMedicalAid/" + ID);
+            return $http.get("api/MedicalAid/GetMedicalAid/" + ID);
         };
 
-        //Insert new record
         var InsertMedicalAid = function (Name, Cell_Number, Fax_Number, Email_Address, Address) {
-            return $http.post("api/MedicalAids/InsertMedicalAid",
+            return $http.post("api/MedicalAid/InsertMedicalAid",
             {
                 'Name': Name,
                 'Cell_Number': Cell_Number,
@@ -24,9 +21,8 @@
             });
         };
 
-        //Update MedicalAid
         var UpdateMedicalAid = function (ID, Name, Cell_Number, Fax_Number, Email_Address, Address) {
-            return $http.post("api/MedicalAids/UpdateMedicalAid",
+            return $http.post("api/MedicalAid/UpdateMedicalAid",
             {
                 'ID': ID,
                 'Name': Name,
@@ -38,9 +34,8 @@
             });
         };
 
-        //Delete the Record
         var DeleteMedicalAid = function (ID) {
-            return $http.post("api/MedicalAids/DeleteMedicalAid/" + ID);
+            return $http.post("api/MedicalAid/DeleteMedicalAid/" + ID);
         };
 
         return {

@@ -1,6 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@section scripts{
+    <script src="~/App/Controllers/LoginController.js"></script>
+}
+<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
+    <script data-require="ui-bootstrap@0.3.0" data-semver="0.3.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.3.0.min.js"></script>
 </head>
 <body>
     <div id="wrapper">
@@ -13,6 +17,13 @@
             </div>
 
             <!-- navbar-top-links -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <i class="fa fa-bars fa-fw"></i>
+                </button>
+                <a class="navbar-brand">{{sessionStorage.FirstName + " " + sessionStorage.LastName}}</a>
+            </div>
+            
             <ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
                     <a class="dropdown-toggle" aria-expanded="false" href="#" data-toggle="dropdown">
@@ -173,7 +184,6 @@
                         <li><a href="/Messages"><i class="fa fa-envelope-o fa-fw"></i> Messages</a></li>
                         <li><a href="/Patients"><i class="fa fa-users fa-fw"></i> Patients</a></li>
                         <li><a href="/Employees"><i class="fa fa-female fa-fw"></i> Employees</a></li>
-                        <li><a href="/Events"><i class="fa fa-calendar fa-fw"></i> Events</a></li>
                         <li><a href="/Appointments"><i class="fa fa-calendar-o fa-fw"></i> Appointments</a></li>
                         <li><a href="/Practices"><i class="fa fa-hospital-o fa-fw"></i> Practices</a></li>
                         <li><a href="/Accounting"><i class="fa fa-money fa-fw"></i> Accounting</a></li>
@@ -218,7 +228,6 @@
                                         <h3>Personal info</h3>
                                     </div>
                                     <div class="panel-body">
-
                                         <form class="form-horizontal">
                                             <div class="form-group">
                                                 <label class="control-label col-md-4" style="text-align:left;">Firstname:</label>
@@ -344,3 +353,4 @@
         </div>
     </div>
 </body>
+

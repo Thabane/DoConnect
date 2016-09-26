@@ -177,13 +177,15 @@ function btnPrompt() {
 
 //-------------------------------------------------------------------------------//
 
-angular.element(".disable_View_readonly").prop("disabled", true);
 //Accounting
 function ViewInvoice() {
     $("#View_Invoice_Modal").modal("show");
 };
+//Appointments Page
 function ViewExpense() {
-    $("#View_ExpensesInvoice_Modal").modal("show");
+    $("#View_Expense_Modal").modal("show");
+    $(".readonly_ViewExpense").attr("readonly", true); $(".disable_ViewExpense").prop("disabled", true);
+    $(".readonly_ViewExpense").css("background-color", "transparent");
 };
 
 //Appointments Page
@@ -269,18 +271,6 @@ function btnRedirect(Page) {
 };
 
 //function DT() {
-//    $(".datetimepicker").datetimepicker({ format: "L" });
+//    $(".date").datepicker({ format: 'yyyy-mm-dd' });
 //};
 
-$(".date").on("change", function () {
-    this.setAttribute(
-        "data-date",
-        moment(this.value, "YYYY-MM-DD")
-        .format(this.getAttribute("data-date-format"))
-    )
-}).trigger("change")
-
-$(".nav li").on("click", function () {
-    $(".nav li").removeClass("active");
-    $(this).addClass("active");
-});

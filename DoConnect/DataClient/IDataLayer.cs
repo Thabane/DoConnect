@@ -11,7 +11,7 @@ namespace DataClient
     {
         #region User
         int CreateUser(int AccessLevel);
-        bool Login(string username, string password);
+        string Login(string username, string password, int accessLevel);
         Login MyLogin(string Email, string Password);
         Staff GetUserDetailsByUser_ID(int User_ID);
         List<AccessLevel> GetAllAccessLevel();
@@ -19,7 +19,12 @@ namespace DataClient
         #endregion
 
         #region Expense
-        bool NewUpdateExpense(Expenses expense, int UserId);
+        List<Expenses> GetAllExpenses();
+        Expenses GetExpenseById(int ID);
+        Expenses GetPracticeIDByUser_ID(int User_ID);
+        bool NewExpense(string Description, string Date, string Amount, int Practice_ID, int User_ID);
+        bool UpdateExpense(int ID, string Description, string Amount);
+        bool DeleteExpense(int id);
         #endregion
 
         #region Appointments
@@ -39,8 +44,10 @@ namespace DataClient
 
         #region Invoice
         List<Invoice> GetAllInvoices();
-        Invoice GetInvoiceById(int id);
-        bool NewUpdateInvoice(DateTime date, string invoiceSummary, string total, int medical_Aid_ID, int patient_ID, int doctor_ID);
+        Invoice GetInvoiceById(int ID);
+        List<GetAllPatients> GetAllPatientsForInvoice();
+        List<Invoice> GetAllDiagnosisByPatientID(int ID);
+        bool NewInvoice(string InvoiceSummary, decimal Total, decimal AmountPaid, int Medical_Aid_ID, int Patient_ID, int Doctor_ID);
         bool DeleteInvoice(int id);
         #endregion
 
@@ -104,7 +111,19 @@ namespace DataClient
         #endregion
 
         #region Medicine_Inventory
-        bool NewUpdateMedicine_Inventory(Medicine_Inventory inventory, int UserId);
+        List<Medicine_Inventory> GetAllMedicine_Inventory();
+        Medicine_Inventory GetMedicine_InventoryById(int ID);
+        bool NewMedicine_Inventory(string DrugName, string Description, int QuantityPurchased, string PurchaseDate, string ExpiryDate, string DrugConcentration, int Practice_ID);
+        bool UpdateMedicine_Inventory(int ID, string DrugName, string Description, int QuantityInStock, string DrugConcentration);
+        bool DeleteMedicine_Inventory(int ID);
+        #endregion
+
+        #region Medical Aid
+        List<Medical_Aid> GetAllMedicalAids();
+        Medical_Aid GetMedicalAidById(int ID);
+        bool NewMedicalAid(string Name, string Cell_Number, string Fax_Number, string Email_Address, string Address);
+        bool UpdateMedicalAid(int ID, string Name, string Cell_Number, string Fax_Number, string Email_Address, string Address);
+        bool DeleteMedicalAid(int ID);
         #endregion
     }
 }
