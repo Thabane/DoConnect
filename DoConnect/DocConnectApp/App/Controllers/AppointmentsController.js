@@ -86,7 +86,6 @@
                 $scope.GetAllAppointments();
                 angular.element(".insert").val('');
                 btnSuccess("Appointment successfully inserted.");
-                //btnRedirect("Appointments");
             },
                 function (error) {
                     btnAlert("System Error Message", "Insert unsuccessful.");

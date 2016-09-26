@@ -176,7 +176,6 @@ function btnPrompt() {
 };
 
 //-------------------------------------------------------------------------------//
-
 //Accounting
 function ViewInvoice() {
     $("#View_Invoice_Modal").modal("show");
@@ -270,7 +269,4 @@ function btnRedirect(Page) {
     window.location.href = "/#/" + Page;
 };
 
-//function DT() {
-//    $(".date").datepicker({ format: 'yyyy-mm-dd' });
-//};
 

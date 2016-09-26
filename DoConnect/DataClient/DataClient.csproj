@@ -50,6 +50,7 @@
     <Compile Include="DataLayer.cs" />
     <Compile Include="DataAccess.cs" />
     <Compile Include="IDataLayer.cs" />
+    <Compile Include="Infermedica.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
