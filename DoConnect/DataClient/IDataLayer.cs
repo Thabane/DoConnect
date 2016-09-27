@@ -24,7 +24,6 @@ namespace DataClient
         Expenses GetPracticeIDByUser_ID(int User_ID);
         bool NewExpense(string Description, string Date, string Amount, int Practice_ID, int User_ID);
         bool UpdateExpense(int ID, string Description, string Amount);
-        bool DeleteExpense(int id);
         #endregion
 
         #region Appointments

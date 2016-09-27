@@ -1,4 +1,4 @@
-﻿var app = angular.module('app', ['ngRoute', 'ngLocationUpdate', 'angularUtils.directives.dirPagination', 'ngBootbox']);
+﻿var app = angular.module('app', ['ngRoute', 'ngLocationUpdate', 'angularUtils.directives.dirPagination']);
 
 app.config(
 [

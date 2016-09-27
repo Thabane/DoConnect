@@ -231,8 +231,6 @@
     <Content Include="Images\Logo\doctorIcon.ico" />
     <Content Include="Images\Logo\doctorIcon.png" />
     <Content Include="Scripts\Alert_Confirm_Prompt_Modal\Alert_Confirm_Prompt_Modal.js" />
-    <Content Include="Scripts\Alert_Confirm_Prompt_Modal\bootbox.js" />
-    <Content Include="Scripts\Alert_Confirm_Prompt_Modal\ngBootbox.js" />
     <Content Include="Scripts\angular-route.min.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bootstrap.js" />
