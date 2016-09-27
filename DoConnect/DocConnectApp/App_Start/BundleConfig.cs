@@ -49,7 +49,7 @@ namespace DocConnectApp
                       "~/Scripts/morris.min.js",
                       "~/Scripts/sb-admin-2.js",
                       "~/Scripts/raphael-min.js",
-                      "~/Scripts/xml2json.js",
+                      "~/Scripts/xml2json.js",                      
                       "~/Scripts/Alert_Confirm_Prompt_Modal/Alert_Confirm_Prompt_Modal.js",
                       "~/Scripts/Index/jquery.min.js",
                       "~/Scripts/jquery-ui.min.js",
@@ -57,9 +57,8 @@ namespace DocConnectApp
                       "~/Scripts/Pagination/dirPagination.js",
                       "~/Scripts/dtPicker/moment.js",
                       "~/Scripts/dtPicker/bootstrap-datetimepicker.min.js",
-                      "~/Scripts/dtPicker/bootstrap-datetimepicker.js",
-                      "~/Scripts/Alert_Confirm_Prompt_Modal/bootbox.js",
-                      "~/Scripts/Alert_Confirm_Prompt_Modal/ngBootbox.js"
+                      "~/Scripts/dtPicker/bootstrap-datetimepicker.js"
+                      
                       //"~/Scripts/DateTimePicker/moment-with-locales.js",
                       //"~/Scripts/DateTimePicker/bootstrap-datetimepicker.min.js",
                       //"~/Scripts/DateTimePicker/bootstrap-datetimepicker.js",

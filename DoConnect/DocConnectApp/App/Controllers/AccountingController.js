@@ -1,17 +1,18 @@
-﻿app.controller("AccountingController", ["$scope", "AccountingService", "$interval", "$filter", "$ngBootbox",
-    function ($scope, AccountingService, $interval, $filter, $ngBootbox) {
+﻿app.controller("AccountingController", ["$scope", "AccountingService", "$interval","$filter",
+    function ($scope, AccountingService, $interval, $filter) {
 
         $scope.PageTitleAccounting = 'Accounting';
         $scope.PageTitleExpenses = 'Expenses';
         $scope.PageTitleNewExpenseEntry = 'New Expense Entry';
         $scope.PageTitleNewPatientInvoiceEntry = 'New Patient Invoice Entry';
 
+        //Sort Function
         $scope.sort = function (keyname) {
             $scope.sortKey = keyname;
             $scope.reverse = !$scope.reverse;
         }
         //--#region Invoices------------------------------------------------------------------------------------------------------
-        
+        //Invoice
         $scope.GetInvoices = function () {
             AccountingService.GetAllInvoices().then(function (result) {
                 $scope.Invoices = result.data;
@@ -19,6 +20,7 @@
         };
         $scope.GetInvoices();
 
+        //Select InvoiceByID Function
         $scope.ViewInvoice = function (ID) {
             AccountingService.GetInvoiceByID(ID).success(function (result) {
                 $scope.ID                      = result["ID"];
@@ -27,11 +29,10 @@
                 $scope.Total                   = result["Total"];
                 $scope.AmountPaid              = result["AmountPaid"];                
                 $scope.BalanceOwing            = result["BalanceOwing"];
-                
-                if (result["PaidStatus"] == 0) { $scope.PaidStatus = "Unpaid"; }//0 == Unpaid, 1 == Fully-Paid, 2 == Partially-Paid
+                //0 == Unpaid, 1 == Fully-Paid, 2 == Partially-Paid
+                if (result["PaidStatus"] == 0) { $scope.PaidStatus = "Unpaid"; }
                 else if (result["PaidStatus"] == 1) { $scope.PaidStatus = "Fully-Paid"; }
                 else { $scope.PaidStatus = "Partially-Paid"; }
-
                 $scope.Medical_Aid_ID          = result["Medical_Aid_ID"];
                 $scope.Patient_ID              = result["Patient_ID"];
                 $scope.Patient_FirstName       = result["Patient_FirstName"];
@@ -58,6 +59,7 @@
             });
         };
 
+        //$scope._PaidStatus = [{ "Status": "Fully-Paid", "Value": "1" }, { "Status": "Partially-Paid", "Value": "2" }, { "Status": "Unpaid", "Value": "0" }];
         $scope.GetPatients = function () {
             AccountingService.GetAllPatients().then(function (result) {
                 $scope.Patients = result.data;
@@ -97,6 +99,7 @@
             $scope.DoctorID = item.ID;
         };
 
+        //Insert InvoiceFuntion
         $scope.NewInvoice = function (_Total, _AmountPaid) {
             AccountingService.InsertInvoice($scope.SelectedDiagnosis, _Total, _AmountPaid, $scope.MedicalAidID, $scope.PatientID, $scope.DoctorID).success(function () {
                 $scope.GetInvoices();
@@ -108,6 +111,7 @@
                 });
         };
 
+        //Update InvoiceFuntion
         $scope.function_btnUpdateInvoice= function (ID) {
             var btnText = angular.element("#function_btnUpdateInvoice").html();
             if (btnText == "Update") {
@@ -116,7 +120,7 @@
             }
             else {
                 AccountingService.UpdateInvoice($scope.ID, $scope.Name, $scope.Phone_Number, $scope.Fax_Number, $scope.Street_Address, $scope.Suburb, $scope.City, $scope.Country, $scope.Trading_Times).success(function () {
-                    $scope.GetInvoices();
+                    $scope.GetAllInvoices();
                     btnSuccess("Invoicedetails successfully updated.");
                 }, function (error) {
                     btnAlert("System Error Message", "Update unsuccessful.");
@@ -128,26 +132,13 @@
             }
         };
 
-        $scope.DeleteInvoice1 = function (ID) {
-            $ngBootbox.confirm("Are you sure you want to delete this Invoice?").then(function () {
-                AccountingService.DeleteInvoice(ID).then(function () {
-                    $scope.GetInvoices();
-                    btnSuccess("Invoice record successfully deleted.");
-                }, function (error) {
-                    btnAlert("System Error Message", "Delete unsuccessful.");
-                });
-            }, function () {});
-        };
-        $scope.DeleteInvoice2 = function () {
-            $ngBootbox.confirm("Are you sure you want to delete this Invoice?").then(function () {
-                AccountingService.DeleteInvoice($scope.ID).then(function () {
-                    $scope.GetInvoices();
-                    angular.element("#CloseModel").trigger("click");
-                    btnSuccess("Invoice record successfully deleted.");
-                }, function (error) {
-                    btnAlert("System Error Message", "Delete unsuccessful.");
-                });
-            }, function () {});
+        //Delete InvoiceFuntion
+        $scope.DeleteInvoice= function () {
+            AccountingService.DeleteInvoice($scope.ID).then(function () {
+                $scope.GetAllInvoices();
+            }, function (error) {
+                btnAlert("System Error Message", "Delete unsuccessful.");
+            });       
         };
 
         //--#region Expenses------------------------------------------------------------------------------------------------------
@@ -215,25 +206,11 @@
             }
         };
 
-        $scope.DeleteExpense1 = function (ID) {
-            $ngBootbox.confirm("Are you sure you want to delete this Expense?").then(function () {
-                AccountingService.DeleteExpense(ID).then(function () {
-                    $scope.GetExpenses();
-                    btnSuccess("Expense record successfully deleted.");
-                }, function (error) {
-                    btnAlert("System Error Message", "Delete unsuccessful.");
-                });
-            }, function () {});
-        };
-        $scope.DeleteExpense2 = function () {
-            $ngBootbox.confirm("Are you sure you want to delete this Expense?").then(function () {
-                AccountingService.DeleteExpense($scope.ID).then(function () {
-                    $scope.GetExpenses();
-                    angular.element("#CloseModel").trigger("click");
-                    btnSuccess("Expense record successfully deleted.");                    
-                }, function (error) {
-                    btnAlert("System Error Message", "Delete unsuccessful.");
-                });
-            }, function () {});
+        $scope.DeleteExpense = function () {
+            AccountingService.DeleteExpense($scope.ID).then(function () {
+                $scope.GetAllExpenses();
+            }, function (error) {
+                btnAlert("System Error Message", "Delete unsuccessful.");
+            });
         };
     }]);
