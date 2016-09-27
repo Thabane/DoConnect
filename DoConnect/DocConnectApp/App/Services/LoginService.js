@@ -10,7 +10,7 @@
             });
         }
 
-        
+
         var GetUserDetailsByUser_ID = function (ID) {
             return $http.get("api/Login/GetUserDetailsByUser_ID/" + ID);
         }

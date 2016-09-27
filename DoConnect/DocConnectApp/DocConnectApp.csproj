@@ -211,7 +211,6 @@
     <Content Include="App\Views\Patients\PatientRecord\NewPrescription.html" />
     <Content Include="App\Views\Patients\PatientRecord\PrescriptionDetails.html" />
     <Content Include="App\Views\Patients\patients.html" />
-    <Content Include="App\Views\Patients\test.html" />
     <Content Include="App\Views\Practices\NewPractice.html" />
     <Content Include="App\Views\Practices\Practices.html" />
     <Content Include="App\Views\Reports\Reports.html" />
@@ -273,7 +272,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Data\" />
     <Folder Include="Views\Signin\" />
   </ItemGroup>
   <ItemGroup>

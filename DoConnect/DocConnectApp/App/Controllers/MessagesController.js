@@ -66,13 +66,13 @@
                     btnAlert("System Error Message", "Insert unsuccessful.");
                 });
         };
-        
+
         //Delete Message Funtion
         $scope.DeleteMessage = function () {
             MessagesService.DeleteMessage($scope.ID).then(function () {
                 $scope.GetAllMessages();
             }, function (error) {
                 btnAlert("System Error Message", "Delete unsuccessful.");
-            });           
+            });
         };
     }]);
