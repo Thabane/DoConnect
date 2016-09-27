@@ -169,7 +169,6 @@
     <Content Include="App\Controllers\PatientsController.js" />
     <Content Include="App\Controllers\PracticesController.js" />
     <Content Include="App\Controllers\Reports.js" />
-    <Content Include="App\Controllers\testController.js" />
     <Content Include="App\Controllers\UserProfileController.js" />
     <Content Include="App\Services\AccountingService.js" />
     <Content Include="App\Services\AppointmentsService.js" />
@@ -231,8 +230,6 @@
     <Content Include="Images\Logo\doctorIcon.ico" />
     <Content Include="Images\Logo\doctorIcon.png" />
     <Content Include="Scripts\Alert_Confirm_Prompt_Modal\Alert_Confirm_Prompt_Modal.js" />
-    <Content Include="Scripts\angular-route.min.js" />
-    <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\bootstrap-theme.css.map" />

@@ -1,5 +1,5 @@
-﻿app.controller("MedicineInventoryController", ["$scope", "MedicineInventoryService", "$interval", "$filter",
-    function ($scope, MedicineInventoryService, $interval, $filter) {
+﻿app.controller("MedicineInventoryController", ["$scope", "MedicineInventoryService", "$interval", "$filter", "$ngBootbox",
+function ($scope, MedicineInventoryService, $interval, $filter, $ngBootbox) {
         
         //Sort Function
         $scope.sort = function (keyname) {
@@ -60,12 +60,32 @@
             }
         };
 
-        $scope.DeleteMedicine = function () {
-            MedicineInventoryService.DeleteMedicine($scope.ID).then(function () {
-                $scope.GetAllMedicine();
-            }, function (error) {
-                btnAlert("System Error Message", "Delete unsuccessful.");
-            });           
+        $scope.DeleteMedicine1 = function (ID) {
+            $ngBootbox.confirm("Are you sure you want to delete this Medicine?").then(function () {
+                MedicineInventoryService.DeleteMedicine(ID).then(function () {
+                    $scope.GetAllMedicine();
+                    btnSuccess("Medicine record successfully deleted.");
+                }, function (error) {
+                    btnAlert("System Error Message", "Delete unsuccessful.");
+                });
+            },function () {
+                //Confirm was cancelled, don't delete customer
+                console.log('Confirm was cancelled');
+            });
+        };
+        $scope.DeleteMedicine2 = function () {
+            $ngBootbox.confirm("Are you sure you want to delete this Medicine?").then(function () {
+                MedicineInventoryService.DeleteMedicine($scope.ID).then(function () {
+                    $scope.GetAllMedicine();
+                    angular.element("#CloseModel").trigger("click");
+                    btnSuccess("Medicine record successfully deleted.");
+                }, function (error) {
+                    btnAlert("System Error Message", "Delete unsuccessful.");
+                });
+            }, function () {
+                //Confirm was cancelled, don't delete customer
+                console.log('Confirm was cancelled');
+            });
         };
     }]);
 
