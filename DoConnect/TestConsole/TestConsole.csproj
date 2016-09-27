@@ -35,7 +35,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DataClient, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DataClient\bin\Debug\DataClient.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -52,9 +57,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataClient\DataClient.csproj">
-      <Project>{8c1aaf48-0805-405b-b58e-91fce15e96a7}</Project>
-      <Name>DataClient</Name>
+    <ProjectReference Include="..\ObjectModel\ObjectModel.csproj">
+      <Project>{171b67fd-6810-48a2-ab91-c12dca6e06bf}</Project>
+      <Name>ObjectModel</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
