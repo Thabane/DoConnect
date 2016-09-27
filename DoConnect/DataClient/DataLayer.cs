@@ -37,7 +37,7 @@ namespace DataClient
             access.LogEntry(userId, "New User Created");
             return userId;
         }
-        
+
 
         public string Login(string username, string password, int accessLevel)
         {
@@ -80,14 +80,14 @@ namespace DataClient
                         SqlParameter IDParameter = new SqlParameter("@ID", SqlDbType.Int);
                         SqlParameter DateTimeParameter = new SqlParameter("@Last_Login", SqlDbType.DateTime);
                         IDParameter.Value = ID;
-                        DateTimeParameter.Value =Convert.ToDateTime(DateTime.ToString("yyyy-MM-dd HH:mm:ss"));
+                        DateTimeParameter.Value = Convert.ToDateTime(DateTime.ToString("yyyy-MM-dd HH:mm:ss"));
 
                         DateTime DT = Convert.ToDateTime(DateTime.ToString("yyyy-MM-dd HH:mm:ss"));
                         _parametersLog_LastLoginTime.Add(IDParameter);
                         _parametersLog_LastLoginTime.Add(DateTimeParameter);
                         access.ExecuteReader(Conn, "[Log_LastLoginTime]", _parametersLog_LastLoginTime);
                     }
-                    
+
                 }
             }
             return Login;
@@ -171,8 +171,8 @@ namespace DataClient
                             ExpenseInfo.Practice_ID = reader.GetInt32(reader.GetOrdinal("Practice_ID"));
                             ExpenseInfo.Practice_Name = reader.GetString(reader.GetOrdinal("Practice_Name"));
                             ExpenseInfo.User_ID = reader.GetInt32(reader.GetOrdinal("User_ID"));
-                            ExpenseInfo.DoctorFullName   = readerUserDoc.GetString(readerUserDoc.GetOrdinal("DoctorFullName"));
-                            
+                            ExpenseInfo.DoctorFullName = readerUserDoc.GetString(readerUserDoc.GetOrdinal("DoctorFullName"));
+
                         }
                     }
 
@@ -180,7 +180,7 @@ namespace DataClient
                     SqlParameter User_IDParameterStaff = new SqlParameter("@User_ID", SqlDbType.Int);
                     User_IDParameterStaff.Value = reader.GetInt32(reader.GetOrdinal("User_ID"));
                     parametersStaff.Add(User_IDParameterStaff);
-                    
+
                     using (var readerUserStaff = access.ExecuteReader(Conn, "[GetAllExpensesUsersStaff]", parametersStaff))
                     {
                         if (readerUserStaff.Read())
@@ -255,7 +255,7 @@ namespace DataClient
             }
             return ExpenseInfo;
         }
-        public Expenses GetPracticeIDByUser_ID (int User_ID)
+        public Expenses GetPracticeIDByUser_ID(int User_ID)
         {
             List<SqlParameter> _parametersPracticeID = new List<SqlParameter>();
             SqlParameter User_IDParameter = new SqlParameter("@User_ID", SqlDbType.Int);
@@ -308,7 +308,7 @@ namespace DataClient
             parameters.Add(DescriptionParameter);
             AmountParameter.Value = Amount;
             parameters.Add(AmountParameter);
-            
+
             access.ExecuteNonQuery(Conn, parameters, "[UpdateExpense]");
             return true;
         }
@@ -342,7 +342,7 @@ namespace DataClient
                 {
                     AppointmentsInfo.Add(new Appointments().Create(reader));
                 }
-                    
+
             }
             return AppointmentsInfo;
         }
@@ -355,14 +355,14 @@ namespace DataClient
             _parameters.Add(appIdParameter);
             //try
             //{
-                Appointments AppointmentsInfo = new Appointments();
-                using (var reader = access.ExecuteReader(Conn, "[GetAppointmentById]", _parameters))
+            Appointments AppointmentsInfo = new Appointments();
+            using (var reader = access.ExecuteReader(Conn, "[GetAppointmentById]", _parameters))
+            {
+                if (reader.Read())
                 {
-                    if (reader.Read())
-                    {
-                        AppointmentsInfo = (new Appointments().Create(reader));
+                    AppointmentsInfo = (new Appointments().Create(reader));
                 }
-                }
+            }
             //}
             //catch (Exception ex)
             //{
@@ -490,7 +490,7 @@ namespace DataClient
         public bool NewConsultationNote(int patient_ID, int doctor_ID, string reasonForConsulta, string symptoms, string clinicalFindings, string diagnosis, string testResultSummary, string treatmentPlan, int presciption_ID, int referral_ID)
         {
             List<SqlParameter> _parameters = new List<SqlParameter>();
-            List<SqlParameter> Patient_Consultation_parameters = new List<SqlParameter>();            
+            List<SqlParameter> Patient_Consultation_parameters = new List<SqlParameter>();
             SqlParameter patient_IDParameter = new SqlParameter("@Patient_ID", SqlDbType.Int);
             SqlParameter doctor_IDParameter = new SqlParameter("@Doctor_ID", SqlDbType.Int);
             SqlParameter reasonForConsultaParameter = new SqlParameter("@ReasonForConsultation", SqlDbType.NVarChar);
@@ -514,7 +514,7 @@ namespace DataClient
             treatmentPlanParameter.Value = treatmentPlan;
             presciption_IDParameter.Value = presciption_ID;
             referral_IDParameter.Value = referral_ID;
-            
+
             _parameters.Add(patient_IDParameter);
             _parameters.Add(doctor_IDParameter);
             _parameters.Add(reasonForConsultaParameter);
@@ -525,7 +525,7 @@ namespace DataClient
             _parameters.Add(treatmentPlanParameter);
             _parameters.Add(presciption_IDParameter);
             _parameters.Add(referral_IDParameter);
-            
+
             //try
             //{
             int insertedConsultationID = 0;
@@ -541,9 +541,9 @@ namespace DataClient
                     Patient_Consultation_parameters.Add(insertedpatient_IDParameter);
                 }
             }
-                access.ExecuteNonQuery(Conn, Patient_Consultation_parameters, "[InsertPatient_Consultation]");
-                //access.LogEntry(1, "Created Consultation");
-                return true;
+            access.ExecuteNonQuery(Conn, Patient_Consultation_parameters, "[InsertPatient_Consultation]");
+            //access.LogEntry(1, "Created Consultation");
+            return true;
             //}
             //catch (Exception ex)
             //{
@@ -578,7 +578,7 @@ namespace DataClient
             _parameters.Add(diagnosisParameter);
             _parameters.Add(testResultSummaryParameter);
             _parameters.Add(treatmentPlanParameter);
-            
+
             access.ExecuteNonQuery(Conn, _parameters, "[UpdateConsultationNote]");
             //access.LogEntry(1, "Updated Consultation");
             return true;
@@ -675,7 +675,7 @@ namespace DataClient
             SqlParameter medical_Aid_IDParameter = new SqlParameter("@Medical_Aid_ID", SqlDbType.Int);
             SqlParameter patient_IDParameter = new SqlParameter("@Patient_ID", SqlDbType.Int);
             SqlParameter doctor_IDParameter = new SqlParameter("@Doctor_ID", SqlDbType.Int);
-            
+
             dateParameter.Value = DateTime.Now.ToString("yyyy-MM-dd");
             invoiceSummaryParameter.Value = InvoiceSummary;
             totalParameter.Value = Total;
@@ -688,11 +688,11 @@ namespace DataClient
             { PaidStatusParameter.Value = 2; }
             else
             { PaidStatusParameter.Value = 1; }
-            
+
             medical_Aid_IDParameter.Value = Medical_Aid_ID;
             patient_IDParameter.Value = Patient_ID;
             doctor_IDParameter.Value = Doctor_ID;
-            
+
             _parameters.Add(dateParameter);
             _parameters.Add(invoiceSummaryParameter);
             _parameters.Add(totalParameter);
@@ -984,7 +984,7 @@ namespace DataClient
                     return false;
                 }
             }
-            
+
         }
         #endregion
 
@@ -1680,7 +1680,7 @@ namespace DataClient
             _parameters.Add(RefillNumberParameter);
 
             access.ExecuteNonQuery(Conn, _parameters, "[UpdatePrescription]");
-            return true;            
+            return true;
         }
 
         public bool DeletePrescription(int id)
@@ -1701,7 +1701,7 @@ namespace DataClient
             return true;
         }
         #endregion
-        
+
         #region Staff       
         public List<Staff> GetAllStaff()
         {
@@ -1751,7 +1751,7 @@ namespace DataClient
             string street_Address, string suburb, string city, string country, int ACCESSLEVEL_ID, string employee_Type, int practice_ID, int User_ID, string Email)
         {
             _parameters = new List<SqlParameter>();
-            List<SqlParameter>  _parametersCreateUser = new List<SqlParameter>();
+            List<SqlParameter> _parametersCreateUser = new List<SqlParameter>();
             SqlParameter IDParameter = new SqlParameter("@ID", SqlDbType.NVarChar);
             SqlParameter firstNameParameter = new SqlParameter("@FirstName", SqlDbType.NVarChar);
             SqlParameter lastNameParameter = new SqlParameter("@LastName", SqlDbType.NVarChar);
@@ -1800,7 +1800,7 @@ namespace DataClient
             _parameters.Add(practice_IDParameter);
             _parameters.Add(User_IDParameter);
             _parameters.Add(emailParameter);
-            
+
             //try
             //{
 
@@ -1811,8 +1811,8 @@ namespace DataClient
             {
                 access.ExecuteNonQuery(Conn, _parameters, "[InsertStaff]");
             }
-        
-                return true;
+
+            return true;
             //}
             //catch (Exception)
             //{
@@ -1871,8 +1871,8 @@ namespace DataClient
 
             //try
             //{
-                access.ExecuteNonQuery(Conn, _parameters, "[UpdateStaff]");
-                return true;
+            access.ExecuteNonQuery(Conn, _parameters, "[UpdateStaff]");
+            return true;
             //}
             //catch (Exception)
             //{
@@ -1946,7 +1946,7 @@ namespace DataClient
                 while (reader.Read())
                 {
                     DoctorsInfo.Add(new Doctor().Create(reader));
-                }                   
+                }
             }
             return DoctorsInfo;
         }
@@ -1960,13 +1960,13 @@ namespace DataClient
             Doctor DoctorsInfo = new Doctor();
             //try
             //{
-                using (var reader = access.ExecuteReader(Conn, "[GetDoctorById]", _parameter))
+            using (var reader = access.ExecuteReader(Conn, "[GetDoctorById]", _parameter))
+            {
+                if (reader.Read())
                 {
-                    if (reader.Read())
-                    {
-                        DoctorsInfo = new Doctor().Create(reader);
-                    }
+                    DoctorsInfo = new Doctor().Create(reader);
                 }
+            }
             //}
             //catch (Exception ex)
             //{
@@ -2042,11 +2042,11 @@ namespace DataClient
             {
                 if (reader.Read())
                 {
-                    insertedID = reader.GetInt32(reader.GetOrdinal("ID"));                    
+                    insertedID = reader.GetInt32(reader.GetOrdinal("ID"));
                 }
             }
-                //access.LogEntry(UserId, "User Added new Medicine Inventory");
-                return true;
+            //access.LogEntry(UserId, "User Added new Medicine Inventory");
+            return true;
             //}
             //catch (Exception ex)
             //{
@@ -2062,7 +2062,7 @@ namespace DataClient
             SqlParameter DescriptionParameter = new SqlParameter("@Description", SqlDbType.NVarChar);
             SqlParameter QuantityInStockParameter = new SqlParameter("@QuantityInStock", SqlDbType.Int);
             SqlParameter DrugConcentrationParameter = new SqlParameter("@DrugConcentration", SqlDbType.NVarChar);
-            
+
             IDParameter.Value = ID;
             DrugNameParameter.Value = DrugName;
             DescriptionParameter.Value = Description;
