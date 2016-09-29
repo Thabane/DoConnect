@@ -1,7 +1,6 @@
 ﻿app.controller("MedicineInventoryController", ["$scope", "MedicineInventoryService", "$interval", "$filter", "$ngBootbox",
 function ($scope, MedicineInventoryService, $interval, $filter, $ngBootbox) {
 
-    //Sort Function
     $scope.sort = function (keyname) {
         $scope.sortKey = keyname;
         $scope.reverse = !$scope.reverse;
@@ -68,10 +67,7 @@ function ($scope, MedicineInventoryService, $interval, $filter, $ngBootbox) {
             }, function (error) {
                 btnAlert("System Error Message", "Delete unsuccessful.");
             });
-        }, function () {
-            //Confirm was cancelled, don't delete customer
-            console.log('Confirm was cancelled');
-        });
+        }, function () {});
     };
     $scope.DeleteMedicine2 = function () {
         $ngBootbox.confirm("Are you sure you want to delete this Medicine?").then(function () {
@@ -82,10 +78,7 @@ function ($scope, MedicineInventoryService, $interval, $filter, $ngBootbox) {
             }, function (error) {
                 btnAlert("System Error Message", "Delete unsuccessful.");
             });
-        }, function () {
-            //Confirm was cancelled, don't delete customer
-            console.log('Confirm was cancelled');
-        });
+        }, function () {});
     };
 }]);
 

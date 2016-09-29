@@ -56,7 +56,6 @@ namespace DataClient
         bool CreatePatient(string firstName, string lastName, string id_Number, string gender, DateTime dob, string cell_number, string street_address, string suburb, string city, string country, string Allergies, string PreviousIllnesses, string PreviousMedication, string RiskFactors, string SocialHistory, string FamilyHistory, int Medical_Aid_ID, int Doctor_ID, int UserId);
         List<GetAllPatients> GetAllPatients();
         List<Patient> GetPatientByID(int id);
-        bool UpdatePatient(int id, string firstName, string lastName, string id_Number, string gender, string dob, string cell_number, string street_address, string suburb, string city, string country, string Allergies, string PreviousIllnesses, string PreviousMedication, string RiskFactors, string SocialHistory, string FamilyHistory, int Medical_Aid_ID, int Doctor_ID);
         bool DeletePatient(int id);
         #endregion
 

@@ -526,22 +526,27 @@ namespace DataClient
             _parameters.Add(presciption_IDParameter);
             _parameters.Add(referral_IDParameter);
 
+            insertedpatient_IDParameter.Value = patient_ID;
+            Patient_Consultation_parameters.Add(insertedpatient_IDParameter);
+
             //try
             //{
             int insertedConsultationID = 0;
-            using (var reader = access.ExecuteReader(Conn, "[InsertConsultationNote]", _parameters))
+            using (var reader = access.ExecuteReader(Conn, "[InsertPatient_Consultation]", Patient_Consultation_parameters))
             {
                 if (reader.Read())
                 {
-                    insertedConsultationID = reader.GetInt32(reader.GetOrdinal("ID"));
-                    insertedConsultationParameter.Value = insertedConsultationID;
-                    Patient_Consultation_parameters.Add(insertedConsultationParameter);
-
-                    insertedpatient_IDParameter.Value = patient_ID;
-                    Patient_Consultation_parameters.Add(insertedpatient_IDParameter);
+                    using (var readerInsertConsultationNote = access.ExecuteReader(Conn, "[InsertConsultationNote]", _parameters))
+                    {
+                        if (reader.Read())
+                        {
+                            insertedConsultationID = readerInsertConsultationNote.GetInt32(reader.GetOrdinal("ID"));
+                        }
+                    }
                 }
-            }
-            access.ExecuteNonQuery(Conn, Patient_Consultation_parameters, "[InsertPatient_Consultation]");
+            }            
+
+            
             //access.LogEntry(1, "Created Consultation");
             return true;
             //}
@@ -591,7 +596,7 @@ namespace DataClient
             idParameter.Value = id;
             _parameters.Add(idParameter);
             int userId = 0;
-            using (var reader = access.ExecuteReader(Conn, "[DeleteConsultation]", new List<SqlParameter>()))
+            using (var reader = access.ExecuteReader(Conn, "[DeleteConsultation]", _parameters))
             {
                 if (reader.Read())
                 {
@@ -889,80 +894,7 @@ namespace DataClient
                 }
             }
             return patientInfo;
-        }
-
-        public bool UpdatePatient(int id, string firstName, string lastName, string id_Number, string gender, string dob, string cell_number, string street_address, string suburb, string city, string country, string Allergies, string PreviousIllnesses, string PreviousMedication, string RiskFactors, string SocialHistory, string FamilyHistory, int Medical_Aid_ID, int Doctor_ID)
-        {
-
-            List<SqlParameter> _parameters = new List<SqlParameter>();
-            SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
-            SqlParameter firstNameParameter = new SqlParameter("@FirstName", SqlDbType.NVarChar);
-            SqlParameter lastNameParameter = new SqlParameter("@LastName", SqlDbType.NVarChar);
-            SqlParameter id_NumberParameter = new SqlParameter("@ID_Number", SqlDbType.NVarChar);
-            SqlParameter genderParameter = new SqlParameter("@Gender", SqlDbType.NVarChar);
-            SqlParameter dobParameter = new SqlParameter("@DOB", SqlDbType.NVarChar);
-            SqlParameter cell_numberParameter = new SqlParameter("@Cell_Number", SqlDbType.NVarChar);
-            SqlParameter street_addressParameter = new SqlParameter("@Street_Address", SqlDbType.NVarChar);
-            SqlParameter suburbParameter = new SqlParameter("@Suburb", SqlDbType.NVarChar);
-            SqlParameter cityParameter = new SqlParameter("@City", SqlDbType.NVarChar);
-            SqlParameter countryParameter = new SqlParameter("@Country", SqlDbType.NVarChar);
-            SqlParameter AllergiesParameter = new SqlParameter("@Allergies", SqlDbType.NVarChar);
-            SqlParameter PreviousIllnessesParameter = new SqlParameter("@PreviousIllnesses", SqlDbType.NVarChar);
-            SqlParameter PreviousMedicationParameter = new SqlParameter("@PreviousMedication", SqlDbType.NVarChar);
-            SqlParameter RiskFactorsParameter = new SqlParameter("@RiskFactors", SqlDbType.NVarChar);
-            SqlParameter SocialHistoryParameter = new SqlParameter("@SocialHistory", SqlDbType.NVarChar);
-            SqlParameter FamilyHistoryParameter = new SqlParameter("@FamilyHistory", SqlDbType.NVarChar);
-            SqlParameter Medical_Aid_IDParameter = new SqlParameter("@Medical_Aid_ID", SqlDbType.Int);
-            SqlParameter Doctor_IDParameter = new SqlParameter("@Doctor_ID", SqlDbType.Int);
-            idParameter.Value = id;
-            firstNameParameter.Value = firstName;
-            lastNameParameter.Value = lastName;
-            id_NumberParameter.Value = id_Number;
-            genderParameter.Value = gender;
-            dobParameter.Value = dob;
-            cell_numberParameter.Value = cell_number;
-            street_addressParameter.Value = street_address;
-            suburbParameter.Value = suburb;
-            cityParameter.Value = city;
-            countryParameter.Value = country;
-            AllergiesParameter.Value = Allergies;
-            PreviousIllnessesParameter.Value = PreviousIllnesses;
-            PreviousMedicationParameter.Value = PreviousMedication;
-            RiskFactorsParameter.Value = RiskFactors;
-            SocialHistoryParameter.Value = SocialHistory;
-            FamilyHistoryParameter.Value = FamilyHistory;
-            Medical_Aid_IDParameter.Value = Medical_Aid_ID;
-            Doctor_IDParameter.Value = Doctor_ID;
-            _parameters.Add(idParameter);
-            _parameters.Add(firstNameParameter);
-            _parameters.Add(lastNameParameter);
-            _parameters.Add(id_NumberParameter);
-            _parameters.Add(genderParameter);
-            _parameters.Add(dobParameter);
-            _parameters.Add(cell_numberParameter);
-            _parameters.Add(street_addressParameter);
-            _parameters.Add(suburbParameter);
-            _parameters.Add(cityParameter);
-            _parameters.Add(countryParameter);
-            _parameters.Add(AllergiesParameter);
-            _parameters.Add(PreviousIllnessesParameter);
-            _parameters.Add(PreviousMedicationParameter);
-            _parameters.Add(RiskFactorsParameter);
-            _parameters.Add(SocialHistoryParameter);
-            _parameters.Add(FamilyHistoryParameter);
-            _parameters.Add(Medical_Aid_IDParameter);
-            _parameters.Add(Doctor_IDParameter);
-
-            int userId = 0;
-            using (var reader = access.ExecuteReader(Conn, "[UpdatePatient]", new List<SqlParameter>()))
-            {
-                if (reader.Read())
-                {
-                    userId = reader.GetInt32(reader.GetOrdinal("ID"));
-                }
-            }
-            return true;
-        }
+        }        
 
         public bool DeletePatient(int ID)
         {
@@ -984,7 +916,6 @@ namespace DataClient
                     return false;
                 }
             }
-
         }
         #endregion
 
@@ -1691,7 +1622,7 @@ namespace DataClient
             _parameters.Add(idParameter);
 
             int userId = 0;
-            using (var reader = access.ExecuteReader(Conn, "[DeletePrescription]", new List<SqlParameter>()))
+            using (var reader = access.ExecuteReader(Conn, "[DeletePrescription]", _parameters))
             {
                 if (reader.Read())
                 {
@@ -1883,16 +1814,15 @@ namespace DataClient
         public bool DeleteStaff(int id)
         {
             _parameters = new List<SqlParameter>();
-            SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
+            SqlParameter idParameter = new SqlParameter("@User_ID", SqlDbType.Int);
             idParameter.Value = id;
             _parameters.Add(idParameter);
-
-            int userId = 0;
-            using (var reader = access.ExecuteReader(Conn, "[DeleteStaff]", new List<SqlParameter>()))
+            
+            using (var reader = access.ExecuteReader(Conn, "[DeleteEmployee]", _parameters))
             {
                 if (reader.Read())
                 {
-                    userId = reader.GetInt32(reader.GetOrdinal("ID"));
+                    
                 }
             }
             return true;

@@ -1,5 +1,5 @@
-﻿app.controller("PracticesController", ["$scope", "PracticesService", "$interval",
-    function ($scope, PracticesService, $interval) {
+﻿app.controller("PracticesController", ["$scope", "PracticesService", "$interval", "$ngBootbox",
+    function ($scope, PracticesService, $interval, $ngBootbox) {
 
         $scope.PageTitle_Practices = 'Practices';
         $scope.PageTitle_NewPractice = 'New Practices Details';
@@ -62,11 +62,25 @@
             }
         };
 
-        $scope.DeletePractice = function () {
-            PracticesService.DeletePractice($scope.ID).then(function () {
-                $scope.GetAllPractices();
-            }, function (error) {
-                btnAlert("System Error Message", "Delete unsuccessful.");
-            });            
+        $scope.DeletePractice1 = function (ID, Name) {
+            $ngBootbox.confirm("Are you sure you want to delete this Practice: " + Name + " ?").then(function () {
+                PracticesService.DeletePractice(ID).then(function () {
+                    $scope.GetAllPractices();
+                    btnSuccess("Practice record successfully deleted.");
+                }, function (error) {
+                    btnAlert("System Error Message", "Delete unsuccessful.");
+                });
+            }, function () { });
+        };
+        $scope.DeletePractice2 = function () {
+            $ngBootbox.confirm("Are you sure you want to delete this Practice: " + $scope.Name + " ?").then(function () {
+                PracticesService.DeletePractice($scope.ID).then(function () {
+                    $scope.GetAllPractices();
+                    angular.element("#CloseModel").trigger("click");
+                    btnSuccess("Practice record successfully deleted.");
+                }, function (error) {
+                    btnAlert("System Error Message", "Delete unsuccessful.");
+                });
+            }, function () { });
         };
     }]);

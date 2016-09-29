@@ -1,5 +1,5 @@
-﻿app.controller("EmployeesController", ["$scope", "EmployeesService", "$interval",
-    function ($scope, EmployeesService, $interval) {
+﻿app.controller("EmployeesController", ["$scope", "EmployeesService", "$interval", "$ngBootbox",
+    function ($scope, EmployeesService, $interval, $ngBootbox) {
 
         $scope.sort = function (keyname) {
             $scope.sortKey = keyname;
@@ -14,8 +14,7 @@
         };
         $scope.GetAllEmployees();
 
-        $scope.Genders = [{ "Gender": "Male", "Char": "M" },
-                          { "Gender": "Female", "Char": "F" }];
+        $scope.Genders = [{ "Gender": "Male", "Char": "M" }, { "Gender": "Female", "Char": "F" }];
 
         $scope.ViewEmployee = function (ID) {
             EmployeesService.GetEmployeeByID(ID).success(function (result) {
@@ -115,11 +114,25 @@
             }
         };
 
-        $scope.DeleteEmployee = function () {
-            EmployeesService.DeleteEmployee($scope.ID).then(function () {
-                $scope.GetAllEmployees();
-            }, function (error) {
-                btnAlert("System Error Message", "Delete unsuccessful.");
-            });
+        $scope.DeleteEmployee1 = function (User_ID, Name) {
+            $ngBootbox.confirm("Are you sure you want to delete this Employee: " + Name + "?").then(function () {
+                EmployeesService.DeleteEmployee(User_ID).then(function () {
+                    $scope.GetAllEmployees();
+                    btnSuccess("Employee record successfully deleted.");
+                }, function (error) {
+                    btnAlert("System Error Message", "Delete unsuccessful.");
+                });
+            }, function () {});
         };
-    }]);
+        $scope.DeleteEmployee2 = function () {
+            $ngBootbox.confirm("Are you sure you want to delete this Employee: " + $scope.FirstName+" "+$scope.LastName + "?").then(function () {
+                EmployeesService.DeleteEmployee($scope.User_ID).then(function () {
+                    $scope.GetAllEmployees();
+                    angular.element("#CloseModel").trigger("click");
+                    btnSuccess("Employee record successfully deleted.");
+                }, function (error) {
+                    btnAlert("System Error Message", "Delete unsuccessful.");
+                });
+            }, function () {});
+        };
+    }]); 

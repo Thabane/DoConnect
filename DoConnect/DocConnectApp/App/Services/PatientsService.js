@@ -9,6 +9,10 @@
             return $http.get("api/Patients/GetPatient/" + ID);
         }
 
+        var DeletePatient = function (ID) {
+            return $http.post("api/Patients/DeletePatient/" + ID);
+        }
+
         //--Medical Record-----------------------------------------------------------------------------------------------------
         var GetMedical_Aid = function () {
             return $http.get("api/Patients/GetMedical_Aid");
@@ -75,13 +79,6 @@
                 'FamilyHistory': FamilyHistory
             });
         };
-
-        var DeleteMedicalRecord = function (ID) {
-            return $http.post("api/Patients/DeleteMedicalRecord/" + ID);
-        };
-
-        //---------------------------------------------------------------------------------------------------------/
-
         //--Prescription-------------------------------------------------------------------------------------------------------/
         
         var GetPrescription = function (ID) {
@@ -166,13 +163,13 @@
         return {
             GetAllPatients: GetAllPatients,
             GetPatientByID: GetPatientByID,
+            DeletePatient: DeletePatient,
 
             //MedicalRecord Details
             GetMedical_Aid: GetMedical_Aid,
             GetMedicalRecord: GetMedicalRecord,
             InsertMedicalRecord: InsertMedicalRecord,
             UpdateMedicalRecord: UpdateMedicalRecord,
-            DeleteMedicalRecord: DeleteMedicalRecord,
 
             //Prescription Details
             GetPrescription: GetPrescription,

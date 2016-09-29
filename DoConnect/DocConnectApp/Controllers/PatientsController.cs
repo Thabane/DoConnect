@@ -28,14 +28,6 @@ namespace DocConnectApp.Controllers
         }
 
         [HttpPost]
-        [Route("api/Patients/UpdatePatient")]
-        public bool UpdatePatient(Patient patient)
-        {
-            DataLayer dtLayer = new DataLayer();
-            return dtLayer.UpdatePatient(patient.User_ID, patient.FirstName, patient.LastName, patient.ID_Number, patient.Gender, patient.DOB, patient.Cell_Number, patient.Street_Address, patient.Suburb, patient.City, patient.Country,patient.Allergies, patient.PreviousIllnesses, patient.PreviousMedication, patient.RiskFactors, patient.SocialHistory, patient.FamilyHistory,patient.Medical_Aid_ID, patient.Doctor_ID);
-        }
-
-        [HttpPost]
         [Route("api/Patients/DeletePatient/{ID}")]
         public bool DeletePatient(int ID)
         {
@@ -76,15 +68,6 @@ namespace DocConnectApp.Controllers
             DataLayer dtLayer = new DataLayer();
             return dtLayer.UpdateMedicalRecord(medicalRecord.Patient_ID, medicalRecord.FirstName, medicalRecord.LastName, medicalRecord.Email, medicalRecord.ID_Number, medicalRecord.Cell_Number, medicalRecord.DOB, medicalRecord.Gender, medicalRecord.Street_Address, medicalRecord.Suburb, medicalRecord.City, medicalRecord.Country, medicalRecord.Patient_Medical_Aid_Medical_Aid_ID, medicalRecord.Scheme_Name, medicalRecord.Membership_Number, medicalRecord.Registration_Date, medicalRecord.Deregistration_Date, medicalRecord.Allergies, medicalRecord.PreviousIllnesses, medicalRecord.PreviousMedication, medicalRecord.RiskFactors, medicalRecord.SocialHistory, medicalRecord.FamilyHistory);
         }
-
-        [HttpPost]
-        [Route("api/Patients/DeleteMedicalRecord/{ID}")]
-        public bool DeleteMedicalRecord(int ID)
-        {
-            DataLayer dtLayer = new DataLayer();
-            return dtLayer.DeletePatient(ID);
-        }
-
         //--Prescription Details----------------------------------------------------------------------------------------------------------------/
 
         [HttpGet]
@@ -116,7 +99,7 @@ namespace DocConnectApp.Controllers
         public bool DeletePrescription(int ID)
         {
             DataLayer dtLayer = new DataLayer();
-            return dtLayer.DeleteConsultation(ID);
+            return dtLayer.DeletePrescription(ID);
         }
 
         //--Consultation Notes----------------------------------------------------------------------------------------------------------------/

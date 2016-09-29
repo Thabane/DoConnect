@@ -1,13 +1,11 @@
 ﻿app.controller("AppointmentsController", ["$scope", "AppointmentsService", "$interval", "$ngBootbox",
     function ($scope, AppointmentsService, $interval, $ngBootbox) {
 
-        //Sort Function
         $scope.sort = function (keyname) {
             $scope.sortKey = keyname;
             $scope.reverse = !$scope.reverse;
         }
 
-        //Select All Appointments
         $scope.GetAllAppointments = function () {
             AppointmentsService.GetAllAppointments().then
             (function (result) {
@@ -18,7 +16,6 @@
 
         $scope.App_Statusz = [{ "Status": "Approved", "bool": "1" }, { "Status": "Declined", "bool": "0" }, { "Status": "Pending", "bool": "2" }];
 
-        //Select AppointmentByID Function
         $scope.ViewAppointment = function (ID) {
             AppointmentsService.GetAppointmentByID(ID).success(function (result) {
                 $scope.Appointments_ID = result["Appointments_ID"];
@@ -80,7 +77,6 @@
             $scope.Seleceted_App_Status = item.bool;
         };
 
-        //Insert Appointment Funtion
         $scope.NewAppointment = function (Details, App_Status) {
             AppointmentsService.InsertAppointment(angular.element("#Appointments_Date").val() + " " + angular.element("#Appointments_Time").val(), $scope.PatientID, Details, App_Status, $scope.DoctorID).success(function () {
                 $scope.GetAllAppointments();
@@ -93,8 +89,6 @@
                 });
         };
 
-
-        //Update Appointment Funtion
         $scope.function_btnUpdateAppointment = function (ID) {
             var btnText = angular.element("#function_btnUpdateAppointment").html();
             if (btnText == "Update") {
@@ -118,12 +112,25 @@
             }
         };
 
-        //Delete Practice Funtion
-        $scope.DeleteAppointment = function () {
-            AppointmentsService.DeleteAppointment($scope.ID).then(function () {
-                $scope.GetAllAppointments();
-            }, function (error) {
-                btnAlert("System Error Message", "Delete unsuccessful.");
-            });
+        $scope.DeleteAppointment1 = function (ID) {
+            $ngBootbox.confirm("Are you sure you want to delete this Appointment?").then(function () {
+                AppointmentsService.DeleteAppointment(ID).then(function () {
+                    $scope.GetAllAppointments();
+                    btnSuccess("Appointment record successfully deleted.");
+                }, function (error) {
+                    btnAlert("System Error Message", "Delete unsuccessful.");
+                });
+            }, function () {});
+        };
+        $scope.DeleteAppointment2 = function () {
+            $ngBootbox.confirm("Are you sure you want to delete this Appointment?").then(function () {
+                AppointmentsService.DeleteAppointment($scope.Appointments_ID).then(function () {
+                    $scope.GetAllAppointments();
+                    angular.element("#CloseModel").trigger("click");
+                    btnSuccess("Appointment record successfully deleted.");
+                }, function (error) {
+                    btnAlert("System Error Message", "Delete unsuccessful.");
+                });
+            }, function () {});
         };
     }]);
