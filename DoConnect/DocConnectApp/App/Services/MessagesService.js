@@ -1,8 +1,8 @@
 ﻿app.factory('MessagesService',
     function ($http) {
 
-        var GetAllMessages = function () {
-            return $http.get("api/Messages/GetAllMessages");
+        var GetAllMessages = function (Receiver) {
+            return $http.get("api/Messages/GetAllMessages/" + Receiver);
         };
 
         var GetMessageByID = function (ID) {
@@ -28,7 +28,6 @@
             GetAllMessages: GetAllMessages,
             GetMessageByID: GetMessageByID,
             InsertMessage: InsertMessage,
-            UpdateMessage: UpdateMessage,
             DeleteMessage: DeleteMessage
         };
     }

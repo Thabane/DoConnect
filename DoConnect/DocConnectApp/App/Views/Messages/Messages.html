@@ -8,24 +8,19 @@
 
         <div class="right_side message">
             <div class="row mailbox-header">
-                <div class="col-md-2">
-                    <a class="btn btn-info btn-block" href="#" ng-click="FunctionComposeMessage()">Compose</a>
+                <div class="col-md-2"><a class="btn btn-info btn-block" href="#" ng-click="FunctionComposeMessage()">Compose</a></div>
+                <div class="col-md-6"><h2 style="margin-top:0px;" id="h2_ContentHeading">Inbox</h2></div>
+                <div class="col-md-4">
+                    <div class="col-md-2"><h5 class="pull-right">Search:</h5></div>
+                    <div class="col-md-10"><input class="form-control" type="text" style="font-size:13px;" ng-model="search"></div>
                 </div>
-                <div class="col-md-8"><h2 style="margin-top:0px;" id="h2_ContentHeading">Inbox</h2></div>
             </div>
             <div class="col-md-2">
                 <ul class="list-unstyled mailbox-nav">
                     <li><a href="#" ng-click="FunctionInbox()"><i class="fa fa-inbox"></i> Inbox<span class="badge badge-success pull-right">1</span></a></li>
                     <li><a href="#" ng-click="FunctionSent()"><i class="fa fa-sign-out"></i> Sent</a></li>
                 </ul>
-            </div>
-
-            <div class="row" style="margin-top: 10px; margin-right: 10px;">
-                <div class="col-md-4"></div><div class="col-md-4"><h5 class="pull-right">Search:</h5></div>
-                <div class="form-group col-md-4">
-                    <input class="form-control" type="text" style="font-size:13px;" ng-model="search">
-                </div>
-            </div>
+            </div>            
 
             <!--Message list (Inbox Table) -->
             <div id="div_Message_list" class="col-md-10">

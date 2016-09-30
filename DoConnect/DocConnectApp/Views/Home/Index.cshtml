@@ -7,7 +7,7 @@
     <script data-require="ui-bootstrap@0.3.0" data-semver="0.3.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.3.0.min.js"></script>
 </head>
 <body>
-    <div id="wrapper">
+    <div id="wrapper" ng-controller="DashboardController">
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -21,7 +21,7 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <i class="fa fa-bars fa-fw"></i>
                 </button>
-                <a class="navbar-brand">{{sessionStorage.FirstName + " " + sessionStorage.LastName}}</a>
+                <a class="navbar-brand">Welcome: @*{{FirstName}} {{LastName}}*@</a>
             </div>
             
             <ul class="nav navbar-top-links navbar-right">
@@ -43,7 +43,7 @@
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a class="text-center" href="/messages">
+                            <a class="text-center" href="/Messages">
                                 <strong>Read All Messages</strong>
                                 <i class="fa fa-angle-right"></i>
                             </a>

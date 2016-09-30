@@ -14,7 +14,7 @@ namespace ObjectModel
         public string Receiver { get; set; }
         public string Subject { get; set; }
         public string Description { get; set; }
-        public DateTime Date { get; set; }
+        public string Date { get; set; }
 
         public Messages Create(SqlDataReader reader)
         {
@@ -25,7 +25,7 @@ namespace ObjectModel
                 Receiver = reader.GetString(reader.GetOrdinal("Receiver")),                
                 Subject = reader.GetString(reader.GetOrdinal("Subject")),
                 Description = reader.GetString(reader.GetOrdinal("Description")),
-                Date = reader.GetDateTime(reader.GetOrdinal("Date")),
+                Date = reader.GetString(reader.GetOrdinal("Date")),
             };
         }
     }

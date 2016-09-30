@@ -124,5 +124,12 @@ namespace DataClient
         bool UpdateMedicalAid(int ID, string Name, string Cell_Number, string Fax_Number, string Email_Address, string Address);
         bool DeleteMedicalAid(int ID);
         #endregion
+
+        #region Messages
+        List<Messages> GetAllMessages(string Receiver);
+        Messages GetMessageById(int ID);
+        bool NewMessages(string Sender, string Receiver, string Subject, string Description, string Date);
+        bool DeleteMessages(int ID);
+        #endregion
     }
 }

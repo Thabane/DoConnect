@@ -228,6 +228,8 @@ function tr_dblclick_InboxMail() {
     $(".readonly_ViewEvent").css("background-color", "transparent");
 };
 
+
+
 //Practices Page
 function ViewPractice() {
     $("#View_Practice_Modal").modal("show");

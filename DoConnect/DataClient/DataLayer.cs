@@ -2156,5 +2156,89 @@ namespace DataClient
             return true;
         }
         #endregion
+
+        #region Messages
+        public List<Messages> GetAllMessages(string Receiver)
+        {
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            SqlParameter ReceiverParameter = new SqlParameter("@Receiver", SqlDbType.NVarChar);
+            ReceiverParameter.Value = Receiver;
+            _parameters.Add(ReceiverParameter);
+
+            List<Messages> MessagesInfo = new List<Messages>();
+            using (var reader = access.ExecuteReader(Conn, "[GetAllMessages]", _parameters))
+            {
+                while (reader.Read())
+                {
+                    MessagesInfo.Add(new Messages().Create(reader));
+                }
+            }
+            return MessagesInfo;
+        }
+        public Messages GetMessageById(int ID)
+        {
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            SqlParameter IDParameter = new SqlParameter("@ID", SqlDbType.Int);
+            IDParameter.Value = ID;
+            _parameters.Add(IDParameter);
+            Messages MessageInfo = new Messages();
+            using (var reader = access.ExecuteReader(Conn, "[GetMessageById]", _parameters))
+            {
+                if (reader.Read())
+                {
+                    return new Messages().Create(reader);
+                }
+            }
+            return MessageInfo;
+        }
+        public bool NewMessages(string Sender, string Receiver, string Subject, string Description, string Date)
+        {
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            SqlParameter SenderParameter = new SqlParameter("@Sender", SqlDbType.NVarChar);
+            SqlParameter ReceiverParameter = new SqlParameter("@Receiver", SqlDbType.NVarChar);
+            SqlParameter SubjectParameter = new SqlParameter("@Subject", SqlDbType.NVarChar);
+            SqlParameter DescriptionParameter = new SqlParameter("@Description", SqlDbType.NVarChar);
+            SqlParameter DateParameter = new SqlParameter("@Date", SqlDbType.NVarChar);
+
+            SenderParameter.Value = Sender;
+            ReceiverParameter.Value = Receiver;
+            SubjectParameter.Value = Subject;
+            DescriptionParameter.Value = Description;
+            DateParameter.Value = Date;
+
+            _parameters.Add(SenderParameter);
+            _parameters.Add(ReceiverParameter);
+            _parameters.Add(SubjectParameter);
+            _parameters.Add(DescriptionParameter);
+            _parameters.Add(DateParameter);
+
+            int insertedID = 0;
+            using (var reader = access.ExecuteReader(Conn, "[InsertMessage]", _parameters))
+            {
+                if (reader.Read())
+                {
+                    insertedID = reader.GetInt32(reader.GetOrdinal("ID"));
+                }
+            }
+            return true;
+
+        }
+        public bool DeleteMessages(int ID)
+        {
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            SqlParameter IDParameter = new SqlParameter("@ID", SqlDbType.Int);
+            IDParameter.Value = ID;
+            _parameters.Add(IDParameter);
+            int User_ID = 0;
+            using (var reader = access.ExecuteReader(Conn, "[DeleteMessage]", _parameters))
+            {
+                if (reader.Read())
+                {
+                    User_ID = reader.GetInt32(reader.GetOrdinal("ID"));
+                }
+            }
+            return true;
+        }
+        #endregion
     }
 }
