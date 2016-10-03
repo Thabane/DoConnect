@@ -272,3 +272,7 @@ function btnRedirect(Page) {
 };
 
 
+function View_NotificationsPanel_Modal() {
+    $("#View_NotificationsPanel_Modal").modal("show");
+};
+

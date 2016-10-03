@@ -2158,21 +2158,44 @@ namespace DataClient
         #endregion
 
         #region Messages
-        public List<Messages> GetAllMessages(string Receiver)
+        public List<Messages> GetAllMessages(int Receiver)
         {
             List<SqlParameter> _parameters = new List<SqlParameter>();
-            SqlParameter ReceiverParameter = new SqlParameter("@Receiver", SqlDbType.NVarChar);
+            SqlParameter ReceiverParameter = new SqlParameter("@Receiver", SqlDbType.Int);
             ReceiverParameter.Value = Receiver;
             _parameters.Add(ReceiverParameter);
 
+            Messages MessageInfo = new Messages();
             List<Messages> MessagesInfo = new List<Messages>();
             using (var reader = access.ExecuteReader(Conn, "[GetAllMessages]", _parameters))
             {
                 while (reader.Read())
                 {
-                    MessagesInfo.Add(new Messages().Create(reader));
+                    MessageInfo.ID = reader.GetInt32(reader.GetOrdinal("ID"));
+                    MessageInfo.Sender = reader.GetInt32(reader.GetOrdinal("Sender"));
+                    MessageInfo.Receiver = reader.GetInt32(reader.GetOrdinal("Receiver"));
+                    MessageInfo.Subject = reader.GetString(reader.GetOrdinal("Subject"));
+                    MessageInfo.Description = reader.GetString(reader.GetOrdinal("Description"));
+                    MessageInfo.Date = reader.GetString(reader.GetOrdinal("Date"));
+                    MessageInfo.ReceiverEmail = reader.GetString(reader.GetOrdinal("ReceiverEmail"));
+
+                    List<SqlParameter> parametersSender = new List<SqlParameter>();
+                    SqlParameter SenderParameterSender = new SqlParameter("@Sender", SqlDbType.Int);
+                    SenderParameterSender.Value = reader.GetInt32(reader.GetOrdinal("Sender"));
+                    parametersSender.Add(SenderParameterSender);
+
+                    using (var readerMessageSender = access.ExecuteReader(Conn, "[GetMessageSender]", parametersSender))
+                    {
+                        if (readerMessageSender.Read())
+                        {
+                            MessageInfo.SenderEmail = readerMessageSender.GetString(readerMessageSender.GetOrdinal("SenderEmail"));
+                        }
+                    }
+                    MessagesInfo.Add(MessageInfo);
+                    MessageInfo = new Messages();
                 }
-            }
+                
+            }            
             return MessagesInfo;
         }
         public Messages GetMessageById(int ID)
@@ -2191,11 +2214,11 @@ namespace DataClient
             }
             return MessageInfo;
         }
-        public bool NewMessages(string Sender, string Receiver, string Subject, string Description, string Date)
+        public bool NewMessages(int Sender, int Receiver, string Subject, string Description, string Date)
         {
             List<SqlParameter> _parameters = new List<SqlParameter>();
-            SqlParameter SenderParameter = new SqlParameter("@Sender", SqlDbType.NVarChar);
-            SqlParameter ReceiverParameter = new SqlParameter("@Receiver", SqlDbType.NVarChar);
+            SqlParameter SenderParameter = new SqlParameter("@Sender", SqlDbType.Int);
+            SqlParameter ReceiverParameter = new SqlParameter("@Receiver", SqlDbType.Int);
             SqlParameter SubjectParameter = new SqlParameter("@Subject", SqlDbType.NVarChar);
             SqlParameter DescriptionParameter = new SqlParameter("@Description", SqlDbType.NVarChar);
             SqlParameter DateParameter = new SqlParameter("@Date", SqlDbType.NVarChar);

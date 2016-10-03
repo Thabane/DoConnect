@@ -1,12 +1,11 @@
 ﻿app.factory('DashboardService',
-    ['$http',
-        function($http) {
-            var getStuff = function ()
-            {
-                return "";
-            }
-            return {
-                getStuff: getStuff
+    function($http) {
+        var SessionData = function () {
+            return $http.get("/Data/SessionData");
+        };
+
+        return {
+            SessionData: SessionData
         }
-        }
-    ]);
+    }
+);

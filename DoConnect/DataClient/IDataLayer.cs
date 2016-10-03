@@ -126,9 +126,9 @@ namespace DataClient
         #endregion
 
         #region Messages
-        List<Messages> GetAllMessages(string Receiver);
+        List<Messages> GetAllMessages(int Receiver);
         Messages GetMessageById(int ID);
-        bool NewMessages(string Sender, string Receiver, string Subject, string Description, string Date);
+        bool NewMessages(int Sender, int Receiver, string Subject, string Description, string Date);
         bool DeleteMessages(int ID);
         #endregion
     }

@@ -59,11 +59,8 @@ namespace DocConnectApp
                       "~/Scripts/dtPicker/bootstrap-datetimepicker.min.js",
                       "~/Scripts/dtPicker/bootstrap-datetimepicker.js",
                       "~/Scripts/Alert_Confirm_Prompt_Modal/bootbox.js",
-                      "~/Scripts/Alert_Confirm_Prompt_Modal/ngBootbox.js"
-                      //"~/Scripts/DateTimePicker/moment-with-locales.js",
-                      //"~/Scripts/DateTimePicker/bootstrap-datetimepicker.min.js",
-                      //"~/Scripts/DateTimePicker/bootstrap-datetimepicker.js",
-                      //"~/Scripts/bootstrap.js"
+                      "~/Scripts/Alert_Confirm_Prompt_Modal/ngBootbox.js",
+                      "~/Scripts/angular-cookies.min.js"
                       ));
         }
     }

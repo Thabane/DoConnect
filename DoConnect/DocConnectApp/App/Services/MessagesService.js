@@ -24,11 +24,16 @@
             return $http.post("api/Messages/DeleteMessage/" + ID);
         };
 
+        var SessionData = function () {
+            return $http.get("/Data/SessionData");
+        };
+
         return {
             GetAllMessages: GetAllMessages,
             GetMessageByID: GetMessageByID,
             InsertMessage: InsertMessage,
-            DeleteMessage: DeleteMessage
+            DeleteMessage: DeleteMessage,
+            SessionData: SessionData
         };
     }
 );

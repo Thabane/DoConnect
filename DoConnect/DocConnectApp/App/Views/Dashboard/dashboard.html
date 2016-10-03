@@ -216,53 +216,60 @@
         })
     </script>-->
 
+    <button onclick="View_NotificationsPanel_Modal()">View_NotificationsPanel_Modal</button>
     <!-- 3rd row -->
     <div class="row">
         <!-- /.Notifications Panel -->
-        <div class="col-lg-4">
-            <div class="panel panel-default">
-                <div class="panel-heading"><i class="fa fa-bell fa-fw"></i> Notifications Panel</div>
-                <div class="panel-body">
-                    <div class="list-group">
-                        <a class="list-group-item" href="#">
-                            <i class="fa fa-comment fa-fw"></i> New Comment
-                            <span class="pull-right text-muted small"><em>4 minutes ago</em></span>
-                        </a>
-                        <a class="list-group-item" href="#">
-                            <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                            <span class="pull-right text-muted small"><em>12 minutes ago</em></span>
-                        </a>
-                        <a class="list-group-item" href="#">
-                            <i class="fa fa-envelope fa-fw"></i> Message Sent
-                            <span class="pull-right text-muted small"><em>27 minutes ago</em></span>
-                        </a>
-                        <a class="list-group-item" href="#">
-                            <i class="fa fa-tasks fa-fw"></i> New Task
-                            <span class="pull-right text-muted small"><em>43 minutes ago</em></span>
-                        </a>
-                        <a class="list-group-item" href="#">
-                            <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                            <span class="pull-right text-muted small"><em>11:32 AM</em></span>
-                        </a>
-                        <a class="list-group-item" href="#">
-                            <i class="fa fa-bolt fa-fw"></i> Server Crashed!
-                            <span class="pull-right text-muted small"><em>11:13 AM</em></span>
-                        </a>
-                        <a class="list-group-item" href="#">
-                            <i class="fa fa-warning fa-fw"></i> Server Not Responding
-                            <span class="pull-right text-muted small"><em>10:57 AM</em></span>
-                        </a>
-                        <a class="list-group-item" href="#">
-                            <i class="fa fa-shopping-cart fa-fw"></i> New Order Placed
-                            <span class="pull-right text-muted small"><em>9:49 AM</em></span>
-                        </a>
-                    </div><!-- /.list-group -->
-                    <a class="btn btn-default btn-block" href="#">View All Alerts</a>
-                </div><!-- /.panel-body -->
-            </div><!-- /.panel -->
-        </div>
-        <!-- /.Notifications Panel -->
-
+        <div id="View_NotificationsPanel_Modal" class="modal fade">
+            <form name="Form">
+                <div class="modal-dialog" style="width:60%">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div class="panel panel-default">
+                                <div class="panel-heading"><i class="fa fa-bell fa-fw"></i> Notifications Panel</div>
+                                <div class="panel-body">
+                                    <div class="list-group">
+                                        <a class="list-group-item" href="#">
+                                            <i class="fa fa-comment fa-fw"></i> New Comment
+                                            <span class="pull-right text-muted small"><em>4 minutes ago</em></span>
+                                        </a>
+                                        <a class="list-group-item" href="#">
+                                            <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                                            <span class="pull-right text-muted small"><em>12 minutes ago</em></span>
+                                        </a>
+                                        <a class="list-group-item" href="#">
+                                            <i class="fa fa-envelope fa-fw"></i> Message Sent
+                                            <span class="pull-right text-muted small"><em>27 minutes ago</em></span>
+                                        </a>
+                                        <a class="list-group-item" href="#">
+                                            <i class="fa fa-tasks fa-fw"></i> New Task
+                                            <span class="pull-right text-muted small"><em>43 minutes ago</em></span>
+                                        </a>
+                                        <a class="list-group-item" href="#">
+                                            <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                                            <span class="pull-right text-muted small"><em>11:32 AM</em></span>
+                                        </a>
+                                        <a class="list-group-item" href="#">
+                                            <i class="fa fa-bolt fa-fw"></i> Server Crashed!
+                                            <span class="pull-right text-muted small"><em>11:13 AM</em></span>
+                                        </a>
+                                        <a class="list-group-item" href="#">
+                                            <i class="fa fa-warning fa-fw"></i> Server Not Responding
+                                            <span class="pull-right text-muted small"><em>10:57 AM</em></span>
+                                        </a>
+                                        <a class="list-group-item" href="#">
+                                            <i class="fa fa-shopping-cart fa-fw"></i> New Order Placed
+                                            <span class="pull-right text-muted small"><em>9:49 AM</em></span>
+                                        </a>
+                                    </div><!-- /.list-group -->
+                                    <a class="btn btn-default btn-block" href="#">View All Alerts</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div><!-- /.Notifications Panel -->
         <!-- Quick Action Appointments-->
         <div class="col-md-6 col-sm-6">
             <div class="portlet light" style="border: 1px solid #ddd; border-radius: 4px;">
@@ -271,7 +278,6 @@
                         <i class="icon-social-twitter font-dark hide"></i>
                         <span class="caption-subject font-green-steel uppercase bold">Appointments</span>
                     </div>
-
                     <ul class="nav nav-pills" style="float: right;">
                         <li role="presentation" class="active"><a href="#tab_actions_pending" data-toggle="tab"> Pending </a></li>
                         <li role="presentation"><a href="#tab_actions_completed" data-toggle="tab"> Approved </a></li>
@@ -498,7 +504,6 @@
             </div>
         </div><!-- /.Quick Action Appointments -->
     </div><!-- /.3rd row -->
-
     <div class="col-lg-6">
         <!--To Do List-->
         <div class="widget">
@@ -553,4 +558,4 @@
             </div>
         </div>
     </div><!--/.To Do List-->
-    </div>
+</div>

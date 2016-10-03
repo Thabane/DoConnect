@@ -1,6 +1,8 @@
 ﻿app.controller("MessagesController", ["$scope", "MessagesService", "$interval", "$filter", "$ngBootbox",
     function ($scope, MessagesService, $interval, $filter, $ngBootbox) {
 
+        
+        
         var init_ControlSettings = function () {
             angular.element("#div_Compose_Message").hide();
             angular.element("#div_Sent_list").hide();
@@ -36,11 +38,16 @@
 
         //Select All Messages
         $scope.GetAllMessages = function () {
-
-            alert("called GetAllMessages(sessionStorage.Email) " + sessionStorage.Email);
-            MessagesService.GetAllMessages(sessionStorage.Email).then(function (result) {
-                $scope.Messages = result.data;
+            MessagesService.SessionData().success(function (result) {
+                sessionStorage.SessionData_User_ID      = result["User_ID"];
+                sessionStorage.SessionData_FirstName    = result["FirstName"];
+                sessionStorage.SessionData_LastName     = result["LastName"];
+                sessionStorage.SessionData_Email        = result["Email"];
+                MessagesService.GetAllMessages(sessionStorage.SessionData_User_ID).then(function (result) {
+                    $scope.Messages = result.data;
+                });
             });
+            
         };
         $scope.GetAllMessages();
 
@@ -48,8 +55,8 @@
         $scope.ViewMessage = function (ID) {
             MessagesService.GetMessageByID(ID).success(function (result) {
                 $scope.ID = result["ID"];
-                $scope.Sender = result["Sender"];
-                $scope.Receiver = result["Receiver"];
+                $scope.Sender = result["SenderEmail"];
+                $scope.Receiver = result["ReceiverEmail"];
                 $scope.Subject = result["Subject"];
                 $scope.Description = result["Description"];
                 $scope.Date = result["Date"];

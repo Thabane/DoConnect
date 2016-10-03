@@ -13,7 +13,7 @@ namespace DocConnectApp.Controllers
     {
         [HttpGet]
         [Route("api/Messages/GetAllMessages/{Receiver}")]
-        public List<Messages> GetAllMessages(string Receiver)
+        public List<Messages> GetAllMessages(int Receiver)
         {
             DataLayer dtLayer = new DataLayer();
             return dtLayer.GetAllMessages(Receiver);
