@@ -88,5 +88,24 @@ namespace DataClient
                 return response;
             }
         }
+
+        public async Task<string> GetRiskFactors()
+        {
+            string url = "https://api.infermedica.com/v2/risk_factors";
+            WebRequest myReq = WebRequest.Create(url);
+
+            myReq.Headers["app_id"] = ConfigurationManager.AppSettings["app_id"];
+            myReq.Headers["app_key"] = ConfigurationManager.AppSettings["app_key"];
+            myReq.ContentType = "application/json";
+
+            WebResponse wr = await myReq.GetResponseAsync();
+            Stream receiveStream = wr.GetResponseStream();
+
+            StreamReader reader = new StreamReader(receiveStream, Encoding.UTF8);
+            string content = reader.ReadToEnd();
+            Console.WriteLine(content);
+            var json = content;
+            return json;
+        }
     }
 }
