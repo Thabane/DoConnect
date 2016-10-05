@@ -131,9 +131,13 @@ app.config(
                 templateUrl: "App/Views/Login/Login.html",
                 controller: "LoginController"
             })
+            .when("/DiagnosisExpertSystemProcess", {
+                    templateUrl: "App/Views/DiagnosisExpertSystem/DiagnosisExpertSystemProcess.html",
+                    controller: "DiagnosisExpertSystemProcessController"
+            })
             .otherwise({
                 redirectTo: "/Dashboard"
-        })
+            })
         ;
 
         $locationProvider.html5Mode({
