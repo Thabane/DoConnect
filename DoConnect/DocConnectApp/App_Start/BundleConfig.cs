@@ -60,7 +60,7 @@ namespace DocConnectApp
                       "~/Scripts/dtPicker/bootstrap-datetimepicker.js",
                       "~/Scripts/Alert_Confirm_Prompt_Modal/bootbox.js",
                       "~/Scripts/Alert_Confirm_Prompt_Modal/ngBootbox.js",
-                      "~/Scripts/angular-cookies.min.js"
+                      "~/Scripts/angular-chart/loader.js"
                       ));
         }
     }

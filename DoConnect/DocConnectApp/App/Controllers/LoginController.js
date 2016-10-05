@@ -1,5 +1,5 @@
-﻿app.controller("LoginController", ["$scope", "LoginService", "$interval", "$cookies", "$cookieStore",
-    function ($scope, LoginService, $interval, $cookies, $cookieStore) {
+﻿app.controller("LoginController", ["$scope", "LoginService", "$interval",
+    function ($scope, LoginService, $interval) {
         
         $scope.IsLogedIn = false;
         angular.element("#wrapper").hide();
@@ -16,8 +16,6 @@
                     if (d.data.Email != null) {
                         $scope.IsLogedIn = true;
                         angular.element("#wrapper").show();
-
-                        //$scope.GetUserDetails(d.data.ID);
                         window.location.href = "Home/Index";
                     }
                     else {
@@ -25,14 +23,4 @@
                     }
                 });
         };
-
-        //$scope.GetUserDetails = function (User_ID) {
-        //    LoginService.GetUserDetailsByUser_ID(User_ID).success(function (result) {
-        //        sessionStorage.ID = result["ID"];
-        //        sessionStorage.User_ID = result["User_ID"];
-        //        sessionStorage.FirstName = result["FirstName"];
-        //        sessionStorage.LastName = result["LastName"];
-        //        sessionStorage.Email = result["Email"];
-        //    });
-        //};
 }]);

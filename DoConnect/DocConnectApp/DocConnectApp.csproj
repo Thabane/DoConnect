@@ -230,6 +230,7 @@
     <Content Include="Images\Logo\doctorIcon.ico" />
     <Content Include="Images\Logo\doctorIcon.png" />
     <Content Include="Scripts\Alert_Confirm_Prompt_Modal\Alert_Confirm_Prompt_Modal.js" />
+    <Content Include="Scripts\angular-chart\loader.js" />
     <Content Include="Scripts\angular-cookies.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

@@ -13,17 +13,29 @@ using System.Globalization;
 namespace DocConnectApp.Controllers
 {
     public class DashboardController : ApiController
-    {   
-        //[HttpGet]
-        //[Route("api/Employees/GetAllEmployees")]
-        //public Login GetAllEmployees()
-        //{
-        //    Login UserData = new Login();
-        //    UserData.User_ID = Convert.ToInt32(Session["User_ID"]);
-        //    //UserData.FirstName = Convert.ToString(Session["FirstName"]);
-        //    //UserData.LastName  = Convert.ToString(Session["LastName"]);
-        //    UserData.Email = Convert.ToString(Session["Email"]);
-        //    return UserData;
-        //}
+    {
+        [HttpGet]
+        [Route("api/Dashboard/GetRevenueSummary_Today/{Practice_ID}")]
+        public Invoice GetRevenueSummary_Today(int Practice_ID)
+        {
+            DataLayer dtLayer = new DataLayer();
+            return dtLayer.GetRevenueSummary_Today(Practice_ID);
+        }
+
+        [HttpGet]
+        [Route("api/Dashboard/GetRevenueSummary_Week/{Practice_ID}")]
+        public Invoice GetRevenueSummary_Week(int Practice_ID)
+        {
+            DataLayer dtLayer = new DataLayer();
+            return dtLayer.GetRevenueSummary_Week(Practice_ID);
+        }
+
+        [HttpGet]
+        [Route("api/Dashboard/GetNumPatientsByPractice/{Practice_ID}")]
+        public Invoice GetNumPatientsByPractice(int Practice_ID)
+        {
+            DataLayer dtLayer = new DataLayer();
+            return dtLayer.GetNumPatientsByPractice(Practice_ID);
+        }
     }
 }

@@ -131,5 +131,11 @@ namespace DataClient
         bool NewMessages(int Sender, int Receiver, string Subject, string Description, string Date);
         bool DeleteMessages(int ID);
         #endregion
+
+        #region Dashboard        
+        Invoice GetRevenueSummary_Today(int Practice_ID);
+        Invoice GetRevenueSummary_Week(int Practice_ID);
+        Invoice GetNumPatientsByPractice(int Practice_ID);
+        #endregion
     }
 }

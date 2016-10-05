@@ -10,8 +10,7 @@
         };
 
         $scope.GetAllPractices = function () {
-            PracticesService.GetAllPractices().then
-            (function (result) {
+            PracticesService.GetAllPractices().then(function (result) {
                 $scope.Practices = result.data;
             });
         };

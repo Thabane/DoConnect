@@ -1,561 +1,155 @@
-﻿<div id="page-wrapper">
-    <div class="row">
-        <div class="col-lg-12">
-            <h2 class="page-header text-primary">Dashboard</h2>
-        </div>
-    </div>
-
-    <!-- first row -->
-    <div class="row">
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-globe fa-5x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge">12</div>
-                            <div>Site Visits</div>
-                        </div>
-                    </div>
-                </div>
-                <a href="#">
-                    <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
+﻿<div id="page-wrapper" ng-controller="DashboardController">
+    <div ng-show="SessionData_User_ID == '2'" dir-paginate="Practice in Practices | filter:search | orderBy:sortKey:reverse | itemsPerPage:1" ng-init="GetNumPatientsByPractice(Practice.ID)">
+        
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="page-header text-primary">Dashboard: {{Practice.Name}}</h2>
             </div>
         </div>
-
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-green">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-user-plus fa-5x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge">12</div>
-                            <div>New Patients</div>
+        
+        <!-- first row -->
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div id="donutchart" style="width: 200px; height: 200px;"></div>
                         </div>
                     </div>
-                </div>
-                <a href="/patients">
-                    <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-yellow">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-shopping-cart fa-5x"></i>
+                    <a href="#">
+                        <div class="panel-footer">
+                            <span class="pull-left">View Details</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
                         </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge">124</div>
-                            <div>New Orders!</div>
-                        </div>
-                    </div>
-                </div>
-                <a href="#">
-                    <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-red">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-support fa-5x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge">13</div>
-                            <div>Support Tickets!</div>
-                        </div>
-                    </div>
-                </div>
-                <a href="#">
-                    <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div><!-- /.first row -->
-
-    <!-- 2nd row -->
-    <div class="row">
-        <!-- Appointment Statistics Pie Chart -->
-        <div class="col-lg-6">
-            <div class="panel panel-default">
-                <div class="panel-heading"><i class="fa fa-bell fa-fw"></i>Appointment Statistics</div>
-                <div class="panel-body">
-                    <div id="piechart_3d" style="width: 400px; height: 200px;"></div>
+                    </a>
                 </div>
             </div>
-        </div>
-        <!-- /.Appointment Statistics Pie Chart -->
-
-        <!-- Sales Summary Graph-->
-        <div class="col-lg-6 col-md-6 col-sm-6">
-            <div class="portlet light" style="border: 1px solid #ddd; border-radius: 4px;">
-                <div class="portlet-title">
-                    <div class="caption caption-md"><i class="icon-bar-chart font-dark hide"></i>
-                        <span class="caption-subject font-green-steel uppercase bold">Revenue Summary</span>
-                        <span class="caption-helper hide">weekly stats...</span>
-                    </div>
-                    <div class="actions">
-                        <div class="btn-group btn-group-devided" data-toggle="buttons">
-                            <label class="btn btn-transparent btn-no-border blue-oleo btn-outline btn-circle btn-sm active" style="width: 60px;">
-                                <input name="options" class="toggle" id="option1" type="radio">Today
-                            </label>
-                            <label class="btn btn-transparent btn-no-border blue-oleo btn-outline btn-circle btn-sm" style="width: 60px;">
-                                <input name="options" class="toggle" id="option2" type="radio">Week
-                            </label>
-                            <label class="btn btn-transparent btn-no-border blue-oleo btn-outline btn-circle btn-sm" style="width: 60px;">
-                                <input name="options" class="toggle" id="option2" type="radio">Month
-                            </label>
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-green">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-user-plus fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge">12</div>
+                                <div>New Patients</div>
+                            </div>
                         </div>
                     </div>
+                    <a href="/patients">
+                        <div class="panel-footer">
+                            <span class="pull-left">View Details</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
                 </div>
-                <div class="portlet-body">
-                    <div class="row list-separated">
-                        <div class="col-md-3 col-sm-3 col-xs-6">
-                            <div class="font-grey-mint font-sm"> Total Sales </div>
-                            <div class="uppercase font-hg font-red-flamingo">13,760<span class="font-lg font-grey-mint">$</span></div>
-                        </div>
-                        <div class="col-md-3 col-sm-3 col-xs-6">
-                            <div class="font-grey-mint font-sm"> Revenue </div>
-                            <div class="uppercase font-hg theme-font">5,760<span class="font-lg font-grey-mint">$</span></div>
-                        </div>
-                        <div class="col-md-3 col-sm-3 col-xs-6">
-                            <div class="font-grey-mint font-sm"> Expenses </div>
-                            <div class="uppercase font-hg font-purple">11,760<span class="font-lg font-grey-mint">$</span></div>
-                        </div>
-                        <div class="col-md-3 col-sm-3 col-xs-6">
-                            <div class="font-grey-mint font-sm"> Growth </div>
-                            <div class="uppercase font-hg font-blue-sharp">9,760<span class="font-lg font-grey-mint">$</span></div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-yellow">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-shopping-cart fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge">124</div>
+                                <div>New Orders!</div>
+                            </div>
                         </div>
                     </div>
-                    <ul class="list-separated list-inline-xs hide">
-                        <li>
-                            <div class="font-grey-mint font-sm"> Total Sales </div>
-                            <div class="uppercase font-hg font-red-flamingo">13,760<span class="font-lg font-grey-mint">$</span></div>
-                        </li>
-                        <li> </li>
-                        <li class="border">
-                            <div class="font-grey-mint font-sm"> Revenue </div>
-                            <div class="uppercase font-hg theme-font">4,760<span class="font-lg font-grey-mint">$</span></div>
-                        </li>
-                        <li class="divider"> </li>
-                        <li>
-                            <div class="font-grey-mint font-sm"> Expenses </div>
-                            <div class="uppercase font-hg font-purple">11,760<span class="font-lg font-grey-mint">$</span></div>
-                        </li>
-                        <li class="divider"> </li>
-                        <li>
-                            <div class="font-grey-mint font-sm"> Growth </div>
-                            <div class="uppercase font-hg font-blue-sharp">9,760<span class="font-lg font-grey-mint">$</span></div>
-                        </li>
-                    </ul>
-                    <!-- / Vertical Bar Graph -->
-                    <div class="container" style="width:450px"> <!-- ref http://www.jqueryrain.com/?NhzHB5Vf -->                   
-                        <div class="charts charts--vertical">
-                            <div class="charts__chart chart--p80  chart--blue    chart--hover"><span class="charts__percent"></span></div>
-
-                            <div class="charts__chart chart--p60  chart--green   chart--hover"><span class="charts__percent"></span></div>
-
-                            <div class="charts__chart chart--p40  chart--red     chart--hover"><span class="charts__percent"></span></div>
-
-                            <div class="charts__chart chart--p20  chart--yellow  chart--hover"><span class="charts__percent"></span></div>
-                        </div><!-- /.Vertical Bar Graph -->
+                    <a href="#">
+                        <div class="panel-footer">
+                            <span class="pull-left">View Details</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-red">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-support fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge">13</div>
+                                <div>Support Tickets!</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#">
+                        <div class="panel-footer">
+                            <span class="pull-left">View Details</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div><!-- /.first row -->
+        <!-- 2nd row -->
+        <div class="row">
+            <!-- Appointment Statistics Pie Chart -->
+            <div class="col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><i class="fa fa-bell fa-fw"></i>Monthly Income Stats</div>
+                    <div class="panel-body">
+                        <div id="piechart" style="width: 400px; height: 200px;"></div>
                     </div>
                 </div>
             </div>
-        </div><!-- /.Sales Summary -->
-    </div><!-- /.2nd row -->
-    <!--
-    <div class="circles-wrp" style="position: relative; display: inline-block;"> 
-        <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80">
-            <path fill="transparent" stroke="#D3B6C6" stroke-width="7" d="M 39.992565928065126 3.500000757060633 A 36.5 36.5 0 1 1 39.949302232260386 3.500035209108127 Z"></path>
-            <path fill="transparent" stroke="#4B253A" stroke-width="7" d="M 39.992565928065126 3.500000757060633 A 36.5 36.5 0 0 1 59.07174573163989 71.12103010421852 "></path>
-        </svg>
-        <div class="circles-text" style="position: absolute; top: 0px; left: 0px; text-align: center; width: 100%; font-size: 28px; height: 80px; line-height: 80px;">
-            <span class="circles-integer">0</span>.<span class="circles-decimals">0</span>
-        </div>
-    </div>
-    <script>
-        Circles.create({
-            id:           'circles-1',
-            radius:       2,
-            value:        0,
-            maxValue:     3,
-            width:        10,
-            text:         function(value){return value + '%';},
-            colors:       ['#D3B6C6', '#4B253A'],
-            duration:     2,
-            wrpClass:     'circles-wrp',
-            textClass:    'circles-text',
-            styleWrapper: true,
-        styleText:    true
-        })
-    </script>-->
-
-    <button onclick="View_NotificationsPanel_Modal()">View_NotificationsPanel_Modal</button>
-    <!-- 3rd row -->
-    <div class="row">
-        <!-- /.Notifications Panel -->
-        <div id="View_NotificationsPanel_Modal" class="modal fade">
-            <form name="Form">
-                <div class="modal-dialog" style="width:60%">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <div class="panel panel-default">
-                                <div class="panel-heading"><i class="fa fa-bell fa-fw"></i> Notifications Panel</div>
-                                <div class="panel-body">
-                                    <div class="list-group">
-                                        <a class="list-group-item" href="#">
-                                            <i class="fa fa-comment fa-fw"></i> New Comment
-                                            <span class="pull-right text-muted small"><em>4 minutes ago</em></span>
-                                        </a>
-                                        <a class="list-group-item" href="#">
-                                            <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                            <span class="pull-right text-muted small"><em>12 minutes ago</em></span>
-                                        </a>
-                                        <a class="list-group-item" href="#">
-                                            <i class="fa fa-envelope fa-fw"></i> Message Sent
-                                            <span class="pull-right text-muted small"><em>27 minutes ago</em></span>
-                                        </a>
-                                        <a class="list-group-item" href="#">
-                                            <i class="fa fa-tasks fa-fw"></i> New Task
-                                            <span class="pull-right text-muted small"><em>43 minutes ago</em></span>
-                                        </a>
-                                        <a class="list-group-item" href="#">
-                                            <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                                            <span class="pull-right text-muted small"><em>11:32 AM</em></span>
-                                        </a>
-                                        <a class="list-group-item" href="#">
-                                            <i class="fa fa-bolt fa-fw"></i> Server Crashed!
-                                            <span class="pull-right text-muted small"><em>11:13 AM</em></span>
-                                        </a>
-                                        <a class="list-group-item" href="#">
-                                            <i class="fa fa-warning fa-fw"></i> Server Not Responding
-                                            <span class="pull-right text-muted small"><em>10:57 AM</em></span>
-                                        </a>
-                                        <a class="list-group-item" href="#">
-                                            <i class="fa fa-shopping-cart fa-fw"></i> New Order Placed
-                                            <span class="pull-right text-muted small"><em>9:49 AM</em></span>
-                                        </a>
-                                    </div><!-- /.list-group -->
-                                    <a class="btn btn-default btn-block" href="#">View All Alerts</a>
-                                </div>
+            <!-- /.Appointment Statistics Pie Chart -->
+            <!-- Sales Summary Graph-->
+            <div class="col-md-6" ng-init="GetRevenueSummary_Today(Practice.ID)">
+                <div class="portlet light" style="border: 1px solid #ddd; border-radius: 4px;">
+                    <div class="portlet-title">
+                        <div class="caption caption-md">
+                            <i class="icon-bar-chart font-dark hide"></i>
+                            <span class="caption-subject font-green-steel uppercase bold">Revenue Summary</span>
+                            <span class="caption-helper hide">weekly stats...</span>
+                        </div>
+                        <div class="actions">
+                            <div class="btn-group btn-group-devided" data-toggle="buttons">
+                                <label ng-click="GetRevenueSummary_Today(Practice.ID)" class="btn btn-transparent btn-no-border blue-oleo btn-outline btn-circle btn-sm active" style="width: 60px;">
+                                    <input name="options" class="toggle" id="option1" type="radio">Today
+                                </label>
+                                <label ng-click="GetRevenueSummary_Week(Practice.ID)" class="btn btn-transparent btn-no-border blue-oleo btn-outline btn-circle btn-sm" style="width: 60px;">
+                                    <input name="options" class="toggle" id="option2" type="radio">Week
+                                </label>
+                                <label ng-click="GetRevenueSummary_Month(Practice.ID)" class="btn btn-transparent btn-no-border blue-oleo btn-outline btn-circle btn-sm" style="width: 60px;">
+                                    <input name="options" class="toggle" id="option2" type="radio">Month
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <div class="row list-separated">
+                            <div class="col-md-3">
+                                <div class="font-grey-mint font-sm"> Total Sales </div>
+                                <div class="uppercase font-hg font-red-flamingo"><span class="font-lg font-grey-mint">R {{Total_Summary}}</span></div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="font-grey-mint font-sm"> Revenue </div>
+                                <div class="uppercase font-hg theme-font"><span class="font-lg font-grey-mint">R {{TotalAmountPaid_Summary - Amount_Summary}}</span></div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="font-grey-mint font-sm"> Expenses </div>
+                                <div class="uppercase font-hg font-purple"><span class="font-lg font-grey-mint">R {{Amount_Summary}}</span></div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </form>
-        </div><!-- /.Notifications Panel -->
-        <!-- Quick Action Appointments-->
-        <div class="col-md-6 col-sm-6">
-            <div class="portlet light" style="border: 1px solid #ddd; border-radius: 4px;">
-                <div class="portlet-title tabbable-line">
-                    <div class="caption">
-                        <i class="icon-social-twitter font-dark hide"></i>
-                        <span class="caption-subject font-green-steel uppercase bold">Appointments</span>
-                    </div>
-                    <ul class="nav nav-pills" style="float: right;">
-                        <li role="presentation" class="active"><a href="#tab_actions_pending" data-toggle="tab"> Pending </a></li>
-                        <li role="presentation"><a href="#tab_actions_completed" data-toggle="tab"> Approved </a></li>
-                    </ul>
-                </div>
-                <div class="portlet-body">
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="tab_actions_pending">
-                            <!-- BEGIN: Actions -->
-                            <div class="mt-actions">
-                                <div class="mt-action">
-                                    <div class="mt-action-body">
-                                        <div class="mt-action-row">
-                                            <div class="mt-action-info ">
-                                                <div class="mt-action-details ">
-                                                    <span class="mt-action-author">Natasha Kim</span>
-                                                    <p class="mt-action-desc">Dummy text of the printing</p>
-                                                </div>
-                                            </div>
-                                            <div class="mt-action-datetime ">
-                                                <span class="mt-action-date">3 jun</span>
-                                                <span class="mt=action-time">9:30-13:00</span>
-                                            </div>
-                                            <div class="mt-action-buttons ">
-                                                <div class="btn-group btn-group-circle">
-                                                    <button class="btn btn-outline green btn-sm" type="button">Appove</button>
-                                                    <button class="btn btn-outline red btn-sm" type="button">Reject</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mt-action">
-                                    <div class="mt-action-body">
-                                        <div class="mt-action-row">
-                                            <div class="mt-action-info ">
-                                                <div class="mt-action-details ">
-                                                    <span class="mt-action-author">Natasha Kim</span>
-                                                    <p class="mt-action-desc">Dummy text of the printing</p>
-                                                </div>
-                                            </div>
-                                            <div class="mt-action-datetime ">
-                                                <span class="mt-action-date">3 jun</span>
-                                                <span class="mt=action-time">9:30-13:00</span>
-                                            </div>
-                                            <div class="mt-action-buttons ">
-                                                <div class="btn-group btn-group-circle">
-                                                    <button class="btn btn-outline green btn-sm" type="button">Appove</button>
-                                                    <button class="btn btn-outline red btn-sm" type="button">Reject</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mt-action">
-                                    <div class="mt-action-body">
-                                        <div class="mt-action-row">
-                                            <div class="mt-action-info ">
-                                                <div class="mt-action-details ">
-                                                    <span class="mt-action-author">Natasha Kim</span><p class="mt-action-desc">Dummy text of the printing</p>
-                                                </div>
-                                            </div>
-                                            <div class="mt-action-datetime ">
-                                                <span class="mt-action-date">3 jun</span><span class="mt=action-time">9:30-13:00</span>
-                                            </div>
-                                            <div class="mt-action-buttons ">
-                                                <div class="btn-group btn-group-circle">
-                                                    <button class="btn btn-outline green btn-sm" type="button">Appove</button>
-                                                    <button class="btn btn-outline red btn-sm" type="button">Reject</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mt-action">
-                                    <div class="mt-action-body">
-                                        <div class="mt-action-row">
-                                            <div class="mt-action-info ">
-                                                <div class="mt-action-details ">
-                                                    <span class="mt-action-author">Natasha Kim</span><p class="mt-action-desc">Dummy text of the printing</p>
-                                                </div>
-                                            </div>
-                                            <div class="mt-action-datetime ">
-                                                <span class="mt-action-date">3 jun</span><span class="mt=action-time">9:30-13:00</span>
-                                            </div>
-                                            <div class="mt-action-buttons ">
-                                                <div class="btn-group btn-group-circle">
-                                                    <button class="btn btn-outline green btn-sm" type="button">Appove</button>
-                                                    <button class="btn btn-outline red btn-sm" type="button">Reject</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mt-action">
-                                    <div class="mt-action-body">
-                                        <div class="mt-action-row">
-                                            <div class="mt-action-info ">
-                                                <div class="mt-action-details ">
-                                                    <span class="mt-action-author">Natasha Kim</span><p class="mt-action-desc">Dummy text of the printing</p>
-                                                </div>
-                                            </div>
-                                            <div class="mt-action-datetime ">
-                                                <span class="mt-action-date">3 jun</span><span class="mt=action-time">9:30-13:00</span>
-                                            </div>
-                                            <div class="mt-action-buttons ">
-                                                <div class="btn-group btn-group-circle">
-                                                    <button class="btn btn-outline green btn-sm" type="button">Appove</button>
-                                                    <button class="btn btn-outline red btn-sm" type="button">Reject</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mt-action">
-                                    <div class="mt-action-body">
-                                        <div class="mt-action-row">
-                                            <div class="mt-action-info ">
-                                                <div class="mt-action-details ">
-                                                    <span class="mt-action-author">Natasha Kim</span><p class="mt-action-desc">Dummy text of the printing</p>
-                                                </div>
-                                            </div>
-                                            <div class="mt-action-datetime ">
-                                                <span class="mt-action-date">3 jun</span><span class="mt=action-time">9:30-13:00</span>
-                                            </div>
-                                            <div class="mt-action-buttons ">
-                                                <div class="btn-group btn-group-circle">
-                                                    <button class="btn btn-outline green btn-sm" type="button">Appove</button>
-                                                    <button class="btn btn-outline red btn-sm" type="button">Reject</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div><!-- END: Actions -->
-                        </div>
-                        <div class="tab-pane" id="tab_actions_completed">
-                            <!-- BEGIN:Completed-->
-                            <div class="mt-actions">
-                                <div class="mt-action">
-                                    <div class="mt-action-body">
-                                        <div class="mt-action-row">
-                                            <div class="mt-action-info ">
-                                                <div class="mt-action-details ">
-                                                    <span class="mt-action-author">Approved</span><p class="mt-action-desc">Dummy text of the printing</p>
-                                                </div>
-                                            </div>
-                                            <div class="mt-action-datetime ">
-                                                <span class="mt-action-date">3 jun</span><span class="mt=action-time">9:30-13:00</span>
-                                            </div>
-                                            <div class="mt-action-buttons ">
-                                                <div class="btn-group btn-group-circle">
-                                                    <button class="btn btn-outline green btn-sm" type="button">Appove</button>
-                                                    <button class="btn btn-outline red btn-sm" type="button">Reject</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mt-action">
-                                    <div class="mt-action-body">
-                                        <div class="mt-action-row">
-                                            <div class="mt-action-info ">
-                                                <div class="mt-action-details ">
-                                                    <span class="mt-action-author">Natasha Kim</span><p class="mt-action-desc">Dummy text of the printing</p>
-                                                </div>
-                                            </div>
-                                            <div class="mt-action-datetime ">
-                                                <span class="mt-action-date">3 jun</span><span class="mt=action-time">9:30-13:00</span>
-                                            </div>
-                                            <div class="mt-action-buttons ">
-                                                <div class="btn-group btn-group-circle">
-                                                    <button class="btn btn-outline green btn-sm" type="button">Appove</button>
-                                                    <button class="btn btn-outline red btn-sm" type="button">Reject</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mt-action">
-                                    <div class="mt-action-body">
-                                        <div class="mt-action-row">
-                                            <div class="mt-action-info ">
-                                                <div class="mt-action-details ">
-                                                    <span class="mt-action-author">Natasha Kim</span><p class="mt-action-desc">Dummy text of the printing</p>
-                                                </div>
-                                            </div>
-                                            <div class="mt-action-datetime ">
-                                                <span class="mt-action-date">3 jun</span><span class="mt=action-time">9:30-13:00</span>
-                                            </div>
-                                            <div class="mt-action-buttons ">
-                                                <div class="btn-group btn-group-circle">
-                                                    <button class="btn btn-outline green btn-sm" type="button">Appove</button>
-                                                    <button class="btn btn-outline red btn-sm" type="button">Reject</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mt-action">
-                                    <div class="mt-action-body">
-                                        <div class="mt-action-row">
-                                            <div class="mt-action-info ">
-                                                <div class="mt-action-details ">
-                                                    <span class="mt-action-author">Natasha Kim</span><p class="mt-action-desc">Dummy text of the printing</p>
-                                                </div>
-                                            </div>
-                                            <div class="mt-action-datetime ">
-                                                <span class="mt-action-date">3 jun</span><span class="mt=action-time">9:30-13:00</span>
-                                            </div>
-                                            <div class="mt-action-buttons ">
-                                                <div class="btn-group btn-group-circle">
-                                                    <button class="btn btn-outline green btn-sm" type="button">Appove</button>
-                                                    <button class="btn btn-outline red btn-sm" type="button">Reject</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div><!-- END: Completed -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div><!-- /.Quick Action Appointments -->
-    </div><!-- /.3rd row -->
-    <div class="col-lg-6">
-        <!--To Do List-->
-        <div class="widget">
-            <div class="widget-header"><i class="icon-check"></i><h3>To Do List </h3></div>
-            <div class="widget-content">
-                <ul class="to-do-list ui-sortable" id="sortable-todo">
-                    <li class="clearfix">
-                        <span class="drag-marker"><i></i></span>
-                        <div class="todo-check pull-left"><input id="todo-check" type="checkbox" value="None"><label for="todo-check"></label></div>
-                        <p class="todo-title"> Lorem ipsum dolor sit amet, consectetuer adipiscing </p>
-                        <div class="todo-actionlist pull-right clearfix"> <a class="todo-done" href="#"><i class="fa fa-check"></i></a> <a class="todo-edit" href="#"><i class="fa fa-pencil"></i></a> <a class="todo-remove"><i class="fa fa-times"></i></a></div>
-                    </li>
-                    <li class="clearfix">
-                        <span class="drag-marker"> <i></i> </span>
-                        <div class="todo-check pull-left"><input id="todo-check1" type="checkbox" value="None"><label for="todo-check1"></label></div>
-                        <p class="todo-title"> Lorem ipsum dolor sit amet, consectetuer adipiscing </p>
-                        <div class="todo-actionlist pull-right clearfix"> <a class="todo-done" href="#"><i class="fa fa-check"></i></a> <a class="todo-edit" href="#"><i class="fa fa-pencil"></i></a> <a class="todo-remove"><i class="fa fa-times"></i></a> </div>
-                    </li>
-                    <li class="clearfix">
-                        <span class="drag-marker"> <i></i> </span>
-                        <div class="todo-check pull-left"><input id="todo-check2" type="checkbox" value="None"><label for="todo-check2"></label></div>
-                        <p class="todo-title"> Lorem ipsum dolor sit amet, consectetuer adipiscing </p>
-                        <div class="todo-actionlist pull-right clearfix"> <a class="todo-done" href="#"><i class="fa fa-check"></i></a> <a class="todo-edit" href="#"><i class="fa fa-pencil"></i></a> <a class="todo-remove"><i class="fa fa-times"></i></a> </div>
-                    </li>
-                    <li class="clearfix">
-                        <span class="drag-marker"> <i></i> </span>
-                        <div class="todo-check pull-left"><input id="todo-check3" type="checkbox" value="None"><label for="todo-check3"></label></div>
-                        <p class="todo-title"> Lorem ipsum dolor sit amet, consectetuer adipiscing </p>
-                        <div class="todo-actionlist pull-right clearfix"> <a class="todo-done" href="#"><i class="fa fa-check"></i></a> <a class="todo-edit" href="#"><i class="fa fa-pencil"></i></a> <a class="todo-remove"><i class="fa fa-times"></i></a> </div>
-                    </li>
-                    <li class="clearfix">
-                        <span class="drag-marker"> <i></i> </span>
-                        <div class="todo-check pull-left"><input id="todo-check4" type="checkbox" value="None"><label for="todo-check4"></label></div>
-                        <p class="todo-title"> Lorem ipsum dolor sit amet, consectetuer adipiscing </p>
-                        <div class="todo-actionlist pull-right clearfix"> <a class="todo-done" href="#"><i class="fa fa-check"></i></a> <a class="todo-edit" href="#"><i class="fa fa-pencil"></i></a> <a class="todo-remove"><i class="fa fa-times"></i></a> </div>
-                    </li>
-                    <li class="clearfix">
-                        <span class="drag-marker"> <i></i> </span>
-                        <div class="todo-check pull-left"><input id="todo-check5" type="checkbox" value="None"><label for="todo-check5"></label></div>
-                        <p class="todo-title"> Lorem ipsum dolor sit amet, consectetuer adipiscing </p>
-                        <div class="todo-actionlist pull-right clearfix"> <a class="todo-done" href="#"><i class="fa fa-check"></i></a> <a class="todo-edit" href="#"><i class="fa fa-pencil"></i></a> <a class="todo-remove"><i class="fa fa-times"></i></a> </div>
-                    </li>
-                </ul>
-                <div class="todo-action-bar">
-                    <!--row start-->
-                    <div class="row">
-                        <div class="col-xs-3 btn-todo-select"><button class="btn btn-info" type="submit"><i class="fa fa-check"></i> Select All</button></div>
-                        <div class="col-xs-6 todo-search-wrap"><input class="form-control todo-search pull-right" type="text" placeholder="Search"></div>
-                        <div class="col-xs-3 btn-add-task"><button class="btn btn-default btn-success" type="submit"><i class="icon-plus"></i> Add Task</button></div>
-                    </div><!--row end-->
-                </div>
-            </div>
+            </div><!-- /.Sales Summary -->
+        </div><!-- /.2nd row -->
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <dir-pagination-controls class="pull-right" max-size="5" direction-links="true" boundary-links="true" style="margin-right: 20px;"></dir-pagination-controls>
         </div>
-    </div><!--/.To Do List-->
+    </div>
 </div>
