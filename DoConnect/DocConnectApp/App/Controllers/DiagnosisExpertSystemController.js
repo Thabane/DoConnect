@@ -24,8 +24,7 @@
                 $scope.response = result.data;
             });
         };
-
-
+        
         //$scope.GetFiveRandomSymptoms();
         $scope.GetAllSymptoms();
         //$scope.GetRiskFactors();
