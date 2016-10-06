@@ -3,14 +3,45 @@
         <div class="col-lg-12">
             <h2 class="page-header text-primary">Expert System</h2>
         </div>
+        <div class="col-lg-6">
+            <h2> Question</h2>
 
-        <h4> Questions</h4>
-        <br />
-        <form>
-            <label>{{$scope.DiagnosisResponse.question.text}}</label>
+            <h4>{{DiagnosisResponse.question.text}}</h4>
 
-            <button type="button" class="btn btn-default">Check</button>
+            <form ng-if="DiagnosisResponse.question.type == 'single'">                
+                <div class="row">
+                    <div ng-repeat="ans in DiagnosisResponse.question.items[0].choices">
+                        <button type="button" class="btn btn-block" value="{{ans.id}}">{{ans.label}}</button>
+                    </div>
+                </div>
+            </form>
 
-        </form>
+            <form ng-if="DiagnosisResponse.question.type == 'group_multiple'">
+                <div class="form-group">
+                    <div class="form-check" ng-repeat="item in DiagnosisResponse.question.items">
+                        <label class="form-check-label">
+                            <input type="checkbox" ng-model="item.SELECTED" ng-true-value="1" ng-false-value="0" ng-checked="checkbox == 1"/>
+                            {{item.name}}
+                        </label>
+                    </div>
+                </div>
+            </form>
+
+            <form ng-if="DiagnosisResponse.question.type == 'group_single'">
+
+                        <label class="form-check-label">
+                            This is a group single question! 
+                        </label>
+     
+            </form>
+
+        </div>
+
+        <div class="col-lg-6">
+            <h2> Possible Conditions</h2>
+            <div class="row" ng-repeat="con in DiagnosisResponse.conditions">
+                <a>{{con.name}}</a>
+            </div>
+        </div>
     </div>
 </div>
