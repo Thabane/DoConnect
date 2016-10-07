@@ -18,7 +18,7 @@ namespace TestConsole
     {
         static void Main(string[] args)
         {
-            TestPost();
+            Fire();
             Console.WriteLine("Connected");
             Console.ReadKey();
         }
@@ -111,6 +111,12 @@ namespace TestConsole
             dRequest.evidence.Add(new Evidence() {id = "s_661", choice_id = ChoiceId.present.ToString()});            
             //["s_721", "s_661"]
             DiagnosisResponse res = med.DiagnosePatient(dRequest);
+        }
+
+        public static async void Fire()
+        {
+            Infermedica med = new Infermedica();
+            var hold = await med.GetConditionById("c_10");
         }
 
         

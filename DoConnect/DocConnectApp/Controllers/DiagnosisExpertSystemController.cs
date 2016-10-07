@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using DataClient;
 using Newtonsoft.Json;
@@ -91,6 +92,18 @@ namespace DocConnectApp.Controllers
             var riskFactors = JsonConvert.DeserializeObject<List<RiskFactor>>(result)
 ?? new List<RiskFactor>();
             return riskFactors;
+        }
+
+        [HttpGet]
+        [Route("api/DiagnosisExpertSystem/GetCondition")]
+        public async Task<FullCondition> GetCondition()
+        {
+            var conditionId = HttpContext.Current.Request.QueryString["conId"];
+            Infermedica med = new Infermedica();
+            string result = await med.GetConditionById(conditionId);
+            var condition = JsonConvert.DeserializeObject<FullCondition>(result)
+?? new FullCondition();
+            return condition;
         }
     }
 }

@@ -135,6 +135,10 @@ app.config(
                     templateUrl: "App/Views/DiagnosisExpertSystem/DiagnosisExpertSystemProcess.html",
                     controller: "DiagnosisExpertSystemProcessController"
             })
+            .when("/DiagnosisExpertSystemCondition/:conId", {
+               templateUrl: "App/Views/DiagnosisExpertSystem/DiagnosisExpertSystemCondition.html",
+               controller: "DiagnosisExpertSystemConditionsController"
+            })
             .otherwise({
                 redirectTo: "/Dashboard"
             })

@@ -3,6 +3,11 @@
         function ($http) {
             var globalResponse;
 
+            var GetCondition = function (conId) {
+                condition = $http.get("api/DiagnosisExpertSystem/GetCondition?conId="+ conId);
+                return condition;
+            }
+
             var GetFiveRandomSymptoms = function () {
                 return $http.get("api/DiagnosisExpertSystem/GetFiveRandomSymptoms");
             }
@@ -29,7 +34,8 @@
                 patientDiagnosis: PatientDiagnosis,
                 getAllSymptoms: GetAllSymptoms,
                 getAllRiskFactors: GetAllRiskFactors,
-                getGlobalResponse: GetGlobalResponse
+                getGlobalResponse: GetGlobalResponse,
+                getCondition : GetCondition
             }
         }
     ]);
