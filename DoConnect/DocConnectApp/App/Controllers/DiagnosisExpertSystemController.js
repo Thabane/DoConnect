@@ -21,7 +21,7 @@
         $scope.DianosePatient = function () {
             DiagnosisExpertSystemService.patientDiagnosis($scope.Symptoms).then
             (function (result) {
-                $scope.response = result.data;
+
             });
         };
         

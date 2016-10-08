@@ -14,10 +14,14 @@
             var PatientDiagnosis = function(Symtoms) {
                 var s = {
                     sex: "male",
-                    age: "16",
+                    age: "26",
                     evidence: Symtoms
                 }
                 globalResponse = $http.post("api/DiagnosisExpertSystem/DiagnosePatient", s);
+                return globalResponse;
+            }
+            var PatientDiagnosisReturn = function (Symtoms) {
+                globalResponse = $http.post("api/DiagnosisExpertSystem/DiagnosePatient", Symtoms);
                 return globalResponse;
             }
             var GetAllRiskFactors = function () {
@@ -35,7 +39,8 @@
                 getAllSymptoms: GetAllSymptoms,
                 getAllRiskFactors: GetAllRiskFactors,
                 getGlobalResponse: GetGlobalResponse,
-                getCondition : GetCondition
+                getCondition: GetCondition,
+                patientDiagnosisReturn: PatientDiagnosisReturn
             }
         }
     ]);

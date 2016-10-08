@@ -8,10 +8,10 @@
 
             <h4>{{DiagnosisResponse.question.text}}</h4>
 
-            <form ng-if="DiagnosisResponse.question.type == 'single'">                
+            <form ng-if="DiagnosisResponse.question.type == 'single'">
                 <div class="row">
                     <div ng-repeat="ans in DiagnosisResponse.question.items[0].choices">
-                        <button type="button" class="btn btn-block" value="{{ans.id}}">{{ans.label}}</button>
+                        <button type="button" class="btn btn-block" ng-click="AnswerQuestionSingle(DiagnosisResponse.question.items[0].id,ans.id)">{{ans.label}}</button>
                     </div>
                 </div>
             </form>
@@ -24,23 +24,28 @@
                             {{item.name}}
                         </label>
                     </div>
+                    <button type="button" class="btn btn-block" ng-click="AnswerQuestionGroupMutiple(DiagnosisResponse.question.items)">Answer</button>
                 </div>
             </form>
 
             <form ng-if="DiagnosisResponse.question.type == 'group_single'">
 
-                        <label class="form-check-label">
-                            This is a group single question! 
-                        </label>
-     
+                <div class="row" ng-repeat="item in DiagnosisResponse.question.items">
+                    <label class="custom-control custom-radio">
+                        <input name="radio" ng-model="item.SELECTED" ng-value="item.id" class="custom-control-input">
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">{{item.name}}</span>
+                    </label>
+                </div>
+
             </form>
 
         </div>
 
         <div class="col-lg-6">
             <h2> Possible Conditions</h2>
-            <div class="row" ng-repeat="con in DiagnosisResponse.conditions">
-                <a href="#">{{con.name}}</a>
+            <div class="row" ng-repeat="con in DiagnosisResponse.conditions | orderBy: -DiagnosisResponse.probability">
+                <a class="btn btn-block" href="#">{{con.name}}</a>
             </div>
         </div>
     </div>

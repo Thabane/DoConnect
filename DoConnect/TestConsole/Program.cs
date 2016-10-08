@@ -18,7 +18,7 @@ namespace TestConsole
     {
         static void Main(string[] args)
         {
-            Fire();
+            TestPost();
             Console.WriteLine("Connected");
             Console.ReadKey();
         }
