@@ -44,31 +44,31 @@
 
                     var options = {
                         title: 'My Daily Activities',
-                        legend: 'none',
+                        pieSliceText: 'value',
                         is3D: true
                     };
-
                     var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
                     chart.draw(data, options);
                 }
 
-                function drawChart() {
-                    var data_TotalNumOfVisits = google.visualization.arrayToDataTable([
-                      ['Task', 'Hours per Day'],
-                      ['Total Visits', $scope.TotalNumOfVisits]
-                    ]);
+                //function drawChart() {
+                //    var data_TotalNumOfVisits = google.visualization.arrayToDataTable([
+                //      ['Task', 'Hours per Day'],
+                //      ['Total Visits', $scope.TotalNumOfVisits]
+                //    ]);
 
-                    var options = {
-                        pieHole: 0.4,
-                        left:0,top:0,
-                        legend: 'none',
-                        is3D: true
-                    };
+                //    var options = {
+                //        pieHole: 0.4,
+                //        left:0,top:0,
+                //        legend: 'none',
+                //        is3D: true
+                //    };
 
-                    var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
-                    chart.draw(data_TotalNumOfVisits, options);
-                }
+                //    var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+                //    chart.draw(data_TotalNumOfVisits, options);
+                //}
+
+                
             });
         };
 
@@ -99,6 +99,112 @@
                 $scope.TotalAmountPaid_Summary = result.data["AmountPaid"];
                 $scope.TotalBalanceOwing_Summary = result.data["BalanceOwing"];
                 $scope.Amount_Summary = result.data["Amount"];
+            });
+        };
+
+        $scope.Consulations_Visits = function (Practice_ID) {
+            DashboardService.Consulations_Visits(Practice_ID).then(function (result) {
+                
+                DashboardService.Appointment_Stats(Practice_ID).then(function (result_Appointment_Stats) {
+                
+                var Consulations_Visits = [];
+
+                for (var i = 0; i < result.data.length; i++) {
+                    Consulations_Visits.push([result.data[i]["Month"], result.data[i]["TotalNumOfVisits"], result_Appointment_Stats.data[i]["TotalNumOfVisits"]]);
+                }
+
+                //Line Graph- TotalNumOfVisits per Day Per Month
+                google.charts.load('current', { 'packages': ['line'] });
+                google.charts.setOnLoadCallback(drawChart_TotalNumOfVisits);
+
+                function drawChart_TotalNumOfVisits() {
+
+                    var data = new google.visualization.DataTable();
+                    data.addColumn('string', 'Month (2016)');
+                    data.addColumn('number', 'Number of consultations');
+                    data.addColumn('number', 'Number of appointments');
+
+                    data.addRows(Consulations_Visits);
+                    var options = {
+                        chart: {
+                            title: 'Consultation & Appointment Stats'
+                        },
+                        legend: { position: 'bottom' },
+                        width: 400,
+                        height: 300
+                    };
+
+                    var chart = new google.charts.Line(document.getElementById('linechart_material'));
+
+                    chart.draw(data, options);
+                }
+
+                });
+            });
+        };
+
+        $scope.displayedDiv = 1;
+        $scope.ShowPendingAppDiv = function (Practice_ID) {
+            $scope.GetPendingAppointmentsByPracticeID(Practice_ID);
+            angular.element("#tab_actions_pending").show();
+            angular.element("#tab_actions_approved").hide();
+            angular.element("#tab_actions_rejected").hide();
+            $scope.displayedDiv = 1;
+        };
+        $scope.ShowApprovedAppDiv = function (Practice_ID) {
+            $scope.GetAppovedAppointmentsByPracticeID(Practice_ID);
+            angular.element("#tab_actions_pending").hide();
+            angular.element("#tab_actions_approved").show();
+            angular.element("#tab_actions_rejected").hide();
+            $scope.displayedDiv = 2;
+        };
+        $scope.ShowRejectedAppDiv = function (Practice_ID) {
+            $scope.GetRejectedAppointmentsByPracticeID(Practice_ID);
+            angular.element("#tab_actions_pending").hide();
+            angular.element("#tab_actions_approved").hide();
+            angular.element("#tab_actions_rejected").show();
+            $scope.displayedDiv = 3;
+        };
+        
+        $scope.GetPendingAppointmentsByPracticeID = function (Practice_ID) {
+            DashboardService.GetPendingAppointmentsByPracticeID(Practice_ID).then(function (result) {
+                angular.element("#tab_actions_pending").show();
+                $scope.PendingAppointments = result.data;
+                $scope.PendingAppointments_Value = $scope.PendingAppointments.length;
+            });
+        };
+
+        $scope.GetAppovedAppointmentsByPracticeID = function (Practice_ID) {
+            DashboardService.GetAppovedAppointmentsByPracticeID(Practice_ID).then(function (result) {
+                $scope.ApprovedAppointments = result.data;
+                $scope.ApprovedAppointments_Value = $scope.ApprovedAppointments.length;
+            });
+        };
+
+        $scope.GetRejectedAppointmentsByPracticeID = function (Practice_ID) {
+            DashboardService.GetRejectedAppointmentsByPracticeID(Practice_ID).then(function (result) {
+                $scope.RejectedAppointments = result.data;
+                $scope.RejectedAppointments_Value = $scope.RejectedAppointments.length;
+            });
+        };
+
+        $scope.AppoveAppointment = function (ID, Practice_ID) {
+            DashboardService.AppoveAppointment(ID).then(function (result) {
+                $scope.GetPendingAppointmentsByPracticeID(Practice_ID);
+                btnSuccess("Appointment status successfully updated.\nAppointment Appoved.");
+            }, function (error) {
+                btnAlert("System Error Message", "Appointment status not successfully updated.");
+            });
+        };
+
+        $scope.RejectAppointment = function (ID, Practice_ID) {
+            DashboardService.RejectAppointment(ID).then(function (result) {
+                $scope.GetRejectedAppointmentsByPracticeID(Practice_ID);
+                $scope.GetPendingAppointmentsByPracticeID(Practice_ID);
+                $scope.GetAppovedAppointmentsByPracticeID(Practice_ID)
+                btnSuccess("Appointment status successfully updated.\nAppointment Rejected.");
+            }, function (error) {
+                btnAlert("System Error Message", "Appointment status not successfully updated.");
             });
         };
 

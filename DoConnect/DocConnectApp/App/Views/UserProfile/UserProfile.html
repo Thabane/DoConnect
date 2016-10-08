@@ -1,5 +1,147 @@
 ﻿<div>
-    <div id="page-wrapper" ng-controller="UserProfileController">
-
+    <div id="page-wrapper">
+        <div id="View_Profile_Modal" class="modal fade">
+            <div class="modal-dialog" style="width:50%">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Profile</h4>
+                    </div>
+                    <div class="modal-body">
+                        <ul class="nav nav-pills" style="margin-bottom: 20px;">
+                            <li role="presentation" class="active"><a href="#" onclick="FunctionShowPersonalInfo()">Personal Infor</a></li>
+                            <li role="presentation"><a href="#" onclick="FunctionShowPracticeInfo()">Practice Info</a></li>
+                        </ul>
+                        <div class="container" style="padding-top: 0px;">
+                            <div class="row">
+                                <!-- left column -->
+                                <div class="col-md-4 col-sm-6 col-xs-12">
+                                    <div class="text-center">
+                                        <img src="http://lorempixel.com/200/200/people/9/" class="avatar img-circle img-thumbnail" alt="avatar">
+                                        <h6>Upload a different photo...</h6>
+                                        <input type="file" class="text-center center-block">
+                                    </div>
+                                </div>
+                                <!-- edit form column -->
+                                <div class="col-md-8 col-sm-6 col-xs-12 personal-info" id="div_PersonalInfo">
+                                    <div class="panel-heading">
+                                        <h3>Personal info</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <form class="form-horizontal">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-4" style="text-align:left;">Firstname:</label>
+                                                <div class="col-md-8"><input class="form-control readonly" type="text" name="Firstname" value="Jossy" style="border: none; font-size: 13px; padding-right: 0px; background-color: transparent;"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-4" style="text-align:left;">Lastname:</label>
+                                                <div class="col-md-8"><input class="form-control readonly" type="text" name="Lastname" value="doctor" style="border: none; font-size: 13px; padding-right: 0px; background-color: transparent;"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-4" style="text-align:left;">Email Address:</label>
+                                                <div class="col-md-8"><input class="form-control readonly" type="email" name="Email_Address" value="josie@gmail.com" style="border: none; font-size: 13px; padding-right: 0px; background-color: transparent;"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-4" style="text-align:left;">ID Number:</label>
+                                                <div class="col-md-8"><input class="form-control readonly" type="text" name="ID_Number" value="94072124589652" style="border: none; font-size: 13px; padding-right: 0px; background-color: transparent;"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-4" style="text-align:left;">Gender:</label>
+                                                <div class="col-md-8">
+                                                    <select name="Gender" class="form-control readonly">
+                                                        <option value=""></option>
+                                                        <option value="1">Male</option>
+                                                        <option value="2">Female</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-4" style="text-align:left;">Cell Number:</label>
+                                                <div class="col-md-8"><input class="form-control readonly" type="text" name="Cell_Number" value="0837135032" style="border: none; font-size: 13px; padding-right: 0px; background-color: transparent;"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-4" style="text-align:left;">Home Address:</label>
+                                                <div class="col-md-8"><input class="form-control readonly" type="text" name="Home_Address" value="94072124589652" style="border: none; font-size: 13px; padding-right: 0px; background-color: transparent;"></div>
+                                            </div>
+                                            <div id="div_ChangePassword">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-4" for="inputPassword" style="text-align:left;">Current Password:</label>
+                                                    <div class="col-md-8"><input name="current_pass" class="form-control" id="inputPassword" type="password" placeholder="Password"></div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-4" for="inputPassword" style="text-align:left;">New Password:</label>
+                                                    <div class="col-md-8"><input name="new_pass" class="validate[required] form-control" id="inputPassword" type="password" placeholder="New Password"></div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-4" for="inputPassword" style="text-align:left;">Confirm Password:</label>
+                                                    <div class="col-md-8"><input name="conform_pass" class="validate[required] form-control" id="inputPassword" type="password" placeholder="Conform Password"></div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-xs-offset-6 col-md-12">
+                                                    <button name="Save_change" id="btnChangePassword" class="btn btn-info">Change Password</button>
+                                                    <button type="button" class="btn btn-default" id="btnCancel_PasswordChange">Cancel</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div><!--Personal Info Ends-->
+                                <!--Practice Info starts-->
+                                <div class="col-md-8 col-sm-6 col-xs-12" id="div_PracticeInformation">
+                                    <div class="panel-heading">
+                                        <h3>Practice info</h3>
+                                        <div class="panel-body">
+                                            <form class="form-horizontal">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-6" style="text-align:left;">Practice Name:</label>
+                                                    <div class="col-md-6"><input class="form-control readonly" type="text" name="Practice_Name" value=""></div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-6" style="text-align:left;">Phone Number:</label>
+                                                    <div class="col-md-6"><input class="form-control readonly" type="text" name="Practice_Phone_Number" value="doctor"></div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-6" style="text-align:left;">Fax Number:</label>
+                                                    <div class="col-md-6"><input class="form-control readonly" type="text" name="Practice_Fax_Number" value=""></div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-6" style="text-align:left;">Email Address:</label>
+                                                    <div class="col-md-6"><input class="form-control readonly" type="email" name="Practice_Email_Address" value=""></div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-6" style="text-align:left;">Street Address:</label>
+                                                    <div class="col-md-6"><input class="form-control readonly" type="text" name="Practice_Street_Address" value=""></div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-6" style="text-align:left;">Suburb:</label>
+                                                    <div class="col-md-6"><input class="form-control readonly" type="text" name="Practice_Suburb" value=""></div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-6" style="text-align:left;">City:</label>
+                                                    <div class="col-md-6"><input class="form-control readonly" type="text" name="Practice_City" value=""></div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-6" style="text-align:left;">Country:</label>
+                                                    <div class="col-md-6"><input class="form-control readonly" type="text" name="Practice_Country" value=""></div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-6" style="text-align:left;">Trading Times:</label>
+                                                    <div class="col-md-6"><input class="form-control readonly" type="text" name="Practice_Trading_Times" value=""></div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div><!--Practice Info Ends-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="btnUpdateProfile()" id="btnUpdateProfile">Update</button>
+                        <button type="button" class="btn btn-danger" onclick="btnDeleteProfile()">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div> 
 </div>

@@ -27,12 +27,28 @@ namespace DocConnectApp.Controllers
             return dtLayer.GetMessageById(ID);
         }
 
+        [HttpGet]
+        [Route("api/Messages/GetAllSentMessages/{Sender}")]
+        public List<Messages> GetAllSentMessages(int Sender)
+        {
+            DataLayer dtLayer = new DataLayer();
+            return dtLayer.GetAllSentMessages(Sender);
+        }
+
+        [HttpGet]
+        [Route("api/Messages/GetSentMessageById/{ID}")]
+        public Messages GetSentMessageById(int ID)
+        {
+            DataLayer dtLayer = new DataLayer();
+            return dtLayer.GetSentMessageById(ID);
+        }
+
         [HttpPost]
         [Route("api/Messages/InsertMessage")]
         public bool InsertMessage(Messages messages)
         {
             DataLayer dtLayer = new DataLayer();
-            return dtLayer.NewMessages(messages.Sender, messages.Receiver, messages.Subject, messages.Description, messages.Date);
+            return dtLayer.NewMessages(messages.Receiver, messages.Sender, messages.Subject, messages.Description, messages.Date);
         }
 
         [HttpPost]

@@ -37,5 +37,61 @@ namespace DocConnectApp.Controllers
             DataLayer dtLayer = new DataLayer();
             return dtLayer.GetNumPatientsByPractice(Practice_ID);
         }
+
+        [HttpGet]
+        [Route("api/Dashboard/Consulations_Visits/{Practice_ID}")]
+        public List<Consultation> Consulations_Visits(int Practice_ID)
+        {
+            DataLayer dtLayer = new DataLayer();
+            return dtLayer.Consulations_Visits(Practice_ID);
+        }
+
+        [HttpGet]
+        [Route("api/Dashboard/Appointment_Stats/{Practice_ID}")]
+        public List<Consultation> Appointment_Stats(int Practice_ID)
+        {
+            DataLayer dtLayer = new DataLayer();
+            return dtLayer.Appointment_Stats(Practice_ID);
+        }
+
+        [HttpGet]
+        [Route("api/Dashboard/GetPendingAppointmentsByPracticeID/{Practice_ID}")]
+        public List<Appointments> GetPendingAppointmentsByPracticeID(int Practice_ID)
+        {
+            DataLayer dtLayer = new DataLayer();
+            return dtLayer.GetPendingAppointmentsByPracticeID(Practice_ID);
+        }
+
+        [HttpGet]
+        [Route("api/Dashboard/GetAppovedAppointmentsByPracticeID/{Practice_ID}")]
+        public List<Appointments> GetAppovedAppointmentsByPracticeID(int Practice_ID)
+        {
+            DataLayer dtLayer = new DataLayer();
+            return dtLayer.GetAppovedAppointmentsByPracticeID(Practice_ID);
+        }
+
+        [HttpGet]
+        [Route("api/Dashboard/GetRejectedAppointmentsByPracticeID/{Practice_ID}")]
+        public List<Appointments> GetRejectedAppointmentsByPracticeID(int Practice_ID)
+        {
+            DataLayer dtLayer = new DataLayer();
+            return dtLayer.GetRejectedAppointmentsByPracticeID(Practice_ID);
+        }
+
+        [HttpPost]
+        [Route("api/Dashboard/AppoveAppointment")]
+        public bool AppoveAppointment(Appointments appointment)
+        {
+            DataLayer dtLayer = new DataLayer();
+            return dtLayer.AppoveAppointment(appointment.Appointments_ID, appointment.Appointments_App_Status);
+        }
+
+        [HttpPost]
+        [Route("api/Dashboard/RejectAppointment")]
+        public bool RejectAppointment(Appointments appointment)
+        {
+            DataLayer dtLayer = new DataLayer();
+            return dtLayer.RejectAppointment(appointment.Appointments_ID, appointment.Appointments_App_Status);
+        }
     }
 }

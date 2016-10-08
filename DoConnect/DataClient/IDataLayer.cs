@@ -128,7 +128,9 @@ namespace DataClient
         #region Messages
         List<Messages> GetAllMessages(int Receiver);
         Messages GetMessageById(int ID);
-        bool NewMessages(int Sender, int Receiver, string Subject, string Description, string Date);
+        List<Messages> GetAllSentMessages(int Sender);
+        Messages GetSentMessageById(int ID);
+        bool NewMessages(int Receiver, int Sender, string Subject, string Description, string Date);
         bool DeleteMessages(int ID);
         #endregion
 
@@ -136,6 +138,13 @@ namespace DataClient
         Invoice GetRevenueSummary_Today(int Practice_ID);
         Invoice GetRevenueSummary_Week(int Practice_ID);
         Invoice GetNumPatientsByPractice(int Practice_ID);
+        List <Consultation> Consulations_Visits(int Practice_ID);
+        List<Consultation> Appointment_Stats(int Practice_ID);
+        List<Appointments> GetPendingAppointmentsByPracticeID(int Practice_ID);
+        List<Appointments> GetAppovedAppointmentsByPracticeID(int Practice_ID);
+        List<Appointments> GetRejectedAppointmentsByPracticeID(int Practice_ID);
+        bool AppoveAppointment(int ID, int App_Status);
+        bool RejectAppointment(int ID, int App_Status);
         #endregion
     }
 }

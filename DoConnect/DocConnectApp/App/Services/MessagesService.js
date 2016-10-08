@@ -9,7 +9,15 @@
             return $http.get("api/Messages/GetMessage/" + ID);
         };
 
-        var InsertMessage = function (Sender, Receiver, Subject, Description, Date) {
+        var GetAllSentMessages = function (Sender) {
+            return $http.get("api/Messages/GetAllSentMessages/" + Sender);
+        };
+
+        var GetSentMessageById = function (ID) {
+            return $http.get("api/Messages/GetSentMessageById/" + ID);
+        };
+
+        var InsertMessage = function (Receiver, Sender, Subject, Description, Date) {
             return $http.post("api/Messages/InsertMessage",
             {
                 'Sender': Sender,
@@ -31,6 +39,8 @@
         return {
             GetAllMessages: GetAllMessages,
             GetMessageByID: GetMessageByID,
+            GetAllSentMessages: GetAllSentMessages,
+            GetSentMessageById: GetSentMessageById,
             InsertMessage: InsertMessage,
             DeleteMessage: DeleteMessage,
             SessionData: SessionData
