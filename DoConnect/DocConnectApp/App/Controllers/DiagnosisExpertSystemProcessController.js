@@ -47,7 +47,7 @@
 
                 }
             
-
+//must implement global variable service to get this gender and age from first constroller
             var quesResponse = {
                 "sex": "male",
                 "age": "26",
