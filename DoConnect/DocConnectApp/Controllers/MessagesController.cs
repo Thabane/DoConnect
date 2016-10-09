@@ -20,6 +20,14 @@ namespace DocConnectApp.Controllers
         }
 
         [HttpGet]
+        [Route("api/Messages/NumOfUnReadMessages/{Receiver}")]
+        public Messages NumOfUnReadMessages(int Receiver)
+        {
+            DataLayer dtLayer = new DataLayer();
+            return dtLayer.NumOfUnReadMessages(Receiver);
+        }
+
+        [HttpGet]
         [Route("api/Messages/GetMessage/{ID}")]
         public Messages GetMessageByID(int ID)
         {

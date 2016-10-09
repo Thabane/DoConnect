@@ -127,6 +127,7 @@ namespace DataClient
 
         #region Messages
         List<Messages> GetAllMessages(int Receiver);
+        Messages NumOfUnReadMessages(int Receiver);
         Messages GetMessageById(int ID);
         List<Messages> GetAllSentMessages(int Sender);
         Messages GetSentMessageById(int ID);

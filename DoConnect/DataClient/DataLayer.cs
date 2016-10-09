@@ -38,7 +38,6 @@ namespace DataClient
             return userId;
         }
 
-
         public string Login(string username, string password, int accessLevel)
         {
             int userId = 0;
@@ -146,7 +145,6 @@ namespace DataClient
         #endregion
 
         #region Expense
-
         public List<Expenses> GetAllExpenses()
         {
             Expenses ExpenseInfo = new Expenses();
@@ -172,7 +170,6 @@ namespace DataClient
                             ExpenseInfo.Practice_Name = reader.GetString(reader.GetOrdinal("Practice_Name"));
                             ExpenseInfo.User_ID = reader.GetInt32(reader.GetOrdinal("User_ID"));
                             ExpenseInfo.DoctorFullName = readerUserDoc.GetString(readerUserDoc.GetOrdinal("DoctorFullName"));
-
                         }
                     }
 
@@ -351,21 +348,22 @@ namespace DataClient
             SqlParameter appIdParameter = new SqlParameter("@AppId", SqlDbType.Int);
             appIdParameter.Value = AppId;
             _parameters.Add(appIdParameter);
-            //try
-            //{
             Appointments AppointmentsInfo = new Appointments();
-            using (var reader = access.ExecuteReader(Conn, "[GetAppointmentById]", _parameters))
-            {
-                if (reader.Read())
+            try
+            {                
+                using (var reader = access.ExecuteReader(Conn, "[GetAppointmentById]", _parameters))
                 {
-                    AppointmentsInfo = (new Appointments().Create(reader));
-                }
+                    if (reader.Read())
+                    {
+                        AppointmentsInfo = (new Appointments().Create(reader));
+                        access.LogEntry(AppId, "Appointment record viewed: id: ");
+                    }
+                }                
             }
-            //}
-            //catch (Exception ex)
-            //{
-            //    access.LogEntry(AppId, "Appointment: " + ex.ToString());
-            //}
+            catch (Exception ex)
+            {
+                access.LogEntry(AppId, "System failed to view selected appointment: id: " + ex.ToString());                
+            }
             return AppointmentsInfo;
         }
         public bool NewAppointment(string Date_Time, int Patient_ID, string Details, int App_Status, int DoctorID)
@@ -2174,6 +2172,7 @@ namespace DataClient
                     MessageInfo.Description = reader.GetString(reader.GetOrdinal("Description"));
                     MessageInfo.Date = reader.GetString(reader.GetOrdinal("Date"));
                     MessageInfo.ReceiverEmail = reader.GetString(reader.GetOrdinal("ReceiverEmail"));
+                    MessageInfo.ReadStatus = reader.GetInt32(reader.GetOrdinal("ReadStatus"));                                      
 
                     List<SqlParameter> parametersSender = new List<SqlParameter>();
                     SqlParameter SenderParameterSender = new SqlParameter("@Sender", SqlDbType.Int);
@@ -2193,6 +2192,26 @@ namespace DataClient
                 
             }            
             return MessagesInfo;
+        }
+        public Messages NumOfUnReadMessages(int Receiver)
+        {
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            SqlParameter ReceiverParameter = new SqlParameter("@Receiver", SqlDbType.Int);
+            ReceiverParameter.Value = Receiver;
+            _parameters.Add(ReceiverParameter);
+
+            Messages NumOfUnReadMessages = new Messages();
+            using (var reader = access.ExecuteReader(Conn, "[NumOfUnReadMessages]", _parameters))
+            {
+                while (reader.Read())
+                {
+                    if (reader.GetInt32(reader.GetOrdinal("ReadStatus")) == 1)
+                    {
+                        NumOfUnReadMessages.NumOfUnReadMessages++;
+                    }
+                }
+            }
+            return NumOfUnReadMessages;
         }
         public Messages GetMessageById(int ID)
         {
@@ -2219,11 +2238,17 @@ namespace DataClient
                     SenderParameterSender.Value = reader.GetInt32(reader.GetOrdinal("Sender"));
                     parametersSender.Add(SenderParameterSender);
 
+                    List<SqlParameter> parametersMessageRead = new List<SqlParameter>();
+                    SqlParameter IDParameterMessageRead = new SqlParameter("@ID", SqlDbType.Int);
+                    IDParameterMessageRead.Value = ID;
+                    parametersMessageRead.Add(IDParameterMessageRead);
+
                     using (var readerMessageSender = access.ExecuteReader(Conn, "[GetMessageSender]", parametersSender))
                     {
                         if (readerMessageSender.Read())
                         {
                             MessageInfo.SenderEmail = readerMessageSender.GetString(readerMessageSender.GetOrdinal("SenderEmail"));
+                            access.ExecuteReader(Conn, "[Update_MessageRead]", parametersMessageRead);
                         }
                     }
                 }
@@ -2231,7 +2256,6 @@ namespace DataClient
             }
             return MessageInfo;
         }
-
         public List<Messages> GetAllSentMessages(int Sender)
         {
             List<SqlParameter> _parameters = new List<SqlParameter>();

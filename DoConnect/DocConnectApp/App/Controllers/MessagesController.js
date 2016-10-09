@@ -45,6 +45,10 @@
                     $scope.Messages = result.data;
                 });
 
+                MessagesService.NumOfUnReadMessages(sessionStorage.SessionData_User_ID).then(function (result) {
+                    $scope.NumOfUnReadMessages = result.data["NumOfUnReadMessages"];
+                });
+
                 MessagesService.GetAllSentMessages(sessionStorage.SessionData_User_ID).then(function (result) {
                     $scope.SentMessages = result.data;
                 });
@@ -63,13 +67,10 @@
                 $scope.Subject = result["Subject"];
                 $scope.Description = result["Description"];
                 $scope.Date = result["Date"];
+
+                $scope.GetAllMessages();
             });
         };
-
-        $scope.GetAllSentMessages = function () {
-            
-        };
-        $scope.GetAllSentMessages();
 
         $scope.ViewSentMessage = function (ID) {
             MessagesService.GetSentMessageById(ID).success(function (result) {

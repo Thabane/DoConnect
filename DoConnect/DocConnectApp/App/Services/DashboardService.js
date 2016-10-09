@@ -56,6 +56,14 @@
             });
         };
 
+        var GetAllMessages = function (Receiver) {
+            return $http.get("api/Dashboard/GetAllMessages/" + Receiver);
+        };
+
+        var NumOfUnReadMessages = function (Receiver) {
+            return $http.get("api/Dashboard/NumOfUnReadMessages/" + Receiver);
+        };
+
         return {
             SessionData: SessionData,
             GetAllPractices: GetAllPractices,
@@ -68,7 +76,10 @@
             GetAppovedAppointmentsByPracticeID: GetAppovedAppointmentsByPracticeID,
             GetRejectedAppointmentsByPracticeID: GetRejectedAppointmentsByPracticeID,
             AppoveAppointment: AppoveAppointment,
-            RejectAppointment: RejectAppointment
+            RejectAppointment: RejectAppointment,
+            NumOfUnReadMessages: NumOfUnReadMessages,
+            GetAllMessages: GetAllMessages
+
         }
     }
 );

@@ -17,7 +17,7 @@
             </div>
             <div class="col-md-2">
                 <ul class="list-unstyled mailbox-nav">
-                    <li><a href="#" ng-click="FunctionInbox()"><i class="fa fa-inbox"></i> Inbox<span class="badge badge-success pull-right">1</span></a></li>
+                    <li><a href="#" ng-click="FunctionInbox()"><i class="fa fa-inbox"></i> Inbox<span class="badge badge-success pull-right">{{NumOfUnReadMessages}}</span></a></li>
                     <li><a href="#" ng-click="FunctionSent()"><i class="fa fa-sign-out"></i> Sent</a></li>
                 </ul>
             </div>            
@@ -35,7 +35,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr dir-paginate="Message in Messages | filter:search | orderBy:sortKey:reverse | itemsPerPage:8">
+                        <tr dir-paginate="Message in Messages | filter:search | orderBy:sortKey:reverse | itemsPerPage:8" ng-class="{'info': Message.ReadStatus == '1'}">
                             <td>{{Message.SenderEmail}}</td>
                             <td>{{Message.Subject}}</td>
                             <td>{{Message.Description}}</td>

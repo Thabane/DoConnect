@@ -5,6 +5,10 @@
             return $http.get("api/Messages/GetAllMessages/" + Receiver);
         };
 
+        var NumOfUnReadMessages = function (Receiver) {
+            return $http.get("api/Messages/NumOfUnReadMessages/" + Receiver);
+        };
+
         var GetMessageByID = function (ID) {
             return $http.get("api/Messages/GetMessage/" + ID);
         };
@@ -38,6 +42,7 @@
 
         return {
             GetAllMessages: GetAllMessages,
+            NumOfUnReadMessages: NumOfUnReadMessages,
             GetMessageByID: GetMessageByID,
             GetAllSentMessages: GetAllSentMessages,
             GetSentMessageById: GetSentMessageById,

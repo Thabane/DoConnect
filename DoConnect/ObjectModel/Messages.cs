@@ -17,6 +17,8 @@ namespace ObjectModel
         public string Date { get; set; }
         public string SenderEmail { get; set; }
         public string ReceiverEmail { get; set; }
+        public int NumOfUnReadMessages { get; set; }
+        public int ReadStatus { get; set; } //0 == read //1 == unread
 
         public Messages Create(SqlDataReader reader)
         {
@@ -24,11 +26,13 @@ namespace ObjectModel
             {
                 ID = reader.GetInt32(reader.GetOrdinal("ID")),
                 Sender = reader.GetInt32(reader.GetOrdinal("Sender")),
-                Receiver = reader.GetInt32(reader.GetOrdinal("Receiver")),                
+                Receiver = reader.GetInt32(reader.GetOrdinal("Receiver")),
                 Subject = reader.GetString(reader.GetOrdinal("Subject")),
                 Description = reader.GetString(reader.GetOrdinal("Description")),
                 Date = reader.GetString(reader.GetOrdinal("Date")),
                 ReceiverEmail = reader.GetString(reader.GetOrdinal("ReceiverEmail")),
+                ReadStatus = reader.GetInt32(reader.GetOrdinal("ReadStatus")),
+                NumOfUnReadMessages = reader.GetInt32(reader.GetOrdinal("NumOfUnReadMessages"))
             };
         }
 

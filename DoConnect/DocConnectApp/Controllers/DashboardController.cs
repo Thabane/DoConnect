@@ -93,5 +93,21 @@ namespace DocConnectApp.Controllers
             DataLayer dtLayer = new DataLayer();
             return dtLayer.RejectAppointment(appointment.Appointments_ID, appointment.Appointments_App_Status);
         }
+
+        [HttpGet]
+        [Route("api/Dashboard/GetAllMessages/{Receiver}")]
+        public List<Messages> GetAllMessages(int Receiver)
+        {
+            DataLayer dtLayer = new DataLayer();
+            return dtLayer.GetAllMessages(Receiver);
+        }
+
+        [HttpGet]
+        [Route("api/Dashboard/NumOfUnReadMessages/{Receiver}")]
+        public Messages NumOfUnReadMessages(int Receiver)
+        {
+            DataLayer dtLayer = new DataLayer();
+            return dtLayer.NumOfUnReadMessages(Receiver);
+        }
     }
 }

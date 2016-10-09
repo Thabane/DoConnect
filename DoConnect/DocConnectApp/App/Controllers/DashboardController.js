@@ -10,6 +10,14 @@
                 $scope.SessionData_Email = result["Email"];
                 $scope.SessionData_Practice_ID = result["Practice_ID"];
                 $scope.SessionData_AccessLevel = result["AccessLevel"];
+                
+                DashboardService.GetAllMessages($scope.SessionData_User_ID).then(function (result) {
+                    $scope.Messages = result.data;
+                });
+
+                DashboardService.NumOfUnReadMessages($scope.SessionData_User_ID).then(function (result) {
+                    $scope.NumOfUnReadMessages = result.data["NumOfUnReadMessages"];
+                });
             });
         };
         $scope.SessionData();
