@@ -29,7 +29,8 @@ namespace DataClient
 
             StreamReader reader = new StreamReader(receiveStream, Encoding.UTF8);
             string content = reader.ReadToEnd();
-            Console.WriteLine(content);
+            DataAccess da = new DataAccess();
+            da.LogEntry(0, $"{"GetConditions"} - {content}");
             var json = content;
             return json;
         }
@@ -49,6 +50,8 @@ namespace DataClient
             StreamReader reader = new StreamReader(receiveStream, Encoding.UTF8);
             string content = reader.ReadToEnd();
             var json = content;
+            DataAccess da = new DataAccess();
+            da.LogEntry(0, $"{"GetConditions"} - {content}");
             return json;
         }
 
@@ -69,6 +72,8 @@ namespace DataClient
             string content = reader.ReadToEnd();
             Console.WriteLine(content);
             var json = content;
+            DataAccess da = new DataAccess();
+            da.LogEntry(0, $"{"GetSymptomById"} - {content}");
             return json;
         }
 
@@ -76,7 +81,6 @@ namespace DataClient
         {
             var url = "https://api.infermedica.com/v1/diagnosis";
             var jsonData = JsonConvert.SerializeObject(request);
-            //var jsonData = "{\"sex\": \"male\",\"age\": \"29\",\"evidence\": []}";
 
             using (var client = new WebClient())
             {
@@ -85,6 +89,8 @@ namespace DataClient
                 client.Headers.Add("content-type", "application/json");
                 var result = client.UploadString(url, jsonData);
                 var response = JsonConvert.DeserializeObject<DiagnosisResponse>(result);
+                DataAccess da = new DataAccess();
+                da.LogEntry(0, $"{"DiagnosePatient"} - {result}");
                 return response;
             }
         }
@@ -105,6 +111,8 @@ namespace DataClient
             string content = reader.ReadToEnd();
             Console.WriteLine(content);
             var json = content;
+            DataAccess da = new DataAccess();
+            da.LogEntry(0, $"{"GetRiskFactors"} - {content}");
             return json;
         }
         public async Task<string> GetConditionById(string id)
@@ -123,6 +131,8 @@ namespace DataClient
             string content = reader.ReadToEnd();
             Console.WriteLine(content);
             var json = content;
+            DataAccess da = new DataAccess();
+            da.LogEntry(0, $"{"GetConditionById"} - {content}");
             return json;
         }
     }

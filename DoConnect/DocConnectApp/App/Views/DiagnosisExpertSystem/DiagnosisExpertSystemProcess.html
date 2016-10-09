@@ -32,12 +32,13 @@
 
                 <div class="row" ng-repeat="item in DiagnosisResponse.question.items">
                     <label class="custom-control custom-radio">
-                        <input name="radio" ng-model="item.SELECTED" ng-value="item.id" class="custom-control-input">
+                        <input type="radio" name="radio" ng-model="$parent.radioMod" ng-value="item" class="custom-control-input">
                         <span class="custom-control-indicator"></span>
                         <span class="custom-control-description">{{item.name}}</span>
                     </label>
                 </div>
-
+                <pre>{{radioMod | json}}</pre><br />
+                <button type="button" class="btn btn-block" ng-click="AnswerQuestionGroupSingle(radioMod)">Answer</button>
             </form>
 
         </div>
