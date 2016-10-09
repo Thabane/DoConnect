@@ -2818,6 +2818,23 @@ namespace DataClient
             access.ExecuteNonQuery(Conn, parameters, "[AppoveOrRejectAppointment]");
             return true;
         }
+        public List<Medicine_Inventory> MedicineInventoryStockCount(int Practice_ID)
+        {
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            SqlParameter Practice_IDParameter = new SqlParameter("@Practice_ID", SqlDbType.Int);
+            Practice_IDParameter.Value = Practice_ID;
+            parameters.Add(Practice_IDParameter);
+
+            List<Medicine_Inventory> MedicineInventoryStockCount  = new List<Medicine_Inventory>();
+            using (var reader = access.ExecuteReader(Conn, "[MedicineInventoryStockCount]", parameters))
+            {
+                while (reader.Read())
+                {
+                    MedicineInventoryStockCount.Add(new Medicine_Inventory().MedicineInventoryStockCount(reader));
+                }
+            }
+            return MedicineInventoryStockCount;
+        }
         #endregion
 
         #region User Profile
@@ -2929,7 +2946,6 @@ namespace DataClient
             //    return false;
             //}
         }
-
 
         public UserProfile GetPassword(int User_ID)
         {

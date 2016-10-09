@@ -64,6 +64,10 @@
             return $http.get("api/Dashboard/NumOfUnReadMessages/" + Receiver);
         };
 
+        var MedicineInventoryStockCount = function (Practice_ID) {
+            return $http.get("api/Dashboard/MedicineInventoryStockCount/" + Practice_ID);
+        };
+
         return {
             SessionData: SessionData,
             GetAllPractices: GetAllPractices,
@@ -78,7 +82,9 @@
             AppoveAppointment: AppoveAppointment,
             RejectAppointment: RejectAppointment,
             NumOfUnReadMessages: NumOfUnReadMessages,
-            GetAllMessages: GetAllMessages
+            GetAllMessages: GetAllMessages,
+            MedicineInventoryStockCount: MedicineInventoryStockCount
+
 
         }
     }

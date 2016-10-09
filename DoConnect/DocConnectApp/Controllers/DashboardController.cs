@@ -109,5 +109,13 @@ namespace DocConnectApp.Controllers
             DataLayer dtLayer = new DataLayer();
             return dtLayer.NumOfUnReadMessages(Receiver);
         }
+
+        [HttpGet]
+        [Route("api/Dashboard/MedicineInventoryStockCount/{Practice_ID}")]
+        public List<Medicine_Inventory> MedicineInventoryStockCount(int Practice_ID)
+        {
+            DataLayer dtLayer = new DataLayer();
+            return dtLayer.MedicineInventoryStockCount(Practice_ID);
+        }
     }
 }

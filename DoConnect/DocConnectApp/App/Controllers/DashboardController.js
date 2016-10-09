@@ -51,32 +51,12 @@
                     ]);
 
                     var options = {
-                        title: 'My Daily Activities',
                         pieSliceText: 'value',
                         is3D: true
                     };
                     var chart = new google.visualization.PieChart(document.getElementById('piechart'));
                     chart.draw(data, options);
                 }
-
-                //function drawChart() {
-                //    var data_TotalNumOfVisits = google.visualization.arrayToDataTable([
-                //      ['Task', 'Hours per Day'],
-                //      ['Total Visits', $scope.TotalNumOfVisits]
-                //    ]);
-
-                //    var options = {
-                //        pieHole: 0.4,
-                //        left:0,top:0,
-                //        legend: 'none',
-                //        is3D: true
-                //    };
-
-                //    var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
-                //    chart.draw(data_TotalNumOfVisits, options);
-                //}
-
-                
             });
         };
 
@@ -110,44 +90,45 @@
             });
         };
 
-        $scope.Consulations_Visits = function (Practice_ID) {
+        $scope.Consulations_Visits = function (Practice_ID) {            
             DashboardService.Consulations_Visits(Practice_ID).then(function (result) {
                 
                 DashboardService.Appointment_Stats(Practice_ID).then(function (result_Appointment_Stats) {
                 
-                var Consulations_Visits = [];
+                    var Consulations_Visits = [];
 
-                for (var i = 0; i < result.data.length; i++) {
-                    Consulations_Visits.push([result.data[i]["Month"], result.data[i]["TotalNumOfVisits"], result_Appointment_Stats.data[i]["TotalNumOfVisits"]]);
-                }
+                    for (var i = 0; i < result.data.length; i++) {
+                        Consulations_Visits.push([result.data[i]["Month"], result.data[i]["TotalNumOfVisits"], result_Appointment_Stats.data[i]["TotalNumOfVisits"]]);
+                    }
 
-                //Line Graph- TotalNumOfVisits per Day Per Month
-                google.charts.load('current', { 'packages': ['line'] });
-                google.charts.setOnLoadCallback(drawChart_TotalNumOfVisits);
+                    //Line Graph- TotalNumOfVisits per Day Per Month
+                    google.charts.load('current', { 'packages': ['line'] });
+                    google.charts.setOnLoadCallback(drawChart_TotalNumOfVisits);
 
-                function drawChart_TotalNumOfVisits() {
+                    function drawChart_TotalNumOfVisits() {
 
-                    var data = new google.visualization.DataTable();
-                    data.addColumn('string', 'Month (2016)');
-                    data.addColumn('number', 'Number of consultations');
-                    data.addColumn('number', 'Number of appointments');
+                        var data = new google.visualization.DataTable();
+                        data.addColumn('string', 'Month (2016)');
+                        data.addColumn('number', 'Number of consultations');
+                        data.addColumn('number', 'Number of appointments');
 
-                    data.addRows(Consulations_Visits);
-                    var options = {
-                        chart: {
-                            title: 'Consultation & Appointment Stats'
-                        },
-                        legend: { position: 'bottom' },
-                        width: 400,
-                        height: 300
-                    };
+                        data.addRows(Consulations_Visits);
+                        var options = {                        
+                            legend: { position: 'bottom' },
+                            is3D: true
+                        };
 
-                    var chart = new google.charts.Line(document.getElementById('linechart_material'));
-
-                    chart.draw(data, options);
-                }
-
+                        var chart = new google.charts.Line(document.getElementById('linechart_material'));
+                        chart.draw(data, options);
+                    }
                 });
+            });
+        };
+
+        //MedicineInventory Stock Count
+        $scope.GetMedicineInventoryStockCount = function (Practice_ID) {
+            DashboardService.MedicineInventoryStockCount(Practice_ID).then(function (result) {
+                $scope.MedicineInventoryStockCount = result.data;
             });
         };
 
@@ -179,6 +160,7 @@
                 angular.element("#tab_actions_pending").show();
                 $scope.PendingAppointments = result.data;
                 $scope.PendingAppointments_Value = $scope.PendingAppointments.length;
+                $scope.GetMedicineInventoryStockCount(Practice_ID);
             });
         };
 
@@ -215,5 +197,7 @@
                 btnAlert("System Error Message", "Appointment status not successfully updated.");
             });
         };
+
+        
 
     }]);
