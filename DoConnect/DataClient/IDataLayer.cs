@@ -146,5 +146,13 @@ namespace DataClient
         bool AppoveAppointment(int ID, int App_Status);
         bool RejectAppointment(int ID, int App_Status);
         #endregion
+
+        #region User Profile
+        UserProfile GetLoggedinUserProfile(int User_ID);
+        bool UpdateProfileStaff(int User_ID, string FirstName, string LastName, string ID_Number, string Gender, string DOB, string Phone, string Street_Address, string Suburb, string City, string Country);
+        bool UpdateProfileDoctor(int User_ID, string FirstName, string LastName, string Gender, string Address);
+        UserProfile GetPassword(int User_ID);
+        bool UpdatePassword(int User_ID, string Password);
+        #endregion
     }
 }

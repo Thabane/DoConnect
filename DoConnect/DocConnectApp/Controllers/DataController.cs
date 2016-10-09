@@ -35,10 +35,12 @@ namespace DocConnectApp.Controllers
 
             Session["FirstName"] = Staff.FirstName;
             Session["LastName"] = Staff.LastName;
-            Session["Email"] = Staff.Email; 
+            Session["Email"] = Staff.Email;
+            Session["AccessLevel"] = Staff.AccessLevel;
             UserData.FirstName = Convert.ToString(Session["FirstName"]);
             UserData.LastName = Convert.ToString(Session["LastName"]);
             UserData.Email = Convert.ToString(Session["Email"]);
+            UserData.AccessLevel = Convert.ToInt32(Session["AccessLevel"]);
             return new JsonResult { Data = UserData, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
     }

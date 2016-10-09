@@ -2455,7 +2455,6 @@ namespace DataClient
             }
             return GetNumPatientsByPractice;
         }
-
         public List<Consultation> Consulations_Visits(int Practice_ID)
         {
             List<SqlParameter> parameters_4LastMonth = new List<SqlParameter>();
@@ -2794,6 +2793,159 @@ namespace DataClient
 
             access.ExecuteNonQuery(Conn, parameters, "[AppoveOrRejectAppointment]");
             return true;
+        }
+        #endregion
+
+        #region User Profile
+        public UserProfile GetLoggedinUserProfile(int User_ID)
+        {
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            SqlParameter User_IDParameter = new SqlParameter("@User_ID", SqlDbType.Int);
+            SqlParameter _User_IDParameter = new SqlParameter("@User_ID", SqlDbType.Int);
+            User_IDParameter.Value = User_ID;
+            _User_IDParameter.Value = User_ID;
+            parameters.Add(User_IDParameter);
+            _parameters.Add(_User_IDParameter);
+
+            UserProfile UserProfile = new UserProfile();
+            using (var reader = access.ExecuteReader(Conn, "[GetLoggedinUserProfile]", _parameters))
+            {
+                if (reader.Read())
+                {
+                    UserProfile.AccessLevel = reader.GetInt32(reader.GetOrdinal("AccessLevel"));
+                    if (UserProfile.AccessLevel == 1 || UserProfile.AccessLevel == 2) {
+                        return new UserProfile().CreateDoctor(reader);
+                    }
+                    else if (UserProfile.AccessLevel == 4 || UserProfile.AccessLevel == 5 || UserProfile.AccessLevel == 6) {
+                        return new UserProfile().CreateStaff(reader);
+                    }
+                    
+                }
+            }
+            return UserProfile;
+        }
+        public bool UpdateProfileStaff(int User_ID, string FirstName, string LastName, string ID_Number, string Gender, string DOB, string Phone, string Street_Address, string Suburb, string City, string Country)
+        {
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            SqlParameter User_IDParameter       = new SqlParameter("@User_ID", SqlDbType.Int);
+            SqlParameter FirstNameParameter     = new SqlParameter("@FirstName", SqlDbType.NVarChar);
+            SqlParameter LastNameParameter      = new SqlParameter("@LastName", SqlDbType.NVarChar);
+            SqlParameter ID_NumberParameter     = new SqlParameter("@ID_Number", SqlDbType.NVarChar);
+            SqlParameter GenderParameter        = new SqlParameter("@Gender", SqlDbType.Char);
+            SqlParameter DOBParameter           = new SqlParameter("@DOB", SqlDbType.NVarChar);
+            SqlParameter PhoneParameter         = new SqlParameter("@Phone", SqlDbType.NVarChar);
+            SqlParameter Street_AddressParameter = new SqlParameter("@Street_Address", SqlDbType.NVarChar);
+            SqlParameter SuburbParameter        = new SqlParameter("@Suburb", SqlDbType.NVarChar);
+            SqlParameter CityParameter          = new SqlParameter("@City", SqlDbType.NVarChar);
+            SqlParameter CountryParameter       = new SqlParameter("@Country", SqlDbType.NVarChar);
+
+            User_IDParameter.Value = User_ID              ;
+            FirstNameParameter.Value = FirstName          ;
+            LastNameParameter.Value = LastName            ;
+            ID_NumberParameter.Value = ID_Number          ;
+            GenderParameter.Value = Gender                ;
+            DOBParameter.Value = DOB                      ;
+            PhoneParameter.Value = Phone                  ;
+            Street_AddressParameter.Value = Street_Address;
+            SuburbParameter.Value = Suburb                ;
+            CityParameter.Value = City                    ;
+            CountryParameter.Value = Country;
+
+            _parameters.Add(User_IDParameter);
+            _parameters.Add(FirstNameParameter);
+            _parameters.Add(LastNameParameter);
+            _parameters.Add(ID_NumberParameter);
+            _parameters.Add(GenderParameter);
+            _parameters.Add(DOBParameter);
+            _parameters.Add(PhoneParameter);
+            _parameters.Add(Street_AddressParameter);
+            _parameters.Add(SuburbParameter);
+            _parameters.Add(CityParameter);
+            _parameters.Add(CountryParameter);
+            
+            //try
+            //{
+            access.ExecuteNonQuery(Conn, _parameters, "[UpdateProfileStaff]");
+            return true;
+            //}
+            //catch (Exception)
+            //{
+            //    return false;
+            //}
+        }
+        public bool UpdateProfileDoctor(int User_ID, string FirstName, string LastName, string Gender, string Address)
+        {
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            SqlParameter User_IDParameter = new SqlParameter("@User_ID", SqlDbType.Int);
+            SqlParameter FirstNameParameter = new SqlParameter("@FirstName", SqlDbType.NVarChar);
+            SqlParameter LastNameParameter = new SqlParameter("@LastName", SqlDbType.NVarChar);
+            SqlParameter GenderParameter = new SqlParameter("@Gender", SqlDbType.Char);
+            SqlParameter AddressParameter = new SqlParameter("@Address", SqlDbType.NVarChar);
+
+            User_IDParameter.Value = User_ID;
+            FirstNameParameter.Value = FirstName;
+            LastNameParameter.Value = LastName;
+            GenderParameter.Value = Gender;
+            AddressParameter.Value = Address;
+
+            _parameters.Add(User_IDParameter);
+            _parameters.Add(FirstNameParameter);
+            _parameters.Add(LastNameParameter);
+            _parameters.Add(GenderParameter);
+            _parameters.Add(AddressParameter);
+
+            //try
+            //{
+            access.ExecuteNonQuery(Conn, _parameters, "[UpdateProfileDoctor]");
+            return true;
+            //}
+            //catch (Exception)
+            //{
+            //    return false;
+            //}
+        }
+
+
+        public UserProfile GetPassword(int User_ID)
+        {
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            SqlParameter User_IDParameter = new SqlParameter("@User_ID", SqlDbType.Int);
+            User_IDParameter.Value = User_ID;
+            parameters.Add(User_IDParameter);
+
+            UserProfile UserProfile = new UserProfile();
+            using (var reader = access.ExecuteReader(Conn, "[GetPassword]", parameters))
+            {
+                if (reader.Read())
+                {
+                    return new UserProfile().GetPassword(reader);
+                }
+            }
+            return UserProfile;
+        }
+
+        public bool UpdatePassword(int User_ID, string Password)
+        {
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            SqlParameter User_IDParameter = new SqlParameter("@User_ID", SqlDbType.Int);
+            SqlParameter PasswordParameter = new SqlParameter("@Password", SqlDbType.NVarChar);
+
+            User_IDParameter.Value = User_ID;
+            PasswordParameter.Value = Password;
+
+            _parameters.Add(User_IDParameter);
+            _parameters.Add(PasswordParameter);
+
+            //try
+            //{
+            access.ExecuteNonQuery(Conn, _parameters, "[UpdatePassword]");
+            return true;
+            //}
+            //catch (Exception)
+            //{
+            //    return false;
+            //}
         }
         #endregion
     }
