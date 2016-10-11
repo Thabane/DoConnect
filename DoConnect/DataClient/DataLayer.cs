@@ -55,6 +55,7 @@ namespace DataClient
             return "";
         }
 
+        public static int LoggedIn_User_ID;
         public Login MyLogin(string Email, string Password)
         {
             List<SqlParameter> _parameters = new List<SqlParameter>();
@@ -80,13 +81,12 @@ namespace DataClient
                         SqlParameter DateTimeParameter = new SqlParameter("@Last_Login", SqlDbType.DateTime);
                         IDParameter.Value = ID;
                         DateTimeParameter.Value = Convert.ToDateTime(DateTime.ToString("yyyy-MM-dd HH:mm:ss"));
-
+                        LoggedIn_User_ID = ID;
                         DateTime DT = Convert.ToDateTime(DateTime.ToString("yyyy-MM-dd HH:mm:ss"));
                         _parametersLog_LastLoginTime.Add(IDParameter);
                         _parametersLog_LastLoginTime.Add(DateTimeParameter);
                         access.ExecuteReader(Conn, "[Log_LastLoginTime]", _parametersLog_LastLoginTime);
                     }
-
                 }
             }
             return Login;
@@ -356,7 +356,7 @@ namespace DataClient
                     if (reader.Read())
                     {
                         AppointmentsInfo = (new Appointments().Create(reader));
-                        access.LogEntry(AppId, "Appointment record viewed: id: ");
+                        access.LogEntry(AppId, "Appointment record viewed: id: "+ LoggedIn_User_ID);
                     }
                 }                
             }
@@ -364,6 +364,7 @@ namespace DataClient
             {
                 access.LogEntry(AppId, "System failed to view selected appointment: id: " + ex.ToString());                
             }
+            access.ReadEntry();
             return AppointmentsInfo;
         }
         public bool NewAppointment(string Date_Time, int Patient_ID, string Details, int App_Status, int DoctorID)
