@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using ObjectModel;
+using Newtonsoft.Json.Linq;
 
 namespace DataClient
 {
@@ -66,7 +67,8 @@ namespace DataClient
         {
             var filePath = ConfigurationManager.AppSettings["LogFile"];
             var jsonData = File.ReadAllText(filePath);
-            var logData = JsonConvert.DeserializeObject<List<Log>>(jsonData)
+            List<Log> logData = new List<Log>();
+            logData = JsonConvert.DeserializeObject<List<Log>>(jsonData)
                         ?? new List<Log>();
 
             var previousId = logData.LastOrDefault().Key;
@@ -81,6 +83,16 @@ namespace DataClient
                 writer.Write(data);
             }
 
+        }
+
+        internal List<Log> ReadEntry()
+        {
+            var filePath = ConfigurationManager.AppSettings["LogFile"];
+            var jsonData = File.ReadAllText(filePath);
+            List<Log> logData = new List<Log>();
+            logData = JsonConvert.DeserializeObject<List<Log>>(jsonData)
+                        ?? new List<Log>();
+            return logData;
         }
     }
 }

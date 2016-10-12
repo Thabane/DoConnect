@@ -169,7 +169,6 @@
     <Content Include="App\Controllers\PatientsController.js" />
     <Content Include="App\Controllers\PracticesController.js" />
     <Content Include="App\Controllers\Reports.js" />
-    <Content Include="App\Controllers\testController.js" />
     <Content Include="App\Controllers\UserProfileController.js" />
     <Content Include="App\Services\AccountingService.js" />
     <Content Include="App\Services\AppointmentsService.js" />
@@ -185,6 +184,7 @@
     <Content Include="App\Services\PatientsService.js" />
     <Content Include="App\Services\PracticesService.js" />
     <Content Include="App\Services\ReportsService.js" />
+    <Content Include="App\Services\userPersistenceService.js" />
     <Content Include="App\Services\UserProfileService.js" />
     <Content Include="App\Views\Accounting\Accounting.html" />
     <Content Include="App\Views\Accounting\Expenses.html" />
@@ -212,7 +212,6 @@
     <Content Include="App\Views\Patients\PatientRecord\NewPrescription.html" />
     <Content Include="App\Views\Patients\PatientRecord\PrescriptionDetails.html" />
     <Content Include="App\Views\Patients\patients.html" />
-    <Content Include="App\Views\Patients\test.html" />
     <Content Include="App\Views\Practices\NewPractice.html" />
     <Content Include="App\Views\Practices\Practices.html" />
     <Content Include="App\Views\Reports\Reports.html" />
@@ -231,6 +230,8 @@
     <Content Include="Images\Logo\doctorIcon.ico" />
     <Content Include="Images\Logo\doctorIcon.png" />
     <Content Include="Scripts\Alert_Confirm_Prompt_Modal\Alert_Confirm_Prompt_Modal.js" />
+    <Content Include="Scripts\angular-chart\loader.js" />
+    <Content Include="Scripts\angular-cookies.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\bootstrap-theme.css.map" />
@@ -274,7 +275,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Data\" />
     <Folder Include="Views\Signin\" />
   </ItemGroup>
   <ItemGroup>

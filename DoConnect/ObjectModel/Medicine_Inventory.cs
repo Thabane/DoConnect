@@ -35,6 +35,15 @@ namespace ObjectModel
                 Practice_ID = reader.GetInt32(reader.GetOrdinal("Practice_ID")),
                 PracticeName = reader.GetString(reader.GetOrdinal("PracticeName"))
             };
+        }        
+
+        public Medicine_Inventory MedicineInventoryStockCount(SqlDataReader reader)
+        {
+            return new Medicine_Inventory
+            {
+                DrugName = reader.GetString(reader.GetOrdinal("DrugName")),
+                QuantityInStock = reader.GetInt32(reader.GetOrdinal("QuantityInStock"))
+            };
         }
     }
 }

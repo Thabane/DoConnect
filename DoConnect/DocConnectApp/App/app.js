@@ -18,25 +18,21 @@ app.config(
                 templateUrl: "App/Views/Patients/patients.html",
                 controller: "PatientsController"
             })
-            .when("/ConsultationNotes/:PatientID", {
+            .when("/ConsultationNotes", {
                 templateUrl: "App/Views/Patients/PatientRecord/ConsultationNotes.html",
                 controller: "PatientsController"
             })
-            .when("/test/:PatientID", {
-                templateUrl: "App/Views/Patients/test.html",
-                controller: "testController"
-            })
-            .when("/NewConsultationNotes/:PatientID", {
+            .when("/NewConsultationNotes", {
                 templateUrl: "App/Views/Patients/PatientRecord/NewConsultationNotes.html",
                 controller: "PatientsController"
             })
-            .when("/MedicalHistory/:PatientID", {
+            .when("/MedicalHistory", {
                 templateUrl: "App/Views/Patients/PatientRecord/MedicalHistory.html",
                 controller: "PatientsController",
                 reloadOnSearch: false
             })
-            .when("/NewPrescription/:PatientID/:ConsultationID", {
-                templateUrl: "App/Views/Patients/PatientRecord/NewPrescription.html",
+            .when("/PrescriptionDetails", {
+                templateUrl: "App/Views/Patients/PatientRecord/PrescriptionDetails.html",
                 controller: "PatientsController"
             })
             .when("/NewPrescription", {
@@ -127,14 +123,9 @@ app.config(
                 templateUrl: "App/Views/UserProfile/UserProfile.html",
                 controller: "UserProfileController"
             })
-            .when("/Login", {//../Views/Home/Login.cshtml
-                templateUrl: "App/Views/Login/Login.html",
-                controller: "LoginController"
-            })
-            //.otherwise({
-            //    redirectTo: "/Dashboard"
-        //})
-        ;
+            .otherwise({
+                redirectTo: "/Dashboard"
+            });
 
         $locationProvider.html5Mode({
             enabled: true,
@@ -161,5 +152,3 @@ app.run(
         };
     }
     ]);
-
-

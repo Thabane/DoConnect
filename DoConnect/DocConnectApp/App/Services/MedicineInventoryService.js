@@ -11,17 +11,17 @@
         var InsertMedicine = function (DrugName, Description, QuantityPurchased, PurchaseDate, ExpiryDate, DrugConcentration, Practice_ID) {
             return $http.post("api/MedicineInventory/InsertMedicine",
             {
-                'DrugName' : DrugName,
-                'Description' : Description,
-                'QuantityPurchased' : QuantityPurchased,
-                'PurchaseDate' : PurchaseDate,
-                'ExpiryDate' : ExpiryDate,
-                'DrugConcentration' : DrugConcentration,
-                'Practice_ID' : Practice_ID      
+                'DrugName': DrugName,
+                'Description': Description,
+                'QuantityPurchased': QuantityPurchased,
+                'PurchaseDate': PurchaseDate,
+                'ExpiryDate': ExpiryDate,
+                'DrugConcentration': DrugConcentration,
+                'Practice_ID': Practice_ID
             });
         };
 
-        var UpdateMedicine = function (ID, DrugName, Description, QuantityInStock , DrugConcentration) {
+        var UpdateMedicine = function (ID, DrugName, Description, QuantityInStock, DrugConcentration) {
             return $http.post("api/MedicineInventory/UpdateMedicine",
             {
                 'ID': ID,

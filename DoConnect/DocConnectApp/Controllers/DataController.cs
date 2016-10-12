@@ -20,16 +20,28 @@ namespace DocConnectApp.Controllers
             if (Login.ID != 0)
             {
                 Session["User_ID"] = Login.ID;
-                Session["User_Email"] = Login.Email;
-                GetUserDetailsByUser_ID(Login.ID);
             }
             return new JsonResult { Data = Login, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
-        public ViewResult GetUserDetailsByUser_ID(int ID)
+        public JsonResult SessionData()
         {
+            Login UserData = new Login();
+            UserData.User_ID = Convert.ToInt32(Session["User_ID"]);
+            
             DataLayer dtLayer = new DataLayer();
-            return View(dtLayer.GetUserDetailsByUser_ID(ID));
+            Staff Staff = new Staff();
+            Staff = dtLayer.GetUserDetailsByUser_ID(UserData.User_ID);
+
+            Session["FirstName"] = Staff.FirstName;
+            Session["LastName"] = Staff.LastName;
+            Session["Email"] = Staff.Email;
+            Session["AccessLevel"] = Staff.AccessLevel;
+            UserData.FirstName = Convert.ToString(Session["FirstName"]);
+            UserData.LastName = Convert.ToString(Session["LastName"]);
+            UserData.Email = Convert.ToString(Session["Email"]);
+            UserData.AccessLevel = Convert.ToInt32(Session["AccessLevel"]);
+            return new JsonResult { Data = UserData, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
     }
 }

@@ -1,5 +1,122 @@
 ﻿<div>
     <div id="page-wrapper" ng-controller="UserProfileController">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header text-primary">User Profile</h2>
+            </div>
+        </div>
 
+        <!--Profile Details: Doctor/Admin-->
+        <div class="portlet light col-md-6" style="border: 1px solid #ddd; border-radius: 4px;">
+            <div class="portlet-title">
+                <div class="caption caption-md">
+                    <i class="icon-bar-chart font-dark hide"></i>
+                    <span class="caption-subject font-green-steel uppercase bold">Profile Details</span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div id="ProfileDetails_DoctorAdmin_div">
+                    <div class="row" style="padding-left:18px;">
+                        <address>
+                            <strong>{{FirstName}} {{LastName}}</strong><br><br>
+                            Email: {{Email}}<br>                                
+                            Gender: {{Gender}}<br>
+                            Job Title: {{Employee_Type}}<br>
+                            Physical Address:<br> {{Address}}<br>
+                        </address> 
+                    </div>
+                </div><!-- /.Profile Details: Doctor/Admin-->
+            <!--Profile Details: Staff-->
+                <div id="ProfileDetails_Staff_div">
+                    <div class="row" style="padding-left:18px;">
+                        <address>
+                            <strong>{{FirstName}} {{LastName}}</strong><br><br>
+                            ID Number: {{ID_Number}}
+                            Job Title: {{Employee_Type}}<br>
+                            DOB: {{DOB}}<br>  
+                            Gender: {{Gender}}<br>
+                            <abbr title="Phone">Cell:</abbr> {{Phone}}
+                            <abbr title="Phone">Email:</abbr> {{Email}}
+                        </address>
+                    </div> 
+
+                    <div class="row" style="padding-left:18px;">
+                        <address>
+                            Physical Address<br><br>
+                            {{Street_Address}}<br>
+                            {{Suburb}}<br>
+                            {{City}}<br>
+                            {{Country}}<br>
+                        </address>
+                    </div>
+                </div><!-- /.Profile Details: Staff-->
+                <form name="Form" novalidate>
+                    <div class="div_ChangePassword">
+                        <div class="row" style="margin-top:4px; margin-bottom:0px;">
+                            <h5 class="col-md-4">Current Password:</h5>
+                            <div class="col-md-5"><input class="form-control" type="password" placeholder="Current Password" name="CurrentPassword" ng-model="CurrentPassword" ng-required="true"></div>
+                        </div>
+                        <div class="row" style="margin-top:0px; margin-bottom:8px;">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-5">
+                                <small ng-show="Form.CurrentPassword.$invalid && Form.CurrentPassword.$touched && Form.CurrentPassword.$error.required">Required field.<br></small>
+                                <small ng-show="Form.CurrentPassword.$invalid && Form.CurrentPassword.$touched && Form.CurrentPassword.$error.pattern">Only alphabetic letters allowed and atleast 3 charactors long.</small>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:4px; margin-bottom:0px;">
+                            <h5 class="col-md-4">New Password:</h5>
+                            <div class="col-md-5"><input class="form-control" type="password" placeholder="New Password" name="NewPassword" ng-model="NewPassword" ng-required="true"></div>
+                        </div>
+                        <div class="row" style="margin-top:0px; margin-bottom:8px;">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-5">
+                                <small ng-show="Form.NewPassword.$invalid && Form.NewPassword.$touched && Form.NewPassword.$error.required">Required field.<br></small>
+                                <small ng-show="Form.NewPassword.$invalid && Form.NewPassword.$touched && Form.NewPassword.$error.pattern">Only alphabetic letters allowed and atleast 3 charactors long.</small>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:4px; margin-bottom:0px;">
+                            <h5 class="col-md-4">Confirm Password:</h5>
+                            <div class="col-md-5"><input class="form-control" type="password" placeholder="Confirm Password" name="ConfirmPassword" ng-model="ConfirmPassword" ng-required="true"></div>
+                        </div>
+                        <div class="row" style="margin-top:0px; margin-bottom:8px;">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-5">
+                                <small ng-show="Form.ConfirmPassword.$invalid && Form.ConfirmPassword.$touched && Form.ConfirmPassword.$error.required">Required field.<br></small>
+                                <small ng-show="Form.ConfirmPassword.$invalid && Form.ConfirmPassword.$touched && Form.ConfirmPassword.$error.pattern">Only alphabetic letters allowed and atleast 3 charactors long.</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top:4px; margin-bottom:0px;">
+                        <div class="col-xs-offset-3 col-md-12">
+                            <button class="btn btn-info btn-xs btnChangePassword" ng-click="btnChangePassword(CurrentPassword, NewPassword, ConfirmPassword)">Change Password</button>
+                            <button class="btn btn-default btn-xs btnCancel_PasswordChange" ng-click="btnCancel_PasswordChange()">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+        <!--Practice Details-->
+        <div class="portlet light col-md-5" style="border: 1px solid #ddd; border-radius: 4px;">
+            <div class="portlet-title">
+                <div class="caption caption-md">
+                    <i class="icon-bar-chart font-dark hide"></i>
+                    <span class="caption-subject font-green-steel uppercase bold">Practice Details</span>
+                </div>
+            </div>
+            <div class="portlet-body">                
+                <div class="row" style="padding-left:18px;">
+                    <address>
+                        <strong>{{Practice_Name}}</strong><br><br>
+                        {{Practice_Street_Address}}<br>
+                        {{Practice_Suburb}}<br>
+                        {{Practice_City}}<br>
+                        {{Practice_Country}}<br>
+                        <abbr title="Phone">Tel:</abbr> {{Practice_Phone_Number}}<br>
+                        <abbr title="Phone">Fax:</abbr> {{Practice_Fax_Number}}
+                    </address>
+                </div>
+            </div>
+        </div><!-- /.Practice Details:-->
     </div> 
 </div>

@@ -1,6 +1,6 @@
-﻿app.controller("PatientsController", ["$scope", "PatientsService", "$interval",
-    function ($scope, PatientsService, $interval) {//, $routeParams, $route, $location
-        //alert("Running");
+﻿app.controller("PatientsController", ["$scope", "PatientsService", "$interval", "$ngBootbox",
+    function ($scope, PatientsService, $interval, $ngBootbox) {
+
         $scope.PageTitle_Patients = 'Patients';
         $scope.PageTitle_NewPatient = 'New Patient Details';
         $scope.PageTitle_MedicalHistory = 'Medical Record';
@@ -12,53 +12,53 @@
             angular.element(".View_readonly").css("border", "1px solid #ccc");
             angular.element(".View_readonly").css("background-color", "transparent");
         };
-        init_ControlSettings();//Excecute the function on page load.
+        init_ControlSettings();
         
-        //Sort Function
         $scope.sort = function (keyname) {
             $scope.sortKey = keyname;
             $scope.reverse = !$scope.reverse;
         }
 
         $scope.GetPatients = function () {
-            PatientsService.GetAllPatients().then
-            (function (result) {
+            PatientsService.GetAllPatients().then(function (result) {
                 $scope.Patients = result.data;                
             });
         };
         $scope.GetPatients();
-            
         
-        //Select PatientByID Function
         $scope.ViewPatient = function (PatientID) {
             sessionStorage.Selected_PatientID = PatientID;
         };
 
-        //Select PatientByID Function
         $scope.SetConsultationID = function (ConsultationID) {
             sessionStorage.Selected_ConsultationID = ConsultationID;
         };
+
+        $scope.DeletePatient1 = function (ID, Name) {
+            $ngBootbox.confirm("Are you sure you want to delete this Patient: "+ Name +" ?").then(function () {
+                PatientsService.DeletePatient(ID).then(function () {
+                    $scope.GetPatients();
+                    btnSuccess("Patient record successfully deleted.");
+                }, function (error) {
+                    btnAlert("System Error Message", "Delete unsuccessful.");
+                });
+            }, function () { });
+        };
         //---#region Medical Record------------------------------------------------------------------------------------------------------------/
         
-        $scope.Genders = [{ "Gender": "Male", "Char": "M" },
-                          { "Gender": "Female", "Char": "F" }];
+        $scope.Genders = [{ "Gender": "Male", "Char": "M" }, { "Gender": "Female", "Char": "F" }];
         $scope.Seleceted_Gender = 0;
         $scope.changedValueGetGender = function (item) {
             $scope.Seleceted_Gender = item.Char;
         };
-        //Select Medical Record by PatientID Funtion
+        
         var GetMedicalRecord = function () {
             PatientsService.GetMedicalRecord(sessionStorage.Selected_PatientID).then(function (result) {
                 $scope.ID = result.data["ID"];
                 $scope.FirstName = result.data["FirstName"];
                 $scope.LastName = result.data["LastName"];
                 $scope.ID_Number = result.data["ID_Number"];
-                if (result.data["Gender"] == 'M') {
-                    $scope.Gender = 'Male';
-                }
-                else {
-                    $scope.Gender = 'Female';
-                }
+                if (result.data["Gender"] == 'M') {$scope.Gender = 'Male'; } else { $scope.Gender = 'Female'; }
                 $scope.DOB = result.data["DOB"];
                 $scope.Cell_Number = result.data["Cell_Number"];
                 $scope.Street_Address = result.data["Street_Address"];
@@ -79,19 +79,13 @@
                 $scope.Patient_Medical_Aid_Medical_Aid_ID = result.data["Patient_Medical_Aid_Medical_Aid_ID"];
                 $scope.Scheme_Name = result.data["Scheme_Name"];
                 $scope.Membership_Number = result.data["Membership_Number"];
-                if (result.data["Status"] == 'true') {
-                    $scope.Status = 'Valid';
-                }
-                else {
-                    $scope.Status = 'Invalid';
-                }
+                if (result.data["Status"] == 'true') { $scope.Status = 'Valid'; } else { $scope.Status = 'Invalid'; }
                 $scope.Registration_Date = result.data["Registration_Date"];
                 $scope.Deregistration_Date = result.data["Deregistration_Date"];
                 $scope.Patient_ID = result.data["Patient_ID"];
             });
         };
-        GetMedicalRecord();
-        
+        GetMedicalRecord();        
 
         $scope.GetMedical_Aid = function () {
             PatientsService.GetMedical_Aid().then(function (result) {
@@ -141,24 +135,24 @@
             }
         };
 
-        //Delete MedicalRecord Funtion
         $scope.DeleteMedicalRecord = function () {
-            PatientsService.DeleteMedicalRecord(sessionStorage.Selected_PatientID).then(function () {
-                GetMedicalRecord();
-                btnSuccess("Medical Record details successfully deleted.");
-                btnRedirect("Patients");
-            }, function (error) {
-                btnAlert("System Error Message", "Delete unsuccessful.");
-            });
+            $ngBootbox.confirm("Are you sure you want to delete this Patient: "+ $scope.FirstName+" "+$scope.LastName +" ?").then(function () {
+                PatientsService.DeletePatient(sessionStorage.Selected_PatientID).then(function () {
+                    btnSuccess("Medical Record details successfully deleted.");
+                    btnRedirect("Patients");
+                }, function (error) {
+                    btnAlert("System Error Message", "Delete unsuccessful.");
+                });
+            }, function () { });
         };
-        //---#endregion------------------------------------------------------------------------------------------------------------/
-        //---Prescription------------------------------------------------------------------------------------------------------------/
+        
+        //---#region Prescription------------------------------------------------------------------------------------------------------------/
 
         angular.element(".readonly_ViewPrescription").attr("readonly", true); angular.element(".disable_ViewPrescription").prop("disabled", true);
         angular.element(".readonly_ViewPrescription").css("background-color", "transparent");
         $scope.IntakeRoutez = [{ "Route": "PO (by mouth)" }, { "Route": "PR (per rectum)" }, { "Route": "IM (intramuscular)" }, { "Route": "IV (intravenous)", }, { "Route": "ID (intradermal)" }, { "Route": "IN (intranasal)" }, { "Route": "TP (topical)" }, { "Route": "SL (sublingual)" }, { "Route": "BUCC (buccal)" }, { "Route": "IP (intraperitoneal)" }];
         $scope.Frequencyz = [{ "Freq": "Daily" }, { "Freq": "Every other day" }, { "Freq": "BID/b.i.d. (Twice a Day)" }, { "Freq": "TID/t.id. (Three Times a Day)" }, { "Freq": "QID/q.i.d. (Four Times a Day)" }, { "Freq": "QHS (Every Bedtime)" }, { "Freq": "Q4h (Every 4 hours)" }, { "Freq": "Q4-6h (Every 4 to 6 hours)" }]
-        //Select Prescription Notes by PatientID Funtion
+        
         var GetPrescription = function () {
             PatientsService.GetPrescription(sessionStorage.Selected_PatientID).then(function (result) {
                 $scope.PrescriptionDetails = result.data;                
@@ -171,7 +165,7 @@
             PatientsService.InsertPrescription(sessionStorage.Selected_PatientID, 4, sessionStorage.Selected_ConsultationID, DrugName, Strength, $scope.Seleceted_IntakeRoute, $scope.Seleceted_Frequency, DispenseNumber, RefillNumber).success(function () {
                 GetPrescription();
                 angular.element(".insert").val('');
-                btnSuccess("Prescription Note successfully inserted.");
+                btnSuccess("Prescription successfully inserted.");
                 btnRedirect("PrescriptionDetails");
             }, function (error) {
                 btnAlert("System Error Message", "Insert unsuccessful.");
@@ -200,7 +194,7 @@
                 console.log(Prescription_ID, Consultation_Diagnosis, Prescription_DrugDetails_DrugName, Prescription_DrugDetails_Strength, $scope.Seleceted_IntakeRoute, $scope.Seleceted_Frequency, Prescription_DrugDetails_DispenseNumber, Prescription_DrugDetails_RefillNumber);
                 PatientsService.UpdatePrescription(Prescription_ID, Consultation_Diagnosis, Prescription_DrugDetails_DrugName, Prescription_DrugDetails_Strength, $scope.Seleceted_IntakeRoute, $scope.Seleceted_Frequency, Prescription_DrugDetails_DispenseNumber, Prescription_DrugDetails_RefillNumber).success(function () {
                     GetPrescription();
-                    btnSuccess("Prescription Note details successfully updated.");
+                    btnSuccess("Prescription details successfully updated.");
                 }, function (error) {
                     btnAlert("System Error Message", "Update unsuccessful.");
                 });
@@ -210,19 +204,19 @@
             }
         };
 
-        //Delete Prescription Funtion
-        $scope.DeleteConsultationNote = function () {
-            PatientsService.DeletePrescription(sessionStorage.Selected_PatientID).then(function () {
-                GetPrescription();
-                btnSuccess("Prescription Note details successfully deleted.");
-            }, function (error) {
-                btnAlert("System Error Message", "Delete unsuccessful.");
-            });
+        $scope.DeletePrescription = function (ID) {
+            $ngBootbox.confirm("Are you sure you want to delete this Prescription ?").then(function () {
+                PatientsService.DeletePrescription(ID).then(function () {
+                    GetPrescription();
+                    btnSuccess("Prescription details successfully deleted.");
+                }, function (error) {
+                    btnAlert("System Error Message", "Delete unsuccessful.");
+                });
+            }, function () { });
         };
-    //---.Prescription------------------------------------------------------------------------------------------------------------/
-    //---Consultation Notes------------------------------------------------------------------------------------------------------------/
+
+        //---#region Consultation Notes------------------------------------------------------------------------------------------------------------/
         
-        //Select Consultation Notes by PatientID Funtion
         var GetConsultationNotes = function () {
             PatientsService.GetConsultationNotes(sessionStorage.Selected_PatientID).then(function (result) {
                 $scope.ConsultationNotes = result.data;
@@ -243,7 +237,6 @@
         };
 
         $scope.btnUpdateConsultation = function (Consultation_ID, ReasonForConsultation, Symptoms, ClinicalFindings, Diagnosis, TestResultSummary, TreatmentPlan) {
-            
             var btnText = angular.element("#btnUpdateConsultation").html();
             if (btnText == "Update") {
                 angular.element(".View_readonly").attr("readonly", false);
@@ -262,16 +255,14 @@
             }
         };
 
-        //Delete Consultation Notes Funtion
-        $scope.DeleteConsultationNote = function () {
-            PatientsService.DeleteConsultationNote(sessionStorage.Selected_PatientID).then(function () {
-                GetConsultationNotes();
-                btnSuccess("Consultation Note details successfully deleted.");
-            }, function (error) {
-                btnAlert("System Error Message", "Delete unsuccessful.");
-            });
+        $scope.DeleteConsultationNote = function (ID) {
+            $ngBootbox.confirm("Are you sure you want to delete this Consultation Note ?").then(function () {
+                PatientsService.DeleteConsultationNote(ID).then(function () {
+                    GetConsultationNotes();
+                    btnSuccess("Consultation Note details successfully deleted.");
+                }, function (error) {
+                    btnAlert("System Error Message", "Delete unsuccessful.");
+                });
+            }, function () { });
         };
-
-    //---.Consultation Notes------------------------------------------------------------------------------------------------------------/
-
     }]);

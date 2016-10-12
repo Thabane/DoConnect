@@ -14,7 +14,7 @@ namespace DoConnectAdmin.Controllers
 {
     public class EmployeesController : ApiController
     {
-        [HttpGet]//Select all Employee data
+        [HttpGet]
         [Route("api/Employees/GetAllEmployees")]
         public List<Staff> GetAllEmployees()
         {
@@ -22,7 +22,7 @@ namespace DoConnectAdmin.Controllers
             return dtLayer.GetAllStaff();
         }
 
-        [HttpGet] //Select Employee by ID
+        [HttpGet]
         [Route("api/Employees/GetEmployee/{ID}")]
         public Staff GetEmployeeByID(int ID)
         {
@@ -38,7 +38,7 @@ namespace DoConnectAdmin.Controllers
             return dtLayer.GetUserDetailsByUser_ID(ID);
         }
 
-        [HttpPost]//Update Employee
+        [HttpPost]
         [Route("api/Employees/UpdateEmployee")]
         public bool UpdateEmployee(Staff staff)
         {            
