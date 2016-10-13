@@ -1,0 +1,99 @@
+﻿<div>
+    <div id="page-wrapper" ng-controller="MedicalAidController">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header text-primary">Medical Aid</h2>
+            </div>
+        </div>
+
+        <ul class="nav nav-tabs">
+            <li role="presentation" class="active"><a href="/MedicalAid"><i class="fa fa-align-justify"></i>Medical Aid Provider List</a></li>
+            <li role="presentation"><a href="/NewMedicalAidProvider"><i class="fa fa-plus-circle"></i>New Provider</a></li>
+        </ul>
+
+        <div class="panel panel-default">
+            <div class="row" style="margin-top: 10px; margin-right: 10px;">
+                <div class="col-md-4"></div><div class="col-md-4"><h5 class="pull-right">Search:</h5></div>
+                <div class="form-group col-md-4">
+                    <input class="form-control" type="text" style="font-size:13px;" ng-model="search">
+                </div>
+            </div>
+
+            <table class="table table-hover">
+                <thead style="background-color: #f8f8f8;">
+                    <tr>
+                        <th style="width: 30%;" ng-click="sort('Name')">Provider Name<span class="fa sort-icon" ng-show="sortKey=='Name'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                        <th style="width: 15%;" ng-click="sort('Cell_Number')">Phone Number<span class="fa sort-icon" ng-show="sortKey=='Cell_Number'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                        <th style="width: 25%;" ng-click="sort('Email_Address')">Email Address<span class="fa sort-icon" ng-show="sortKey=='Email_Address'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                        <th style="width: 15%;" ng-click="sort('Fax_Number')">Fax Number<span class="fa sort-icon" ng-show="sortKey=='Fax_Number'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                        <th style="width: 15%;" >Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr dir-paginate="MedicalAid in MedicalAids | filter:search | orderBy:sortKey:reverse | itemsPerPage:5">                        
+                        <td>{{MedicalAid.Name}}</td>
+                        <td>{{MedicalAid.Cell_Number}}</td>
+                        <td>{{MedicalAid.Email_Address}}</td>
+                        <td>{{MedicalAid.Fax_Number}}</td>
+                        <td>
+                            <button class="btn btn-primary btn-xs" ng-click="ViewMedicalAid(MedicalAid.ID)" onclick="ViewMedicalAid()"><i class="glyphicon glyphicon-new-window"></i></button>
+                            <button class="btn btn-danger btn-xs" ng-click="DeleteMedicalAid(MedicalAid.ID)"><i class="fa fa-trash-o"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <dir-pagination-controls class="pull-right" max-size="5" direction-links="true" boundary-links="true" style="margin-right: 20px;"></dir-pagination-controls>
+                </div>
+            </div>
+        </div>
+
+        <!--View Medical Aid Modal-->
+        <div id="View_MedicalAid_Modal" class="modal fade">
+            <form>
+                <div class="modal-dialog" style="width:70%;">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title text-primary">Medical Aid Details</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                                <div class="col-md-2"><h5>Provider Name:</h5></div>
+                                <div class="col-md-4"><input class="form-control readonly_View" type="text" ng-value="Name" ng-model="Name"></div>
+                                <div class="col-md-2"><h5>Cell Number:</h5></div>
+                                <div class="col-md-4"><input class="form-control readonly_View" type="text" ng-value="Cell_Number" ng-model="Cell_Number"></div>
+                            </div>
+                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                                <div class="col-md-2"><h5>Email Address:</h5></div>
+                                <div class="col-md-4"><input class="form-control readonly_View" type="text" ng-value="Email_Address" ng-model="Email_Address"></div>
+                                <div class="col-md-2"><h5>Fax Number:</h5></div>
+                                <div class="col-md-4"><input class="form-control readonly_View" type="text" ng-value="Fax_Number" ng-model="Fax_Number"></div>
+                            </div>
+                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                                <div class="col-md-2"><h5>Scheme Names:</h5></div>
+                                <div class="col-md-4"><select class="form-control readonly_View" size="4" ng-value="SchemeNames" ng-model="SchemeNames">
+                                                            <option>1</option>
+                                                            <option>2</option>
+                                                            <option>3</option>
+                                                            <option>4</option>
+                                                            <option>5</option>
+                                                        </select>
+                                </div>
+                                <div class="col-md-2"><h5>Physical Address:</h5></div>
+                                <div class="col-md-4"><textarea class="form-control readonly_View" rows="3" ng-value="Address" ng-model="Address"></textarea></div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" ng-click="function_btnUpdateMedicalAid(ID)" id="function_btnUpdateMedicalAid">Update</button>
+                            <button type="button" class="btn btn-danger" id="btnDeleteConfirmed" onclick="btnConfirm('danger', 'Are you sure you want to delete this Practice?')">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div><!--View Medical Aid Modal Ends-->
+    </div>
+</div>
