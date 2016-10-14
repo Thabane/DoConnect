@@ -18,6 +18,14 @@
                 DashboardService.NumOfUnReadMessages($scope.SessionData_User_ID).then(function (result) {
                     $scope.NumOfUnReadMessages = result.data["NumOfUnReadMessages"];
                 });
+
+                if (result["AccessLevel"] == '1' || result["AccessLevel"] == '2' || result["AccessLevel"] == '6') {
+                    angular.element("#doctor_AssistentControls").show();
+                }
+                else {
+                    angular.element("#doctor_AssistentControls").hide();
+                }
+                
             });
         };
         $scope.SessionData();
@@ -59,7 +67,7 @@
                 }
             });
         };
-
+        
         $scope.GetRevenueSummary_Today = function (Practice_ID) {
             DashboardService.GetRevenueSummary_Today(Practice_ID).then(function (result) {
                 $scope.TotalNumOfVisits_Summary = result.data["TotalNumOfVisits"];

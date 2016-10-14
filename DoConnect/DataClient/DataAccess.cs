@@ -82,7 +82,6 @@ namespace DataClient
             {
                 writer.Write(data);
             }
-
         }
 
         internal List<Log> ReadEntry()

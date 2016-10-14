@@ -18,9 +18,9 @@
                 <div class="modal-header" style="border-bottom:0px;">
                     <ul class="nav nav-pills">
                         <li role="presentation" class="active"><a href="/MedicalHistory">Medical Record</a></li>
-                        <li role="presentation" ng-show="ConsultationNotes.length != '0'"><a href="/PrescriptionDetails">Prescriptions</a></li>
-                        <li role="presentation" ng-show="ConsultationNotes.length != '0'"><a href="/ConsultationNotes">Consultation Notes</a></li>
-                        <li role="presentation" ng-show="ConsultationNotes.length == '0'"><a href="/NewConsultationNotes">New Consultation Notes</a></li>
+                        <li role="presentation" class="doctorControls" ng-show="ConsultationNotes.length != '0'"><a href="/PrescriptionDetails">Prescriptions</a></li>
+                        <li role="presentation" class="doctorControls" ng-show="ConsultationNotes.length != '0'"><a href="/ConsultationNotes">Consultation Notes</a></li>
+                        <li role="presentation" class="doctorControls" ng-show="ConsultationNotes.length == '0'"><a href="/NewConsultationNotes">New Consultation Notes</a></li>
                     </ul>
                 </div>
                 <div class="panel panel-default">
@@ -32,7 +32,7 @@
                             <div class="col-md-1"><h5 class="form-control-label">Lastname:</h5></div>
                             <div class="col-md-3"><input type="text" class="form-control  View_readonly" name="LastName" ng-model="LastName" ng-required="true" ng-pattern="/^[a-zA-Z''-'\s]{3,40}$/"></div>
                             <div class="col-md-1"><h5 class="form-control-label">Email:</h5></div>
-                            <div class="col-md-3"><input type="email" class="form-control  View_readonly" name="Email" ng-model="Email" ng-required="true" ng-pattern="/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/"></div>
+                            <div class="col-md-3"><input type="email" class="form-control" name="Email" ng-model="Email" ng-readonly="true" style="background-color: transparent"></div>
                         </div>
                         <div class="row" style="margin-top:0px; margin-bottom:8px;">
                             <div class="col-md-1"></div>
@@ -46,10 +46,7 @@
                                 <small ng-show="Form.LastName.$invalid && Form.LastName.$touched && Form.LastName.$error.pattern">Only numeric letters allowed and atleast 10 charactors long.</small>
                             </div>
                             <div class="col-md-1"></div>
-                            <div class="col-md-3">
-                                <small ng-show="Form.Email.$invalid && Form.Email.$touched && Form.Email.$error.required">Required field.<br></small>
-                                <small ng-show="Form.Email.$invalid && Form.Email.$touched && Form.Email.$error.pattern">Enter a valid email address.</small>
-                            </div>
+                            <div class="col-md-3"></div>
                         </div>
                         <div class="row" style="margin-top:8px; margin-bottom:0px;">
                             <div class="col-md-1"><h5>ID Number:</h5></div>
@@ -159,7 +156,7 @@
                                                         <input class="form-control" type="text" id="Deregistration_Date" ng-model="Deregistration_Date" name="Deregistration_Date" data-date-format="yyyy-mm-dd" ng-required="true" ng-readonly="true" style="background-color: transparent"><span class="input-group-addon"><span class="fa fa-calendar"></span></span>
                                                     </div></div>
                             <div class="col-md-1"><h5>Account Status:</h5></div>
-                            <div class="col-md-3"><input type="text" class="form-control View_readonly" name="Status" ng-model="Status" ng-readonly="true"></div>
+                            <div class="col-md-3"><input ng-class="{'font-green-steel bold' : Status}" type="text" class="form-control" name="Status" ng-model="Status" ng-readonly="true" style="background-color: transparent"></div>
                         </div>
                         <div class="row" style="margin-top:0px; margin-bottom:8px;">
                             <div class="col-md-1"></div>

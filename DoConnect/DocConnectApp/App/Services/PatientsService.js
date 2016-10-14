@@ -1,6 +1,10 @@
 ﻿app.factory('PatientsService',
     function ($http) {
 
+        var SessionData = function () {
+            return $http.get("/Data/SessionData");
+        };
+
         var GetAllPatients = function () {
             return $http.get("api/Patients/GetAllPatients");
         }
@@ -161,6 +165,7 @@
         };
 
         return {
+            SessionData: SessionData,
             GetAllPatients: GetAllPatients,
             GetPatientByID: GetPatientByID,
             DeletePatient: DeletePatient,

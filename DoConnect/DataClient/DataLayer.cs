@@ -92,6 +92,7 @@ namespace DataClient
             return Login;
         }
 
+        public static int LoggedIn_User_PRACTICE_ID;
         public Staff GetUserDetailsByUser_ID(int User_ID)
         {
             List<SqlParameter> _parameters = new List<SqlParameter>();
@@ -104,6 +105,7 @@ namespace DataClient
             {
                 if (reader.Read())
                 {
+                    LoggedIn_User_PRACTICE_ID = reader.GetInt32(reader.GetOrdinal("Practice_ID"));
                     List = new Staff().GetLogginUser(reader);
                 }
             }
@@ -1326,10 +1328,12 @@ namespace DataClient
             List<SqlParameter> _parameters = new List<SqlParameter>();
             List<SqlParameter> _parametersCreateUser = new List<SqlParameter>();
             List<SqlParameter> _parametersPatient_Medical_Aid = new List<SqlParameter>();
+            List<SqlParameter> _parametersEmailAddress = new List<SqlParameter>();
             SqlParameter Doctor_IDParameter = new SqlParameter("@Doctor_ID", SqlDbType.Int);
             SqlParameter FirstNameParameter = new SqlParameter("@FirstName", SqlDbType.VarChar);
             SqlParameter LastNameParameter = new SqlParameter("@LastName", SqlDbType.VarChar);
             SqlParameter EmailParameter = new SqlParameter("@Email", SqlDbType.VarChar);
+            SqlParameter _EmailParameter = new SqlParameter("@Email", SqlDbType.VarChar);
             SqlParameter ID_NumberParameter = new SqlParameter("@ID_Number", SqlDbType.VarChar);
             SqlParameter Cell_NumberParameter = new SqlParameter("@Cell_Number", SqlDbType.VarChar);
             SqlParameter DOBParameter = new SqlParameter("@DOB", SqlDbType.VarChar);
@@ -1378,6 +1382,7 @@ namespace DataClient
             SocialHistoryParameter.Value = SocialHistory;
             FamilyHistoryParameter.Value = FamilyHistory;
             accessLevelParameter.Value = accessLevel;
+            _EmailParameter.Value = Email;
             _parameters.Add(Doctor_IDParameter);
             _parameters.Add(FirstNameParameter);
             _parameters.Add(LastNameParameter);
@@ -1404,33 +1409,52 @@ namespace DataClient
             _parameters.Add(SocialHistoryParameter);
             _parameters.Add(FamilyHistoryParameter);
             _parametersCreateUser.Add(accessLevelParameter);
+            _parametersEmailAddress.Add(_EmailParameter);
 
-            int UserID = 0; int PatientID = 0;
-            using (var reader = access.ExecuteReader(Conn, "[CreateUser]", _parametersCreateUser))
+            int UserID = 0; int PatientID = 0;            
+            try
             {
-                if (reader.Read())
+                using (var readerEmailAddress = access.ExecuteReader(Conn, "[CheckIfUserExists]", _parametersEmailAddress))//Check if user exists
                 {
-                    UserID = reader.GetInt32(reader.GetOrdinal("ID"));
-                    SqlParameter UserIDParameter = new SqlParameter("@User_ID", SqlDbType.Int);
-                    UserIDParameter.Value = UserID;
-                    _parameters.Add(UserIDParameter);
-                }
-            }
-            if (UserID != 0)
-            {
-                using (var reader = access.ExecuteReader(Conn, "[InsertMedicalRecord]", _parameters))
-                {
-                    if (reader.Read())
+                    if (!readerEmailAddress.Read())
                     {
-                        PatientID = reader.GetInt32(reader.GetOrdinal("ID"));
-                        SqlParameter PatientIDParameter = new SqlParameter("@Patient_ID", SqlDbType.Int);
-                        PatientIDParameter.Value = PatientID;
-                        _parametersPatient_Medical_Aid.Add(PatientIDParameter);
-                        access.ExecuteNonQuery(Conn, _parametersPatient_Medical_Aid, "[InsertPatient_Medical_Aid]");
+                        using (var reader = access.ExecuteReader(Conn, "[CreateUser]", _parametersCreateUser))
+                        {
+                            if (reader.Read())
+                            {
+                                UserID = reader.GetInt32(reader.GetOrdinal("ID"));
+                                SqlParameter UserIDParameter = new SqlParameter("@User_ID", SqlDbType.Int);
+                                UserIDParameter.Value = UserID;
+                                _parameters.Add(UserIDParameter);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        return false;
                     }
                 }
+                if (UserID != 0)
+                {
+                    using (var reader = access.ExecuteReader(Conn, "[InsertMedicalRecord]", _parameters))
+                    {
+                        if (reader.Read())
+                        {
+                            PatientID = reader.GetInt32(reader.GetOrdinal("ID"));
+                            SqlParameter PatientIDParameter = new SqlParameter("@Patient_ID", SqlDbType.Int);
+                            PatientIDParameter.Value = PatientID;
+                            _parametersPatient_Medical_Aid.Add(PatientIDParameter);
+                            access.ExecuteNonQuery(Conn, _parametersPatient_Medical_Aid, "[InsertPatient_Medical_Aid]");
+                            
+                        }
+                    }
+                }
+                return true;
             }
-            return true;
+            catch (Exception)
+            {
+                return false;
+            }            
         }
 
         public bool UpdateMedicalRecord(int Patient_ID, string FirstName, string LastName, string Email, string ID_Number, string Cell_Number, string DOB, string Gender, string Street_Address, string Suburb, string City, string Country, int Patient_Medical_Aid_Medical_Aid_ID, string Scheme_Name, string Membership_Number, string Registration_Date, string Deregistration_Date, string Allergies, string PreviousIllnesses, string PreviousMedication, string RiskFactors, string SocialHistory, string FamilyHistory)
@@ -1631,8 +1655,13 @@ namespace DataClient
         #region Staff       
         public List<Staff> GetAllStaff()
         {
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            SqlParameter Practice_IDParameter = new SqlParameter("@Practice_ID", SqlDbType.Int);
+            Practice_IDParameter.Value = LoggedIn_User_PRACTICE_ID;
+            _parameters.Add(Practice_IDParameter);
+            
             List<Staff> staffInfo = new List<Staff>();
-            using (var reader = access.ExecuteReader(Conn, "[GetAllStaff]", new List<SqlParameter>()))
+            using (var reader = access.ExecuteReader(Conn, "[GetAllStaff]", _parameters))
             {
                 while (reader.Read())
                 {

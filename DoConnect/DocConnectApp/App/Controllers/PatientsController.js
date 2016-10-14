@@ -1,5 +1,5 @@
-﻿app.controller("PatientsController", ["$scope", "PatientsService", "$interval", "$ngBootbox",
-    function ($scope, PatientsService, $interval, $ngBootbox) {
+﻿app.controller("PatientsController", ["$scope", "PatientsService", "$interval", "$ngBootbox", "$location",
+    function ($scope, PatientsService, $interval, $ngBootbox, $location) {
 
         $scope.PageTitle_Patients = 'Patients';
         $scope.PageTitle_NewPatient = 'New Patient Details';
@@ -11,13 +11,29 @@
             angular.element(".View_readonly").attr("readonly", true);
             angular.element(".View_readonly").css("border", "1px solid #ccc");
             angular.element(".View_readonly").css("background-color", "transparent");
+
+            PatientsService.SessionData().success(function (result) {
+                sessionStorage.SessionData_User_ID = result["User_ID"];
+                sessionStorage.SessionData_FirstName = result["FirstName"];
+                sessionStorage.SessionData_LastName = result["LastName"];
+                sessionStorage.SessionData_Email = result["Email"];
+                sessionStorage.SessionData_Practice_ID = result["Practice_ID"];
+                sessionStorage.SessionData_AccessLevel = result["AccessLevel"];
+
+                if (result["AccessLevel"] == '1' || result["AccessLevel"] == '2') {
+                    angular.element(".doctorControls").show();
+                }
+                else {
+                    angular.element(".doctorControls").hide();
+                }
+            });
         };
         init_ControlSettings();
         
         $scope.sort = function (keyname) {
             $scope.sortKey = keyname;
             $scope.reverse = !$scope.reverse;
-        }
+        }       
 
         $scope.GetPatients = function () {
             PatientsService.GetAllPatients().then(function (result) {
@@ -79,10 +95,14 @@
                 $scope.Patient_Medical_Aid_Medical_Aid_ID = result.data["Patient_Medical_Aid_Medical_Aid_ID"];
                 $scope.Scheme_Name = result.data["Scheme_Name"];
                 $scope.Membership_Number = result.data["Membership_Number"];
-                if (result.data["Status"] == 'true') { $scope.Status = 'Valid'; } else { $scope.Status = 'Invalid'; }
+                if (result.data["Status"])
+                { $scope.Status = "Valid"; } 
+                else { $scope.Status = "Invalid"; }
                 $scope.Registration_Date = result.data["Registration_Date"];
                 $scope.Deregistration_Date = result.data["Deregistration_Date"];
                 $scope.Patient_ID = result.data["Patient_ID"];
+
+                angular.element(".disable_View_readonly").prop("disabled", true);
             });
         };
         GetMedicalRecord();        
@@ -101,10 +121,17 @@
 
         //Insert Medical Record Funtion ##Doctor_ID     
         $scope.InsertPatient = function (FirstName, LastName, Email, ID_Number, Cell_Number, Street_Address, Suburb, City, Country, SchemeName, MembershipNumber, Allergies, PreviousMedication, PreviousIllnesses, RiskFactors, SocialHistory, FamilyHistory) {
-            PatientsService.InsertMedicalRecord(1, FirstName, LastName, Email, ID_Number, Cell_Number, angular.element("#DOB").val(), $scope.Seleceted_Gender, Street_Address, Suburb, City, Country, $scope.Medical_AidID, SchemeName, MembershipNumber, angular.element("#Registration_Date").val(), angular.element("#Deregistration_Date").val(), Allergies, PreviousMedication, PreviousIllnesses, RiskFactors, SocialHistory, FamilyHistory).then(function () {
-                //GetMedicalRecord();
-                angular.element(".insert").val('');
-                btnSuccess("Medical Record successfully inserted.");
+            PatientsService.InsertMedicalRecord(2, FirstName, LastName, Email, ID_Number, Cell_Number, angular.element("#DOB").val(), $scope.Seleceted_Gender, Street_Address, Suburb, City, Country, $scope.Medical_AidID, SchemeName, MembershipNumber, angular.element("#Registration_Date").val(), angular.element("#Deregistration_Date").val(), Allergies, PreviousMedication, PreviousIllnesses, RiskFactors, SocialHistory, FamilyHistory).then(function (result) {
+                GetMedicalRecord();
+                $location.path('/Patients');
+                if (result) {
+                    angular.element(".insert").val('');
+                    btnSuccess("Medical Record successfully inserted.");
+                }
+                else {
+                    btnAlert("System Error Message", "Insert unsuccessful.");
+                }
+                
             }, function (error) {
                 btnAlert("System Error Message", "Insert unsuccessful.");
             });
@@ -139,7 +166,7 @@
             $ngBootbox.confirm("Are you sure you want to delete this Patient: "+ $scope.FirstName+" "+$scope.LastName +" ?").then(function () {
                 PatientsService.DeletePatient(sessionStorage.Selected_PatientID).then(function () {
                     btnSuccess("Medical Record details successfully deleted.");
-                    btnRedirect("Patients");
+                    $location.path('/Patients');
                 }, function (error) {
                     btnAlert("System Error Message", "Delete unsuccessful.");
                 });
@@ -162,11 +189,11 @@
 
         //Insert Prescription Notes Funtion ##Patient_ID, Doctor_ID, Consultation_ID
         $scope.InsertPrescription = function (DrugName, Strength, DispenseNumber, RefillNumber) {
-            PatientsService.InsertPrescription(sessionStorage.Selected_PatientID, 4, sessionStorage.Selected_ConsultationID, DrugName, Strength, $scope.Seleceted_IntakeRoute, $scope.Seleceted_Frequency, DispenseNumber, RefillNumber).success(function () {
+            PatientsService.InsertPrescription(sessionStorage.Selected_PatientID, sessionStorage.SessionData_User_ID, sessionStorage.Selected_ConsultationID, DrugName, Strength, $scope.Seleceted_IntakeRoute, $scope.Seleceted_Frequency, DispenseNumber, RefillNumber).success(function () {
                 GetPrescription();
                 angular.element(".insert").val('');
                 btnSuccess("Prescription successfully inserted.");
-                btnRedirect("PrescriptionDetails");
+                $location.path('/PrescriptionDetails');
             }, function (error) {
                 btnAlert("System Error Message", "Insert unsuccessful.");
             });
@@ -230,7 +257,7 @@
                 GetConsultationNotes();
                 angular.element(".insert").val('');
                 btnSuccess("Consultation Note successfully inserted.");
-                btnRedirect("ConsultationNotes");
+                $location.path('/ConsultationNotes');
             }, function (error) {
                 btnAlert("System Error Message", "Insert unsuccessful.");
             });
