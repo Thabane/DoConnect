@@ -6,22 +6,22 @@
 
         <h4> Patient Information</h4>
         <br />
-        <form>
+        <form data-toggle="validator" role="form" name="dForm">
             <div class="form-group">
                 <div class="form-group row">
-                    <label for="example-text-input" class="col-xs-2 col-form-label">Patient Age</label>
+                    <label class="col-xs-2 col-form-label">Patient Age</label>
                     <div class="col-xs-10">
-                        <input class="form-control" type="number" value="0" id="example-text-input">
+                        <input class="form-control" type="number" ng-model="patient.age" ng-required="true">
                     </div>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="patientGender" class="col-xs-2 col-form-label">Gender</label>
                 <div class="col-xs-10">
-                    <select class="custom-select" id="patientGender">
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
+                    <select ng-model="patient.gender" class="custom-select" id="patientGender">
                         <option selected value="both">Both</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>                        
                     </select>
                 </div>
             </div>
@@ -40,10 +40,9 @@
                     <div class="form-group">
                         <label for="searchSymptomTextbox">Search: </label>
                         <input id="searchSymptomTextbox" ng-model="searchSymptom.name">
-                        <select size="10" ng-model="selectedSymptom" form="finalSymptoms" multiple class="form-control ng-valid ng-dirty" ng-options="symptom.id as symptom.name for symptom in SymptomBank | filter:searchSymptom">
+                        <select size="10" ng-model="selectedSymptom" form="finalSymptoms" multiple class="form-control ng-valid ng-dirty" ng-options="symptom as symptom.name for symptom in SymptomBank | filter:searchSymptom">
                             <option ng-repeat="symptom in SymptomBank">{{symptom.name}}</option>
                         </select>
-                        <label>{{selectedSymptom}}</label>
                     </div>                    
                     <button type="button" class="btn btn-default" ng-click="AddEvidence(selectedSymptom)">Add Symptom</button>
 
@@ -52,10 +51,9 @@
                     <div class="form-group">
                         <label for="searchRiskTextbox">Search: </label>
                         <input id="searchRiskTextbox" ng-model="searchRisk.name">
-                        <select size="10" ng-model="selectedRisk" form="finalSymptoms" multiple class="form-control ng-valid ng-dirty" ng-options="risk.id as risk.name for risk in RiskBank | filter:searchRisk">
+                        <select size="10" ng-model="selectedRisk" form="finalSymptoms" multiple class="form-control ng-valid ng-dirty" ng-options="risk as risk.name for risk in RiskBank | filter:searchRisk">
                             <option ng-repeat="risk in RiskBank">{{risk.name}}</option>
                         </select>
-                        <label>{{selectedRisk}}</label>
                     </div>
                     <button type="button" class="btn btn-default" ng-click="AddEvidence(selectedRisk)" >Add Risk Factor</button>
                 </div>
@@ -64,14 +62,17 @@
         
         <form>
             <div class="form-group">
-                <label for="finalSymptoms">Selected Symptoms</label>
+                <label for="finalSymptoms">Selected Symptoms & Risks</label>
                 <select multiple class="form-control" id="finalSymptoms">
-                    <option ng-repeat="res in Symptoms">{{res.id}}</option>
+                    <option ng-repeat="res in Symptoms">{{res.name}}</option>
                 </select>
             </div>
 
-            <!--<button type="submit" class="btn btn-default" href="/DiagnosisExpertSystemProcess">Diagnose</button>-->
-            <a href="/DiagnosisExpertSystemProcess" ng-click="DianosePatient(Symptoms)"> Diagnose</a>
+            <!--<button type="submit" class="btn btn-default" href="/DiagnosisExpertSystemProcess">Diagnose1</button>-->
+            <a href="/DiagnosisExpertSystemProcess" ng-click="DianosePatient(Symptoms,patient.age,patient.gender)"> Diagnose</a>
+
+            <pre>{{patient.age}}</pre>
+            <pre>{{patient.gender}}</pre>
         </form>
 
     </div>

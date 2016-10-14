@@ -1,5 +1,5 @@
 ﻿app.controller("DiagnosisExpertSystemController", ["$scope", "DiagnosisExpertSystemService", "$interval",
-    function ($scope, DiagnosisExpertSystemService, $interval, $localStorage) {
+    function ($scope, DiagnosisExpertSystemService, $interval, $location) {
 
         $scope.Symptoms = [];
 
@@ -11,23 +11,19 @@
             });
         };
 
-        $scope.GetFiveRandomSymptoms = function () {
-            DiagnosisExpertSystemService.getFiveRandomSymptoms().then
-            (function (result) {
-                $scope.RandomSymp = result.data;
+        $scope.DianosePatient = function (symptoms, age, gender) {
+            var evidence = {
+                sex: gender,
+                age: age,
+                evidence: symptoms
+            }
+
+            DiagnosisExpertSystemService.patientDiagnosis(evidence).then
+            (function () {
             });
         };
 
-        $scope.DianosePatient = function () {
-            DiagnosisExpertSystemService.patientDiagnosis($scope.Symptoms).then
-            (function (result) {
-
-            });
-        };
-        
-        //$scope.GetFiveRandomSymptoms();
         $scope.GetAllSymptoms();
-        //$scope.GetRiskFactors();
 
 
         $scope.AddEvidence = function (data) {
@@ -35,15 +31,12 @@
             if (data != undefined) {
                 var sympt =
                     {
-                        id: data[0],
-                        choice_id: "present"
+                        id: data[0].id,
+                        choice_id: "present",
+                        name: data[0].name
                     }
                 $scope.Symptoms.push(sympt);
             }
-        }
-
-        $scope.populateData = function () {
-            //$scope.GetSymptoms();;
         }
 
         $scope.GetRiskFactors = function () {
