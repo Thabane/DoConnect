@@ -1661,7 +1661,7 @@ namespace DataClient
             _parameters.Add(Practice_IDParameter);
             
             List<Staff> staffInfo = new List<Staff>();
-            using (var reader = access.ExecuteReader(Conn, "[GetAllStaff]", _parameters))
+            using (var reader = access.ExecuteReader(Conn, "[GetAllStaff]",   _parameters))
             {
                 while (reader.Read())
                 {
