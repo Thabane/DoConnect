@@ -27,11 +27,11 @@
                         <th style="width: 20%;" ng-click="sort('Email')">Email Address<span class="fa sort-icon" ng-show="sortKey=='Email'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
                         <th style="width: 20%;" ng-click="sort('ID_Number')">ID Number<span class="fa sort-icon" ng-show="sortKey=='ID_Number'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
                         <th style="width: 15%;" ng-click="sort('Employee_Type')">Employee Type<span class="fa sort-icon" ng-show="sortKey=='Employee_Type'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
-                        <th style="width: 15%;" >Action
+                        <th style="width: 15%;">Action
                     </tr>
                 </thead>
-                <tbody>
-                    <tr dir-paginate="Employee in Employees | filter:search | orderBy:sortKey:reverse | itemsPerPage:5">
+                <tbody>                    
+                    <tr ng-show="Employees.length > 0" dir-paginate="Employee in Employees | filter:search | orderBy:sortKey:reverse | itemsPerPage:5">                        
                         <td>{{Employee.FirstName}}</td>
                         <td>{{Employee.LastName}}</td>
                         <td>{{Employee.Email}}</td>
@@ -42,6 +42,7 @@
                             <button class="btn btn-danger btn-xs" ng-click="DeleteEmployee1(Employee.User_ID, Employee.FirstName +' '+ Employee.LastName)"><i class="fa fa-trash-o"></i></button>
                         </td>
                     </tr>
+                    <tr class="row alert alert-info text-center" ng-show="Employees.length == 0"><td colspan="4"><b>System Message!</b> No employee records to display.</td></tr>
                 </tbody>
             </table>
 

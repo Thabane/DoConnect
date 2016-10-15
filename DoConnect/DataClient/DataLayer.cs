@@ -92,7 +92,7 @@ namespace DataClient
             return Login;
         }
 
-        public static int LoggedIn_User_PRACTICE_ID;
+        public static int LoggedIn_User_PRACTICE_ID, LoggedIn_User_AccessLevel;
         public Staff GetUserDetailsByUser_ID(int User_ID)
         {
             List<SqlParameter> _parameters = new List<SqlParameter>();
@@ -106,6 +106,7 @@ namespace DataClient
                 if (reader.Read())
                 {
                     LoggedIn_User_PRACTICE_ID = reader.GetInt32(reader.GetOrdinal("Practice_ID"));
+                    LoggedIn_User_AccessLevel = reader.GetInt32(reader.GetOrdinal("AccessLevel"));
                     List = new Staff().GetLogginUser(reader);
                 }
             }
@@ -1661,13 +1662,26 @@ namespace DataClient
             _parameters.Add(Practice_IDParameter);
             
             List<Staff> staffInfo = new List<Staff>();
-            using (var reader = access.ExecuteReader(Conn, "[GetAllStaff]",   _parameters))
+            if (LoggedIn_User_AccessLevel == 2 || LoggedIn_User_AccessLevel == 1)
             {
-                while (reader.Read())
+                using (var reader = access.ExecuteReader(Conn, "[GetAllPracStaff]", new List<SqlParameter>()))
                 {
-                    staffInfo.Add(new Staff().Create(reader));
+                    while (reader.Read())
+                    {
+                        staffInfo.Add(new Staff().Create(reader));
+                    }
                 }
             }
+            else
+            {
+                using (var reader = access.ExecuteReader(Conn, "[GetAllStaff]", _parameters))
+                {
+                    while (reader.Read())
+                    {
+                        staffInfo.Add(new Staff().Create(reader));
+                    }
+                }
+            }            
             return staffInfo;
         }
 
