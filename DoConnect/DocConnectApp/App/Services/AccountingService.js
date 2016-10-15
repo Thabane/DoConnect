@@ -1,6 +1,10 @@
 ﻿app.factory('AccountingService',
     function ($http) {
 
+        var SessionData = function () {
+            return $http.get("/Data/SessionData");
+        };
+
         var GetAllInvoices = function () {
             return $http.get("api/Accounting/GetAllInvoices");
         };
@@ -21,9 +25,10 @@
             return $http.get("api/Appointments/GetAllDoctors");
         }
 
-        var InsertInvoice = function (InvoiceSummary, Total, AmountPaid, Medical_Aid_ID, Patient_ID, Doctor_ID) {
+        var InsertInvoice = function (Date, InvoiceSummary, Total, AmountPaid, Medical_Aid_ID, Patient_ID, Doctor_ID) {
             return $http.post("api/Accounting/InsertInvoice",
             {
+                'Date': Date,
                 'InvoiceSummary': InvoiceSummary,
                 'Total': Total,
                 'AmountPaid': AmountPaid,
@@ -92,6 +97,7 @@
         };
 
         return {
+            SessionData: SessionData,
             GetAllInvoices: GetAllInvoices,
             GetInvoiceByID: GetInvoiceByID,
             GetAllPatients: GetAllPatients,

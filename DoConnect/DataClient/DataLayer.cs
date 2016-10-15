@@ -20,6 +20,7 @@ namespace DataClient
         public DataLayer()
         {
             access = new DataAccess();
+            
         }
 
         #region
@@ -695,12 +696,83 @@ namespace DataClient
         #region Invoice
         public List<Invoice> GetAllInvoices()
         {
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            SqlParameter Practice_IDParameter = new SqlParameter("@Practice_ID", SqlDbType.Int);
+            Practice_IDParameter.Value = LoggedIn_User_PRACTICE_ID;
+            _parameters.Add(Practice_IDParameter);
+
+            Invoice invoice = new Invoice(); int numOfUnPaid = 0; int numOfPatiallyPaid = 0;
             List<Invoice> invoiceInfo = new List<Invoice>();
-            using (var reader = access.ExecuteReader(Conn, "[GetAllInvoices]", new List<SqlParameter>()))
+            if (LoggedIn_User_AccessLevel == 1)
             {
-                while (reader.Read())
+                using (var reader = access.ExecuteReader(Conn, "[GetAllInvoices]", new List<SqlParameter>()))
                 {
-                    invoiceInfo.Add(new Invoice().Create(reader));
+                    while (reader.Read())
+                    {
+                        invoice.ID = reader.GetInt32(reader.GetOrdinal("ID"));
+                        invoice.InvoiceSummary = reader.GetString(reader.GetOrdinal("InvoiceSummary"));
+                        invoice.Date = reader.GetString(reader.GetOrdinal("Date"));
+                        invoice.Total = reader.GetDecimal(reader.GetOrdinal("Total"));
+                        invoice.BalanceOwing = reader.GetDecimal(reader.GetOrdinal("BalanceOwing"));
+                        invoice.PaidStatus = reader.GetInt32(reader.GetOrdinal("PaidStatus"));
+                        invoice.Medical_Aid_ID = reader.GetInt32(reader.GetOrdinal("Medical_Aid_ID"));
+                        invoice.Patient_ID = reader.GetInt32(reader.GetOrdinal("Patient_ID"));
+                        invoice.Patient_FirstName = reader.GetString(reader.GetOrdinal("Patient_FirstName"));
+                        invoice.Patient_LastName = reader.GetString(reader.GetOrdinal("Patient_LastName"));
+                        invoice.Patient_Email = reader.GetString(reader.GetOrdinal("Patient_Email"));
+                        invoice.Doctor_ID = reader.GetInt32(reader.GetOrdinal("Doctor_ID"));
+                        invoice.Doctor_FirstName = reader.GetString(reader.GetOrdinal("Doctor_FirstName"));
+                        invoice.Doctor_LastName = reader.GetString(reader.GetOrdinal("Doctor_LastName"));
+                        invoice.Doctor_Email = reader.GetString(reader.GetOrdinal("Doctor_Email"));
+                            //0 == Unpaid, 1 == Fully-Paid, 2 == Partially-Paid
+                        if (reader.GetInt32(reader.GetOrdinal("PaidStatus")) == 0)
+                        {
+                            numOfUnPaid++;
+                        }
+                        invoice.numOfUnPaid = numOfUnPaid;
+                        if (reader.GetInt32(reader.GetOrdinal("PaidStatus")) == 2)
+                        {
+                            numOfPatiallyPaid++;
+                        }
+                        invoice.numOfPatiallyPaid = numOfPatiallyPaid;
+                        invoiceInfo.Add(invoice); invoice = new Invoice();
+                    }
+                }
+            }
+            else
+            {
+                using (var reader = access.ExecuteReader(Conn, "[GetAllInvoicesPrac]", _parameters))
+                {
+                    while (reader.Read())
+                    {
+                        invoice.ID = reader.GetInt32(reader.GetOrdinal("ID"));
+                        invoice.InvoiceSummary = reader.GetString(reader.GetOrdinal("InvoiceSummary"));
+                        invoice.Date = reader.GetString(reader.GetOrdinal("Date"));
+                        invoice.Total = reader.GetDecimal(reader.GetOrdinal("Total"));
+                        invoice.BalanceOwing = reader.GetDecimal(reader.GetOrdinal("BalanceOwing"));
+                        invoice.PaidStatus = reader.GetInt32(reader.GetOrdinal("PaidStatus"));
+                        invoice.Medical_Aid_ID = reader.GetInt32(reader.GetOrdinal("Medical_Aid_ID"));
+                        invoice.Patient_ID = reader.GetInt32(reader.GetOrdinal("Patient_ID"));
+                        invoice.Patient_FirstName = reader.GetString(reader.GetOrdinal("Patient_FirstName"));
+                        invoice.Patient_LastName = reader.GetString(reader.GetOrdinal("Patient_LastName"));
+                        invoice.Patient_Email = reader.GetString(reader.GetOrdinal("Patient_Email"));
+                        invoice.Doctor_ID = reader.GetInt32(reader.GetOrdinal("Doctor_ID"));
+                        invoice.Doctor_FirstName = reader.GetString(reader.GetOrdinal("Doctor_FirstName"));
+                        invoice.Doctor_LastName = reader.GetString(reader.GetOrdinal("Doctor_LastName"));
+                        invoice.Doctor_Email = reader.GetString(reader.GetOrdinal("Doctor_Email"));
+                        
+                        if (reader.GetInt32(reader.GetOrdinal("PaidStatus")) == 0)
+                        {
+                            numOfUnPaid++;
+                        }
+                        invoice.numOfUnPaid = numOfUnPaid;
+                        if (reader.GetInt32(reader.GetOrdinal("PaidStatus")) == 2)
+                        {
+                            numOfPatiallyPaid++;
+                        }
+                        invoice.numOfPatiallyPaid = numOfPatiallyPaid;
+                        invoiceInfo.Add(invoice); invoice = new Invoice();
+                    }
                 }
             }
             return invoiceInfo;
@@ -752,7 +824,7 @@ namespace DataClient
             return invoiceInfo;
         }
 
-        public bool NewInvoice(string InvoiceSummary, decimal Total, decimal AmountPaid, int Medical_Aid_ID, int Patient_ID, int Doctor_ID)
+        public bool NewInvoice(string Date, string InvoiceSummary, decimal Total, decimal AmountPaid, int Medical_Aid_ID, int Patient_ID, int Doctor_ID)
         {
             List<SqlParameter> _parameters = new List<SqlParameter>();
             SqlParameter dateParameter = new SqlParameter("@Date", SqlDbType.DateTime);
@@ -765,7 +837,7 @@ namespace DataClient
             SqlParameter patient_IDParameter = new SqlParameter("@Patient_ID", SqlDbType.Int);
             SqlParameter doctor_IDParameter = new SqlParameter("@Doctor_ID", SqlDbType.Int);
 
-            dateParameter.Value = DateTime.Now.ToString("yyyy-MM-dd");
+            dateParameter.Value = Date;
             invoiceSummaryParameter.Value = InvoiceSummary;
             totalParameter.Value = Total;
             AmountPaidParameter.Value = AmountPaid;
@@ -798,6 +870,9 @@ namespace DataClient
                 if (reader.Read())
                 {
                     insertedID = reader.GetInt32(reader.GetOrdinal("ID"));
+
+                    //Send email to Patient
+                    Email.SendEmail("josephine.chivinge@gmail.com", "Consultation Invoice", "Here is your email", "");
                 }
             }
             return true;

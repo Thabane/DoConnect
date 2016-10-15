@@ -47,7 +47,7 @@ namespace DataClient
         Invoice GetInvoiceById(int ID);
         List<GetAllPatients> GetAllPatientsForInvoice();
         List<Invoice> GetAllDiagnosisByPatientID(int ID);
-        bool NewInvoice(string InvoiceSummary, decimal Total, decimal AmountPaid, int Medical_Aid_ID, int Patient_ID, int Doctor_ID);
+        bool NewInvoice(string Date, string InvoiceSummary, decimal Total, decimal AmountPaid, int Medical_Aid_ID, int Patient_ID, int Doctor_ID);
         bool DeleteInvoice(int id);
         #endregion
 

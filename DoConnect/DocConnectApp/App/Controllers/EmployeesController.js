@@ -18,17 +18,17 @@
                 sessionStorage.SessionData_LastName = result["LastName"];
                 sessionStorage.SessionData_Email = result["Email"];
                 sessionStorage.SessionData_Practice_ID = result["Practice_ID"];
-                sessionStorage.SessionData_AccessLevel = result["AccessLevel"];
-
-                if (result["AccessLevel"] == '1' || result["AccessLevel"] == '2') {
-                    angular.element(".doctorControls").show();
-                }
-                else {
-                    angular.element(".doctorControls").hide();
-                }
+                sessionStorage.SessionData_AccessLevel = result["AccessLevel"];                
             });
         };
         $scope.GetAllEmployees();
+
+        if (sessionStorage.SessionData_AccessLevel == '1' || sessionStorage.SessionData_AccessLevel == '2') {
+            angular.element(".doctorControls").show();
+        }
+        else {
+            angular.element(".doctorControls").hide();
+        }
 
         $scope.Genders = [{ "Gender": "Male", "Char": "M" }, { "Gender": "Female", "Char": "F" }];
 
