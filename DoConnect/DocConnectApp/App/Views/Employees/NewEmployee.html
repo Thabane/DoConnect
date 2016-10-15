@@ -20,7 +20,7 @@
                         <div class="col-md-2"><h5>Firstname:<span style="color:red">*</span></h5></div>
                         <div class="col-md-4"><input class="form-control insert" type="text" ng-model="FirstName" name="FirstName" ng-required="true" ng-pattern="/^[a-zA-Z''-'\s]{3,40}$/"></div>
                         <div class="col-md-2"><h5>Cell Number:<span style="color:red">*</span></h5></div>
-                        <div class="col-md-4"><input class="form-control insert" type="text" ng-model="Phone" name="Phone" ng-required="true" ng-pattern="/[0-9]{1}[0-9]{9}/"></div>
+                        <div class="col-md-4"><input class="form-control insert" type="text" ng-model="Phone" name="Phone" ng-required="true" ng-pattern="/^[0-9]{10,10}$/" placeholder="0829999999"></div>
                     </div>
                     <div class="row" style="margin-top:0px; margin-bottom:8px;">
                         <div class="col-md-2"></div>
@@ -31,7 +31,7 @@
                         <div class="col-md-2"></div>
                         <div class="col-md-4">
                             <small ng-show="Form.Phone.$invalid && Form.Phone.$touched && Form.Phone.$error.required">Required field.<br></small>
-                            <small ng-show="Form.Phone.$invalid && Form.Phone.$touched && Form.Phone.$error.pattern">Only numeric letters allowed and atleast 10 charactors long.</small>
+                            <small ng-show="Form.Phone.$invalid && Form.Phone.$touched && Form.Phone.$error.pattern">Only numeric letters allowed and 10 charactors long.</small>
                         </div>    
                     </div>
                     <div class="row" style="margin-top:4px; margin-bottom:0px;">

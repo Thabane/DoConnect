@@ -438,8 +438,8 @@ namespace DataClient
             appIdParameter.Value = AppId;
             _parameters.Add(appIdParameter);
             Appointments AppointmentsInfo = new Appointments();
-            //try
-            //{                
+            try
+            {                
                 using (var reader = access.ExecuteReader(Conn, "[GetAppointmentById]", _parameters))
                 {
                     if (reader.Read())
@@ -448,12 +448,12 @@ namespace DataClient
                         access.LogEntry(AppId, "Appointment record viewed: id: "+ LoggedIn_User_ID);
                     }
                 }                
-            //}
-            //catch (Exception ex)
-            //{
-            //    access.LogEntry(AppId, "System failed to view selected appointment: id: " + ex.ToString());                
-            //}
-            //access.ReadEntry();
+            }
+            catch (Exception ex)
+            {
+                access.LogEntry(AppId, "System failed to view selected appointment: id: " + ex.ToString());                
+            }
+            access.ReadEntry();
             return AppointmentsInfo;
         }
         public bool NewAppointment(string Date_Time, int Patient_ID, string Details, int App_Status, int DoctorID)
