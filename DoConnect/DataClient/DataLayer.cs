@@ -16,7 +16,7 @@ namespace DataClient
         private DataAccess access;
         private List<SqlParameter> _parameters = new List<SqlParameter>();
         private string Conn = @"Data Source=DESKTOP-6Gu3I3G\SQLEXPRESS;Initial Catalog=DoConnect;Integrated Security=True";
-
+        //private string Conn =   @"Data Source=doconnect.database.windows.net;Initial Catalog=DoConnect;Persist Security Info=True;User ID=teamCogent;Password=DoConnect1";
         public DataLayer()
         {
             access = new DataAccess();

@@ -1,5 +1,5 @@
-﻿app.controller("EmployeesController", ["$scope", "EmployeesService", "$interval", "$ngBootbox",
-    function ($scope, EmployeesService, $interval, $ngBootbox) {
+﻿app.controller("EmployeesController", ["$scope", "EmployeesService", "$interval", "$ngBootbox", "$location",
+    function ($scope, EmployeesService, $interval, $ngBootbox, $location) {
 
         $scope.sort = function (keyname) {
             $scope.sortKey = keyname;
@@ -10,6 +10,22 @@
             EmployeesService.GetAllEmployees().then
             (function (result) {
                 $scope.Employees = result.data;
+            });
+
+            EmployeesService.SessionData().success(function (result) {
+                sessionStorage.SessionData_User_ID = result["User_ID"];
+                sessionStorage.SessionData_FirstName = result["FirstName"];
+                sessionStorage.SessionData_LastName = result["LastName"];
+                sessionStorage.SessionData_Email = result["Email"];
+                sessionStorage.SessionData_Practice_ID = result["Practice_ID"];
+                sessionStorage.SessionData_AccessLevel = result["AccessLevel"];
+
+                if (result["AccessLevel"] == '1' || result["AccessLevel"] == '2') {
+                    angular.element(".doctorControls").show();
+                }
+                else {
+                    angular.element(".doctorControls").hide();
+                }
             });
         };
         $scope.GetAllEmployees();
@@ -79,14 +95,29 @@
         };
 
         $scope.NewEmployee = function (FirstName, LastName, ID_Number, Phone, Street_Address, Suburb, City, Country, Email) {
-            EmployeesService.InsertEmployee(FirstName, LastName, ID_Number, $scope.Seleceted_Gender, angular.element("#DOB").val(), Phone, Street_Address, Suburb, City, Country, $scope.Seleceted_ACCESSLEVEL_ID, $scope.Seleceted_ACCESSLEVEL_LEVEL, $scope.Practice_ID, Email).success(function () {
-                $scope.GetAllEmployees();
-                angular.element(".insert").val('');
-                btnSuccess("Employee successfully inserted.");
-                //btnRedirect("Employees");
-            }, function (error) {
-                btnAlert("System Error Message", "Insert unsuccessful.");
-            });
+            if (sessionStorage.SessionData_AccessLevel == '1' || sessionStorage.SessionData_AccessLevel == '2') {
+                EmployeesService.InsertEmployee(FirstName, LastName, ID_Number, $scope.Seleceted_Gender, angular.element("#DOB").val(), Phone, Street_Address, Suburb, City, Country, $scope.Seleceted_ACCESSLEVEL_ID, $scope.Seleceted_ACCESSLEVEL_LEVEL, $scope.Practice_ID, Email).success(function () {
+                    $scope.GetAllEmployees();
+                    angular.element(".insert").val('');
+                    btnSuccess("Employee successfully inserted.");
+                    $location.path('/Employees');
+                }, function (error) {
+                    btnAlert("System Error Message", "Insert unsuccessful.");
+                });
+            }
+            else {
+                EmployeesService.InsertEmployee(FirstName, LastName, ID_Number, $scope.Seleceted_Gender, angular.element("#DOB").val(), Phone, Street_Address, Suburb, City, Country, $scope.Seleceted_ACCESSLEVEL_ID, $scope.Seleceted_ACCESSLEVEL_LEVEL, sessionStorage.SessionData_Practice_ID, Email).success(function () {
+                    $scope.GetAllEmployees();
+                    angular.element(".insert").val('');
+                    btnSuccess("Employee successfully inserted.");
+                    $location.path('/Employees');
+                }, function (error) {
+                    btnAlert("System Error Message", "Insert unsuccessful.");
+                });
+            }
+
+
+            
         };
 
         $scope.function_btnUpdateEmployee = function () {
