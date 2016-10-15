@@ -31,7 +31,7 @@
                     </tr>
                 </thead>
                 <tbody>                    
-                    <tr ng-show="Employees.length > 0" dir-paginate="Employee in Employees | filter:search | orderBy:sortKey:reverse | itemsPerPage:5">                        
+                    <tr ng-show="Employees.length > 0" dir-paginate="Employee in Employees | filter:search | orderBy:sortKey:reverse | itemsPerPage:7">                        
                         <td>{{Employee.FirstName}}</td>
                         <td>{{Employee.LastName}}</td>
                         <td>{{Employee.Email}}</td>
@@ -55,7 +55,7 @@
 
         <!--View Employee Modal-->
         <div id="View_Employee_Modal" class="modal fade">
-            <form name="Form">
+            <form name="Form" novalidate>
                 <div class="modal-dialog" style="width:60%">
                     <div class="modal-content">
                         <div class="modal-header">

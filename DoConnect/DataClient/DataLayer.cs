@@ -333,14 +333,100 @@ namespace DataClient
         #region Appointments
         public List<Appointments> GetAppointments()
         {
-            List<Appointments> AppointmentsInfo = new List<Appointments>();
-            using (var reader = access.ExecuteReader(Conn, "[GetAllAppointments]", new List<SqlParameter>()))
-            {
-                while (reader.Read())
-                {
-                    AppointmentsInfo.Add(new Appointments().Create(reader));
-                }
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            SqlParameter Practice_IDParameter = new SqlParameter("@Practice_ID", SqlDbType.Int);
+            Practice_IDParameter.Value = LoggedIn_User_PRACTICE_ID;
+            _parameters.Add(Practice_IDParameter);
 
+            DateTime Today = DateTime.Now;
+            DateTime Tomorrow = DateTime.Today.AddDays(+1);
+            DateTime Tomorrow2 = DateTime.Today.AddDays(+2);
+            Appointments AppointmentInfo = new Appointments(); int numTodayApps = 0; int numTomorrowApps = 0;
+            List<Appointments> AppointmentsInfo = new List<Appointments>();
+            if (LoggedIn_User_AccessLevel == 1)
+            {
+                using (var reader = access.ExecuteReader(Conn, "[GetAllAppointments]", new List<SqlParameter>()))
+                {
+                    while (reader.Read())
+                    {
+                        AppointmentInfo.Appointments_ID = reader.GetInt32(reader.GetOrdinal("Appointments_ID"));
+                        AppointmentInfo.Appointments_App_Status = reader.GetInt32(reader.GetOrdinal("Appointments_App_Status"));
+                        AppointmentInfo.Appointments_Date_Time = reader.GetString(reader.GetOrdinal("Appointments_Date_Time"));
+                        AppointmentInfo.Appointments_Details = reader.GetString(reader.GetOrdinal("Appointments_Details"));
+                        AppointmentInfo.Patient_ID = reader.GetInt32(reader.GetOrdinal("Patient_ID"));
+                        AppointmentInfo.Patient_FirstName = reader.GetString(reader.GetOrdinal("Patient_FirstName"));
+                        AppointmentInfo.Patient_LastName = reader.GetString(reader.GetOrdinal("Patient_LastName"));
+                        AppointmentInfo.Patient_Cell_Number = reader.GetString(reader.GetOrdinal("Patient_Cell_Number"));
+                        AppointmentInfo.Patient_Email = reader.GetString(reader.GetOrdinal("Patient_Email"));
+                        AppointmentInfo.Doctors_Email = reader.GetString(reader.GetOrdinal("Doctors_Email"));
+                        AppointmentInfo.Doctors_FirstName = reader.GetString(reader.GetOrdinal("Doctors_FirstName"));
+                        AppointmentInfo.Doctors_LastName = reader.GetString(reader.GetOrdinal("Doctors_LastName"));
+                        AppointmentInfo.Doctors_ID = reader.GetInt32(reader.GetOrdinal("Doctors_ID"));
+                        AppointmentInfo.Doctors_Job_Title = reader.GetString(reader.GetOrdinal("Doctors_Job_Title"));
+                        AppointmentInfo.Practice_ID = reader.GetInt32(reader.GetOrdinal("Practice_ID"));
+                        AppointmentInfo.Practice_Name = reader.GetString(reader.GetOrdinal("Practice_Name"));
+                        AppointmentInfo.Practice_Phone_Number = reader.GetString(reader.GetOrdinal("Practice_Phone_Number"));
+                        AppointmentInfo.Practice_Fax_Number = reader.GetString(reader.GetOrdinal("Practice_Fax_Number"));
+                        AppointmentInfo.Practice_Address = reader.GetString(reader.GetOrdinal("Practice_Address"));
+
+                        DateTime Appointments_Date_Time = Convert.ToDateTime(reader.GetString(reader.GetOrdinal("Appointments_Date_Time")));
+                        if ((Today < Appointments_Date_Time) && (Appointments_Date_Time < Tomorrow))
+                        {
+                            AppointmentInfo.highlightTodayApps = 1;
+                            numTodayApps++;                            
+                        }
+                        AppointmentInfo.numTodayApps = numTodayApps;
+                        if ((Tomorrow < Appointments_Date_Time) && (Appointments_Date_Time < Tomorrow2))
+                        {
+                            AppointmentInfo.highlightTomorrowApps = 1;
+                            numTomorrowApps++;                            
+                        }
+                        AppointmentInfo.numTomorrowApps = numTomorrowApps;
+                        AppointmentsInfo.Add(AppointmentInfo); AppointmentInfo = new Appointments();
+                    }
+                }
+            }
+            else
+            {
+                using (var reader = access.ExecuteReader(Conn, "[GetAllAppointmentsPrac]", _parameters))
+                {
+                    while (reader.Read())
+                    {
+                        AppointmentInfo.Appointments_ID = reader.GetInt32(reader.GetOrdinal("Appointments_ID"));
+                        AppointmentInfo.Appointments_App_Status = reader.GetInt32(reader.GetOrdinal("Appointments_App_Status"));
+                        AppointmentInfo.Appointments_Date_Time = reader.GetString(reader.GetOrdinal("Appointments_Date_Time"));
+                        AppointmentInfo.Appointments_Details = reader.GetString(reader.GetOrdinal("Appointments_Details"));
+                        AppointmentInfo.Patient_ID = reader.GetInt32(reader.GetOrdinal("Patient_ID"));
+                        AppointmentInfo.Patient_FirstName = reader.GetString(reader.GetOrdinal("Patient_FirstName"));
+                        AppointmentInfo.Patient_LastName = reader.GetString(reader.GetOrdinal("Patient_LastName"));
+                        AppointmentInfo.Patient_Cell_Number = reader.GetString(reader.GetOrdinal("Patient_Cell_Number"));
+                        AppointmentInfo.Patient_Email = reader.GetString(reader.GetOrdinal("Patient_Email"));
+                        AppointmentInfo.Doctors_Email = reader.GetString(reader.GetOrdinal("Doctors_Email"));
+                        AppointmentInfo.Doctors_FirstName = reader.GetString(reader.GetOrdinal("Doctors_FirstName"));
+                        AppointmentInfo.Doctors_LastName = reader.GetString(reader.GetOrdinal("Doctors_LastName"));
+                        AppointmentInfo.Doctors_ID = reader.GetInt32(reader.GetOrdinal("Doctors_ID"));
+                        AppointmentInfo.Doctors_Job_Title = reader.GetString(reader.GetOrdinal("Doctors_Job_Title"));
+                        AppointmentInfo.Practice_ID = reader.GetInt32(reader.GetOrdinal("Practice_ID"));
+                        AppointmentInfo.Practice_Name = reader.GetString(reader.GetOrdinal("Practice_Name"));
+                        AppointmentInfo.Practice_Phone_Number = reader.GetString(reader.GetOrdinal("Practice_Phone_Number"));
+                        AppointmentInfo.Practice_Fax_Number = reader.GetString(reader.GetOrdinal("Practice_Fax_Number"));
+                        AppointmentInfo.Practice_Address = reader.GetString(reader.GetOrdinal("Practice_Address"));
+                        DateTime Appointments_Date_Time = Convert.ToDateTime(reader.GetString(reader.GetOrdinal("Appointments_Date_Time")));
+                        if ((Today < Appointments_Date_Time) && (Appointments_Date_Time < Tomorrow))
+                        {
+                            AppointmentInfo.highlightTodayApps = 1;
+                            numTodayApps++;
+                        }
+                        AppointmentInfo.numTodayApps = numTodayApps;
+                        if ((Tomorrow < Appointments_Date_Time) && (Appointments_Date_Time < Tomorrow2))
+                        {
+                            AppointmentInfo.highlightTomorrowApps = 1;
+                            numTomorrowApps++;
+                        }
+                        AppointmentInfo.numTomorrowApps = numTomorrowApps;
+                        AppointmentsInfo.Add(AppointmentInfo); AppointmentInfo = new Appointments();
+                    }
+                }
             }
             return AppointmentsInfo;
         }
@@ -352,22 +438,22 @@ namespace DataClient
             appIdParameter.Value = AppId;
             _parameters.Add(appIdParameter);
             Appointments AppointmentsInfo = new Appointments();
-            try
-            {                
+            //try
+            //{                
                 using (var reader = access.ExecuteReader(Conn, "[GetAppointmentById]", _parameters))
                 {
                     if (reader.Read())
                     {
-                        AppointmentsInfo = (new Appointments().Create(reader));
+                        AppointmentsInfo = (new Appointments().GetAppByID(reader));
                         access.LogEntry(AppId, "Appointment record viewed: id: "+ LoggedIn_User_ID);
                     }
                 }                
-            }
-            catch (Exception ex)
-            {
-                access.LogEntry(AppId, "System failed to view selected appointment: id: " + ex.ToString());                
-            }
-            access.ReadEntry();
+            //}
+            //catch (Exception ex)
+            //{
+            //    access.LogEntry(AppId, "System failed to view selected appointment: id: " + ex.ToString());                
+            //}
+            //access.ReadEntry();
             return AppointmentsInfo;
         }
         public bool NewAppointment(string Date_Time, int Patient_ID, string Details, int App_Status, int DoctorID)
@@ -1662,7 +1748,7 @@ namespace DataClient
             _parameters.Add(Practice_IDParameter);
             
             List<Staff> staffInfo = new List<Staff>();
-            if (LoggedIn_User_AccessLevel == 2 || LoggedIn_User_AccessLevel == 1)
+            if (LoggedIn_User_AccessLevel == 1)
             {
                 using (var reader = access.ExecuteReader(Conn, "[GetAllPracStaff]", new List<SqlParameter>()))
                 {

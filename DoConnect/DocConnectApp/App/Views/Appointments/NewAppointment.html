@@ -65,7 +65,7 @@
                     </div>
                     <div class="row" style="margin-top:4px; margin-bottom:0px;">
                         <div class="col-md-3"><h5>Appointment Status:<span style="color:red">*</span></h5></div>
-                        <div class="col-md-8"><select class="form-control" ng-model="App_Status" name="Appointments_App_Status" ng-required="true" ng-change="changedValueGetApp_Status(Appointments_App_Status)" data-ng-options="App_Status as App_Status.Status for App_Status in App_Statusz">
+                        <div class="col-md-8"><select class="form-control" ng-model="App_Status" name="Appointments_App_Status" ng-required="true" ng-change="changedValueGetApp_Status(App_Status)" data-ng-options="App_Status as App_Status.Status for App_Status in App_Statusz">
                                                     <option value="">Select App Status</option>
                                                 </select></div>
                     </div>
@@ -89,7 +89,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" ng-click="NewAppointment(Details, App_Status)" ng-disabled="Form.$invalid">Add Appointment</button>
+                    <button type="button" class="btn btn-primary" ng-click="NewAppointment(Details)" ng-disabled="Form.$invalid">Add Appointment</button>
                 </div>
             </div>
         </form><!--New Appointment Modal Ends-->

@@ -153,7 +153,7 @@
         //--#region Expenses------------------------------------------------------------------------------------------------------
         
         $scope.GetExpenses = function () {
-            AccountingService.GetAllExpenses().then(function (result) {
+            AccountingService.GetAllExpenses().then(function (result) {                
                 $scope.Expenses = result.data;
             });
         };
