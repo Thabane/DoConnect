@@ -1,4 +1,4 @@
-﻿<div id="page-wrapper" ng-controller="DashboardController">
+﻿<div id="page-wrapper">
     <div ng-show="SessionData_User_ID == '2'" dir-paginate="Practice in Practices | filter:search | orderBy:sortKey:reverse | itemsPerPage:1" ng-init="GetNumPatientsByPractice(Practice.ID)">
         
         <div class="row" ng-init="Consulations_Visits(Practice.ID)">

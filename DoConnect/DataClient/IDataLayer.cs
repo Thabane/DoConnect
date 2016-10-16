@@ -11,7 +11,7 @@ namespace DataClient
     {
         #region User
         int CreateUser(int AccessLevel);
-        string Login(string username, string password, int accessLevel);
+        //string Login(string username, string password, int accessLevel);
         Login MyLogin(string Email, string Password);
         Staff GetUserDetailsByUser_ID(int User_ID);
         List<AccessLevel> GetAllAccessLevel();
@@ -155,6 +155,10 @@ namespace DataClient
         bool UpdateProfileDoctor(int User_ID, string FirstName, string LastName, string Gender, string Address);
         UserProfile GetPassword(int User_ID);
         bool UpdatePassword(int User_ID, string Password);
+        #endregion
+
+        #region LogFile
+        List<Log> ReadLogFile();
         #endregion
     }
 }
