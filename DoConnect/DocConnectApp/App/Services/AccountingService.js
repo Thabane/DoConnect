@@ -1,10 +1,10 @@
 ﻿app.factory('AccountingService',
     function ($http) {
-            
+
         var GetAllInvoices = function () {
             return $http.get("api/Accounting/GetAllInvoices");
-        };            
-                               
+        };
+
         var GetInvoiceByID = function (ID) {
             return $http.get("api/Accounting/GetInvoice/" + ID);
         };
@@ -16,7 +16,7 @@
         var GetAllDiagnosisByPatientID = function (ID) {
             return $http.get("api/Accounting/GetAllDiagnosisByPatientID/" + ID);
         }
-            
+
         var GetAllDoctors = function () {
             return $http.get("api/Appointments/GetAllDoctors");
         }
@@ -44,7 +44,7 @@
                 'Doctor_ID': Doctor_ID
             });
         };
-            
+
         var DeleteInvoice = function (ID) {
             return $http.post("api/Accounting/DeleteInvoice/" + ID);
         };
@@ -54,7 +54,7 @@
         var GetAllExpenses = function () {
             return $http.get("api/Expenses/GetAllExpenses");
         };
-                
+
         var GetAllPractices = function () {
             return $http.get("api/Practices/GetAllPractices");
         };

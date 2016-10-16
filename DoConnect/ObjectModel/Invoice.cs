@@ -27,6 +27,7 @@ namespace ObjectModel
         public string Patient_City { get; set; }
         public string Patient_Country { get; set; }
         public string Patient_Phone_Number { get; set; }
+        public int Practice_ID { get; set; }
         public string Practice_Name { get; set; }
         public string Practice_Street_Address { get; set; }
         public string Practice_Suburb { get; set; }
@@ -37,6 +38,9 @@ namespace ObjectModel
         public string Medical_Aid_Address { get; set; }
         public string Medical_Aid_Cell_Number { get; set; }
         public string Diagnosis { get; set; }
+        public int TotalNumOfVisits { get; set; }
+        public decimal Amount { get; set; }
+
 
         public Invoice Create(SqlDataReader reader)
         {
@@ -103,6 +107,25 @@ namespace ObjectModel
             {
                 Patient_ID = reader.GetInt32(reader.GetOrdinal("Patient_ID")),
                 Diagnosis = reader.GetString(reader.GetOrdinal("Diagnosis"))
+            };
+        }
+
+        public Invoice GetNumPatientsByPractice(SqlDataReader reader)
+        {
+            return new Invoice
+            {
+                TotalNumOfVisits = reader.GetInt32(reader.GetOrdinal("TotalNumOfVisits")),
+                Total = reader.GetDecimal(reader.GetOrdinal("Total")),
+                AmountPaid = reader.GetDecimal(reader.GetOrdinal("AmountPaid")),
+                BalanceOwing = reader.GetDecimal(reader.GetOrdinal("BalanceOwing"))
+            };
+        }
+
+        public Invoice GetExpense(SqlDataReader reader)
+        {
+            return new Invoice
+            {
+                Amount = Convert.ToDecimal(reader.GetString(reader.GetOrdinal("Amount")))
             };
         }
     }

@@ -37,12 +37,9 @@
                         <td>{{Patient.Email}}</td>
                         <td>{{Patient.ID_Number}}</td>
                         <td>{{Patient.Cell_Number}}</td>
-                        <td><!-- onclick="ViewPatient()"-->
-                            <!--<button class="btn btn-primary btn-xs" ng-click="ViewPatient(Patient.ID)" onclick="ViewPatient()"><i class="glyphicon glyphicon-new-window"></i></button>-->
-                            <!--<a class="btn btn-primary btn-xs" href="/MedicalHistory/{{Patient.ID}}" ng-click="selectedPatient(Patient.ID)"><i class="glyphicon glyphicon-new-window"></i></a> -->  
+                        <td>
                             <a class="btn btn-primary btn-xs" href="/MedicalHistory" ng-click="ViewPatient(Patient.ID)"><i class="glyphicon glyphicon-new-window"></i></a>
-                        
-                            <button class="btn btn-danger btn-xs" ng-click="DeletePatient(Patient.ID)"><i class="fa fa-trash-o"></i></button>
+                            <button class="btn btn-danger btn-xs" ng-click="DeletePatient1(Patient.ID, Patient.FirstName +' '+ Patient.LastName)"><i class="fa fa-trash-o"></i></button>
                         </td>
                     </tr>
                 </tbody>

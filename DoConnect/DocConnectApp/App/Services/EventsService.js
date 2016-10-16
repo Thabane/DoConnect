@@ -1,17 +1,14 @@
-﻿app.factory('EventsService',    
+﻿app.factory('EventsService',
     function ($http) {
 
-        //Select all Event data
         var GetAllEvents = function () {
             return $http.get("api/Events/GetAllEvents");
         };
 
-        //Select Event by ID
         var GetEventByID = function (ID) {
             return $http.get("api/Events/GetEvent/" + ID);
         };
 
-        //Insert new record
         var InsertEvent = function (Title, Details, StartDateTime, EndDateTime, AppointmentStatus) {
             return $http.post("api/Events/InsertEvent",
             {
@@ -23,7 +20,6 @@
             });
         };
 
-        //Update Event
         var UpdateEvent = function (ID, Title, Details, StartDateTime, EndDateTime, AppointmentStatus) {
             return $http.post("api/Events/UpdateEvent",
             {
@@ -36,7 +32,6 @@
             });
         };
 
-        //Delete the Record
         var DeleteEvent = function (ID) {
             return $http.post("api/Events/DeleteEvent/" + ID);
         };

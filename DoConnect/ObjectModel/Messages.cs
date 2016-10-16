@@ -10,22 +10,37 @@ namespace ObjectModel
     public class Messages
     {
         public int ID { get; set; }
-        public string Sender { get; set; }
-        public string Receiver { get; set; }
+        public int Sender { get; set; }//Refers to Sender's User_ID
+        public int Receiver { get; set; }//Refers to Receiver's User_ID
         public string Subject { get; set; }
         public string Description { get; set; }
-        public DateTime Date { get; set; }
+        public string Date { get; set; }
+        public string SenderEmail { get; set; }
+        public string ReceiverEmail { get; set; }
+        public int NumOfUnReadMessages { get; set; }
+        public int ReadStatus { get; set; } //0 == read //1 == unread
 
         public Messages Create(SqlDataReader reader)
         {
             return new Messages
             {
                 ID = reader.GetInt32(reader.GetOrdinal("ID")),
-                Sender = reader.GetString(reader.GetOrdinal("Sender")),
-                Receiver = reader.GetString(reader.GetOrdinal("Receiver")),                
+                Sender = reader.GetInt32(reader.GetOrdinal("Sender")),
+                Receiver = reader.GetInt32(reader.GetOrdinal("Receiver")),
                 Subject = reader.GetString(reader.GetOrdinal("Subject")),
                 Description = reader.GetString(reader.GetOrdinal("Description")),
-                Date = reader.GetDateTime(reader.GetOrdinal("Date")),
+                Date = reader.GetString(reader.GetOrdinal("Date")),
+                ReceiverEmail = reader.GetString(reader.GetOrdinal("ReceiverEmail")),
+                ReadStatus = reader.GetInt32(reader.GetOrdinal("ReadStatus")),
+                NumOfUnReadMessages = reader.GetInt32(reader.GetOrdinal("NumOfUnReadMessages"))
+            };
+        }
+
+        public Messages readerMessageSender(SqlDataReader reader)
+        {
+            return new Messages
+            {
+                SenderEmail = reader.GetString(reader.GetOrdinal("SenderEmail"))
             };
         }
     }

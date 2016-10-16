@@ -141,12 +141,12 @@
                     </div>
                     <div class="row" style="margin-top:8px; margin-bottom:15px; border-bottom: 1px solid #ddd;">
                         <div class="col-md-1"><h5>Registration Date:</h5></div>
-                        <div class="col-md-3"><div class="input-group date datepicker" style="padding:0px;">
+                        <div class="col-md-3"><div class="input-group date datepicker1" style="padding:0px;">
                                                     <input class="form-control insert" type="text" id="Registration_Date" name="Registration_Date" data-date-format="yyyy-mm-dd" ng-required="true" ng-readonly="true" style="background-color: transparent"><span class="input-group-addon"><span class="fa fa-calendar"></span></span>
                                                 </div>
                         </div>
                         <div class="col-md-1"><h5>Expiry Date:</h5></div>
-                        <div class="col-md-3"><div class="input-group date datepicker" style="padding:0px;">
+                        <div class="col-md-3"><div class="input-group date datepicker2" style="padding:0px;">
                                                   <input class="form-control insert" type="text" id="Deregistration_Date" name="Deregistration_Date" data-date-format="yyyy-mm-dd" ng-required="true" ng-readonly="true" style="background-color: transparent"><span class="input-group-addon"><span class="fa fa-calendar"></span></span>
                                               </div>
                         </div>
@@ -213,8 +213,18 @@
 </div>
 
 <script>
-    $(".datepicker").datepicker({
-        format: 'yyyy-mm-dd',
-        autoclose: true,
+    $(".datepicker").datepicker({ format: 'yyyy-mm-dd', autoclose: true });
+
+    $(function () {
+        $('.datepicker1').datepicker();
+        $('.datepicker2').datepicker({
+            useCurrent: false
+        });
+        $(".datepicker1").on("dp.change", function (e) {
+            $('.datepicker2').data("DatePicker").minDate(e.date);
+        });
+        $(".datepicker2").on("dp.change", function (e) {
+            $('.datepicker1').data("DatePicker").maxDate(e.date);
+        });
     });
 </script>

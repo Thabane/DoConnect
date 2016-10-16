@@ -14,6 +14,10 @@ namespace ObjectModel
         public string Password { get; set; }
         public string Last_Login { get; set; }
         public int AccessLevel  { get; set; }
+
+        public int User_ID     { get; set; }
+        public string FirstName   { get; set; }
+        public string LastName    { get; set; }  
         public Login Create(SqlDataReader reader)
         {
             return new Login

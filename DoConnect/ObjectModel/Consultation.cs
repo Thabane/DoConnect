@@ -30,6 +30,8 @@ namespace ObjectModel
         public int Consultation_Referral_ID { get; set; }
         public int Patient_Consultation_ID { get; set; }
         public int Patient_Consultation_Patient_ID { get; set; }
+        public int TotalNumOfVisits { get; set; }
+        public string Month { get; set; }
         public Consultation Create(SqlDataReader reader)
         {
             return new Consultation
@@ -56,6 +58,15 @@ namespace ObjectModel
                 Consultation_Referral_ID = reader.GetInt32(reader.GetOrdinal("Consultation_Referral_ID")),
                 Patient_Consultation_ID = reader.GetInt32(reader.GetOrdinal("Patient_Consultation_ID")),
                 Patient_Consultation_Patient_ID = reader.GetInt32(reader.GetOrdinal("Patient_Consultation_Patient_ID"))
+            };
+        }
+
+        public Consultation Consulations_Visits(SqlDataReader reader)
+        {
+            return new Consultation
+            {
+                TotalNumOfVisits = reader.GetInt32(reader.GetOrdinal("TotalNumOfVisits")),
+                Month = reader.GetString(reader.GetOrdinal("Month"))
             };
         }
     }

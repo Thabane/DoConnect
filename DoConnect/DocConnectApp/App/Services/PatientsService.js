@@ -1,14 +1,16 @@
 ﻿app.factory('PatientsService',
     function ($http) {
 
-        //Select all Patient data
         var GetAllPatients = function () {
-            return  $http.get("api/Patients/GetAllPatients");
-        }            
+            return $http.get("api/Patients/GetAllPatients");
+        }
 
-        //Select Patient by PatientID
         var GetPatientByID = function (ID) {
             return $http.get("api/Patients/GetPatient/" + ID);
+        }
+
+        var DeletePatient = function (ID) {
+            return $http.post("api/Patients/DeletePatient/" + ID);
         }
 
         //--Medical Record-----------------------------------------------------------------------------------------------------
@@ -16,12 +18,10 @@
             return $http.get("api/Patients/GetMedical_Aid");
         }
 
-        //Select Medical Record by PatientID
         var GetMedicalRecord = function (ID) {
             return $http.get("api/Patients/GetMedicalRecord/" + ID);
         }
 
-        //Insert new record
         var InsertMedicalRecord = function (Doctor_ID, FirstName, LastName, Email, ID_Number, Cell_Number, DOB, Gender, Street_Address, Suburb, City, Country, Patient_Medical_Aid_Medical_Aid_ID, Scheme_Name, Membership_Number, Registration_Date, Deregistration_Date, Allergies, PreviousMedication, PreviousIllnesses, RiskFactors, SocialHistory, FamilyHistory) {
             return $http.post("api/Patients/InsertMedicalRecord",
             {
@@ -51,7 +51,6 @@
             });
         };
 
-        //Update MedicalRecord
         var UpdateMedicalRecord = function (Patient_ID, FirstName, LastName, Email, ID_Number, Cell_Number, DOB, Gender, Street_Address, Suburb, City, Country, Patient_Medical_Aid_Medical_Aid_ID, Scheme_Name, Membership_Number, Registration_Date, Deregistration_Date, Allergies, PreviousIllnesses, PreviousMedication, RiskFactors, SocialHistory, FamilyHistory) {
             return $http.post("api/Patients/UpdateMedicalRecord",
             {
@@ -80,24 +79,12 @@
                 'FamilyHistory': FamilyHistory
             });
         };
-
-        //Delete the Record
-        var DeleteMedicalRecord = function (ID) {
-            return $http.post("api/Patients/DeleteMedicalRecord/" + ID);
-        };
-
-        //---------------------------------------------------------------------------------------------------------/
-
         //--Prescription-------------------------------------------------------------------------------------------------------/
-
         
-        
-        //Select Prescription Notes by PatientID
         var GetPrescription = function (ID) {
             return $http.get("api/Patients/GetPrescription/" + ID);
         }
-
-        //Insert new record 
+        
         var InsertPrescription = function (Patient_ID, Doctor_ID, Consultation_ID, Prescription_DrugDetails_DrugName, Prescription_DrugDetails_Strength, Prescription_DrugDetails_IntakeRoute, Prescription_DrugDetails_Frequency, Prescription_DrugDetails_DispenseNumber, Prescription_DrugDetails_RefillNumber) {
             console.log(Patient_ID, Doctor_ID, Consultation_ID, Prescription_DrugDetails_DrugName, Prescription_DrugDetails_Strength, Prescription_DrugDetails_IntakeRoute, Prescription_DrugDetails_Frequency, Prescription_DrugDetails_DispenseNumber, Prescription_DrugDetails_RefillNumber);
             return $http.post("api/Patients/InsertPrescription",
@@ -114,7 +101,6 @@
             });
         };
 
-        //Update Prescription Details
         var UpdatePrescription = function (Prescription_ID, Consultation_Diagnosis, Prescription_DrugDetails_DrugName, Prescription_DrugDetails_Strength, IntakeRoute, Frequency, Prescription_DrugDetails_DispenseNumber, Prescription_DrugDetails_RefillNumber) {
             console.log(Prescription_ID, Consultation_Diagnosis, Prescription_DrugDetails_DrugName, Prescription_DrugDetails_Strength, IntakeRoute, Frequency, Prescription_DrugDetails_DispenseNumber, Prescription_DrugDetails_RefillNumber)
             return $http.post("api/Patients/UpdatePrescription",
@@ -130,13 +116,11 @@
             });
         };
 
-        //Delete the Record
         var DeletePrescription = function (ID) {
             return $http.post("api/Patients/DeletePrescription/" + ID);
         };
 
         //---------------------------------------------------------------------------------------------------------/
-        //Select Consultation Notes by PatientID
         var GetConsultationNotes = function (ID) {
             return $http.get("api/Patients/GetConsultationNotes/" + ID);
         }
@@ -159,7 +143,6 @@
             });
         };
 
-        //Update Employee
         var UpdateConsultationNote = function (Consultation_ID, ReasonForConsultation, Symptoms, ClinicalFindings, Diagnosis, TestResultSummary, TreatmentPlan) {
             return $http.post("api/Patients/UpdateConsultationNote",
             {
@@ -173,7 +156,6 @@
             });
         };
 
-        //Delete the Record
         var DeleteConsultationNote = function (ID) {
             return $http.post("api/Patients/DeleteConsultationNote/" + ID);
         };
@@ -181,16 +163,13 @@
         return {
             GetAllPatients: GetAllPatients,
             GetPatientByID: GetPatientByID,
-            //InsertPractice: InsertPractice,
-            //UpdatePractice: UpdatePractice,
-            //DeletePractice: DeletePractice
+            DeletePatient: DeletePatient,
 
             //MedicalRecord Details
             GetMedical_Aid: GetMedical_Aid,
             GetMedicalRecord: GetMedicalRecord,
             InsertMedicalRecord: InsertMedicalRecord,
             UpdateMedicalRecord: UpdateMedicalRecord,
-            DeleteMedicalRecord: DeleteMedicalRecord,
 
             //Prescription Details
             GetPrescription: GetPrescription,
@@ -202,7 +181,7 @@
             GetConsultationNotes: GetConsultationNotes,
             InsertConsultation: InsertConsultation,
             UpdateConsultationNote: UpdateConsultationNote,
-            DeleteConsultationNote: DeleteConsultationNote            
+            DeleteConsultationNote: DeleteConsultationNote
         };
     }
 );
