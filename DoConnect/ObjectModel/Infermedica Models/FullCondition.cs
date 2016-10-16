@@ -11,11 +11,11 @@ namespace ObjectModel.Infermedica_Models
         public string id { get; set; }
         public string name { get; set; }
         public string[] categories { get; set; }
-        public Prevalence prevalence { get; set; }
-        public Acuteness acuteness { get; set; }
-        public Severity severity { get; set; }
+        public string prevalence { get; set; }
+        public string acuteness { get; set; }
+        public string severity { get; set; }
         public object extras { get; set; }
-        public Sex sex_filter { get; set; }
+        public string sex_filter { get; set; }
 
     }
 

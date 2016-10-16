@@ -113,6 +113,12 @@ namespace TestConsole
             DiagnosisResponse res = med.DiagnosePatient(dRequest);
         }
 
+        public static async void Fire()
+        {
+            Infermedica med = new Infermedica();
+            var hold = await med.GetConditionById("c_10");
+        }
+
         
     }
 }

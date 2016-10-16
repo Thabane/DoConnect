@@ -13,7 +13,7 @@ namespace ObjectModel.Infermedica_Models
         public string question { get; set; } // only available in object details, not in listing 
         public string category { get; set; }
         public object extras { get; set; }
-        public Sex sex_filter { get; set; }
+        public string sex_filter { get; set; }
         public string image_url { get; set; }
         public string image_source { get; set; }
     }

@@ -13,15 +13,16 @@ namespace DocConnectApp.Controllers
         {
             return View();
         }
+        [HttpGet]
         public ActionResult Login()
         {
             return View();
         }
-        //[System.Web.Mvc.HttpPost]
-        //public ActionResult Login(string username, string password)
-        //{
-        //    IDataLayer dl = new DataLayer();
-        //    return RedirectToAction("Login");
-        //}
+        [HttpPost]
+        public ActionResult Login(string username, string password)
+        {
+            IDataLayer dl = new DataLayer();
+            return RedirectToAction("Index");
+        }
     }
 }
