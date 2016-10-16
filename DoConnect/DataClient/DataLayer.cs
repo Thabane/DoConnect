@@ -15,7 +15,7 @@ namespace DataClient
     {
         private DataAccess access;
         private List<SqlParameter> _parameters = new List<SqlParameter>();
-        private string Conn = @"Data Source=DESKTOP-6Gu3I3G\SQLEXPRESS;Initial Catalog=DoConnect;Integrated Security=True";
+        private string Conn = @"Data Source=SAL-THABANEN-P;Initial Catalog=DoConnect;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework";
 
         public DataLayer()
         {

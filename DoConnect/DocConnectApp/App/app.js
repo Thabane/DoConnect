@@ -123,9 +123,22 @@ app.config(
                 templateUrl: "App/Views/UserProfile/UserProfile.html",
                 controller: "UserProfileController"
             })
+            .when("/Login", {//../Views/Home/Login.cshtml
+                templateUrl: "App/Views/Login/Login.html",
+                controller: "LoginController"
+            })
+            .when("/DiagnosisExpertSystemProcess", {
+                    templateUrl: "App/Views/DiagnosisExpertSystem/DiagnosisExpertSystemProcess.html",
+                    controller: "DiagnosisExpertSystemProcessController"
+            })
+            .when("/DiagnosisExpertSystemCondition/:conId", {
+               templateUrl: "App/Views/DiagnosisExpertSystem/DiagnosisExpertSystemCondition.html",
+               controller: "DiagnosisExpertSystemConditionsController"
+            })
             .otherwise({
                 redirectTo: "/Dashboard"
-            });
+            })
+        ;
 
         $locationProvider.html5Mode({
             enabled: true,

@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using DataClient;
 using Newtonsoft.Json;
@@ -15,8 +16,8 @@ namespace DocConnectApp.Controllers
     public class DiagnosisExpertSystemController : ApiController
     {
         [HttpGet]
-        [Route("api/DiagnosisExpertSystem/GetSymptoms")]
-        public async Task<List<Symptom>> GetSymptoms()
+        [Route("api/DiagnosisExpertSystem/GetFiveRandomSymptoms")]
+        public async Task<List<Symptom>> GetFiveRandomSymptoms()
         {
             Infermedica med = new Infermedica();
             string result = await med.GetSymptoms();
@@ -47,9 +48,10 @@ namespace DocConnectApp.Controllers
             Thread.Sleep(1000);
             Random rnd = new Random();
             Symptom theOne = new Symptom();
-            theOne = syms[rnd.Next(0,syms.Count)];
+            theOne = syms[rnd.Next(0, syms.Count)];
             return theOne;
         }
+
         [HttpGet]
         [Route("api/DiagnosisExpertSystem/GetConditions")]
         public async Task<List<Symptom>> GetConditions()
@@ -68,6 +70,40 @@ namespace DocConnectApp.Controllers
             Infermedica med = new Infermedica();
             var read = med.DiagnosePatient(request);
             return read;
+        }
+
+        [HttpGet]
+        [Route("api/DiagnosisExpertSystem/GetAllSymptoms")]
+        public async Task<List<Symptom>> GetSymptoms()
+        {
+            Infermedica med = new Infermedica();
+            string result = await med.GetSymptoms();
+            var Symptoms = JsonConvert.DeserializeObject<List<Symptom>>(result)
+?? new List<Symptom>();
+            return Symptoms;
+        }
+
+        [HttpGet]
+        [Route("api/DiagnosisExpertSystem/GetAllRiskFactors")]
+        public async Task<List<RiskFactor>> GetRiskFactors()
+        {
+            Infermedica med = new Infermedica();
+            string result = await med.GetRiskFactors();
+            var riskFactors = JsonConvert.DeserializeObject<List<RiskFactor>>(result)
+?? new List<RiskFactor>();
+            return riskFactors;
+        }
+
+        [HttpGet]
+        [Route("api/DiagnosisExpertSystem/GetCondition")]
+        public async Task<FullCondition> GetCondition()
+        {
+            var conditionId = HttpContext.Current.Request.QueryString["conId"];
+            Infermedica med = new Infermedica();
+            string result = await med.GetConditionById(conditionId);
+            var condition = JsonConvert.DeserializeObject<FullCondition>(result)
+?? new FullCondition();
+            return condition;
         }
     }
 }

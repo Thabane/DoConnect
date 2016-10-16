@@ -1,0 +1,76 @@
+﻿<div id="page-wrapper" ng-controller="DiagnosisExpertSystemController">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header text-primary">Expert System</h2>
+        </div>
+        <div class="form-group row">
+            <div class="col-lg-6">
+                <h4> Condition</h4>
+            </div>
+        </div>
+        <br />
+        <div class="form-group row">
+            <div class="col-lg-2">
+                <label for="conditionName" class="col-xs-2 col-form-label">Name: </label>
+            </div>
+            <div class="col-lg-6">
+                <input class="form-control" type="text" value="{{Condition.name}}" id="conditionName">
+            </div>
+            <div class="col-lg-4">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-lg-2">
+                <label for="conditionSeverity" class="col-xs-2 col-form-label">Severity: </label>
+            </div>
+            <div class="col-lg-6">
+                <input class="form-control" type="text" value="{{Condition.severity}}" id="conditionSeverity">
+            </div>
+            <div class="col-lg-4">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-lg-2">
+                <label for="conditionPrevalence" class="col-xs-2 col-form-label">Prevalence: </label>
+            </div>
+            <div class="col-lg-6">
+                <input class="form-control" type="text" value="{{Condition.prevalence}}" id="conditionPrevalence">
+            </div>
+            <div class="col-lg-4">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-lg-2">
+                <label for="conditionSex" class="col-xs-2 col-form-label">Sex: </label>
+            </div>
+            <div class="col-lg-6">
+                <input class="form-control" type="text" value="{{Condition.sex_filter}}" id="conditionSex">
+            </div>
+            <div class="col-lg-4">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-lg-2">
+                <label for="conditionAcuteness" class="col-xs-2 col-form-label">Acuteness: </label>
+            </div>
+            <div class="col-lg-6">
+                <input class="form-control" type="text" value="{{Condition.acuteness}}" id="conditionAcuteness">
+            </div>
+            <div class="col-lg-4">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-lg-2">
+                <label for="example-text-input" class="col-xs-2 col-form-label">Extra: </label>
+            </div>
+            <div class="col-lg-6">
+                <label>{{Condition.extras.hint}}</label>
+            </div>
+            <div class="col-lg-4">
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
