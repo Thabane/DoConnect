@@ -1,17 +1,27 @@
 ﻿app.factory('MessagesService',
     function ($http) {
-        //Select all Message data
-        var GetAllMessages = function () {
-            return $http.get("api/Messages/GetAllMessages");
-        };            
-                                    
-        //Select Message by ID
+
+        var GetAllMessages = function (Receiver) {
+            return $http.get("api/Messages/GetAllMessages/" + Receiver);
+        };
+
+        var NumOfUnReadMessages = function (Receiver) {
+            return $http.get("api/Messages/NumOfUnReadMessages/" + Receiver);
+        };
+
         var GetMessageByID = function (ID) {
             return $http.get("api/Messages/GetMessage/" + ID);
         };
-            
-        //Insert new record
-        var InsertMessage = function (Sender, Receiver, Subject, Description, Date) {
+
+        var GetAllSentMessages = function (Sender) {
+            return $http.get("api/Messages/GetAllSentMessages/" + Sender);
+        };
+
+        var GetSentMessageById = function (ID) {
+            return $http.get("api/Messages/GetSentMessageById/" + ID);
+        };
+
+        var InsertMessage = function (Receiver, Sender, Subject, Description, Date) {
             return $http.post("api/Messages/InsertMessage",
             {
                 'Sender': Sender,
@@ -22,17 +32,23 @@
             });
         };
 
-        //Delete the Record
         var DeleteMessage = function (ID) {
             return $http.post("api/Messages/DeleteMessage/" + ID);
         };
 
+        var SessionData = function () {
+            return $http.get("/Data/SessionData");
+        };
+
         return {
             GetAllMessages: GetAllMessages,
+            NumOfUnReadMessages: NumOfUnReadMessages,
             GetMessageByID: GetMessageByID,
+            GetAllSentMessages: GetAllSentMessages,
+            GetSentMessageById: GetSentMessageById,
             InsertMessage: InsertMessage,
-            UpdateMessage: UpdateMessage,
-            DeleteMessage: DeleteMessage
+            DeleteMessage: DeleteMessage,
+            SessionData: SessionData
         };
     }
 );

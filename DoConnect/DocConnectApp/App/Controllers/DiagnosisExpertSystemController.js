@@ -1,60 +1,52 @@
-﻿app.controller("DiagnosisExpertSystemController", ["$scope", "DiagnosisExpertSystemService", "$interval",
-    function ($scope, DiagnosisExpertSystemService, $interval, $localStorage) {
+﻿app.controller("DiagnosisExpertSystemController", ["$scope", "DiagnosisExpertSystemService", "$interval","$location",
+    function ($scope, DiagnosisExpertSystemService, $interval, $location) {
 
         $scope.Symptoms = [];
 
-        $scope.GetSymptoms = function () {
-            DiagnosisExpertSystemService.getDiagnosisExpertSystem().then
+        $scope.GetAllSymptoms = function () {
+            DiagnosisExpertSystemService.getAllSymptoms().then
             (function (result) {
-                $scope.Symp = result.data;
+                $scope.SymptomBank = result.data;
+                $scope.GetRiskFactors();
             });
         };
 
+        $scope.DianosePatient = function (symptoms, age, gender) {
+            
+            var evidence = {
+                sex: gender,
+                age: age,
+                evidence: symptoms
+            }
 
-        $scope.DianosePatient = function () {
-            DiagnosisExpertSystemService.patientDiagnosis($scope.Symptoms).then
-            (function (result) {
-                $scope.response = result.data;
-                //Console.log($scope.response);
+            DiagnosisExpertSystemService.patientDiagnosis(evidence).then
+            (function () {
             });
+
+            $location.path('/DiagnosisExpertSystemProcess');
         };
 
-        
-        $scope.GetSymptoms();
-        localStorage.clear();
+        $scope.GetAllSymptoms();
+
 
         $scope.AddEvidence = function (data) {
 
-            if (localStorage.getItem('myStorage') === null) {
-                var arr = [];
-            } else {
-                var arr = JSON.parse(localStorage.getItem('myStorage'));
-            }
-            
-
-            for (var i in data) {
-                if (data[i].SELECTED == "1") {
-                    var sympt = {
-                        id: data[i].id,
+            if (data != undefined) {
+                var sympt =
+                    {
+                        id: data[0].id,
                         choice_id: "present",
-                        name: data[i].name
+                        name: data[0].name
                     }
-                    $scope.Symptoms.push(sympt);
-                    arr.push(sympt);
-                }
+                $scope.Symptoms.push(sympt);
             }
-            localStorage.setItem('myStorage', JSON.stringify(arr));
-            $scope.getStoredData();
+        }
 
-            if ($scope.Symptoms != undefined) {
-                //$scope.DianosePatient();
-            }
-        }
-        
-        $scope.getStoredData = function () {
-            var obj = JSON.parse(localStorage.getItem('myStorage'));
-            //console.log(obj);
-            $scope.GetSymptoms();;
-        }
+        $scope.GetRiskFactors = function () {
+            DiagnosisExpertSystemService.getAllRiskFactors().then
+            (function (result) {
+                $scope.RiskBank = result.data;
+            });
+        };
 
     }]);

@@ -222,10 +222,18 @@ function ViewMedicine() {
 };
 
 //Messages Page
-function tr_dblclick_InboxMail() {
+function ViewInboxMessage() {
     $("#View_SelectedInboxMail").modal("show");
     $(".readonly_ViewEvent").attr("readonly", true);
     $(".readonly_ViewEvent").css("background-color", "transparent");
+};
+
+function ShowReplyMessageModel() {
+    $("#ShowReplyMessageModel").modal("show");
+};
+
+function ViewSentMessage() {
+    $("#ViewSentMessage").modal("show");
 };
 
 //Practices Page
@@ -268,5 +276,16 @@ function btnRedirect(Page, PatientID) {
 function btnRedirect(Page) {
     window.location.href = "/#/" + Page;
 };
+
+//Dashboard
+function View_NotificationsPanel_Modal() {
+    $("#View_NotificationsPanel_Modal").modal("show");
+};
+function AppointmentsModal() {
+    $("#AppointmentsModal").modal("show");
+};
+
+//User Profile
+
 
 

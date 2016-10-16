@@ -56,7 +56,6 @@ namespace DataClient
         bool CreatePatient(string firstName, string lastName, string id_Number, string gender, DateTime dob, string cell_number, string street_address, string suburb, string city, string country, string Allergies, string PreviousIllnesses, string PreviousMedication, string RiskFactors, string SocialHistory, string FamilyHistory, int Medical_Aid_ID, int Doctor_ID, int UserId);
         List<GetAllPatients> GetAllPatients();
         List<Patient> GetPatientByID(int id);
-        bool UpdatePatient(int id, string firstName, string lastName, string id_Number, string gender, string dob, string cell_number, string street_address, string suburb, string city, string country, string Allergies, string PreviousIllnesses, string PreviousMedication, string RiskFactors, string SocialHistory, string FamilyHistory, int Medical_Aid_ID, int Doctor_ID);
         bool DeletePatient(int id);
         #endregion
 
@@ -124,6 +123,38 @@ namespace DataClient
         bool NewMedicalAid(string Name, string Cell_Number, string Fax_Number, string Email_Address, string Address);
         bool UpdateMedicalAid(int ID, string Name, string Cell_Number, string Fax_Number, string Email_Address, string Address);
         bool DeleteMedicalAid(int ID);
+        #endregion
+
+        #region Messages
+        List<Messages> GetAllMessages(int Receiver);
+        Messages NumOfUnReadMessages(int Receiver);
+        Messages GetMessageById(int ID);
+        List<Messages> GetAllSentMessages(int Sender);
+        Messages GetSentMessageById(int ID);
+        bool NewMessages(int Receiver, int Sender, string Subject, string Description, string Date);
+        bool DeleteMessages(int ID);
+        #endregion
+
+        #region Dashboard        
+        Invoice GetRevenueSummary_Today(int Practice_ID);
+        Invoice GetRevenueSummary_Week(int Practice_ID);
+        Invoice GetNumPatientsByPractice(int Practice_ID);
+        List <Consultation> Consulations_Visits(int Practice_ID);
+        List<Consultation> Appointment_Stats(int Practice_ID);
+        List<Appointments> GetPendingAppointmentsByPracticeID(int Practice_ID);
+        List<Appointments> GetAppovedAppointmentsByPracticeID(int Practice_ID);
+        List<Appointments> GetRejectedAppointmentsByPracticeID(int Practice_ID);
+        bool AppoveAppointment(int ID, int App_Status);
+        bool RejectAppointment(int ID, int App_Status);
+        List<Medicine_Inventory> MedicineInventoryStockCount(int Practice_ID);
+        #endregion
+
+        #region User Profile
+        UserProfile GetLoggedinUserProfile(int User_ID);
+        bool UpdateProfileStaff(int User_ID, string FirstName, string LastName, string ID_Number, string Gender, string DOB, string Phone, string Street_Address, string Suburb, string City, string Country);
+        bool UpdateProfileDoctor(int User_ID, string FirstName, string LastName, string Gender, string Address);
+        UserProfile GetPassword(int User_ID);
+        bool UpdatePassword(int User_ID, string Password);
         #endregion
     }
 }
