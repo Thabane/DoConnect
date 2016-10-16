@@ -4,7 +4,7 @@
         $scope.GetGlobalResponse = function () {
             DiagnosisExpertSystemService.getGlobalResponse().then
             (function (result) {
-                $scope.DiagnosisResponse = result.data;
+                $scope.DiagnosisResponse = result.data;                
             });
         };
 
@@ -18,25 +18,24 @@
 
         $scope.AnswerQuestionSingle = function (id, choiceid) {
 
-            var quesResponse = {
-                "sex": "male",
-                "age": "26",
-                "evidence": [
-                    {
+            var quesResponse = {                    
                         "id": id,
-                        "choice_id": choiceid
-                    }
-                ]
+                        "choice_id": choiceid                   
             }
+            
+            $scope.globalEvidence.evidence.push(quesResponse);
 
-            var check = $scope.globalEvidence;
-
-            DiagnosisExpertSystemService.patientDiagnosisReturn(quesResponse).then
+            DiagnosisExpertSystemService.patientDiagnosisReturn($scope.globalEvidence).then
             (function (result) {
                 $scope.DiagnosisResponse = result.data;
+                $scope.LogStuff($scope.DiagnosisResponse);
             });
 
         };
+
+        $scope.LogStuff = function (log) {
+            console.log(log);
+        }
 
         $scope.AnswerQuestionGroupMutiple = function (evidence) {
 
@@ -48,45 +47,39 @@
                     var evid =
                         {
                             id: evidence[e].id,
-                            choice_id: evidence[e].choices[0].id
+                            choice_id: evidence[e].choices[1].id
                         }
                     $scope.finalEvidence.push(evid);
                 }
 
             }
 
-            //must implement global variable service to get this gender and age from first constroller
-            var quesResponse = {
-                "sex": "male",
-                "age": "26",
-                "evidence": $scope.finalEvidence
-            }
-
-
-            DiagnosisExpertSystemService.patientDiagnosisReturn(quesResponse).then
+            for (var e in $scope.finalEvidence) {
+                $scope.globalEvidence.evidence.push($scope.finalEvidence[e]);
+            }            
+            
+            DiagnosisExpertSystemService.patientDiagnosisReturn($scope.globalEvidence).then
             (function (result) {
                 $scope.DiagnosisResponse = result.data;
+                $scope.LogStuff($scope.DiagnosisResponse);
             });
 
         };
 
         $scope.AnswerQuestionGroupSingle = function (evidence) {
 
-            var quesResponse = {
-                "sex": "male",
-                "age": "26",
-                "evidence": [
-                    {
+            var quesResponse = {               
                         "id": evidence.id,
                         "choice_id": evidence.choices[0].id
-                    }
-                ]
-
             }
+                
+            $scope.globalEvidence.evidence.push(quesResponse);
+            
 
-            DiagnosisExpertSystemService.patientDiagnosisReturn(quesResponse).then
+            DiagnosisExpertSystemService.patientDiagnosisReturn($scope.globalEvidence).then
             (function (result) {
                 $scope.DiagnosisResponse = result.data;
+                $scope.LogStuff($scope.DiagnosisResponse);
             });
 
         };

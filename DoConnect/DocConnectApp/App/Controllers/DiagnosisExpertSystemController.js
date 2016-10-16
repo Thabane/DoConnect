@@ -1,4 +1,4 @@
-﻿app.controller("DiagnosisExpertSystemController", ["$scope", "DiagnosisExpertSystemService", "$interval",
+﻿app.controller("DiagnosisExpertSystemController", ["$scope", "DiagnosisExpertSystemService", "$interval","$location",
     function ($scope, DiagnosisExpertSystemService, $interval, $location) {
 
         $scope.Symptoms = [];
@@ -12,6 +12,7 @@
         };
 
         $scope.DianosePatient = function (symptoms, age, gender) {
+            
             var evidence = {
                 sex: gender,
                 age: age,
@@ -21,6 +22,8 @@
             DiagnosisExpertSystemService.patientDiagnosis(evidence).then
             (function () {
             });
+
+            $location.path('/DiagnosisExpertSystemProcess');
         };
 
         $scope.GetAllSymptoms();

@@ -29,8 +29,6 @@ namespace DataClient
 
             StreamReader reader = new StreamReader(receiveStream, Encoding.UTF8);
             string content = reader.ReadToEnd();
-            //DataAccess da = new DataAccess();
-            //da.LogEntry(0, "Expert System - GetConditions");
             var json = content;
             return json;
         }
@@ -50,8 +48,6 @@ namespace DataClient
             StreamReader reader = new StreamReader(receiveStream, Encoding.UTF8);
             string content = reader.ReadToEnd();
             var json = content;
-            //DataAccess da = new DataAccess();
-            //da.LogEntry(0, "Expert System - GetSymptoms");
             return json;
         }
 
@@ -72,8 +68,6 @@ namespace DataClient
             string content = reader.ReadToEnd();
             Console.WriteLine(content);
             var json = content;
-            //DataAccess da = new DataAccess();
-            //da.LogEntry(0, "Expert System - GetSymptomById");
             return json;
         }
 
@@ -89,8 +83,6 @@ namespace DataClient
                 client.Headers.Add("content-type", "application/json");
                 var result = client.UploadString(url, jsonData);
                 var response = JsonConvert.DeserializeObject<DiagnosisResponse>(result);
-                //DataAccess da = new DataAccess();
-                //da.LogEntry(0, "Expert System - DiagnosePatient");
                 return response;
             }
         }
@@ -111,8 +103,6 @@ namespace DataClient
             string content = reader.ReadToEnd();
             Console.WriteLine(content);
             var json = content;
-            //DataAccess da = new DataAccess();
-            //da.LogEntry(0, "Expert Syetem - GetRiskFactors");
             return json;
         }
         public async Task<string> GetConditionById(string id)
@@ -131,8 +121,6 @@ namespace DataClient
             string content = reader.ReadToEnd();
             Console.WriteLine(content);
             var json = content;
-            //DataAccess da = new DataAccess();
-            //da.LogEntry(0, "Expert System - GetConditionById");
             return json;
         }
     }
