@@ -1,4 +1,5 @@
 ﻿app.factory('DashboardService',
+    ['$http',
     function($http) {
         var SessionData = function () {
             return $http.get("/Data/SessionData");
@@ -88,4 +89,4 @@
 
         }
     }
-);
+]);
