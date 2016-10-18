@@ -1,4 +1,5 @@
 ﻿app.factory('PatientsService',
+    ['$http',
     function ($http) {
 
         var SessionData = function () {
@@ -189,4 +190,4 @@
             DeleteConsultationNote: DeleteConsultationNote
         };
     }
-);
+]);

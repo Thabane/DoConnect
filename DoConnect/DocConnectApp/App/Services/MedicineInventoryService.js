@@ -1,4 +1,5 @@
 ﻿app.factory('MedicineInventoryService',
+['$http',
     function ($http) {
         var GetAllMedicines = function () {
             return $http.get("api/MedicineInventory/GetAllMedicines");
@@ -44,4 +45,4 @@
             DeleteMedicine: DeleteMedicine
         };
     }
-);
+]);

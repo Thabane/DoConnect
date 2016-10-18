@@ -1,4 +1,5 @@
 ﻿app.factory('PracticesService',
+['$http',
     function ($http) {
 
         var SessionData = function () {
@@ -55,4 +56,4 @@
             DeletePractice: DeletePractice
         };
     }
-);
+]);

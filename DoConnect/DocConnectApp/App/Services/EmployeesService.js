@@ -1,4 +1,5 @@
 ﻿app.factory('EmployeesService',
+['$http',
     function ($http) {
 
         var SessionData = function () {
@@ -81,4 +82,4 @@
             DeleteEmployee: DeleteEmployee
         };
     }
-);
+]);

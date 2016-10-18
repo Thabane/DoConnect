@@ -1,4 +1,5 @@
 ﻿app.factory('MessagesService',
+    ['$http',
     function ($http) {
 
         var GetAllMessages = function (Receiver) {
@@ -51,4 +52,4 @@
             SessionData: SessionData
         };
     }
-);
+]);

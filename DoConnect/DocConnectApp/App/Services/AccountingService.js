@@ -1,4 +1,5 @@
 ﻿app.factory('AccountingService',
+['$http',
     function ($http) {
 
         var SessionData = function () {
@@ -116,4 +117,4 @@
             DeleteExpense: DeleteExpense
         };
     }
-);
+]);

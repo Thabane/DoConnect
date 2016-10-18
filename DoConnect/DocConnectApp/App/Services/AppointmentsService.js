@@ -1,4 +1,5 @@
 ﻿app.factory('AppointmentsService',
+['$http',
     function ($http) {
 
         var GetAllAppointments = function () {
@@ -56,4 +57,4 @@
             DeleteAppointment: DeleteAppointment
         };
     }
-);
+]);
