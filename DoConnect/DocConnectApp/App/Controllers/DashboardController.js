@@ -10,6 +10,8 @@
                 $scope.SessionData_Email = result["Email"];
                 $scope.SessionData_Practice_ID = result["Practice_ID"];
                 $scope.SessionData_AccessLevel = result["AccessLevel"];
+
+                console.log(result);
                 
                 DashboardService.GetAllMessages($scope.SessionData_User_ID).then(function (result) {
                     $scope.Messages = result.data;
