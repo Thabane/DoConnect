@@ -110,11 +110,11 @@ namespace DataClient
         }
 
         public static int LoggedIn_User_PRACTICE_ID, LoggedIn_User_AccessLevel, COUNT = 0; public static string LoggedIn_Name, LoggedIn_User_strAccessLevel;
-        public Staff GetUserDetailsByUser_ID(int User_ID)
+        public Staff GetUserDetailsByUser_ID()
         {
             List<SqlParameter> _parameters = new List<SqlParameter>();
             SqlParameter User_IDParameter = new SqlParameter("@User_ID", SqlDbType.Int);
-            User_IDParameter.Value = User_ID;
+            User_IDParameter.Value = LoggedIn_User_ID;
             _parameters.Add(User_IDParameter);
 
             Staff List = new Staff();

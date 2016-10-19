@@ -14,6 +14,16 @@ namespace DocConnectApp.Controllers
 {
     public class DashboardController : ApiController
     {
+
+        [HttpGet]
+        [Route("api/Dashboard/SessionData")]
+        public Staff SessionData()
+        { 
+            DataLayer dtLayer = new DataLayer();
+            Staff Staff = new Staff();
+            return dtLayer.GetUserDetailsByUser_ID();
+        }
+
         [HttpGet]
         [Route("api/Dashboard/GetRevenueSummary_Today/{Practice_ID}")]
         public Invoice GetRevenueSummary_Today(int Practice_ID)

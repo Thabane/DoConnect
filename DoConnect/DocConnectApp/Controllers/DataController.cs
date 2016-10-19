@@ -28,10 +28,10 @@ namespace DocConnectApp.Controllers
         {
             Login UserData = new Login();
             UserData.User_ID = Convert.ToInt32(Session["User_ID"]);
-            
+
             DataLayer dtLayer = new DataLayer();
             Staff Staff = new Staff();
-            Staff = dtLayer.GetUserDetailsByUser_ID(UserData.User_ID);
+            Staff = dtLayer.GetUserDetailsByUser_ID();
 
             Session["FirstName"] = Staff.FirstName;
             Session["LastName"] = Staff.LastName;

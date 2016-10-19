@@ -2,7 +2,7 @@
     ['$http',
     function($http) {
         var SessionData = function () {
-            return $http.get("/Data/SessionData");
+            return $http.get("api/Dashboard/SessionData");
         };
 
         var GetAllPractices = function () {
