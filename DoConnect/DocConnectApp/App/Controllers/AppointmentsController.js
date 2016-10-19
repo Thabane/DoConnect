@@ -16,7 +16,7 @@
         $scope.GetAllAppointments();
 
         $scope.App_Statusz = [{ "Status": "Approved", "bool": "1" }, { "Status": "Declined", "bool": "0" }, { "Status": "Pending", "bool": "2"}];
-
+        $scope.listApp_Statusz = [{ "Status": "Approved", "bool": "1" }, { "Status": "Pending", "bool": "2" }];
         $scope.ViewAppointment = function (ID) {
             AppointmentsService.GetAppointmentByID(ID).success(function (result) {
                 $scope.Appointments_ID = result["Appointments_ID"];

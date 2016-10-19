@@ -27,7 +27,7 @@
                             <div class="col-md-2"></div>
                             <div class="col-md-5" style="padding:0px;">
                                 <div class="input-group date" id="datetime" style="padding:0px;">
-                                    <input class="form-control insert" type="text" id="Appointments_Time" name="Appointments_Time" ng-required="true"><span class="input-group-addon"><span class="fa fa-clock-o"></span></span>
+                                    <input class="form-control insert" type="text" id="Appointments_Time" m name="Appointments_Time" ng-required="true" ng-pattern="/^[0-9':'-'\s]{3,40}$/" placeholder="13:00"><span class="input-group-addon"><span class="fa fa-clock-o"></span></span>
                                 </div>
                             </div>
                         </div>
@@ -37,7 +37,12 @@
                         <div class="col-md-8">
                             <div class="col-md-5" style="padding:0px;"><small ng-show="Form.Appointments_Date.$invalid && Form.Appointments_Date.$touched && Form.Appointments_Date.$error.required">Required field.<br></small></div>
                             <div class="col-md-2"></div>
-                            <div class="col-md-5" style="padding:0px;"><small ng-show="Form.Appointments_Time.$invalid && Form.Appointments_Time.$touched && Form.Appointments_Time.$error.required">Required field.<br></small></div>
+                            <div class="col-md-5">
+                                <div class="row">
+                                    <div class="col-md-12" style="padding:0px;"><small ng-show="Form.Appointments_Time.$invalid && Form.Appointments_Time.$touched && Form.Appointments_Time.$error.required">Invalid time fomart.<br></small></div>
+                                    <div class="col-md-12" style="padding:0px;"><small ng-show="Form.Appointments_Time.$invalid && Form.Appointments_Time.$touched && Form.Appointments_Time.$error.required">Required field.<br></small></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="row" style="margin-top:4px; margin-bottom:0px;">
@@ -65,7 +70,7 @@
                     </div>
                     <div class="row" style="margin-top:4px; margin-bottom:0px;">
                         <div class="col-md-3"><h5>Appointment Status:<span style="color:red">*</span></h5></div>
-                        <div class="col-md-8"><select class="form-control" ng-model="App_Status" name="Appointments_App_Status" ng-required="true" ng-change="changedValueGetApp_Status(App_Status)" data-ng-options="App_Status as App_Status.Status for App_Status in App_Statusz">
+                        <div class="col-md-8"><select class="form-control" ng-model="App_Status" name="Appointments_App_Status" ng-required="true" ng-change="changedValueGetApp_Status(App_Status)" data-ng-options="App_Status as App_Status.Status for App_Status in listApp_Statusz">
                                                     <option value="">Select App Status</option>
                                                 </select></div>
                     </div>
@@ -96,11 +101,13 @@
     </div>
 </div>
 <script>
-    $("#date").datepicker({
-        format: 'yyyy-mm-dd',
-        autoclose: true,
-        orientation: "bottom",
-        minDate: 0
+    $(function () {
+        $("#date").datepicker({
+            format: 'yyyy-mm-dd',
+            autoclose: true,
+            orientation: "bottom",
+            minDate: 0
+        });
     });
 
     $(function () {
