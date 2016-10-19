@@ -101,18 +101,20 @@
     </div>
 </div>
 <script>
-    $(function () {
-        $("#date").datepicker({
-            format: 'yyyy-mm-dd',
-            autoclose: true,
-            orientation: "bottom",
-            minDate: 0
-        });
+    $("#date").datepicker({
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+        orientation: "bottom",
+        minDate: 0
     });
 
-    $(function () {
-        $("#datetime").datetimepicker({
+    //$(function () {
+    //    $("#datetime").datetimepicker({
+    //        format: 'HH:mm'
+    //    });
+    //});
+
+    $("#datetime").datetimepicker({
             format: 'HH:mm'
         });
-    });
 </script>
