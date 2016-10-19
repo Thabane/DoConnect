@@ -52,12 +52,10 @@
 
                     var data = google.visualization.arrayToDataTable([
                       ['Task', 'Hours per Day'],
-                      ['Total Visits', $scope.TotalNumOfVisits],
-                      ['Expected Income', $scope.Total],
-                      ['Actual Income', $scope.TotalAmountPaid],
-                      ['Balance Due', $scope.TotalBalanceOwing]
+                      ['Gross Income', $scope.Total],
+                      ['Income Received', $scope.TotalAmountPaid],
+                      ['Income Due', $scope.TotalBalanceOwing]
                     ]);
-
                     var options = {
                         pieSliceText: 'value',
                         is3D: true
@@ -188,8 +186,8 @@
 
         $scope.AppoveAppointment = function (ID, Practice_ID) {
             DashboardService.AppoveAppointment(ID).then(function (result) {
-                $scope.GetPendingAppointmentsByPracticeID(Practice_ID);
                 btnSuccess("Appointment status successfully updated.\nAppointment Appoved.");
+                $scope.GetPendingAppointmentsByPracticeID(Practice_ID);                
             }, function (error) {
                 btnAlert("System Error Message", "Appointment status not successfully updated.");
             });
