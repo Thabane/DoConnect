@@ -152,15 +152,15 @@ namespace DataClient
                         List = new Staff().GetLogginUser(reader);
                         if (COUNT == 0)
                         {
-                            access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Logged in");
+                            //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Logged in");
                             COUNT = 1;
                         }                        
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed: " + ex.ToString());
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed: " + ex.ToString());
             }
             return List;
         }
@@ -247,9 +247,9 @@ namespace DataClient
                                 }
                             }
                         }
-                        catch (Exception ex)
+                        catch (Exception)
                         {
-                            access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to view expenses: " + ex.ToString());
+                            //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to view expenses: " + ex.ToString());
                         }
 
                         List<SqlParameter> parametersStaff = new List<SqlParameter>();
@@ -274,18 +274,18 @@ namespace DataClient
                                 }
                             }
                         }
-                        catch (Exception ex)
+                        catch (Exception)
                         {
-                            access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to view expenses: " + ex.ToString());
+                            //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to view expenses: " + ex.ToString());
                         }
                         ExpensesInfo.Add(ExpenseInfo);
                     }
                 }
-                access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Viewed expenses page");
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Viewed expenses page");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to view expenses: " + ex.ToString());
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to view expenses: " + ex.ToString());
             }
             return ExpensesInfo;
         }
@@ -344,11 +344,11 @@ namespace DataClient
                         }
                     }
                 }
-                access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Viewed expense record");
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Viewed expense record");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to view selected expense: " + ex.ToString());
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to view selected expense: " + ex.ToString());
             }
             return ExpenseInfo;
         }
@@ -370,9 +370,9 @@ namespace DataClient
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to select practice details: " + ex.ToString());
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to select practice details: " + ex.ToString());
             }
             return PracticeID;
         }
@@ -398,12 +398,12 @@ namespace DataClient
             try
             {
                 access.ExecuteNonQuery(Conn, parameters, "[InsertExpense]");
-                access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Created a new expense entry");
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Created a new expense entry");
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to insert a new expense: " + ex.ToString());
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to insert a new expense: " + ex.ToString());
                 return false;
             }
         }
@@ -425,12 +425,12 @@ namespace DataClient
             try
             {
                 access.ExecuteNonQuery(Conn, parameters, "[UpdateExpense]");
-                access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Updated expense record: ID: "+ ID);
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Updated expense record: ID: "+ ID);
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to Updated expense record: ID: " + ID+"\n" + ex.ToString());
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to Updated expense record: ID: " + ID+"\n" + ex.ToString());
                 return false;
             }
         }
@@ -448,14 +448,14 @@ namespace DataClient
                     if (reader.Read())
                     {
                         DeletedID = reader.GetInt32(reader.GetOrdinal("ID"));
-                        access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Deleted expense record: ID: " + ID);
+                       //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Deleted expense record: ID: " + ID);
                     }
                 }
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to deleted expense record: ID: " + ID+"\n" + ex.ToString());
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to deleted expense record: ID: " + ID+"\n" + ex.ToString());
                 return false;
             }
         }
@@ -562,11 +562,11 @@ namespace DataClient
                         }
                     }
                 }
-                access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Viewed appointments page");
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Viewed appointments page");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to view selected appointment " + ex.ToString());
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to view selected appointment " + ex.ToString());
             }
             return AppointmentsInfo;
         }
@@ -585,13 +585,13 @@ namespace DataClient
                     if (reader.Read())
                     {
                         AppointmentsInfo = (new Appointments().GetAppByID(reader));
-                        access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Viewed appointment record");
+                        //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Viewed appointment record");
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to view appointments: " + AppId + "\n" + ex.ToString());
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to view appointments: " + AppId + "\n" + ex.ToString());
             }
             return AppointmentsInfo;
         }
@@ -622,13 +622,13 @@ namespace DataClient
                 {
                     if (reader.Read())
                     ID = reader.GetInt32(reader.GetOrdinal("ID"));
-                    access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Recorded new appointment");
+                    //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Recorded new appointment");
                 }
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to record new appointment: " + ex.ToString());
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to record new appointment: " + ex.ToString());
                 return false;
             }
         }
@@ -658,12 +658,12 @@ namespace DataClient
             try
             {
                 access.ExecuteNonQuery(Conn, parameters, "[UpdateAppointment]");
-                access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Updated appointment record");
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Updated appointment record");
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to update appointment record: " + ex.ToString());
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to update appointment record: " + ex.ToString());
                 return false;
             }
         }
@@ -679,19 +679,19 @@ namespace DataClient
                 {
                     if (reader.Read())
                     {                        
-                        access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Deleted appointment record: "+ id);
+                        //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Deleted appointment record: "+ id);
                         return true;
                     }
                     else
                     {
-                        access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to delete appointment record: " + id);
+                        //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to delete appointment record: " + id);
                         return false;
                     }
                 }
             }   
-            catch (Exception ex)
+            catch (Exception)
             {
-                access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to delete appointment record: "+ id +" : "+ ex.ToString());
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to delete appointment record: "+ id +" : "+ ex.ToString());
                 return false;
             }
         }
@@ -711,9 +711,9 @@ namespace DataClient
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed retrive consulation details: " + ex.ToString());
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed retrive consulation details: " + ex.ToString());
             }
             return consultationInfo;
         }
@@ -734,11 +734,11 @@ namespace DataClient
                         consultationInfo.Add(new Consultation().Create(reader));
                     }
                 }
-                access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Viewed patient's consultation notes");
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Viewed patient's consultation notes");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to view patient's consultation notes: " + ex.ToString());
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to view patient's consultation notes: " + ex.ToString());
             }
             return consultationInfo;
         }
@@ -801,12 +801,12 @@ namespace DataClient
                         }
                     }
                 }
-                access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Recorded new consultation notes");
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Recorded new consultation notes");
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to record new consultation notes: " + ex.ToString());
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to record new consultation notes: " + ex.ToString());
 	            return false;
             }
         }
@@ -841,12 +841,12 @@ namespace DataClient
             try
             {
                 access.ExecuteNonQuery(Conn, _parameters, "[UpdateConsultationNote]");
-                access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Updated consultation note: ID: " + consultationID);
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Updated consultation note: ID: " + consultationID);
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {            
-                access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to updated consultation note: ID: " + consultationID + "\n" + ex.ToString());
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to updated consultation note: ID: " + consultationID + "\n" + ex.ToString());
             	return false;
             }
         }
@@ -867,12 +867,12 @@ namespace DataClient
                         userId = reader.GetInt32(reader.GetOrdinal("ID"));
                     }
                 }
-                access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Deleted consultation note: ID: " + id);
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Deleted consultation note: ID: " + id);
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {            
-                access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to delete consultation note: ID: " + id +"\n" + ex.ToString());
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to delete consultation note: ID: " + id +"\n" + ex.ToString());
             	return false;
             }
         }
@@ -963,11 +963,11 @@ namespace DataClient
                         }
                     }
                 }
-                access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Viewed invoice page");
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Viewed invoice page");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to view invoice page: " + ex.ToString());
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to view invoice page: " + ex.ToString());
             }
             return invoiceInfo;
         }
@@ -988,11 +988,11 @@ namespace DataClient
                         return new Invoice().ViewInvoiceByID(reader);
                     }
                 }
-                access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Viewed invoice record");
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Viewed invoice record");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to view selected invoice: " + ex.ToString());
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to view selected invoice: " + ex.ToString());
             }
             return invoiceInfo;
         }
@@ -1091,12 +1091,12 @@ namespace DataClient
                         Email.SendEmail("josephine.chivinge@gmail.com", "Consultation Invoice", "Here is your email", "");
                     }
                 }
-                access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Recorded new invoice entry");
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Recorded new invoice entry");
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to record new invoice entry: " + ex.ToString());
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to record new invoice entry: " + ex.ToString());
                 return false;
             }
         }
@@ -1117,12 +1117,12 @@ namespace DataClient
                         DeletedID = reader.GetInt32(reader.GetOrdinal("ID"));
                     }
                 }
-                access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Deleted invoice entry: ID: " + id);
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Deleted invoice entry: ID: " + id);
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {            
-                access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to delete invoice entry: ID: " + id+"\n" + ex.ToString());
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to delete invoice entry: ID: " + id+"\n" + ex.ToString());
             	return false;
             }
         }
@@ -1174,12 +1174,12 @@ namespace DataClient
                         userId = reader.GetInt32(reader.GetOrdinal("ID"));
                     }
                 }
-                access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Created new patient's medical record");
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Created new patient's medical record");
                 return userId;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to create new patient's medical record: " + ex.ToString());
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to create new patient's medical record: " + ex.ToString());
                 return userId;
             }
         }
@@ -1254,12 +1254,12 @@ namespace DataClient
             try
             {
                 access.ExecuteNonQuery(Conn, _parameters, "[CreatePatient]");
-                access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Created new patient's medical record");
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Created new patient's medical record");
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to create new patient's medical record: " + ex.ToString());
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to create new patient's medical record: " + ex.ToString());
                 return false;
             }
         }
@@ -1276,11 +1276,11 @@ namespace DataClient
                         patientInfo.Add(new GetAllPatients().Create(reader));
                     }
                 }
-                access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Viewed patients page");
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Viewed patients page");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to view patients list: " + ex.ToString());
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to view patients list: " + ex.ToString());
             }
             return patientInfo;
         }
@@ -1301,11 +1301,11 @@ namespace DataClient
                         patientInfo.Add(new Patient().Create(reader));
                     }
                 }
-                access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Viewed patient's medical record");
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Viewed patient's medical record");
             }
-            catch (Exception ex)
+            catch (Exception)
             {            
-                access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to view selected patient's medical record: " + ex.ToString());
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to view selected patient's medical record: " + ex.ToString());
             }
             return patientInfo;
         }        
@@ -1325,19 +1325,19 @@ namespace DataClient
                     if (reader.Read())
                     {
                         userId = reader.GetInt32(reader.GetOrdinal("ID"));
-                        access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Deleted patient's medical record: ID: " + ID);
+                        //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Deleted patient's medical record: ID: " + ID);
                         return true;
                     }
                     else
                     {
-                        access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to delete patient's medical record: ID: " + ID);
+                        //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to delete patient's medical record: ID: " + ID);
                         return false;
                     }
                 }                
             }
-            catch (Exception ex)
+            catch (Exception)
             {            
-                access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to delete patient's medical record: ID: " + ID + "\n" + ex.ToString());
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to delete patient's medical record: ID: " + ID + "\n" + ex.ToString());
 	            return false;
             }
         }
@@ -1379,9 +1379,9 @@ namespace DataClient
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to create new patient's medical aid record: " + ex.ToString());                
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to create new patient's medical aid record: " + ex.ToString());                
             }
             return userId;
         }
@@ -1492,9 +1492,9 @@ namespace DataClient
                 }
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {            
-                access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to delete patient's medical aid: ID: " + id+"\n" + ex.ToString());
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to delete patient's medical aid: ID: " + id+"\n" + ex.ToString());
             	return false;
             }
         }
