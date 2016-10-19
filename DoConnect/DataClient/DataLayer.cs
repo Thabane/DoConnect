@@ -79,8 +79,8 @@ namespace DataClient
             _parameters.Add(PasswordParameter);
 
             Login Login = new Login();
-            //try
-            //{
+            try
+            {
                 using (var reader = access.ExecuteReader(Conn, "[Login]", _parameters))
                 {
                     if (reader.Read())
@@ -102,10 +102,10 @@ namespace DataClient
                         }
                     }
                 }
-            //}
-            //catch (Exception)
-            //{
-            //}
+            }
+            catch (Exception)
+            {
+            }
             return Login;
         }
 

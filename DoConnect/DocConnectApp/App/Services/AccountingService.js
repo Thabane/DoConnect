@@ -1,7 +1,6 @@
 ﻿app.factory('AccountingService',
 ['$http',
     function ($http) {
-
         var SessionData = function () {
             return $http.get("/Data/SessionData");
         };
