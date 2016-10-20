@@ -139,6 +139,7 @@ namespace DataClient
         #region Dashboard        
         Invoice GetRevenueSummary_Today(int Practice_ID);
         Invoice GetRevenueSummary_Week(int Practice_ID);
+        Invoice GetRevenueSummary_Month(int Practice_ID);
         Invoice GetNumPatientsByPractice(int Practice_ID);
         List <Consultation> Consulations_Visits(int Practice_ID);
         List<Consultation> Appointment_Stats(int Practice_ID);

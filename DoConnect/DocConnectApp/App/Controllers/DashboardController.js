@@ -72,30 +72,30 @@
         $scope.GetRevenueSummary_Today = function (Practice_ID) {
             DashboardService.GetRevenueSummary_Today(Practice_ID).then(function (result) {
                 $scope.TotalNumOfVisits_Summary = result.data["TotalNumOfVisits"];
-                $scope.Total_Summary = result.data["Total"];
+                $scope.Income = result.data["Total"];
                 $scope.TotalAmountPaid_Summary = result.data["AmountPaid"];
                 $scope.TotalBalanceOwing_Summary = result.data["BalanceOwing"];
-                $scope.Amount_Summary = result.data["Amount"];
+                $scope.Expenses_Summary = result.data["Amount"];
             });
         };
         
         $scope.GetRevenueSummary_Week = function (Practice_ID) {
             DashboardService.GetRevenueSummary_Week(Practice_ID).then(function (result) {
                 $scope.TotalNumOfVisits_Summary = result.data["TotalNumOfVisits"];
-                $scope.Total_Summary = result.data["Total"];
+                $scope.Income = result.data["Total"];
                 $scope.TotalAmountPaid_Summary = result.data["AmountPaid"];
                 $scope.TotalBalanceOwing_Summary = result.data["BalanceOwing"];
-                $scope.Amount_Summary = result.data["Amount"];
+                $scope.Expenses_Summary = result.data["Amount"];
             });
         };
 
         $scope.GetRevenueSummary_Month = function (Practice_ID) {
-            DashboardService.GetNumPatientsByPractice(Practice_ID).then(function (result) {
+            DashboardService.GetRevenueSummary_Month(Practice_ID).then(function (result) {
                 $scope.TotalNumOfVisits_Summary = result.data["TotalNumOfVisits"];
-                $scope.Total_Summary = result.data["Total"];
+                $scope.Income = result.data["Total"];
                 $scope.TotalAmountPaid_Summary = result.data["AmountPaid"];
                 $scope.TotalBalanceOwing_Summary = result.data["BalanceOwing"];
-                $scope.Amount_Summary = result.data["Amount"];
+                $scope.Expenses_Summary = result.data["Amount"];
             });
         };
 

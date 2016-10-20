@@ -3026,6 +3026,40 @@ namespace DataClient
             }
             return GetRevenueSummary_Week;
         }
+
+        public Invoice GetRevenueSummary_Month(int Practice_ID)
+        {
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            SqlParameter _Practice_IDParameter = new SqlParameter("@Practice_ID", SqlDbType.Int);
+            SqlParameter Practice_IDParameter = new SqlParameter("@Practice_ID", SqlDbType.Int);
+            _Practice_IDParameter.Value = Practice_ID;
+            Practice_IDParameter.Value = Practice_ID;
+            _parameters.Add(_Practice_IDParameter);
+            parameters.Add(Practice_IDParameter);
+
+            Invoice GetRevenueSummary_Month = new Invoice();
+            using (var reader = access.ExecuteReader(Conn, "[GetRevenueSummary_Month]", _parameters))
+            {
+                while (reader.Read())
+                {
+                    GetRevenueSummary_Month.TotalNumOfVisits++;
+                    GetRevenueSummary_Month.Total += reader.GetDecimal(reader.GetOrdinal("Total"));
+                    GetRevenueSummary_Month.AmountPaid += reader.GetDecimal(reader.GetOrdinal("AmountPaid"));
+                    GetRevenueSummary_Month.BalanceOwing += reader.GetDecimal(reader.GetOrdinal("BalanceOwing"));
+                }
+            }
+
+            using (var GetExpense = access.ExecuteReader(Conn, "[GetExpenses_Month]", parameters))
+            {
+                while (GetExpense.Read())
+                {
+                    GetRevenueSummary_Month.Amount += Convert.ToDecimal(GetExpense.GetString(GetExpense.GetOrdinal("Amount")));
+                }
+            }
+            return GetRevenueSummary_Month;
+        }
+
         public Invoice GetNumPatientsByPractice(int Practice_ID)
         {
             List<SqlParameter> _parameters = new List<SqlParameter>();

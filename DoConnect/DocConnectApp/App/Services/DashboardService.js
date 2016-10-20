@@ -17,6 +17,10 @@
             return $http.get("api/Dashboard/GetRevenueSummary_Week/" + Practice_ID);
         };
 
+        var GetRevenueSummary_Month = function (Practice_ID) {
+            return $http.get("api/Dashboard/GetRevenueSummary_Month/" + Practice_ID);
+        };
+
         var GetNumPatientsByPractice = function (Practice_ID) {
             return $http.get("api/Dashboard/GetNumPatientsByPractice/" + Practice_ID);
         };
@@ -78,6 +82,7 @@
             GetAllPractices: GetAllPractices,
             GetRevenueSummary_Today: GetRevenueSummary_Today,
             GetRevenueSummary_Week: GetRevenueSummary_Week,
+            GetRevenueSummary_Month: GetRevenueSummary_Month,
             GetNumPatientsByPractice: GetNumPatientsByPractice,
             Consulations_Visits: Consulations_Visits,
             Appointment_Stats: Appointment_Stats,

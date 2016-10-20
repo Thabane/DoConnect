@@ -41,6 +41,14 @@ namespace DocConnectApp.Controllers
         }
 
         [HttpGet]
+        [Route("api/Dashboard/GetRevenueSummary_Month/{Practice_ID}")]
+        public Invoice GetRevenueSummary_Month(int Practice_ID)
+        {
+            DataLayer dtLayer = new DataLayer();
+            return dtLayer.GetRevenueSummary_Month(Practice_ID);
+        }
+
+        [HttpGet]
         [Route("api/Dashboard/GetNumPatientsByPractice/{Practice_ID}")]
         public Invoice GetNumPatientsByPractice(int Practice_ID)
         {
