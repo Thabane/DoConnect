@@ -69,6 +69,10 @@
             return $http.get("api/Dashboard/MedicineInventoryStockCount/" + Practice_ID);
         };
 
+        var NumOFPatientsPerMonthPerPractice = function (Practice_ID) {
+            return $http.get("api/Dashboard/NumOFPatientsPerMonthPerPractice/" + Practice_ID);
+        };
+
         return {
             SessionData: SessionData,
             GetAllPractices: GetAllPractices,
@@ -84,9 +88,8 @@
             RejectAppointment: RejectAppointment,
             NumOfUnReadMessages: NumOfUnReadMessages,
             GetAllMessages: GetAllMessages,
-            MedicineInventoryStockCount: MedicineInventoryStockCount
-
-
+            MedicineInventoryStockCount: MedicineInventoryStockCount,
+            NumOFPatientsPerMonthPerPractice: NumOFPatientsPerMonthPerPractice
         }
     }
 ]);

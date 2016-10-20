@@ -60,7 +60,8 @@
                     ]);
                     var options = {
                         pieSliceText: 'value',
-                        is3D: true
+                        is3D: true,
+                        height: '170'
                     };
                     var chart = new google.visualization.PieChart(document.getElementById('piechart'));
                     chart.draw(data, options);
@@ -130,6 +131,38 @@
                         chart.draw(data, options);
                     }
                 });
+            });
+        };
+
+        //Graph: Number Of Patients Per Practice Per Month
+        $scope.NumOFPatientsPerMonthPerPractice = function (Practice_ID) {
+            DashboardService.NumOFPatientsPerMonthPerPractice(Practice_ID).then(function (result) {
+
+                    var List = [];
+
+                    for (var i = 0; i < result.data.length; i++) {
+                        List.push([result.data[i]["Month"], result.data[i]["TotalNumOfVisits"], result.data[i]["TotalPatientsCount"]]);
+                    }
+
+                    google.charts.load('current', { 'packages': ['line'] });
+                    google.charts.setOnLoadCallback(drawChart_NumOFPatientsPerMonthPerPractice);
+
+                    function drawChart_NumOFPatientsPerMonthPerPractice() {
+
+                        var data = new google.visualization.DataTable();
+                        data.addColumn('string', 'Month (2016)');
+                        data.addColumn('number', 'Number of registered patients');
+                        data.addColumn('number', 'Total patients');
+
+                        data.addRows(List);
+                        var options = {
+                            legend: { position: 'bottom' },
+                            is3D: true
+                        };                        
+
+                        var chart = new google.charts.Line(document.getElementById('linechart_NumOFPatientsPerMonthPerPractice'));
+                        chart.draw(data, options);
+                    }
             });
         };
 

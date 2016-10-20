@@ -127,5 +127,13 @@ namespace DocConnectApp.Controllers
             DataLayer dtLayer = new DataLayer();
             return dtLayer.MedicineInventoryStockCount(Practice_ID);
         }
+
+        [HttpGet]
+        [Route("api/Dashboard/NumOFPatientsPerMonthPerPractice/{Practice_ID}")]
+        public List<Consultation> NumOFPatientsPerMonthPerPractice(int Practice_ID)
+        {
+            DataLayer dtLayer = new DataLayer();
+            return dtLayer.NumOFPatientsPerMonthPerPractice(Practice_ID);
+        }
     }
 }

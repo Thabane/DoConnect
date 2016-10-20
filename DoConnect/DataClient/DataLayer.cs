@@ -15,8 +15,8 @@ namespace DataClient
     {
         private DataAccess access; 
         private List<SqlParameter> _parameters = new List<SqlParameter>();
-        //private string Conn = @"Data Source=DESKTOP-6Gu3I3G\SQLEXPRESS;Initial Catalog=DoConnect;Integrated Security=True";
-        private string Conn = @"Server=tcp:doconnect.database.windows.net,1433;Initial Catalog=DoConnect;Persist Security Info=False;User ID=teamCogent;Password=DoConnect1;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+        private string Conn = @"Data Source=DESKTOP-6Gu3I3G\SQLEXPRESS;Initial Catalog=DoConnect;Integrated Security=True";
+        //private string Conn = @"Server=tcp:doconnect.database.windows.net,1433;Initial Catalog=DoConnect;Persist Security Info=False;User ID=teamCogent;Password=DoConnect1;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
         public DataLayer()
         {
             access = new DataAccess();            
@@ -3376,6 +3376,248 @@ namespace DataClient
             }
             return MedicineInventoryStockCount;
         }
+
+        public List<Consultation> NumOFPatientsPerMonthPerPractice(int Practice_ID)
+        {
+            List<SqlParameter> parameters_4LastMonth = new List<SqlParameter>();
+            List<SqlParameter> parameters_3LastMonth = new List<SqlParameter>();
+            List<SqlParameter> parameters_2LastMonth = new List<SqlParameter>();
+            List<SqlParameter> parameters_1LastMonth = new List<SqlParameter>();
+            List<SqlParameter> parameters_CurrentMonth = new List<SqlParameter>();
+
+            SqlParameter Practice_ID_4LastMonth = new SqlParameter("@Practice_ID", SqlDbType.Int);
+            SqlParameter Practice_ID_3LastMonth = new SqlParameter("@Practice_ID", SqlDbType.Int);
+            SqlParameter Practice_ID_2LastMonth = new SqlParameter("@Practice_ID", SqlDbType.Int);
+            SqlParameter Practice_ID_1LastMonth = new SqlParameter("@Practice_ID", SqlDbType.Int);
+            SqlParameter Practice_ID_CurrentMonth = new SqlParameter("@Practice_ID", SqlDbType.Int);
+            Practice_ID_4LastMonth.Value = Practice_ID;
+            Practice_ID_3LastMonth.Value = Practice_ID;
+            Practice_ID_2LastMonth.Value = Practice_ID;
+            Practice_ID_1LastMonth.Value = Practice_ID;
+            Practice_ID_CurrentMonth.Value = Practice_ID;
+            parameters_4LastMonth.Add(Practice_ID_4LastMonth);
+            parameters_3LastMonth.Add(Practice_ID_3LastMonth);
+            parameters_2LastMonth.Add(Practice_ID_2LastMonth);
+            parameters_1LastMonth.Add(Practice_ID_1LastMonth);
+            parameters_CurrentMonth.Add(Practice_ID_CurrentMonth);
+
+
+            Consultation PatientsCount = new Consultation();
+            DateTime date = DateTime.Now;
+            List<Consultation> List = new List<Consultation>();
+            using (var reader = access.ExecuteReader(Conn, "[PatientsCount_4LastMonth]", parameters_4LastMonth))
+            {
+                int Count = 0; PatientsCount = new Consultation();
+                while (reader.Read())
+                {
+                    Count++;
+                }
+                if (reader.Read())
+                {
+                    PatientsCount.TotalNumOfVisits = Count;
+                    PatientsCount.Month = Convert.ToDateTime(reader.GetString(reader.GetOrdinal("RegistrationDate"))).ToString("MMM");
+
+                }
+                else
+                {
+                    PatientsCount.TotalNumOfVisits = Count;
+                    PatientsCount.Month = (date.AddMonths(-4)).ToString("MMM");
+                }
+                //List.Add(PatientsCount);
+            }
+            //PatientsCount/Month
+            using (var reader = access.ExecuteReader(Conn, "[TotalPatientsCount_4LastMonth]", new List<SqlParameter>()))
+            {
+                int Count = 0; //PatientsCount = new Consultation();
+                while (reader.Read())
+                {
+                    Count++;
+                }
+                if (reader.Read())
+                {
+                    PatientsCount.TotalPatientsCount = Count;
+                    PatientsCount.Month = Convert.ToDateTime(reader.GetString(reader.GetOrdinal("RegistrationDate"))).ToString("MMM");
+
+                }
+                else
+                {
+                    PatientsCount.TotalPatientsCount = Count;
+                    PatientsCount.Month = (date.AddMonths(-4)).ToString("MMM");
+                }
+                List.Add(PatientsCount);
+            }
+
+            using (var reader = access.ExecuteReader(Conn, "[PatientsCount_3LastMonth]", parameters_3LastMonth))
+            {
+                int Count = 0; PatientsCount = new Consultation();
+                while (reader.Read())
+                {
+                    Count++;
+                }
+                if (reader.Read())
+                {
+                    PatientsCount.TotalNumOfVisits = Count;
+                    PatientsCount.Month = Convert.ToDateTime(reader.GetString(reader.GetOrdinal("RegistrationDate"))).ToString("MMM");
+
+                }
+                else
+                {
+                    PatientsCount.TotalNumOfVisits = Count;
+                    PatientsCount.Month = (date.AddMonths(-3)).ToString("MMM");
+                }
+                //List.Add(PatientsCount);
+            }
+            //PatientsCount/Month
+            using (var reader = access.ExecuteReader(Conn, "[TotalPatientsCount_3LastMonth]", new List<SqlParameter>()))
+            {
+                int Count = 0; //PatientsCount = new Consultation();
+                while (reader.Read())
+                {
+                    Count++;
+                }
+                if (reader.Read())
+                {
+                    PatientsCount.TotalPatientsCount = Count;
+                    PatientsCount.Month = Convert.ToDateTime(reader.GetString(reader.GetOrdinal("RegistrationDate"))).ToString("MMM");
+
+                }
+                else
+                {
+                    PatientsCount.TotalPatientsCount = Count;
+                    PatientsCount.Month = (date.AddMonths(-3)).ToString("MMM");
+                }
+                List.Add(PatientsCount);
+            }
+
+            using (var reader = access.ExecuteReader(Conn, "[PatientsCount_2LastMonth]", parameters_2LastMonth))
+            {
+                int Count = 0; PatientsCount = new Consultation();
+                while (reader.Read())
+                {
+                    Count++;
+                }
+                if (reader.Read())
+                {
+                    PatientsCount.TotalNumOfVisits = Count;
+                    PatientsCount.Month = Convert.ToDateTime(reader.GetString(reader.GetOrdinal("RegistrationDate"))).ToString("MMM");
+
+                }
+                else
+                {
+                    PatientsCount.TotalNumOfVisits = Count;
+                    PatientsCount.Month = (date.AddMonths(-2)).ToString("MMM");
+                }
+                //List.Add(PatientsCount);
+            }
+
+            //PatientsCount/Month
+            using (var reader = access.ExecuteReader(Conn, "[TotalPatientsCount_2LastMonth]", new List<SqlParameter>()))
+            {
+                int Count = 0; //PatientsCount = new Consultation();
+                while (reader.Read())
+                {
+                    Count++;
+                }
+                if (reader.Read())
+                {
+                    PatientsCount.TotalPatientsCount = Count;
+                    PatientsCount.Month = Convert.ToDateTime(reader.GetString(reader.GetOrdinal("RegistrationDate"))).ToString("MMM");
+
+                }
+                else
+                {
+                    PatientsCount.TotalPatientsCount = Count;
+                    PatientsCount.Month = (date.AddMonths(-2)).ToString("MMM");
+                }
+                List.Add(PatientsCount);
+            }
+
+            using (var reader = access.ExecuteReader(Conn, "[PatientsCount_LastMonth]", parameters_1LastMonth))
+            {
+                int Count = 0; PatientsCount = new Consultation();
+                while (reader.Read())
+                {
+                    Count++;
+                }
+                if (reader.Read())
+                {
+                    PatientsCount.TotalNumOfVisits = Count;
+                    PatientsCount.Month = Convert.ToDateTime(reader.GetString(reader.GetOrdinal("RegistrationDate"))).ToString("MMM");
+
+                }
+                else
+                {
+                    PatientsCount.TotalNumOfVisits = Count;
+                    PatientsCount.Month = (date.AddMonths(-1)).ToString("MMM");
+                }
+                //List.Add(PatientsCount);
+            }
+            //PatientsCount/Month
+            using (var reader = access.ExecuteReader(Conn, "[TotalPatientsCount_LastMonth]", new List<SqlParameter>()))
+            {
+                int Count = 0; //PatientsCount = new Consultation();
+                while (reader.Read())
+                {
+                    Count++;
+                }
+                if (reader.Read())
+                {
+                    PatientsCount.TotalPatientsCount = Count;
+                    PatientsCount.Month = Convert.ToDateTime(reader.GetString(reader.GetOrdinal("RegistrationDate"))).ToString("MMM");
+
+                }
+                else
+                {
+                    PatientsCount.TotalPatientsCount = Count;
+                    PatientsCount.Month = (date.AddMonths(-1)).ToString("MMM");
+                }
+                List.Add(PatientsCount);
+            }
+            //PatientsCount/Practice/Month
+            using (var reader = access.ExecuteReader(Conn, "[PatientsCount_CurrentMonth]", parameters_CurrentMonth))
+            {
+                int Count = 0; PatientsCount = new Consultation();
+                while (reader.Read())
+                {
+                    Count++;
+                }
+                if (reader.Read())
+                {
+                    PatientsCount.TotalNumOfVisits = Count;
+                    PatientsCount.Month = Convert.ToDateTime(reader.GetString(reader.GetOrdinal("RegistrationDate"))).ToString("MMM");
+
+                }
+                else
+                {
+                    PatientsCount.TotalNumOfVisits = Count;
+                    PatientsCount.Month = (date.AddMonths(0)).ToString("MMM");
+                }
+                //List.Add(PatientsCount);
+            }
+
+            //PatientsCount/Month
+            using (var TotalPatientsCount = access.ExecuteReader(Conn, "[TotalPatientsCount_CurrentMonth]", new List<SqlParameter>()))
+            {
+                int Count = 0; //PatientsCount = new Consultation();
+                while (TotalPatientsCount.Read())
+                {
+                    Count++;
+                }
+                if (TotalPatientsCount.Read())
+                {
+                    PatientsCount.TotalPatientsCount = Count;
+                    PatientsCount.Month = Convert.ToDateTime(TotalPatientsCount.GetString(TotalPatientsCount.GetOrdinal("RegistrationDate"))).ToString("MMM");
+                }
+                else
+                {
+                    PatientsCount.TotalPatientsCount = Count;
+                    PatientsCount.Month = (date.AddMonths(0)).ToString("MMM");
+                }
+                List.Add(PatientsCount);
+            }
+            return List;
+        }
+
         #endregion
 
         #region User Profile

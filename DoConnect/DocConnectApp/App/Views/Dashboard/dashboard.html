@@ -2,7 +2,7 @@
     <div ng-show="SessionData_User_ID == '2'" dir-paginate="Practice in Practices | filter:search | orderBy:sortKey:reverse | itemsPerPage:1" ng-init="GetNumPatientsByPractice(Practice.ID)">
         
         <div class="row" ng-init="Consulations_Visits(Practice.ID)">
-            <div class="col-md-12">
+            <div class="col-md-12" ng-init="NumOFPatientsPerMonthPerPractice(Practice.ID)">
                 <h2 class="page-header text-primary">Dashboard: {{Practice.Name}}</h2>
             </div>
         </div>
@@ -117,7 +117,7 @@
         <div class="row">
             <!-- Appointment Statistics Pie Chart -->
             <div class="col-md-6">
-                <div class="portlet light" style="border: 1px solid #ddd; border-radius: 4px; height: 250px;">
+                <div class="portlet light" style="border: 1px solid #ddd; border-radius: 4px; height: 263px;">
                     <div class="portlet-title">
                         <div class="caption caption-md">
                             <i class="icon-bar-chart font-dark hide"></i>
@@ -146,129 +146,145 @@
                 </div>
             </div>        
         </div><!-- /.2nd row -->
-        
-        <!--AppointmentsModal-->
-        <div id="AppointmentsModal" class="modal fade">
-            <form>
-                <div class="modal-dialog" style="width:50%" ng-init="GetPendingAppointmentsByPracticeID(Practice.ID)">
-                    <div class="modal-content" ng-init="GetAppovedAppointmentsByPracticeID(Practice.ID)">
-                        <div class="modal-header" ng-init="GetRejectedAppointmentsByPracticeID(Practice.ID)">
-                            <button type="button" class="close CloseModel" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title">Appointments Wedgit</h4>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="portlet light" style="border: 1px solid #ddd; border-radius: 4px;">
+                    <div class="portlet-title">
+                        <div class="caption caption-md">
+                            <i class="icon-bar-chart font-dark hide"></i>
+                            <span class="caption-subject font-green-steel uppercase bold">Registered Patients Stats</span>
                         </div>
-                        <div class="modal-body" style="max-height: 450px; overflow-y: auto;">
-                            <div class="portlet light" style="border: 1px solid #ddd; border-radius: 4px;">
-                                <div class="btn-group btn-group-devided pull-right" data-toggle="buttons">
-                                    <label ng-click="ShowPendingAppDiv(Practice.ID)" class="btn btn-transparent btn-no-border blue-oleo btn-outline btn-circle btn-sm active" style="width: 60px;">
-                                        <input name="options" class="toggle" type="radio">Pending
-                                    </label>
-                                    <label ng-click="ShowApprovedAppDiv(Practice.ID)" class="btn btn-transparent btn-no-border blue-oleo btn-outline btn-circle btn-sm" style="width: 60px;">
-                                        <input name="options" class="toggle" type="radio">Approved
-                                    </label>
-                                    <label ng-click="ShowRejectedAppDiv(Practice.ID)" class="btn btn-transparent btn-no-border blue-oleo btn-outline btn-circle btn-sm" style="width: 60px;">
-                                        <input name="options" class="toggle" type="radio">Rejected
-                                    </label>
-                                </div>
-                                <div class="portlet-body">
-                                    <div class="tab-content">
-                                        <!-- BEGIN: Pending Appointment-->
-                                        <div class="tab-pane active" id="tab_actions_pending">
-                                            <div class="mt-actions" ng-repeat="PendingAppointment in PendingAppointments">
-                                                <div class="mt-action">
-                                                    <div class="mt-action-body">
-                                                        <div class="mt-action-row">
-                                                            <div class="mt-action-info col-md-4">
-                                                                <div class="mt-action-details">
-                                                                    <span class="mt-action-author">{{PendingAppointment.Patient_FirstName}}</span>
-                                                                    <p class="mt-action-desc">{{PendingAppointment.Appointments_Details}}</p>
+                    </div>
+                    <div class="portlet-body">
+                        <div class="row" id="linechart_NumOFPatientsPerMonthPerPractice" style="width: 100%; height: 190px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- /.2nd row -->
+
+            <!--AppointmentsModal-->
+            <div id="AppointmentsModal" class="modal fade">
+                <form>
+                    <div class="modal-dialog" style="width:50%" ng-init="GetPendingAppointmentsByPracticeID(Practice.ID)">
+                        <div class="modal-content" ng-init="GetAppovedAppointmentsByPracticeID(Practice.ID)">
+                            <div class="modal-header" ng-init="GetRejectedAppointmentsByPracticeID(Practice.ID)">
+                                <button type="button" class="close CloseModel" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title">Appointments Wedgit</h4>
+                            </div>
+                            <div class="modal-body" style="max-height: 450px; overflow-y: auto;">
+                                <div class="portlet light" style="border: 1px solid #ddd; border-radius: 4px;">
+                                    <div class="btn-group btn-group-devided pull-right" data-toggle="buttons">
+                                        <label ng-click="ShowPendingAppDiv(Practice.ID)" class="btn btn-transparent btn-no-border blue-oleo btn-outline btn-circle btn-sm active" style="width: 60px;">
+                                            <input name="options" class="toggle" type="radio">Pending
+                                        </label>
+                                        <label ng-click="ShowApprovedAppDiv(Practice.ID)" class="btn btn-transparent btn-no-border blue-oleo btn-outline btn-circle btn-sm" style="width: 60px;">
+                                            <input name="options" class="toggle" type="radio">Approved
+                                        </label>
+                                        <label ng-click="ShowRejectedAppDiv(Practice.ID)" class="btn btn-transparent btn-no-border blue-oleo btn-outline btn-circle btn-sm" style="width: 60px;">
+                                            <input name="options" class="toggle" type="radio">Rejected
+                                        </label>
+                                    </div>
+                                    <div class="portlet-body">
+                                        <div class="tab-content">
+                                            <!-- BEGIN: Pending Appointment-->
+                                            <div class="tab-pane active" id="tab_actions_pending">
+                                                <div class="mt-actions" ng-repeat="PendingAppointment in PendingAppointments">
+                                                    <div class="mt-action">
+                                                        <div class="mt-action-body">
+                                                            <div class="mt-action-row">
+                                                                <div class="mt-action-info col-md-4">
+                                                                    <div class="mt-action-details">
+                                                                        <span class="mt-action-author">{{PendingAppointment.Patient_FirstName}}</span>
+                                                                        <p class="mt-action-desc">{{PendingAppointment.Appointments_Details}}</p>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="mt-action-info col-md-4">
-                                                                <div class="mt-action-details">
-                                                                    <span class="mt-action-author">Dr. {{PendingAppointment.Doctors_FirstName}}</span>
-                                                                    <p class="mt-action-desc">{{PendingAppointment.Appointments_Date_Time}}</p>
+                                                                <div class="mt-action-info col-md-4">
+                                                                    <div class="mt-action-details">
+                                                                        <span class="mt-action-author">Dr. {{PendingAppointment.Doctors_FirstName}}</span>
+                                                                        <p class="mt-action-desc">{{PendingAppointment.Appointments_Date_Time}}</p>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="mt-action-buttons col-md-2">
-                                                                <div class="btn-group btn-group-circle">
-                                                                    <button class="btn btn-outline green btn-sm" type="button" ng-click="AppoveAppointment(PendingAppointment.Appointments_ID, Practice.ID)">Appove</button>
-                                                                    <button class="btn btn-outline red btn-sm" type="button" ng-click="RejectAppointment(PendingAppointment.Appointments_ID, Practice.ID)">Reject</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row" ng-show="PendingAppointments.length==0 && displayedDiv==1"><div class="alert alert-info col-md-12"><strong>System Message!</strong> No pending appointments to display.</div></div>
-                                        </div><!-- END: Pending Appointment -->
-                                        <!-- BEGIN: Approved Appointments-->
-                                        <div class="tab-pane" id="tab_actions_approved">
-                                            <div class="mt-actions" ng-repeat="ApprovedAppointment in ApprovedAppointments">
-                                                <div class="mt-action">
-                                                    <div class="mt-action-body">
-                                                        <div class="mt-action-row">
-                                                            <div class="mt-action-info col-md-4">
-                                                                <div class="mt-action-details">
-                                                                    <span class="mt-action-author">{{ApprovedAppointment.Patient_FirstName}}</span>
-                                                                    <p class="mt-action-desc">{{ApprovedAppointment.Appointments_Details}}</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="mt-action-info col-md-4">
-                                                                <div class="mt-action-details">
-                                                                    <span class="mt-action-author">Dr. {{ApprovedAppointment.Doctors_FirstName}}</span>
-                                                                    <p class="mt-action-desc">{{ApprovedAppointment.Appointments_Date_Time}}</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="mt-action-buttons col-md-2">
-                                                                <div class="btn-group btn-group-circle">
-                                                                    <button class="btn btn-outline red btn-sm" type="button" ng-click="RejectAppointment(ApprovedAppointment.Appointments_ID, Practice.ID)">Reject</button>
+                                                                <div class="mt-action-buttons col-md-2">
+                                                                    <div class="btn-group btn-group-circle">
+                                                                        <button class="btn btn-outline green btn-sm" type="button" ng-click="AppoveAppointment(PendingAppointment.Appointments_ID, Practice.ID)">Appove</button>
+                                                                        <button class="btn btn-outline red btn-sm" type="button" ng-click="RejectAppointment(PendingAppointment.Appointments_ID, Practice.ID)">Reject</button>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="row" ng-show="ApprovedAppointments.length==0 && displayedDiv==2"><div class="alert alert-info col-md-12"><strong>System Message!</strong> No approved appointments to display.</div></div>
-                                        </div><!-- END: Approved Appointments -->
-                                        <!-- BEGIN: Rejected Appointments-->
-                                        <div class="tab-pane" id="tab_actions_rejected">
-                                            <div class="mt-actions" ng-repeat="RejectedAppointment in RejectedAppointments">
-                                                <div class="mt-action">
-                                                    <div class="mt-action-body">
-                                                        <div class="mt-action-row row">
-                                                            <div class="mt-action-info col-md-4">
-                                                                <div class="mt-action-details">
-                                                                    <span class="mt-action-author">{{RejectedAppointment.Patient_FirstName}}</span>
-                                                                    <p class="mt-action-desc">{{RejectedAppointment.Appointments_Details}}</p>
+                                                <div class="row" ng-show="PendingAppointments.length==0 && displayedDiv==1"><div class="alert alert-info col-md-12"><strong>System Message!</strong> No pending appointments to display.</div></div>
+                                            </div><!-- END: Pending Appointment -->
+                                            <!-- BEGIN: Approved Appointments-->
+                                            <div class="tab-pane" id="tab_actions_approved">
+                                                <div class="mt-actions" ng-repeat="ApprovedAppointment in ApprovedAppointments">
+                                                    <div class="mt-action">
+                                                        <div class="mt-action-body">
+                                                            <div class="mt-action-row">
+                                                                <div class="mt-action-info col-md-4">
+                                                                    <div class="mt-action-details">
+                                                                        <span class="mt-action-author">{{ApprovedAppointment.Patient_FirstName}}</span>
+                                                                        <p class="mt-action-desc">{{ApprovedAppointment.Appointments_Details}}</p>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="mt-action-info col-md-4">
-                                                                <div class="mt-action-details">
-                                                                    <span class="mt-action-author">Dr. {{RejectedAppointment.Doctors_FirstName}}</span>
-                                                                    <p class="mt-action-desc">{{RejectedAppointment.Appointments_Date_Time}}</p>
+                                                                <div class="mt-action-info col-md-4">
+                                                                    <div class="mt-action-details">
+                                                                        <span class="mt-action-author">Dr. {{ApprovedAppointment.Doctors_FirstName}}</span>
+                                                                        <p class="mt-action-desc">{{ApprovedAppointment.Appointments_Date_Time}}</p>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="mt-action-buttons col-md-2">
-                                                                <div class="btn-group btn-group-circle">
-                                                                    <button class="btn btn-outline green btn-sm" type="button" ng-click="AppoveAppointment(RejectedAppointment.Appointments_ID, Practice.ID)">Appove</button>
+                                                                <div class="mt-action-buttons col-md-2">
+                                                                    <div class="btn-group btn-group-circle">
+                                                                        <button class="btn btn-outline red btn-sm" type="button" ng-click="RejectAppointment(ApprovedAppointment.Appointments_ID, Practice.ID)">Reject</button>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="row" ng-show="RejectedAppointments.length==0 && displayedDiv==3"><div class="alert alert-info col-md-12"><strong>System Message!</strong> No rejected appointments to display.</div></div>
-                                        </div><!-- END: Rejected Appointments -->
+                                                <div class="row" ng-show="ApprovedAppointments.length==0 && displayedDiv==2"><div class="alert alert-info col-md-12"><strong>System Message!</strong> No approved appointments to display.</div></div>
+                                            </div><!-- END: Approved Appointments -->
+                                            <!-- BEGIN: Rejected Appointments-->
+                                            <div class="tab-pane" id="tab_actions_rejected">
+                                                <div class="mt-actions" ng-repeat="RejectedAppointment in RejectedAppointments">
+                                                    <div class="mt-action">
+                                                        <div class="mt-action-body">
+                                                            <div class="mt-action-row row">
+                                                                <div class="mt-action-info col-md-4">
+                                                                    <div class="mt-action-details">
+                                                                        <span class="mt-action-author">{{RejectedAppointment.Patient_FirstName}}</span>
+                                                                        <p class="mt-action-desc">{{RejectedAppointment.Appointments_Details}}</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="mt-action-info col-md-4">
+                                                                    <div class="mt-action-details">
+                                                                        <span class="mt-action-author">Dr. {{RejectedAppointment.Doctors_FirstName}}</span>
+                                                                        <p class="mt-action-desc">{{RejectedAppointment.Appointments_Date_Time}}</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="mt-action-buttons col-md-2">
+                                                                    <div class="btn-group btn-group-circle">
+                                                                        <button class="btn btn-outline green btn-sm" type="button" ng-click="AppoveAppointment(RejectedAppointment.Appointments_ID, Practice.ID)">Appove</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row" ng-show="RejectedAppointments.length==0 && displayedDiv==3"><div class="alert alert-info col-md-12"><strong>System Message!</strong> No rejected appointments to display.</div></div>
+                                            </div><!-- END: Rejected Appointments -->
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
+            <!-- /.Appointments Modal-->
         </div>
-        <!-- /.Appointments Modal-->
-    </div>
     <div class="row">
         <div class="col-md-12">
             <dir-pagination-controls class="pull-right" max-size="5" direction-links="true" boundary-links="true" style="margin-right: 20px;"></dir-pagination-controls>
