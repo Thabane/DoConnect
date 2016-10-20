@@ -50,7 +50,6 @@
                 </div>
             </div>
         </div>
-        <pre>{{DiagnosisResponse.question}}</pre>
         <div class="col-lg-12" ng-if="DiagnosisResponse.question == null">
             <h2> Possible Conditions</h2>
             <div class="row" ng-repeat="con in DiagnosisResponse.conditions | orderBy: -DiagnosisResponse.probability">
