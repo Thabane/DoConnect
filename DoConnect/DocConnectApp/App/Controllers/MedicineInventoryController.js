@@ -9,6 +9,9 @@ function ($scope, MedicineInventoryService, $interval, $filter, $ngBootbox) {
     $scope.GetAllMedicine = function () {
         MedicineInventoryService.GetAllMedicines().then(function (result) {
             $scope.Medicines = result.data;
+            $scope.qtyExpiered = $scope.Medicines[$scope.Medicines.length - 1].qtyExpiered;
+            $scope.qtyAboutToExpier = $scope.Medicines[$scope.Medicines.length - 1].qtyAboutToExpier;
+            $scope.qtyNeedRefill = $scope.Medicines[$scope.Medicines.length - 1].qtyNeedRefill;
         });
     };
     $scope.GetAllMedicine();

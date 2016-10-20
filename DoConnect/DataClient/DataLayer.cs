@@ -2400,16 +2400,53 @@ namespace DataClient
         #region Medicine_Inventory
         public List<Medicine_Inventory> GetAllMedicine_Inventory()
         {
+            DateTime Today = DateTime.Now;
+            DateTime NextMonthDate = DateTime.Today.AddMonths(+1);
+            Medicine_Inventory Medicine = new Medicine_Inventory(); int qtyAboutToExpier = 0; int qtyExpiered = 0; int qtyNeedRefill = 0;
             List<Medicine_Inventory> Medicine_InventoryInfo = new List<Medicine_Inventory>();
             using (var reader = access.ExecuteReader(Conn, "[GetAllMedicine_Inventory]", new List<SqlParameter>()))
             {
                 while (reader.Read())
                 {
-                    Medicine_InventoryInfo.Add(new Medicine_Inventory().Create(reader));
+                    Medicine.ID = reader.GetInt32(reader.GetOrdinal("ID"))                                  ;
+                    Medicine.DrugName = reader.GetString(reader.GetOrdinal("DrugName"))                     ;
+                    Medicine.Description = reader.GetString(reader.GetOrdinal("Description"))               ;
+                    Medicine.QuantityPurchased = reader.GetInt32(reader.GetOrdinal("QuantityPurchased"))    ;
+                    Medicine.PurchaseDate = reader.GetString(reader.GetOrdinal("PurchaseDate"))             ;
+                    Medicine.QuantityInStock = reader.GetInt32(reader.GetOrdinal("QuantityInStock"))        ;
+                    Medicine.ExpiryDate = reader.GetString(reader.GetOrdinal("ExpiryDate"))                 ;
+                    Medicine.DrugConcentration = reader.GetString(reader.GetOrdinal("DrugConcentration"))   ;
+                    Medicine.Practice_ID = reader.GetInt32(reader.GetOrdinal("Practice_ID"))                ;
+                    Medicine.PracticeName = reader.GetString(reader.GetOrdinal("PracticeName"));
+
+                    DateTime ExpiryDate = Convert.ToDateTime(reader.GetString(reader.GetOrdinal("ExpiryDate")));
+                    if ((Today < ExpiryDate) && (ExpiryDate < NextMonthDate))
+                    {
+                        Medicine.highlightqtyAboutToExpier = 1;
+                        qtyAboutToExpier++;
+                    }
+                    Medicine.qtyAboutToExpier = qtyAboutToExpier;
+
+                    if (ExpiryDate < Today)
+                    {
+                        Medicine.highlightqtyExpiered = 1;
+                        qtyExpiered++;
+                    }
+                    Medicine.qtyExpiered = qtyExpiered;
+
+                    int QuantityInStock = reader.GetInt32(reader.GetOrdinal("QuantityInStock"));
+                    if (QuantityInStock < 50)
+                    {
+                        Medicine.highlightqtyNeedRefill = 1;
+                        qtyNeedRefill++;
+                    }
+                    Medicine.qtyNeedRefill = qtyNeedRefill;
+                    Medicine_InventoryInfo.Add(Medicine); Medicine = new Medicine_Inventory();
                 }
             }
             return Medicine_InventoryInfo;
         }
+
         public Medicine_Inventory GetMedicine_InventoryById(int ID)
         {
             List<SqlParameter> _parameters = new List<SqlParameter>();
@@ -2426,6 +2463,7 @@ namespace DataClient
             }
             return Medicine_InventoryInfo;
         }
+
         public bool NewMedicine_Inventory(string DrugName, string Description, int QuantityPurchased, string PurchaseDate, string ExpiryDate, string DrugConcentration, int Practice_ID)
         {
             List<SqlParameter> parameters = new List<SqlParameter>();
