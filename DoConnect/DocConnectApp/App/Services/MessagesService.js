@@ -14,6 +14,10 @@
             return $http.get("api/Messages/GetMessage/" + ID);
         };
 
+        var GetAllRecepients = function () {
+            return $http.get("api/Messages/GetAllRecepients");
+        };
+
         var GetAllSentMessages = function (Sender) {
             return $http.get("api/Messages/GetAllSentMessages/" + Sender);
         };
@@ -47,6 +51,7 @@
             GetMessageByID: GetMessageByID,
             GetAllSentMessages: GetAllSentMessages,
             GetSentMessageById: GetSentMessageById,
+            GetAllRecepients:GetAllRecepients,
             InsertMessage: InsertMessage,
             DeleteMessage: DeleteMessage,
             SessionData: SessionData

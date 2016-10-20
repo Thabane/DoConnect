@@ -131,6 +131,7 @@ namespace DataClient
         Messages GetMessageById(int ID);
         List<Messages> GetAllSentMessages(int Sender);
         Messages GetSentMessageById(int ID);
+        List<Staff> GetAllRecepients();
         bool NewMessages(int Receiver, int Sender, string Subject, string Description, string Date);
         bool DeleteMessages(int ID);
         #endregion

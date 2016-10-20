@@ -2593,7 +2593,6 @@ namespace DataClient
                 }
             }
             return true;
-
         }
         public bool UpdateMedicalAid(int ID, string Name, string Cell_Number, string Fax_Number, string Email_Address, string Address)
         {
@@ -2751,7 +2750,8 @@ namespace DataClient
                 }
             }
             return MessageInfo;
-        }
+        }        
+
         public List<Messages> GetAllSentMessages(int Sender)
         {
             List<SqlParameter> _parameters = new List<SqlParameter>();
@@ -2827,6 +2827,54 @@ namespace DataClient
             }
             return MessageInfo;
         }
+
+        public List<Staff> GetAllRecepients()
+        {
+
+            Staff MessageInfo = new Staff();
+            List<Staff> MessagesInfo = new List<Staff>();
+            using (var reader = access.ExecuteReader(Conn, "[GetRecepientDoctors]", new List<SqlParameter>()))
+            {
+                while (reader.Read())
+                {
+                    MessageInfo.ID = reader.GetInt32(reader.GetOrdinal("ID"));
+                    MessageInfo.FirstName = reader.GetString(reader.GetOrdinal("FirstName")) + " " + reader.GetString(reader.GetOrdinal("LastName")) + " : " + reader.GetString(reader.GetOrdinal("Email"));
+                    MessageInfo.LastName = reader.GetString(reader.GetOrdinal("LastName"));
+                    MessageInfo.User_ID = reader.GetInt32(reader.GetOrdinal("User_ID"));
+                    MessageInfo.Email = reader.GetString(reader.GetOrdinal("Email"));                    
+                    MessagesInfo.Add(MessageInfo);
+                    MessageInfo = new Staff();
+                }
+            }
+            using (var reader = access.ExecuteReader(Conn, "[GetRecepientStaff]", new List<SqlParameter>()))
+            {
+                while (reader.Read())
+                {
+                    MessageInfo.ID = reader.GetInt32(reader.GetOrdinal("ID"));
+                    MessageInfo.FirstName = reader.GetString(reader.GetOrdinal("FirstName")) +" "+ reader.GetString(reader.GetOrdinal("LastName")) + " : " + reader.GetString(reader.GetOrdinal("Email"));
+                    MessageInfo.LastName = reader.GetString(reader.GetOrdinal("LastName"));
+                    MessageInfo.User_ID = reader.GetInt32(reader.GetOrdinal("User_ID"));
+                    MessageInfo.Email = reader.GetString(reader.GetOrdinal("Email"));
+                    MessagesInfo.Add(MessageInfo);
+                    MessageInfo = new Staff();
+                }
+            }
+            using (var reader = access.ExecuteReader(Conn, "[GetRecepientPatients]", new List<SqlParameter>()))
+            {
+                while (reader.Read())
+                {
+                    MessageInfo.ID = reader.GetInt32(reader.GetOrdinal("ID"));
+                    MessageInfo.FirstName = reader.GetString(reader.GetOrdinal("FirstName")) + " " + reader.GetString(reader.GetOrdinal("LastName")) + " : " + reader.GetString(reader.GetOrdinal("Email"));
+                    MessageInfo.LastName = reader.GetString(reader.GetOrdinal("LastName"));
+                    MessageInfo.User_ID = reader.GetInt32(reader.GetOrdinal("User_ID"));
+                    MessageInfo.Email = reader.GetString(reader.GetOrdinal("Email"));
+                    MessagesInfo.Add(MessageInfo);
+                    MessageInfo = new Staff();
+                }
+            }
+            return MessagesInfo;
+        }
+
         public bool NewMessages(int Receiver, int Sender, string Subject, string Description, string Date)
         {
             List<SqlParameter> _parameters = new List<SqlParameter>();
