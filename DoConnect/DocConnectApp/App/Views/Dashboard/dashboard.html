@@ -295,8 +295,8 @@
     <!--If Any other employee logs in-->
     <div ng-show="SessionData_User_ID != '2'" dir-paginate="Practice in Practices | filter:search | orderBy:sortKey:reverse | itemsPerPage:1" ng-init="GetNumPatientsByPractice(Practice.ID)">
 
-        <div class="row" ng-init="Consulations_Visits(SessionData_Practice_ID)">
-            <div class="col-md-12" ng-init="NumOFPatientsPerMonthPerPractice(SessionData_Practice_ID)">
+        <div class="row" ng-show="SessionData_User_ID != '2'" ng-init="Consulations_Visits(SessionData_Practice_ID)">
+            <div class="col-md-12" ng-show="SessionData_User_ID != '2'" ng-init="NumOFPatientsPerMonthPerPractice(SessionData_Practice_ID)">
                 <h2 class="page-header text-primary">Dashboard: {{Practice.Name}}</h2>
             </div>
         </div>
@@ -304,7 +304,7 @@
         <!-- first row -->
         <div class="row">
             <div class="col-lg-3 col-md-6">
-                <div class="portlet light" style="border: 1px solid #ddd; border-radius: 4px;" ng-init="GetMedicineInventoryStockCount(SessionData_Practice_ID)">
+                <div class="portlet light" style="border: 1px solid #ddd; border-radius: 4px;" ng-show="SessionData_User_ID != '2'"ng-init="GetMedicineInventoryStockCount(SessionData_Practice_ID)">
                     <div class="portlet-title">
                         <div class="caption caption-md">
                             <i class="icon-bar-chart font-dark hide"></i>
@@ -331,9 +331,9 @@
                 </div>
             </div>
             <div class="col-lg-3 col-md-6">
-                <div class="portlet light" style="border: 1px solid #ddd; border-radius: 4px;" ng-init="GetPendingAppointmentsByPracticeID(SessionData_Practice_ID)">
-                    <div class="portlet-title" ng-init="GetAppovedAppointmentsByPracticeID(SessionData_Practice_ID)">
-                        <div class="caption caption-md" ng-init="GetRejectedAppointmentsByPracticeID(SessionData_Practice_ID)">
+                <div class="portlet light" style="border: 1px solid #ddd; border-radius: 4px;" ng-show="SessionData_User_ID != '2'" ng-init="GetPendingAppointmentsByPracticeID(SessionData_Practice_ID)">
+                    <div class="portlet-title" ng-show="SessionData_User_ID != '2'" ng-init="GetAppovedAppointmentsByPracticeID(SessionData_Practice_ID)">
+                        <div class="caption caption-md" ng-show="SessionData_User_ID != '2'" ng-init="GetRejectedAppointmentsByPracticeID(SessionData_Practice_ID)">
                             <i class="icon-bar-chart font-dark hide"></i>
                             <span class="caption-subject font-green-steel uppercase bold">Appointments</span>
                         </div>
@@ -365,7 +365,7 @@
                 </div>
             </div>
             <!-- Sales Summary Graph-->
-            <div class="col-md-6" ng-init="GetRevenueSummary_Today(SessionData_Practice_ID)">
+            <div class="col-md-6" ng-show="SessionData_User_ID != '2'" ng-init="GetRevenueSummary_Today(SessionData_Practice_ID)">
                 <div class="portlet light" style="border: 1px solid #ddd; border-radius: 4px; height: 202px;">
                     <div class="portlet-title">
                         <div class="caption caption-md">
@@ -375,13 +375,13 @@
                         </div>
                         <div class="actions">
                             <div class="btn-group btn-group-devided" data-toggle="buttons">
-                                <label ng-click="GetRevenueSummary_Today(SessionData_Practice_ID)" class="btn btn-transparent btn-no-border blue-oleo btn-outline btn-circle btn-sm active" style="width: 60px;">
+                                <label ng-show="SessionData_User_ID != '2'" ng-click="GetRevenueSummary_Today(SessionData_Practice_ID)" class="btn btn-transparent btn-no-border blue-oleo btn-outline btn-circle btn-sm active" style="width: 60px;">
                                     <input name="options" class="toggle" id="option1" type="radio">Today
                                 </label>
-                                <label ng-click="GetRevenueSummary_Week(SessionData_Practice_ID)" class="btn btn-transparent btn-no-border blue-oleo btn-outline btn-circle btn-sm" style="width: 60px;">
+                                <label ng-show="SessionData_User_ID != '2'" ng-click="GetRevenueSummary_Week(SessionData_Practice_ID)" class="btn btn-transparent btn-no-border blue-oleo btn-outline btn-circle btn-sm" style="width: 60px;">
                                     <input name="options" class="toggle" id="option2" type="radio">Week
                                 </label>
-                                <label ng-click="GetRevenueSummary_Month(SessionData_Practice_ID)" class="btn btn-transparent btn-no-border blue-oleo btn-outline btn-circle btn-sm" style="width: 60px;">
+                                <label ng-show="SessionData_User_ID != '2'" ng-click="GetRevenueSummary_Month(SessionData_Practice_ID)" class="btn btn-transparent btn-no-border blue-oleo btn-outline btn-circle btn-sm" style="width: 60px;">
                                     <input name="options" class="toggle" id="option2" type="radio">Month
                                 </label>
                             </div>
@@ -457,22 +457,22 @@
         <!--AppointmentsModal-->
         <div id="AppointmentsModal" class="modal fade">
             <form>
-                <div class="modal-dialog" style="width:50%" ng-init="GetPendingAppointmentsByPracticeID(SessionData_Practice_ID)">
-                    <div class="modal-content" ng-init="GetAppovedAppointmentsByPracticeID(SessionData_Practice_ID)">
-                        <div class="modal-header" ng-init="GetRejectedAppointmentsByPracticeID(SessionData_Practice_ID)">
+                <div class="modal-dialog" style="width:50%" ng-show="SessionData_User_ID != '2'" ng-init="GetPendingAppointmentsByPracticeID(SessionData_Practice_ID)">
+                    <div class="modal-content" ng-show="SessionData_User_ID != '2'" ng-init="GetAppovedAppointmentsByPracticeID(SessionData_Practice_ID)">
+                        <div class="modal-header" ng-show="SessionData_User_ID != '2'" ng-init="GetRejectedAppointmentsByPracticeID(SessionData_Practice_ID)">
                             <button type="button" class="close CloseModel" data-dismiss="modal" aria-hidden="true">&times;</button>
                             <h4 class="modal-title">Appointments Wedgit</h4>
                         </div>
                         <div class="modal-body" style="max-height: 450px; overflow-y: auto;">
                             <div class="portlet light" style="border: 1px solid #ddd; border-radius: 4px;">
                                 <div class="btn-group btn-group-devided pull-right" data-toggle="buttons">
-                                    <label ng-click="ShowPendingAppDiv(SessionData_Practice_ID)" class="btn btn-transparent btn-no-border blue-oleo btn-outline btn-circle btn-sm active" style="width: 60px;">
+                                    <label ng-show="SessionData_User_ID != '2'" ng-click="ShowPendingAppDiv(SessionData_Practice_ID)" class="btn btn-transparent btn-no-border blue-oleo btn-outline btn-circle btn-sm active" style="width: 60px;">
                                         <input name="options" class="toggle" type="radio">Pending
                                     </label>
-                                    <label ng-click="ShowApprovedAppDiv(SessionData_Practice_ID)" class="btn btn-transparent btn-no-border blue-oleo btn-outline btn-circle btn-sm" style="width: 60px;">
+                                    <label ng-show="SessionData_User_ID != '2'" ng-click="ShowApprovedAppDiv(SessionData_Practice_ID)" class="btn btn-transparent btn-no-border blue-oleo btn-outline btn-circle btn-sm" style="width: 60px;">
                                         <input name="options" class="toggle" type="radio">Approved
                                     </label>
-                                    <label ng-click="ShowRejectedAppDiv(SessionData_Practice_ID)" class="btn btn-transparent btn-no-border blue-oleo btn-outline btn-circle btn-sm" style="width: 60px;">
+                                    <label ng-show="SessionData_User_ID != '2'" ng-click="ShowRejectedAppDiv(SessionData_Practice_ID)" class="btn btn-transparent btn-no-border blue-oleo btn-outline btn-circle btn-sm" style="width: 60px;">
                                         <input name="options" class="toggle" type="radio">Rejected
                                     </label>
                                 </div>
@@ -498,8 +498,8 @@
                                                             </div>
                                                             <div class="mt-action-buttons col-md-2">
                                                                 <div class="btn-group btn-group-circle">
-                                                                    <button class="btn btn-outline green btn-sm" type="button" ng-click="AppoveAppointment(PendingAppointment.Appointments_ID, SessionData_Practice_ID)">Appove</button>
-                                                                    <button class="btn btn-outline red btn-sm" type="button" ng-click="RejectAppointment(PendingAppointment.Appointments_ID, SessionData_Practice_ID)">Reject</button>
+                                                                    <button class="btn btn-outline green btn-sm" type="button" ng-show="SessionData_User_ID != '2'" ng-click="AppoveAppointment(PendingAppointment.Appointments_ID, SessionData_Practice_ID)">Appove</button>
+                                                                    <button class="btn btn-outline red btn-sm" type="button" ng-show="SessionData_User_ID != '2'" ng-click="RejectAppointment(PendingAppointment.Appointments_ID, SessionData_Practice_ID)">Reject</button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -528,7 +528,7 @@
                                                             </div>
                                                             <div class="mt-action-buttons col-md-2">
                                                                 <div class="btn-group btn-group-circle">
-                                                                    <button class="btn btn-outline red btn-sm" type="button" ng-click="RejectAppointment(ApprovedAppointment.Appointments_ID, SessionData_Practice_ID)">Reject</button>
+                                                                    <button class="btn btn-outline red btn-sm" type="button" ng-show="SessionData_User_ID != '2'" ng-click="RejectAppointment(ApprovedAppointment.Appointments_ID, SessionData_Practice_ID)">Reject</button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -557,7 +557,7 @@
                                                             </div>
                                                             <div class="mt-action-buttons col-md-2">
                                                                 <div class="btn-group btn-group-circle">
-                                                                    <button class="btn btn-outline green btn-sm" type="button" ng-click="AppoveAppointment(RejectedAppointment.Appointments_ID, SessionData_Practice_ID)">Appove</button>
+                                                                    <button class="btn btn-outline green btn-sm" type="button" ng-show="SessionData_User_ID != '2'" ng-click="AppoveAppointment(RejectedAppointment.Appointments_ID, SessionData_Practice_ID)">Appove</button>
                                                                 </div>
                                                             </div>
                                                         </div>
