@@ -19,7 +19,7 @@ namespace DoConnectTesting
             Assert.IsTrue(result == false,"Values are empty");
         }
 
-        [TestMethod, TestCategory("Smoke")]
+        [TestMethod, TestCategory("Critical")]
         public void When_entering_incorrect_values()
         {
             DataMan access = new DataMan();
@@ -40,11 +40,11 @@ namespace DoConnectTesting
             Assert.IsTrue(access.Login("Bongani", "123455") == false, "Password is Incorrect");
         }
 
-        [TestMethod, TestCategory("Smoke")]
+        [TestMethod, TestCategory("Critical")]
         public void When_entering_correct_values()
         {
             DataMan access = new DataMan();
-            Assert.IsTrue(access.Login("Bongani", "12345"), "Correct values");
+            Assert.IsTrue(access.Login("Bongani!", "12345"), "Correct values");
         }
     }
 }
