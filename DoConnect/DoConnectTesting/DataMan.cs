@@ -21,6 +21,7 @@ namespace DoConnectTesting
             string user = "Bongani";
             string pass = "12345";
 
+
             if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password))
             {
                 if (username == user && password == pass)
@@ -342,5 +343,10 @@ namespace DoConnectTesting
         {
             throw new NotImplementedException();
         }
+    }
+
+    public class MyException : Exception
+    {
+        
     }
 }
