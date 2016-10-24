@@ -51,7 +51,10 @@ namespace DataClient
 
                 return true;
             }
-            catch { return false; }
+            catch (Exception)
+            {
+                return false;
+            }
         }
         #endregion
     }

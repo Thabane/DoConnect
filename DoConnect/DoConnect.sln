@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocConnectApp", "DocConnect
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectModel", "ObjectModel\ObjectModel.csproj", "{171B67FD-6810-48A2-AB91-C12DCA6E06BF}"
 EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DoConnect", "DoConnect\DoConnect.sqlproj", "{61D69D0C-DB3B-42AD-B1C1-A925F7582C01}"
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DoConnect.sqlproj", "DoConnect\DoConnect.sqlproj.user", "{61D69D0C-DB3B-42AD-B1C1-A925F7582C01}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

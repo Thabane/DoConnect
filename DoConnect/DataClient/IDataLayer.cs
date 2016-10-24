@@ -11,7 +11,6 @@ namespace DataClient
     {
         #region User
         int CreateUser(int AccessLevel);
-        //string Login(string username, string password, int accessLevel);
         Login MyLogin(string Email, string Password);
         Staff GetUserDetailsByUser_ID();
         List<AccessLevel> GetAllAccessLevel();

@@ -43,29 +43,7 @@ namespace DataClient
             }
             return userId;
         }
-
-        //public string Login(string username, string password, int accessLevel)
-        //{
-        //    int userId = 0;
-        //    List<SqlParameter> _parameters = new List<SqlParameter>();
-        //    SqlParameter accessLevelParameter = new SqlParameter("@AccessLevel", SqlDbType.Int);
-        //    accessLevelParameter.Value = accessLevel;
-        //    _parameters.Add(accessLevelParameter);
-        //    try
-        //    {
-        //        using (var reader = access.ExecuteReader(Conn, "[CreateUser]", _parameters))
-        //        {
-        //            if (reader.Read())
-        //                userId = reader.GetInt32(reader.GetOrdinal("ID"));                    
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-                
-        //    }
-        //    return "";
-        //}
-
+        
         public static int LoggedIn_User_ID;
         public Login MyLogin(string Email, string Password)
         {

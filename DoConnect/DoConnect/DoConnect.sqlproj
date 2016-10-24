@@ -60,16 +60,24 @@
     <Folder Include="Properties" />
     <Folder Include="Tables" />
     <Folder Include="Stored Procedures" />
+    <Folder Include="Data\" />
   </ItemGroup>
   <ItemGroup>
+	<Build Include="Tables\AccessLevel.sql" />
     <Build Include="Tables\Appointments.sql" />
+	<Build Include="Tables\Consultation.sql" />
     <Build Include="Tables\Doctors.sql" />
+	<Build Include="Tables\Expenses.sql" />
     <Build Include="Tables\Invoice.sql" />
     <Build Include="Tables\Medical_Aid.sql" />
+	<Build Include="Tables\Medicine_Inventory.sql" />
+	<Build Include="Tables\Messages.sql" />
     <Build Include="Tables\Patient.sql" />
+	<Build Include="Tables\Patient_Consultation.sql" />
     <Build Include="Tables\Patient_Medical_Aid.sql" />
     <Build Include="Tables\Practice.sql" />
     <Build Include="Tables\Prescription.sql" />
+	<Build Include="Tables\Prescription_DrugDetails.sql" />
     <Build Include="Tables\Staff.sql" />
     <Build Include="Tables\Users.sql" />
     <Build Include="Stored Procedures\CreateUser.sql" />
@@ -92,8 +100,29 @@
     <Build Include="Stored Procedures\NewUpdatePractice.sql" />
     <Build Include="Stored Procedures\NewUpdateMedicine_Inventory.sql" />
     <Build Include="Tables\AccessLevel.sql" />
+    <Build Include="Tables\Expenses.sql" />
+    <Build Include="Tables\Consultation.sql" />
+    <Build Include="Tables\Medicine_Inventory.sql" />
+    <Build Include="Tables\Messages.sql" />
+    <Build Include="Tables\Patient_Consultation.sql" />
+    <Build Include="Tables\Prescription_DrugDetails.sql" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Data\dbo.AccessLevel.data.sql" />
+    <None Include="Data\dbo.Appointments.data.sql" />
+    <None Include="Data\dbo.Consultation.data.sql" />
+    <None Include="Data\dbo.Doctors.data.sql" />
+    <None Include="Data\dbo.Expenses.data.sql" />
+    <None Include="Data\dbo.Invoice.data.sql" />
+    <None Include="Data\dbo.Medical_Aid.data.sql" />
+    <None Include="Data\dbo.Medicine_Inventory.data.sql" />
+    <None Include="Data\dbo.Messages.data.sql" />
+    <None Include="Data\dbo.Patient.data.sql" />
+    <None Include="Data\dbo.Patient_Medical_Aid.data.sql" />
+    <None Include="Data\dbo.Practice.data.sql" />
+    <None Include="Data\dbo.Prescription.data.sql" />
+    <None Include="Data\dbo.Staff.data.sql" />
+    <None Include="Data\dbo.Users.data.sql" />
     <None Include="Stored Procedures\NewUpdateExpense.sql" />
   </ItemGroup>
 </Project>

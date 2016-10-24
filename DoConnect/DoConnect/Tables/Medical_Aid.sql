@@ -1,9 +1,10 @@
 ﻿CREATE TABLE [dbo].[Medical_Aid] (
-    [ID]            INT           IDENTITY (1, 1) NOT NULL,
-    [Name]          NVARCHAR (50) NOT NULL,
-    [Cell_Number]   NVARCHAR (50) NOT NULL,
-    [Fax_Number]    NVARCHAR (50) NOT NULL,
-    [Email_Address] NVARCHAR (50) NOT NULL,
-    [Address]       NVARCHAR (50) NOT NULL,
+    [ID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](50) NOT NULL,
+	[Cell_Number] [nvarchar](50) NOT NULL,
+	[Fax_Number] [nvarchar](50) NOT NULL,
+	[Email_Address] [nvarchar](50) NOT NULL,
+	[Address] [nvarchar](250) NOT NULL,
+	[DeletedStatus] [int] NULL DEFAULT ((0)),
     CONSTRAINT [PK_Medical_Aid] PRIMARY KEY CLUSTERED ([ID] ASC)
 );

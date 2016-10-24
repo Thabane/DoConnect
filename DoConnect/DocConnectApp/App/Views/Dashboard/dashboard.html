@@ -1,9 +1,9 @@
 ﻿<div id="page-wrapper">
-    <div dir-paginate="Practice in Practices | filter:search | orderBy:sortKey:reverse | itemsPerPage:1" ng-init="GetNumPatientsByPractice(Practice.ID)">
+    <div dir-paginate="Practice in Practices | filter:search | orderBy:sortKey:reverse | itemsPerPage:1">
         
         <div class="row" ng-init="Consulations_Visits(Practice.ID)">
             <div class="col-md-12" ng-init="NumOFPatientsPerMonthPerPractice(Practice.ID)">
-                <h2 class="page-header text-primary">Dashboard: {{Practice.Name}}</h2>
+                <h2 class="page-header text-primary" ng-init="GetNumPatientsByPractice(Practice.ID)">Dashboard: {{Practice.Name}}</h2>
             </div>
         </div>
         
