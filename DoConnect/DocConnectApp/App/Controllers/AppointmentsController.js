@@ -1,21 +1,22 @@
-﻿app.controller("AppointmentsController", ["$scope", "AppointmentsService", "$interval", "$ngBootbox",
-    function ($scope, AppointmentsService, $interval, $ngBootbox) {
+﻿app.controller("AppointmentsController", ["$scope", "AppointmentsService", "$interval", "$ngBootbox", "$location",
+    function ($scope, AppointmentsService, $interval, $ngBootbox, $location) {
 
         $scope.sort = function (keyname) {
             $scope.sortKey = keyname;
             $scope.reverse = !$scope.reverse;
         }
 
-        $scope.GetAllAppointments = function () {
-            AppointmentsService.GetAllAppointments().then
-            (function (result) {
-                $scope.Appointments = result.data;
+        $scope.GetAllAppointments = function () {            
+            AppointmentsService.GetAllAppointments().then(function (result) {
+                $scope.Appointments = result.data;                
+                $scope.numTodayApps = $scope.Appointments[$scope.Appointments.length - 1].numTodayApps;
+                $scope.numTomorrowApps = $scope.Appointments[$scope.Appointments.length - 1].numTomorrowApps;
             });
         };
         $scope.GetAllAppointments();
 
-        $scope.App_Statusz = [{ "Status": "Approved", "bool": "1" }, { "Status": "Declined", "bool": "0" }, { "Status": "Pending", "bool": "2" }];
-
+        $scope.App_Statusz = [{ "Status": "Approved", "bool": "1" }, { "Status": "Declined", "bool": "0" }, { "Status": "Pending", "bool": "2"}];
+        $scope.listApp_Statusz = [{ "Status": "Approved", "bool": "1" }, { "Status": "Pending", "bool": "2" }];
         $scope.ViewAppointment = function (ID) {
             AppointmentsService.GetAppointmentByID(ID).success(function (result) {
                 $scope.Appointments_ID = result["Appointments_ID"];
@@ -77,12 +78,12 @@
             $scope.Seleceted_App_Status = item.bool;
         };
 
-        $scope.NewAppointment = function (Details, App_Status) {
-            AppointmentsService.InsertAppointment(angular.element("#Appointments_Date").val() + " " + angular.element("#Appointments_Time").val(), $scope.PatientID, Details, App_Status, $scope.DoctorID).success(function () {
+        $scope.NewAppointment = function (Details) {
+            AppointmentsService.InsertAppointment(angular.element("#Appointments_Date").val() + " " + angular.element("#Appointments_Time").val(), $scope.PatientID, Details, $scope.Seleceted_App_Status, $scope.DoctorID).success(function () {
                 $scope.GetAllAppointments();
                 angular.element(".insert").val('');
                 btnSuccess("Appointment successfully inserted.");
-                //btnRedirect("Appointments");
+                $location.path('/Appointments');
             },
                 function (error) {
                     btnAlert("System Error Message", "Insert unsuccessful.");
@@ -98,9 +99,20 @@
             else {
                 if ($scope.DoctorID == 0) { $scope.DoctorID = $scope.Doctors_ID }
                 if ($scope.PatientID == 0) { $scope.PatientID = $scope.Patient_ID }
-                if ($scope.Seleceted_App_Status == 0) { $scope.Seleceted_App_Status = $scope.Appointments_App_Status }
+                if ($scope.Appointments_App_Status = 'Pending') {
+                    $scope.AppSta = '2';
+                }
+                else if ($scope.Appointments_App_Status = 'Approved') {
+                    $scope.AppSta = '1';
+                }
+                else {
+                    $scope.AppSta = '0';
+                }
 
+                if ($scope.Seleceted_App_Status == 0) { $scope.Seleceted_App_Status = $scope.AppSta }
+                console.log($scope.Appointments_App_Status);
                 AppointmentsService.UpdateAppointment($scope.Appointments_ID, angular.element("#Appointments_Date").val() + " " + angular.element("#Appointments_Time").val(), $scope.PatientID, $scope.Appointments_Details, $scope.Seleceted_App_Status, $scope.DoctorID).success(function () {
+                    angular.element(".close").trigger("click");
                     $scope.GetAllAppointments();
                     btnSuccess("Appointment details successfully updated.");
                 }, function (error) {

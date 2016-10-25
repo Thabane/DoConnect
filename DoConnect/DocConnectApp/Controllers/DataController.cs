@@ -28,18 +28,20 @@ namespace DocConnectApp.Controllers
         {
             Login UserData = new Login();
             UserData.User_ID = Convert.ToInt32(Session["User_ID"]);
-            
+
             DataLayer dtLayer = new DataLayer();
             Staff Staff = new Staff();
-            Staff = dtLayer.GetUserDetailsByUser_ID(UserData.User_ID);
+            Staff = dtLayer.GetUserDetailsByUser_ID();
 
             Session["FirstName"] = Staff.FirstName;
             Session["LastName"] = Staff.LastName;
             Session["Email"] = Staff.Email;
+            Session["Practice_ID"] = Staff.PRACTICE_ID;
             Session["AccessLevel"] = Staff.AccessLevel;
             UserData.FirstName = Convert.ToString(Session["FirstName"]);
             UserData.LastName = Convert.ToString(Session["LastName"]);
             UserData.Email = Convert.ToString(Session["Email"]);
+            UserData.Practice_ID = Convert.ToInt32(Session["Practice_ID"]);
             UserData.AccessLevel = Convert.ToInt32(Session["AccessLevel"]);
             return new JsonResult { Data = UserData, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }

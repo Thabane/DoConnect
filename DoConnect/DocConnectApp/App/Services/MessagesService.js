@@ -1,4 +1,5 @@
 ﻿app.factory('MessagesService',
+    ['$http',
     function ($http) {
 
         var GetAllMessages = function (Receiver) {
@@ -11,6 +12,10 @@
 
         var GetMessageByID = function (ID) {
             return $http.get("api/Messages/GetMessage/" + ID);
+        };
+
+        var GetAllRecepients = function () {
+            return $http.get("api/Messages/GetAllRecepients");
         };
 
         var GetAllSentMessages = function (Sender) {
@@ -46,9 +51,10 @@
             GetMessageByID: GetMessageByID,
             GetAllSentMessages: GetAllSentMessages,
             GetSentMessageById: GetSentMessageById,
+            GetAllRecepients:GetAllRecepients,
             InsertMessage: InsertMessage,
             DeleteMessage: DeleteMessage,
             SessionData: SessionData
         };
     }
-);
+]);

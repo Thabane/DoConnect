@@ -785,9 +785,9 @@
       CONFIRM : "Επιβεβαίωση"
     },
     en : {
-      OK      : "OK",
+      OK      : "Yes",
       CANCEL  : "Cancel",
-      CONFIRM : "OK"
+      CONFIRM : "Yes"
     },
     es : {
       OK      : "OK",

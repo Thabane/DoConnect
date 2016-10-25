@@ -1,4 +1,4 @@
-﻿app.factory("userPersistenceService", [
+﻿app.factory("userPersistenceService", ['$http',
 	"$cookies", function ($cookies) {
 	    var userName = "";
 

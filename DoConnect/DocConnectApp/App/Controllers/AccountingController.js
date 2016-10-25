@@ -1,5 +1,5 @@
-﻿app.controller("AccountingController", ["$scope", "AccountingService", "$interval", "$filter", "$ngBootbox",
-    function ($scope, AccountingService, $interval, $filter, $ngBootbox) {
+﻿app.controller("AccountingController", ["$scope", "AccountingService", "$interval", "$filter", "$ngBootbox", "$location",
+    function ($scope, AccountingService, $interval, $filter, $ngBootbox, $location) {
 
         $scope.PageTitleAccounting = 'Accounting';
         $scope.PageTitleExpenses = 'Expenses';
@@ -12,12 +12,32 @@
         }
         //--#region Invoices------------------------------------------------------------------------------------------------------
         
+        $scope.today = $filter('date')(new Date(), 'yyyy-MM-dd');
+
         $scope.GetInvoices = function () {
             AccountingService.GetAllInvoices().then(function (result) {
                 $scope.Invoices = result.data;
+                $scope.numOfUnPaid = $scope.Invoices[$scope.Invoices.length - 1].numOfUnPaid;
+                $scope.numOfPatiallyPaid = $scope.Invoices[$scope.Invoices.length - 1].numOfPatiallyPaid;
+            });
+
+            AccountingService.SessionData().success(function (result) {
+                sessionStorage.SessionData_User_ID = result["User_ID"];
+                sessionStorage.SessionData_FirstName = result["FirstName"];
+                sessionStorage.SessionData_LastName = result["LastName"];
+                sessionStorage.SessionData_Email = result["Email"];
+                sessionStorage.SessionData_Practice_ID = result["Practice_ID"];
+                sessionStorage.SessionData_AccessLevel = result["AccessLevel"];                
             });
         };
         $scope.GetInvoices();
+
+        if (sessionStorage.SessionData_AccessLevel == '1' || sessionStorage.SessionData_AccessLevel == '2') {
+            angular.element(".doctorControls").show();
+        }
+        else {
+            angular.element(".doctorControls").hide();
+        }
 
         $scope.ViewInvoice = function (ID) {
             AccountingService.GetInvoiceByID(ID).success(function (result) {
@@ -98,10 +118,11 @@
         };
 
         $scope.NewInvoice = function (_Total, _AmountPaid) {
-            AccountingService.InsertInvoice($scope.SelectedDiagnosis, _Total, _AmountPaid, $scope.MedicalAidID, $scope.PatientID, $scope.DoctorID).success(function () {
+            AccountingService.InsertInvoice($scope.today, $scope.SelectedDiagnosis, _Total, _AmountPaid, $scope.MedicalAidID, $scope.PatientID, $scope.DoctorID).success(function () {
                 $scope.GetInvoices();
                 angular.element(".insert").val('');
-                btnSuccess("Invoice successfully inserted.");
+                btnSuccess("Invoice successfully inserted.\nThe invoice bill has been sent to the patient.");
+                $location.path('/Accounting');
             },
                 function (error) {
                     btnAlert("System Error Message", "Insert unsuccessful.");
@@ -117,7 +138,7 @@
             else {
                 AccountingService.UpdateInvoice($scope.ID, $scope.Name, $scope.Phone_Number, $scope.Fax_Number, $scope.Street_Address, $scope.Suburb, $scope.City, $scope.Country, $scope.Trading_Times).success(function () {
                     $scope.GetInvoices();
-                    btnSuccess("Invoicedetails successfully updated.");
+                    btnSuccess("Invoice details successfully updated.");
                 }, function (error) {
                     btnAlert("System Error Message", "Update unsuccessful.");
                 });
@@ -153,7 +174,7 @@
         //--#region Expenses------------------------------------------------------------------------------------------------------
         
         $scope.GetExpenses = function () {
-            AccountingService.GetAllExpenses().then(function (result) {
+            AccountingService.GetAllExpenses().then(function (result) {                
                 $scope.Expenses = result.data;
             });
         };
@@ -173,8 +194,7 @@
                 else { $scope.User_Name = result["StaffFullName"]; }
             });
         };
-        $scope.today = $filter('date')(new Date(), 'yyyy-MM-dd');
-
+        
         $scope.NewExpense = function (_Description, _Amount) {
             $scope.GetPracticeIDByUser_ID = function (User_ID) {
                 alert(User_ID);
@@ -191,9 +211,7 @@
                         });
                 });
             };
-            $scope.GetPracticeIDByUser_ID(2);//#User_ID Should be a sessionUserId of logged in user
-
-            
+            $scope.GetPracticeIDByUser_ID(2);//#User_ID Should be a sessionUserId of logged in user            
         };        
 
         $scope.function_btnUpdateExpense = function () {

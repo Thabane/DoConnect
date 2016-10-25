@@ -1,1 +1,10 @@
-[{"Key":"4","Value":"New User Created","UserId":"12","DateTime":"2016/08/11 8:02:51 PM"},{"Key":"5","Value":"New User Created","UserId":"13","DateTime":"2016/08/11 8:03:17 PM"},{"Key":"6","Value":"New User Created","UserId":"0","DateTime":"2016/09/15 4:35:56 PM"},{"Key":"7","Value":"Appointment record viewed: id: ","UserId":"14","DateTime":"2016-10-09 2:40:05 PM"},{"Key":"8","Value":"Appointment record viewed: id: ","UserId":"14","DateTime":"2016-10-10 8:53:46 PM"},{"Key":"9","Value":"Appointment record viewed: id: ","UserId":"14","DateTime":"2016-10-11 10:09:39 AM"},{"Key":"10","Value":"Appointment record viewed: id: 2","UserId":"14","DateTime":"2016-10-11 5:00:12 PM"},{"Key":"11","Value":"Appointment record viewed: id: 2","UserId":"19","DateTime":"2016-10-11 5:00:32 PM"},{"Key":"12","Value":"Appointment record viewed: id: 2","UserId":"14","DateTime":"2016-10-11 5:13:00 PM"},{"Key":"13","Value":"Appointment record viewed: id: 2","UserId":"16","DateTime":"2016-10-11 5:21:42 PM"},{"Key":"14","Value":"Appointment record viewed: id: 2","UserId":"16","DateTime":"2016-10-11 5:49:18 PM"}]
+[
+  {
+    "Key": "1",
+    "User_ID": "2",
+    "Name": "Logan Mbuyamba mbuyamba@gmail.com",
+    "AccessLevel": "Admin",
+    "Activity": "Logged in",
+    "LogTime": "2016-10-16 9:42:16 PM"
+  }
+]

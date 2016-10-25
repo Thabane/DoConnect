@@ -28,8 +28,6 @@ namespace DocConnectApp
                       "~/Scripts/DashboardWidgets/To Do List.css",
                       "~/Scripts/Pagination/styles.css",
                       "~/Scripts/dtPicker/bootstrap-datetimepicker.min.css",
-                      //"~/Scripts/DateTimePicker/bootstrap-datetimepicker.min.css",
-                      //"~/Scripts/DateTimePicker/bootstrap-datetimepicker.css",
                       "~/Scripts/FormValidation/FormValidationStyle.css"
                       ));
 

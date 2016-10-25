@@ -11,9 +11,8 @@ namespace DataClient
     {
         #region User
         int CreateUser(int AccessLevel);
-        string Login(string username, string password, int accessLevel);
         Login MyLogin(string Email, string Password);
-        Staff GetUserDetailsByUser_ID(int User_ID);
+        Staff GetUserDetailsByUser_ID();
         List<AccessLevel> GetAllAccessLevel();
         AccessLevel GetAccessLevelById(int id);
         #endregion
@@ -47,7 +46,7 @@ namespace DataClient
         Invoice GetInvoiceById(int ID);
         List<GetAllPatients> GetAllPatientsForInvoice();
         List<Invoice> GetAllDiagnosisByPatientID(int ID);
-        bool NewInvoice(string InvoiceSummary, decimal Total, decimal AmountPaid, int Medical_Aid_ID, int Patient_ID, int Doctor_ID);
+        bool NewInvoice(string Date, string InvoiceSummary, decimal Total, decimal AmountPaid, int Medical_Aid_ID, int Patient_ID, int Doctor_ID);
         bool DeleteInvoice(int id);
         #endregion
 
@@ -131,6 +130,7 @@ namespace DataClient
         Messages GetMessageById(int ID);
         List<Messages> GetAllSentMessages(int Sender);
         Messages GetSentMessageById(int ID);
+        List<Staff> GetAllRecepients();
         bool NewMessages(int Receiver, int Sender, string Subject, string Description, string Date);
         bool DeleteMessages(int ID);
         #endregion
@@ -138,6 +138,7 @@ namespace DataClient
         #region Dashboard        
         Invoice GetRevenueSummary_Today(int Practice_ID);
         Invoice GetRevenueSummary_Week(int Practice_ID);
+        Invoice GetRevenueSummary_Month(int Practice_ID);
         Invoice GetNumPatientsByPractice(int Practice_ID);
         List <Consultation> Consulations_Visits(int Practice_ID);
         List<Consultation> Appointment_Stats(int Practice_ID);
@@ -147,6 +148,7 @@ namespace DataClient
         bool AppoveAppointment(int ID, int App_Status);
         bool RejectAppointment(int ID, int App_Status);
         List<Medicine_Inventory> MedicineInventoryStockCount(int Practice_ID);
+        List<Consultation> NumOFPatientsPerMonthPerPractice(int Practice_ID);
         #endregion
 
         #region User Profile
@@ -155,6 +157,10 @@ namespace DataClient
         bool UpdateProfileDoctor(int User_ID, string FirstName, string LastName, string Gender, string Address);
         UserProfile GetPassword(int User_ID);
         bool UpdatePassword(int User_ID, string Password);
+        #endregion
+
+        #region LogFile
+        List<Log> ReadLogFile();
         #endregion
     }
 }

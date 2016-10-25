@@ -92,6 +92,20 @@
         $scope.today = $filter('date')(new Date(), 'yyyy-MM-dd');
         //alert($filter('time')(new Date(), 'HH:mm:ss'));
 
+        $scope.GetAllRecepients = function () {
+            MessagesService.GetAllRecepients().success(function (result) {
+                $scope.AllRecepients = result.data;
+                console.log($scope.AllRecepients);
+            });            
+        };
+        $scope.GetAllRecepients();
+
+        $scope.Receiver_UserID = 0;
+        $scope.changedValueGetReceiver_UserID = function (item) {
+            $scope.Receiver_UserID = item.User_ID;
+            console.log($scope.Receiver_UserID);
+        };
+
         $scope.ReplyMessage = function (_Subject, _Description) {
             MessagesService.InsertMessage($scope.Sender, $scope.Receiver, _Subject, _Description, $scope.today).success(function () {
                 $scope.GetAllMessages();

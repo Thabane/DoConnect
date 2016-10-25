@@ -57,7 +57,7 @@ namespace DocConnectApp.Controllers
         public bool InsertInvoice(Invoice invoice)
         {
             DataLayer dtLayer = new DataLayer();
-            return dtLayer.NewInvoice(invoice.InvoiceSummary, invoice.Total, invoice.AmountPaid, invoice.Medical_Aid_ID, invoice.Patient_ID, invoice.Doctor_ID);
+            return dtLayer.NewInvoice(invoice.Date, invoice.InvoiceSummary, invoice.Total, invoice.AmountPaid, invoice.Medical_Aid_ID, invoice.Patient_ID, invoice.Doctor_ID);
         }
 
         [HttpPost]
