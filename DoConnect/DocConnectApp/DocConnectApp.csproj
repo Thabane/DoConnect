@@ -175,6 +175,7 @@
     <Content Include="App\Services\AccountingService.js" />
     <Content Include="App\Services\AppointmentsService.js" />
     <Content Include="App\Services\AuthHttpResponseInterceptor.js" />
+    <Content Include="App\Services\AuthService.js" />
     <Content Include="App\Services\DashboardService.js" />
     <Content Include="App\Services\DiagnosisExpertSystemService.js" />
     <Content Include="App\Services\EmployeesService.js" />
