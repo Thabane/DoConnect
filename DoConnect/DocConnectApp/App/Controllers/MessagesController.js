@@ -12,6 +12,7 @@
             angular.element("#h2_ContentHeading").html("Inbox");
             angular.element("#div_Compose_Message").hide();
             angular.element("#div_Sent_list").hide();
+            angular.element(".SearchDiv").show();            
         };
 
         $scope.FunctionComposeMessage = function () {
@@ -19,6 +20,7 @@
             angular.element("#h2_ContentHeading").html("Compose Message");
             angular.element("#div_Message_list").hide();
             angular.element("#div_Sent_list").hide();
+            angular.element(".SearchDiv").hide();
         };
 
         $scope.FunctionSent = function () {
@@ -26,6 +28,7 @@
             angular.element("#div_Message_list").hide();
             angular.element("#h2_ContentHeading").html("Sent Messages");
             angular.element("#div_Compose_Message").hide();
+            angular.element(".SearchDiv").show();
         };
 
         //Sort Function

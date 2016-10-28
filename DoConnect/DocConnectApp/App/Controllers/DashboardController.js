@@ -238,7 +238,4 @@
                 btnAlert("System Error Message", "Appointment status not successfully updated.");
             });
         };
-
-        
-
     }]);

@@ -164,6 +164,7 @@
     <Content Include="App\Controllers\DiagnosisExpertSystemProcessController.js" />
     <Content Include="App\Controllers\EmployeesController.js" />
     <Content Include="App\Controllers\EventsController.js" />
+    <Content Include="App\Controllers\FeedCtrl.js" />
     <Content Include="App\Controllers\LoginController.js" />
     <Content Include="App\Controllers\MedicalAidController.js" />
     <Content Include="App\Controllers\MedicineInventoryController.js" />
