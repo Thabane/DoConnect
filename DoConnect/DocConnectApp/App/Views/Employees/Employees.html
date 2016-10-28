@@ -156,11 +156,11 @@
                             </div>
                             <div class="row" style="margin-top:4px; margin-bottom:0px;">
                                 <div class="col-md-2"><h5>Gender:</h5></div>
-                                <div class="col-md-4"><select class="form-control disable_ViewEmployee readonly_ViewEmployee" ng-model="Gender" name="Gender" ng-required="true" ng-change="changedValueGetGender(Gender)" data-ng-options="gender as gender.Gender for gender in Genders">
+                                <div class="col-md-4"><select class="form-control disable_ViewEmployee readonly_ViewEmployee" ng-model="Gender" name="Gender" ng-required="true" ng-change="changedValueGetGender(Gender)" data-ng-options="gender as gender.Gender for gender in Genders | orderBy:'Gender'">
                                                             <option value="">{{Gender}}</option>
                                                         </select></div>
                                 <div class="col-md-2"><h5>Employee Type:</h5></div>
-                                <div class="col-md-4"><select class="form-control disable_ViewEmployee readonly_ViewEmployee" ng-model="ACCESSLEVEL_ID" name="ACCESSLEVEL_ID" ng-required="true" ng-change="changedValueGetAccessLevel(ACCESSLEVEL_ID)" data-ng-options="accessLevel as accessLevel.Level for accessLevel in AccessLevel">
+                                <div class="col-md-4"><select class="form-control disable_ViewEmployee readonly_ViewEmployee" ng-model="ACCESSLEVEL_ID" name="ACCESSLEVEL_ID" ng-required="true" ng-change="changedValueGetAccessLevel(ACCESSLEVEL_ID)" data-ng-options="accessLevel as accessLevel.Level for accessLevel in AccessLevel | orderBy:'Level'">
                                                         <option value="">{{Employee_Type}}</option>
                                                       </select></div>
                             </div>
@@ -176,7 +176,7 @@
                             </div>
                             <div class="row" style="margin-top:4px; margin-bottom:0px;">
                                 <div class="col-md-2"><h5>Practice Name:<span style="color:red">*</span></h5></div>
-                                <div class="col-md-4"><select class="form-control disable_ViewEmployee readonly_ViewEmployee" ng-model="Practice_ID" name="Practice_ID" ng-required="true" ng-change="changedValueGetPractice_ID(Practice_ID)" data-ng-options="practice as practice.Name for practice in Practices">
+                                <div class="col-md-4"><select class="form-control disable_ViewEmployee readonly_ViewEmployee" ng-model="Practice_ID" name="Practice_ID" ng-required="true" ng-change="changedValueGetPractice_ID(Practice_ID)" data-ng-options="practice as practice.Name for practice in Practices | orderBy:'Name'">
                                                             <option value="">{{Practice_Name}}</option>
                                                         </select></div>
                             </div>

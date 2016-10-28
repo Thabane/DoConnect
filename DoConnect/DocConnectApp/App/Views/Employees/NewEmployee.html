@@ -110,13 +110,13 @@
                     <div class="row" style="margin-top:4px; margin-bottom:0px;">
                         <div class="col-md-2"><h5>Gender:<span style="color:red">*</span></h5></div>
                         <div class="col-md-4">
-                            <select class="form-control insert" ng-model="Gender" name="Gender" ng-required="true" ng-change="changedValueGetGender(Gender)" data-ng-options="gender as gender.Gender for gender in Genders">
+                            <select class="form-control insert" ng-model="Gender" name="Gender" ng-required="true" ng-change="changedValueGetGender(Gender)" data-ng-options="gender as gender.Gender for gender in Genders | orderBy:'Gender'">
                                 <option value="">Select gender</option>
                             </select>
                         </div>
                         <div class="col-md-2"><h5>Employee Type:<span style="color:red">*</span></h5></div>
                         <div class="col-md-4">
-                            <select class="form-control insert" ng-model="ACCESSLEVEL_ID" name="ACCESSLEVEL_ID" ng-required="true" ng-change="changedValueGetAccessLevel(ACCESSLEVEL_ID)" data-ng-options="accessLevel as accessLevel.Level for accessLevel in AccessLevel">
+                            <select class="form-control insert" ng-model="ACCESSLEVEL_ID" name="ACCESSLEVEL_ID" ng-required="true" ng-change="changedValueGetAccessLevel(ACCESSLEVEL_ID)" data-ng-options="accessLevel as accessLevel.Level for accessLevel in AccessLevel | orderBy:'Level'">
                                 <option value="">Select Employee Type</option>
                             </select>
                         </div>
@@ -134,7 +134,7 @@
                     <div class="row doctorControls" style="margin-top:4px; margin-bottom:0px;">
                         <div class="col-md-2"><h5>Practice Name:<span style="color:red">*</span></h5></div>
                         <div class="col-md-4">
-                            <select class="form-control insert" ng-model="Practice_Name" ng-change="changedValueGetPractice_ID(Practice_Name)" data-ng-options="practice as practice.Name for practice in Practices">
+                            <select class="form-control insert" ng-model="Name" ng-change="changedValueGetPractice_ID(Name)" data-ng-options="practice as practice.Name for practice in Practices | orderBy:'Name'">
                                 <option value="">Select a practice</option>
                             </select>
                         </div>

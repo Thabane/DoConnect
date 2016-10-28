@@ -78,7 +78,7 @@
                         <div class="row" style="margin-top:8px; margin-bottom:0px;">
                             <div class="col-md-1"><h5>Gender:</h5></div>
                             <div class="col-md-3">
-                                <select class="form-control disable_View_readonly View_readonly" ng-model="Gender" name="Gender" ng-required="true" ng-change="changedValueGetGender(Gender)" data-ng-options="gender as gender.Gender for gender in Genders">
+                                <select class="form-control disable_View_readonly View_readonly" ng-model="Gender" name="Gender" ng-required="true" ng-change="changedValueGetGender(Gender)" data-ng-options="gender as gender.Gender for gender in Genders | orderBy:'Gender'">
                                     <option value="">{{Gender}}</option>
                                 </select>
                             </div>
@@ -123,7 +123,7 @@
                         <div class="row col-md-12" style="margin-top:6px; margin-bottom:10px;"><label class="caption-subject font-green-steel uppercase bold">Insurance Information</label></div>
                         <div class="row" style="margin-top:8px; margin-bottom:0px;">
                             <div class="col-md-1"><h5>Medical Aid Provider:</h5></div>
-                            <div class="col-md-3"><select class="form-control disable_View_readonly View_readonly" ng-model="Medical_Aid_Name" name="Medical_Aid_Name" ng-required="true" ng-change="changedValueMedical_AidID(Medical_Aid_Name)" data-ng-options="medical_Aid as medical_Aid.Name for medical_Aid in Medical_Aid">
+                            <div class="col-md-3"><select class="form-control disable_View_readonly View_readonly" ng-model="Medical_Aid_Name" name="Medical_Aid_Name" ng-required="true" ng-change="changedValueMedical_AidID(Medical_Aid_Name)" data-ng-options="medical_Aid as medical_Aid.Name for medical_Aid in Medical_Aid | orderBy:'Name'">
                                                         <option value="">{{Medical_Aid_Name}}</option>
                                                     </select>
                             </div>

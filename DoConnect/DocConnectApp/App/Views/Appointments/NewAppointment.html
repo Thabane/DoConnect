@@ -48,7 +48,7 @@
                     </div>
                     <div class="row" style="margin-top:4px; margin-bottom:0px;">
                         <div class="col-md-3"><h5>Patient Name:<span style="color:red">*</span></h5></div>
-                        <div class="col-md-8"><select class="form-control" ng-model="Patient_ID" name="PatientName" ng-change="changedValueGetPatientID(Patient_ID)" data-ng-options="patient as patient.PatientFullName for patient in Patients" ng-required="true">
+                        <div class="col-md-8"><select class="form-control" ng-model="Patient_ID" name="PatientName" ng-change="changedValueGetPatientID(Patient_ID)" data-ng-options="patient as patient.PatientFullName for patient in Patients | orderBy:'PatientFullName'" ng-required="true">
                                                     <option value="">Select Patient</option>
                                                 </select></div>
                     </div>
@@ -71,7 +71,7 @@
                     </div>
                     <div class="row" style="margin-top:4px; margin-bottom:0px;">
                         <div class="col-md-3"><h5>Appointment Status:<span style="color:red">*</span></h5></div>
-                        <div class="col-md-8"><select class="form-control" ng-model="App_Status" name="Appointments_App_Status" ng-required="true" ng-change="changedValueGetApp_Status(App_Status)" data-ng-options="App_Status as App_Status.Status for App_Status in listApp_Statusz">
+                        <div class="col-md-8"><select class="form-control" ng-model="App_Status" name="Appointments_App_Status" ng-required="true" ng-change="changedValueGetApp_Status(App_Status)" data-ng-options="App_Status as App_Status.Status for App_Status in listApp_Statusz | orderBy:'Status'">
                                                     <option value="">Select App Status</option>
                                                 </select></div>
                     </div>
@@ -82,7 +82,7 @@
                     <div class="row" style="margin-top:4px; margin-bottom:0px;">
                         <div class="col-md-3"><h5>Doctor Name:</h5></div>
                         <div class="col-md-8">
-                            <select class="form-control" ng-model="Doctors_ID" name="DoctorName" ng-required="true" ng-change="changedValueGetDoctors_ID(Doctors_ID)" data-ng-options="doctor as doctor.DoctorFullName for doctor in Doctors">
+                            <select class="form-control" ng-model="Doctors_ID" name="DoctorName" ng-required="true" ng-change="changedValueGetDoctors_ID(Doctors_ID)" data-ng-options="doctor as doctor.DoctorFullName for doctor in Doctors | orderBy:'DoctorFullName'">
                                 <option value="">Select Doctor</option>
                             </select>
                         </div>

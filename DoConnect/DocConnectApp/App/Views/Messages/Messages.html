@@ -61,24 +61,22 @@
                         <div class="form-group">
                             <label class="col-sm-2">To</label>
                             <div class="col-sm-10">
-                                <!--<div style="overflow: auto; height: 80px;">-->
-                                    <select class="form-control" ng-model="Receiver_UserID" name="Receiver_UserID" ng-required="true" ng-change="changedValueGetReceiver_UserID(Receiver_UserID)" data-ng-options="AllRecepient as AllRecepient.FirstName for AllRecepient in AllRecepients">
-                                        <option value=""></option>
-                                    </select>
-                                <!--</div>-->
+                                <select class="form-control insert" ng-model="FirstName" name="FirstName" ng-change="changedValueGetReceiver_UserID(FirstName)" data-ng-options="Recepient as Recepient.FirstName for Recepient in AllRecepients | orderBy:'FirstName'">
+                                    <option value="">Select Recepient</option>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2" for="inputSubject">Subject</label>
-                            <div class="col-sm-10"><input class="form-control insert" id="inputSubject" placeholder="Subject" type="text"></div>
+                            <div class="col-sm-10"><input class="form-control insert" ng-model="Subject" placeholder="Subject" type="text"></div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-12" for="inputBody">Message</label>
-                            <div class="col-sm-12"><textarea class="form-control insert" id="inputBody" rows="8"></textarea></div>
+                            <div class="col-sm-12"><textarea class="form-control insert" ng-model="Message" rows="8"></textarea></div>
                         </div>
                     </form>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary ">Send <i class="fa fa-arrow-circle-right fa-lg"></i></button>
+                        <button type="button" class="btn btn-primary" ng-click="SendMessage(Subject, Message)">Send <i class="fa fa-arrow-circle-right fa-lg"></i></button>
                     </div>
                 </div>
             </div><!--Compose message div Ends-->

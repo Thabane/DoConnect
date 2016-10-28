@@ -41,9 +41,9 @@
                     </div>
                     <div class="row" style="margin-top:8px; margin-bottom:0px;">
                         <div class="col-md-2"><h5>Intake Route:</h5></div>
-                        <div class="col-md-4"><select class="form-control insert" ng-model="IntakeRoute" name="IntakeRoute" ng-required="true" ng-change="changedValueGetIntakeRoute(IntakeRoute)" data-ng-options="IntakeRoute as IntakeRoute.Route for IntakeRoute in IntakeRoutez"><option value=""></option></select></div>
+                        <div class="col-md-4"><select class="form-control insert" ng-model="IntakeRoute" name="IntakeRoute" ng-required="true" ng-change="changedValueGetIntakeRoute(IntakeRoute)" data-ng-options="IntakeRoute as IntakeRoute.Route for IntakeRoute in IntakeRoutez | orderBy:'Route'"><option value=""></option></select></div>
                         <div class="col-md-2"><h5 class="form-control-label">Frequency:</h5></div>
-                        <div class="col-md-4"><select class="form-control insert" ng-model="Frequency" name="Frequency" ng-required="true" ng-change="changedValueGetFrequency(Frequency)" data-ng-options="Frequency as Frequency.Freq for Frequency in Frequencyz"><option value=""></option></select></div>
+                        <div class="col-md-4"><select class="form-control insert" ng-model="Frequency" name="Frequency" ng-required="true" ng-change="changedValueGetFrequency(Frequency)" data-ng-options="Frequency as Frequency.Freq for Frequency in Frequencyz | orderBy:'Freq'"><option value=""></option></select></div>
                     </div>
                     <div class="row" style="margin-top:0px; margin-bottom:8px;">
                         <div class="col-md-2"></div>

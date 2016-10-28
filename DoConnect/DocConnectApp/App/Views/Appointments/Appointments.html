@@ -98,7 +98,7 @@
                             </div>
                             <div class="row" style="margin-top:4px; margin-bottom:0px;">
                                 <div class="col-md-3"><h5>Patient Name:</h5></div>
-                                <div class="col-md-8"><select class="form-control disable_ViewAppointment readonly_ViewAppointment" ng-model="Patient_ID" name="PatientName" ng-change="changedValueGetPatientID(Patient_ID)" data-ng-options="patient as patient.PatientFullName for patient in Patients" ng-required="true">
+                                <div class="col-md-8"><select class="form-control disable_ViewAppointment readonly_ViewAppointment" ng-model="Patient_ID" name="PatientName" ng-change="changedValueGetPatientID(Patient_ID)" data-ng-options="patient as patient.PatientFullName for patient in Patients | orderBy:'PatientFullName'" ng-required="true">
                                                             <option value="">{{Patient_FirstName}} {{Patient_LastName}}</option></select></div>
                             </div>
                             <div class="row" style="margin-top:0px; margin-bottom:8px;">
@@ -119,7 +119,7 @@
                             </div>
                             <div class="row" style="margin-top:4px; margin-bottom:0px;">
                                 <div class="col-md-3"><h5>Appointment Status:</h5></div>
-                                <div class="col-md-8"><select class="form-control disable_ViewAppointment readonly_ViewAppointment" ng-model="AppStatus" name="Appointments_App_Status" ng-required="true" ng-change="changedValueGetApp_Status(AppStatus)" data-ng-options="App_Status as App_Status.Status for App_Status in App_Statusz">
+                                <div class="col-md-8"><select class="form-control disable_ViewAppointment readonly_ViewAppointment" ng-model="AppStatus" name="Appointments_App_Status" ng-required="true" ng-change="changedValueGetApp_Status(AppStatus)" data-ng-options="App_Status as App_Status.Status for App_Status in App_Statusz | orderBy:'Status'">
                                                         <option value="">{{Appointments_App_Status}}</option>
                                                       </select></div>
                             </div>
@@ -131,7 +131,7 @@
                             </div>
                             <div class="row" style="margin-top:4px; margin-bottom:0px;">
                                 <div class="col-md-3"><h5>Doctor Name:</h5></div>
-                                <div class="col-md-8"><select class="form-control disable_ViewAppointment readonly_ViewAppointment" ng-model="Doctors_ID" name="DoctorName" ng-required="true" ng-change="changedValueGetDoctors_ID(Doctors_ID)" data-ng-options="doctor as doctor.DoctorFullName for doctor in Doctors">
+                                <div class="col-md-8"><select class="form-control disable_ViewAppointment readonly_ViewAppointment" ng-model="Doctors_ID" name="DoctorName" ng-required="true" ng-change="changedValueGetDoctors_ID(Doctors_ID)" data-ng-options="doctor as doctor.DoctorFullName for doctor in Doctors | orderBy:'DoctorFullName'">
                                                             <option value="">{{Doctors_FirstName}} {{Doctors_LastName}}</option>
                                                        </select></div>
                             </div>

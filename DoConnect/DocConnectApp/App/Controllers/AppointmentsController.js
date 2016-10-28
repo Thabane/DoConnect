@@ -50,8 +50,7 @@
         };
 
         $scope.GetPatients = function () {
-            AppointmentsService.GetAllPatients().then
-            (function (result) {
+            AppointmentsService.GetAllPatients().then(function (result) {
                 $scope.Patients = result.data;
             });
         };

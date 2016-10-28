@@ -70,7 +70,7 @@
                     <div class="row" style="margin-top:6px; margin-bottom:6px;">
                         <div class="col-md-1"><h5>Gender:</h5></div>
                         <div class="col-md-3">
-                            <select class="form-control insert" ng-model="_Gender" name="Gender" ng-required="true" ng-change="changedValueGetGender(_Gender)" data-ng-options="gender as gender.Gender for gender in Genders">
+                            <select class="form-control insert" ng-model="_Gender" name="Gender" ng-required="true" ng-change="changedValueGetGender(_Gender)" data-ng-options="gender as gender.Gender for gender in Genders | orderBy:'Gender'">
                                 <option value=""></option>
                             </select>
                         </div>
@@ -116,7 +116,7 @@
                     <div class="row" style="margin-top:8px; margin-bottom:0px;">
                         <div class="col-md-1"><h5>Medical Aid Provider:</h5></div>
                         <div class="col-md-3">
-                            <select class="form-control insert" ng-model="_Medical_Aid_Name" name="Medical_Aid_Name" ng-required="true" ng-change="changedValueMedical_AidID(_Medical_Aid_Name)" data-ng-options="medical_Aid as medical_Aid.Name for medical_Aid in Medical_Aid">
+                            <select class="form-control insert" ng-model="_Medical_Aid_Name" name="Medical_Aid_Name" ng-required="true" ng-change="changedValueMedical_AidID(_Medical_Aid_Name)" data-ng-options="medical_Aid as medical_Aid.Name for medical_Aid in Medical_Aid | orderBy:'Name'">
                                 <option value=""></option>
                             </select>
                         </div>
