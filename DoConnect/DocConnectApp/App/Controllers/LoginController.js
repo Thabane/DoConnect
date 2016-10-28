@@ -16,7 +16,7 @@
                     if (d.data.Email != null) {
                         $scope.IsLogedIn = true;
                         angular.element("#wrapper").show();
-                        window.location.href = "Dashboard";
+                        window.location.href = "Home/Index";
                     }
                     else {
                         $scope.InvalidCredential = "Invalid Username or Password\nPlease enter a valid Username and Password";
