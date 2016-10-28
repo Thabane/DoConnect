@@ -1,5 +1,5 @@
-﻿app.controller("LoginController", ["$scope", "LoginService", "$interval", "$location",
-    function ($scope, LoginService, $interval, $location) {
+﻿app.controller("LoginController", ["$scope", "LoginService", "$interval",
+    function ($scope, LoginService, $interval) {
         
         $scope.IsLogedIn = false;
         angular.element("#wrapper").hide();
@@ -15,8 +15,8 @@
                 LoginService.GetUser($scope.LoginData).then(function (d) {
                     if (d.data.Email != null) {
                         $scope.IsLogedIn = true;
-                        //angular.element("#wrapper").show();
-                        $location.path('/Dashboard');
+                        angular.element("#wrapper").show();
+                        window.location.href = "Home/Index";
                     }
                     else {
                         $scope.InvalidCredential = "Invalid Username or Password\nPlease enter a valid Username and Password";

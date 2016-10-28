@@ -8,8 +8,7 @@ app.config(
         $routeProvider
             .when("/Dashboard", {
                 templateUrl: "App/Views/Dashboard/dashboard.html",
-                controller: "DashboardController",
-                requireLogin: true
+                controller: "DashboardController"
             })
             .when("/DashboardSecretary", {
                 templateUrl: "App/Views/Dashboard/DashboardSecretary.html",
@@ -124,7 +123,7 @@ app.config(
                 templateUrl: "App/Views/UserProfile/UserProfile.html",
                 controller: "UserProfileController"
             })
-            .when("/Login", {
+            .when("/Login", {//../Views/Home/Login.cshtml
                 templateUrl: "App/Views/Login/Login.html",
                 controller: "LoginController"
             })
@@ -137,7 +136,7 @@ app.config(
                controller: "DiagnosisExpertSystemConditionsController"
             })
             .otherwise({
-                redirectTo: "/Login"
+                redirectTo: "/Dashboard"
             })
         ;
 
@@ -152,7 +151,7 @@ app.config(
 
 app.run(
     [
-    '$route', '$rootScope', '$location', 'AuthService', function ($route, $rootScope, $location, AuthService) {
+    '$route', '$rootScope', '$location', function ($route, $rootScope, $location) {
         var original = $location.path;
         $location.path = function (path, reload) {
             if (reload === false) {
@@ -164,22 +163,5 @@ app.run(
             }
             return original.apply($location, [path]);
         };
-        
-        $rootScope.$on('locationChangeStart', function (ev, to, toParams, from, fromParams) {
-
-            $scope.GetAllAppointments = function () {  
-                AuthService.isLoggedIn().then(function (result) {
-                    console.log("App Array: " + result);
-                });
-            };
-            $scope.GetAllAppointments();
-            if (requireLogin && !AuthService.isLoggedIn()) {
-                $location.path("/Login");
-            }
-            else if (to.name == 'Login' && AuthService.isLoggedIn()) {
-                ev.preventDefault();
-                $location.path("/Dashboard");
-            }
-        });
     }
     ]);

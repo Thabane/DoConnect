@@ -1,8 +1,7 @@
-﻿app.controller('DashboardController', ['$scope', '$interval', 'DashboardService', "$location",
-    function ($scope, $interval, DashboardService, $location) {
+﻿app.controller('DashboardController', ['$scope', '$interval', 'DashboardService',
+    function ($scope, $interval, DashboardService) {
         angular.element("#wrapper").show();
         
-        $scope.SessionData_User_ID = 0;
         $scope.SessionData = function () {
             DashboardService.SessionData().success(function (result) {
                 $scope.SessionData_User_ID = result["User_ID"];
@@ -12,12 +11,8 @@
                 $scope.SessionData_Practice_ID = result["Practice_ID"];
                 $scope.SessionData_AccessLevel = result["AccessLevel"];
 
-                //$scope.ValidateSession = function () {
-                //    if ($scope.SessionData_User_ID == 0) {
-                //        $location.path('/Login');
-                //    }
-                //};
-                //$scope.ValidateSession();
+                console.log(result);
+                
                 DashboardService.GetAllMessages($scope.SessionData_User_ID).then(function (result) {
                     $scope.Messages = result.data;
                 });
@@ -36,8 +31,6 @@
             });
         };
         $scope.SessionData();
-
-        
 
         $scope.GetAllPractices = function () {
             DashboardService.GetAllPractices().then(function (result) {
@@ -145,31 +138,31 @@
         $scope.NumOFPatientsPerMonthPerPractice = function (Practice_ID) {
             DashboardService.NumOFPatientsPerMonthPerPractice(Practice_ID).then(function (result) {
 
-                var List = [];
+                    var List = [];
 
-                for (var i = 0; i < result.data.length; i++) {
-                    List.push([result.data[i]["Month"], result.data[i]["TotalNumOfVisits"], result.data[i]["TotalPatientsCount"]]);
-                }
+                    for (var i = 0; i < result.data.length; i++) {
+                        List.push([result.data[i]["Month"], result.data[i]["TotalNumOfVisits"], result.data[i]["TotalPatientsCount"]]);
+                    }
 
-                google.charts.load('current', { 'packages': ['line'] });
-                google.charts.setOnLoadCallback(drawChart_NumOFPatientsPerMonthPerPractice);
+                    google.charts.load('current', { 'packages': ['line'] });
+                    google.charts.setOnLoadCallback(drawChart_NumOFPatientsPerMonthPerPractice);
 
-                function drawChart_NumOFPatientsPerMonthPerPractice() {
+                    function drawChart_NumOFPatientsPerMonthPerPractice() {
 
-                    var data = new google.visualization.DataTable();
-                    data.addColumn('string', 'Month (2016)');
-                    data.addColumn('number', 'Number of registered patients');
-                    data.addColumn('number', 'Total patients');
+                        var data = new google.visualization.DataTable();
+                        data.addColumn('string', 'Month (2016)');
+                        data.addColumn('number', 'Number of registered patients');
+                        data.addColumn('number', 'Total patients');
 
-                    data.addRows(List);
-                    var options = {
-                        legend: { position: 'bottom' },
-                        is3D: true
-                    };
+                        data.addRows(List);
+                        var options = {
+                            legend: { position: 'bottom' },
+                            is3D: true
+                        };                        
 
-                    var chart = new google.charts.Line(document.getElementById('linechart_NumOFPatientsPerMonthPerPractice'));
-                    chart.draw(data, options);
-                }
+                        var chart = new google.charts.Line(document.getElementById('linechart_NumOFPatientsPerMonthPerPractice'));
+                        chart.draw(data, options);
+                    }
             });
         };
 
