@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8"/>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+    
+    $.ajax({
+        type: "POST",
+        url: "MyWebService.asmx/SayHello",
+        data: "firstName=Aidy&lastName=F", // the data in form-encoded format, ie as it would appear on a querystring
+        //contentType: "application/x-www-form-urlencoded; charset=UTF-8", // if you are using form encoding, this is default so you don't need to supply it
+        dataType: "text", // the data type we want back, so text.  The data will come wrapped in xml
+        success: function (data) {
+            $("#searchresultsA").html(data); // show the string that was returned, this will be the data inside the xml wrapper
+        }
+    });
+
+</script>
+
+
+</body>
+</html>

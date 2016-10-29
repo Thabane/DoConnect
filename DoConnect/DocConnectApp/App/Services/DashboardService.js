@@ -1,8 +1,8 @@
 ﻿app.factory('DashboardService',
-    ['$http',
+['$http',
     function($http) {
         var SessionData = function () {
-            return $http.get("api/Dashboard/SessionData");
+            return $http.get("/Data/SessionData");
         };
 
         var GetAllPractices = function () {
@@ -15,10 +15,6 @@
 
         var GetRevenueSummary_Week = function (Practice_ID) {
             return $http.get("api/Dashboard/GetRevenueSummary_Week/" + Practice_ID);
-        };
-
-        var GetRevenueSummary_Month = function (Practice_ID) {
-            return $http.get("api/Dashboard/GetRevenueSummary_Month/" + Practice_ID);
         };
 
         var GetNumPatientsByPractice = function (Practice_ID) {
@@ -73,16 +69,11 @@
             return $http.get("api/Dashboard/MedicineInventoryStockCount/" + Practice_ID);
         };
 
-        var NumOFPatientsPerMonthPerPractice = function (Practice_ID) {
-            return $http.get("api/Dashboard/NumOFPatientsPerMonthPerPractice/" + Practice_ID);
-        };
-
         return {
             SessionData: SessionData,
             GetAllPractices: GetAllPractices,
             GetRevenueSummary_Today: GetRevenueSummary_Today,
             GetRevenueSummary_Week: GetRevenueSummary_Week,
-            GetRevenueSummary_Month: GetRevenueSummary_Month,
             GetNumPatientsByPractice: GetNumPatientsByPractice,
             Consulations_Visits: Consulations_Visits,
             Appointment_Stats: Appointment_Stats,
@@ -93,8 +84,9 @@
             RejectAppointment: RejectAppointment,
             NumOfUnReadMessages: NumOfUnReadMessages,
             GetAllMessages: GetAllMessages,
-            MedicineInventoryStockCount: MedicineInventoryStockCount,
-            NumOFPatientsPerMonthPerPractice: NumOFPatientsPerMonthPerPractice
+            MedicineInventoryStockCount: MedicineInventoryStockCount
+
+
         }
     }
 ]);

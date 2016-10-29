@@ -299,6 +299,13 @@
     <Content Include="Scripts\morris.min.js" />
     <Content Include="Scripts\Pagination\bootstrap-theme.min.css" />
     <Content Include="Scripts\Pagination\dirPagination.js" />
+    <Content Include="Scripts\Pagination\Index\bootstrap.min.js" />
+    <Content Include="Scripts\Pagination\Index\components.min.css" />
+    <Content Include="Scripts\Pagination\Index\jquery.min.js" />
+    <Content Include="Scripts\Pagination\Index\QuickActionsAppointments.css" />
+    <Content Include="Scripts\Pagination\Index\SalesSummary.css" />
+    <Content Include="Scripts\Pagination\Index\theme.css" />
+    <Content Include="Scripts\Pagination\Index\To Do List.css" />
     <Content Include="Scripts\Pagination\styles.css" />
     <Content Include="Scripts\raphael-min.js" />
     <Content Include="Scripts\respond.js" />
@@ -321,6 +328,8 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Login\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

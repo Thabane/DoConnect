@@ -48,9 +48,40 @@ namespace ObjectModel
         public string Frequency { get; set; }
         public int DispenseNumber { get; set; }
         public int RefillNumber { get; set; }
+        public int DeletedStatus { get; set; }
+
+        public Patient()
+        {            
+        }
+        public Patient(SqlDataReader reader)
+        {
+            ID = reader.GetInt32(reader.GetOrdinal("ID"));
+            FirstName = reader.GetString(reader.GetOrdinal("FirstName"));
+            LastName = reader.GetString(reader.GetOrdinal("LastName"));
+            ID_Number = reader.GetString(reader.GetOrdinal("ID_Number"));
+            Gender = reader.GetString(reader.GetOrdinal("Gender"));
+            DOB = reader.GetString(reader.GetOrdinal("DOB"));
+            Cell_Number = reader.GetString(reader.GetOrdinal("Cell_Number"));
+            Street_Address = reader.GetString(reader.GetOrdinal("Street_Address"));
+            Suburb = reader.GetString(reader.GetOrdinal("Suburb"));
+            City = reader.GetString(reader.GetOrdinal("City"));
+            Country = reader.GetString(reader.GetOrdinal("Country"));
+            Medical_Aid_ID = reader.GetInt32(reader.GetOrdinal("Medical_Aid_ID"));
+            Doctor_ID = reader.GetInt32(reader.GetOrdinal("Doctor_ID"));
+            User_ID = reader.GetInt32(reader.GetOrdinal("User_ID"));
+            Allergies = reader.GetString(reader.GetOrdinal("Allergies"));
+            PreviousIllnesses = reader.GetString(reader.GetOrdinal("PreviousIllnesses"));
+            PreviousMedication = reader.GetString(reader.GetOrdinal("PreviousMedication"));
+            RiskFactors = reader.GetString(reader.GetOrdinal("RiskFactors"));
+            SocialHistory = reader.GetString(reader.GetOrdinal("SocialHistory"));
+            FamilyHistory = reader.GetString(reader.GetOrdinal("FamilyHistory"));
+            Email = reader.GetString(reader.GetOrdinal("Email"));
+            DeletedStatus = reader.GetInt32(reader.GetOrdinal("DeletedStatus"));
+
+        }
 
         public Patient Create(SqlDataReader reader)
-        {
+        {        
             return new Patient
             {
                 ID = reader.GetInt32(reader.GetOrdinal("ID")),
