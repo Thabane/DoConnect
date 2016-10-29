@@ -16,6 +16,7 @@
         };
 
         $scope.FunctionComposeMessage = function () {
+            
             angular.element("#div_Compose_Message").show();
             angular.element("#h2_ContentHeading").html("Compose Message");
             angular.element("#div_Message_list").hide();
@@ -24,6 +25,9 @@
         };
 
         $scope.FunctionSent = function () {
+            MessagesService.GetAllSentMessages($scope.SessionData_User_ID).then(function (result) {
+                $scope.SentMessages = result.data;
+            });
             angular.element("#div_Sent_list").show();
             angular.element("#div_Message_list").hide();
             angular.element("#h2_ContentHeading").html("Sent Messages");
@@ -52,9 +56,12 @@
                     $scope.NumOfUnReadMessages = result.data["NumOfUnReadMessages"];
                 });
 
-                MessagesService.GetAllSentMessages($scope.SessionData_User_ID).then(function (result) {
-                    $scope.SentMessages = result.data;
-                });
+                $scope.GetAllRecepients = function () {
+                    MessagesService.GetAllRecepients().success(function (result) {
+                        $scope.AllRecepients = result;
+                    });
+                };
+                $scope.GetAllRecepients();
             });            
         };
         $scope.GetAllMessages();
@@ -94,15 +101,11 @@
 
         $scope.today = $filter('date')(new Date(), 'yyyy-MM-dd');
 
-        $scope.GetAllRecepients = function () {
-            MessagesService.GetAllRecepients().success(function (result) {
-                $scope.AllRecepients = result;
-            });            
-        };
-        $scope.GetAllRecepients();
+        
 
         $scope.Receiver_UserID = 0;
         $scope.changedValueGetReceiver_UserID = function (item) {
+            console.log(item);
             $scope.Receiver_UserID = item.User_ID;
         };
 

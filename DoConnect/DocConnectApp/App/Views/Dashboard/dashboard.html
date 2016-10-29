@@ -1,9 +1,12 @@
 ﻿<div id="page-wrapper">
     <div dir-paginate="Practice in Practices | filter:search | orderBy:sortKey:reverse | itemsPerPage:1">
 
-        <div class="row" ng-init="Consulations_Visits(Practice.ID)">
-            <div class="col-md-12" ng-init="NumOFPatientsPerMonthPerPractice(Practice.ID)">
-                <h2 class="page-header text-primary" ng-init="GetNumPatientsByPractice(Practice.ID)">Dashboard: {{Practice.Name}}</h2>
+        <div class="row page-header" ng-init="Consulations_Visits(Practice.ID)">
+            <div class="col-md-8 " ng-init="NumOFPatientsPerMonthPerPractice(Practice.ID)">
+                <h2 class="text-primary" ng-init="GetNumPatientsByPractice(Practice.ID)">Dashboard: {{Practice.Name}}</h2>
+            </div>
+            <div class="col-md-4">
+                <dir-pagination-controls class="pull-right" max-size="3" direction-links="true" boundary-links="true"></dir-pagination-controls>
             </div>
         </div>
 
@@ -61,7 +64,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="#" onclick="AppointmentsModal()">
+                    <a href="#" ng-click="AppointmentsModal()"  onclick="AppointmentsModal()">
                         <div class="panel-footer">
                             <span class="pull-left">View Details</span>
                             <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -206,8 +209,8 @@
         <div id="AppointmentsModal" class="modal fade">
             <form>
                 <div class="modal-dialog" style="width:50%" ng-init="GetPendingAppointmentsByPracticeID(Practice.ID)">
-                    <div class="modal-content" ng-init="GetAppovedAppointmentsByPracticeID(Practice.ID)">
-                        <div class="modal-header" ng-init="GetRejectedAppointmentsByPracticeID(Practice.ID)">
+                    <div class="modal-content" ><!--ng-init="GetAppovedAppointmentsByPracticeID(Practice.ID)"-->
+                        <div class="modal-header"><!--ng-init="GetRejectedAppointmentsByPracticeID(Practice.ID)"-->
                             <button type="button" class="close CloseModel" data-dismiss="modal" aria-hidden="true">&times;</button>
                             <h4 class="modal-title">Appointments Wedgit</h4>
                         </div>
@@ -323,10 +326,5 @@
             </form>
         </div>
         <!-- /.Appointments Modal-->
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <dir-pagination-controls class="pull-right" max-size="5" direction-links="true" boundary-links="true" style="margin-right: 20px;"></dir-pagination-controls>
-        </div>
     </div>
 </div>

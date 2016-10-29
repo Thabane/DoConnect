@@ -39,7 +39,7 @@ namespace DataClient
 
                 command.CommandType = CommandType.StoredProcedure;
                 conn.Open();
-                command.CommandTimeout = 50;
+                //command.CommandTimeout = 60;
                 return command.ExecuteReader(CommandBehavior.CloseConnection);
             
         }
