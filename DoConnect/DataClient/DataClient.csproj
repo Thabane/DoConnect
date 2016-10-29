@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppMethods.cs" />
     <Compile Include="DataLayer.cs" />
     <Compile Include="DataAccess.cs" />
     <Compile Include="IDataLayer.cs" />

@@ -104,6 +104,7 @@
     </Content>
     <None Include="Properties\PublishProfiles\DCTest.pubxml" />
     <None Include="Properties\PublishProfiles\DCws.pubxml" />
+    <None Include="Properties\PublishProfiles\Thabane.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -115,13 +116,14 @@
     <Content Include="InfoServ.asmx" />
     <Content Include="scripts\ai.0.15.0-build58334.js" />
     <Content Include="scripts\ai.0.15.0-build58334.min.js" />
+    <Content Include="ServiceCall.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContactResult.cs" />
-    <Compile Include="GlabalVar.cs" />
+    <Compile Include="FunctionBank.cs" />
     <Compile Include="InfoServ.asmx.cs">
       <DependentUpon>InfoServ.asmx</DependentUpon>
       <SubType>Component</SubType>
