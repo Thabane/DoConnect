@@ -37,8 +37,9 @@
         "</div>" +
       "</div>",
     header:
-      "<div class='modal-header'>" +
-        "<h4 class='modal-title'></h4>" +
+      "<div id='ezAlerts-header' class='modal-header alert-danger'>" +
+        "<button id='close-button' type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>×</span><span class='sr-only'>Close</span></button>" +
+        "<h4 id='ezAlerts-title' class='modal-title'>Confirm Delete</h4>" +
       "</div>",
     footer:
       "<div class='modal-footer'></div>",
@@ -568,6 +569,7 @@
     var dialog = $(templates.dialog);
     var innerDialog = dialog.find(".modal-dialog");
     var body = dialog.find(".modal-body");
+    var ModalContent = dialog.find(".modal-content");
     var buttons = options.buttons;
     var buttonStr = "";
     var callbacks = {
@@ -607,11 +609,10 @@
 
     if (options.closeButton) {
       var closeButton = $(templates.closeButton);
-
+      var templateshearder = $(templates.header);
       if (options.title) {
-        dialog.find(".modal-header").prepend(closeButton);
       } else {
-        closeButton.css("margin-top", "-10px").prependTo(body);
+          templateshearder.prependTo(ModalContent);
       }
     }
 
