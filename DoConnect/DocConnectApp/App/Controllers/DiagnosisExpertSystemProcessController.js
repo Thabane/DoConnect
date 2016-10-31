@@ -28,7 +28,7 @@
             DiagnosisExpertSystemService.patientDiagnosisReturn($scope.globalEvidence).then
             (function (result) {
                 $scope.DiagnosisResponse = result.data;
-                $scope.LogStuff($scope.globalEvidence);
+                $scope.LogStuff($scope.DiagnosisResponse);
             });
 
         };
@@ -61,7 +61,7 @@
             DiagnosisExpertSystemService.patientDiagnosisReturn($scope.globalEvidence).then
             (function (result) {
                 $scope.DiagnosisResponse = result.data;
-                $scope.LogStuff($scope.globalEvidence);
+                $scope.LogStuff($scope.DiagnosisResponse);
             });
 
         };
@@ -79,10 +79,9 @@
             DiagnosisExpertSystemService.patientDiagnosisReturn($scope.globalEvidence).then
             (function (result) {
                 $scope.DiagnosisResponse = result.data;
-                $scope.LogStuff($scope.globalEvidence);
+                $scope.LogStuff($scope.DiagnosisResponse);
             });
 
         };
-
 
     }]);

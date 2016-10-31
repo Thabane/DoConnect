@@ -1,4 +1,5 @@
 ﻿app.factory('LoginService',
+['$http',
     function ($http) {
         var GetUser = function (d) {
             return $http({
@@ -13,4 +14,4 @@
             GetUser: GetUser
         }
     }
-);
+]);

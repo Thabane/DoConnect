@@ -20,6 +20,13 @@ namespace ObjectModel
         public int Practice_ID { get; set; }
         public string PracticeName { get; set; }
 
+        public int highlightqtyAboutToExpier  { get; set; }
+        public int qtyAboutToExpier           { get; set; }
+        public int highlightqtyExpiered       { get; set; }
+        public int qtyExpiered                { get; set; }
+        public int highlightqtyNeedRefill     { get; set; }
+        public int qtyNeedRefill              { get; set; }
+
         public Medicine_Inventory Create(SqlDataReader reader)
         {
             return new Medicine_Inventory

@@ -63,7 +63,7 @@ namespace DataClient
             }
         }
 
-        internal void LogEntry(int UserId, string value)
+        internal void LogEntry(int User_Id, string Name, string AccessLevel, string Activity)
         {
             var filePath = ConfigurationManager.AppSettings["LogFile"];
             var jsonData = File.ReadAllText(filePath);
@@ -72,17 +72,20 @@ namespace DataClient
                         ?? new List<Log>();
 
             var previousId = logData.LastOrDefault().Key;
+            if ((logData.LastOrDefault().Activity == Activity) && (Activity != "Logged in"))
+            {
+                logData.RemoveAt(logData.Count-1);
+            }
             var newId = Convert.ToInt32(previousId);
             newId++;
 
-            logData.Add(new Log() { Key = newId.ToString(), Value = value, UserId = UserId.ToString(), DateTime = DateTime.Now.ToString() });
+            logData.Add(new Log() { Key = newId.ToString(), User_ID = User_Id.ToString(), Name = Name, AccessLevel = AccessLevel, Activity = Activity,  LogTime = DateTime.Now.ToString() });
 
             var data = JsonConvert.SerializeObject(logData);
             using (StreamWriter writer = new StreamWriter(filePath))
             {
                 writer.Write(data);
             }
-
         }
 
         internal List<Log> ReadEntry()

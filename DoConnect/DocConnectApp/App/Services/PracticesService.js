@@ -1,5 +1,10 @@
 ﻿app.factory('PracticesService',
+['$http',
     function ($http) {
+
+        var SessionData = function () {
+            return $http.get("/Data/SessionData");
+        };
 
         var GetAllPractices = function () {
             return $http.get("api/Practices/GetAllPractices");
@@ -43,6 +48,7 @@
         };
 
         return {
+            SessionData: SessionData,
             GetAllPractices: GetAllPractices,
             GetPracticeByID: GetPracticeByID,
             InsertPractice: InsertPractice,
@@ -50,4 +56,4 @@
             DeletePractice: DeletePractice
         };
     }
-);
+]);

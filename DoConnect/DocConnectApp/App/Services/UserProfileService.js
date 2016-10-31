@@ -1,4 +1,5 @@
 ﻿app.factory('UserProfileService',
+    ['$http',
     function ($http) {
 
         var SessionData = function () {
@@ -59,4 +60,4 @@
             UpdateProfileDoctor: UpdateProfileDoctor
         };
     }
-);
+]);

@@ -1,4 +1,5 @@
 ﻿app.factory('MedicalAidService',
+['$http',
     function ($http) {
 
         var GetAllMedicalAids = function () {
@@ -46,4 +47,4 @@
             DeleteMedicalAid: DeleteMedicalAid
         };
     }
-);
+]);

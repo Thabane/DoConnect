@@ -35,7 +35,7 @@ namespace DoConnectAdmin.Controllers
         public Staff GetUserDetailsByUser_ID(int ID)
         {
             DataLayer dtLayer = new DataLayer();
-            return dtLayer.GetUserDetailsByUser_ID(ID);
+            return dtLayer.GetUserDetailsByUser_ID();
         }
 
         [HttpPost]

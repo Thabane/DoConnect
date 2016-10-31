@@ -31,6 +31,7 @@ namespace ObjectModel
         public int Patient_Consultation_ID { get; set; }
         public int Patient_Consultation_Patient_ID { get; set; }
         public int TotalNumOfVisits { get; set; }
+        public int TotalPatientsCount { get; set; }
         public string Month { get; set; }
         public Consultation Create(SqlDataReader reader)
         {

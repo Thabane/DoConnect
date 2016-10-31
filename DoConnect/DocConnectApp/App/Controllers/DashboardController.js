@@ -10,6 +10,8 @@
                 $scope.SessionData_Email = result["Email"];
                 $scope.SessionData_Practice_ID = result["Practice_ID"];
                 $scope.SessionData_AccessLevel = result["AccessLevel"];
+
+                console.log(result);
                 
                 DashboardService.GetAllMessages($scope.SessionData_User_ID).then(function (result) {
                     $scope.Messages = result.data;
@@ -18,6 +20,14 @@
                 DashboardService.NumOfUnReadMessages($scope.SessionData_User_ID).then(function (result) {
                     $scope.NumOfUnReadMessages = result.data["NumOfUnReadMessages"];
                 });
+
+                if (result["AccessLevel"] == '1' || result["AccessLevel"] == '2' || result["AccessLevel"] == '6') {
+                    angular.element("#doctor_AssistentControls").show();
+                }
+                else {
+                    angular.element("#doctor_AssistentControls").hide();
+                }
+                
             });
         };
         $scope.SessionData();
@@ -44,49 +54,48 @@
 
                     var data = google.visualization.arrayToDataTable([
                       ['Task', 'Hours per Day'],
-                      ['Total Visits', $scope.TotalNumOfVisits],
-                      ['Expected Income', $scope.Total],
-                      ['Actual Income', $scope.TotalAmountPaid],
-                      ['Balance Due', $scope.TotalBalanceOwing]
+                      ['Gross Income', $scope.Total],
+                      ['Income Received', $scope.TotalAmountPaid],
+                      ['Income Due', $scope.TotalBalanceOwing]
                     ]);
-
                     var options = {
                         pieSliceText: 'value',
-                        is3D: true
+                        is3D: true,
+                        height: '170'
                     };
                     var chart = new google.visualization.PieChart(document.getElementById('piechart'));
                     chart.draw(data, options);
                 }
             });
         };
-
+        
         $scope.GetRevenueSummary_Today = function (Practice_ID) {
             DashboardService.GetRevenueSummary_Today(Practice_ID).then(function (result) {
                 $scope.TotalNumOfVisits_Summary = result.data["TotalNumOfVisits"];
-                $scope.Total_Summary = result.data["Total"];
+                $scope.Income = result.data["Total"];
                 $scope.TotalAmountPaid_Summary = result.data["AmountPaid"];
                 $scope.TotalBalanceOwing_Summary = result.data["BalanceOwing"];
-                $scope.Amount_Summary = result.data["Amount"];
+                $scope.Expenses_Summary = result.data["Amount"];
             });
         };
         
         $scope.GetRevenueSummary_Week = function (Practice_ID) {
             DashboardService.GetRevenueSummary_Week(Practice_ID).then(function (result) {
                 $scope.TotalNumOfVisits_Summary = result.data["TotalNumOfVisits"];
-                $scope.Total_Summary = result.data["Total"];
+                $scope.Income = result.data["Total"];
                 $scope.TotalAmountPaid_Summary = result.data["AmountPaid"];
                 $scope.TotalBalanceOwing_Summary = result.data["BalanceOwing"];
-                $scope.Amount_Summary = result.data["Amount"];
+                $scope.Expenses_Summary = result.data["Amount"];
             });
         };
 
         $scope.GetRevenueSummary_Month = function (Practice_ID) {
-            DashboardService.GetNumPatientsByPractice(Practice_ID).then(function (result) {
+            DashboardService.GetRevenueSummary_Month(Practice_ID).then(function (result) {
                 $scope.TotalNumOfVisits_Summary = result.data["TotalNumOfVisits"];
-                $scope.Total_Summary = result.data["Total"];
+                $scope.Income = result.data["Total"];
                 $scope.TotalAmountPaid_Summary = result.data["AmountPaid"];
                 $scope.TotalBalanceOwing_Summary = result.data["BalanceOwing"];
-                $scope.Amount_Summary = result.data["Amount"];
+                $scope.Expenses_Summary = result.data["Amount"];
             });
         };
 
@@ -122,6 +131,38 @@
                 //        chart.draw(data, options);
                 //    }
                 //});
+            });
+        };
+
+        //Graph: Number Of Patients Per Practice Per Month
+        $scope.NumOFPatientsPerMonthPerPractice = function (Practice_ID) {
+            DashboardService.NumOFPatientsPerMonthPerPractice(Practice_ID).then(function (result) {
+
+                    var List = [];
+
+                    for (var i = 0; i < result.data.length; i++) {
+                        List.push([result.data[i]["Month"], result.data[i]["TotalNumOfVisits"], result.data[i]["TotalPatientsCount"]]);
+                    }
+
+                    google.charts.load('current', { 'packages': ['line'] });
+                    google.charts.setOnLoadCallback(drawChart_NumOFPatientsPerMonthPerPractice);
+
+                    function drawChart_NumOFPatientsPerMonthPerPractice() {
+
+                        var data = new google.visualization.DataTable();
+                        data.addColumn('string', 'Month (2016)');
+                        data.addColumn('number', 'Number of registered patients');
+                        data.addColumn('number', 'Total patients');
+
+                        data.addRows(List);
+                        var options = {
+                            legend: { position: 'bottom' },
+                            is3D: true
+                        };                        
+
+                        var chart = new google.charts.Line(document.getElementById('linechart_NumOFPatientsPerMonthPerPractice'));
+                        chart.draw(data, options);
+                    }
             });
         };
 
@@ -180,8 +221,8 @@
 
         $scope.AppoveAppointment = function (ID, Practice_ID) {
             DashboardService.AppoveAppointment(ID).then(function (result) {
-                $scope.GetPendingAppointmentsByPracticeID(Practice_ID);
                 btnSuccess("Appointment status successfully updated.\nAppointment Appoved.");
+                $scope.GetPendingAppointmentsByPracticeID(Practice_ID);                
             }, function (error) {
                 btnAlert("System Error Message", "Appointment status not successfully updated.");
             });

@@ -17,7 +17,8 @@ namespace ObjectModel
 
         public int User_ID     { get; set; }
         public string FirstName   { get; set; }
-        public string LastName    { get; set; }  
+        public string LastName    { get; set; }
+        public int Practice_ID { get; set; }
         public Login Create(SqlDataReader reader)
         {
             return new Login
@@ -25,7 +26,7 @@ namespace ObjectModel
                 ID = reader.GetInt32(reader.GetOrdinal("ID")),
                 Email = reader.GetString(reader.GetOrdinal("Email")),
                 Password = reader.GetString(reader.GetOrdinal("Password")),
-                AccessLevel = reader.GetInt32(reader.GetOrdinal("AccessLevel")),
+                AccessLevel = reader.GetInt32(reader.GetOrdinal("AccessLevel"))
             };
         }
     }
