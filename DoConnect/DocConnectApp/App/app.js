@@ -142,7 +142,7 @@ app.config(
 
         $locationProvider.html5Mode({
             enabled: true,
-            requireBase: true
+            requireBase: false
         });
 
         $httpProvider.interceptors.push('AuthHttpResponseInterceptor');
