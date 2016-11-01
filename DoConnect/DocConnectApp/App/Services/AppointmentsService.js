@@ -19,7 +19,6 @@
         };
         
         var InsertAppointment = function (Date_Time, Patient_ID, Details, App_Status, DoctorID) {
-            console.log(Date_Time, Patient_ID, Details, App_Status, DoctorID);
             return $http.post("api/Appointments/InsertAppointment",
             {
                 'Appointments_Date_Time': Date_Time,
@@ -31,7 +30,6 @@
         };
 
         var UpdateAppointment = function (ID, Date_Time, Patient_ID, Details, App_Status, DoctorID) {
-            console.log(ID, Date_Time, Patient_ID, Details, App_Status, DoctorID);
             return $http.post("api/Appointments/UpdateAppointment",
             {
                 'Appointments_ID': ID,
