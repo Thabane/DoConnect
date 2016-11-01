@@ -164,7 +164,6 @@
     <Content Include="App\Controllers\DiagnosisExpertSystemProcessController.js" />
     <Content Include="App\Controllers\EmployeesController.js" />
     <Content Include="App\Controllers\EventsController.js" />
-    <Content Include="App\Controllers\FeedCtrl.js" />
     <Content Include="App\Controllers\LoginController.js" />
     <Content Include="App\Controllers\MedicalAidController.js" />
     <Content Include="App\Controllers\MedicineInventoryController.js" />
@@ -300,6 +299,13 @@
     <Content Include="Scripts\morris.min.js" />
     <Content Include="Scripts\Pagination\bootstrap-theme.min.css" />
     <Content Include="Scripts\Pagination\dirPagination.js" />
+    <Content Include="Scripts\Pagination\Index\bootstrap.min.js" />
+    <Content Include="Scripts\Pagination\Index\components.min.css" />
+    <Content Include="Scripts\Pagination\Index\jquery.min.js" />
+    <Content Include="Scripts\Pagination\Index\QuickActionsAppointments.css" />
+    <Content Include="Scripts\Pagination\Index\SalesSummary.css" />
+    <Content Include="Scripts\Pagination\Index\theme.css" />
+    <Content Include="Scripts\Pagination\Index\To Do List.css" />
     <Content Include="Scripts\Pagination\styles.css" />
     <Content Include="Scripts\raphael-min.js" />
     <Content Include="Scripts\respond.js" />
