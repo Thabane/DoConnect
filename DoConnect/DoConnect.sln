@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectModel", "ObjectModel\
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DoConnect", "DoConnect\DoConnect.sqlproj", "{61D69D0C-DB3B-42AD-B1C1-A925F7582C01}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoConnectTesting", "DoConnectTesting\DoConnectTesting.csproj", "{14AD2BCF-9355-4B75-8FD0-06B14BDF347F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

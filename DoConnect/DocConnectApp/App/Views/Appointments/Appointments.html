@@ -40,9 +40,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-show="Appointments.length > 0" ng-class="{'info': Appointment.highlightTodayApps == '1', 'success': Appointment.highlightTomorrowApps == '1'}" dir-paginate="Appointment in Appointments | filter:search | orderBy:sortKey:reverse | itemsPerPage:7">
+    
+                    <tr dir-paginate="Appointment in Appointments | filter:search | orderBy:sortKey:reverse | itemsPerPage:5">
                         <td>{{Appointment.Appointments_Date_Time}}</td>
-                        <td>{{Appointment.Patient_FirstName}} {{Appointment.Patient_LastName}}</td>
+                        <td><a>{{Appointment.Patient_FirstName}} {{Appointment.Patient_LastName}}</a></td>
                         <td>{{Appointment.Doctors_FirstName}} {{Appointment.Doctors_LastName}}</td>
                         <td>{{Appointment.Appointments_Details}}</td>
                         <td>
@@ -50,7 +51,6 @@
                             <button class="btn btn-danger btn-xs" ng-click="DeleteAppointment1(Appointment.Appointments_ID)"><i class="fa fa-trash-o"></i></button>
                         </td>
                     </tr>
-                    <tr class="row alert alert-info text-center" ng-show="Appointments.length == 0"><td colspan="4"><b>System Message!</b> No appointment records to display.</td></tr>
                 </tbody>
             </table>
 
@@ -156,5 +156,11 @@
 <script>
     $("#date").datepicker({
         format: 'yyyy-mm-dd'
+    });
+
+    $(function () {        
+        $("#datetime").datetimepicker({
+            format: 'HH:mm'
+        });
     });
 </script>

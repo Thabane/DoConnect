@@ -10,6 +10,8 @@
                 $scope.SessionData_Email = result["Email"];
                 $scope.SessionData_Practice_ID = result["Practice_ID"];
                 $scope.SessionData_AccessLevel = result["AccessLevel"];
+
+                console.log(result);
                 
                 DashboardService.GetAllMessages($scope.SessionData_User_ID).then(function (result) {
                     $scope.Messages = result.data;
@@ -39,7 +41,7 @@
 
         //Load data by practice id
         $scope.GetNumPatientsByPractice = function (GetPractice_ID) {            
-            DashboardService.GetNumPatientsByPractice(GetPractice_ID).then(function (result) {
+            DashboardService.GetNumPatientsByPractice(1).then(function (result) {
                 $scope.TotalNumOfVisits = result.data["TotalNumOfVisits"];
                 $scope.Total = result.data["Total"];
                 $scope.TotalAmountPaid = result.data["AmountPaid"];
@@ -100,35 +102,67 @@
         $scope.Consulations_Visits = function (Practice_ID) {            
             DashboardService.Consulations_Visits(Practice_ID).then(function (result) {
                 
-                DashboardService.Appointment_Stats(Practice_ID).then(function (result_Appointment_Stats) {
+                //DashboardService.Appointment_Stats(Practice_ID).then(function (result_Appointment_Stats) {
                 
-                    var Consulations_Visits = [];
+                //    var Consulations_Visits = [];
+
+                //    for (var i = 0; i < result.data.length; i++) {
+                //        Consulations_Visits.push([result.data[i]["Month"], result.data[i]["TotalNumOfVisits"], result_Appointment_Stats.data[i]["TotalNumOfVisits"]]);
+                //    }
+
+                //    //Line Graph- TotalNumOfVisits per Day Per Month
+                //    google.charts.load('current', { 'packages': ['line'] });
+                //    google.charts.setOnLoadCallback(drawChart_TotalNumOfVisits);
+
+                //    function drawChart_TotalNumOfVisits() {
+
+                //        var data = new google.visualization.DataTable();
+                //        data.addColumn('string', 'Month (2016)');
+                //        data.addColumn('number', 'Number of consultations');
+                //        data.addColumn('number', 'Number of appointments');
+
+                //        data.addRows(Consulations_Visits);
+                //        var options = {                        
+                //            legend: { position: 'bottom' },
+                //            is3D: true
+                //        };
+
+                //        var chart = new google.charts.Line(document.getElementById('linechart_material'));
+                //        chart.draw(data, options);
+                //    }
+                //});
+            });
+        };
+
+        //Graph: Number Of Patients Per Practice Per Month
+        $scope.NumOFPatientsPerMonthPerPractice = function (Practice_ID) {
+            DashboardService.NumOFPatientsPerMonthPerPractice(Practice_ID).then(function (result) {
+
+                    var List = [];
 
                     for (var i = 0; i < result.data.length; i++) {
-                        Consulations_Visits.push([result.data[i]["Month"], result.data[i]["TotalNumOfVisits"], result_Appointment_Stats.data[i]["TotalNumOfVisits"]]);
+                        List.push([result.data[i]["Month"], result.data[i]["TotalNumOfVisits"], result.data[i]["TotalPatientsCount"]]);
                     }
 
-                    //Line Graph- TotalNumOfVisits per Day Per Month
                     google.charts.load('current', { 'packages': ['line'] });
-                    google.charts.setOnLoadCallback(drawChart_TotalNumOfVisits);
+                    google.charts.setOnLoadCallback(drawChart_NumOFPatientsPerMonthPerPractice);
 
-                    function drawChart_TotalNumOfVisits() {
+                    function drawChart_NumOFPatientsPerMonthPerPractice() {
 
                         var data = new google.visualization.DataTable();
                         data.addColumn('string', 'Month (2016)');
-                        data.addColumn('number', 'Number of consultations');
-                        data.addColumn('number', 'Number of appointments');
+                        data.addColumn('number', 'Number of registered patients');
+                        data.addColumn('number', 'Total patients');
 
-                        data.addRows(Consulations_Visits);
-                        var options = {                        
+                        data.addRows(List);
+                        var options = {
                             legend: { position: 'bottom' },
                             is3D: true
-                        };
+                        };                        
 
-                        var chart = new google.charts.Line(document.getElementById('linechart_material'));
+                        var chart = new google.charts.Line(document.getElementById('linechart_NumOFPatientsPerMonthPerPractice'));
                         chart.draw(data, options);
                     }
-                });
             });
         };
 
