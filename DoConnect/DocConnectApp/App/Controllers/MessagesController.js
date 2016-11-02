@@ -12,20 +12,27 @@
             angular.element("#h2_ContentHeading").html("Inbox");
             angular.element("#div_Compose_Message").hide();
             angular.element("#div_Sent_list").hide();
+            angular.element(".SearchDiv").show();            
         };
 
         $scope.FunctionComposeMessage = function () {
+            
             angular.element("#div_Compose_Message").show();
             angular.element("#h2_ContentHeading").html("Compose Message");
             angular.element("#div_Message_list").hide();
             angular.element("#div_Sent_list").hide();
+            angular.element(".SearchDiv").hide();
         };
 
         $scope.FunctionSent = function () {
+            MessagesService.GetAllSentMessages($scope.SessionData_User_ID).then(function (result) {
+                $scope.SentMessages = result.data;
+            });
             angular.element("#div_Sent_list").show();
             angular.element("#div_Message_list").hide();
             angular.element("#h2_ContentHeading").html("Sent Messages");
             angular.element("#div_Compose_Message").hide();
+            angular.element(".SearchDiv").show();
         };
 
         //Sort Function
@@ -37,21 +44,24 @@
         //Select All Messages
         $scope.GetAllMessages = function () {
             MessagesService.SessionData().success(function (result) {
-                sessionStorage.SessionData_User_ID      = result["User_ID"];
-                sessionStorage.SessionData_FirstName    = result["FirstName"];
-                sessionStorage.SessionData_LastName     = result["LastName"];
-                sessionStorage.SessionData_Email        = result["Email"];
-                MessagesService.GetAllMessages(sessionStorage.SessionData_User_ID).then(function (result) {
+                $scope.SessionData_User_ID      = result["User_ID"];
+                $scope.SessionData_FirstName    = result["FirstName"];
+                $scope.SessionData_LastName     = result["LastName"];
+                $scope.SessionData_Email        = result["Email"];
+                MessagesService.GetAllMessages($scope.SessionData_User_ID).then(function (result) {
                     $scope.Messages = result.data;
                 });
 
-                MessagesService.NumOfUnReadMessages(sessionStorage.SessionData_User_ID).then(function (result) {
+                MessagesService.NumOfUnReadMessages($scope.SessionData_User_ID).then(function (result) {
                     $scope.NumOfUnReadMessages = result.data["NumOfUnReadMessages"];
                 });
 
-                MessagesService.GetAllSentMessages(sessionStorage.SessionData_User_ID).then(function (result) {
-                    $scope.SentMessages = result.data;
-                });
+                $scope.GetAllRecepients = function () {
+                    MessagesService.GetAllRecepients().success(function (result) {
+                        $scope.AllRecepients = result;
+                    });
+                };
+                $scope.GetAllRecepients();
             });            
         };
         $scope.GetAllMessages();
@@ -90,23 +100,28 @@
         };
 
         $scope.today = $filter('date')(new Date(), 'yyyy-MM-dd');
-        //alert($filter('time')(new Date(), 'HH:mm:ss'));
 
-        $scope.GetAllRecepients = function () {
-            MessagesService.GetAllRecepients().success(function (result) {
-                $scope.AllRecepients = result.data;
-                console.log($scope.AllRecepients);
-            });            
-        };
-        $scope.GetAllRecepients();
+        
 
         $scope.Receiver_UserID = 0;
         $scope.changedValueGetReceiver_UserID = function (item) {
+            console.log(item);
             $scope.Receiver_UserID = item.User_ID;
-            console.log($scope.Receiver_UserID);
         };
 
-        $scope.ReplyMessage = function (_Subject, _Description) {
+        $scope.SendMessage = function (_Subject, _Description) {
+            MessagesService.InsertMessage($scope.Receiver_UserID, $scope.SessionData_User_ID, _Subject, _Description, $scope.today).success(function () {
+                $scope.GetAllMessages();
+                $scope.FunctionInbox();
+                angular.element(".insert").val('');
+                btnSuccess("Message successfully sent.");
+            },
+            function (error) {
+                btnAlert("System Error Message", "Message not successfully sent.");
+            });
+        };
+
+        $scope.ReplyMessage = function (_Subject, _Description) {            
             MessagesService.InsertMessage($scope.Sender, $scope.Receiver, _Subject, _Description, $scope.today).success(function () {
                 $scope.GetAllMessages();
                 angular.element("#CloseViewMessageModel2").trigger("click");

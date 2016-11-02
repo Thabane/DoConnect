@@ -40,9 +40,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-show="Appointments.length > 0" ng-class="{'info': Appointment.highlightTodayApps == '1', 'success': Appointment.highlightTomorrowApps == '1'}" dir-paginate="Appointment in Appointments | filter:search | orderBy:sortKey:reverse | itemsPerPage:7">
+    
+                    <tr dir-paginate="Appointment in Appointments | filter:search | orderBy:sortKey:reverse | itemsPerPage:5">
                         <td>{{Appointment.Appointments_Date_Time}}</td>
-                        <td>{{Appointment.Patient_FirstName}} {{Appointment.Patient_LastName}}</td>
+                        <td><a>{{Appointment.Patient_FirstName}} {{Appointment.Patient_LastName}}</a></td>
                         <td>{{Appointment.Doctors_FirstName}} {{Appointment.Doctors_LastName}}</td>
                         <td>{{Appointment.Appointments_Details}}</td>
                         <td>
@@ -50,7 +51,6 @@
                             <button class="btn btn-danger btn-xs" ng-click="DeleteAppointment1(Appointment.Appointments_ID)"><i class="fa fa-trash-o"></i></button>
                         </td>
                     </tr>
-                    <tr class="row alert alert-info text-center" ng-show="Appointments.length == 0"><td colspan="4"><b>System Message!</b> No appointment records to display.</td></tr>
                 </tbody>
             </table>
 
@@ -64,13 +64,14 @@
         <!--View Appointment Modal-->
         <div id="View_Appointment_Modal" class="modal fade">
             <form name="Form" novalidate>
-                <div class="modal-dialog" style="width:40%">
+                <div class="modal-dialog" style="width:50%">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             <h4 class="modal-title text-primary">Appointment Details</h4>
                         </div>
                         <div class="modal-body">
+                            <div class="row alert alert-danger text-center" ng-show="TimeError != 0">{{TimeError}}</div>
                             <div class="row" style="margin-top:4px; margin-bottom:0px;">
                                 <div class="col-md-3"><h5>Date & Time:</h5></div>
                                 <div class="col-md-8">
@@ -97,7 +98,7 @@
                             </div>
                             <div class="row" style="margin-top:4px; margin-bottom:0px;">
                                 <div class="col-md-3"><h5>Patient Name:</h5></div>
-                                <div class="col-md-8"><select class="form-control disable_ViewAppointment readonly_ViewAppointment" ng-model="Patient_ID" name="PatientName" ng-change="changedValueGetPatientID(Patient_ID)" data-ng-options="patient as patient.PatientFullName for patient in Patients" ng-required="true">
+                                <div class="col-md-8"><select class="form-control disable_ViewAppointment readonly_ViewAppointment" ng-model="Patient_ID" name="PatientName" ng-change="changedValueGetPatientID(Patient_ID)" data-ng-options="patient as patient.PatientFullName for patient in Patients | orderBy:'PatientFullName'" ng-required="true">
                                                             <option value="">{{Patient_FirstName}} {{Patient_LastName}}</option></select></div>
                             </div>
                             <div class="row" style="margin-top:0px; margin-bottom:8px;">
@@ -118,7 +119,7 @@
                             </div>
                             <div class="row" style="margin-top:4px; margin-bottom:0px;">
                                 <div class="col-md-3"><h5>Appointment Status:</h5></div>
-                                <div class="col-md-8"><select class="form-control disable_ViewAppointment readonly_ViewAppointment" ng-model="AppStatus" name="Appointments_App_Status" ng-required="true" ng-change="changedValueGetApp_Status(AppStatus)" data-ng-options="App_Status as App_Status.Status for App_Status in App_Statusz">
+                                <div class="col-md-8"><select class="form-control disable_ViewAppointment readonly_ViewAppointment" ng-model="AppStatus" name="Appointments_App_Status" ng-required="true" ng-change="changedValueGetApp_Status(AppStatus)" data-ng-options="App_Status as App_Status.Status for App_Status in App_Statusz | orderBy:'Status'">
                                                         <option value="">{{Appointments_App_Status}}</option>
                                                       </select></div>
                             </div>
@@ -130,7 +131,7 @@
                             </div>
                             <div class="row" style="margin-top:4px; margin-bottom:0px;">
                                 <div class="col-md-3"><h5>Doctor Name:</h5></div>
-                                <div class="col-md-8"><select class="form-control disable_ViewAppointment readonly_ViewAppointment" ng-model="Doctors_ID" name="DoctorName" ng-required="true" ng-change="changedValueGetDoctors_ID(Doctors_ID)" data-ng-options="doctor as doctor.DoctorFullName for doctor in Doctors">
+                                <div class="col-md-8"><select class="form-control disable_ViewAppointment readonly_ViewAppointment" ng-model="Doctors_ID" name="DoctorName" ng-required="true" ng-change="changedValueGetDoctors_ID(Doctors_ID)" data-ng-options="doctor as doctor.DoctorFullName for doctor in Doctors | orderBy:'DoctorFullName'">
                                                             <option value="">{{Doctors_FirstName}} {{Doctors_LastName}}</option>
                                                        </select></div>
                             </div>
@@ -155,5 +156,11 @@
 <script>
     $("#date").datepicker({
         format: 'yyyy-mm-dd'
+    });
+
+    $(function () {        
+        $("#datetime").datetimepicker({
+            format: 'HH:mm'
+        });
     });
 </script>

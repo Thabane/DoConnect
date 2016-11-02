@@ -1,5 +1,5 @@
 ﻿<div>
-    <div id="page-wrapper" ng-controller="PatientsController">
+    <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
                 <h2 class="page-header text-primary">{{PageTitle_MedicalHistory}}</h2>
@@ -27,9 +27,9 @@
                     <div class="modal-body">
                         <div class="row col-md-12" style="margin-top:6px; margin-bottom:6px;"><label class="caption-subject font-green-steel uppercase bold">General Information</label></div>
                         <div class="row" style="margin-top:8px; margin-bottom:0px;">
-                            <div class="col-md-1"><h5 class="form-control-label">Firstname:</h5></div>
+                            <div class="col-md-1"><h5 class="form-control-label">First Name:</h5></div>
                             <div class="col-md-3"><input type="text" class="form-control View_readonly" name="FirstName" ng-model="FirstName" ng-required="true" ng-pattern="/^[a-zA-Z''-'\s]{3,40}$/"></div>
-                            <div class="col-md-1"><h5 class="form-control-label">Lastname:</h5></div>
+                            <div class="col-md-1"><h5 class="form-control-label">Last Name:</h5></div>
                             <div class="col-md-3"><input type="text" class="form-control  View_readonly" name="LastName" ng-model="LastName" ng-required="true" ng-pattern="/^[a-zA-Z''-'\s]{3,40}$/"></div>
                             <div class="col-md-1"><h5 class="form-control-label">Email:</h5></div>
                             <div class="col-md-3"><input type="email" class="form-control" name="Email" ng-model="Email" ng-readonly="true" style="background-color: transparent"></div>
@@ -38,21 +38,21 @@
                             <div class="col-md-1"></div>
                             <div class="col-md-3">
                                 <small ng-show="Form.FirstName.$invalid && Form.FirstName.$touched && Form.FirstName.$error.required">Required field.<br></small>
-                                <small ng-show="Form.FirstName.$invalid && Form.FirstName.$touched && Form.FirstName.$error.pattern">Only numeric letters allowed and 13 charactors long.</small>
+                                <small ng-show="Form.FirstName.$invalid && Form.FirstName.$touched && Form.FirstName.$error.pattern">Only alphabetic letters allowed and atleast 3 charactors long.</small>
                             </div>
                             <div class="col-md-1"></div>
                             <div class="col-md-3">
                                 <small ng-show="Form.LastName.$invalid && Form.LastName.$touched && Form.LastName.$error.required">Required field.<br></small>
-                                <small ng-show="Form.LastName.$invalid && Form.LastName.$touched && Form.LastName.$error.pattern">Only numeric letters allowed and atleast 10 charactors long.</small>
+                                <small ng-show="Form.LastName.$invalid && Form.LastName.$touched && Form.LastName.$error.pattern">Only alphabetic letters allowed and atleast 3 charactors long.</small>
                             </div>
                             <div class="col-md-1"></div>
                             <div class="col-md-3"></div>
                         </div>
                         <div class="row" style="margin-top:8px; margin-bottom:0px;">
                             <div class="col-md-1"><h5>ID Number:</h5></div>
-                            <div class="col-md-3"><input type="text" class="form-control  View_readonly" name="ID_Number" ng-model="ID_Number" ng-required="true" ng-pattern="/[0-9]{13}/"></div>
+                            <div class="col-md-3"><input type="text" class="form-control  View_readonly" name="ID_Number" ng-model="ID_Number" ng-required="true" ng-pattern="/^[0-9]{13,13}$/"></div>
                             <div class="col-md-1"><h5>Cell Number:</h5></div>
-                            <div class="col-md-3"><input type="text" class="form-control  View_readonly" name="Cell_Number" ng-model="Cell_Number" ng-required="true" ng-pattern="/[0-9]{1}[0-9]{9}/"></div>
+                            <div class="col-md-3"><input type="text" class="form-control  View_readonly" name="Cell_Number" ng-model="Cell_Number" ng-required="true" ng-pattern="/^[0-9]{10,10}$/"></div>
                             <div class="col-md-1"><h5>DOB:</h5></div>
                             <div class="col-md-3"><div class="input-group date datepicker" style="padding:0px;">
                                                        <input class="form-control" type="text" ng-model="DOB" id="DOB" name="DOB" data-date-format="yyyy-mm-dd" ng-required="true" ng-readonly="true" style="background-color: transparent;"><span class="input-group-addon"><span class="fa fa-calendar"></span></span>
@@ -67,7 +67,7 @@
                             <div class="col-md-1"></div>
                             <div class="col-md-3">
                                 <small ng-show="Form.Cell_Number.$invalid && Form.Cell_Number.$touched && Form.Cell_Number.$error.required">Required field.<br></small>
-                                <small ng-show="Form.Cell_Number.$invalid && Form.Cell_Number.$touched && Form.Cell_Number.$error.pattern">Only numeric letters allowed and atleast 10 charactors long.</small>
+                                <small ng-show="Form.Cell_Number.$invalid && Form.Cell_Number.$touched && Form.Cell_Number.$error.pattern">Only numeric letters allowed and 10 charactors long.</small>
                             </div>
                             <div class="col-md-1"></div>
                             <div class="col-md-3">
@@ -78,7 +78,7 @@
                         <div class="row" style="margin-top:8px; margin-bottom:0px;">
                             <div class="col-md-1"><h5>Gender:</h5></div>
                             <div class="col-md-3">
-                                <select class="form-control disable_View_readonly View_readonly" ng-model="Gender" name="Gender" ng-required="true" ng-change="changedValueGetGender(Gender)" data-ng-options="gender as gender.Gender for gender in Genders">
+                                <select class="form-control disable_View_readonly View_readonly" ng-model="Gender" name="Gender" ng-required="true" ng-change="changedValueGetGender(Gender)" data-ng-options="gender as gender.Gender for gender in Genders | orderBy:'Gender'">
                                     <option value="">{{Gender}}</option>
                                 </select>
                             </div>
@@ -98,7 +98,7 @@
                             <div class="col-md-1"></div>
                             <div class="col-md-3">
                                 <small ng-show="Form.Suburb.$invalid && Form.Suburb.$touched && Form.Suburb.$error.required">Required field.<br></small>
-                                <small ng-show="Form.Suburb.$invalid && Form.Suburb.$touched && Form.Suburb.$error.pattern">nly alphabetic letters allowed and atleast 3 charactors long.</small>
+                                <small ng-show="Form.Suburb.$invalid && Form.Suburb.$touched && Form.Suburb.$error.pattern">Only alphabetic letters allowed and atleast 3 charactors long.</small>
                             </div>
                         </div>
                         <div class="row" style="margin-top:8px; margin-bottom:15px; padding-bottom:15px; border-bottom: 1px solid #ddd;">
@@ -123,7 +123,7 @@
                         <div class="row col-md-12" style="margin-top:6px; margin-bottom:10px;"><label class="caption-subject font-green-steel uppercase bold">Insurance Information</label></div>
                         <div class="row" style="margin-top:8px; margin-bottom:0px;">
                             <div class="col-md-1"><h5>Medical Aid Provider:</h5></div>
-                            <div class="col-md-3"><select class="form-control disable_View_readonly View_readonly" ng-model="Medical_Aid_Name" name="Medical_Aid_Name" ng-required="true" ng-change="changedValueMedical_AidID(Medical_Aid_Name)" data-ng-options="medical_Aid as medical_Aid.Name for medical_Aid in Medical_Aid">
+                            <div class="col-md-3"><select class="form-control disable_View_readonly View_readonly" ng-model="Medical_Aid_Name" name="Medical_Aid_Name" ng-required="true" ng-change="changedValueMedical_AidID(Medical_Aid_Name)" data-ng-options="medical_Aid as medical_Aid.Name for medical_Aid in Medical_Aid | orderBy:'Name'">
                                                         <option value="">{{Medical_Aid_Name}}</option>
                                                     </select>
                             </div>
