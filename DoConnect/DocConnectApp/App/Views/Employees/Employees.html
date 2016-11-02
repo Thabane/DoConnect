@@ -19,36 +19,37 @@
                 </div>
             </div>
 
-            <table class="table table-hover">
-                <thead style="background-color: #f8f8f8;">
-                    <tr>
-                        <th style="width: 15%;" ng-click="sort('FirstName')">First Name<span class="fa sort-icon" ng-show="sortKey=='FirstName'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
-                        <th style="width: 15%;" ng-click="sort('LastName')">Last Name<span class="fa sort-icon" ng-show="sortKey=='LastName'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
-                        <th style="width: 20%;" ng-click="sort('Email')">Email Address<span class="fa sort-icon" ng-show="sortKey=='Email'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
-                        <th style="width: 20%;" ng-click="sort('ID_Number')">ID Number<span class="fa sort-icon" ng-show="sortKey=='ID_Number'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
-                        <th style="width: 15%;" ng-click="sort('Employee_Type')">Employee Type<span class="fa sort-icon" ng-show="sortKey=='Employee_Type'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
-                        <th style="width: 15%;">Action
-                    </tr>
-                </thead>
-                <tbody>                    
-                    <tr ng-show="Employees.length > 0" dir-paginate="Employee in Employees | filter:search | orderBy:sortKey:reverse | itemsPerPage:7">                        
-                        <td>{{Employee.FirstName}}</td>
-                        <td>{{Employee.LastName}}</td>
-                        <td>{{Employee.Email}}</td>
-                        <td>{{Employee.ID_Number}}</td>
-                        <td>{{Employee.Employee_Type}}</td>
-                        <td>
-                            <button class="btn btn-primary btn-xs" ng-click="ViewEmployee(Employee.ID)" onclick="ViewEmployee()"><i class="glyphicon glyphicon-new-window"></i></button>
-                            <button class="btn btn-danger btn-xs" ng-click="DeleteEmployee1(Employee.User_ID, Employee.FirstName +' '+ Employee.LastName)"><i class="fa fa-trash-o"></i></button>
-                        </td>
-                    </tr>
-                    <tr class="row alert alert-info text-center" ng-show="Employees.length == 0"><td colspan="4"><b>System Message!</b> No employee records to display.</td></tr>
-                </tbody>
-            </table>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <dir-pagination-controls class="pull-right" max-size="5" direction-links="true" boundary-links="true" style="margin-right: 20px;"></dir-pagination-controls>
+            <div class="table-responsive table-bordered">
+                <table class="table table-hover">
+                    <thead style="background-color: #f8f8f8;">
+                        <tr>
+                            <th ng-click="sort('FirstName')">First Name<span class="fa sort-icon" ng-show="sortKey=='FirstName'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                            <th ng-click="sort('LastName')">Last Name<span class="fa sort-icon" ng-show="sortKey=='LastName'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                            <th ng-click="sort('Email')">Email Address<span class="fa sort-icon" ng-show="sortKey=='Email'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                            <th ng-click="sort('ID_Number')">ID Number<span class="fa sort-icon" ng-show="sortKey=='ID_Number'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                            <th ng-click="sort('Employee_Type')">Employee Type<span class="fa sort-icon" ng-show="sortKey=='Employee_Type'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                            <th>Action
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-show="Employees.length > 0" dir-paginate="Employee in Employees | filter:search | orderBy:sortKey:reverse | itemsPerPage:7">
+                            <td>{{Employee.FirstName}}</td>
+                            <td>{{Employee.LastName}}</td>
+                            <td>{{Employee.Email}}</td>
+                            <td>{{Employee.ID_Number}}</td>
+                            <td>{{Employee.Employee_Type}}</td>
+                            <td>
+                                <button class="btn btn-primary btn-xs" ng-click="ViewEmployee(Employee.ID)" onclick="ViewEmployee()"><i class="glyphicon glyphicon-new-window"></i></button>
+                                <button class="btn btn-danger btn-xs" ng-click="DeleteEmployee1(Employee.User_ID, Employee.FirstName +' '+ Employee.LastName)"><i class="fa fa-trash-o"></i></button>
+                            </td>
+                        </tr>
+                        <tr class="row alert alert-info text-center" ng-show="Employees.length == 0"><td colspan="4"><b>System Message!</b> No employee records to display.</td></tr>
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-md-12">
+                        <dir-pagination-controls class="pull-right" max-size="5" direction-links="true" boundary-links="true" style="margin-right: 20px;"></dir-pagination-controls>
+                    </div>
                 </div>
             </div>
         </div>
@@ -175,7 +176,7 @@
                                 </div>
                             </div>
                             <div class="row" style="margin-top:4px; margin-bottom:0px;">
-                                <div class="col-md-2"><h5>Practice Name:<span style="color:red">*</span></h5></div>
+                                <div class="col-md-2"><h5>Practice Name:</h5></div>
                                 <div class="col-md-4"><select class="form-control disable_ViewEmployee readonly_ViewEmployee" ng-model="Practice_ID" name="Practice_ID" ng-required="true" ng-change="changedValueGetPractice_ID(Practice_ID)" data-ng-options="practice as practice.Name for practice in Practices | orderBy:'Name'">
                                                             <option value="">{{Practice_Name}}</option>
                                                         </select></div>

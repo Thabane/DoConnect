@@ -24,36 +24,39 @@
 
             <!--Message list (Inbox Table) -->
             <div id="div_Message_list" class="col-md-10">
-                <table class="table table-hover">
-                    <thead style="background-color: #f8f8f8;">
-                        <tr>
-                            <th style="width: 15%;" ng-click="sort('SenderEmail')">From<span class="fa sort-icon" ng-show="sortKey=='SenderEmail'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
-                            <th style="width: 15%;" ng-click="sort('Subject')">Subject<span class="fa sort-icon" ng-show="sortKey=='Subject'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
-                            <th style="width: 45%;" ng-click="sort('Description')">Message<span class="fa sort-icon" ng-show="sortKey=='Description'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
-                            <th style="width: 15%;" ng-click="sort('Date')">Date<span class="fa sort-icon" ng-show="sortKey=='Date'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
-                            <th style="width: 10%;">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr dir-paginate="Message in Messages | filter:search | orderBy:sortKey:reverse | itemsPerPage:8" ng-class="{'info': Message.ReadStatus == '1'}">
-                            <td>{{Message.SenderEmail}}</td>
-                            <td>{{Message.Subject}}</td>
-                            <td>{{Message.Description}}</td>
-                            <td>{{Message.Date}}</td>
-                            <td>
-                                <button class="btn btn-primary btn-xs" ng-click="ViewInboxMessage(Message.ID)" onclick="ViewInboxMessage()"><i class="glyphicon glyphicon-new-window"></i></button>
-                                <button class="btn btn-danger btn-xs" ng-click="DeleteMessage1(Message.ID)"><i class="fa fa-trash-o"></i></button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="row">
-                    <div class="col-md-12">
-                        <dir-pagination-controls class="pull-right" max-size="5" direction-links="true" boundary-links="true" style="margin-right: 20px;"></dir-pagination-controls>
-                    </div>
+                <div class="panel panel-default">
+                    <div class="table-responsive table-bordered">
+                        <table class="table table-hover">
+                            <thead style="background-color: #f8f8f8;">
+                                <tr>
+                                    <th ng-click="sort('SenderEmail')">From<span class="fa sort-icon" ng-show="sortKey=='SenderEmail'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                                    <th ng-click="sort('Subject')">Subject<span class="fa sort-icon" ng-show="sortKey=='Subject'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                                    <th ng-click="sort('Description')">Message<span class="fa sort-icon" ng-show="sortKey=='Description'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                                    <th class="col-md-2" ng-click="sort('Date')">Date<span class="fa sort-icon" ng-show="sortKey=='Date'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr dir-paginate="Message in Messages | filter:search | orderBy:sortKey:reverse | itemsPerPage:8" ng-class="{'info': Message.ReadStatus == '1'}">
+                                    <td>{{Message.SenderEmail}}</td>
+                                    <td>{{Message.Subject}}</td>
+                                    <td>{{Message.Description}}</td>
+                                    <td>{{Message.Date}}</td>
+                                    <td>
+                                        <button class="btn btn-primary btn-xs" ng-click="ViewInboxMessage(Message.ID)" onclick="ViewInboxMessage()"><i class="glyphicon glyphicon-new-window"></i></button>
+                                        <button class="btn btn-danger btn-xs" ng-click="DeleteMessage1(Message.ID)"><i class="fa fa-trash-o"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <dir-pagination-controls class="pull-right" max-size="5" direction-links="true" boundary-links="true" style="margin-right: 20px;"></dir-pagination-controls>
+                            </div>
+                        </div>
+                    </div><!--Message list (Inbox Table) Ends -->
                 </div>
-            </div><!--Message list (Inbox Table) Ends -->
-
+            </div> 
             <!--Compose message div begins-->
             <div id="div_Compose_Message" class="col-md-10">
                 <div class="panel panel-default col-sm-10" style="padding-right:20px; border:0px;">
@@ -148,36 +151,39 @@
         
         <!--Sent Modal-->
         <div id="div_Sent_list" class="col-md-10">
-            <table class="table table-hover">
-                <thead style="background-color: #f8f8f8;">
-                    <tr>
-                        <th style="width: 15%;" ng-click="sort('ReceiverEmail')">Recipient<span class="fa sort-icon" ng-show="sortKey=='ReceiverEmail'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
-                        <th style="width: 15%;" ng-click="sort('Subject')">Subject<span class="fa sort-icon" ng-show="sortKey=='Subject'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
-                        <th style="width: 45%;" ng-click="sort('Description')">Message<span class="fa sort-icon" ng-show="sortKey=='Description'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
-                        <th style="width: 15%;" ng-click="sort('Date')">Date<span class="fa sort-icon" ng-show="sortKey=='Date'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
-                        <th style="width: 10%;">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr dir-paginate="SentMessage in SentMessages | filter:search | orderBy:sortKey:reverse | itemsPerPage:8">
-                        <td>{{SentMessage.ReceiverEmail}}</td>
-                        <td>{{SentMessage.Subject}}</td>
-                        <td>{{SentMessage.Description}}</td>
-                        <td>{{SentMessage.Date}}</td>
-                        <td>
-                            <button class="btn btn-primary btn-xs" ng-click="ViewSentMessage(SentMessage.ID)" onclick="ViewSentMessage()"><i class="glyphicon glyphicon-new-window"></i></button>
-                            <button class="btn btn-danger btn-xs" ng-click="DeleteMessage1(SentMessage.ID)"><i class="fa fa-trash-o"></i></button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="row">
-                <div class="col-md-12">
-                    <dir-pagination-controls class="pull-right" max-size="5" direction-links="true" boundary-links="true" style="margin-right: 20px;"></dir-pagination-controls>
-                </div>
+            <div class="panel panel-default">
+                <div class="table-responsive table-bordered">
+                    <table class="table table-hover">
+                        <thead style="background-color: #f8f8f8;">
+                            <tr>
+                                <th ng-click="sort('ReceiverEmail')">Recipient<span class="fa sort-icon" ng-show="sortKey=='ReceiverEmail'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                                <th ng-click="sort('Subject')">Subject<span class="fa sort-icon" ng-show="sortKey=='Subject'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                                <th ng-click="sort('Description')">Message<span class="fa sort-icon" ng-show="sortKey=='Description'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                                <th ng-click="sort('Date')">Date<span class="fa sort-icon" ng-show="sortKey=='Date'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr dir-paginate="SentMessage in SentMessages | filter:search | orderBy:sortKey:reverse | itemsPerPage:8">
+                                <td>{{SentMessage.ReceiverEmail}}</td>
+                                <td>{{SentMessage.Subject}}</td>
+                                <td>{{SentMessage.Description}}</td>
+                                <td>{{SentMessage.Date}}</td>
+                                <td>
+                                    <button class="btn btn-primary btn-xs" ng-click="ViewSentMessage(SentMessage.ID)" onclick="ViewSentMessage()"><i class="glyphicon glyphicon-new-window"></i></button>
+                                    <button class="btn btn-danger btn-xs" ng-click="DeleteMessage1(SentMessage.ID)"><i class="fa fa-trash-o"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <dir-pagination-controls class="pull-right" max-size="5" direction-links="true" boundary-links="true" style="margin-right: 20px;"></dir-pagination-controls>
+                        </div>
+                    </div>
+                </div><!--Sent Modal Ends  -->
             </div>
-        </div><!--Sent Modal Ends  -->
-
+        </div>
         <!--ViewSentMessage Modal-->
         <div id="ViewSentMessage" class="modal fade">
             <form>

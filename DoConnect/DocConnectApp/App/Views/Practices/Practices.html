@@ -14,40 +14,42 @@
         <div class="panel panel-default">
             <div class="row" style="margin-top: 10px; margin-right: 10px;">
                 <div class="col-md-4"></div><div class="col-md-4"><h5 class="pull-right">Search:</h5></div>
-                <div class="form-group col-md-4">                    
+                <div class="form-group col-md-4">
                     <input class="form-control" type="text" style="font-size:13px;" ng-model="search">
                 </div>
             </div>
 
-            <table class="table table-hover">
-                <thead style="background-color: #f8f8f8;">
-                    <tr>
-                        <th style="width: 15%;" ng-click="sort('Name')">Name<span class="fa sort-icon" ng-show="sortKey=='Name'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
-                        <th style="width: 15%;" ng-click="sort('Phone_Number')">Phone Number<span class="fa sort-icon" ng-show="sortKey=='Phone_Number'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
-                        <th style="width: 15%;" ng-click="sort('Fax_Number')">Fax Number<span class="fa sort-icon" ng-show="sortKey=='Fax_Number'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
-                        <th style="width: 20%;" ng-click="sort('Street_Address')">Physical Address<span class="fa sort-icon" ng-show="sortKey=='Street_Address'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
-                        <th style="width: 20%;" ng-click="sort('Trading_Times')">Trading Times<span class="fa sort-icon" ng-show="sortKey=='Trading_Times'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
-                        <th style="width: 10%;">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-show="Practices.length > 0" dir-paginate="Practice in Practices | filter:search | orderBy:sortKey:reverse | itemsPerPage:5">
-                        <td>{{Practice.Name}}</td>
-                        <td>{{Practice.Phone_Number}}</td>
-                        <td>{{Practice.Fax_Number}}</td>
-                        <td>{{Practice.Street_Address}} {{Practice.Suburb}} {{Practice.City}} {{Practice.Country}}</td>
-                        <td>{{Practice.Trading_Times}}</td>
-                        <td>
-                            <button class="btn btn-primary btn-xs" ng-click="ViewPractice(Practice.ID)" onclick="ViewPractice()"><i class="glyphicon glyphicon-new-window"></i></button>
-                            <button class="btn btn-danger btn-xs doctorControls" ng-click="DeletePractice1(Practice.ID, Practice.Name)"><i class="fa fa-trash-o"></i></button>
-                        </td>
-                    </tr>
-                    <tr class="row alert alert-info text-center" ng-show="Practices.length == 0"><td colspan="4"><b>System Message!</b> No practice records to display.</td></tr>
-                </tbody>
-            </table>
-            <div class="row">
-                <div class="col-md-12">
-                    <dir-pagination-controls class="pull-right" max-size="5" direction-links="true" boundary-links="true" style="margin-right: 20px;"></dir-pagination-controls>
+            <div class="table-responsive table-bordered">
+                <table class="table table-hover">
+                    <thead style="background-color: #f8f8f8;">
+                        <tr>
+                            <th ng-click="sort('Name')">Name<span class="fa sort-icon" ng-show="sortKey=='Name'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                            <th ng-click="sort('Phone_Number')">Phone Number<span class="fa sort-icon" ng-show="sortKey=='Phone_Number'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                            <th ng-click="sort('Fax_Number')">Fax Number<span class="fa sort-icon" ng-show="sortKey=='Fax_Number'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                            <th ng-click="sort('Street_Address')">Physical Address<span class="fa sort-icon" ng-show="sortKey=='Street_Address'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                            <th ng-click="sort('Trading_Times')">Trading Times<span class="fa sort-icon" ng-show="sortKey=='Trading_Times'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-show="Practices.length > 0" dir-paginate="Practice in Practices | filter:search | orderBy:sortKey:reverse | itemsPerPage:5">
+                            <td>{{Practice.Name}}</td>
+                            <td>{{Practice.Phone_Number}}</td>
+                            <td>{{Practice.Fax_Number}}</td>
+                            <td>{{Practice.Street_Address}} {{Practice.Suburb}} {{Practice.City}} {{Practice.Country}}</td>
+                            <td>{{Practice.Trading_Times}}</td>
+                            <td>
+                                <button class="btn btn-primary btn-xs" ng-click="ViewPractice(Practice.ID)" onclick="ViewPractice()"><i class="glyphicon glyphicon-new-window"></i></button>
+                                <button class="btn btn-danger btn-xs doctorControls" ng-click="DeletePractice1(Practice.ID, Practice.Name)"><i class="fa fa-trash-o"></i></button>
+                            </td>
+                        </tr>
+                        <tr class="row alert alert-info text-center" ng-show="Practices.length == 0"><td colspan="4"><b>System Message!</b> No practice records to display.</td></tr>
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-md-12">
+                        <dir-pagination-controls class="pull-right" max-size="5" direction-links="true" boundary-links="true" style="margin-right: 20px;"></dir-pagination-controls>
+                    </div>
                 </div>
             </div>
         </div>

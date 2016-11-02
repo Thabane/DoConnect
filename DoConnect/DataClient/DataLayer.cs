@@ -1263,6 +1263,31 @@ namespace DataClient
             return patientInfo;
         }
 
+        public List<GetAllPatients> GetAllPatientsByPracticeID(int PracticeID)
+        {
+            _parameters = new List<SqlParameter>();
+            SqlParameter PracticeIDParameter = new SqlParameter("@PracticeID", SqlDbType.Int);
+            PracticeIDParameter.Value = PracticeID;
+            _parameters.Add(PracticeIDParameter);
+            List<GetAllPatients> patientInfo = new List<GetAllPatients>();
+            try
+            {
+                using (var reader = access.ExecuteReader(Conn, "[GetAllPatientsByPracticeID]", _parameters))
+                {
+                    while (reader.Read())
+                    {
+                        patientInfo.Add(new GetAllPatients().Create(reader));
+                    }
+                }
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Viewed patients page");
+            }
+            catch (Exception)
+            {
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to view patients list: " + ex.ToString());
+            }
+            return patientInfo;
+        }
+
         public List<Patient> GetPatientByID(int id)
         {
             List<SqlParameter> _parameters = new List<SqlParameter>();

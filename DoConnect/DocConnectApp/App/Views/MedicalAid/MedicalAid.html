@@ -19,33 +19,34 @@
                 </div>
             </div>
 
-            <table class="table table-hover">
-                <thead style="background-color: #f8f8f8;">
-                    <tr>
-                        <th style="width: 30%;" ng-click="sort('Name')">Provider Name<span class="fa sort-icon" ng-show="sortKey=='Name'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
-                        <th style="width: 15%;" ng-click="sort('Cell_Number')">Phone Number<span class="fa sort-icon" ng-show="sortKey=='Cell_Number'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
-                        <th style="width: 15%;" ng-click="sort('Fax_Number')">Fax Number<span class="fa sort-icon" ng-show="sortKey=='Fax_Number'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
-                        <th style="width: 25%;" ng-click="sort('Email_Address')">Email Address<span class="fa sort-icon" ng-show="sortKey=='Email_Address'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
-                        <th style="width: 15%;" >Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr dir-paginate="MedicalAid in MedicalAids | filter:search | orderBy:sortKey:reverse | itemsPerPage:7">                        
-                        <td>{{MedicalAid.Name}}</td>
-                        <td>{{MedicalAid.Cell_Number}}</td>
-                        <td>{{MedicalAid.Fax_Number}}</td>
-                        <td>{{MedicalAid.Email_Address}}</td>                        
-                        <td>
-                            <button class="btn btn-primary btn-xs" ng-click="ViewMedicalAid(MedicalAid.ID)" onclick="ViewMedicalAid()"><i class="glyphicon glyphicon-new-window"></i></button>
-                            <button class="btn btn-danger btn-xs" ng-click="DeleteMedicalAid1(MedicalAid.ID, MedicalAid.Name)"><i class="fa fa-trash-o"></i></button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <dir-pagination-controls class="pull-right" max-size="5" direction-links="true" boundary-links="true" style="margin-right: 20px;"></dir-pagination-controls>
+            <div class="table-responsive table-bordered">
+                <table class="table table-hover">
+                    <thead style="background-color: #f8f8f8;">
+                        <tr>
+                            <th ng-click="sort('Name')">Provider Name<span class="fa sort-icon" ng-show="sortKey=='Name'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                            <th ng-click="sort('Cell_Number')">Phone Number<span class="fa sort-icon" ng-show="sortKey=='Cell_Number'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                            <th ng-click="sort('Fax_Number')">Fax Number<span class="fa sort-icon" ng-show="sortKey=='Fax_Number'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                            <th ng-click="sort('Email_Address')">Email Address<span class="fa sort-icon" ng-show="sortKey=='Email_Address'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr dir-paginate="MedicalAid in MedicalAids | filter:search | orderBy:sortKey:reverse | itemsPerPage:7">
+                            <td>{{MedicalAid.Name}}</td>
+                            <td>{{MedicalAid.Cell_Number}}</td>
+                            <td>{{MedicalAid.Fax_Number}}</td>
+                            <td>{{MedicalAid.Email_Address}}</td>
+                            <td>
+                                <button class="btn btn-primary btn-xs" ng-click="ViewMedicalAid(MedicalAid.ID)" onclick="ViewMedicalAid()"><i class="glyphicon glyphicon-new-window"></i></button>
+                                <button class="btn btn-danger btn-xs" ng-click="DeleteMedicalAid1(MedicalAid.ID, MedicalAid.Name)"><i class="fa fa-trash-o"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-md-12">
+                        <dir-pagination-controls class="pull-right" max-size="5" direction-links="true" boundary-links="true" style="margin-right: 20px;"></dir-pagination-controls>
+                    </div>
                 </div>
             </div>
         </div>

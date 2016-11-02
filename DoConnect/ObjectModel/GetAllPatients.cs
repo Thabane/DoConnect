@@ -18,6 +18,7 @@ namespace ObjectModel
         public string Email { get; set; }
         public int Medical_Aid_ID { get; set; }
         public string PatientFullName { get; set; }
+        public string RegistrationDate { get; set; }
 
         public GetAllPatients Create(SqlDataReader reader)
         {
@@ -32,6 +33,7 @@ namespace ObjectModel
                 Email = reader.GetString(reader.GetOrdinal("Email")),
                 Medical_Aid_ID = reader.GetInt32(reader.GetOrdinal("Medical_Aid_ID")),
                 PatientFullName = reader.GetString(reader.GetOrdinal("PatientFullName")),
+                RegistrationDate = reader.GetString(reader.GetOrdinal("RegistrationDate")),
             };
         }
     }

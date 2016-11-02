@@ -237,6 +237,7 @@
     <Content Include="Scripts\Alert_Confirm_Prompt_Modal\Alert_Confirm_Prompt_Modal.js" />
     <Content Include="Scripts\Alert_Confirm_Prompt_Modal\bootbox.js" />
     <Content Include="Scripts\Alert_Confirm_Prompt_Modal\ngBootbox.js" />
+    <Content Include="Scripts\Alert_Confirm_Prompt_Modal\RSS Feed\fw-loader.js" />
     <Content Include="Scripts\angular-chart\loader.js" />
     <Content Include="Scripts\angular-cookies.min.js" />
     <Content Include="Scripts\angular-location-update.min.js" />
