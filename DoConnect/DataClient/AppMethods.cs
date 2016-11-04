@@ -35,9 +35,10 @@ namespace DataClient
                 if (reader.Read())
                 {
                     patientInfo = new Patient(reader);
+                    return JsonConvert.SerializeObject(patientInfo);
                 }
             }
-            return JsonConvert.SerializeObject(patientInfo);            
+            return null;
         }
     }
 }

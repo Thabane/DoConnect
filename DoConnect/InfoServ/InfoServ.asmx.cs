@@ -26,10 +26,10 @@ namespace InfoServ
     {
         [WebMethod]
         public void GetPatientProfile(int id)
-        {                     
-            AppMethods am = new AppMethods();
-            string patient = am.GetPatientByID(id);        
-            HttpContext.Current.Response.Write($"{patient}");
+        {
+                AppMethods am = new AppMethods();
+                string patient = am.GetPatientByID(id);
+                HttpContext.Current.Response.Write($"{patient}");        
         }
     }
 }
