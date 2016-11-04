@@ -44,7 +44,7 @@ namespace DoConnectTesting
         public void When_entering_correct_values()
         {
             DataMan access = new DataMan();
-            Assert.IsTrue(access.Login("Bongani!", "12345"), "Incorrect values entered.");
+            Assert.IsTrue(access.Login("Bongani", "12345"), "Incorrect values entered.");
         }
         
     }
