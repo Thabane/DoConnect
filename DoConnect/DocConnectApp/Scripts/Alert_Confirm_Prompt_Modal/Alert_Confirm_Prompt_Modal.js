@@ -285,7 +285,11 @@ function AppointmentsModal() {
     $("#AppointmentsModal").modal("show");
 };
 
-//User Profile
+//Reports
+function View_Patients_Demographic_Graph_Modal() {
+    $("#View_Patients_Demographic_Graph_Modal").modal("show");
+};
+
 
 
 

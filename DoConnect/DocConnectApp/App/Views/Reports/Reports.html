@@ -7,22 +7,24 @@
         </div>
 
         <ul class="nav nav-tabs">
-            <li role="presentation" class="active"><a href="/Practices"><i class="fa fa-align-justify"></i>Practice List</a></li>
-            <li role="presentation"><a href="/NewPractice"><i class="fa fa-plus-circle"></i>New Practice</a></li>
-        </ul>
-        
+            <li role="presentation" class="active"><a href="/Reports"><i class="fa fa-file-text-o"></i> Patients Report</a></li>
+            <li role="presentation"><a href="/Financial_Report"><i class="fa fa-plus-circle"></i> Financial Report</a></li>
+        </ul>        
 
         <div class="col-lg-12"> 
             <div class="panel panel-default"> 
-                <div class="panel-heading"> Patients report </div>
+                <div class="panel-heading"> Patients report: {{Practice_Name}}</div>
                     <div class="panel-body"> 
                         <div class="row" style="margin-top: 10px; margin-right: 10px;">
                             <div class="col-md-4">
                                 <div class="row">                                    
-                                    <div class="col-md-12">
+                                    <div class="col-md-8">
                                         <select class="form-control insert" ng-model="Name" name="Name" ng-required="true" ng-change="changedValueGetPractice_ID(Name)" data-ng-options="practices as practices.Name for practices in Practices | orderBy:'Name'">
                                             <option value="">Select practice name</option>
                                         </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button type="button" class="btn btn-info" onclick="View_Patients_Demographic_Graph_Modal()"><i class="fa fa-pie-chart"></i> Chart</button>
                                     </div>
                                 </div>
                             </div>
@@ -43,14 +45,17 @@
                                         <th ng-click="sort('RegistrationDate')">Registration Date<span ng-show="sortKey=='RegistrationDate'" class="fa sort-icon" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
                                     </tr>
                                 </thead>
-                                <tbody> 
-                                    <tr ng-show="Patients.length > 0" dir-paginate="Patient in Patients | filter:search | orderBy:sortKey:reverse | itemsPerPage:100"> 
+                                <tbody ng-show="Patients.length > 0" dir-paginate="Patient in Patients | filter:search | orderBy:sortKey:reverse | itemsPerPage:100"> 
+                                    <tr> 
                                         <td>{{Patient.FirstName}}</td>
                                         <td>{{Patient.LastName}}</td>
                                         <td>{{Patient.Email}}</td>
                                         <td>{{Patient.Cell_Number}}</td>  
                                         <td>{{Patient.RegistrationDate}}</td> 
                                     </tr>
+                                    <tr class="row alert alert-info" ng-show="Patients.length > 0 && Patient.PrintSummary == 'true'"><td colspan="4"><b>Number of Patients = </b>{{Patient.num_TotalPatientsPerGroup}}</td></tr>
+                                    <tr class="row alert alert-info" ng-show="Patients.length > 0 && Patient.PrintSummary == 'Groupfooter'"><td colspan="4"><b>Number of Patients = </b>{{Patient.num_TotalPatientsPerGroup}}</td></tr>
+                                    <tr class="row alert alert-info" ng-show="Patients.length > 0 && Patient.PrintSummary == 'footer'"><td colspan="4"><b>Number of Patients = </b>{{Patient.num_TotalPatients}}</td></tr>
                                     <tr class="row alert alert-info text-center" ng-show="Patients.length == 0"><td colspan="4"><b>System Message!</b> No patients records to display.</td></tr>
                                 </tbody>
                             </table> 
@@ -64,7 +69,49 @@
             </div>
         </div>
 
-            
+        <!--View Patients Demographic Graph Modal-->
+        <div id="View_Patients_Demographic_Graph_Modal" class="modal fade">
+            <form name="Form" novalidate>
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title text-primary">Registered Patients Demographics: {{Practice_Name}}</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="portlet light" style="border: 1px solid #ddd; border-radius: 4px; height: auto; width: auto">
+                                    <div class="portlet-title">
+                                        <div class="caption caption-md">
+                                            <i class="icon-bar-chart font-dark hide"></i>
+                                            <span class="caption-subject font-green-steel uppercase bold">Patients Gender Stats</span>
+                                        </div>
+                                    </div>
+                                    <div class="portlet-body">
+                                        <div id="donutchart_Gender" style="width: 500px; height:300px; margin: auto"></div> 
+                                        <div ng-show="num_Male > 0 || num_Female > 0"><p><h5><b>Suggestion</b>: Implement marketing strategies directed to the {{Suggestion}} population. </h5></p></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="portlet light" style="border: 1px solid #ddd; border-radius: 4px; height: auto; width: auto">
+                                    <div class="portlet-title">
+                                        <div class="caption caption-md">
+                                            <i class="icon-bar-chart font-dark hide"></i>
+                                            <span class="caption-subject font-green-steel uppercase bold">Patients Age Stats</span>
+                                        </div>
+                                    </div>
+                                    <div class="portlet-body">
+                                        <div id="donutchart_Age" style="width: 500px; height: 300px;"></div>
+                                    </div>
+                                </div>
+                            </div>                            
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div><!--View Patients Demographic Graph Modal-->       
 
     </div>
 </div>
