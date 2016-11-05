@@ -33,6 +33,17 @@ namespace ObjectModel
         public int TotalNumOfVisits { get; set; }
         public int TotalPatientsCount { get; set; }
         public string Month { get; set; }
+
+        public string PatientFullName   { get; set; }
+        public string Email             { get; set; }
+        public string Gender            { get; set; }
+        public string DOB               { get; set; }
+        public string Date              { get; set; }
+        public string Diagnosis         { get; set; }
+        public decimal Total             { get; set; }
+        public decimal AmountPaid        { get; set; }
+        public decimal BalanceOwing { get; set; }
+
         public Consultation Create(SqlDataReader reader)
         {
             return new Consultation
@@ -68,6 +79,22 @@ namespace ObjectModel
             {
                 TotalNumOfVisits = reader.GetInt32(reader.GetOrdinal("TotalNumOfVisits")),
                 Month = reader.GetString(reader.GetOrdinal("Month"))
+            };
+        }
+
+        public Consultation FinancialReportByPracticeID(SqlDataReader reader)
+        {
+            return new Consultation
+            {
+                PatientFullName  = reader.GetString(reader.GetOrdinal("PatientFullName")),
+                Email            = reader.GetString(reader.GetOrdinal("Email")),
+                Gender           = reader.GetString(reader.GetOrdinal("Gender")),
+                DOB              = reader.GetString(reader.GetOrdinal("DOB")),
+                Date             = reader.GetString(reader.GetOrdinal("Date")),
+                Diagnosis        = reader.GetString(reader.GetOrdinal("Diagnosis")),
+                Total            = reader.GetDecimal(reader.GetOrdinal("Total")),
+                AmountPaid       = reader.GetDecimal(reader.GetOrdinal("AmountPaid")),
+                BalanceOwing     = reader.GetDecimal(reader.GetOrdinal("BalanceOwing")),
             };
         }
     }

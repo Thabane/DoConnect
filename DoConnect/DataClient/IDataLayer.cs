@@ -163,5 +163,10 @@ namespace DataClient
         #region LogFile
         List<Log> ReadLogFile();
         #endregion
+
+        #region
+        List<Consultation> FinancialReportByPracticeID(int Practice_ID, string StartDate, string EndDate);
+        List<Consultation> FinancialReport_All(string StartDate, string EndDate);
+        #endregion
     }
 }

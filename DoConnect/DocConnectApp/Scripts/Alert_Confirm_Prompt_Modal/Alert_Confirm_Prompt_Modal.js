@@ -290,6 +290,10 @@ function View_Patients_Demographic_Graph_Modal() {
     $("#View_Patients_Demographic_Graph_Modal").modal("show");
 };
 
+function View_Financial_Modal() {
+    $("#View_Financial_Modal").modal("show");
+};
+
 
 
 

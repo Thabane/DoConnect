@@ -19,5 +19,21 @@ namespace DocConnectApp.Controllers
             return dtLayer.GetAllPatientsByPracticeID(ID);
         }
 
+        [HttpGet]
+        [Route("api/Reports/FinancialReport_All/{StartDate}/{EndDate}")]
+        public List<Consultation> FinancialReport_All(string StartDate, string EndDate)
+        {
+            DataLayer dtLayer = new DataLayer();
+            return dtLayer.FinancialReport_All(StartDate, EndDate);
+        }
+
+        [HttpGet]
+        [Route("api/Reports/FinancialReportByPracticeID/{Practice_ID}/{StartDate}/{EndDate}")]
+        public List<Consultation> FinancialReportByPracticeID(int Practice_ID, string StartDate, string EndDate)
+        {
+            DataLayer dtLayer = new DataLayer();
+            return dtLayer.FinancialReportByPracticeID(Practice_ID, StartDate, EndDate);
+        }
+
     }
 }

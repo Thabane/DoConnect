@@ -115,9 +115,6 @@
                     btnAlert("System Error Message", "Insert unsuccessful.");
                 });
             }
-
-
-            
         };
 
         $scope.function_btnUpdateEmployee = function () {

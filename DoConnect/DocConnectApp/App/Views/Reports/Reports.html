@@ -71,47 +71,41 @@
 
         <!--View Patients Demographic Graph Modal-->
         <div id="View_Patients_Demographic_Graph_Modal" class="modal fade">
-            <form name="Form" novalidate>
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title text-primary">Registered Patients Demographics: {{Practice_Name}}</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="portlet light" style="border: 1px solid #ddd; border-radius: 4px; height: auto; width: auto">
-                                    <div class="portlet-title">
-                                        <div class="caption caption-md">
-                                            <i class="icon-bar-chart font-dark hide"></i>
-                                            <span class="caption-subject font-green-steel uppercase bold">Patients Gender Stats</span>
-                                        </div>
-                                    </div>
-                                    <div class="portlet-body">
-                                        <div id="donutchart_Gender" style="width: 500px; height:300px; margin: auto"></div> 
-                                        <div ng-show="num_Male > 0 || num_Female > 0"><p><h5><b>Suggestion</b>: Implement marketing strategies directed to the {{Suggestion}} population. </h5></p></div>
-                                    </div>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title text-primary">Registered Patients Demographics: {{Practice_Name}}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="portlet light" style="border: 1px solid #ddd; border-radius: 4px; height: auto; width: auto">
+                            <div class="portlet-title">
+                                <div class="caption caption-md">
+                                    <i class="icon-bar-chart font-dark hide"></i>
+                                    <span class="caption-subject font-green-steel uppercase bold">Patients Gender Stats</span>
                                 </div>
                             </div>
-
-                            <div class="row">
-                                <div class="portlet light" style="border: 1px solid #ddd; border-radius: 4px; height: auto; width: auto">
-                                    <div class="portlet-title">
-                                        <div class="caption caption-md">
-                                            <i class="icon-bar-chart font-dark hide"></i>
-                                            <span class="caption-subject font-green-steel uppercase bold">Patients Age Stats</span>
-                                        </div>
-                                    </div>
-                                    <div class="portlet-body">
-                                        <div id="donutchart_Age" style="width: 500px; height: 300px;"></div>
-                                    </div>
-                                </div>
-                            </div>                            
+                            <div class="portlet-body">
+                                <div ng-show="num_Male > 0 || num_Female > 0"><p><h5>{{num_Male + num_Female}} consulatations were conducted at {{Finance_Practice_Name}} over the selected period of time.</h5></p></div>
+                                <div id="donutchart_Gender" style="width: 500px; height:300px; margin: auto"></div> 
+                                <div ng-show="num_Male > 0 || num_Female > 0"><p><h5><b>Suggestion</b>: Implement marketing strategies directed to the {{Suggestion}} population. </h5></p></div>
+                            </div>
                         </div>
+
+                        <div class="portlet light" style="border: 1px solid #ddd; border-radius: 4px; height: auto; width: auto">
+                            <div class="portlet-title">
+                                <div class="caption caption-md">
+                                    <i class="icon-bar-chart font-dark hide"></i>
+                                    <span class="caption-subject font-green-steel uppercase bold">Patients Age Stats</span>
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <div id="donutchart_Age" style="width: 500px; height: 300px;"></div>
+                            </div>
+                        </div>                           
                     </div>
                 </div>
-            </form>
-        </div><!--View Patients Demographic Graph Modal-->       
-
+            </div>
+        </div><!--View Patients Demographic Graph Modal-->
     </div>
 </div>

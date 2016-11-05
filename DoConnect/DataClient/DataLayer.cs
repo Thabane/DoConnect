@@ -3867,5 +3867,56 @@ namespace DataClient
             return LogData;
         }
         #endregion
+
+        #region
+        public List<Consultation> FinancialReport_All(string StartDate, string EndDate)
+        {
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            SqlParameter StartDateParameter = new SqlParameter("@DateStart", SqlDbType.NVarChar);
+            SqlParameter EndDateParameter = new SqlParameter("@DateEnd", SqlDbType.NVarChar);
+            
+            StartDateParameter.Value = StartDate;
+            EndDateParameter.Value = EndDate;
+            
+            _parameters.Add(StartDateParameter);
+            _parameters.Add(EndDateParameter);
+
+            List<Consultation> FinancialInfo = new List<Consultation>();
+            using (var reader = access.ExecuteReader(Conn, "[FinancialReport_All]", _parameters))
+            {
+                while (reader.Read())
+                {
+                    FinancialInfo.Add(new Consultation().FinancialReportByPracticeID(reader));
+                }
+            }
+            return FinancialInfo;
+        }
+
+        public List<Consultation> FinancialReportByPracticeID(int Practice_ID, string StartDate, string EndDate)
+        {
+            List<SqlParameter> _parameters = new List<SqlParameter>(); 
+            SqlParameter Practice_IDParameter = new SqlParameter("@PracticeID", SqlDbType.Int);
+            SqlParameter StartDateParameter = new SqlParameter("@DateStart", SqlDbType.NVarChar);
+            SqlParameter EndDateParameter = new SqlParameter("@DateEnd", SqlDbType.NVarChar);
+
+            Practice_IDParameter.Value = Practice_ID;
+            StartDateParameter.Value = StartDate;
+            EndDateParameter.Value = EndDate;
+
+            _parameters.Add(Practice_IDParameter);
+            _parameters.Add(StartDateParameter);
+            _parameters.Add(EndDateParameter);
+
+            List<Consultation> FinancialInfo = new List<Consultation>();
+            using (var reader = access.ExecuteReader(Conn, "[FinancialReportByPracticeID]", _parameters))
+            {
+                while (reader.Read())
+                {
+                    FinancialInfo.Add(new Consultation().FinancialReportByPracticeID(reader));
+                }
+            }
+            return FinancialInfo;
+        }
+        #endregion
     }
 }
