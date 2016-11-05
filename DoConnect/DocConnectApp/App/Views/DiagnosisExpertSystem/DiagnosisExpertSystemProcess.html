@@ -5,14 +5,19 @@
         </div>
         <div class="col-lg-12" ng-if="DiagnosisResponse.question != null">
             <div class="col-lg-6">
-                <h2> Question</h2>
+                <h2>Question</h2>
+
+                <hr class="tagline-divider">
 
                 <h4>{{DiagnosisResponse.question.text}}</h4>
+
+                <hr class="tagline-divider">
 
                 <form ng-if="DiagnosisResponse.question.type == 'single'">
                     <div class="row">
                         <div ng-repeat="ans in DiagnosisResponse.question.items[0].choices">
                             <button type="button" class="btn btn-block" ng-click="AnswerQuestionSingle(DiagnosisResponse.question.items[0].id,ans.id)">{{ans.label}}</button>
+                            <hr class="tagline-divider">
                         </div>
                     </div>
                 </form>
@@ -21,23 +26,27 @@
                     <div class="form-group">
                         <div class="form-check" ng-repeat="item in DiagnosisResponse.question.items">
                             <label class="form-check-label">
-                                <input type="checkbox" ng-model="item.SELECTED" ng-true-value="1" ng-false-value="0" ng-checked="checkbox == 1"/>
+                                <input type="checkbox" ng-model="item.SELECTED" ng-true-value="1" ng-false-value="0" ng-checked="checkbox == 1" />
                                 {{item.name}}
                             </label>
                         </div>
+                        <hr class="tagline-divider">
                         <button type="button" class="btn btn-block" ng-click="AnswerQuestionGroupMutiple(DiagnosisResponse.question.items)">Answer</button>
                     </div>
                 </form>
 
                 <form ng-if="DiagnosisResponse.question.type == 'group_single'">
 
-                    <div class="row" ng-repeat="item in DiagnosisResponse.question.items">
-                        <label class="custom-control custom-radio">
-                            <input type="radio" name="radio" ng-model="$parent.radioMod" ng-value="item" class="custom-control-input">
-                            <span class="custom-control-indicator"></span>
-                            <span class="custom-control-description">{{item.name}}</span>
-                        </label>
+                    <div class="form-group text-center">
+                        <div class="row" ng-repeat="item in DiagnosisResponse.question.items">
+                            <label class="custom-control custom-radio">
+                                <input type="radio" name="radio" ng-model="$parent.radioMod" ng-value="item" class="custom-control-input">
+                                <span class="custom-control-indicator"></span>
+                                <span class="custom-control-description">{{item.name}}</span>
+                            </label>
+                        </div>
                     </div>
+                    <hr class="tagline-divider">
                     <button type="button" class="btn btn-block" ng-click="AnswerQuestionGroupSingle(radioMod)">Answer</button>
                 </form>
 

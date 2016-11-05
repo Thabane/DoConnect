@@ -2,25 +2,39 @@
     function ($scope, DiagnosisExpertSystemService, $interval, $location) {
 
         $scope.Symptoms = [];
-        $scope.Gender = "Select a Gender";
+        $scope.Gender = "";
+        $scope.GenderSelector = "Select a Gender";
 
         $scope.GetAllSymptoms = function () {
             DiagnosisExpertSystemService.getAllSymptoms().then
             (function (result) {
                 $scope.SymptomBank = result.data;
                 $scope.GetRiskFactors();
-                $scope.SetGender(3);
             });
         };
 
-        $scope.DianosePatient = function (symptoms, age, gender) {
+        $scope.DianosePatient = function (symptoms, age, gender, adv) {
 
-            var evidence = {
-                sex: gender,
-                age: age,
-                evidence: symptoms
+            var evidence;
+
+            if (adv) {
+                 evidence = {
+                    sex: gender,
+                    age: age,
+                    evidence: symptoms
+                }
+            } else {
+                evidence = {
+                    sex: gender,
+                    age: age,
+                    evidence: symptoms,
+                    extras: {
+                        "ignore_groups": true
+                    }
+                }
             }
-
+            console.log(evidence);
+            
             DiagnosisExpertSystemService.patientDiagnosis(evidence).then
             (function () {
             });
@@ -52,17 +66,20 @@
         };
 
         $scope.SetGender = function (num) {
-            if (num == 1) {
+            if (num === 1) {
                 $scope.Gender = "male";
+                $scope.GenderSelector = $scope.Gender;
             }
             if (num === 2) {
                 $scope.Gender = "female";
+                $scope.GenderSelector = $scope.Gender;
             }
             if (num !== 1 && num !== 2) {
                 $scope.Gender = "both";
+                $scope.GenderSelector = "Select a Gender";
             }
         };
-        $scope.GetGender = function (num) {
+        $scope.GetGender = function () {
             return $scope.Gender;
         };
 
