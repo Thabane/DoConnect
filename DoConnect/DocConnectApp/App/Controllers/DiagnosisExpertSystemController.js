@@ -2,17 +2,19 @@
     function ($scope, DiagnosisExpertSystemService, $interval, $location) {
 
         $scope.Symptoms = [];
+        $scope.Gender = "Select a Gender";
 
         $scope.GetAllSymptoms = function () {
             DiagnosisExpertSystemService.getAllSymptoms().then
             (function (result) {
                 $scope.SymptomBank = result.data;
                 $scope.GetRiskFactors();
+                $scope.SetGender(3);
             });
         };
 
         $scope.DianosePatient = function (symptoms, age, gender) {
-            
+
             var evidence = {
                 sex: gender,
                 age: age,
@@ -47,6 +49,21 @@
             (function (result) {
                 $scope.RiskBank = result.data;
             });
+        };
+
+        $scope.SetGender = function (num) {
+            if (num == 1) {
+                $scope.Gender = "male";
+            }
+            if (num === 2) {
+                $scope.Gender = "female";
+            }
+            if (num !== 1 && num !== 2) {
+                $scope.Gender = "both";
+            }
+        };
+        $scope.GetGender = function (num) {
+            return $scope.Gender;
         };
 
     }]);
