@@ -1,1 +1,74 @@
-[{"Key":"4","Value":"New User Created","UserId":"12","DateTime":"2016/08/11 8:02:51 PM"},{"Key":"5","Value":"New User Created","UserId":"13","DateTime":"2016/08/11 8:03:17 PM"},{"Key":"6","Value":"New User Created","UserId":"0","DateTime":"2016/09/15 4:35:56 PM"},{"Key":"7","Value":"Appointment record viewed: id: ","UserId":"14","DateTime":"2016-10-09 2:40:05 PM"},{"Key":"8","Value":"Appointment record viewed: id: ","UserId":"14","DateTime":"2016-10-10 8:53:46 PM"},{"Key":"9","Value":"Appointment record viewed: id: ","UserId":"14","DateTime":"2016-10-11 10:09:39 AM"},{"Key":"10","Value":"Appointment record viewed: id: 2","UserId":"14","DateTime":"2016-10-11 5:00:12 PM"},{"Key":"11","Value":"Appointment record viewed: id: 2","UserId":"19","DateTime":"2016-10-11 5:00:32 PM"},{"Key":"12","Value":"Appointment record viewed: id: 2","UserId":"14","DateTime":"2016-10-11 5:13:00 PM"},{"Key":"13","Value":"Appointment record viewed: id: 2","UserId":"16","DateTime":"2016-10-11 5:21:42 PM"},{"Key":"14","Value":"Appointment record viewed: id: 2","UserId":"16","DateTime":"2016-10-11 5:49:18 PM"}]
+[
+  {
+    "Key": "4",
+    "Value": "New User Created",
+    "UserId": "12",
+    "DateTime": "2016/08/11 8:02:51 PM"
+  },
+  {
+    "Key": "5",
+    "Value": "New User Created",
+    "UserId": "13",
+    "DateTime": "2016/08/11 8:03:17 PM"
+  },
+  {
+    "Key": "6",
+    "Value": "New User Created",
+    "UserId": "0",
+    "DateTime": "2016/09/15 4:35:56 PM"
+  },
+  {
+    "Key": "7",
+    "Value": "Appointment record viewed: id: ",
+    "UserId": "14",
+    "DateTime": "2016-10-09 2:40:05 PM"
+  },
+  {
+    "Key": "8",
+    "Value": "Appointment record viewed: id: ",
+    "UserId": "14",
+    "DateTime": "2016-10-10 8:53:46 PM"
+  },
+  {
+    "Key": "9",
+    "Value": "Appointment record viewed: id: ",
+    "UserId": "14",
+    "DateTime": "2016-10-11 10:09:39 AM"
+  },
+  {
+    "Key": "10",
+    "Value": "Appointment record viewed: id: 2",
+    "UserId": "14",
+    "DateTime": "2016-10-11 5:00:12 PM"
+  },
+  {
+    "Key": "11",
+    "Value": "Appointment record viewed: id: 2",
+    "UserId": "19",
+    "DateTime": "2016-10-11 5:00:32 PM"
+  },
+  {
+    "Key": "12",
+    "Value": "Appointment record viewed: id: 2",
+    "UserId": "14",
+    "DateTime": "2016-10-11 5:13:00 PM"
+  },
+  {
+    "Key": "13",
+    "Value": "Appointment record viewed: id: 2",
+    "UserId": "16",
+    "DateTime": "2016-10-11 5:21:42 PM"
+  },
+  {
+    "Key": "14",
+    "Value": "Appointment record viewed: id: 2",
+    "UserId": "16",
+    "DateTime": "2016-10-11 5:49:18 PM"
+  },
+  {
+    "Key": "15",
+    "Value": "System.Data.SqlClient.SqlException (0x80131904): The MERGE statement conflicted with the FOREIGN KEY constraint \"FK_Patient_Users\". The conflict occurred in database \"DoConnect\", table \"dbo.Users\", column 'ID'.\r\nThe statement has been terminated.\r\n   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)\r\n   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)\r\n   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)\r\n   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)\r\n   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)\r\n   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)\r\n   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)\r\n   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()\r\n   at DataClient.DataAccess.ExecuteNonQuery(String connectionString, List`1 parameters, String storedProc) in C:\\Users\\Thabane.n\\Source\\Repos\\DoConnect\\DoConnect\\DataClient\\DataAccess.cs:line 62\r\n   at DataClient.AppMethods.UpdatePatient(Int32 userId, String firstName, String lastName, String idNumber, Char gender, String dob, String cellNumber, Int32 medicalAidId, Int32 doctorId, String streetaddress, String suburb, String city, String country) in C:\\Users\\Thabane.n\\Source\\Repos\\DoConnect\\DoConnect\\DataClient\\AppMethods.cs:line 101\r\nClientConnectionId:9d4a1fbd-00ff-4e8b-84e1-bdc6e0a1fcbb\r\nError Number:547,State:0,Class:16",
+    "UserId": "0",
+    "DateTime": "2016/11/06 2:42:54 PM"
+  }
+]
