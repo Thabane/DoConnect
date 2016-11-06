@@ -67,5 +67,45 @@ namespace InfoServ
                 HttpContext.Current.Response.Write("false");
             }
         }
+
+        [WebMethod]
+        public void GetAppointmentsById(int id)
+        {
+            AppMethods am = new AppMethods();
+            string appointment = am.GetApppointmentsById(id);
+            HttpContext.Current.Response.Write($"{appointment}");
+        }
+
+        [WebMethod]
+        public void Login(string email, string password)
+        {
+            AppMethods am = new AppMethods();
+            string user = am.Login(email, password);
+            HttpContext.Current.Response.Write($"{user}");
+        }
+
+        [WebMethod]
+        public void GetAppointmentForPatient(int id)
+        {
+            AppMethods am = new AppMethods();
+            string app = am.GetApppointmentsById(id);
+            HttpContext.Current.Response.Write($"{app}");
+        }
+
+        [WebMethod]
+        public void GetSingleAppointment(int id)
+        {
+            AppMethods am = new AppMethods();
+            string singleApp = am.GetApppointmentsById(id);
+            HttpContext.Current.Response.Write($"{singleApp}");
+        }
+
+        [WebMethod]
+        public void RegisterPatient(string firstName, string lastName, string dob, string idNumber, char gender, string postalAddress, string email, string password)
+        {
+            AppMethods am = new AppMethods();
+            string reg = am.RegisterPatient(firstName, lastName, idNumber, dob, gender, postalAddress, email, password);
+            HttpContext.Current.Response.Write($"{reg}");
+        }
     }
 }

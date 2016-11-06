@@ -44,10 +44,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-      <Reference Include="DataClient, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Source\Repos\DoConnect\DoConnect\DataClient\bin\Debug\DataClient.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.0.1011, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -129,6 +125,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataClient\DataClient.csproj">
+      <Project>{8c1aaf48-0805-405b-b58e-91fce15e96a7}</Project>
+      <Name>DataClient</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DataClient\DataClient.csproj">
       <Project>{8c1aaf48-0805-405b-b58e-91fce15e96a7}</Project>
       <Name>DataClient</Name>

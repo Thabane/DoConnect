@@ -107,5 +107,75 @@ namespace DataClient
                 return false;
             }
         }
+
+        public string RegisterPatient(string firstName, string lastName, string idNumber, string dob, char gender, string postalAddress, string email, string password)
+        {
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            SqlParameter FirstName = new SqlParameter("@FirstName", SqlDbType.NVarChar);
+            SqlParameter LastName = new SqlParameter("@LastName", SqlDbType.NVarChar);
+            SqlParameter IDNumber = new SqlParameter("@IDNumber", SqlDbType.NVarChar);
+            SqlParameter DOB = new SqlParameter("@DOB", SqlDbType.NVarChar);
+            SqlParameter Gender = new SqlParameter("@Gender", SqlDbType.Char);
+            SqlParameter PostalAddress = new SqlParameter("@PostalAddress", SqlDbType.NVarChar);
+            SqlParameter Email = new SqlParameter("@Email", SqlDbType.NVarChar);
+            SqlParameter Password = new SqlParameter("@Password", SqlDbType.NVarChar);
+            FirstName.Value = firstName;
+            LastName.Value = lastName;
+            IDNumber.Value = idNumber;
+            DOB.Value = dob;
+            Gender.Value = gender;
+            PostalAddress.Value = postalAddress;
+            Email.Value = email;
+            Password.Value = password;
+            _parameters.Add(FirstName);
+            _parameters.Add(LastName);
+            _parameters.Add(IDNumber);
+            _parameters.Add(DOB);
+            _parameters.Add(Gender);
+            _parameters.Add(PostalAddress);
+            _parameters.Add(Email);
+            _parameters.Add(Password);
+            access.ExecuteNonQuery(Conn, _parameters, "[RegisterMobilePatient]");
+            return string.Empty;
+        }
+
+        public string Login(string email, string password)
+        {
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            SqlParameter emailParameter = new SqlParameter("@Email", SqlDbType.NVarChar);
+            SqlParameter passwordParameter = new SqlParameter("@Password", SqlDbType.NVarChar);
+            emailParameter.Value = email;
+            passwordParameter.Value = password;
+            _parameters.Add(emailParameter);
+            _parameters.Add(passwordParameter);
+            User user;
+            using (var reader = access.ExecuteReader(Conn, "[Login]", _parameters))
+            {
+                if (reader.Read())
+                {
+                    user = new User(reader);
+                    return JsonConvert.SerializeObject(user);
+                }
+            }
+            return string.Empty;
+        }
+
+        public string GetApppointmentsById(int id)
+        {
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            SqlParameter idParameter = new SqlParameter("@PatID", SqlDbType.Int);
+            idParameter.Value = id;
+            _parameters.Add(idParameter);
+            Appointments app = new Appointments();
+            using (var reader = access.ExecuteReader(Conn, "[GetAppointmentByPatientId]", _parameters))
+            {
+                if (reader.Read())
+                {
+                    app = new Appointments().GetAppointmentsForPatient(reader);
+                    return JsonConvert.SerializeObject(app);
+                }
+            }
+            return string.Empty;
+        }
     }
 }

@@ -103,5 +103,19 @@ namespace ObjectModel
                 Practice_Name = reader.GetString(reader.GetOrdinal("Practice_Name"))
             };
         }
+
+        public Appointments GetAppointmentsForPatient(SqlDataReader reader)
+        {
+            return new Appointments
+            {
+                Appointments_ID = reader.GetInt32(reader.GetOrdinal("Appointments_ID")),
+                Appointments_App_Status = reader.GetInt32(reader.GetOrdinal("Appointments_App_Status")),
+                Appointments_Date_Time = reader.GetString(reader.GetOrdinal("Appointments_Date_Time")),
+                Appointments_Details = reader.GetString(reader.GetOrdinal("Appointments_Details")),
+                Patient_FirstName = reader.GetString(reader.GetOrdinal("Patient_FirstName")),
+                Doctors_FirstName = reader.GetString(reader.GetOrdinal("Doctors_FirstName")),
+                Practice_Name = reader.GetString(reader.GetOrdinal("Practice_Name"))
+            };
+        }
     }
 }
