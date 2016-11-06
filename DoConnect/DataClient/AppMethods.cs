@@ -102,12 +102,10 @@ namespace DataClient
                 return true;
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                DataAccess da = new DataAccess();
-                da.LogEntry(0, e.ToString());
-            }            
-            return false;
+                return false;
+            }
         }
     }
 }
