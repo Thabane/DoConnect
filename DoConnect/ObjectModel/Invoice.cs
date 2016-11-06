@@ -41,6 +41,8 @@ namespace ObjectModel
         public int TotalNumOfVisits { get; set; }
         public decimal Amount { get; set; }
 
+        public int numOfUnPaid              { get; set; }
+        public int numOfPatiallyPaid        { get; set; }
 
         public Invoice Create(SqlDataReader reader)
         {
@@ -50,6 +52,30 @@ namespace ObjectModel
                 InvoiceSummary = reader.GetString(reader.GetOrdinal("InvoiceSummary")),
                 Date = reader.GetString(reader.GetOrdinal("Date")),
                 Total = reader.GetDecimal(reader.GetOrdinal("Total")),                
+                BalanceOwing = reader.GetDecimal(reader.GetOrdinal("BalanceOwing")),
+                PaidStatus = reader.GetInt32(reader.GetOrdinal("PaidStatus")),
+                Medical_Aid_ID = reader.GetInt32(reader.GetOrdinal("Medical_Aid_ID")),
+                Patient_ID = reader.GetInt32(reader.GetOrdinal("Patient_ID")),
+                Patient_FirstName = reader.GetString(reader.GetOrdinal("Patient_FirstName")),
+                Patient_LastName = reader.GetString(reader.GetOrdinal("Patient_LastName")),
+                Patient_Email = reader.GetString(reader.GetOrdinal("Patient_Email")),
+                Doctor_ID = reader.GetInt32(reader.GetOrdinal("Doctor_ID")),
+                Doctor_FirstName = reader.GetString(reader.GetOrdinal("Doctor_FirstName")),
+                Doctor_LastName = reader.GetString(reader.GetOrdinal("Doctor_LastName")),
+                Doctor_Email = reader.GetString(reader.GetOrdinal("Doctor_Email")),
+                numOfUnPaid = reader.GetInt32(reader.GetOrdinal("numOfUnPaid")),
+                numOfPatiallyPaid = reader.GetInt32(reader.GetOrdinal("numOfPatiallyPaid"))
+            };
+        }
+
+        public Invoice CreateByID(SqlDataReader reader)
+        {
+            return new Invoice
+            {
+                ID = reader.GetInt32(reader.GetOrdinal("ID")),
+                InvoiceSummary = reader.GetString(reader.GetOrdinal("InvoiceSummary")),
+                Date = reader.GetString(reader.GetOrdinal("Date")),
+                Total = reader.GetDecimal(reader.GetOrdinal("Total")),
                 BalanceOwing = reader.GetDecimal(reader.GetOrdinal("BalanceOwing")),
                 PaidStatus = reader.GetInt32(reader.GetOrdinal("PaidStatus")),
                 Medical_Aid_ID = reader.GetInt32(reader.GetOrdinal("Medical_Aid_ID")),

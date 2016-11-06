@@ -1,5 +1,5 @@
 ﻿<div>
-    <div id="page-wrapper" ng-controller="AppointmentsController">
+    <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
                 <h2 class="page-header text-primary">Appointments</h2>
@@ -13,7 +13,17 @@
 
         <div class="panel panel-default">
             <div class="row" style="margin-top: 10px; margin-right: 10px;">
-                <div class="col-md-4"></div><div class="col-md-4"><h5 class="pull-right">Search:</h5></div>
+                <div class="col-md-6">
+                    <div class="row" style="padding-top: 10px; padding-left: 7px;">
+                        <div class="col-md-6">
+                            <small class="font-dark">Today's Appointments </small> <span class="label label-pill label-info">{{numTodayApps}}</span>
+                        </div>
+                        <div class="col-md-6">
+                            <small class="font-dark">Tomorrow's Appointments </small> <span class="label label-pill label-success">{{numTomorrowApps}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2"><h5 class="pull-right">Search:</h5></div>
                 <div class="form-group col-md-4">
                     <input class="form-control" type="text" style="font-size:13px;" ng-model="search">
                 </div>
@@ -53,14 +63,15 @@
 
         <!--View Appointment Modal-->
         <div id="View_Appointment_Modal" class="modal fade">
-            <form name="Form">
-                <div class="modal-dialog" style="width:40%">
+            <form name="Form" novalidate>
+                <div class="modal-dialog" style="width:50%">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             <h4 class="modal-title text-primary">Appointment Details</h4>
                         </div>
                         <div class="modal-body">
+                            <div class="row alert alert-danger text-center" ng-show="TimeError != 0">{{TimeError}}</div>
                             <div class="row" style="margin-top:4px; margin-bottom:0px;">
                                 <div class="col-md-3"><h5>Date & Time:</h5></div>
                                 <div class="col-md-8">
@@ -72,7 +83,7 @@
                                     <div class="col-md-2"></div>
                                     <div class="col-md-5" style="padding:0px;">
                                         <div class="input-group date" id="datetime" style="padding:0px;">
-                                            <input class="form-control" type="text" id="Appointments_Time" ng-value="Appointments_Time" name="Appointments_Time" ng-required="true"><span class="input-group-addon"><span class="fa fa-clock-o"></span></span>
+                                            <input class="form-control" type=time min=9:30 max=17:00 step=900 id="Appointments_Time" ng-value="Appointments_Time" name="Appointments_Time" ng-required="true"><span class="input-group-addon"><span class="fa fa-clock-o"></span></span>
                                         </div>
                                     </div>
                                 </div>
@@ -87,7 +98,7 @@
                             </div>
                             <div class="row" style="margin-top:4px; margin-bottom:0px;">
                                 <div class="col-md-3"><h5>Patient Name:</h5></div>
-                                <div class="col-md-8"><select class="form-control disable_ViewAppointment readonly_ViewAppointment" ng-model="Patient_ID" name="PatientName" ng-change="changedValueGetPatientID(Patient_ID)" data-ng-options="patient as patient.PatientFullName for patient in Patients" ng-required="true">
+                                <div class="col-md-8"><select class="form-control disable_ViewAppointment readonly_ViewAppointment" ng-model="Patient_ID" name="PatientName" ng-change="changedValueGetPatientID(Patient_ID)" data-ng-options="patient as patient.PatientFullName for patient in Patients | orderBy:'PatientFullName'" ng-required="true">
                                                             <option value="">{{Patient_FirstName}} {{Patient_LastName}}</option></select></div>
                             </div>
                             <div class="row" style="margin-top:0px; margin-bottom:8px;">
@@ -108,7 +119,7 @@
                             </div>
                             <div class="row" style="margin-top:4px; margin-bottom:0px;">
                                 <div class="col-md-3"><h5>Appointment Status:</h5></div>
-                                <div class="col-md-8"><select class="form-control disable_ViewAppointment readonly_ViewAppointment" ng-model="Appointments_App_Status" name="Appointments_App_Status" ng-required="true" ng-change="changedValueGetApp_Status(Appointments_App_Status)" data-ng-options="App_Status as App_Status.Status for App_Status in App_Statusz">
+                                <div class="col-md-8"><select class="form-control disable_ViewAppointment readonly_ViewAppointment" ng-model="AppStatus" name="Appointments_App_Status" ng-required="true" ng-change="changedValueGetApp_Status(AppStatus)" data-ng-options="App_Status as App_Status.Status for App_Status in App_Statusz | orderBy:'Status'">
                                                         <option value="">{{Appointments_App_Status}}</option>
                                                       </select></div>
                             </div>
@@ -120,7 +131,7 @@
                             </div>
                             <div class="row" style="margin-top:4px; margin-bottom:0px;">
                                 <div class="col-md-3"><h5>Doctor Name:</h5></div>
-                                <div class="col-md-8"><select class="form-control disable_ViewAppointment readonly_ViewAppointment" ng-model="Doctors_ID" name="DoctorName" ng-required="true" ng-change="changedValueGetDoctors_ID(Doctors_ID)" data-ng-options="doctor as doctor.DoctorFullName for doctor in Doctors">
+                                <div class="col-md-8"><select class="form-control disable_ViewAppointment readonly_ViewAppointment" ng-model="Doctors_ID" name="DoctorName" ng-required="true" ng-change="changedValueGetDoctors_ID(Doctors_ID)" data-ng-options="doctor as doctor.DoctorFullName for doctor in Doctors | orderBy:'DoctorFullName'">
                                                             <option value="">{{Doctors_FirstName}} {{Doctors_LastName}}</option>
                                                        </select></div>
                             </div>

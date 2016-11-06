@@ -1,12 +1,15 @@
-﻿<div id="page-wrapper" ng-controller="DashboardController">
-    <div ng-show="SessionData_User_ID == '2'" dir-paginate="Practice in Practices | filter:search | orderBy:sortKey:reverse | itemsPerPage:1" ng-init="GetNumPatientsByPractice(Practice.ID)">
-        
-        <div class="row" ng-init="Consulations_Visits(Practice.ID)">
-            <div class="col-md-12">
-                <h2 class="page-header text-primary">Dashboard: {{Practice.Name}}</h2>
+﻿<div id="page-wrapper">
+    <div dir-paginate="Practice in Practices | filter:search | orderBy:sortKey:reverse | itemsPerPage:1">
+
+        <div class="row page-header" ng-init="Consulations_Visits(Practice.ID)">
+            <div class="col-md-8 " ng-init="NumOFPatientsPerMonthPerPractice(Practice.ID)">
+                <h2 class="text-primary" ng-init="GetNumPatientsByPractice(Practice.ID)">Dashboard: {{Practice.Name}}</h2>
+            </div>
+            <div class="col-md-4">
+                <dir-pagination-controls class="pull-right" max-size="3" direction-links="true" boundary-links="true"></dir-pagination-controls>
             </div>
         </div>
-        
+
         <!-- first row -->
         <div class="row">
             <div class="col-lg-3 col-md-6">
@@ -24,7 +27,7 @@
                             </div>
                             <div class="col-md-3 text-left" style="padding-left:0px">
                                 <p>{{medicineInventoryStockCount.QuantityInStock}}</p>
-                            </div>                           
+                            </div>
                         </div>
                     </div>
                     <a href="/MedicineInventory">
@@ -36,7 +39,6 @@
                     </a>
                 </div>
             </div>
-
             <div class="col-lg-3 col-md-6">
                 <div class="portlet light" style="border: 1px solid #ddd; border-radius: 4px;" ng-init="GetPendingAppointmentsByPracticeID(Practice.ID)">
                     <div class="portlet-title" ng-init="GetAppovedAppointmentsByPracticeID(Practice.ID)">
@@ -77,7 +79,7 @@
                     <div class="portlet-title">
                         <div class="caption caption-md">
                             <i class="icon-bar-chart font-dark hide"></i>
-                            <span class="caption-subject font-green-steel uppercase bold">Revenue Summary</span>
+                            <span class="caption-subject font-green-steel uppercase bold">Cash Flow Summary</span>
                             <span class="caption-helper hide">weekly stats...</span>
                         </div>
                         <div class="actions">
@@ -95,18 +97,18 @@
                         </div>
                     </div>
                     <div class="portlet-body">
-                        <div class="row list-separated">
+                        <div class="row list-separated">                            
                             <div class="col-md-4">
-                                <div class="font-grey-mint font-hg"> Total Sales </div>
-                                <div class="uppercase font-hg font-dark"><span class="font-lg font-grey-mint">R</span> {{Total_Summary}}</div>
+                                <div class="font-purple font-hg"> Net Income </div>
+                                <div class="uppercase font-hg theme-font font-purple"><span class="font-lg font-grey-mint">R</span> {{Income - Expenses_Summary}}</div>
                             </div>
                             <div class="col-md-4">
-                                <div class="font-purple font-hg"> Revenue </div>
-                                <div class="uppercase font-hg theme-font font-purple"><span class="font-lg font-grey-mint">R</span> {{TotalAmountPaid_Summary - Amount_Summary}}</div>
+                                <div class="font-grey-mint font-hg"> Income </div>
+                                <div class="uppercase font-hg font-dark"><span class="font-lg font-grey-mint">R</span> {{Income}}</div>
                             </div>
                             <div class="col-md-4">
                                 <div class="font-dark font-hg"> Expenses </div>
-                                <div class="uppercase font-hg font-red-flamingo"><span class="font-lg font-grey-mint">R</span> {{Amount_Summary}}</div>
+                                <div class="uppercase font-hg font-red-flamingo"><span class="font-lg font-grey-mint">R</span> {{Expenses_Summary}}</div>
                             </div>
                         </div>
                     </div>
@@ -117,7 +119,7 @@
         <div class="row">
             <!-- Appointment Statistics Pie Chart -->
             <div class="col-md-6">
-                <div class="portlet light" style="border: 1px solid #ddd; border-radius: 4px; height: 250px;">
+                <div class="portlet light" style="border: 1px solid #ddd; border-radius: 4px; height: 263px;">
                     <div class="portlet-title">
                         <div class="caption caption-md">
                             <i class="icon-bar-chart font-dark hide"></i>
@@ -125,12 +127,13 @@
                         </div>
                     </div>
                     <div class="portlet-body">
+                        <i>Stats based on total consulations: {{TotalNumOfVisits}}</i>
                         <div class="row" id="piechart" style="width: 100%; height: 190px;"></div>
                     </div>
                 </div>
             </div>
-            <!-- /.Appointment Statistics Pie Chart -->    
-        
+            <!-- /.Appointment Statistics Pie Chart -->
+
             <div class="col-md-6">
                 <div class="portlet light" style="border: 1px solid #ddd; border-radius: 4px;">
                     <div class="portlet-title">
@@ -143,15 +146,78 @@
                         <div class="row" id="linechart_material" style="width: 100%; height: 190px;"></div>
                     </div>
                 </div>
-            </div>        
+            </div>
         </div><!-- /.2nd row -->
-        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="portlet light" style="border: 1px solid #ddd; border-radius: 4px;">
+                    <div class="portlet-title">
+                        <div class="caption caption-md">
+                            <i class="icon-bar-chart font-dark hide"></i>
+                            <span class="caption-subject font-green-steel uppercase bold">Registered Patients Stats</span>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <div class="row" id="linechart_NumOFPatientsPerMonthPerPractice" style="width: 100%; height: 190px;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+
+
+                <div data-ng-controller="FeedCtrl" class="portlet light" style="border: 1px solid #ddd; border-radius: 4px; height:262px;">
+                    <div class="portlet-title">
+                        <div class="">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="col-md-4 pull-left" style="margin-top: 0px">
+                                        <i class="icon-bar-chart font-dark hide"></i>
+                                        <span class="caption-subject font-green-steel uppercase bold">RSS Feed</span>
+                                    </div>
+                                    <div class="btn-group col-md-8">
+                                        <button class="btn btn-info" type="button" tabindex="-1">{{loadButonText}}</button>
+                                        <button class="btn btn-info dropdown-toggle" data-toggle="dropdown" tabindex="-1">
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#" ng-click="feedSrc='https://medlineplus.gov/feeds/news_en.xml';loadFeed($event);">MedlinePlus Health News</a></li>
+                                            <li><a href="#" ng-click="feedSrc='http://rssfeeds.webmd.com/rss/rss.aspx?RSSSource=RSS_PUBLIC';loadFeed($event)">WebMD</a></li>
+                                            <li><a href="#" ng-click="feedSrc='http://feeds.reuters.com/reuters/healthNews';loadFeed($event)">Health News</a></li>
+                                            <li><a href="#" ng-click="feedSrc='http://www.onmedica.com/rssFeed.aspx?content=views';loadFeed($event)">On Medica</a></li>
+                                            <li><a href="#" ng-click="feedSrc='http://www.healthline.com/rss/health-news';loadFeed($event)">Health Line</a></li>
+                                            <li><a href="#" ng-click="feedSrc='http://www.medicinenet.com/rss/article.htm';loadFeed($event)">Medicine Net</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portlet-body" id="Feed">                        
+                        <!--<div class="row">
+                            
+                            <div class="col-md-1"><input type="text" class="form-control hidden" autocomplete="off" placeholder="Enter Feed URL" data-ng-model="feedSrc" /></div>
+                            <div class="col-md-5" ng-show="feeds.length > 0">
+                                <span class="add-on"><i class="icon-search"></i></span>
+                                <input class="form-control" type="text" placeholder="Search" data-ng-model="filterText" />
+                            </div>
+                        </div>-->
+                        <div class="row" style="max-height: 180px; overflow-y: auto; overflow-x: hidden;">                            
+                            <div class="well" ng-repeat="feed in feeds | filter:filterText">
+                                <h5><a href="{{feed.link}}">{{feed.title}}</a></h5>
+                                <p class="text-left">{{feed.contentSnippet}}</p>
+                                <span class="small">{{feed.publishedDate}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- /.2nd row -->
         <!--AppointmentsModal-->
         <div id="AppointmentsModal" class="modal fade">
             <form>
                 <div class="modal-dialog" style="width:50%" ng-init="GetPendingAppointmentsByPracticeID(Practice.ID)">
-                    <div class="modal-content" ng-init="GetAppovedAppointmentsByPracticeID(Practice.ID)">
-                        <div class="modal-header" ng-init="GetRejectedAppointmentsByPracticeID(Practice.ID)">
+                    <div class="modal-content" ><!--ng-init="GetAppovedAppointmentsByPracticeID(Practice.ID)"-->
+                        <div class="modal-header"><!--ng-init="GetRejectedAppointmentsByPracticeID(Practice.ID)"-->
                             <button type="button" class="close CloseModel" data-dismiss="modal" aria-hidden="true">&times;</button>
                             <h4 class="modal-title">Appointments Wedgit</h4>
                         </div>
@@ -267,10 +333,5 @@
             </form>
         </div>
         <!-- /.Appointments Modal-->
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <dir-pagination-controls class="pull-right" max-size="5" direction-links="true" boundary-links="true" style="margin-right: 20px;"></dir-pagination-controls>
-        </div>
     </div>
 </div>

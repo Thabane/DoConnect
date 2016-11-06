@@ -1,39 +1,32 @@
-﻿<div ng-controller="LoginController">
+﻿<div>
     <div class="row">
-        <h1 class="glyphicon-bold text-primary text-center" style="width:50%; margin-top:70px; margin-left:auto; margin-right:auto;">DoConnect</h1>
+        <h1 class="text-primary text-center" style="width:50%; margin-top:70px; margin-left:auto; margin-right:auto;">DoConnect Administration System</h1>
     </div>
-    <div class="container">
-        <div class="row">
-            <div style="width:50%; margin:auto;">
-                <div class="login-panel panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="glyphicon-bold text-info text-center" style="background-color:transparent;">Please Sign In</h3>
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <form novalidate name="Form" ng-submit="Login()">
+            <div class="panel panel-info">
+                <div class="panel-heading"><h4 class="text-info text-center" style="background-color:transparent;">Please login</h4></div>
+                <div class="panel-body">
+                    <div class="alert alert-danger" ng-if="InvalidCredential != 'null'">Invalid username or password<br>Please enter a valid username and password</div>
+                    <div class="form-group">
+                        <label for="username">Username</label>&nbsp<i class="fa fa-key"></i>
+                        <input type="text" name="username" id="username" class="form-control" ng-model="LoginData.Username" required />
+                        <span ng-show="Form.username.$dirty && Form.username.$error.required" class="help-block">Username is required</span>
                     </div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-md-12 center-block" style="color:red" ng-show="InvalidCredential != 'null'">{{InvalidCredential}}</div>
-                            <div class="col-md-12 center-block" style="color:red" ng-show="(f1.cUsername.$dirty || Submitted) && f1.cUsername.$error.required">Username required</div>
-                            <div class="col-md-12 center-block" style="color:red" ng-show="(f1.cPassword.$dirty || Submitted) && f1.cPassword.$error.required">Password required</div>
-                            <div class="col-md-12 center-block" style="color:red" ng-show="f1.cUsername.$invalid && f1.cUsername.$touched && f1.cUsername.$error.pattern">Enter a valid email address.</div>
-                            <div class="col-md-12 center-block" style="color:red" ng-show="f1.cPassword.$invalid && f1.cPassword.$touched && f1.cPassword.$error.pattern">Password must be atleast 5 charators long.</div>
-                            
-                        </div>
-                        <form novalidate name="f1" ng-submit="Login()">
-                            <fieldset ng-show="!IsLogedIn">
-                                <div class="row" style="margin-top:8px; margin-bottom:0px;">
-                                    <div class="col-md-2"><h5 class="form-control-label">Username:</h5></div>
-                                    <div class="col-md-10"><input class="form-control" ng-model="LoginData.Username" name="cUsername" ng-class="Submitted?'ng-dirty':''" ng-pattern="/^[\w-\.]+@([\w-]+\.)+[\w-]{2,}$/" ng-required="true" autofocus placeholder="E-mail" type="email"></div>
-                                </div>
-                                <div class="row" style="margin-top:8px; margin-bottom:10px;">
-                                    <div class="col-md-2"><h5 class="form-control-label">Password:</h5></div>
-                                    <div class="col-md-10"><input class="form-control" ng-model="LoginData.Password" name="cPassword" ng-class="Submitted?'ng-dirty':''" ng-pattern="/{5,12}$/" ng-required="true" autofocus placeholder="Password" type="password"></div>
-                                </div>
-                                <input class="btn btn-md btn-primary center-block" type="submit" value="Login" ng-disabled="f1.$invalid" />
-                            </fieldset>
-                        </form>
+                    <div class="form-group">
+                        <label for="password">Password</label>&nbsp<i class="fa fa-lock"></i>
+                        <input type="password" name="password" id="password" class="form-control" ng-model="LoginData.Password" required />
+                        <span ng-show="Form.password.$dirty && Form.password.$error.required" class="help-block">Password is required</span>
+                    </div>
+                    <div class="form-actions">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4"><button type="submit" ng-disabled="Form.$invalid || dataLoading" class="btn btn-primary">Login</button></div>
+                        <div class="col-md-4"><img ng-if="dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" /></div>
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
+    <div class="col-md-4"></div>
 </div>

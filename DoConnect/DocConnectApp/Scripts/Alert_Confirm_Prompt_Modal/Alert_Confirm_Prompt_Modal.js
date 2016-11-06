@@ -239,7 +239,7 @@ function ViewSentMessage() {
 //Practices Page
 function ViewPractice() {
     $("#View_Practice_Modal").modal("show");
-    $(".readonly_ViewPractice").attr("readonly", true);
+    $(".readonly_ViewPractice").attr("readonly", true); 
     $(".readonly_ViewPractice").css("background-color", "transparent");
 };
 

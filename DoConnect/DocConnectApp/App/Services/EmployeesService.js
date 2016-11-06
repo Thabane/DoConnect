@@ -1,5 +1,10 @@
 ﻿app.factory('EmployeesService',
+['$http',
     function ($http) {
+
+        var SessionData = function () {
+            return $http.get("/Data/SessionData");
+        };
 
         var GetAllEmployees = function () {
             return $http.get("api/Employees/GetAllEmployees");
@@ -66,6 +71,7 @@
         };
 
         return {
+            SessionData: SessionData,
             GetAllEmployees: GetAllEmployees,
             GetEmployeeByID: GetEmployeeByID,
             GetAllAccessLevel: GetAllAccessLevel,
@@ -76,4 +82,4 @@
             DeleteEmployee: DeleteEmployee
         };
     }
-);
+]);

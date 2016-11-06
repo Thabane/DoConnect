@@ -1,5 +1,5 @@
-﻿app.controller("PracticesController", ["$scope", "PracticesService", "$interval", "$ngBootbox",
-    function ($scope, PracticesService, $interval, $ngBootbox) {
+﻿app.controller("PracticesController", ["$scope", "PracticesService", "$interval", "$ngBootbox", "$location",
+    function ($scope, PracticesService, $interval, $ngBootbox, $location) {
 
         $scope.PageTitle_Practices = 'Practices';
         $scope.PageTitle_NewPractice = 'New Practices Details';
@@ -13,8 +13,24 @@
             PracticesService.GetAllPractices().then(function (result) {
                 $scope.Practices = result.data;
             });
+
+            PracticesService.SessionData().success(function (result) {
+                sessionStorage.SessionData_User_ID = result["User_ID"];
+                sessionStorage.SessionData_FirstName = result["FirstName"];
+                sessionStorage.SessionData_LastName = result["LastName"];
+                sessionStorage.SessionData_Email = result["Email"];
+                sessionStorage.SessionData_Practice_ID = result["Practice_ID"];
+                sessionStorage.SessionData_AccessLevel = result["AccessLevel"];                
+            });
         };
         $scope.GetAllPractices();
+
+        if (sessionStorage.SessionData_AccessLevel == '1') {
+            angular.element(".doctorControls").show();
+        }
+        else {
+            angular.element(".doctorControls").hide();
+        }
 
         $scope.ViewPractice = function (ID) {
             PracticesService.GetPracticeByID(ID).success(function (result) {
@@ -35,6 +51,7 @@
                 $scope.GetAllPractices();
                 angular.element(".insert").val('');
                 btnSuccess("Practice successfully inserted.");
+                $location.path('/Practices');
             },
                 function (error) {
                     btnAlert("System Error Message", "Insert unsuccessful.");
@@ -50,6 +67,7 @@
             else {
                 PracticesService.UpdatePractice($scope.ID, $scope.Name, $scope.Phone_Number, $scope.Fax_Number, $scope.Street_Address, $scope.Suburb, $scope.City, $scope.Country, $scope.Trading_Times).success(function () {
                     $scope.GetAllPractices();
+                    angular.element(".close").trigger("click");
                     btnSuccess("Practice details successfully updated.");
                 }, function (error) {
                     btnAlert("System Error Message", "Update unsuccessful.");

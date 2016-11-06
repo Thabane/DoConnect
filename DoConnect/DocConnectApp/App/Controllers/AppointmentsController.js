@@ -1,20 +1,23 @@
-﻿app.controller("AppointmentsController", ["$scope", "AppointmentsService", "$interval", "$ngBootbox",
-    function ($scope, AppointmentsService, $interval, $ngBootbox) {
+﻿app.controller("AppointmentsController", ["$scope", "AppointmentsService", "$interval", "$ngBootbox", "$location",
+    function ($scope, AppointmentsService, $interval, $ngBootbox, $location) {
 
         $scope.sort = function (keyname) {
             $scope.sortKey = keyname;
             $scope.reverse = !$scope.reverse;
         }
 
-        $scope.GetAllAppointments = function () {
-            AppointmentsService.GetAllAppointments().then
-            (function (result) {
-                $scope.Appointments = result.data;
+        $scope.GetAllAppointments = function () {            
+            AppointmentsService.GetAllAppointments().then(function (result) {
+                $scope.Appointments = result.data;                
+                $scope.numTodayApps = $scope.Appointments[$scope.Appointments.length - 1].numTodayApps;
+                $scope.numTomorrowApps = $scope.Appointments[$scope.Appointments.length - 1].numTomorrowApps;
             });
         };
         $scope.GetAllAppointments();
 
-        $scope.App_Statusz = [{ "Status": "Approved", "bool": "1" }, { "Status": "Declined", "bool": "0" }, { "Status": "Pending", "bool": "2" }];
+        $scope.App_Statusz = [{ "Status": "Approved", "bool": "1" }, { "Status": "Declined", "bool": "0" }, { "Status": "Pending", "bool": "2"}];
+        $scope.listApp_Statusz = [{ "Status": "Approved", "bool": "1" }, { "Status": "Pending", "bool": "2" }];
+        $scope.TimeError = 0;
 
         $scope.ViewAppointment = function (ID) {
             AppointmentsService.GetAppointmentByID(ID).success(function (result) {
@@ -47,8 +50,7 @@
         };
 
         $scope.GetPatients = function () {
-            AppointmentsService.GetAllPatients().then
-            (function (result) {
+            AppointmentsService.GetAllPatients().then(function (result) {
                 $scope.Patients = result.data;
             });
         };
@@ -77,16 +79,41 @@
             $scope.Seleceted_App_Status = item.bool;
         };
 
-        $scope.NewAppointment = function (Details, App_Status) {
-            AppointmentsService.InsertAppointment(angular.element("#Appointments_Date").val() + " " + angular.element("#Appointments_Time").val(), $scope.PatientID, Details, App_Status, $scope.DoctorID).success(function () {
-                $scope.GetAllAppointments();
-                angular.element(".insert").val('');
-                btnSuccess("Appointment successfully inserted.");
-                //btnRedirect("Appointments");
-            },
-                function (error) {
-                    btnAlert("System Error Message", "Insert unsuccessful.");
-                });
+        $scope.NewAppointment = function (Details) {
+            var TheTime  = angular.element("#Appointments_Time").val();
+            if(TheTime != '') 
+            {
+                if(regs = TheTime) 
+                {
+                    var hours = regs[0]+""+regs[1];
+                    var minutes = regs[3]+""+regs[4]
+                    var errorCount = 0;                        
+                    if ((hours < 9) || (hours > 17)) {
+                        errorCount++;
+                    }      
+                        
+                    if (minutes > 59) {
+                        errorCount++;
+                    }
+                    
+                    if (errorCount != 0) {
+                        $scope.TimeError = "Please make an appointment during our office hours.\nOffice hours: 9:00 hours to 17:00 hours.";
+
+                    }
+                    else {
+                        AppointmentsService.InsertAppointment(angular.element("#Appointments_Date").val() + " " + angular.element("#Appointments_Time").val(), $scope.PatientID, Details, $scope.Seleceted_App_Status, $scope.DoctorID).success(function () {
+                            $scope.GetAllAppointments();
+                            angular.element(".insert").val('');
+                            btnSuccess("Appointment successfully inserted.");
+                            $location.path('/Appointments');
+                        },
+                            function (error) {
+                                btnAlert("System Error Message", "Insert unsuccessful.");
+                            });
+                        $scope.TimeError = 0;
+                    }
+                }
+            }
         };
 
         $scope.function_btnUpdateAppointment = function (ID) {
@@ -98,14 +125,51 @@
             else {
                 if ($scope.DoctorID == 0) { $scope.DoctorID = $scope.Doctors_ID }
                 if ($scope.PatientID == 0) { $scope.PatientID = $scope.Patient_ID }
-                if ($scope.Seleceted_App_Status == 0) { $scope.Seleceted_App_Status = $scope.Appointments_App_Status }
+                if ($scope.Appointments_App_Status == 'Pending') {
+                    $scope.AppSta = '2';
+                }
+                else if ($scope.Appointments_App_Status == 'Approved') {
+                    $scope.AppSta = '1';
+                }
+                else {
+                    $scope.AppSta = '0';
+                }
 
-                AppointmentsService.UpdateAppointment($scope.Appointments_ID, angular.element("#Appointments_Date").val() + " " + angular.element("#Appointments_Time").val(), $scope.PatientID, $scope.Appointments_Details, $scope.Seleceted_App_Status, $scope.DoctorID).success(function () {
-                    $scope.GetAllAppointments();
-                    btnSuccess("Appointment details successfully updated.");
-                }, function (error) {
-                    btnAlert("System Error Message", "Update unsuccessful.");
-                });
+                if ($scope.Seleceted_App_Status == 0) { $scope.Seleceted_App_Status = $scope.AppSta }
+
+                var TheTime  = angular.element("#Appointments_Time").val();
+                if(TheTime != '') 
+                {
+                    if(regs = TheTime) 
+                    {
+                        var hours = regs[0]+""+regs[1];
+                        var minutes = regs[3]+""+regs[4]
+                        var errorCount = 0;                        
+                        if ((hours < 9) || (hours > 17)) {
+                            errorCount++;
+                        }      
+                        
+                        if (minutes > 59) {
+                            errorCount++;
+                        }
+
+                        if (errorCount != 0) {
+                            $scope.TimeError = "Please make an appointment during our office hours.\nOffice hours: 9:00 hours to 17:00 hours.";
+
+                        }
+                        else {
+                            AppointmentsService.UpdateAppointment($scope.Appointments_ID, angular.element("#Appointments_Date").val() + " " + angular.element("#Appointments_Time").val(), $scope.PatientID, $scope.Appointments_Details, $scope.Seleceted_App_Status, $scope.DoctorID).success(function () {
+                                angular.element(".close").trigger("click");
+                                $scope.GetAllAppointments();
+                                btnSuccess("Appointment details successfully updated.");
+                            }, function (error) {
+                                btnAlert("System Error Message", "Update unsuccessful.");
+                            });
+                            $scope.TimeError = 0;
+                        }
+                    }
+                }
+                
                 angular.element(".readonly_ViewAppointment").attr("readonly", true); angular.element(".disable_ViewAppointment").prop("disabled", true);
                 angular.element(".readonly_ViewAppointment").css("background-color", "transparent");
                 angular.element("#function_btnUpdateAppointment").html("Update");

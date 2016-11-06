@@ -9,8 +9,10 @@ namespace ObjectModel
     public class Log
     {
         public string Key { get; set; }
-        public string Value { get; set; }
-        public string UserId { get; set; }
-        public string DateTime { get; set; }
+        public string User_ID { get; set; }
+        public string Name { get; set; }
+        public string AccessLevel { get; set; }
+        public string Activity { get; set; }
+        public string LogTime { get; set; }
     }
 }

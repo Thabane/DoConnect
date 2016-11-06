@@ -1,4 +1,5 @@
 ﻿app.factory('EventsService',
+    ['$http',
     function ($http) {
 
         var GetAllEvents = function () {
@@ -44,4 +45,4 @@
             DeleteEvent: DeleteEvent
         };
     }
-);
+]);

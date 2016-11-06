@@ -14,6 +14,16 @@ namespace DocConnectApp.Controllers
 {
     public class DashboardController : ApiController
     {
+
+        [HttpGet]
+        [Route("api/Dashboard/SessionData")]
+        public Staff SessionData()
+        { 
+            DataLayer dtLayer = new DataLayer();
+            Staff Staff = new Staff();
+            return dtLayer.GetUserDetailsByUser_ID();
+        }
+
         [HttpGet]
         [Route("api/Dashboard/GetRevenueSummary_Today/{Practice_ID}")]
         public Invoice GetRevenueSummary_Today(int Practice_ID)
@@ -28,6 +38,14 @@ namespace DocConnectApp.Controllers
         {
             DataLayer dtLayer = new DataLayer();
             return dtLayer.GetRevenueSummary_Week(Practice_ID);
+        }
+
+        [HttpGet]
+        [Route("api/Dashboard/GetRevenueSummary_Month/{Practice_ID}")]
+        public Invoice GetRevenueSummary_Month(int Practice_ID)
+        {
+            DataLayer dtLayer = new DataLayer();
+            return dtLayer.GetRevenueSummary_Month(Practice_ID);
         }
 
         [HttpGet]
@@ -116,6 +134,14 @@ namespace DocConnectApp.Controllers
         {
             DataLayer dtLayer = new DataLayer();
             return dtLayer.MedicineInventoryStockCount(Practice_ID);
+        }
+
+        [HttpGet]
+        [Route("api/Dashboard/NumOFPatientsPerMonthPerPractice/{Practice_ID}")]
+        public List<Consultation> NumOFPatientsPerMonthPerPractice(int Practice_ID)
+        {
+            DataLayer dtLayer = new DataLayer();
+            return dtLayer.NumOFPatientsPerMonthPerPractice(Practice_ID);
         }
     }
 }

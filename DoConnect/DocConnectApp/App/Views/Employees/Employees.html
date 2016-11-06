@@ -1,5 +1,5 @@
 ﻿<div>
-    <div id="page-wrapper" ng-controller="EmployeesController">
+    <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
                 <h2 class="page-header text-primary">Employees</h2>
@@ -22,16 +22,16 @@
             <table class="table table-hover">
                 <thead style="background-color: #f8f8f8;">
                     <tr>
-                        <th style="width: 15%;" ng-click="sort('FirstName')">Firstname<span class="fa sort-icon" ng-show="sortKey=='FirstName'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
-                        <th style="width: 15%;" ng-click="sort('LastName')">Lastname<span class="fa sort-icon" ng-show="sortKey=='LastName'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                        <th style="width: 15%;" ng-click="sort('FirstName')">First Name<span class="fa sort-icon" ng-show="sortKey=='FirstName'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                        <th style="width: 15%;" ng-click="sort('LastName')">Last Name<span class="fa sort-icon" ng-show="sortKey=='LastName'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
                         <th style="width: 20%;" ng-click="sort('Email')">Email Address<span class="fa sort-icon" ng-show="sortKey=='Email'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
                         <th style="width: 20%;" ng-click="sort('ID_Number')">ID Number<span class="fa sort-icon" ng-show="sortKey=='ID_Number'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
                         <th style="width: 15%;" ng-click="sort('Employee_Type')">Employee Type<span class="fa sort-icon" ng-show="sortKey=='Employee_Type'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
-                        <th style="width: 15%;" >Action
+                        <th style="width: 15%;">Action
                     </tr>
                 </thead>
-                <tbody>
-                    <tr dir-paginate="Employee in Employees | filter:search | orderBy:sortKey:reverse | itemsPerPage:5">
+                <tbody>                    
+                    <tr ng-show="Employees.length > 0" dir-paginate="Employee in Employees | filter:search | orderBy:sortKey:reverse | itemsPerPage:7">                        
                         <td>{{Employee.FirstName}}</td>
                         <td>{{Employee.LastName}}</td>
                         <td>{{Employee.Email}}</td>
@@ -42,6 +42,7 @@
                             <button class="btn btn-danger btn-xs" ng-click="DeleteEmployee1(Employee.User_ID, Employee.FirstName +' '+ Employee.LastName)"><i class="fa fa-trash-o"></i></button>
                         </td>
                     </tr>
+                    <tr class="row alert alert-info text-center" ng-show="Employees.length == 0"><td colspan="4"><b>System Message!</b> No employee records to display.</td></tr>
                 </tbody>
             </table>
 
@@ -54,7 +55,7 @@
 
         <!--View Employee Modal-->
         <div id="View_Employee_Modal" class="modal fade">
-            <form name="Form">
+            <form name="Form" novalidate>
                 <div class="modal-dialog" style="width:60%">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -63,10 +64,10 @@
                         </div>
                         <div class="modal-body">
                             <div class="row" style="margin-top:4px; margin-bottom:0px;">
-                                <div class="col-md-2"><h5 class="form-control-label">Firstname:</h5></div>
+                                <div class="col-md-2"><h5 class="form-control-label">First Name:</h5></div>
                                 <div class="col-md-4"><input class="form-control readonly_ViewEmployee" type="text" name="FirstName" ng-value="FirstName" ng-model="FirstName" ng-required="true" ng-pattern="/^[a-zA-Z''-'\s]{3,40}$/"></div>
                                 <div class="col-md-2"><h5>Cell Number:</h5></div>
-                                <div class="col-md-4"><input class="form-control readonly_ViewEmployee" type="text" name="Phone" ng-value="Phone" ng-model="Phone" ng-required="true" ng-pattern="/[0-9]{1}[0-9]{9}/"></div>
+                                <div class="col-md-4"><input class="form-control readonly_ViewEmployee" type="text" name="Phone" ng-value="Phone" ng-model="Phone" ng-required="true" ng-pattern="/^[0-9]{10,10}$/"></div>
                             </div>
                             <div class="row" style="margin-top:0px; margin-bottom:8px;">
                                 <div class="col-md-2"></div>
@@ -77,11 +78,11 @@
                                 <div class="col-md-2"></div>
                                 <div class="col-md-4">
                                     <small ng-show="Form.Phone.$invalid && Form.Phone.$touched && Form.Phone.$error.required">Required field.<br></small>
-                                    <small ng-show="Form.Phone.$invalid && Form.Phone.$touched && Form.Phone.$error.pattern">Only numeric letters allowed and atleast 10 charactors long.</small>
+                                    <small ng-show="Form.Phone.$invalid && Form.Phone.$touched && Form.Phone.$error.pattern">Only numeric letters allowed and 10 charactors long.</small>
                                 </div>
                             </div>
                             <div class="row" style="margin-top:4px; margin-bottom:0px;">
-                                <div class="col-md-2"><h5 class="form-control-label">Lastname:</h5></div>
+                                <div class="col-md-2"><h5 class="form-control-label">Last Name:</h5></div>
                                 <div class="col-md-4"><input class="form-control readonly_ViewEmployee" type="text" name="LastName" ng-value="LastName" ng-model="LastName" ng-required="true" ng-pattern="/^[a-zA-Z''-'\s]{3,40}$/"></div>
                                 <div class="col-md-2"><h5>Street Address:</h5></div>
                                 <div class="col-md-4"><input class="form-control readonly_ViewEmployee" type="text" name="Street_Address" ng-value="Street_Address" ng-model="Street_Address" ng-required="true" ng-pattern="/^[0-9a-zA-Z''-'\s]{3,}$/"></div>
@@ -155,11 +156,11 @@
                             </div>
                             <div class="row" style="margin-top:4px; margin-bottom:0px;">
                                 <div class="col-md-2"><h5>Gender:</h5></div>
-                                <div class="col-md-4"><select class="form-control disable_ViewEmployee readonly_ViewEmployee" ng-model="Gender" name="Gender" ng-required="true" ng-change="changedValueGetGender(Gender)" data-ng-options="gender as gender.Gender for gender in Genders">
+                                <div class="col-md-4"><select class="form-control disable_ViewEmployee readonly_ViewEmployee" ng-model="Gender" name="Gender" ng-required="true" ng-change="changedValueGetGender(Gender)" data-ng-options="gender as gender.Gender for gender in Genders | orderBy:'Gender'">
                                                             <option value="">{{Gender}}</option>
                                                         </select></div>
                                 <div class="col-md-2"><h5>Employee Type:</h5></div>
-                                <div class="col-md-4"><select class="form-control disable_ViewEmployee readonly_ViewEmployee" ng-model="ACCESSLEVEL_ID" name="ACCESSLEVEL_ID" ng-required="true" ng-change="changedValueGetAccessLevel(ACCESSLEVEL_ID)" data-ng-options="accessLevel as accessLevel.Level for accessLevel in AccessLevel">
+                                <div class="col-md-4"><select class="form-control disable_ViewEmployee readonly_ViewEmployee" ng-model="ACCESSLEVEL_ID" name="ACCESSLEVEL_ID" ng-required="true" ng-change="changedValueGetAccessLevel(ACCESSLEVEL_ID)" data-ng-options="accessLevel as accessLevel.Level for accessLevel in AccessLevel | orderBy:'Level'">
                                                         <option value="">{{Employee_Type}}</option>
                                                       </select></div>
                             </div>
@@ -174,8 +175,8 @@
                                 </div>
                             </div>
                             <div class="row" style="margin-top:4px; margin-bottom:0px;">
-                                <div class="col-md-2"><h5>Practice Name:<span style="color:red">*</span></h5></div>
-                                <div class="col-md-4"><select class="form-control disable_ViewEmployee readonly_ViewEmployee" ng-model="Practice_ID" name="Practice_ID" ng-required="true" ng-change="changedValueGetPractice_ID(Practice_ID)" data-ng-options="practice as practice.Name for practice in Practices">
+                                <div class="col-md-2"><h5>Practice Name:</h5></div>
+                                <div class="col-md-4"><select class="form-control disable_ViewEmployee readonly_ViewEmployee" ng-model="Practice_ID" name="Practice_ID" ng-required="true" ng-change="changedValueGetPractice_ID(Practice_ID)" data-ng-options="practice as practice.Name for practice in Practices | orderBy:'Name'">
                                                             <option value="">{{Practice_Name}}</option>
                                                         </select></div>
                             </div>

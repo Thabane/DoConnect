@@ -28,8 +28,6 @@ namespace DocConnectApp
                       "~/Scripts/DashboardWidgets/To Do List.css",
                       "~/Scripts/Pagination/styles.css",
                       "~/Scripts/dtPicker/bootstrap-datetimepicker.min.css",
-                      //"~/Scripts/DateTimePicker/bootstrap-datetimepicker.min.css",
-                      //"~/Scripts/DateTimePicker/bootstrap-datetimepicker.css",
                       "~/Scripts/FormValidation/FormValidationStyle.css"
                       ));
 
@@ -60,7 +58,8 @@ namespace DocConnectApp
                       "~/Scripts/dtPicker/bootstrap-datetimepicker.js",
                       "~/Scripts/Alert_Confirm_Prompt_Modal/bootbox.js",
                       "~/Scripts/Alert_Confirm_Prompt_Modal/ngBootbox.js",
-                      "~/Scripts/angular-chart/loader.js"
+                      "~/Scripts/angular-chart/loader.js",
+                      "~/Scripts/Alert_Confirm_Prompt_Modal/RSS Feed/fw-loader.js"
                       ));
         }
     }

@@ -51,6 +51,14 @@ namespace DocConnectApp.Controllers
             return dtLayer.GetSentMessageById(ID);
         }
 
+        [HttpGet]
+        [Route("api/Messages/GetAllRecepients")]
+        public List<Staff> GetAllRecepients()
+        {
+            DataLayer dtLayer = new DataLayer();
+            return dtLayer.GetAllRecepients();
+        }
+
         [HttpPost]
         [Route("api/Messages/InsertMessage")]
         public bool InsertMessage(Messages messages)

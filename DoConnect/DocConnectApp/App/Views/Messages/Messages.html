@@ -1,5 +1,5 @@
 ﻿<div>
-    <div id="page-wrapper" ng-controller="MessagesController">
+    <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
                 <h2 class="page-header text-primary">Messages</h2>
@@ -10,7 +10,7 @@
             <div class="row mailbox-header">
                 <div class="col-md-2"><a class="btn btn-info btn-block" href="#" ng-click="FunctionComposeMessage()">Compose</a></div>
                 <div class="col-md-6"><h2 style="margin-top:0px;" id="h2_ContentHeading">Inbox</h2></div>
-                <div class="col-md-4">
+                <div class="col-md-4 SearchDiv">
                     <div class="col-md-2"><h5 class="pull-right">Search:</h5></div>
                     <div class="col-md-10"><input class="form-control" type="text" style="font-size:13px;" ng-model="search"></div>
                 </div>
@@ -59,28 +59,24 @@
                 <div class="panel panel-default col-sm-10" style="padding-right:20px; border:0px;">
                     <form role="form" class="form-horizontal">
                         <div class="form-group">
-                            <label class="col-sm-2" for="inputTo">To</label>
-                            <div class="col-sm-10"><select name="receiver" class="form-control validate[required] text-input" id="to">
-                                                        <option value="patient">All Patient</option>
-                                                        <option value="doctor">All Doctor</option>
-                                                        <option value="nurse">All Nurse</option>
-                                                        <option value="receptionist">All Support Staff</option>
-                                                        <option value="pharmacist">All Pharmacist</option>
-                                                        <option value="laboratorist">All Laboratory Staff</option>
-                                                        <option value="accountant">All Accountant</option>
-                                                    </select></div>
+                            <label class="col-sm-2">To</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" ng-model="FirstName" name="FirstName" ng-change="changedValueGetReceiver_UserID(FirstName)" data-ng-options="Recepient as Recepient.FirstName for Recepient in AllRecepients | orderBy:'FirstName'">
+                                    <option value="">Select Recepient</option>
+                                </select>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2" for="inputSubject">Subject</label>
-                            <div class="col-sm-10"><input class="form-control insert" id="inputSubject" placeholder="Subject" type="text"></div>
+                            <div class="col-sm-10"><input class="form-control insert" ng-model="_Subject" placeholder="Subject" type="text"></div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-12" for="inputBody">Message</label>
-                            <div class="col-sm-12"><textarea class="form-control insert" id="inputBody" rows="8"></textarea></div>
+                            <div class="col-sm-12"><textarea class="form-control insert" ng-model="Message" rows="8"></textarea></div>
                         </div>
                     </form>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary ">Send <i class="fa fa-arrow-circle-right fa-lg"></i></button>
+                        <button type="button" class="btn btn-primary" ng-click="SendMessage(_Subject, Message)">Send <i class="fa fa-arrow-circle-right fa-lg"></i></button>
                     </div>
                 </div>
             </div><!--Compose message div Ends-->

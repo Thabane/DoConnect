@@ -1,5 +1,5 @@
 ﻿<div>
-    <div id="page-wrapper" ng-controller="AppointmentsController">
+    <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
                 <h2 class="page-header text-primary">New Appointment Details</h2>
@@ -13,9 +13,10 @@
         
         <!--New Appointment Modal-->
         <form name="Form">
-            <div style="margin:auto; width:50%;">
+            <div style="margin:auto; width:60%;">
                 <div class="modal-header" style="border-bottom:0px;"></div>
                 <div class="modal-body">
+                    <div class="row alert alert-danger text-center" ng-show="TimeError != 0">{{TimeError}}</div>
                     <div class="row" style="margin-top:4px; margin-bottom:0px;">
                         <div class="col-md-3"><h5>Date & Time:<span style="color:red">*</span></h5></div>
                         <div class="col-md-8">
@@ -37,12 +38,17 @@
                         <div class="col-md-8">
                             <div class="col-md-5" style="padding:0px;"><small ng-show="Form.Appointments_Date.$invalid && Form.Appointments_Date.$touched && Form.Appointments_Date.$error.required">Required field.<br></small></div>
                             <div class="col-md-2"></div>
-                            <div class="col-md-5" style="padding:0px;"><small ng-show="Form.Appointments_Time.$invalid && Form.Appointments_Time.$touched && Form.Appointments_Time.$error.required">Required field.<br></small></div>
+                            <div class="col-md-5">
+                                <div class="row">
+                                    <div class="col-md-12" style="padding:0px;"><small ng-show="Form.Appointments_Time.$invalid && Form.Appointments_Time.$touched && Form.Appointments_Time.$error.required">Invalid time fomart.<br></small></div>
+                                    <div class="col-md-12" style="padding:0px;"><small ng-show="Form.Appointments_Time.$invalid && Form.Appointments_Time.$touched && Form.Appointments_Time.$error.required">Required field.<br></small></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="row" style="margin-top:4px; margin-bottom:0px;">
                         <div class="col-md-3"><h5>Patient Name:<span style="color:red">*</span></h5></div>
-                        <div class="col-md-8"><select class="form-control" ng-model="Patient_ID" name="PatientName" ng-change="changedValueGetPatientID(Patient_ID)" data-ng-options="patient as patient.PatientFullName for patient in Patients" ng-required="true">
+                        <div class="col-md-8"><select class="form-control" ng-model="Patient_ID" name="PatientName" ng-change="changedValueGetPatientID(Patient_ID)" data-ng-options="patient as patient.PatientFullName for patient in Patients | orderBy:'PatientFullName'" ng-required="true">
                                                     <option value="">Select Patient</option>
                                                 </select></div>
                     </div>
@@ -65,7 +71,7 @@
                     </div>
                     <div class="row" style="margin-top:4px; margin-bottom:0px;">
                         <div class="col-md-3"><h5>Appointment Status:<span style="color:red">*</span></h5></div>
-                        <div class="col-md-8"><select class="form-control" ng-model="App_Status" name="Appointments_App_Status" ng-required="true" ng-change="changedValueGetApp_Status(Appointments_App_Status)" data-ng-options="App_Status as App_Status.Status for App_Status in App_Statusz">
+                        <div class="col-md-8"><select class="form-control" ng-model="App_Status" name="Appointments_App_Status" ng-required="true" ng-change="changedValueGetApp_Status(App_Status)" data-ng-options="App_Status as App_Status.Status for App_Status in listApp_Statusz | orderBy:'Status'">
                                                     <option value="">Select App Status</option>
                                                 </select></div>
                     </div>
@@ -76,7 +82,7 @@
                     <div class="row" style="margin-top:4px; margin-bottom:0px;">
                         <div class="col-md-3"><h5>Doctor Name:</h5></div>
                         <div class="col-md-8">
-                            <select class="form-control" ng-model="Doctors_ID" name="DoctorName" ng-required="true" ng-change="changedValueGetDoctors_ID(Doctors_ID)" data-ng-options="doctor as doctor.DoctorFullName for doctor in Doctors">
+                            <select class="form-control" ng-model="Doctors_ID" name="DoctorName" ng-required="true" ng-change="changedValueGetDoctors_ID(Doctors_ID)" data-ng-options="doctor as doctor.DoctorFullName for doctor in Doctors | orderBy:'DoctorFullName'">
                                 <option value="">Select Doctor</option>
                             </select>
                         </div>
@@ -89,7 +95,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" ng-click="NewAppointment(Details, App_Status)" ng-disabled="Form.$invalid">Add Appointment</button>
+                    <button type="button" class="btn btn-primary" ng-click="NewAppointment(Details)" ng-disabled="Form.$invalid">Add Appointment</button>
                 </div>
             </div>
         </form><!--New Appointment Modal Ends-->
@@ -99,12 +105,13 @@
     $("#date").datepicker({
         format: 'yyyy-mm-dd',
         autoclose: true,
-        orientation: "bottom"
+        orientation: "bottom",
+        minDate: 0
     });
 
-    $(function () {
-        $("#datetime").datetimepicker({
-            format: 'HH:mm'
-        });
-    });
+   //$(function () {
+       //$("#datetime").timepicker({
+       //    format: 'HH:mm'
+       //});
+   //});
 </script>

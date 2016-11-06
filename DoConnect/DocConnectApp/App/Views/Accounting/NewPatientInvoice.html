@@ -1,5 +1,5 @@
 ﻿<div>
-    <div id="page-wrapper" ng-controller="AccountingController">
+    <div id="page-wrapper">
         <!--Expenses Section Begins-->
         <div class="row">
             <div class="col-lg-12">
@@ -22,7 +22,7 @@
                     <div class="form-horizontal">
                         <div class="row" style="margin-top:4px; margin-bottom:0px;">
                             <h5 class="col-md-4">Patient:<span style="color:red">*</span></h5>
-                            <div class="col-md-8"><select class="form-control insert" ng-model="_Patient_ID" name="PatientName" ng-change="changedValueGetPatientID(_Patient_ID)" data-ng-options="patient as patient.PatientFullName for patient in Patients" ng-required="true" ng-text-change="GetDiagnosis($scope.PatientID)">
+                            <div class="col-md-8"><select class="form-control insert" ng-model="_Patient_ID" name="PatientName" ng-change="changedValueGetPatientID(_Patient_ID)" data-ng-options="patient as patient.PatientFullName for patient in Patients | orderBy:'PatientFullName'" ng-required="true" ng-text-change="GetDiagnosis($scope.PatientID)">
                                                         <option value="">Select Patient</option>
                                                     </select></div>
                         </div>
@@ -32,7 +32,7 @@
                         </div>
                         <div class="row" style="margin-top:4px; margin-bottom:0px;" ng-show="_Patient_ID != '0'">
                             <h5 class="col-md-4">Treatment Details:<span style="color:red">*</span></h5>
-                            <div class="col-md-8"><select class="form-control insert" ng-model="_InvoiceSummary" name="InvoiceSummary" ng-change="changedValueGetInvoiceSummary(_InvoiceSummary)" data-ng-options="diagnosis as diagnosis.Diagnosis for diagnosis in Diagnosis" ng-required="true">
+                            <div class="col-md-8"><select class="form-control insert" ng-model="_InvoiceSummary" name="InvoiceSummary" ng-change="changedValueGetInvoiceSummary(_InvoiceSummary)" data-ng-options="diagnosis as diagnosis.Diagnosis for diagnosis in Diagnosis | orderBy:'Diagnosis'" ng-required="true">
                                                         <option value="">Select Treatment Details</option>
                                                     </select></div>
                         </div>
@@ -42,7 +42,7 @@
                         </div>
                         <div class="row" style="margin-top:4px; margin-bottom:0px;">
                             <div class="col-md-4"><h5>Doctor Name:<span style="color:red">*</span></h5></div>
-                            <div class="col-md-8"><select class="form-control" ng-model="Doctors_ID" name="DoctorName" ng-required="true" ng-change="changedValueGetDoctors_ID(Doctors_ID)" data-ng-options="doctor as doctor.DoctorFullName for doctor in Doctors">
+                            <div class="col-md-8"><select class="form-control" ng-model="Doctors_ID" name="DoctorName" ng-required="true" ng-change="changedValueGetDoctors_ID(Doctors_ID)" data-ng-options="doctor as doctor.DoctorFullName for doctor in Doctors | orderBy:'DoctorFullName'">
                                                         <option value="">Select Doctor</option>
                                                     </select></div>
                         </div>
