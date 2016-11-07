@@ -305,6 +305,7 @@
     <Content Include="Content\css\fontawesome-webfont.ttf" />
     <Content Include="Content\css\fontawesome-webfont.woff" />
     <Content Include="Scripts\angular-cookies.min.js.map" />
+    <None Include="Properties\PublishProfiles\doconnectpatientportal.pubxml" />
     <None Include="Properties\PublishProfiles\doconnectpatientsportal.azurewebsites.net.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\DTPicker\bootstrap-datetimepicker.css" />
