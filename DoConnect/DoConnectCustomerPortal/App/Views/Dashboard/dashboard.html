@@ -1,0 +1,64 @@
+﻿<div class="span9" ng-controller="DashboardController">
+    <div class="btn-controls">
+        <div class="btn-box-row row-fluid">
+            <a href="/Appointments" class="btn-box big span4">
+                <i class="icon-hospital"></i><b>Appointments</b>
+                <p class="text-muted">
+                    {{AppointmentsTotal}}
+                </p>
+            </a>
+            <a href="#" class="btn-box big span4">
+                <i class="icon-user"></i><b>Profile</b>
+                <p class="text-muted">
+                    {{LoggedUserName}}
+                </p>
+            </a>
+            <a href="/Messages" class="btn-box big span4">
+                <i class="menu-icon icon-bullhorn"></i><b>Notifications</b>
+                <p class="text-muted">
+                    {{NumOfUnReadMessages}}
+                </p>
+            </a>
+        </div>
+
+        <div class="btn-box-row row-fluid">
+            <div class="span12">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <a href="/Messages" class="btn-box small span4">
+                            <i class="icon-envelope"></i><b>Messages</b>
+                        </a>
+                        <a href="/Doctors" class="btn-box small span4">
+                            <i class="icon-group"></i><b>Doctor's</b>
+                        </a>
+                        <a href="/AppointmentsCalendar" class="btn-box small span4">
+                            <i class="icon-calendar"></i><b>Events</b>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="btn-box-row row-fluid">
+            <a href="/Practices" class="btn-box big span4">
+                <i class="icon-map-marker"></i><b>Practice's</b>
+                <p class="text-muted">
+                    {{TotalPracices}}
+                </p>
+            </a>
+            <a href="#ProfileModal" class="btn-box big span4">
+                <i class="icon-user"></i><b>Prescription</b>
+                <p class="text-muted">
+                    3
+                </p>
+            </a>
+            <a href="/MedicalAid" class="btn-box big span4">
+                <i class="icon-money"></i><b>Medical Aid</b>
+                <p class="text-muted">
+                    {{MedicalAid}}
+                </p>
+            </a>
+        </div>
+    </div>
+    <!--/#btn-controls-->
+</div>

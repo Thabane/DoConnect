@@ -1,0 +1,125 @@
+﻿<div>
+    <div id="page-wrapper" ng-controller="EventsController">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header text-primary">Events</h2>
+            </div>
+        </div>
+
+        <ul class="nav nav-tabs">
+            <li role="presentation" class="active"><a href="/Events"><i class="fa fa-align-justify"></i>Events List</a></li>
+            <li role="presentation"><a href="/NewEvent"><i class="fa fa-plus-circle"></i>New Event</a></li>
+        </ul>
+        
+        <div class="panel panel-default">
+            <div class="row" style="margin-top: 10px; margin-right: 10px;">
+                <div class="col-md-4"></div><div class="col-md-4"><h5 class="pull-right">Search:</h5></div>
+                <div class="form-group col-md-4">
+                    <input class="form-control" type="text" style="font-size:13px;" ng-model="search">
+                </div>
+            </div>
+
+            <table class="table table-hover">
+                <thead style="background-color: #f8f8f8;">
+                    <tr>
+                        <th style="width: 20%;" ng-click="sort('Title')">Title<span class="fa sort-icon" ng-show="sortKey=='Title'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                        <th style="width: 25%;" ng-click="sort('EventDetails')">Event Details<span class="fa sort-icon" ng-show="sortKey=='EventDetails'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                        <th style="width: 20%;" ng-click="sort('StartDate_Time')">Start Date & Time<span class="fa sort-icon" ng-show="sortKey=='StartDate_Time'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                        <th style="width: 20%;" ng-click="sort('EndDate_Time')">End Date & Time<span class="fa sort-icon" ng-show="sortKey=='EndDate_Time'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                        <th style="width: 15%;">Action
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr dir-paginate="Event in Events | filter:search | orderBy:sortKey:reverse | itemsPerPage:5">
+                        <td>{{Event.Title}}</td>
+                        <td>{{Event.EventDetails}}</td>
+                        <td>{{Event.StartDate_Time}}</td>
+                        <td>{{Event.EndDate_Time}}</td>
+                        <td>
+                            <button class="btn btn-primary btn-xs" ng-click="ViewEvent(Event.ID)" onclick="ViewEvent()"><i class="glyphicon glyphicon-new-window"></i></button>
+                            <button class="btn btn-danger btn-xs" ng-click="DeleteEvent(Event.ID)"><i class="fa fa-trash-o"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <dir-pagination-controls class="pull-right" max-size="5" direction-links="true" boundary-links="true" style="margin-right: 20px;"></dir-pagination-controls>
+                </div>
+            </div>
+        </div>
+
+        <!--View Events Modal-->
+        <div id="View_Event_Modal" class="modal fade">
+            <form>
+                <div class="modal-dialog" style="width:40%">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title text-primary">Event Details</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row" style="margin-top:5px; margin-bottom:5px;">
+                                <div class="col-md-3"><h5>Title:</h5></div>
+                                <div class="col-md-8"><input class="form-control readonly_ViewEvent" type="text" ng-model="Title"></div>
+                            </div>
+                            <div class="row" style="margin-top:5px; margin-bottom:5px;">
+                                <div class="col-md-3"><h5>Details:</h5></div>
+                                <div class="col-md-8"><textarea class="form-control readonly_ViewEvent" rows="3" cols="20" ng-model="Details"></textarea></div>
+                            </div>
+                            <div class="row" style="margin-top:5px; margin-bottom:0px;">
+                                <div class="col-md-3"><h5>Start Date & Time:</h5></div>
+                                <div class="col-md-8"><div class="row" style="padding-left:0px; padding-right:0px;">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <div class="input-group date" id='datetimepicker3' ng-click="DT_View_Events()">
+                                                                        <input class="form-control" type="text" ng-model="StartDateTime">
+                                                                        <span class="input-group-addon">
+                                                                            <span class="glyphicon glyphicon-calendar"></span>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:0px; margin-bottom:0px;">
+                                <div class="col-md-3"><h5>End Date & Time:</h5></div>
+                                <div class="col-md-8"><div class="row" style="padding-left:0px; padding-right:0px;">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <div class="input-group date" id="datetimepicker4" ng-click="DT_View_Events()">
+                                                                        <input class="form-control" type="text" ng-model="EndDateTime">
+                                                                        <span class="input-group-addon">
+                                                                            <span class="glyphicon glyphicon-calendar"></span>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:0px; margin-bottom:5px;">
+                                <div class="col-md-3"><h5>Appointment Status:</h5></div>
+                                <div class="col-md-8"><select class="form-control readonly_ViewEvent" ng-model="AppointmentStatus">
+                                                            <option value="">Status</option>
+                                                            <option value="1">Approve</option>
+                                                            <option value="2">Decline</option>
+                                                        </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" ng-click="function_btnUpdateEvent(Title, Details, StartDateTime, EndDateTime, AppointmentStatus)" id="function_btnUpdateEvent">Update</button>
+                            <button type="button" class="btn btn-danger" id="btnDeleteConfirmed" onclick="btnConfirm('danger', 'Are you sure you want to delete this Practice?')">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div><!--View Event Modal Ends-->       
+    </div>
+</div>
+
+

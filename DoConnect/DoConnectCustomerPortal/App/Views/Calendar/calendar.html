@@ -1,0 +1,24 @@
+﻿<div class="row">
+    <section id="directives-calendar" ng-controller="CalendarCtrl">
+        <div class="well">
+            <div class="row-fluid">
+                <div class="span12">
+                    <tabset>
+                        <tab select="renderCalendar('myCalendar3');">
+                            <div class="btn-toolbar">
+                                <a class="btn btn-default icon-list pull-right" href="/Appointments"></a>
+                                <p class="pull-right lead">Appointments Calendar </p>
+                                <div class="btn-group">
+                                    <button class="btn btn-success" ng-click="changeView('agendaDay', 'myCalendar3')">AgendaDay</button>
+                                    <button class="btn btn-success" ng-click="changeView('agendaWeek', 'myCalendar3')">AgendaWeek</button>
+                                    <button class="btn btn-success" ng-click="changeView('month', 'myCalendar3')">Month</button>
+                                </div>
+                            </div>
+                            <div class="calendar" ng-model="eventSources2" calendar="myCalendar3" ui-calendar="uiConfig.calendar"></div>
+                        </tab>
+                    </tabset>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
