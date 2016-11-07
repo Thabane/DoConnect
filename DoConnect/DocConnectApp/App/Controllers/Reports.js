@@ -338,7 +338,7 @@
                 ]);
 
                 var options_Age = {
-                    pieHole: 0.6, width: 500, height: 300
+                    pieHole: 0.6, width: 500, height: '220'
                 };
 
                 var chart_Age = new google.visualization.PieChart(document.getElementById('donutchart_Gender'));
@@ -364,19 +364,23 @@
                 chart.draw(data, options);
 
                 //Financial Bar Graph - Totals (Consulation Fee, Amount Owing, Amount Paid) Over the selected period over a selected period of time.
-                var data_Finance = new google.visualization.arrayToDataTable([
-                  ['Income Type', 'Amount (R)'],
-                  ["Gross Income", $scope.Total_Footer],
-                  ["Income Received", $scope.AmountPaid_Footer],
-                  ["Income Outstanding", $scope.BalanceOwing_Footer]
+                var data = google.visualization.arrayToDataTable([
+                    ["Income Type", "Amount (R)", { role: "style" }],
+                    ["Gross Income", $scope.Total_Footer, "gold"],
+                    ["Income Received", $scope.AmountPaid_Footer, "gold"],
+                    ["Income Outstanding", $scope.BalanceOwing_Footer, "gold"]
                 ]);
 
-                var options_Finance = {
-                    width: 900, height: 500, legend: { position: 'none' }, axes: { x: { 0: { side: 'top', label: 'White to move' } } }, bar: { groupWidth: "20px" }
+                var options = {
+                    title: "Income in (R)",
+                    width: 1000,
+                    height: 400,
+                    bar: { groupWidth: "95%" },
+                    legend: { position: "none" },
                 };
 
-                var chart_Finance = new google.charts.Bar(document.getElementById('top_x_div'));
-                chart_Finance.draw(data_Finance, google.charts.Bar.convertOptions(options_Finance));
+                var chart = new google.visualization.ColumnChart(document.getElementById('curve_chart_IncomeStats'));
+                chart.draw(data, options);
             } 
         };
     }]);

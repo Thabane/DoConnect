@@ -73,7 +73,7 @@
                                     <td>{{financialReportData.Diagnosis}}</td>
                                     <td>{{financialReportData.Total}}</td>
                                     <td>{{financialReportData.AmountPaid}}</td>
-                                    <td ng-class="{'text-danger': financialReportData.AmountPaid != '0'}">{{financialReportData.BalanceOwing}}</td>
+                                    <td ng-class="{'text-danger': financialReportData.BalanceOwing > 0}">{{financialReportData.BalanceOwing}}</td>
                                 </tr>  
                                 <tr ng-show="Total_Footer > '0'">
                                     <td colspan="3"><b>Totals</b></td>
@@ -96,51 +96,59 @@
 
         <!--View Financial Graph Modal-->
         <div id="View_Financial_Modal" class="modal fade">
-            <div class="modal-dialog">
+            <div class="modal-dialog" style="width:90%;">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         <h4 class="modal-title text-primary">Consultation Report: {{Finance_Practice_Name}}</h4>
                     </div>
                     <div class="modal-body">
-                        <div class="portlet light" style="border: 1px solid #ddd; border-radius: 4px; height: auto; width: auto">
-                            <div class="portlet-title">
-                                <div class="caption caption-md">
-                                    <i class="icon-bar-chart font-dark hide"></i>
-                                    <span class="caption-subject font-green-steel uppercase bold">Patients Gender Stats</span>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="portlet light" style="border: 1px solid #ddd; border-radius: 4px; height: auto; width: auto">
+                                    <div class="portlet-title">
+                                        <div class="caption caption-md">
+                                            <i class="icon-bar-chart font-dark hide"></i>
+                                            <span class="caption-subject font-green-steel uppercase bold">Patients Gender Stats</span>
+                                        </div>
+                                    </div>
+                                    <div class="portlet-body">
+                                        <div ng-show="num_Male > 0 || num_Female > 0"><p><h5>{{num_Male + num_Female}} consulatations were conducted at {{Finance_Practice_Name}} over the selected period of time.</h5></p></div>
+                                        <div id="donutchart_Gender" style="width: 500px; height:223px; margin: auto"></div>
+                                        <div ng-show="num_Male > 0 || num_Female > 0"><p><h5><b>Suggestion</b>: Implement marketing strategies directed to the {{Suggestion}} population. </h5></p></div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="portlet-body">
-                                <div ng-show="num_Male > 0 || num_Female > 0"><p><h5>{{num_Male + num_Female}} consulatations were conducted at {{Finance_Practice_Name}} over the selected period of time.</h5></p></div>
-                                <div id="donutchart_Gender" style="width: 500px; height:300px; margin: auto"></div>
-                                <div ng-show="num_Male > 0 || num_Female > 0"><p><h5><b>Suggestion</b>: Implement marketing strategies directed to the {{Suggestion}} population. </h5></p></div>
-                            </div>
-                        </div>
-
-                        <div class="portlet light" style="border: 1px solid #ddd; border-radius: 4px; height: auto; width: auto">
-                            <div class="portlet-title">
-                                <div class="caption caption-md">
-                                    <i class="icon-bar-chart font-dark hide"></i>
-                                    <span class="caption-subject font-green-steel uppercase bold">Patients Age Stats</span>
+                            <div class="col-md-6">
+                                <div class="portlet light" style="border: 1px solid #ddd; border-radius: 4px; height: auto; width: auto">
+                                    <div class="portlet-title">
+                                        <div class="caption caption-md">
+                                            <i class="icon-bar-chart font-dark hide"></i>
+                                            <span class="caption-subject font-green-steel uppercase bold">Patients Age Stats</span>
+                                        </div>
+                                    </div>
+                                    <div class="portlet-body">
+                                        <div id="donutchart_Age" style="width: 500px; height: 300px;"></div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="portlet-body">
-                                <div id="donutchart_Age" style="width: 500px; height: 300px;"></div>
-                            </div>
                         </div>
-
-                        <div class="portlet light" style="border: 1px solid #ddd; border-radius: 4px; height: auto; width: auto">
-                            <div class="portlet-title">
-                                <div class="caption caption-md">
-                                    <i class="icon-bar-chart font-dark hide"></i>
-                                    <span class="caption-subject font-green-steel uppercase bold">Income Graph</span>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-4 portlet light" style="border: 1px solid #ddd; border-radius: 4px; height: auto; width: auto">
+                                    <div class="portlet-title">
+                                        <div class="caption caption-md">
+                                            <i class="icon-bar-chart font-dark hide"></i>
+                                            <span class="caption-subject font-green-steel uppercase bold">Income Graph</span>
+                                        </div>
+                                    </div>
+                                    <div class="portlet-body">
+                                        <div id="curve_chart_IncomeStats" style="width: 1000px; height: 400px;"></div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="portlet-body" style="max-height: 500px; overflow-y: auto; overflow-x: auto;">
-                                <div id="top_x_div" style="width: 900px; height: 500px;"></div>
-                            </div>
                         </div>
-                    </div>
+                     </div>
                 </div>
             </div>
         </div><!--View Patients Demographic Graph Modal-->
