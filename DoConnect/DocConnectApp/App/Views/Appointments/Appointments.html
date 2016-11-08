@@ -29,36 +29,36 @@
                 </div>
             </div>
             <div class="table-responsive table-bordered">
-                <table class="table table-hover">
-                    <thead style="background-color: #f8f8f8;">
-                        <tr>
+            <table class="table table-hover">
+                <thead style="background-color: #f8f8f8;">
+                    <tr>
                             <th ng-click="sort('Date_Time')">App Date/Time<span class="fa sort-icon" ng-show="sortKey=='Date_Time'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
                             <th ng-click="sort('PatientName')">Patient's Name<span class="fa sort-icon" ng-show="sortKey=='PatientName'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
                             <th ng-click="sort('DoctorName')">Doctor's Name<span class="fa sort-icon" ng-show="sortKey=='DoctorName'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
                             <th ng-click="sort('Details')">App Details<span class="fa sort-icon" ng-show="sortKey=='Details'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
                             <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-show="Appointments.length > 0" ng-class="{'info': Appointment.highlightTodayApps == '1', 'success': Appointment.highlightTomorrowApps == '1'}" dir-paginate="Appointment in Appointments | filter:search | orderBy:sortKey:reverse | itemsPerPage:7">
-                            <td>{{Appointment.Appointments_Date_Time}}</td>
-                            <td>{{Appointment.Patient_FirstName}} {{Appointment.Patient_LastName}}</td>
-                            <td>{{Appointment.Doctors_FirstName}} {{Appointment.Doctors_LastName}}</td>
-                            <td>{{Appointment.Appointments_Details}}</td>
-                            <td>
-                                <button class="btn btn-primary btn-xs" ng-click="ViewAppointment(Appointment.Appointments_ID)" onclick="ViewAppointment()"><i class="glyphicon glyphicon-new-window"></i></button>
-                                <button class="btn btn-danger btn-xs" ng-click="DeleteAppointment1(Appointment.Appointments_ID)"><i class="fa fa-trash-o"></i></button>
-                            </td>
-                        </tr>
-                        <tr class="row alert alert-info text-center" ng-show="Appointments.length == 0"><td colspan="4"><b>System Message!</b> No appointment records to display.</td></tr>
-                    </tbody>
-                </table>
-                <div class="row">
-                    <div class="col-md-12">
-                        <dir-pagination-controls class="pull-right" max-size="5" direction-links="true" boundary-links="true" style="margin-right: 20px;"></dir-pagination-controls>
-                    </div>
+                    </tr>
+                </thead>
+                <tbody>
+    
+                    <tr dir-paginate="Appointment in Appointments | filter:search | orderBy:sortKey:reverse | itemsPerPage:5">
+                        <td>{{Appointment.Appointments_Date_Time}}</td>
+                        <td><a>{{Appointment.Patient_FirstName}} {{Appointment.Patient_LastName}}</a></td>
+                        <td>{{Appointment.Doctors_FirstName}} {{Appointment.Doctors_LastName}}</td>
+                        <td>{{Appointment.Appointments_Details}}</td>
+                        <td>
+                            <button class="btn btn-primary btn-xs" ng-click="ViewAppointment(Appointment.Appointments_ID)" onclick="ViewAppointment()"><i class="glyphicon glyphicon-new-window"></i></button>
+                            <button class="btn btn-danger btn-xs" ng-click="DeleteAppointment1(Appointment.Appointments_ID)"><i class="fa fa-trash-o"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="row">
+                <div class="col-md-12">
+                    <dir-pagination-controls class="pull-right" max-size="5" direction-links="true" boundary-links="true" style="margin-right: 20px;"></dir-pagination-controls>
                 </div>
             </div>
+        </div>
         </div>
 
         <!--View Appointment Modal-->
@@ -156,5 +156,11 @@
 <script>
     $("#date").datepicker({
         format: 'yyyy-mm-dd'
+    });
+
+    $(function () {        
+        $("#datetime").datetimepicker({
+            format: 'HH:mm'
+        });
     });
 </script>

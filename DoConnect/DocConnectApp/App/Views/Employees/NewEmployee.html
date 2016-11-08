@@ -139,6 +139,12 @@
                             </select>
                         </div>
                     </div>
+                    <div class="row" style="margin-top:0px; margin-bottom:8px;">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-4">
+                            <small ng-show="Form.Practice_ID.$invalid && Form.Practice_ID.$touched && Form.Practice_ID.$error.required">Required field.<br></small>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" ng-click="NewEmployee(FirstName, LastName, ID_Number, Phone, Street_Address, Suburb, City, Country, Email)" ng-disabled="Form.$invalid">Add Employee</button>
