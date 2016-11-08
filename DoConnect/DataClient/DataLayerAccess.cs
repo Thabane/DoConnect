@@ -1,6 +1,7 @@
 ﻿using ObjectModel;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace DataClient
     {
         private DataAccess access;
         private List<SqlParameter> _parameters = new List<SqlParameter>();
-        private string Conn = @"Server=tcp:doconnect.database.windows.net,1433;Initial Catalog=DoConnect;Persist Security Info=False;User ID=teamCogent;Password=DoConnect1;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+        private string Conn;
         private int LoggedIn_User_AccessLevel;
         private int LoggedIn_User_PRACTICE_ID;
 
@@ -22,6 +23,7 @@ namespace DataClient
             access = new DataAccess();
             LoggedIn_User_AccessLevel = 1;
             LoggedIn_User_PRACTICE_ID = 1;
+            Conn = ConfigurationManager.ConnectionStrings["DB"].ConnectionString;
         }
 
         public List<Appointments> GetAppointments()

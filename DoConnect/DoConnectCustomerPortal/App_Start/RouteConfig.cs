@@ -12,12 +12,12 @@ namespace DoConnectCustomerPortal
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-            //PatientLoginController
+
             routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "PatientLogin", action = "Index", id = UrlParameter.Optional }
-            );
+              name: "App",
+              url: "{*url}",
+              defaults: new { controller = "Home", action = "Index" }
+          );
         }
     }
 }
