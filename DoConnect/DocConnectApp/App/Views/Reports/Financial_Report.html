@@ -114,7 +114,7 @@
                                     </div>
                                     <div class="portlet-body">
                                         <div ng-show="num_Male > 0 || num_Female > 0"><p><h5>{{num_Male + num_Female}} consulatations were conducted at {{Finance_Practice_Name}} over the selected period of time.</h5></p></div>
-                                        <div id="donutchart_Gender" style="width: 500px; height:223px; margin: auto"></div>
+                                        <div id="donutchart_Gender" style="width: 500px; height:230px; margin: auto"></div>
                                         <div ng-show="num_Male > 0 || num_Female > 0"><p><h5><b>Suggestion</b>: Implement marketing strategies directed to the {{Suggestion}} population. </h5></p></div>
                                     </div>
                                 </div>
@@ -134,8 +134,8 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12">
-                                <div class="col-md-4 portlet light" style="border: 1px solid #ddd; border-radius: 4px; height: auto; width: auto">
+                            <div class="col-md-6">
+                                <div class="portlet light" style="border: 1px solid #ddd; border-radius: 4px; height: auto; width: auto">
                                     <div class="portlet-title">
                                         <div class="caption caption-md">
                                             <i class="icon-bar-chart font-dark hide"></i>
@@ -143,7 +143,20 @@
                                         </div>
                                     </div>
                                     <div class="portlet-body">
-                                        <div id="curve_chart_IncomeStats" style="width: 1000px; height: 400px;"></div>
+                                        <div id="curve_chart_IncomeStats" style="width: 500px; height: 400px;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="portlet light" style="border: 1px solid #ddd; border-radius: 4px; height: auto; width: auto">
+                                    <div class="portlet-title">
+                                        <div class="caption caption-md">
+                                            <i class="icon-bar-chart font-dark hide"></i>
+                                            <span class="caption-subject font-green-steel uppercase bold">Income Graph ({{month_5}} to {{month_0}})</span>
+                                        </div>
+                                    </div>
+                                    <div class="portlet-body" style="max-height: 500px; overflow-y: hidden; overflow-x: auto;">
+                                        <div id="curve_chart_Income_OverLast6Months" style="width: 1200px; height: 380px;"></div>
                                     </div>
                                 </div>
                             </div>
