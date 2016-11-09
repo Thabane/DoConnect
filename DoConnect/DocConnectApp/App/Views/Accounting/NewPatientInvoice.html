@@ -22,7 +22,7 @@
                     <div class="form-horizontal">
                         <div class="row" style="margin-top:4px; margin-bottom:0px;">
                             <h5 class="col-md-4">Patient:<span style="color:red">*</span></h5>
-                            <div class="col-md-8"><select class="form-control insert" ng-model="_Patient_ID" name="PatientName" ng-change="changedValueGetPatientID(_Patient_ID)" data-ng-options="patient as patient.PatientFullName for patient in Patients | orderBy:'PatientFullName'" ng-required="true" ng-text-change="GetDiagnosis($scope.PatientID)">
+                            <div class="col-md-8"><select class="form-control insert" ng-model="PatientFullName" name="PatientName" ng-change="changedValueGetPatientID(PatientFullName)" data-ng-options="patient as patient.PatientFullName for patient in Patients | orderBy:'PatientFullName'" ng-required="true" ng-text-change="GetDiagnosis($scope.PatientID)">
                                                         <option value="">Select Patient</option>
                                                     </select></div>
                         </div>

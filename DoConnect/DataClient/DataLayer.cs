@@ -15,8 +15,8 @@ namespace DataClient
     {
         private DataAccess access; 
         private List<SqlParameter> _parameters = new List<SqlParameter>();
-        private string Conn = @"Data Source=DESKTOP-6Gu3I3G\SQLEXPRESS;Initial Catalog=DoConnect;Integrated Security=True";
-        //private string Conn = @"Server=tcp:doconnect.database.windows.net,1433;Initial Catalog=DoConnect;Persist Security Info=False;User ID=teamCogent;Password=DoConnect1;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+        //private string Conn = @"Data Source=DESKTOP-6Gu3I3G\SQLEXPRESS;Initial Catalog=DoConnect;Integrated Security=True";
+        private string Conn = @"Server=tcp:doconnect.database.windows.net,1433;Initial Catalog=DoConnect;Persist Security Info=False;User ID=teamCogent;Password=DoConnect1;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
         public DataLayer()
         {
             access = new DataAccess();            
@@ -1055,20 +1055,14 @@ namespace DataClient
         public List<GetAllPatients> GetAllPatientsForInvoice()
         {
             List<GetAllPatients> patientInfo = new List<GetAllPatients>();
-            try
+            
+            using (var reader = access.ExecuteReader(Conn, "[GetAllPatientsForInvoice]", new List<SqlParameter>()))
             {
-                using (var reader = access.ExecuteReader(Conn, "[GetAllPatientsForInvoice]", new List<SqlParameter>()))
+                while (reader.Read())
                 {
-                    while (reader.Read())
-                    {
-                        patientInfo.Add(new GetAllPatients().Create(reader));
-                    }
+                    patientInfo.Add(new GetAllPatients().Create(reader));
                 }
-            }
-            catch (Exception)
-            {
-
-            }
+            }            
             return patientInfo;
         }
 
@@ -1099,7 +1093,7 @@ namespace DataClient
         public bool NewInvoice(string Date, string InvoiceSummary, decimal Total, decimal AmountPaid, int Medical_Aid_ID, int Patient_ID, int Doctor_ID)
         {
             List<SqlParameter> _parameters = new List<SqlParameter>();
-            SqlParameter dateParameter = new SqlParameter("@Date", SqlDbType.DateTime);
+            SqlParameter dateParameter = new SqlParameter("@Date", SqlDbType.NVarChar);
             SqlParameter invoiceSummaryParameter = new SqlParameter("@InvoiceSummary", SqlDbType.NVarChar);
             SqlParameter totalParameter = new SqlParameter("@Total", SqlDbType.Decimal);
             SqlParameter AmountPaidParameter = new SqlParameter("@AmountPaid", SqlDbType.Decimal);
@@ -1144,7 +1138,7 @@ namespace DataClient
                     if (reader.Read())
                     {
                         insertedID = reader.GetInt32(reader.GetOrdinal("ID"));                        
-                        //Email.SendEmail("josephine.chivinge@gmail.com", "Consultation Invoice", "Here is your email", "");
+                        Email.SendEmail("josephine.chivinge@gmail.com", "Consultation Invoice", "Your account has been billed with the consultation fee amount of R "+ Total+ ".\nA total amount of R "+Convert.ToDecimal(Total - AmountPaid)+" has been credited to your account.","");
                     }
                 }
                 //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Recorded new invoice entry");
