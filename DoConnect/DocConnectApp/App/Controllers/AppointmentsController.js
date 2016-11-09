@@ -11,6 +11,7 @@
                 $scope.Appointments = result.data;                
                 $scope.numTodayApps = $scope.Appointments[$scope.Appointments.length - 1].numTodayApps;
                 $scope.numTomorrowApps = $scope.Appointments[$scope.Appointments.length - 1].numTomorrowApps;
+                $scope.numYesterdayApps = $scope.Appointments[$scope.Appointments.length - 1].numYesterdayApps;
             });
         };
         $scope.GetAllAppointments();

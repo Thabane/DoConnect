@@ -91,7 +91,6 @@
         }
         
         var InsertPrescription = function (Patient_ID, Doctor_ID, Consultation_ID, Prescription_DrugDetails_DrugName, Prescription_DrugDetails_Strength, Prescription_DrugDetails_IntakeRoute, Prescription_DrugDetails_Frequency, Prescription_DrugDetails_DispenseNumber, Prescription_DrugDetails_RefillNumber) {
-            console.log(Patient_ID, Doctor_ID, Consultation_ID, Prescription_DrugDetails_DrugName, Prescription_DrugDetails_Strength, Prescription_DrugDetails_IntakeRoute, Prescription_DrugDetails_Frequency, Prescription_DrugDetails_DispenseNumber, Prescription_DrugDetails_RefillNumber);
             return $http.post("api/Patients/InsertPrescription",
             {
                 'Patient_ID': Patient_ID,
@@ -107,7 +106,6 @@
         };
 
         var UpdatePrescription = function (Prescription_ID, Consultation_Diagnosis, Prescription_DrugDetails_DrugName, Prescription_DrugDetails_Strength, IntakeRoute, Frequency, Prescription_DrugDetails_DispenseNumber, Prescription_DrugDetails_RefillNumber) {
-            console.log(Prescription_ID, Consultation_Diagnosis, Prescription_DrugDetails_DrugName, Prescription_DrugDetails_Strength, IntakeRoute, Frequency, Prescription_DrugDetails_DispenseNumber, Prescription_DrugDetails_RefillNumber)
             return $http.post("api/Patients/UpdatePrescription",
             {
                 'Prescription_ID': Prescription_ID,
@@ -132,7 +130,6 @@
 
         //Insert new record ##Patient_ID, Doctor_ID,
         var InsertConsultation = function (Patient_ID, ReasonForConsultation, Symptoms, ClinicalFindings, Diagnosis, TestResultSummary, TreatmentPlan, Presciption_ID, Referral_ID) {
-            console.log(ReasonForConsultation, Symptoms, ClinicalFindings, Diagnosis, TestResultSummary, TreatmentPlan, Presciption_ID, Referral_ID);
             return $http.post("api/Patients/InsertConsultation",
             {
                 'Consultation_Patient_ID': Patient_ID,
@@ -145,6 +142,14 @@
                 'Consultation_TreatmentPlan': TreatmentPlan,
                 'Consultation_Presciption_ID': Presciption_ID,
                 'Consultation_Referral_ID': Referral_ID
+            });
+        };
+
+        var UpdateConsultation_AddAdditionalFee = function (Additionalfee, InvoiceDocMessage) {
+            return $http.post("api/Patients/UpdateConsultation_AddAdditionalFee",
+            {
+                'Additionalfee': Additionalfee,
+                'InvoiceDocMessage': InvoiceDocMessage
             });
         };
 
@@ -186,6 +191,7 @@
             //Consultation Notes
             GetConsultationNotes: GetConsultationNotes,
             InsertConsultation: InsertConsultation,
+            UpdateConsultation_AddAdditionalFee: UpdateConsultation_AddAdditionalFee,
             UpdateConsultationNote: UpdateConsultationNote,
             DeleteConsultationNote: DeleteConsultationNote
         };

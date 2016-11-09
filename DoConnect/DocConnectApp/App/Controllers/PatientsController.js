@@ -254,12 +254,36 @@
         //Insert Consultation Notes Funtion ##Remember to add Patient_ID, Doctor_ID, 
         $scope.InsertConsultation = function (ReasonForConsultation, Symptoms, ClinicalFindings, Diagnosis, TestResultSummary, TreatmentPlan) {
             PatientsService.InsertConsultation(sessionStorage.Selected_PatientID, ReasonForConsultation, Symptoms, ClinicalFindings, Diagnosis, TestResultSummary, TreatmentPlan, 1, 1).success(function () {
-                GetConsultationNotes();
+                //GetConsultationNotes();
                 angular.element(".insert").val('');
                 btnSuccess("Consultation Note successfully inserted.");
-                $location.path('/ConsultationNotes');
+                $ngBootbox.confirm("The regular consultation fee is R250. Would you like to add an additional consultation fees?").then(function () {
+                    //Executed when user clicks yes
+                    angular.element("#UpdateConsultation_AddAdditionalFee").css("display", "block");
+                    angular.element("#UpdateConsultation_AddAdditionalFee").addClass("show");
+                        
+                }, function () {
+                    $location.path('/ConsultationNotes');
+                });
             }, function (error) {
                 btnAlert("System Error Message", "Insert unsuccessful.");
+            });          
+        };        
+
+        $scope.close_AddAdditionalFee = function () {
+            angular.element("#UpdateConsultation_AddAdditionalFee").css("display", "none");
+            angular.element("#UpdateConsultation_AddAdditionalFee").add(".hide, .fade");
+            angular.element("#UpdateConsultation_AddAdditionalFee").removeClass("show");
+        };
+
+        $scope.UpdateConsultation_AddAdditionalFee = function (AddAdditionalFee, InvoiceDocMessage) {
+            PatientsService.UpdateConsultation_AddAdditionalFee(AddAdditionalFee, InvoiceDocMessage).then(function () {
+                angular.element("#close_AddAdditionalFee").trigger("click");
+                $location.path('/ConsultationNotes');
+                btnSuccess("Additional consultation fee has been recorded.");
+                
+            }, function (error) {
+                btnAlert("System Error Message", "Delete unsuccessful.");
             });
         };
 

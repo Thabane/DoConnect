@@ -15,18 +15,21 @@
 
         <div class="panel panel-default">
             <div class="row" style="margin-top: 10px; margin-right: 10px;">
-                <div class="col-md-6">
+                <div class="col-md-8">
                     <div class="row" style="padding-top: 10px; padding-left: 7px;">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <small class="font-dark">Un-Paid Invoices </small> <span class="label label-pill label-danger">{{numOfUnPaid}}</span>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <small class="font-dark">Partially-Paid Invoices </small> <span class="label label-pill label-warning">{{numOfPatiallyPaid}}</span>
+                        </div>
+                        <div class="col-md-4">
+                            <button type="button" class="btn btn-info" onclick="ViewUninvoicedConsultations()">Uninvoiced Consultations <span class="label label-pill label-default">{{numOfUnInvoicedConsultations}}</span></button>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-2"><h5 class="pull-right">Search:</h5></div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-2">
                     <input class="form-control" type="text" style="font-size:13px;" ng-model="search">
                 </div>
             </div>
@@ -135,5 +138,94 @@
                 </div>
             </div>
         </div><!--View Invoice Modal Ends-->
-    </div>
+
+        <!--View UninvoicedConsultations Modal-->
+        <div id="ViewUninvoicedConsultations" class="modal fade">
+            <div class="modal-dialog" style="width:80%;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" id="CloseModel_ViewUninvoicedConsultations" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title text-primary">Uninvoiced Consultations</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="table-responsive table-bordered">
+                            <table class="table table-hover">
+                                <thead style="background-color: #f8f8f8;">
+                                    <tr>
+                                        <th ng-click="sort('PatientFullName')">Patient Name<span class="fa sort-icon" ng-show="sortKey=='PatientFullName'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                                        <th ng-click="sort('Consultation_Date')">Consultation Date<span class="fa sort-icon" ng-show="sortKey=='Consultation_Date'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                                        <th ng-click="sort('DoctorFullName')">Doctor Name<span class="fa sort-icon" ng-show="sortKey=='DoctorFullName'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                                        <th ng-click="sort('Additionalfee')">Additional fee<span class="fa sort-icon" ng-show="sortKey=='Additionalfee'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                                        <th ng-click="sort('InvoiceDocMessage')">Details<span class="fa sort-icon" ng-show="sortKey=='InvoiceDocMessage'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-show="UnInvoicedConsultations.length > 0" dir-paginate="UnInvoicedConsultation in UnInvoicedConsultations | filter:search | orderBy:sortKey:reverse | itemsPerPage:10">
+                                        <td>{{UnInvoicedConsultation.PatientFullName}}</td>
+                                        <td>{{UnInvoicedConsultation.Consultation_Date}}</td>
+                                        <td>{{UnInvoicedConsultation.DoctorFullName}}</td>
+                                        <td>{{UnInvoicedConsultation.Additionalfee}}</td>
+                                        <td>{{UnInvoicedConsultation.InvoiceDocMessage}}</td>
+                                        <td><button class="btn btn-primary btn-xs" onclick="AddUninvoicedConsultations()" ng-click="SelectedConsultationDetails(UnInvoicedConsultation.Consultation_ID, UnInvoicedConsultation.PatientFullName, UnInvoicedConsultation.DoctorFullName, UnInvoicedConsultation.Patient_ID, UnInvoicedConsultation.Doctors_ID, UnInvoicedConsultation.Medical_Aid_ID, UnInvoicedConsultation.Diagnosis, UnInvoicedConsultation.Additionalfee)"><i class="glyphicon glyphicon-plus"></i></button></td>
+                                    </tr>
+                                    <tr class="row alert alert-info text-center" ng-show="UnInvoicedConsultations.length == 0"><td colspan="4"><b>System Message!</b> No un-invoiced consultation records to display.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--View Invoice Modal Ends-->
+
+
+        <!--View New InvoicedConsultations Modal-->
+        <div id="AddUninvoicedConsultations" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" id="AddUninvoicedConsultations" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title text-primary">Uninvoiced Consultations</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row" style="margin-top:4px; margin-bottom:0px;">
+                            <h5 class="col-md-4">Patient's Name:</h5>
+                            <div class="col-md-8"><h5 class="form-control">{{__PatientFullName}}</h5></div>
+                        </div>                        
+                        <div class="row" style="margin-top:4px; margin-bottom:0px;">
+                            <h5 class="col-md-4">Treatment Details:</h5>
+                            <div class="col-md-8"><h5 class="form-control">{{__Diagnosis}}</h5></div>
+                        </div>
+                        <div class="row" style="margin-top:4px; margin-bottom:0px;">
+                            <div class="col-md-4"><h5>Doctor's Name:</h5></div>
+                            <div class="col-md-8"><h5 class="form-control">{{__DoctorFullName}}</h5></div>
+                        </div>
+                        <div class="row" style="margin-top:4px; margin-bottom:0px;">
+                            <h5 class="col-sm-4">Standard consulatation Fee:</h5>
+                            <div class="col-sm-8"><h5 class="form-control">R 250</h5></div>
+                        </div>
+                        <div class="row" style="margin-top:4px; margin-bottom:0px;">
+                            <h5 class="col-md-4">Additional Fee:</h5>
+                            <div class="col-md-8"><h5 class="form-control">R {{__Additionalfee}}</h5></div>
+                        </div> 
+                        <div class="row" style="margin-top:4px; margin-bottom:0px;">
+                            <h5 class="col-sm-4">Paid Consultation Fee:<span style="color:red">*</span></h5>
+                            <div class="col-sm-8"><input class="form-control insert" type="text" ng-model="_AmountPaid" name="AmountPaid" ng-required="true" ng-pattern="/^[0-9'.']/"></div>
+                        </div>
+                        <div class="row" style="margin-top:0px; margin-bottom:8px;">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-8">
+                                <small ng-show="Form.AmountPaid.$invalid && Form.AmountPaid.$touched && Form.AmountPaid.$error.required">Required field.<br></small>
+                                <small ng-show="Form.AmountPaid.$invalid && Form.AmountPaid.$touched && Form.AmountPaid.$error.pattern">Only numeric letters allowed.</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" ng-click="AddUninvoicedConsultations(__Additionalfee+250, _AmountPaid)" ng-disabled="Form.$invalid">Create Invoice Entry</button>
+                    </div>
+                </div>
+            </div>
+        </div><!--View New InvoicedConsultations Modal Ends-->
+
+     </div>
 </div>

@@ -19,7 +19,7 @@
                 $scope.Invoices = result.data;
                 $scope.numOfUnPaid = $scope.Invoices[$scope.Invoices.length - 1].numOfUnPaid;
                 $scope.numOfPatiallyPaid = $scope.Invoices[$scope.Invoices.length - 1].numOfPatiallyPaid;
-            });
+            });            
 
             AccountingService.SessionData().success(function (result) {
                 sessionStorage.SessionData_User_ID = result["User_ID"];
@@ -31,6 +31,25 @@
             });
         };
         $scope.GetInvoices();
+
+        $scope.ViewUnInvoicedConsultations = function () {
+            AccountingService.ViewUnInvoicedConsultations().success(function (result) {
+                $scope.UnInvoicedConsultations = result;
+                $scope.numOfUnInvoicedConsultations = $scope.UnInvoicedConsultations.length;
+            });
+        };
+        $scope.ViewUnInvoicedConsultations();
+
+        $scope.SelectedConsultationDetails = function (__Consultation_ID, __PatientFullName, __DoctorFullName, __Patient_ID, __Doctors_ID, __Medical_Aid_ID, __Diagnosis, __Additionalfee) {
+            $scope.__Consultation_ID = __Consultation_ID;
+            $scope.__PatientFullName = __PatientFullName;
+            $scope.__DoctorFullName = __DoctorFullName;
+            $scope.__Patient_ID = __Patient_ID;
+            $scope.__Doctors_ID = __Doctors_ID;
+            $scope.__Medical_Aid_ID = __Medical_Aid_ID;
+            $scope.__Diagnosis = __Diagnosis;
+            $scope.__Additionalfee = __Additionalfee;
+        };        
 
         if (sessionStorage.SessionData_AccessLevel == '1' || sessionStorage.SessionData_AccessLevel == '2') {
             angular.element(".doctorControls").show();
@@ -124,9 +143,29 @@
                 btnSuccess("Invoice successfully inserted.\nThe invoice bill has been sent to the patient.");
                 $location.path('/Accounting');
             },
+            function (error) {
+                btnAlert("System Error Message", "Insert unsuccessful.");
+            });
+        };
+
+        $scope.AddUninvoicedConsultations = function (_Total, _AmountPaid) {
+            AccountingService.UpdateUnInvoicedConsultations($scope.__Consultation_ID).success(function () {
+                $scope.ViewUnInvoicedConsultations();
+                    AccountingService.InsertInvoice($scope.today, $scope.__Diagnosis, _Total, _AmountPaid, $scope.__Medical_Aid_ID, $scope.__Patient_ID, $scope.__Doctors_ID).success(function () {
+                    $scope.GetInvoices();
+                    angular.element("#AddUninvoicedConsultations").trigger("click");
+                    angular.element(".insert").val('');
+                    btnSuccess("Invoice successfully inserted.\nThe invoice bill has been sent to the patient.");
+                },
                 function (error) {
                     btnAlert("System Error Message", "Insert unsuccessful.");
                 });
+            },
+            function (error) {
+                btnAlert("System Error Message", "Insert unsuccessful.");
+            });
+
+            
         };
 
         $scope.function_btnUpdateInvoice= function (ID) {
@@ -137,7 +176,7 @@
             }
             else {
                 AccountingService.UpdateInvoice($scope.ID, $scope.Name, $scope.Phone_Number, $scope.Fax_Number, $scope.Street_Address, $scope.Suburb, $scope.City, $scope.Country, $scope.Trading_Times).success(function () {
-                    $scope.GetInvoices();
+                    $scope.GetInvoices();                    
                     btnSuccess("Invoice details successfully updated.");
                 }, function (error) {
                     btnAlert("System Error Message", "Update unsuccessful.");

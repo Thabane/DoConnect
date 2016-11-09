@@ -448,9 +448,12 @@ namespace DataClient
             _parameters.Add(Practice_IDParameter);
 
             DateTime Today = DateTime.Now;
+            DateTime Today0 = DateTime.Today.AddDays(0);
+            DateTime Yesterday2 = DateTime.Today.AddDays(-2);
+            DateTime Yesterday = DateTime.Today.AddDays(-1);
             DateTime Tomorrow = DateTime.Today.AddDays(+1);
             DateTime Tomorrow2 = DateTime.Today.AddDays(+2);
-            Appointments AppointmentInfo = new Appointments(); int numTodayApps = 0; int numTomorrowApps = 0;
+            Appointments AppointmentInfo = new Appointments(); int numYesterdayApps = 0; int numTodayApps = 0; int numTomorrowApps = 0;
             List<Appointments> AppointmentsInfo = new List<Appointments>();
 
             try
@@ -482,17 +485,27 @@ namespace DataClient
                             AppointmentInfo.Practice_Address = reader.GetString(reader.GetOrdinal("Practice_Address"));
 
                             DateTime Appointments_Date_Time = Convert.ToDateTime(reader.GetString(reader.GetOrdinal("Appointments_Date_Time")));
+                            
+                            
+
                             if ((Today < Appointments_Date_Time) && (Appointments_Date_Time < Tomorrow))
                             {
                                 AppointmentInfo.highlightTodayApps = 1;
                                 numTodayApps++;                            
-                            }
-                            AppointmentInfo.numTodayApps = numTodayApps;
-                            if ((Tomorrow < Appointments_Date_Time) && (Appointments_Date_Time < Tomorrow2))
+                            }                            
+                            else if ((Tomorrow < Appointments_Date_Time) && (Appointments_Date_Time < Tomorrow2))
                             {
                                 AppointmentInfo.highlightTomorrowApps = 1;
                                 numTomorrowApps++;                            
                             }
+                            else if ((Appointments_Date_Time > Convert.ToDateTime("2016-11-06")) && (Appointments_Date_Time < Convert.ToDateTime("2016-11-08")))
+                            {
+                                AppointmentInfo.highlightYesterdayApps = 1;
+                                numYesterdayApps++;
+                            }
+
+                            AppointmentInfo.numTodayApps = numTodayApps;
+                            AppointmentInfo.numYesterdayApps = numYesterdayApps;
                             AppointmentInfo.numTomorrowApps = numTomorrowApps;
                             AppointmentsInfo.Add(AppointmentInfo); AppointmentInfo = new Appointments();
                         }
@@ -696,6 +709,26 @@ namespace DataClient
             return consultationInfo;
         }
 
+        public List<Consultation> ViewUnInvoicedConsultations()
+        {
+            List<Consultation> consultationInfo = new List<Consultation>();
+            //try
+            //{
+                using (var reader = access.ExecuteReader(Conn, "[ViewUnInvoicedConsultations]", new List<SqlParameter>()))
+                {
+                    while (reader.Read())
+                    {
+                        consultationInfo.Add(new Consultation().ViewUnInvoicedConsultations(reader));
+                    }
+                }
+            //}
+            //catch (Exception)
+            //{
+            //    //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed retrive consulation details: " + ex.ToString());
+            //}
+            return consultationInfo;
+        }
+
         public List<Consultation> GetConsultationByPatientId(int id)//Get Consultation Notes by Patient ID
         {
             List<SqlParameter> _parameters = new List<SqlParameter>();
@@ -827,6 +860,51 @@ namespace DataClient
                 //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to updated consultation note: ID: " + consultationID + "\n" + ex.ToString());
             	return false;
             }
+        }
+
+
+        public bool UpdateUnInvoicedConsultations(int consultationID)
+        {
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            SqlParameter consultationIDParameter = new SqlParameter("@ID", SqlDbType.Int);
+            consultationIDParameter.Value = consultationID;
+            _parameters.Add(consultationIDParameter);
+
+            using (var reader = access.ExecuteReader(Conn, "[UpdateUnInvoicedConsultations]", _parameters))
+            {
+
+            }
+                return true; 
+        }
+
+        public bool UpdateConsultation_AddAdditionalFee(decimal Additionalfee, string InvoiceDocMessage)
+        {
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            SqlParameter AdditionalfeeParameter = new SqlParameter("@Additionalfee", SqlDbType.Decimal);
+            SqlParameter InvoiceDocMessageParameter = new SqlParameter("@InvoiceDocMessage", SqlDbType.NVarChar);
+            AdditionalfeeParameter.Value = Additionalfee;
+            InvoiceDocMessageParameter.Value = InvoiceDocMessage;
+            _parameters.Add(AdditionalfeeParameter);
+            _parameters.Add(InvoiceDocMessageParameter);
+
+            int lastConsultationID = 0;
+            using (var reader = access.ExecuteReader(Conn, "[lastAddedConsultation]", new List<SqlParameter>()))
+            {
+                if (reader.Read())
+                {
+                    lastConsultationID = reader.GetInt32(reader.GetOrdinal("ID"));
+                    
+                    SqlParameter lastConsultationIDParameter = new SqlParameter("@lastConsultationID", SqlDbType.Int);
+                    lastConsultationIDParameter.Value = lastConsultationID;
+                    _parameters.Add(lastConsultationIDParameter);
+
+                    using (var readerupdate = access.ExecuteReader(Conn, "[UpdateConsultation_AddAdditionalFee]", _parameters))
+                    {
+
+                    }
+                }
+            }            
+            return true;
         }
 
         public bool DeleteConsultation(int id)
@@ -1066,7 +1144,7 @@ namespace DataClient
                     if (reader.Read())
                     {
                         insertedID = reader.GetInt32(reader.GetOrdinal("ID"));                        
-                        Email.SendEmail("josephine.chivinge@gmail.com", "Consultation Invoice", "Here is your email", "");
+                        //Email.SendEmail("josephine.chivinge@gmail.com", "Consultation Invoice", "Here is your email", "");
                     }
                 }
                 //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Recorded new invoice entry");

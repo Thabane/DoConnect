@@ -438,7 +438,6 @@
                   [$scope.month_0, $scope.Total_month_0, $scope.AmountPaid_month_0, $scope.BalanceOwing_month_0] 
                 ]);
 
-
                 console.log($scope.month_5, +" " + $scope.Total_month_5, +" " + $scope.AmountPaid_month_5, +" " + $scope.BalanceOwing_month_5);
                 console.log($scope.month_4, +" " + $scope.Total_month_4, +" " + $scope.AmountPaid_month_4, +" " + $scope.BalanceOwing_month_4);
                 console.log($scope.month_3, +" " + $scope.Total_month_3, +" " + $scope.AmountPaid_month_3, +" " + $scope.BalanceOwing_month_3);

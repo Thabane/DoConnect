@@ -91,5 +91,47 @@
                 </div>
             </div>
         </form><!-- Add Consultation Notes Ends -->
+
+        <!--View UpdateConsultation_AddAdditionalFeeModal-->
+        <div id="UpdateConsultation_AddAdditionalFee" class="modal">
+            <form name="FormAddFee" novalidate>
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" id="close_AddAdditionalFee" data-dismiss="modal" aria-hidden="true" ng-click="close_AddAdditionalFee()">&times;</button>
+                            <h4 class="modal-title text-primary">Add Additional Consultation Fees</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row" style="margin-top:4px; margin-bottom:0px;">
+                                <div class="col-md-4"><h5 class="form-control-label">Additional Fee:</h5></div>
+                                <div class="col-md-8"><input class="form-control insert" type="text" name="AddAdditionalFee" ng-model="AddAdditionalFee" ng-required="true" ng-pattern="/[0-9]{1,4}/"></div>
+                            </div>
+                            <div class="row" style="margin-top:0px; margin-bottom:8px;">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-8">
+                                    <small ng-show="FormAddFee.AddAdditionalFee.$invalid && FormAddFee.AddAdditionalFee.$touched && FormAddFee.AddAdditionalFee.$error.required">Required field.<br></small>
+                                    <small ng-show="FormAddFee.AddAdditionalFee.$invalid && FormAddFee.AddAdditionalFee.$touched && FormAddFee.AddAdditionalFee.$error.pattern">Only numeric letters allowed and atleast 1 charactors long.</small>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:4px; margin-bottom:0px;">
+                                <div class="col-md-4"><h5 class="form-control-label">Note:</h5></div>
+                                <div class="col-md-8"><input class="form-control insert" type="text" name="InvoiceDocMessage" ng-model="InvoiceDocMessage" ng-pattern="/^[0-9a-zA-Z''-'\s]{3,40}$/"></div>
+                            </div>
+                            <div class="row" style="margin-top:0px; margin-bottom:8px;">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-8">
+                                    <small ng-show="FormAddFee.InvoiceDocMessage.$invalid && FormAddFee.InvoiceDocMessage.$touched && FormAddFee.InvoiceDocMessage.$error.required">Required field.<br></small>
+                                    <small ng-show="FormAddFee.InvoiceDocMessage.$invalid && FormAddFee.InvoiceDocMessage.$touched && FormAddFee.InvoiceDocMessage.$error.pattern">Only alphabetic and numeric letters allowed and atleast 3 charactors long.</small>
+                                </div>
+                            </div>                             
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" ng-click="UpdateConsultation_AddAdditionalFee(AddAdditionalFee, InvoiceDocMessage)">Add Fee</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div><!--View UpdateConsultation_AddAdditionalFee Modal Ends--> 
+
     </div>
 </div>

@@ -35,9 +35,12 @@ namespace DataClient
 
         #region Consultation
         List<Consultation> GetAllConsultations();
+        List<Consultation> ViewUnInvoicedConsultations();
         List<Consultation> GetConsultationByPatientId(int id);
         bool NewConsultationNote(int patient_ID, int doctor_ID, string reasonForConsulta, string symptoms, string clinicalFindings, string diagnosis, string testResultSummary, string treatmentPlan, int presciption_ID, int referral_ID);
         bool UpdateConsultationNote(int consultationID, string reasonForConsulta, string symptoms, string clinicalFindings, string diagnosis, string testResultSummary, string treatmentPlan);
+        bool UpdateUnInvoicedConsultations(int consultationID);
+        bool UpdateConsultation_AddAdditionalFee(decimal Additionalfee, string InvoiceDocMessage);
         bool DeleteConsultation(int id);
         #endregion
 
