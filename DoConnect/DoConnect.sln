@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoConnectTesting", "DoConne
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfoServ", "InfoServ\InfoServ.csproj", "{F70A3ED7-3603-49CF-B887-664E9236D607}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoConnectCustomerPortal", "DoConnectCustomerPortal\DoConnectCustomerPortal.csproj", "{6A1EA494-DC91-423B-9494-721EB0CF2629}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{F70A3ED7-3603-49CF-B887-664E9236D607}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F70A3ED7-3603-49CF-B887-664E9236D607}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F70A3ED7-3603-49CF-B887-664E9236D607}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A1EA494-DC91-423B-9494-721EB0CF2629}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A1EA494-DC91-423B-9494-721EB0CF2629}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A1EA494-DC91-423B-9494-721EB0CF2629}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A1EA494-DC91-423B-9494-721EB0CF2629}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

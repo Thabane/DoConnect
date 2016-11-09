@@ -50,9 +50,11 @@
     <Compile Include="AppMethods.cs" />
     <Compile Include="DataLayer.cs" />
     <Compile Include="DataAccess.cs" />
+    <Compile Include="DataLayerAccess.cs" />
     <Compile Include="Email.cs" />
     <Compile Include="IDataLayer.cs" />
     <Compile Include="Infermedica.cs" />
+    <Compile Include="PatientDataLayer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

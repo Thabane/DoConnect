@@ -57,6 +57,7 @@
     <Compile Include="Invoice.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Login.cs" />
+    <Compile Include="MedicalHistory.cs" />
     <Compile Include="MedicalRecord.cs" />
     <Compile Include="Medical_Aid.cs" />
     <Compile Include="Medicine_Inventory.cs" />
