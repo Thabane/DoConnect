@@ -16,7 +16,8 @@ namespace DocConnectApp
             routes.MapRoute(
                 name: "App",
                 url: "{*url}",
-                defaults: new { controller = "Home", action = "Index" }
+                defaults: new { controller = "Home", action = "Index" },
+                namespaces: new [] { "DocConnectApp.Controllers" }
         );
         }
     }
