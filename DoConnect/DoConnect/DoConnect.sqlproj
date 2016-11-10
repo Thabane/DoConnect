@@ -95,6 +95,7 @@
     <Build Include="Tables\AccessLevel.sql" />
     <Build Include="Stored Procedures\Portal_NumOfUnReadMessages.sql" />
     <Build Include="Stored Procedures\Portal_GetAllPractices.sql" />
+    <Build Include="Stored Procedures\GetConsultationNoteById.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Data\dbo.AccessLevel.data.sql" />

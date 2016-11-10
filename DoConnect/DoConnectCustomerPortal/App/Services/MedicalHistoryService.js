@@ -11,7 +11,7 @@
 
         return {
             getMedicalHistoryByPatientID: GetMedicalHistoryByPatientID,
-            Portal_GetMedicalHistoryID: Portal_GetMedicalHistoryID
+            portal_GetMedicalHistoryID: Portal_GetMedicalHistoryID
         };
     }
 );

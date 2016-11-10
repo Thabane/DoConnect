@@ -27,7 +27,7 @@ namespace ObjectModel
         {
             return new MedicalHistory
             {
-                //ID = reader.GetInt32(reader.GetOrdinal("ID")),
+                ID = reader.GetInt32(reader.GetOrdinal("ID")),
                 Patient_ID = reader.GetInt32(reader.GetOrdinal("Patient_ID")),
                 Doctor_ID = reader.GetInt32(reader.GetOrdinal("Doctors_ID")),
                 Date = reader.GetString(reader.GetOrdinal("Consultation_Date")),
@@ -41,6 +41,14 @@ namespace ObjectModel
                 Referral_ID = reader.GetInt32(reader.GetOrdinal("Consultation_Referral_ID"))
                 //DeletedStatus = reader.GetInt32(reader.GetOrdinal("DeletedStatus"))
             };
+        }
+
+        public void SetMedRecord(SqlDataReader reader)
+        {
+            Diagnosis = reader.GetString(reader.GetOrdinal("Consultation_Diagnosis"));
+            TestResultSummary = reader.GetString(reader.GetOrdinal("Consultation_TestResultSummary"));
+            TreatmentPlan = reader.GetString(reader.GetOrdinal("Consultation_TreatmentPlan"));
+            Presciption_ID = reader.GetInt32(reader.GetOrdinal("Consultation_Presciption_ID"));
         }
     }
 }

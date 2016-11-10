@@ -371,7 +371,7 @@ namespace DataClient
             IdParameter.Value = patient_ID;
             _parameter.Add(IdParameter);
             List<MedicalHistory> PatientMedicalHistory = new List<MedicalHistory>();
-            using (var reader = access.ExecuteReader(Conn, "[GetConsultationNotes]", _parameter))
+            using (var reader = access.ExecuteReader(Conn, "[GetConsultationNotesWithId]", _parameter))
             {
                 while (reader.Read())
                 {
@@ -388,11 +388,15 @@ namespace DataClient
             IdParameter.Value = id;
             _parameter.Add(IdParameter);
             MedicalHistory PatientMedicalHistory = new MedicalHistory();
-            using (var reader = access.ExecuteReader(Conn, "[Portal_GetMedicalHistoryID]", _parameter))
+            using (var reader = access.ExecuteReader(Conn, "[GetConsultationNotesWithId]", _parameter))
             {
-                PatientMedicalHistory.Create(reader);
+                if(reader.Read())
+                { 
+                    PatientMedicalHistory.SetMedRecord(reader);
+                    return PatientMedicalHistory;
+                }
             }
-            return PatientMedicalHistory;
+            return null;
         }
         #endregion
 

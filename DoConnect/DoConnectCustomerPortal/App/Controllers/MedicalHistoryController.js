@@ -36,11 +36,11 @@
         $scope.GetMedicalHistoryByPatientID();
 
         $scope.ViewDiagnosis = function (ID) {
-            MedicalHistoryService.Portal_GetMedicalHistoryID(1).success(function (result) {
-                $scope.Diagnosis = result["Diagnosis"];
-                $scope.TestResultSummary = result["TestResultSummary"];
-                $scope.TreatmentPlan = result["TreatmentPlan"];
-                $scope.Presciption_ID = result["Presciption_ID"];
+            MedicalHistoryService.portal_GetMedicalHistoryID(ID).success(function (result) {
+                $scope.Diagnosis = result["Consultation_Diagnosis"];
+                $scope.TestResultSummary = result["Consultation_TestResultSummary"];
+                $scope.TreatmentPlan = result["Consultation_TreatmentPlan"];
+                $scope.Presciption_ID = result["Consultation_Presciption_ID"];
             });
         };
         
