@@ -404,7 +404,7 @@ namespace DataClient
 
             Messages MessageInfo = new Messages();
             List<Messages> MessagesInfo = new List<Messages>();
-            using (var reader = access.ExecuteReader(Conn, "[Portal_GetAllMessages]", _parameters))
+            using (var reader = access.ExecuteReader(Conn, "[GetAllMessages]", _parameters))
             {
                 while (reader.Read())
                 {
@@ -422,7 +422,7 @@ namespace DataClient
                     SenderParameterSender.Value = reader.GetInt32(reader.GetOrdinal("Sender"));
                     parametersSender.Add(SenderParameterSender);
 
-                    using (var readerMessageSender = access.ExecuteReader(Conn, "[Portal_GetMessageSender]", parametersSender))
+                    using (var readerMessageSender = access.ExecuteReader(Conn, "[GetMessageSender]", parametersSender))
                     {
                         if (readerMessageSender.Read())
                         {
@@ -444,7 +444,7 @@ namespace DataClient
             _parameters.Add(ReceiverParameter);
 
             Messages NumOfUnReadMessages = new Messages();
-            using (var reader = access.ExecuteReader(Conn, "[Portal_NumOfUnReadMessages]", _parameters))
+            using (var reader = access.ExecuteReader(Conn, "[NumOfUnReadMessages]", _parameters))
             {
                 while (reader.Read())
                 {
@@ -464,7 +464,7 @@ namespace DataClient
             _parameters.Add(IDParameter);
 
             Messages MessageInfo = new Messages();
-            using (var reader = access.ExecuteReader(Conn, "[Portal_GetMessageById]", _parameters))
+            using (var reader = access.ExecuteReader(Conn, "[GetMessageById]", _parameters))
             {
                 while (reader.Read())
                 {
@@ -486,7 +486,7 @@ namespace DataClient
                     IDParameterMessageRead.Value = ID;
                     parametersMessageRead.Add(IDParameterMessageRead);
 
-                    using (var readerMessageSender = access.ExecuteReader(Conn, "[Portal_GetMessageSender]", parametersSender))
+                    using (var readerMessageSender = access.ExecuteReader(Conn, "[GetMessageSender]", parametersSender))
                     {
                         if (readerMessageSender.Read())
                         {
@@ -507,7 +507,7 @@ namespace DataClient
 
             Messages MessageInfo = new Messages();
             List<Messages> MessagesInfo = new List<Messages>();
-            using (var reader = access.ExecuteReader(Conn, "[Portal_GetAllSentMessages]", _parameters))
+            using (var reader = access.ExecuteReader(Conn, "[GetAllSentMessages]", _parameters))
             {
                 while (reader.Read())
                 {
@@ -545,7 +545,7 @@ namespace DataClient
             _parameters.Add(IDParameter);
 
             Messages MessageInfo = new Messages();
-            using (var reader = access.ExecuteReader(Conn, "[Portal_GetMessageById]", _parameters))
+            using (var reader = access.ExecuteReader(Conn, "[GetMessageById]", _parameters))
             {
                 while (reader.Read())
                 {
@@ -562,7 +562,7 @@ namespace DataClient
                     SenderParameterSender.Value = reader.GetInt32(reader.GetOrdinal("Sender"));
                     parametersSender.Add(SenderParameterSender);
 
-                    using (var readerMessageSender = access.ExecuteReader(Conn, "[Portal_GetMessageSender]", parametersSender))
+                    using (var readerMessageSender = access.ExecuteReader(Conn, "[GetMessageSender]", parametersSender))
                     {
                         if (readerMessageSender.Read())
                         {
@@ -578,7 +578,7 @@ namespace DataClient
 
             Staff MessageInfo = new Staff();
             List<Staff> MessagesInfo = new List<Staff>();
-            using (var reader = access.ExecuteReader(Conn, "[Portal_GetRecepientDoctors]", new List<SqlParameter>()))
+            using (var reader = access.ExecuteReader(Conn, "[GetRecepientDoctors]", new List<SqlParameter>()))
             {
                 while (reader.Read())
                 {
@@ -591,7 +591,7 @@ namespace DataClient
                     MessageInfo = new Staff();
                 }
             }
-            using (var reader = access.ExecuteReader(Conn, "[Portal_GetRecepientStaff]", new List<SqlParameter>()))
+            using (var reader = access.ExecuteReader(Conn, "[GetRecepientStaff]", new List<SqlParameter>()))
             {
                 while (reader.Read())
                 {
@@ -604,7 +604,7 @@ namespace DataClient
                     MessageInfo = new Staff();
                 }
             }
-            using (var reader = access.ExecuteReader(Conn, "[Portal_GetRecepientPatients]", new List<SqlParameter>()))
+            using (var reader = access.ExecuteReader(Conn, "[GetRecepientPatients]", new List<SqlParameter>()))
             {
                 while (reader.Read())
                 {
@@ -641,7 +641,7 @@ namespace DataClient
             _parameters.Add(DateParameter);
 
             int insertedID = 0;
-            using (var reader = access.ExecuteReader(Conn, "[Portal_InsertMessage]", _parameters))
+            using (var reader = access.ExecuteReader(Conn, "[InsertMessage]", _parameters))
             {
                 if (reader.Read())
                 {
@@ -657,7 +657,7 @@ namespace DataClient
             IDParameter.Value = ID;
             _parameters.Add(IDParameter);
             int User_ID = 0;
-            using (var reader = access.ExecuteReader(Conn, "[Portal_DeleteMessage]", _parameters))
+            using (var reader = access.ExecuteReader(Conn, "[DeleteMessage]", _parameters))
             {
                 if (reader.Read())
                 {
