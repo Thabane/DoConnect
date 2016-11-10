@@ -107,18 +107,72 @@
         $scope.changedValueGetReceiver_UserID = function (item) {
             console.log(item);
             $scope.Receiver_UserID = item.User_ID;
-        };
+        };        
 
+        
         $scope.SendMessage = function (_Subject, _Description) {
-            MessagesService.InsertMessage($scope.Receiver_UserID, $scope.SessionData_User_ID, _Subject, _Description, $scope.today).success(function () {
+            
+            var BroadCastMessage = function (_recepient, _Subject, _Description) {
+                console.log("Just called me" + _recepient, $scope.SessionData_User_ID, _Subject, _Description, $scope.today);
+
+                MessagesService.InsertMessage(_recepient, $scope.SessionData_User_ID, _Subject, _Description, $scope.today).success(function () {
+                    console.log("Successfull"+_recepient, $scope.SessionData_User_ID, _Subject, _Description, $scope.today);
+                },
+                function (error) {
+                    btnAlert("System Error Message", "Message not successfully sent.");
+                });
+            };
+
+            if ($("#rbAllDoctors").is(":checked")) {
+                var List_AllDoctors = [];                
+                for (var i = 0; i < $scope.AllRecepients.length; i++) {
+                    if ($scope.AllRecepients[i].AccessLevel == "2") {
+                        BroadCastMessage($scope.AllRecepients[i].User_ID, _Subject, _Description);
+                    }
+                }
+
+                console.log("rbAllDoctors");
                 $scope.GetAllMessages();
                 $scope.FunctionInbox();
                 angular.element(".insert").val('');
                 btnSuccess("Message successfully sent.");
-            },
-            function (error) {
-                btnAlert("System Error Message", "Message not successfully sent.");
-            });
+            }
+            else if ($("#rbAllPatients").is(":checked")) {
+                for (var i = 0; i < $scope.AllRecepients.length; i++) {
+                    if ($scope.AllRecepients[i].AccessLevel == "3") {
+                        BroadCastMessage($scope.AllRecepients[i].User_ID, _Subject, _Description);
+                    }
+                }
+                console.log("rbAllPatients");
+                $scope.GetAllMessages();
+                $scope.FunctionInbox();
+                angular.element(".insert").val('');
+                btnSuccess("Message successfully sent.");
+            }
+            else if ($("#rbAllStaff").is(":checked")) {
+                for (var i = 0; i < $scope.AllRecepients.length; i++) {
+                    if ($scope.AllRecepients[i].AccessLevel == "4" || ($scope.AllRecepients[i].AccessLevel == "5") || ($scope.AllRecepients[i].AccessLevel == "6")) {
+                        BroadCastMessage($scope.AllRecepients[i].User_ID , _Subject, _Description);
+                    }
+                }
+                console.log("rbAllStaff");
+                $scope.GetAllMessages();
+                $scope.FunctionInbox();
+                angular.element(".insert").val('');
+                btnSuccess("Message successfully sent.");
+            }
+            else if ($("#rbSingleRecepient").is(":checked")) {
+                MessagesService.InsertMessage($scope.Receiver_UserID, $scope.SessionData_User_ID, _Subject, _Description, $scope.today).success(function () {
+                    console.log("rbSingleRecepient");
+                    $scope.GetAllMessages();
+                    $scope.FunctionInbox();
+                    angular.element(".insert").val('');
+                    btnSuccess("Message successfully sent.");
+                },
+                function (error) {
+                    btnAlert("System Error Message", "Message not successfully sent.");
+                });
+            }
         };
 
         $scope.ReplyMessage = function (_Subject, _Description) {            

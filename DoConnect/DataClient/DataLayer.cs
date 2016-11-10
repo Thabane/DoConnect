@@ -15,8 +15,8 @@ namespace DataClient
     {
         private DataAccess access; 
         private List<SqlParameter> _parameters = new List<SqlParameter>();
-        //private string Conn = @"Data Source=DESKTOP-6Gu3I3G\SQLEXPRESS;Initial Catalog=DoConnect;Integrated Security=True";
-        private string Conn = @"Server=tcp:doconnect.database.windows.net,1433;Initial Catalog=DoConnect;Persist Security Info=False;User ID=teamCogent;Password=DoConnect1;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+        private string Conn = @"Data Source=DESKTOP-6Gu3I3G\SQLEXPRESS;Initial Catalog=DoConnect;Integrated Security=True";
+        //private string Conn = @"Server=tcp:doconnect.database.windows.net,1433;Initial Catalog=DoConnect;Persist Security Info=False;User ID=teamCogent;Password=DoConnect1;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
         public DataLayer()
         {
             access = new DataAccess();            
@@ -2943,7 +2943,6 @@ namespace DataClient
 
         public List<Staff> GetAllRecepients()
         {
-
             Staff MessageInfo = new Staff();
             List<Staff> MessagesInfo = new List<Staff>();
             using (var reader = access.ExecuteReader(Conn, "[GetRecepientDoctors]", new List<SqlParameter>()))
@@ -2954,7 +2953,8 @@ namespace DataClient
                     MessageInfo.FirstName = reader.GetString(reader.GetOrdinal("FirstName")) + " " + reader.GetString(reader.GetOrdinal("LastName")) + " : " + reader.GetString(reader.GetOrdinal("Email"));
                     MessageInfo.LastName = reader.GetString(reader.GetOrdinal("LastName"));
                     MessageInfo.User_ID = reader.GetInt32(reader.GetOrdinal("User_ID"));
-                    MessageInfo.Email = reader.GetString(reader.GetOrdinal("Email"));                    
+                    MessageInfo.Email = reader.GetString(reader.GetOrdinal("Email"));
+                    MessageInfo.AccessLevel = reader.GetInt32(reader.GetOrdinal("AccessLevel"));
                     MessagesInfo.Add(MessageInfo);
                     MessageInfo = new Staff();
                 }
@@ -2968,6 +2968,7 @@ namespace DataClient
                     MessageInfo.LastName = reader.GetString(reader.GetOrdinal("LastName"));
                     MessageInfo.User_ID = reader.GetInt32(reader.GetOrdinal("User_ID"));
                     MessageInfo.Email = reader.GetString(reader.GetOrdinal("Email"));
+                    MessageInfo.AccessLevel = reader.GetInt32(reader.GetOrdinal("AccessLevel"));
                     MessagesInfo.Add(MessageInfo);
                     MessageInfo = new Staff();
                 }
@@ -2981,6 +2982,7 @@ namespace DataClient
                     MessageInfo.LastName = reader.GetString(reader.GetOrdinal("LastName"));
                     MessageInfo.User_ID = reader.GetInt32(reader.GetOrdinal("User_ID"));
                     MessageInfo.Email = reader.GetString(reader.GetOrdinal("Email"));
+                    MessageInfo.AccessLevel = reader.GetInt32(reader.GetOrdinal("AccessLevel"));
                     MessagesInfo.Add(MessageInfo);
                     MessageInfo = new Staff();
                 }
