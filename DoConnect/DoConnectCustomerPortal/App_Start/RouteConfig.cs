@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -16,8 +17,9 @@ namespace DoConnectCustomerPortal
             routes.MapRoute(
               name: "App",
               url: "{*url}",
-              defaults: new { controller = "Home", action = "Index" }
-          );
+              defaults: new { controller = "Home", action = "Index" },
+              namespaces: new []{ "DoConnectCustomerPortal.Controllers" }
+        );
         }
     }
 }
