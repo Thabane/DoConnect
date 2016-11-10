@@ -38,11 +38,11 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="MedicalHistory in MedicalRecord | filter : searchKey | limitTo : getlimitTo() | orderBy : getSortKey()">
-                        <td>{{MedicalRecord.Date}}</td>
-                        <td>{{MedicalRecord.Symptoms}}</td>
-                        <td>{{MedicalRecord.ClinicalFindings}}</td>
+                        <td>{{MedicalHistory.Date}}</td>
+                        <td>{{MedicalHistory.Symptoms}}</td>
+                        <td>{{MedicalHistory.ClinicalFindings}}</td>
                         <td>
-                            <button class="btn btn-primary btn-xs" ng-click="ViewDiagnosis(MedicalRecord.ID)"><i class="icon-eye-open"></i></button>
+                            <button class="btn btn-primary btn-xs" ng-click="ViewDiagnosis(MedicalHistory.ID)"><i class="icon-eye-open"></i></button>
                         </td>
                     </tr>
                 </tbody>

@@ -1,6 +1,7 @@
 ﻿using ObjectModel;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -13,12 +14,13 @@ namespace DataClient
     {
         private DataAccess access;
         private List<SqlParameter> _parameters = new List<SqlParameter>();
-        private string Conn = @"Server=tcp:doconnect.database.windows.net,1433;Initial Catalog=DoConnect;Persist Security Info=False;User ID=teamCogent;Password=DoConnect1;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-        //private string Conn = @"Data Source=localhost;Initial Catalog=DoConnect;Integrated Security=True";
+        private string Conn;
+        //private string Conn = @"Server=tcp:doconnect.database.windows.net,1433;Initial Catalog=DoConnect;Persist Security Info=False;User ID=teamCogent;Password=DoConnect1;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
         public PatientDataLayer()
         {
             access = new DataAccess();
+            Conn = ConfigurationManager.ConnectionStrings["DB"].ConnectionString;
         }
 
         #region Appointments
@@ -323,7 +325,7 @@ namespace DataClient
         public List<Doctor> Portal_GetAllDoctors()
         {
             List<Doctor> DoctorsInfo = new List<Doctor>();
-            using (var reader = access.ExecuteReader(Conn, "[Portal_GetAllDoctors]", new List<SqlParameter>()))
+            using (var reader = access.ExecuteReader(Conn, "[GetAllDoctors]", new List<SqlParameter>()))
             {
                 while (reader.Read())
                 {
@@ -365,11 +367,11 @@ namespace DataClient
         public List<MedicalHistory> Portal_GetMedicalHistoryByPatientID(int patient_ID)
         {
             List<SqlParameter> _parameter = new List<SqlParameter>();
-            SqlParameter IdParameter = new SqlParameter("@Patient_ID", SqlDbType.Int);
+            SqlParameter IdParameter = new SqlParameter("@ID", SqlDbType.Int);
             IdParameter.Value = patient_ID;
             _parameter.Add(IdParameter);
             List<MedicalHistory> PatientMedicalHistory = new List<MedicalHistory>();
-            using (var reader = access.ExecuteReader(Conn, "[Portal_GetMedicalHistoryByPatientID]", _parameter))
+            using (var reader = access.ExecuteReader(Conn, "[GetConsultationNotes]", _parameter))
             {
                 while (reader.Read())
                 {

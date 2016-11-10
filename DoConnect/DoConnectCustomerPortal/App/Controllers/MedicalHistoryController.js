@@ -27,10 +27,10 @@
 
         //Select GetMedicalHistoryByPatientID Function
         $scope.GetMedicalHistoryByPatientID = function () {
-            MedicalHistoryService.GetMedicalHistoryByPatientID(1).success(function (result) {
-                console.log(result);
-                $scope.MedicalHistory = result.data;
-                console.log($scope.MedicalHistory);
+            MedicalHistoryService.getMedicalHistoryByPatientID(2).success(function (result) {
+                //console.log(result);
+                $scope.MedicalRecord = result;
+                //console.log($scope.MedicalHistory);
             });
         };
         $scope.GetMedicalHistoryByPatientID();

@@ -93,6 +93,8 @@
     <Build Include="Stored Procedures\NewUpdatePractice.sql" />
     <Build Include="Stored Procedures\NewUpdateMedicine_Inventory.sql" />
     <Build Include="Tables\AccessLevel.sql" />
+    <Build Include="Stored Procedures\Portal_NumOfUnReadMessages.sql" />
+    <Build Include="Stored Procedures\Portal_GetAllPractices.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Data\dbo.AccessLevel.data.sql" />

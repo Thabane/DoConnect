@@ -10,7 +10,7 @@
         };
 
         return {
-            GetMedicalHistoryByPatientID: GetMedicalHistoryByPatientID,
+            getMedicalHistoryByPatientID: GetMedicalHistoryByPatientID,
             Portal_GetMedicalHistoryID: Portal_GetMedicalHistoryID
         };
     }

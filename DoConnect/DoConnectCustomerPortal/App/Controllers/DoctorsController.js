@@ -33,7 +33,7 @@
 			    $scope.GetAllDoctors = function () {
 			        DoctorsService.GetAllDoctors().then
 					(function (result) {
-					    console.log(result.data);
+					    //console.log(result.data);
 					    $scope.Doctors = result.data;
 					});
 			    };

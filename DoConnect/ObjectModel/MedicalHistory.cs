@@ -27,19 +27,19 @@ namespace ObjectModel
         {
             return new MedicalHistory
             {
-                ID = reader.GetInt32(reader.GetOrdinal("ID")),
+                //ID = reader.GetInt32(reader.GetOrdinal("ID")),
                 Patient_ID = reader.GetInt32(reader.GetOrdinal("Patient_ID")),
-                Doctor_ID = reader.GetInt32(reader.GetOrdinal("Doctor_ID")),
-                Date = reader.GetString(reader.GetOrdinal("Date")),
-                ReasonForConsultation = reader.GetString(reader.GetOrdinal("ReasonForConsultation")),
-                Symptoms = reader.GetString(reader.GetOrdinal("Symptoms")),
-                ClinicalFindings = reader.GetString(reader.GetOrdinal("ClinicalFindings")),
-                Diagnosis = reader.GetString(reader.GetOrdinal("Diagnosis")),
-                TestResultSummary = reader.GetString(reader.GetOrdinal("TestResultSummary")),
-                TreatmentPlan = reader.GetString(reader.GetOrdinal("TreatmentPlan")),
-                Presciption_ID = reader.GetInt32(reader.GetOrdinal("Presciption_ID")),
-                Referral_ID = reader.GetInt32(reader.GetOrdinal("Referral_ID")),
-                DeletedStatus = reader.GetInt32(reader.GetOrdinal("DeletedStatus"))
+                Doctor_ID = reader.GetInt32(reader.GetOrdinal("Doctors_ID")),
+                Date = reader.GetString(reader.GetOrdinal("Consultation_Date")),
+                ReasonForConsultation = reader.GetString(reader.GetOrdinal("Consultation_ReasonForConsultation")),
+                Symptoms = reader.GetString(reader.GetOrdinal("Consultation_Symptoms")),
+                ClinicalFindings = reader.GetString(reader.GetOrdinal("Consultation_ClinicalFindings")),
+                Diagnosis = reader.GetString(reader.GetOrdinal("Consultation_Diagnosis")),
+                TestResultSummary = reader.GetString(reader.GetOrdinal("Consultation_TestResultSummary")),
+                TreatmentPlan = reader.GetString(reader.GetOrdinal("Consultation_TreatmentPlan")),
+                Presciption_ID = reader.GetInt32(reader.GetOrdinal("Consultation_Presciption_ID")),
+                Referral_ID = reader.GetInt32(reader.GetOrdinal("Consultation_Referral_ID"))
+                //DeletedStatus = reader.GetInt32(reader.GetOrdinal("DeletedStatus"))
             };
         }
     }

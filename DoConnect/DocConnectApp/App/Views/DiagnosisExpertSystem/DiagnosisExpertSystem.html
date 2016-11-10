@@ -1,87 +1,157 @@
 ﻿<div id="page-wrapper" ng-controller="DiagnosisExpertSystemController">
     <div class="row">
         <div class="col-lg-12">
-            <h2 class="page-header text-primary">Expert System</h2>
+            <h2 class="page-header text-primary">Diagnosis Assistant</h2>
         </div>
 
-        <h4> Patient Information</h4>
-        <br />
-        <form data-toggle="validator" role="form" name="dForm">
-            <div class="form-group">
-                <div class="form-group row">
-                    <label class="col-xs-2 col-form-label">Patient Age</label>
-                    <div class="col-xs-10">
-                        <input class="form-control" type="number" ng-model="patient.age" ng-required="true">
-                    </div>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="patientGender" class="col-xs-2 col-form-label">Gender</label>
-                <div class="col-xs-10">
-                    <select ng-model="patient.gender" class="custom-select" id="patientGender">
-                        <option selected value="both">Both</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-6">
-                    <h4>Select Symptoms that the patient has</h4>
-                </div>
-                <div class="col-md-6">
-                    <h4>Select Any Risk factors that the patient has</h4>
-                </div>
-            </div>
-            <div class="row">
-
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <div class="form-inline">
-                            <label for="searchSymptomTextbox">Search: </label>
-                            <input class="form-control" id="searchSymptomTextbox" ng-model="searchSymptom.name">
+        <div class="row">
+            <div class="col-lg-12 col-md-6">
+                <div class="portlet light" style="border: 1px solid #ddd; border-radius: 4px;">
+                    <div class="portlet-title">
+                        <div class="caption caption-md">
+                            <i class="icon-bar-chart font-dark hide"></i>
+                            <span class="caption-subject font-green-steel uppercase bold">PATIENT INFORMATION</span>
                         </div>
-                        <br />
-                        <select size="10" ng-model="selectedSymptom" form="finalSymptoms" multiple class="form-control ng-valid" ng-options="symptom as symptom.name for symptom in SymptomBank | filter:searchSymptom">
-                            <option ng-repeat="symptom in SymptomBank">{{symptom.name}}</option>
-                        </select>
                     </div>
-                    <button type="button" class="btn btn-default" ng-click="AddEvidence(selectedSymptom)">Add Symptom</button>
+                    <div class="portlet-body">
+                        <div class="row" style="padding-left: 15px">
+                            <form data-toggle="validator" role="form" name="dForm">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="row">
+                                            <div class="col-md-2"><h5 class="bold">Age:</h5></div>
+                                            <div class="col-md-8"><input class="form-control" type="number" ng-model="patient.age" ng-required="true"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="row">
+                                            <h5 class="bold col-md-2" for="patientGender">Gender:</h5>
+                                            <div class="col-md-10 btn-group">
+                                                <button type="button" class="btn btn-primary dropdown-toggle btn-sm" data-toggle="dropdown">
+                                                    {{GenderSelector}}
+                                                    <span class="caret"></span>
+                                                </button>
 
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <div class="form-inline">
-                            <label for="searchRiskTextbox">Search: </label>
-                            <input class="form-control" id="searchRiskTextbox" ng-model="searchRisk.name">
+                                                <ul class="dropdown-menu" role="menu">
+                                                    <li href="#" ng-click="SetGender(1)"><a>Male</a></li>
+                                                    <li class="divider"></li>
+                                                    <li href="#" ng-click="SetGender(2)"><a>Female</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="row">
+                                            <div class="col-md-2"></div>
+                                            <div class="col-md-6"><h5 class="bold">Advanced Diagnosis:</h5></div>
+                                            <div class="col-md-4 checkbox">
+                                                <label>
+                                                    <input class="checkbox" type="checkbox" ng-model="patient.advanced" ng-true-value="true" ng-false-value="false">
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <hr class="tagline-divider">
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="row" style="padding-left: 15px">
+                                            <div class="caption caption-md">
+                                                <i class="icon-bar-chart font-dark hide"></i>
+                                                <span class="caption-subject font-green-steel bold">Select patient's symptoms</span>
+                                            </div>
+                                        </div><br />
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group input-group">
+                                                    <input type="text" class="form-control" id="searchSymptomTextbox" ng-model="searchSymptom.name">
+                                                    <span class="input-group-btn"><button class="btn btn-default" type="button"><i class="fa fa-search"></i></button></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 form-group">
+                                                <button type="button" class="btn btn-info" ng-click="AddEvidence(selectedSymptom)">Add Symptom</button>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <select size="6" ng-model="selectedSymptom" form="finalSymptoms" multiple class="form-control ng-valid" ng-options="symptom as symptom.name for symptom in SymptomBank | filter:searchSymptom">
+                                                    <option ng-repeat="symptom in SymptomBank">{{symptom.name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="row" style="padding-left: 15px">
+                                            <div class="caption caption-md">
+                                                <i class="icon-bar-chart font-dark hide"></i>
+                                                <span class="caption-subject font-green-steel bold">Select patient's risk factors</span>
+                                            </div>
+                                        </div><br />
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group input-group">
+                                                    <input type="text" class="form-control" id="searchRiskTextbox" ng-model="searchRisk.name">
+                                                    <span class="input-group-btn"><button class="btn btn-default" type="button"><i class="fa fa-search"></i></button></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 form-group">
+                                                <button type="button" class="btn btn-info" ng-click="AddEvidence(selectedRisk)">Add Risk Factor</button>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <select size="6" ng-model="selectedRisk" form="finalSymptoms" multiple class="form-control ng-valid" ng-options="risk as risk.name for risk in RiskBank | filter:searchRisk">
+                                                    <option ng-repeat="risk in RiskBank">{{risk.name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-                        <br/>
-                        <select size="10" ng-model="selectedRisk" form="finalSymptoms" multiple class="form-control ng-valid" ng-options="risk as risk.name for risk in RiskBank | filter:searchRisk">
-                            <option ng-repeat="risk in RiskBank">{{risk.name}}</option>
-                        </select>
                     </div>
-                    <button type="button" class="btn btn-default" ng-click="AddEvidence(selectedRisk)">Add Risk Factor</button>
                 </div>
             </div>
-            <br />
-            <h4>Patient Diagnosis Information</h4>
-            <br />
-            <pre><strong>Patient Age:</strong> {{patient.age}}</pre>
-            <pre><strong>Patient Gender:</strong> {{patient.gender}}</pre>
-            <pre><label for="finalSymptoms">Selected Symptoms & Risks</label></pre>
-            <pre>                                
-            <select disabled multiple class="form-control" id="finalSymptoms">
-            <option ng-repeat="res in Symptoms">{{res.name}}</option>
-                </select>
-            </pre>
-            
-                <button type="button" ng-click="DianosePatient(Symptoms,patient.age,patient.gender)" class="btn btn-default">Diagnose Patient</button>
-            
-            <!--<a href="/DiagnosisExpertSystemProcess" ng-click="DianosePatient(Symptoms,patient.age,patient.gender)"> Diagnose</a>-->
+        </div>
 
-        </form>
-
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="portlet light" style="border: 1px solid #ddd; border-radius: 4px;">
+                    <div class="portlet-title">
+                        <div class="caption caption-md">
+                            <i class="icon-bar-chart font-dark hide"></i>
+                            <span class="caption-subject font-green-steel uppercase bold">PATIENT'S ILLNESS SUMMARY</span>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <div class="row">
+                            <pre><strong>Patient Age:</strong> {{patient.age}} </pre>
+                            <pre><strong>Patient Gender:</strong> {{Gender}}</pre>
+                            <pre><label for="finalSymptoms">Selected Symptoms & Risks</label>
+                            <select disabled multiple class="form-control selectpicker" id="finalSymptoms">
+                            <option ng-repeat="res in Symptoms">{{res.name}}</option>
+                                                        </select>
+                                                    </pre>
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4">
+                                    <div class="col-md-4"></div>
+                                    <div class="col-md-4"><button type="button" class="btn btn-info" ng-click="DianosePatient(Symptoms,patient.age,GetGender(),patient.advanced)">Proceed</button></div>
+                                    <div class="col-md-4"></div>
+                                </div>
+                                <div class="col-md-4"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
