@@ -42,6 +42,8 @@
                 $scope.TreatmentPlan = result["Consultation_TreatmentPlan"];
                 $scope.Presciption_ID = result["Consultation_Presciption_ID"];
             });
+
+            $('#View_Diagnosis_Modal').modal('show');
         };
         
 }]);
