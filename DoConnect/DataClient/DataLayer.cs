@@ -455,9 +455,7 @@ namespace DataClient
             DateTime Tomorrow2 = DateTime.Today.AddDays(+2);
             Appointments AppointmentInfo = new Appointments(); int numYesterdayApps = 0; int numTodayApps = 0; int numTomorrowApps = 0;
             List<Appointments> AppointmentsInfo = new List<Appointments>();
-
-            try
-            {            
+           
                 if (LoggedIn_User_AccessLevel == 1)
                 {
                     using (var reader = access.ExecuteReader(Conn, "[GetAllAppointments]", new List<SqlParameter>()))
@@ -485,10 +483,9 @@ namespace DataClient
                             AppointmentInfo.Practice_Address = reader.GetString(reader.GetOrdinal("Practice_Address"));
 
                             DateTime Appointments_Date_Time = Convert.ToDateTime(reader.GetString(reader.GetOrdinal("Appointments_Date_Time")));
-                            
-                            
+                                                     
 
-                            if ((Today < Appointments_Date_Time) && (Appointments_Date_Time < Tomorrow))
+                            if ((Appointments_Date_Time > Today0) && (Appointments_Date_Time < Tomorrow))
                             {
                                 AppointmentInfo.highlightTodayApps = 1;
                                 numTodayApps++;                            
@@ -498,7 +495,7 @@ namespace DataClient
                                 AppointmentInfo.highlightTomorrowApps = 1;
                                 numTomorrowApps++;                            
                             }
-                            else if ((Appointments_Date_Time > Convert.ToDateTime("2016-11-06")) && (Appointments_Date_Time < Convert.ToDateTime("2016-11-08")))
+                            else if ((Appointments_Date_Time > Yesterday) && (Appointments_Date_Time < Today0))
                             {
                                 AppointmentInfo.highlightYesterdayApps = 1;
                                 numYesterdayApps++;
@@ -537,28 +534,31 @@ namespace DataClient
                             AppointmentInfo.Practice_Fax_Number = reader.GetString(reader.GetOrdinal("Practice_Fax_Number"));
                             AppointmentInfo.Practice_Address = reader.GetString(reader.GetOrdinal("Practice_Address"));
                             DateTime Appointments_Date_Time = Convert.ToDateTime(reader.GetString(reader.GetOrdinal("Appointments_Date_Time")));
-                            if ((Today < Appointments_Date_Time) && (Appointments_Date_Time < Tomorrow))
-                            {
-                                AppointmentInfo.highlightTodayApps = 1;
-                                numTodayApps++;
-                            }
-                            AppointmentInfo.numTodayApps = numTodayApps;
-                            if ((Tomorrow < Appointments_Date_Time) && (Appointments_Date_Time < Tomorrow2))
-                            {
-                                AppointmentInfo.highlightTomorrowApps = 1;
-                                numTomorrowApps++;
-                            }
-                            AppointmentInfo.numTomorrowApps = numTomorrowApps;
-                            AppointmentsInfo.Add(AppointmentInfo); AppointmentInfo = new Appointments();
+                        if ((Appointments_Date_Time > Today0) && (Appointments_Date_Time < Tomorrow))
+                        {
+                            AppointmentInfo.highlightTodayApps = 1;
+                            numTodayApps++;
                         }
+                        else if ((Tomorrow < Appointments_Date_Time) && (Appointments_Date_Time < Tomorrow2))
+                        {
+                            AppointmentInfo.highlightTomorrowApps = 1;
+                            numTomorrowApps++;
+                        }
+                        else if ((Appointments_Date_Time > Yesterday) && (Appointments_Date_Time < Today0))
+                        {
+                            AppointmentInfo.highlightYesterdayApps = 1;
+                            numYesterdayApps++;
+                        }
+
+                        AppointmentInfo.numTodayApps = numTodayApps;
+                        AppointmentInfo.numYesterdayApps = numYesterdayApps;
+                        AppointmentInfo.numTomorrowApps = numTomorrowApps;
+                        AppointmentsInfo.Add(AppointmentInfo); AppointmentInfo = new Appointments();
+                    }
                     }
                 }
                 //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Viewed appointments page");
-            }
-            catch (Exception)
-            {
-                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to view selected appointment " + ex.ToString());
-            }
+            
             return AppointmentsInfo;
         }
 

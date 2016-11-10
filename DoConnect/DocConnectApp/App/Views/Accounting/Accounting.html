@@ -59,11 +59,11 @@
                         </tr>
                         <tr class="row alert alert-info text-center" ng-show="Invoices.length == 0"><td colspan="4"><b>System Message!</b> No invoice records to display.</td></tr>
                     </tbody>
-                </table>
-                <div class="row">
-                    <div class="col-md-12">
-                        <dir-pagination-controls class="pull-right" max-size="5" direction-links="true" boundary-links="true" style="margin-right: 20px;"></dir-pagination-controls>
-                    </div>
+                </table>                
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <dir-pagination-controls class="pull-right" max-size="5" direction-links="true" boundary-links="true" style="margin-right: 20px;"></dir-pagination-controls>
                 </div>
             </div>
         </div>
@@ -183,7 +183,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-show="UnInvoicedConsultations.length > 0" dir-paginate="UnInvoicedConsultation in UnInvoicedConsultations | filter:search | orderBy:sortKey:reverse | itemsPerPage:10">
+                                    <tr ng-show="UnInvoicedConsultations.length > 0" ng-repeat="UnInvoicedConsultation in UnInvoicedConsultations | filter:search | orderBy:sortKey:reverse | itemsPerPage:10">
                                         <td>{{UnInvoicedConsultation.PatientFullName}}</td>
                                         <td>{{UnInvoicedConsultation.Consultation_Date}}</td>
                                         <td>{{UnInvoicedConsultation.DoctorFullName}}</td>
