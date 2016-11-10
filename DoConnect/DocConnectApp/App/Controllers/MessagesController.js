@@ -101,22 +101,15 @@
 
         $scope.today = $filter('date')(new Date(), 'yyyy-MM-dd');
 
-        
-
         $scope.Receiver_UserID = 0;
         $scope.changedValueGetReceiver_UserID = function (item) {
-            console.log(item);
             $scope.Receiver_UserID = item.User_ID;
-        };        
-
+        };
         
-        $scope.SendMessage = function (_Subject, _Description) {
-            
+        $scope.SendMessage = function (_Subject, _Description) {            
             var BroadCastMessage = function (_recepient, _Subject, _Description) {
-                console.log("Just called me" + _recepient, $scope.SessionData_User_ID, _Subject, _Description, $scope.today);
-
                 MessagesService.InsertMessage(_recepient, $scope.SessionData_User_ID, _Subject, _Description, $scope.today).success(function () {
-                    console.log("Successfull"+_recepient, $scope.SessionData_User_ID, _Subject, _Description, $scope.today);
+                   
                 },
                 function (error) {
                     btnAlert("System Error Message", "Message not successfully sent.");
@@ -130,8 +123,6 @@
                         BroadCastMessage($scope.AllRecepients[i].User_ID, _Subject, _Description);
                     }
                 }
-
-                console.log("rbAllDoctors");
                 $scope.GetAllMessages();
                 $scope.FunctionInbox();
                 angular.element(".insert").val('');
@@ -143,7 +134,6 @@
                         BroadCastMessage($scope.AllRecepients[i].User_ID, _Subject, _Description);
                     }
                 }
-                console.log("rbAllPatients");
                 $scope.GetAllMessages();
                 $scope.FunctionInbox();
                 angular.element(".insert").val('');
@@ -155,7 +145,6 @@
                         BroadCastMessage($scope.AllRecepients[i].User_ID , _Subject, _Description);
                     }
                 }
-                console.log("rbAllStaff");
                 $scope.GetAllMessages();
                 $scope.FunctionInbox();
                 angular.element(".insert").val('');
@@ -163,7 +152,6 @@
             }
             else if ($("#rbSingleRecepient").is(":checked")) {
                 MessagesService.InsertMessage($scope.Receiver_UserID, $scope.SessionData_User_ID, _Subject, _Description, $scope.today).success(function () {
-                    console.log("rbSingleRecepient");
                     $scope.GetAllMessages();
                     $scope.FunctionInbox();
                     angular.element(".insert").val('');

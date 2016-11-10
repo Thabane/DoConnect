@@ -52,12 +52,10 @@
 
                     var data = google.visualization.arrayToDataTable([
                       ['Task', 'Hours per Day'],
-                      ['Gross Income', $scope.Total],
                       ['Income Received', $scope.TotalAmountPaid],
-                      ['Income Due', $scope.TotalBalanceOwing]
+                      ['Outstanding Income', $scope.TotalBalanceOwing]
                     ]);
                     var options = {
-                        pieSliceText: 'value',
                         is3D: true,
                         height: '170'
                     };
@@ -115,7 +113,7 @@
                     function drawChart_TotalNumOfVisits() {
 
                         var data = new google.visualization.DataTable();
-                        data.addColumn('string', 'Month (2016)');
+                        data.addColumn('string', 'Year (2016)');
                         data.addColumn('number', 'Number of consultations');
                         data.addColumn('number', 'Number of appointments');
 

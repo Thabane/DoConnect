@@ -27,7 +27,6 @@
         };
 
         var InsertMessage = function (Receiver, Sender, Subject, Description, Date) {
-            console.log(Receiver, Sender, Subject, Description, Date);
             return $http.post("api/Messages/InsertMessage",
             {
                 'Sender': Sender,
