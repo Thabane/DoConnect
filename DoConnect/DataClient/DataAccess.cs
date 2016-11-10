@@ -28,20 +28,18 @@ namespace DataClient
         /// <returns></returns>
         internal SqlDataReader ExecuteReader(string connectionString, string procName, List<SqlParameter> commandParameters)
         {
-            
-                string connStr = connectionString;
-                var conn = new SqlConnection(connStr);
-                SqlCommand command = new SqlCommand(procName, conn);
+            string connStr = connectionString;
+            var conn = new SqlConnection(connStr);
+            SqlCommand command = new SqlCommand(procName, conn);
 
-                if (commandParameters != null)
-                    foreach (SqlParameter param in commandParameters)
-                        command.Parameters.Add(param);
+            if (commandParameters != null)
+                foreach (SqlParameter param in commandParameters)
+                    command.Parameters.Add(param);
 
-                command.CommandType = CommandType.StoredProcedure;
-                conn.Open();
-                //command.CommandTimeout = 60;
-                return command.ExecuteReader(CommandBehavior.CloseConnection);
-            
+            command.CommandType = CommandType.StoredProcedure;
+            conn.Open();
+            //command.CommandTimeout = 60;
+            return command.ExecuteReader(CommandBehavior.CloseConnection);            
         }
 
         /// <summary>

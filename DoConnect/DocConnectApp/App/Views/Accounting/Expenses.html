@@ -21,34 +21,34 @@
                     <input class="form-control" type="text" style="font-size:13px;" ng-model="search">
                 </div>
             </div>
-
-            <table class="table table-hover">
-                <thead style="background-color: #f8f8f8;">
-                    <tr>
-                        <th style="width: 35%;" ng-click="sort('Description')">Expense Description<span class="fa sort-icon" ng-show="sortKey=='Description'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
-                        <th style="width: 15%;" ng-click="sort('Date')">Date<span class="fa sort-icon" ng-show="sortKey=='Date'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
-                        <th style="width: 15%;" ng-click="sort('Amount')">Amount (R)<span class="fa sort-icon" ng-show="sortKey=='Amount'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
-                        <th style="width: 15%;" ng-click="sort('Practice Name')">Practice Name<span class="fa sort-icon" ng-show="sortKey=='Practice Name'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
-                        <th style="width: 15%;">Action
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr dir-paginate="Expense in Expenses | filter:search | orderBy:sortKey:reverse | itemsPerPage:5">
-                        <td>{{Expense.Description}}</td>
-                        <td>{{Expense.Date}}</td>
-                        <td>{{Expense.Amount}}</td>
-                        <td>{{Expense.Practice_Name}}</td>
-                        <td>
-                            <button class="btn btn-primary btn-xs" ng-click="ViewExpense(Expense.ID)" onclick="ViewExpense()"><i class="glyphicon glyphicon-new-window"></i></button>
-                            <button class="btn btn-danger btn-xs" ng-click="DeleteExpense1(Expense.ID)"><i class="fa fa-trash-o"></i></button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <dir-pagination-controls class="pull-right" max-size="5" direction-links="true" boundary-links="true" style="margin-right: 20px;"></dir-pagination-controls>
+            <div class="table-responsive table-bordered">
+                <table class="table table-hover">
+                    <thead style="background-color: #f8f8f8;">
+                        <tr>
+                            <th ng-click="sort('Description')">Expense Description<span class="fa sort-icon" ng-show="sortKey=='Description'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                            <th ng-click="sort('Date')">Date<span class="fa sort-icon" ng-show="sortKey=='Date'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                            <th ng-click="sort('Amount')">Amount (R)<span class="fa sort-icon" ng-show="sortKey=='Amount'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                            <th ng-click="sort('Practice Name')">Practice Name<span class="fa sort-icon" ng-show="sortKey=='Practice Name'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                            <th>Action
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr dir-paginate="Expense in Expenses | filter:search | orderBy:sortKey:reverse | itemsPerPage:5">
+                            <td>{{Expense.Description}}</td>
+                            <td>{{Expense.Date}}</td>
+                            <td>{{Expense.Amount}}</td>
+                            <td>{{Expense.Practice_Name}}</td>
+                            <td>
+                                <button class="btn btn-primary btn-xs" ng-click="ViewExpense(Expense.ID)" onclick="ViewExpense()"><i class="glyphicon glyphicon-new-window"></i></button>
+                                <button class="btn btn-danger btn-xs" ng-click="DeleteExpense1(Expense.ID)"><i class="fa fa-trash-o"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-md-12">
+                        <dir-pagination-controls class="pull-right" max-size="5" direction-links="true" boundary-links="true" style="margin-right: 20px;"></dir-pagination-controls>
+                    </div>
                 </div>
             </div>
         </div>

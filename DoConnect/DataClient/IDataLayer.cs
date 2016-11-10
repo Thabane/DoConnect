@@ -54,6 +54,7 @@ namespace DataClient
         int NewUpdatePatient(string firstName, string lastName, string id_Number, string gender, string dob, string cell_number, string street_address, string suburb, string city, string country);
         bool CreatePatient(string firstName, string lastName, string id_Number, string gender, DateTime dob, string cell_number, string street_address, string suburb, string city, string country, string Allergies, string PreviousIllnesses, string PreviousMedication, string RiskFactors, string SocialHistory, string FamilyHistory, int Medical_Aid_ID, int Doctor_ID, int UserId);
         List<GetAllPatients> GetAllPatients();
+        List<GetAllPatients> GetAllPatientsByPracticeID(int PracticeID);
         List<Patient> GetPatientByID(int id);
         bool DeletePatient(int id);
         #endregion
@@ -161,6 +162,11 @@ namespace DataClient
 
         #region LogFile
         List<Log> ReadLogFile();
+        #endregion
+
+        #region
+        List<Consultation> FinancialReportByPracticeID(int Practice_ID, string StartDate, string EndDate);
+        List<Consultation> FinancialReport_All(string StartDate, string EndDate);
         #endregion
     }
 }

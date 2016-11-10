@@ -1263,6 +1263,31 @@ namespace DataClient
             return patientInfo;
         }
 
+        public List<GetAllPatients> GetAllPatientsByPracticeID(int PracticeID)
+        {
+            _parameters = new List<SqlParameter>();
+            SqlParameter PracticeIDParameter = new SqlParameter("@PracticeID", SqlDbType.Int);
+            PracticeIDParameter.Value = PracticeID;
+            _parameters.Add(PracticeIDParameter);
+            List<GetAllPatients> patientInfo = new List<GetAllPatients>();
+            try
+            {
+                using (var reader = access.ExecuteReader(Conn, "[GetAllPatientsByPracticeID]", _parameters))
+                {
+                    while (reader.Read())
+                    {
+                        patientInfo.Add(new GetAllPatients().Create(reader));
+                    }
+                }
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Viewed patients page");
+            }
+            catch (Exception)
+            {
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to view patients list: " + ex.ToString());
+            }
+            return patientInfo;
+        }
+
         public List<Patient> GetPatientByID(int id)
         {
             List<SqlParameter> _parameters = new List<SqlParameter>();
@@ -3840,6 +3865,57 @@ namespace DataClient
                LoadList.Add(Data); Data = new Log();
             }
             return LogData;
+        }
+        #endregion
+
+        #region
+        public List<Consultation> FinancialReport_All(string StartDate, string EndDate)
+        {
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            SqlParameter StartDateParameter = new SqlParameter("@DateStart", SqlDbType.NVarChar);
+            SqlParameter EndDateParameter = new SqlParameter("@DateEnd", SqlDbType.NVarChar);
+            
+            StartDateParameter.Value = StartDate;
+            EndDateParameter.Value = EndDate;
+            
+            _parameters.Add(StartDateParameter);
+            _parameters.Add(EndDateParameter);
+
+            List<Consultation> FinancialInfo = new List<Consultation>();
+            using (var reader = access.ExecuteReader(Conn, "[FinancialReport_All]", _parameters))
+            {
+                while (reader.Read())
+                {
+                    FinancialInfo.Add(new Consultation().FinancialReportByPracticeID(reader));
+                }
+            }
+            return FinancialInfo;
+        }
+
+        public List<Consultation> FinancialReportByPracticeID(int Practice_ID, string StartDate, string EndDate)
+        {
+            List<SqlParameter> _parameters = new List<SqlParameter>(); 
+            SqlParameter Practice_IDParameter = new SqlParameter("@PracticeID", SqlDbType.Int);
+            SqlParameter StartDateParameter = new SqlParameter("@DateStart", SqlDbType.NVarChar);
+            SqlParameter EndDateParameter = new SqlParameter("@DateEnd", SqlDbType.NVarChar);
+
+            Practice_IDParameter.Value = Practice_ID;
+            StartDateParameter.Value = StartDate;
+            EndDateParameter.Value = EndDate;
+
+            _parameters.Add(Practice_IDParameter);
+            _parameters.Add(StartDateParameter);
+            _parameters.Add(EndDateParameter);
+
+            List<Consultation> FinancialInfo = new List<Consultation>();
+            using (var reader = access.ExecuteReader(Conn, "[FinancialReportByPracticeID]", _parameters))
+            {
+                while (reader.Read())
+                {
+                    FinancialInfo.Add(new Consultation().FinancialReportByPracticeID(reader));
+                }
+            }
+            return FinancialInfo;
         }
         #endregion
     }

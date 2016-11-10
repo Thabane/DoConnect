@@ -119,11 +119,15 @@ app.config(
                 templateUrl: "App/Views/Reports/Reports.html",
                 controller: "ReportsController"
             })
+            .when("/Financial_Report", {
+                templateUrl: "App/Views/Reports/Financial_Report.html",
+                controller: "ReportsController"
+            })
             .when("/UserProfile", {
                 templateUrl: "App/Views/UserProfile/UserProfile.html",
                 controller: "UserProfileController"
             })
-            .when("/Login", {//../Views/Home/Login.cshtml
+            .when("/Login", {
                 templateUrl: "App/Views/Login/Login.html",
                 controller: "LoginController"
             })
@@ -137,8 +141,7 @@ app.config(
             })
             .otherwise({
                 redirectTo: "/Dashboard"
-            })
-        ;
+            });
 
         $locationProvider.html5Mode({
             enabled: true,

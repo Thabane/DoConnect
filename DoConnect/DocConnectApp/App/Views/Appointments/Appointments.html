@@ -28,15 +28,15 @@
                     <input class="form-control" type="text" style="font-size:13px;" ng-model="search">
                 </div>
             </div>
-
+            <div class="table-responsive table-bordered">
             <table class="table table-hover">
                 <thead style="background-color: #f8f8f8;">
                     <tr>
-                        <th style="width: 20%;" ng-click="sort('Date_Time')">App Date/Time<span class="fa sort-icon" ng-show="sortKey=='Date_Time'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
-                        <th style="width: 20%;" ng-click="sort('PatientName')">Patient's Name<span class="fa sort-icon" ng-show="sortKey=='PatientName'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
-                        <th style="width: 20%;" ng-click="sort('DoctorName')">Doctor's Name<span class="fa sort-icon" ng-show="sortKey=='DoctorName'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
-                        <th style="width: 20%;" ng-click="sort('Details')">App Details<span class="fa sort-icon" ng-show="sortKey=='Details'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
-                        <th style="width: 15%;">Action</th>
+                            <th ng-click="sort('Date_Time')">App Date/Time<span class="fa sort-icon" ng-show="sortKey=='Date_Time'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                            <th ng-click="sort('PatientName')">Patient's Name<span class="fa sort-icon" ng-show="sortKey=='PatientName'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                            <th ng-click="sort('DoctorName')">Doctor's Name<span class="fa sort-icon" ng-show="sortKey=='DoctorName'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                            <th ng-click="sort('Details')">App Details<span class="fa sort-icon" ng-show="sortKey=='Details'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                            <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -53,12 +53,12 @@
                     </tr>
                 </tbody>
             </table>
-
             <div class="row">
                 <div class="col-md-12">
                     <dir-pagination-controls class="pull-right" max-size="5" direction-links="true" boundary-links="true" style="margin-right: 20px;"></dir-pagination-controls>
                 </div>
             </div>
+        </div>
         </div>
 
         <!--View Appointment Modal-->

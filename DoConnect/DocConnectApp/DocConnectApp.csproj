@@ -219,6 +219,7 @@
     <Content Include="App\Views\Patients\patients.html" />
     <Content Include="App\Views\Practices\NewPractice.html" />
     <Content Include="App\Views\Practices\Practices.html" />
+    <Content Include="App\Views\Reports\Financial_Report.html" />
     <Content Include="App\Views\Reports\Reports.html" />
     <Content Include="App\Views\UserProfile\UserProfile.html" />
     <Content Include="Content\bootstrap-theme.css" />

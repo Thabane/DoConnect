@@ -22,10 +22,10 @@
                     </div>
                     <div class="portlet-body" style="max-height: 98px; overflow-y: auto; overflow-x: hidden;">
                         <div class="row" ng-repeat="medicineInventoryStockCount in MedicineInventoryStockCount">
-                            <div class="col-md-8 text-left">
+                            <div class="col-xs-8 text-left">
                                 <p>{{medicineInventoryStockCount.DrugName}}</p>
                             </div>
-                            <div class="col-md-3 text-left" style="padding-left:0px">
+                            <div class="col-xs-3 text-left" style="padding-left:0px">
                                 <p>{{medicineInventoryStockCount.QuantityInStock}}</p>
                             </div>
                         </div>
@@ -49,15 +49,15 @@
                     </div>
                     <div class="portlet-body">
                         <div class="row">
-                            <div class="col-md-5">
+                            <div class="col-xs-5">
                                 <i class="fa fa-calendar-check-o fa-5x"></i>
                             </div>
-                            <div class="col-md-5 text-left">
+                            <div class="col-xs-5 text-left">
                                 <p>Pending</p>
                                 <p>Accepted</p>
                                 <p>Rejected</p>
                             </div>
-                            <div class="col-md-2 text-left" style="padding-left:0px">
+                            <div class="col-xs-2 text-left" style="padding-left:0px">
                                 <p>{{PendingAppointments_Value}}</p>
                                 <p>{{ApprovedAppointments_Value}}</p>
                                 <p>{{RejectedAppointments_Value}}</p>
@@ -97,16 +97,16 @@
                         </div>
                     </div>
                     <div class="portlet-body">
-                        <div class="row list-separated">                            
-                            <div class="col-md-4">
+                        <div class="row list-separated">
+                            <div class="col-xs-4">
                                 <div class="font-purple font-hg"> Net Income </div>
                                 <div class="uppercase font-hg theme-font font-purple"><span class="font-lg font-grey-mint">R</span> {{Income - Expenses_Summary}}</div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-xs-4">
                                 <div class="font-grey-mint font-hg"> Income </div>
                                 <div class="uppercase font-hg font-dark"><span class="font-lg font-grey-mint">R</span> {{Income}}</div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-xs-4">
                                 <div class="font-dark font-hg"> Expenses </div>
                                 <div class="uppercase font-hg font-red-flamingo"><span class="font-lg font-grey-mint">R</span> {{Expenses_Summary}}</div>
                             </div>
@@ -170,11 +170,14 @@
                         <div class="">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="col-md-4 pull-left" style="margin-top: 0px">
+                                <!--<div class="col-md-4 pull-left" style="margin-top: 0px">
                                         <i class="icon-bar-chart font-dark hide"></i>
                                         <span class="caption-subject font-green-steel uppercase bold">RSS Feed</span>
-                                    </div>
-                                    <div class="btn-group col-md-8">
+                                </div>-->
+                                        <div class="feedgrabbr_widget" id="fgid_ac60de62969c794c92e57aa62"></div>
+                                        <script> if (typeof(fg_widgets)==="undefined") fg_widgets = new Array();fg_widgets.push("fgid_ac60de62969c794c92e57aa62");</script>
+                                        <script src="http://www.feedgrabbr.com/widget/fgwidget.js"></script>
+                                        <!--<div class="btn-group col-md-8">
                                         <button class="btn btn-info" type="button" tabindex="-1">{{loadButonText}}</button>
                                         <button class="btn btn-info dropdown-toggle" data-toggle="dropdown" tabindex="-1">
                                             <span class="caret"></span>
@@ -189,6 +192,7 @@
                                         </ul>
                                     </div>
                                 </div>
+                            </div>-->
                             </div>
                         </div>
                     </div>
@@ -215,7 +219,7 @@
         <!--AppointmentsModal-->
         <div id="AppointmentsModal" class="modal fade">
             <form>
-                <div class="modal-dialog" style="width:50%" ng-init="GetPendingAppointmentsByPracticeID(Practice.ID)">
+                <div class="modal-dialog" ng-init="GetPendingAppointmentsByPracticeID(Practice.ID)">
                     <div class="modal-content" ><!--ng-init="GetAppovedAppointmentsByPracticeID(Practice.ID)"-->
                         <div class="modal-header"><!--ng-init="GetRejectedAppointmentsByPracticeID(Practice.ID)"-->
                             <button type="button" class="close CloseModel" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -242,19 +246,19 @@
                                                 <div class="mt-action">
                                                     <div class="mt-action-body">
                                                         <div class="mt-action-row">
-                                                            <div class="mt-action-info col-md-4">
+                                                            <div class="mt-action-info col-md-4 col-xs-12">
                                                                 <div class="mt-action-details">
                                                                     <span class="mt-action-author">{{PendingAppointment.Patient_FirstName}}</span>
                                                                     <p class="mt-action-desc">{{PendingAppointment.Appointments_Details}}</p>
                                                                 </div>
                                                             </div>
-                                                            <div class="mt-action-info col-md-4">
+                                                            <div class="mt-action-info col-md-4 col-xs-12">
                                                                 <div class="mt-action-details">
                                                                     <span class="mt-action-author">Dr. {{PendingAppointment.Doctors_FirstName}}</span>
                                                                     <p class="mt-action-desc">{{PendingAppointment.Appointments_Date_Time}}</p>
                                                                 </div>
                                                             </div>
-                                                            <div class="mt-action-buttons col-md-2">
+                                                            <div class="mt-action-buttons col-md-2 col-xs-12">
                                                                 <div class="btn-group btn-group-circle">
                                                                     <button class="btn btn-outline green btn-sm" type="button" ng-click="AppoveAppointment(PendingAppointment.Appointments_ID, Practice.ID)">Appove</button>
                                                                     <button class="btn btn-outline red btn-sm" type="button" ng-click="RejectAppointment(PendingAppointment.Appointments_ID, Practice.ID)">Reject</button>
@@ -272,19 +276,19 @@
                                                 <div class="mt-action">
                                                     <div class="mt-action-body">
                                                         <div class="mt-action-row">
-                                                            <div class="mt-action-info col-md-4">
+                                                            <div class="mt-action-info col-md-4 col-xs-12">
                                                                 <div class="mt-action-details">
                                                                     <span class="mt-action-author">{{ApprovedAppointment.Patient_FirstName}}</span>
                                                                     <p class="mt-action-desc">{{ApprovedAppointment.Appointments_Details}}</p>
                                                                 </div>
                                                             </div>
-                                                            <div class="mt-action-info col-md-4">
+                                                            <div class="mt-action-info col-md-4 col-xs-12">
                                                                 <div class="mt-action-details">
                                                                     <span class="mt-action-author">Dr. {{ApprovedAppointment.Doctors_FirstName}}</span>
                                                                     <p class="mt-action-desc">{{ApprovedAppointment.Appointments_Date_Time}}</p>
                                                                 </div>
                                                             </div>
-                                                            <div class="mt-action-buttons col-md-2">
+                                                            <div class="mt-action-buttons col-md-2 col-xs-12">
                                                                 <div class="btn-group btn-group-circle">
                                                                     <button class="btn btn-outline red btn-sm" type="button" ng-click="RejectAppointment(ApprovedAppointment.Appointments_ID, Practice.ID)">Reject</button>
                                                                 </div>
@@ -301,19 +305,19 @@
                                                 <div class="mt-action">
                                                     <div class="mt-action-body">
                                                         <div class="mt-action-row row">
-                                                            <div class="mt-action-info col-md-4">
+                                                            <div class="mt-action-info col-md-4 col-xs-12">
                                                                 <div class="mt-action-details">
                                                                     <span class="mt-action-author">{{RejectedAppointment.Patient_FirstName}}</span>
                                                                     <p class="mt-action-desc">{{RejectedAppointment.Appointments_Details}}</p>
                                                                 </div>
                                                             </div>
-                                                            <div class="mt-action-info col-md-4">
+                                                            <div class="mt-action-info col-md-4 col-xs-12">
                                                                 <div class="mt-action-details">
                                                                     <span class="mt-action-author">Dr. {{RejectedAppointment.Doctors_FirstName}}</span>
                                                                     <p class="mt-action-desc">{{RejectedAppointment.Appointments_Date_Time}}</p>
                                                                 </div>
                                                             </div>
-                                                            <div class="mt-action-buttons col-md-2">
+                                                            <div class="mt-action-buttons col-md-2 col-xs-12">
                                                                 <div class="btn-group btn-group-circle">
                                                                     <button class="btn btn-outline green btn-sm" type="button" ng-click="AppoveAppointment(RejectedAppointment.Appointments_ID, Practice.ID)">Appove</button>
                                                                 </div>
