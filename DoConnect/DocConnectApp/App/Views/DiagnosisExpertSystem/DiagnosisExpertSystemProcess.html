@@ -1,60 +1,158 @@
-﻿<div id="page-wrapper" ng-controller="DiagnosisExpertSystemProcessController">
-    <div class="row">
+﻿<div ng-controller="DiagnosisExpertSystemProcessController">
+    <div id="page-wrapper">
         <div class="col-lg-12">
-            <h2 class="page-header text-primary">Expert System</h2>
+            <h2 class="page-header text-primary">Diagnosis Assistant</h2>
         </div>
         <div class="col-lg-12" ng-if="DiagnosisResponse.question != null">
-            <div class="col-lg-6">
-                <h2> Question</h2>
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="portlet light" style="border: 1px solid #ddd; border-radius: 4px;">
+                        <div class="portlet-title">
+                            <div class="caption caption-md">
+                                <i class="icon-bar-chart font-dark hide"></i>
+                                <span class="caption-subject font-green-steel uppercase bold">Question</span>
+                            </div>
+                        </div>
+                        <div class="portlet-body">
+                            <div class="row" style="padding-left: 15px">
+                                <h4>{{DiagnosisResponse.question.text}}</h4>
+                            </div>
+                            <hr class="tagline-divider">
 
-                <h4>{{DiagnosisResponse.question.text}}</h4>
+                            <form ng-if="DiagnosisResponse.question.type == 'single'">
+                                <div class="row">
+                                    <div ng-repeat="ans in DiagnosisResponse.question.items[0].choices">
+                                        <div class="col-md-4">
+                                            <button type="button" class="btn btn btn-info" ng-click="AnswerQuestionSingle(DiagnosisResponse.question.items[0].id,ans.id)">{{ans.label}}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <form ng-if="DiagnosisResponse.question.type == 'group_multiple'">
+                                <div class="form-group">
+                                    <div class="form-check" ng-repeat="item in DiagnosisResponse.question.items">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" ng-model="item.SELECTED" ng-true-value="1" ng-false-value="0" ng-checked="checkbox == 1" />
+                                            {{item.name}}
+                                        </label>
+                                    </div>
+                                    <hr class="tagline-divider">
+                                    <div class="row">
+                                        <div class="col-md-4"></div>
+                                        <div class="col-md-4">
+                                            <div class="row">
+                                                <div class="col-md-4"></div>
+                                                <div class="col-md-4">
+                                                    <button type="button" class="btn btn-info" ng-click="AnswerQuestionGroupMutiple(DiagnosisResponse.question.items)">Submit</button>
+                                                </div>
+                                                <div class="col-md-4"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4"></div>
+                                    </div>
+                                </div>
+                            </form>
+                            <form ng-if="DiagnosisResponse.question.type == 'group_single'">
+                                <div class="form-group text-center">
+                                    <div class="row" ng-repeat="item in DiagnosisResponse.question.items">
+                                        <label class="custom-control custom-radio">
+                                            <input type="radio" name="radio" ng-model="$parent.radioMod" ng-value="item" class="custom-control-input">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description">{{item.name}}</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <hr class="tagline-divider">
+                                <div class="row">
+                                    <div class="col-md-4"></div>
+                                    <div class="col-md-4">
+                                        <div class="row">
+                                            <div class="col-md-4"></div>
+                                            <div class="col-md-4">
+                                                <button type="button" class="btn btn-info" ng-click="AnswerQuestionGroupSingle(radioMod)">Submit</button>
+                                            </div>
+                                            <div class="col-md-4"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4"></div>
+                                </div>
 
-                <form ng-if="DiagnosisResponse.question.type == 'single'">
-                    <div class="row">
-                        <div ng-repeat="ans in DiagnosisResponse.question.items[0].choices">
-                            <button type="button" class="btn btn-block" ng-click="AnswerQuestionSingle(DiagnosisResponse.question.items[0].id,ans.id)">{{ans.label}}</button>
+                            </form>
                         </div>
                     </div>
-                </form>
+                </div>
 
-                <form ng-if="DiagnosisResponse.question.type == 'group_multiple'">
-                    <div class="form-group">
-                        <div class="form-check" ng-repeat="item in DiagnosisResponse.question.items">
-                            <label class="form-check-label">
-                                <input type="checkbox" ng-model="item.SELECTED" ng-true-value="1" ng-false-value="0" ng-checked="checkbox == 1"/>
-                                {{item.name}}
-                            </label>
+                <div class="col-lg-6 col-md-6">
+                    <div class="portlet light" style="border: 1px solid #ddd; border-radius: 4px;">
+                        <div class="portlet-title">
+                            <div class="caption caption-md">
+                                <i class="icon-bar-chart font-dark hide"></i>
+                                <span class="caption-subject font-green-steel uppercase bold">Possible Conditions</span>
+                            </div>
                         </div>
-                        <button type="button" class="btn btn-block" ng-click="AnswerQuestionGroupMutiple(DiagnosisResponse.question.items)">Answer</button>
+                        <div class="portlet-body">
+                            <div class="row text-center" ng-repeat="con in DiagnosisResponse.conditions | orderBy: -DiagnosisResponse.probability  | limitTo:numOfConditons">
+                                <button class="btn btn-default" data-toggle="modal" onclick="ConditionDetails()" ng-click="GetCondition(con.id)">{{con.name}}</button>
+                                <hr class="tagline-divider">
+                            </div>
+
+                            <div class="col-lg-12" ng-if="DiagnosisResponse.question == null">
+                                <h2> Possible Conditions</h2>
+                                <div class="row" ng-repeat="con in DiagnosisResponse.conditions | orderBy: -DiagnosisResponse.probability | limitTo:numOfConditons">
+                                    <a class="btn btn-block" href="/DiagnosisExpertSystemCondition/{{con.id}}">{{con.name}}</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </form>
-
-                <form ng-if="DiagnosisResponse.question.type == 'group_single'">
-
-                    <div class="row" ng-repeat="item in DiagnosisResponse.question.items">
-                        <label class="custom-control custom-radio">
-                            <input type="radio" name="radio" ng-model="$parent.radioMod" ng-value="item" class="custom-control-input">
-                            <span class="custom-control-indicator"></span>
-                            <span class="custom-control-description">{{item.name}}</span>
-                        </label>
-                    </div>
-                    <button type="button" class="btn btn-block" ng-click="AnswerQuestionGroupSingle(radioMod)">Answer</button>
-                </form>
-
-            </div>
-
-            <div class="col-lg-6">
-                <h2> Possible Conditions</h2>
-                <div class="row" ng-repeat="con in DiagnosisResponse.conditions | orderBy: -DiagnosisResponse.probability">
-                    <a class="btn btn-block" href="/DiagnosisExpertSystemCondition/{{con.id}}">{{con.name}}</a>
                 </div>
             </div>
         </div>
-        <div class="col-lg-12" ng-if="DiagnosisResponse.question == null">
-            <h2> Possible Conditions</h2>
-            <div class="row" ng-repeat="con in DiagnosisResponse.conditions | orderBy: -DiagnosisResponse.probability">
-                <a class="btn btn-block" href="/DiagnosisExpertSystemCondition/{{con.id}}">{{con.name}}</a>
-            </div>
+
+
+        <div id="ConditionDetails" class="modal fade">
+            <form name="Form" novalidate>
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title text-primary">Condition Details</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row" style="margin-bottom:4px;">
+                                <div class="col-md-2"><h5 class="form-control-label bold">Name:</h5></div>
+                                <div class="col-md-8"><h5 class="form-control-label" id="conditionName">{{Condition.name}}</h5></div>
+                            </div>
+                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                                <div class="col-md-2"><h5 class="form-control-label bold">Severity:</h5></div>
+                                <div class="col-md-8"><h5 class="form-control-label" id="conditionSeverity">{{Condition.severity}}</h5></div>
+                            </div>
+                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                                <div class="col-md-2"><h5 class="form-control-label bold">Prevalence:</h5></div>
+                                <div class="col-md-8"><h5 class="form-control-label" id="conditionPrevalence">{{Condition.prevalence}}</h5></div>
+                            </div>
+                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                                <div class="col-md-2"><h5 class="form-control-label bold">Sex:</h5></div>
+                                <div class="col-md-8"><h5 class="form-control-label" id="conditionSex">{{Condition.sex_filter}}</h5></div>
+                            </div>
+                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                                <div class="col-md-2"><h5 class="form-control-label bold">Acuteness:</h5></div>
+                                <div class="col-md-8"><h5 class="form-control-label" id="conditionAcuteness">{{Condition.acuteness}}</h5></div>
+                            </div>
+                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
+                                <div class="col-md-2"><h5 class="form-control-label bold">Extra:</h5></div>
+                                <div class="col-md-8"><h5 class="form-control-label">{{Condition.extras.hint}}</h5></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
+
     </div>
 </div>
+
+<script>
+    function ConditionDetails() {
+        $("#ConditionDetails").modal("show");
+    };
+</script>

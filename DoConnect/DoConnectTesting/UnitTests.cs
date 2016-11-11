@@ -46,5 +46,6 @@ namespace DoConnectTesting
             DataMan access = new DataMan();
             Assert.IsTrue(access.Login("Bongani", "12345"), "Incorrect values entered.");
         }
+        
     }
 }

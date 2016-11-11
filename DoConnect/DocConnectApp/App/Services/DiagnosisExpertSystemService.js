@@ -19,6 +19,8 @@
             }
             var PatientDiagnosisReturn = function (Symtoms) {
                 globalResponse = $http.post("api/DiagnosisExpertSystem/DiagnosePatient", Symtoms);
+                chosenEvidence = Symtoms;
+                console.log(chosenEvidence);
                 return globalResponse;
             }
             var GetAllRiskFactors = function () {
