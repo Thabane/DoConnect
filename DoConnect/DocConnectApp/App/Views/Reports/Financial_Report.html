@@ -60,7 +60,6 @@
                                 <tr>
                                     <th ng-click="sort('PatientFullName')">Patient's Name<span ng-show="sortKey=='PatientFullName'" class="fa sort-icon" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
                                     <th ng-click="sort('Date')">Consultation Date<span ng-show="sortKey=='Date'" class="fa sort-icon" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
-                                    <th ng-click="sort('Diagnosis')">Diagnosis<span ng-show="sortKey=='Diagnosis'" class="fa sort-icon" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
                                     <th ng-click="sort('Total')">Consultation Fee (R)<span ng-show="sortKey=='Total'" class="fa sort-icon" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
                                     <th ng-click="sort('AmountPaid')">Ammount Paid (R)<span ng-show="sortKey=='AmountPaid'" class="fa sort-icon" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
                                     <th ng-click="sort('BalanceOwing')">Amount Owing (R)<span ng-show="sortKey=='BalanceOwing'" class="fa sort-icon" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
@@ -70,13 +69,12 @@
                                 <tr ng-show="FinancialReportData.length > 0" dir-paginate="financialReportData in FinancialReportData | filter:search | orderBy:sortKey:reverse | itemsPerPage:50">
                                     <td>{{financialReportData.PatientFullName}}</td>
                                     <td>{{financialReportData.Date}}</td>
-                                    <td>{{financialReportData.Diagnosis}}</td>
                                     <td>{{financialReportData.Total}}</td>
                                     <td>{{financialReportData.AmountPaid}}</td>
                                     <td ng-class="{'text-danger': financialReportData.BalanceOwing > 0}">{{financialReportData.BalanceOwing}}</td>
                                 </tr>  
                                 <tr ng-show="Total_Footer > '0'">
-                                    <td colspan="3"><b>Totals</b></td>
+                                    <td colspan="2"><b>Totals</b></td>
                                     <td Style="border-top: 1px solid black; border-bottom: 2px solid black;"><b>{{Total_Footer}}</b></td>
                                     <td Style="border-top: 1px solid black; border-bottom: 2px solid black;"><b>{{AmountPaid_Footer}}</b></td>
                                     <td Style="border-top: 1px solid black; border-bottom: 2px solid black;"><b>{{BalanceOwing_Footer}}</b></td>
@@ -133,8 +131,21 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6">
+                        <div class="row">                            
+                            <div class="col-md-12">
+                                <div class="portlet light" style="border: 1px solid #ddd; border-radius: 4px; height: auto; width: auto">
+                                    <div class="portlet-title">
+                                        <div class="caption caption-md">
+                                            <i class="icon-bar-chart font-dark hide"></i>
+                                            <span class="caption-subject font-green-steel uppercase bold">Income Graph ({{month_5}} to {{month_0}})</span>
+                                        </div>
+                                    </div>
+                                    <div class="portlet-body" style="max-height: 500px; overflow-y: hidden; overflow-x: auto;">
+                                        <div id="curve_chart_Income_OverLast6Months" style="width: 1000px; height: 380px;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
                                 <div class="portlet light" style="border: 1px solid #ddd; border-radius: 4px; height: auto; width: auto">
                                     <div class="portlet-title">
                                         <div class="caption caption-md">
@@ -144,19 +155,6 @@
                                     </div>
                                     <div class="portlet-body">
                                         <div id="curve_chart_IncomeStats" style="width: 500px; height: 400px;"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="portlet light" style="border: 1px solid #ddd; border-radius: 4px; height: auto; width: auto">
-                                    <div class="portlet-title">
-                                        <div class="caption caption-md">
-                                            <i class="icon-bar-chart font-dark hide"></i>
-                                            <span class="caption-subject font-green-steel uppercase bold">Income Graph ({{month_5}} to {{month_0}})</span>
-                                        </div>
-                                    </div>
-                                    <div class="portlet-body" style="max-height: 500px; overflow-y: hidden; overflow-x: auto;">
-                                        <div id="curve_chart_Income_OverLast6Months" style="width: 1200px; height: 380px;"></div>
                                     </div>
                                 </div>
                             </div>

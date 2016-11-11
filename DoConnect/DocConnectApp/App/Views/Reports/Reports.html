@@ -53,7 +53,7 @@
                                         <td>{{Patient.Cell_Number}}</td>  
                                         <td>{{Patient.RegistrationDate}}</td> 
                                     </tr>
-                                    <tr class="row alert alert-info" ng-show="Patients.length > 0 && Patient.PrintSummary == 'true'"><td colspan="4"><b>Number of Patients = </b>{{Patient.num_TotalPatientsPerGroup}}</td></tr>
+                                    <tr class="row alert" ng-show="Patients.length > 0 && Patient.PrintSummary == 'true'"><td colspan="4"><b>Number of Patients = </b>{{Patient.num_TotalPatientsPerGroup}}</td></tr>
                                     <tr class="row alert alert-info" ng-show="Patients.length > 0 && Patient.PrintSummary == 'Groupfooter'"><td colspan="4"><b>Number of Patients = </b>{{Patient.num_TotalPatientsPerGroup}}</td></tr>
                                     <tr class="row alert alert-info" ng-show="Patients.length > 0 && Patient.PrintSummary == 'footer'"><td colspan="4"><b>Number of Patients = </b>{{Patient.num_TotalPatients}}</td></tr>
                                     <tr class="row alert alert-info text-center" ng-show="Patients.length == 0"><td colspan="4"><b>System Message!</b> No patients records to display.</td></tr>

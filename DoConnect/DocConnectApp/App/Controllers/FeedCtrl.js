@@ -1,13 +1,5 @@
 ﻿app.controller("FeedCtrl", ["$scope", "FeedService", "$interval", function ($scope, FeedService, $interval, Feed) {
     $scope.loadButonText = "Load";
-     
-    $scope.Load = function () {
-        FeedService.parseFeed("https://medlineplus.gov/feeds/news_en.xml").then(function (res) {
-            $scope.loadButonText = "MedlinePlus Health News";
-            $scope.feeds = res.data.responseData.feed.entries;
-        });
-    }
-
     $scope.loadFeed = function (e) {
         FeedService.parseFeed($scope.feedSrc).then(function (res) {
             $scope.loadButonText = angular.element(e.target).text();
@@ -26,4 +18,3 @@ app.factory('FeedService', ['$http', function ($http) {
 
     return { parseFeed: parseFeed }
 }]);
-

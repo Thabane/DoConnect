@@ -411,9 +411,9 @@
                 //Financial Bar Graph - Totals (Consulation Fee, Amount Owing, Amount Paid) Over the selected period over a selected period of time.
                 var data = google.visualization.arrayToDataTable([
                     ["Income Type", "Amount (R)", { role: "style" }],
-                    ["Gross Income", $scope.Total_Footer, "gold"],
-                    ["Income Received", $scope.AmountPaid_Footer, "gold"],
-                    ["Income Outstanding", $scope.BalanceOwing_Footer, "gold"]
+                    ["Gross Income", $scope.Total_Footer, "blue"],
+                    ["Received", $scope.AmountPaid_Footer, "red"],
+                    ["Outstanding", $scope.BalanceOwing_Footer, "gold"]
                 ]);
 
                 var options = {
@@ -429,7 +429,7 @@
 
                 //Financial Line Graph: Income Stats over last 6 Months
                 var data = google.visualization.arrayToDataTable([
-                  ['Year-Month', 'Gross Income', 'Income Received', 'Income Outstanding'],
+                  ['Year-Month', 'Income', 'Received', 'Outstanding'],
                   [$scope.month_5, $scope.Total_month_5, $scope.AmountPaid_month_5, $scope.BalanceOwing_month_5],
                   [$scope.month_4, $scope.Total_month_4, $scope.AmountPaid_month_4, $scope.BalanceOwing_month_4],
                   [$scope.month_3, $scope.Total_month_3, $scope.AmountPaid_month_3, $scope.BalanceOwing_month_3],
@@ -454,7 +454,6 @@
 
                 var chart = new google.visualization.LineChart(document.getElementById('curve_chart_Income_OverLast6Months'));
                 chart.draw(data, options);
-
             } 
         };
     }]);

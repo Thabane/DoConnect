@@ -146,7 +146,7 @@
                 function drawChart_NumOFPatientsPerMonthPerPractice() {
 
                     var data = new google.visualization.DataTable();
-                    data.addColumn('string', 'Month (2016)');
+                    data.addColumn('string', 'Year (2016)');
                     data.addColumn('number', 'Number of registered patients');
                     data.addColumn('number', 'Total patients');
 
