@@ -1,6 +1,8 @@
 ﻿app.controller("DiagnosisExpertSystemProcessController", ["$scope", "DiagnosisExpertSystemService", "$interval",
     function ($scope, DiagnosisExpertSystemService, $interval) {
 
+        $scope.numOfConditons = 5;
+
         $scope.GetGlobalResponse = function () {
             DiagnosisExpertSystemService.getGlobalResponse().then
             (function (result) {
@@ -11,6 +13,15 @@
         $scope.GetChosenEvidence = function () {
             $scope.globalEvidence = DiagnosisExpertSystemService.getChosenEvidence();
         };
+
+        $scope.GetCondition = function (conId) {
+            DiagnosisExpertSystemService.getCondition(conId).then
+            (function (result) {
+                $scope.Condition = result.data;
+            });
+        };
+
+        
 
         $scope.GetChosenEvidence();
         $scope.GetGlobalResponse();
@@ -28,7 +39,6 @@
             DiagnosisExpertSystemService.patientDiagnosisReturn($scope.globalEvidence).then
             (function (result) {
                 $scope.DiagnosisResponse = result.data;
-                $scope.LogStuff($scope.DiagnosisResponse);
             });
 
         };
@@ -61,7 +71,6 @@
             DiagnosisExpertSystemService.patientDiagnosisReturn($scope.globalEvidence).then
             (function (result) {
                 $scope.DiagnosisResponse = result.data;
-                $scope.LogStuff($scope.DiagnosisResponse);
             });
 
         };
@@ -79,7 +88,6 @@
             DiagnosisExpertSystemService.patientDiagnosisReturn($scope.globalEvidence).then
             (function (result) {
                 $scope.DiagnosisResponse = result.data;
-                $scope.LogStuff($scope.DiagnosisResponse);
             });
 
         };
