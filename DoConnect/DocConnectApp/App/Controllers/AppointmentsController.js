@@ -16,6 +16,8 @@
         };
         $scope.GetAllAppointments();
 
+        $interval($scope.GetAllAppointments, 5000);
+
         $scope.App_Statusz = [{ "Status": "Approved", "bool": "1" }, { "Status": "Declined", "bool": "0" }, { "Status": "Pending", "bool": "2"}];
         $scope.listApp_Statusz = [{ "Status": "Approved", "bool": "1" }, { "Status": "Pending", "bool": "2" }];
         $scope.TimeError = 0;
