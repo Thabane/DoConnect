@@ -170,16 +170,39 @@
 
 
                 <div data-ng-controller="FeedCtrl" class="portlet light" style="border: 1px solid #ddd; border-radius: 4px; height:262px;">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="feedgrabbr_widget" id="fgid_ac60de62969c794c92e57aa62"></div>
-                            <script> if (typeof(fg_widgets)==="undefined") fg_widgets = new Array();fg_widgets.push("fgid_ac60de62969c794c92e57aa62");</script>
-                            <script src="http://www.feedgrabbr.com/widget/fgwidget.js"></script>
-                            <!--<div class="well" ng-repeat="feed in feeds | filter:filterText">
+                    <div class="portlet-title" ng-init="Load()">
+                        <div class="">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="col-md-4 pull-left" style="margin-top: 0px">
+                                        <i class="icon-bar-chart font-dark hide"></i>
+                                        <span class="caption-subject font-green-steel uppercase bold">RSS Feed</span>
+                                    </div>
+                                    <div class="btn-group col-md-8">
+                                        <button class="btn btn-info" type="button" tabindex="-1">{{loadButonText}}</button>
+                                        <button class="btn btn-info dropdown-toggle" data-toggle="dropdown" tabindex="-1">
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#" ng-click="feedSrc='https://medlineplus.gov/feeds/news_en.xml';loadFeed($event);">MedlinePlus Health News</a></li>
+                                            <li><a href="#" ng-click="feedSrc='http://rssfeeds.webmd.com/rss/rss.aspx?RSSSource=RSS_PUBLIC';loadFeed($event)">WebMD</a></li>
+                                            <li><a href="#" ng-click="feedSrc='http://feeds.reuters.com/reuters/healthNews';loadFeed($event)">Health News</a></li>
+                                            <li><a href="#" ng-click="feedSrc='http://www.onmedica.com/rssFeed.aspx?content=views';loadFeed($event)">On Medica</a></li>
+                                            <li><a href="#" ng-click="feedSrc='http://www.healthline.com/rss/health-news';loadFeed($event)">Health Line</a></li>
+                                            <li><a href="#" ng-click="feedSrc='http://www.medicinenet.com/rss/article.htm';loadFeed($event)">Medicine Net</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portlet-body" id="Feed">
+                        <div class="row" style="max-height: 180px; overflow-y: auto; overflow-x: hidden;">
+                            <div class="well" ng-repeat="feed in feeds | filter:filterText">
                                 <h5><a href="{{feed.link}}">{{feed.title}}</a></h5>
                                 <p class="text-left">{{feed.contentSnippet}}</p>
                                 <span class="small">{{feed.publishedDate}}</span>
-                            </div>-->
+                            </div>
                         </div>
                     </div>
                 </div>
