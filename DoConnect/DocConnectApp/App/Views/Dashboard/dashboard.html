@@ -128,10 +128,7 @@
                     </div>
                     <div class="portlet-body">
                         <div class="row">
-                            <div class="col-md-7">
-                                <i>Stats based on total consulations: {{TotalNumOfVisits}}</i>
-                            </div>
-                            <div class="col-md-5">
+                            <div>
                                 <i>Total income is: R{{Total}}</i>
                             </div>
                         </div>
@@ -178,11 +175,11 @@
                             <div class="feedgrabbr_widget" id="fgid_ac60de62969c794c92e57aa62"></div>
                             <script> if (typeof(fg_widgets)==="undefined") fg_widgets = new Array();fg_widgets.push("fgid_ac60de62969c794c92e57aa62");</script>
                             <script src="http://www.feedgrabbr.com/widget/fgwidget.js"></script>
-                            <div class="well" ng-repeat="feed in feeds | filter:filterText">
+                            <!--<div class="well" ng-repeat="feed in feeds | filter:filterText">
                                 <h5><a href="{{feed.link}}">{{feed.title}}</a></h5>
                                 <p class="text-left">{{feed.contentSnippet}}</p>
                                 <span class="small">{{feed.publishedDate}}</span>
-                            </div>
+                            </div>-->
                         </div>
                     </div>
                 </div>
