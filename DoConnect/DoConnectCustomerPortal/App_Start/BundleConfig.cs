@@ -60,6 +60,7 @@ namespace DoConnectCustomerPortal
                    "~/App/Controllers/*.js",
                    "~/App/Filters/*.js"
                    ));
+            BundleTable.EnableOptimizations = false;
         }
     }
 }

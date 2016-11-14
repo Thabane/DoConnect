@@ -17,7 +17,7 @@ namespace DoConnectCustomerPortal
             routes.MapRoute(
               name: "App",
               url: "{*url}",
-              defaults: new { controller = "Home", action = "Index" },
+              defaults: new { controller = "PatientLogin", action = "Index" },
               namespaces: new []{ "DoConnectCustomerPortal.Controllers" }
         );
         }
