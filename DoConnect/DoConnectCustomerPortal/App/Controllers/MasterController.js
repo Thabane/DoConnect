@@ -1,6 +1,6 @@
 ﻿app.controller("MasterController", ["$scope", "PatientsService", "$interval", "$rootScope", "MessagesService",
 function ($scope, PatientsService, $interval, $rootScope, MessagesService) {
-    $rootScope.loggedOnUserID = 1;
+    $rootScope.loggedOnUserID = document.cookie;
     //Select GetPatientByID Function
     $scope.GetPatientByID = function () {
         PatientsService.GetPatientByID($rootScope.loggedOnUserID).success(function (result) {

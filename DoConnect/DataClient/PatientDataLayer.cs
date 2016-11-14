@@ -20,7 +20,7 @@ namespace DataClient
         public PatientDataLayer()
         {
             access = new DataAccess();
-            Conn = ConfigurationManager.ConnectionStrings["DB"].ConnectionString;
+            Conn = "Server=tcp:doconnect.database.windows.net,1433;Initial Catalog=DoConnect;Persist Security Info=False;User ID=teamCogent;Password=DoConnect1;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";//ConfigurationManager.ConnectionStrings["DB"].ConnectionString;
         }
 
         #region Appointments
@@ -124,7 +124,7 @@ namespace DataClient
             SqlParameter Patient_IDParameter = new SqlParameter("@Patient_ID", SqlDbType.Int);
             SqlParameter DoctorIDParameter = new SqlParameter("@Doctor_ID", SqlDbType.NVarChar);
 
-            App_StatusParameter.Value = App_Status;
+            App_StatusParameter.Value = 2;//App_Status;
             DetailsParameter.Value = Details;
             Date_TimeParameter.Value = Date_Time;
             Patient_IDParameter.Value = Patient_ID;

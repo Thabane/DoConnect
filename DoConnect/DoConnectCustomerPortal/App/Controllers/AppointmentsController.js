@@ -1,7 +1,7 @@
 ﻿app.controller("AppointmentsController", ["$scope", "AppointmentsService", "$interval", "PatientsService",
     function ($scope, AppointmentsService, $interval, PatientsService) {
         $scope.Date_Time = new Date('2016-11-07 10:27');
-        $scope.loggedUserID = 1;
+        $scope.loggedUserID = document.cookie;
         $scope.loggedUserDoctor;
 
         //View Filter's
@@ -45,6 +45,7 @@
             });
         };
         $scope.GetAllAppointments();
+        $interval($scope.GetAllAppointments, 5000);
 
         $scope.App_Statusz = [{ "Status": "Approved", "bool": "1" }, { "Status": "Declined", "bool": "0" }, { "Status": "Pending", "bool": "2" }];
 

@@ -1,6 +1,6 @@
 ﻿app.controller("MessagesController", ["$scope", "MessagesService", "$interval", "$filter", "$ngBootbox",
     function ($scope, MessagesService, $interval, $filter, $ngBootbox) {
-        $scope.UserID = 1;
+        $scope.UserID = document.cookie;
         var init_ControlSettings = function () {
             angular.element("#div_Compose_Message").hide();
             angular.element("#div_Sent_list").hide();
@@ -43,26 +43,26 @@
 
         //Select All Messages
         $scope.GetAllMessages = function () {
-            //MessagesService.SessionData().success(function (result) {
-            $scope.SessionData_User_ID = $scope.UserID;//result["User_ID"];
-            $scope.SessionData_FirstName = "Thato";//result["FirstName"];
-            $scope.SessionData_LastName = "Madihlaba";//result["LastName"];
-            $scope.SessionData_Email = "thato.madihlaba@gmail.com";//result["Email"];
-            MessagesService.GetAllMessages($scope.UserID).then(function (result) {
-                $scope.Messages = result.data;
-            });
-
-            MessagesService.NumOfUnReadMessages($scope.UserID).then(function (result) {
-                $scope.NumOfUnReadMessages = result.data["NumOfUnReadMessages"];
-            });
-
-            $scope.GetAllRecepients = function () {
-                MessagesService.GetAllRecepients().success(function (result) {
-                    $scope.AllRecepients = result;
+            PatientsService.GetPatientByID($scope.UserID).success(function (result) {
+                $scope.SessionData_User_ID = $scope.UserID;//result["User_ID"];
+                $scope.SessionData_FirstName = result["FirstName"];//result["FirstName"];
+                $scope.SessionData_LastName = result["LastName"];//result["LastName"];
+                $scope.SessionData_Email = result["Email"];//result["Email"];
+                MessagesService.GetAllMessages($scope.UserID).then(function (result) {
+                    $scope.Messages = result.data;
                 });
-            };
-            $scope.GetAllRecepients();
-            //});
+
+                MessagesService.NumOfUnReadMessages($scope.UserID).then(function (result) {
+                    $scope.NumOfUnReadMessages = result.data["NumOfUnReadMessages"];
+                });
+
+                $scope.GetAllRecepients = function () {
+                    MessagesService.GetAllRecepients().success(function (result) {
+                        $scope.AllRecepients = result;
+                    });
+                };
+                $scope.GetAllRecepients();
+            });
         };
         $scope.GetAllMessages();
 
@@ -109,7 +109,6 @@
             $scope.Receiver_UserID = item.User_ID;
         };
         $scope.Receiver_UserID = 5;
-        $scope.UserID = 2;
 
         $scope.SendMessage = function (_Subject, _Description) {
             MessagesService.InsertMessage($scope.Receiver_UserID, $scope.UserID, _Subject, _Description, $scope.today).success(function () {
@@ -168,4 +167,7 @@
                 });
             }, function () { });
         };
+
+        $interval($scope.GetAllMessages, 5000);
+        $interval($scope.ViewInboxMessage, 5000);
     }]);

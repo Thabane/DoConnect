@@ -27,7 +27,7 @@
 
         //Select GetMedicalHistoryByPatientID Function
         $scope.GetMedicalHistoryByPatientID = function () {
-            MedicalHistoryService.getMedicalHistoryByPatientID(2).success(function (result) {
+            MedicalHistoryService.getMedicalHistoryByPatientID(document.cookie).success(function (result) {
                 //console.log(result);
                 $scope.MedicalRecord = result;
                 //console.log($scope.MedicalHistory);

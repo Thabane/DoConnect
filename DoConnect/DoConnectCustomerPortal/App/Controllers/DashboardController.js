@@ -1,6 +1,7 @@
 ﻿app.controller('DashboardController', ['$scope', '$interval', 'DashboardService', "PracticesService", "PatientsService", "MessagesService", "AppointmentsService",
     function ($scope, $interval, DashboardService, PracticesService, PatientsService, MessagesService, AppointmentsService) {
-        $scope.LoggedOnUserID = 1;
+        $scope.LoggedOnUserID = document.cookie;
+        
 
         //Select All Practices 
         $scope.GetAllPractices = function () {
@@ -19,9 +20,14 @@
             });
         };
 
-        MessagesService.NumOfUnReadMessages($scope.LoggedOnUserID).then(function (result) {
-            $scope.NumOfUnReadMessages = result.data["NumOfUnReadMessages"];
-        });
+        $scope.ViewNumOfUnReadMessages = function () {
+            MessagesService.NumOfUnReadMessages($scope.LoggedOnUserID).then(function(result) {
+                $scope.NumOfUnReadMessages = result.data["NumOfUnReadMessages"];
+                console.log(result);
+            });
+        };
+
+        $interval($scope.ViewNumOfUnReadMessages, 5000);
 
         //Select All Appointments
         $scope.GetAllAppointments = function () {

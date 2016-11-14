@@ -11,9 +11,12 @@
         };
 
         $scope.Login = function () {
-            LoginService.VerifyPatient($scope.LoginData.Username, $scope.LoginData.Password).then(function (result) {
-                if (result.data > 0) {
-                    console.log(result.data);
+            LoginService.VerifyPatient($scope.LoginData.Username, $scope.LoginData.Password).success(function (result) {
+                console.log(result);
+                if (result > 0 || result.data > 0) {
+                    document.cookie = result;   
+                    window.location.href = "Home/Index";
+                    $scope.LogStuff(result.data);
                     $scope.changeRs = function () {
                         $rootScope.loggedOnUser = result.data;
                         console.log(result.data);
@@ -22,11 +25,14 @@
                     $scope.changeRs();
                     $scope.IsLogedIn = true;
                     angular.element("#wrapper").show();
-                    window.location.href = "Home/Index";
+                    
                 }
                 else {
                     $scope.InvalidCredential = "Invalid Username or Password\nPlease enter a valid Username and Password";
                 }
             });
         };
+        $scope.LogStuff = function (log) {
+            console.log(log);
+        }
     }]);

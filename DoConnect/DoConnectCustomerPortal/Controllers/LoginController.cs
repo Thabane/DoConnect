@@ -24,10 +24,17 @@ namespace DoConnectCustomerPortal.Controllers
 
         [HttpPost]
         [Route("api/Login/VerifyPatient")]
-        public int VerifyPatient(Login login)
+        public string VerifyPatient(Login login)
         {
-            PatientDataLayer dtLayer = new PatientDataLayer();
-            return dtLayer.Portal_Login(login.Email, login.Password);//return dtLayer.MyLogin(Email);
+            try
+            {
+                PatientDataLayer dtLayer = new PatientDataLayer();
+                return dtLayer.Portal_Login(login.Email, login.Password).ToString();//return dtLayer.MyLogin(Email);
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
         }
     }
 }

@@ -36,6 +36,10 @@
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="ObjectModel, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ObjectModel\bin\Debug\ObjectModel.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -56,12 +60,6 @@
     <Compile Include="Infermedica.cs" />
     <Compile Include="PatientDataLayer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ObjectModel\ObjectModel.csproj">
-      <Project>{171b67fd-6810-48a2-ab91-c12dca6e06bf}</Project>
-      <Name>ObjectModel</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="LogFiles\Log.json" />

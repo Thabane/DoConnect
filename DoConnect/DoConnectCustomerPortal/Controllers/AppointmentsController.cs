@@ -18,15 +18,6 @@ namespace DoConnectCustomerPortal.Controllers
             PatientDataLayer dtLayer = new PatientDataLayer();
             return dtLayer.Portal_GetAppointmentsByPatientID(patientID);
         }
-        
-
-        [HttpGet]//Select all Appointments data
-        [Route("api/Appointments/GetAllDoctors")]
-        public List<Doctor> GetAllDoctors()
-        {
-            PatientDataLayer dtLayer = new PatientDataLayer();
-            return dtLayer.Portal_GetAllDoctors();
-        }
 
         [HttpGet] //Select Appointment by ID
         [Route("api/Appointments/GetAppointment/{ID}")]
@@ -55,8 +46,9 @@ namespace DoConnectCustomerPortal.Controllers
         [Route("api/Appointments/InsertAppointment")]
         public bool InsertAppointment(Appointments appointment)
         {
+            string date = appointment.Appointments_Date_Time.Substring(0, 10);
             PatientDataLayer dtLayer = new PatientDataLayer();
-            return dtLayer.Portal_NewAppointment(appointment.Appointments_Date_Time, appointment.Patient_ID, appointment.Appointments_Details, 2, appointment.Doctors_ID);
+            return dtLayer.Portal_NewAppointment(date, appointment.Patient_ID, appointment.Appointments_Details, 2, appointment.Doctors_ID);
         }
 
         [HttpPost]

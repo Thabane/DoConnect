@@ -15,11 +15,11 @@ namespace DoConnectCustomerPortal
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-              name: "App",
-              url: "{*url}",
-              defaults: new { controller = "Home", action = "Index" },
-              namespaces: new []{ "DoConnectCustomerPortal.Controllers" }
-        );
+                name: "Default",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "PatientLogin", action = "Index", id = UrlParameter.Optional },
+                namespaces:new []{ "DoConnectCustomerPortal.Controllers" }
+            );
         }
     }
 }

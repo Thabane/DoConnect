@@ -7,7 +7,7 @@
         };
 
         var NumOfUnReadMessages = function (Receiver) {
-            return $http.get("http://localhost:2003/api/Messages/NumOfUnReadMessages/" + Receiver);
+            return $http.get("api/Messages/NumOfUnReadMessages/" + Receiver);
         };
 
         var GetMessageByID = function (ID) {

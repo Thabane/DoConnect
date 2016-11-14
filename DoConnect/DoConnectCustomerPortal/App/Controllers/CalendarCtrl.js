@@ -8,7 +8,7 @@
 
        //Select All Appointments
        $scope.GetAllAppointments = function () {
-           AppointmentsService.GetAllAppointments(1).then
+           AppointmentsService.GetAllAppointments(document.cookie).then
            (function (result) {
                $scope.Appointments = result.data;
                console.log(result.data.length);

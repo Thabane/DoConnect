@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoConnectCustomerPortal", "DoConnectCustomerPortal.csproj", "{6A1EA494-DC91-423B-9494-721EB0CF2629}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataClient", "..\DataClient\DataClient.csproj", "{8C1AAF48-0805-405B-B58E-91FCE15E96A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectModel", "..\ObjectModel\ObjectModel.csproj", "{171B67FD-6810-48A2-AB91-C12DCA6E06BF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6A1EA494-DC91-423B-9494-721EB0CF2629}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A1EA494-DC91-423B-9494-721EB0CF2629}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A1EA494-DC91-423B-9494-721EB0CF2629}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A1EA494-DC91-423B-9494-721EB0CF2629}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C1AAF48-0805-405B-B58E-91FCE15E96A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C1AAF48-0805-405B-B58E-91FCE15E96A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C1AAF48-0805-405B-B58E-91FCE15E96A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C1AAF48-0805-405B-B58E-91FCE15E96A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{171B67FD-6810-48A2-AB91-C12DCA6E06BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{171B67FD-6810-48A2-AB91-C12DCA6E06BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{171B67FD-6810-48A2-AB91-C12DCA6E06BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{171B67FD-6810-48A2-AB91-C12DCA6E06BF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

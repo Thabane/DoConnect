@@ -37,22 +37,18 @@
         <table class="table table-hover pull-left">
             <thead style="background-color: #f8f8f8;">
                 <tr>
-                    <th style="width: 20%;" ng-click="sort('Appointments_Date_Time')">Date<span ng-show="sortKey=='Phone_Number'"></span></th>
-                    <th style="width: 30%;" ng-click="sort('Appointments_Details')">Describtion<span ng-show="sortKey=='Fax_Number'"></span></th>
-                    <th style="width: 20%;" ng-click="sort('Doctors_FirstName')">Doctors Name<span ng-show="sortKey=='Street_Address'"></span></th>
-                    <th style="width: 20%;" ng-click="sort('Practice_Name')">Practice Name<span ng-show="sortKey=='Trading_Times'"></span></th>
-                    <th style="width: 10%;">Action</th>
+                    <th style="width: 20%;" ng-click="sort('Appointments_Date_Time')"><b>Date</b><span ng-show="sortKey=='Phone_Number'"></span></th>
+                    <th style="width: 30%;" ng-click="sort('Appointments_Details')"><b>Describtion</b><span ng-show="sortKey=='Fax_Number'"></span></th>
+                    <th style="width: 20%;" ng-click="sort('Doctors_FirstName')"><b>Doctors Name</b><span ng-show="sortKey=='Street_Address'"></span></th>
+                    <th style="width: 20%;" ng-click="sort('Practice_Name')"><b>Practice Name</b><span ng-show="sortKey=='Trading_Times'"></span></th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="Appointment in Appointments | filter : searchKey | limitTo : getlimitTo() | orderBy : getSortKey()">
+                <tr ng-repeat="Appointment in Appointments | filter : searchKey | limitTo : getlimitTo() | orderBy : getSortKey()" ng-class="{'success': Appointment.Appointments_App_Status == '1'}">
                     <td>{{Appointment.Appointments_Date_Time}}</td>
                     <td>{{Appointment.Appointments_Details}}</td>
                     <td><a ng-click="ViewDoctor(Appointment.Doctors_ID)">{{Appointment.Doctors_FirstName}} {{Appointment.Doctors_LastName}}</a></td>
                     <td><a ng-click="ViewPractice(Appointment.Practice_ID)">{{Appointment.Practice_Name}}</a></td>
-                    <td>
-                        <button class="btn btn-primary btn-xs" ng-click="ViewAppointment(Appointment.Appointments_ID)"><i class="icon-eye-open"></i></button>
-                    </td>
                 </tr>
             </tbody>
         </table>

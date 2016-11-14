@@ -3,7 +3,7 @@
 			    $scope.PageTitle_Doctors = 'Doctors';
 			    $scope.PageTitle_NewPractice = 'New Practices Details';
 			    $scope.PrefferedDoctor;
-			    $scope.LoggedOnUserID = 1;
+			    $scope.LoggedOnUserID = document.cookie;
 
 			    //View Filter's
 			    $scope.strSort;
