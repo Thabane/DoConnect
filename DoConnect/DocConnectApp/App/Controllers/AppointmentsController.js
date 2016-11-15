@@ -1,5 +1,5 @@
-﻿app.controller("AppointmentsController", ["$scope", "AppointmentsService", "$interval", "$ngBootbox", "$location",
-    function ($scope, AppointmentsService, $interval, $ngBootbox, $location) {
+﻿app.controller("AppointmentsController", ["$scope", "AppointmentsService", "$interval", "$ngBootbox", "$location", "PatientsService",
+    function ($scope, AppointmentsService, $interval, $ngBootbox, $location, PatientsService) {
 
         $scope.sort = function (keyname) {
             $scope.sortKey = keyname;
@@ -12,6 +12,12 @@
                 $scope.numTodayApps = $scope.Appointments[$scope.Appointments.length - 1].numTodayApps;
                 $scope.numTomorrowApps = $scope.Appointments[$scope.Appointments.length - 1].numTomorrowApps;
                 $scope.numYesterdayApps = $scope.Appointments[$scope.Appointments.length - 1].numYesterdayApps;
+            });
+
+            PatientsService.SessionData().success(function (result) {
+                sessionStorage.Selected_PatientID = result["ID"];
+                sessionStorage.Selected_ConsultationID = result["ID"];
+                sessionStorage.SessionData_User_ID = result["User_ID"];
             });
         };
         $scope.GetAllAppointments();
@@ -104,7 +110,7 @@
 
                     }
                     else {
-                        AppointmentsService.InsertAppointment(angular.element("#Appointments_Date").val() + " " + angular.element("#Appointments_Time").val(), $scope.PatientID, Details, $scope.Seleceted_App_Status, $scope.DoctorID).success(function () {
+                        AppointmentsService.InsertAppointment(angular.element("#Appointments_Date").val() + " " + angular.element("#Appointments_Time").val(), sessionStorage.Selected_PatientID, Details, 2, $scope.DoctorID).success(function () {
                             $scope.GetAllAppointments();
                             angular.element(".insert").val('');
                             btnSuccess("Appointment successfully inserted.");

@@ -61,18 +61,12 @@
             <div id="div_Compose_Message" class="col-md-10">
 	            <div class="panel panel-default col-md-12" style="padding-right:20px; border:0px;">
 		            <form role="form" class="form-horizontal">
-		              <div class="form-group" style="padding-left: 15px">
-				            <div class="row" onclick="Recepient()">
-					            <div class="col-md-2"><label>To</label></div>										
-					            <div class="col-md-4" id="divSingleRecepient"><select class="form-control" ng-model="FirstName" name="FirstName" ng-change="changedValueGetReceiver_UserID(FirstName)" data-ng-options="Recepient as Recepient.FirstName for Recepient in AllRecepients | orderBy:'FirstName'">
-												            <option value="">Select Recepient</option>
-											            </select>
-					            </div>
-                                <div class="col-md-4 radio" id="divrdSingleRecepient"><label><input type="radio" name="optradio" id="rbSingleRecepient">Single Recepient</label></div>
-					            <div class="col-md-2 radio"><label><input type="radio" name="optradio" id="rbAllDoctors">All Doctors</label></div>
-					            <div class="col-md-2 radio"><label><input type="radio" name="optradio" id="rbAllPatients">All Patients</label></div>
-					            <div class="col-md-2 radio"><label><input type="radio" name="optradio" id="rbAllStaff">All Staff</label></div>
-				            </div>
+		              <div class="form-group">
+					        <label class="col-md-2">To</label>										
+					        <div class="col-md-10" id="divSingleRecepient"><select class="form-control" ng-model="FirstName" name="FirstName" ng-change="changedValueGetReceiver_UserID(FirstName)" data-ng-options="Recepient as Recepient.FirstName for Recepient in AllRecepients | orderBy:'FirstName'">
+												        <option value="">Select Recepient</option>
+											        </select>
+					        </div>
 			            </div>
 			            <div class="form-group">
 				            <label class="col-md-2" for="inputSubject">Subject</label>
@@ -221,17 +215,3 @@
         </div><!--View_SelectedInboxMail Modal Ends  -->
     </div>
 </div>
-
-<script>
-    $("#rbSingleRecepient").prop("checked", true);
-    $('#divrdSingleRecepient').hide(); $('#divSingleRecepient').show();
-    function Recepient() {
-        if ($("#rbAllDoctors").is(":checked") || $("#rbAllPatients").is(":checked") || $("#rbAllStaff").is(":checked")) {
-            $('#divSingleRecepient').hide();
-            $('#divrdSingleRecepient').show();
-        }
-        else {
-            $('#divrdSingleRecepient').hide(); $('#divSingleRecepient').show();
-        }
-    };
-</script>

@@ -13,19 +13,25 @@
             angular.element(".View_readonly").css("background-color", "transparent");
 
             PatientsService.SessionData().success(function (result) {
+                sessionStorage.Selected_PatientID = result["ID"];
+                sessionStorage.Selected_ConsultationID = result["ID"];
                 sessionStorage.SessionData_User_ID = result["User_ID"];
                 sessionStorage.SessionData_FirstName = result["FirstName"];
                 sessionStorage.SessionData_LastName = result["LastName"];
                 sessionStorage.SessionData_Email = result["Email"];
-                sessionStorage.SessionData_Practice_ID = result["Practice_ID"];
+                sessionStorage.SessionData_Practice_ID = "1";
                 sessionStorage.SessionData_AccessLevel = result["AccessLevel"];
-
+                
                 if (result["AccessLevel"] == '1' || result["AccessLevel"] == '2') {
                     angular.element(".doctorControls").show();
                 }
                 else {
                     angular.element(".doctorControls").hide();
                 }
+
+                $scope.GetMedicalRecord();
+                $scope.GetPrescription();
+                $scope.GetConsultationNotes();
             });
         };
         init_ControlSettings();
@@ -34,17 +40,6 @@
             $scope.sortKey = keyname;
             $scope.reverse = !$scope.reverse;
         }       
-
-        $scope.GetPatients = function () {
-            PatientsService.GetAllPatients().then(function (result) {
-                $scope.Patients = result.data;                
-            });
-        };
-        $scope.GetPatients();
-        
-        $scope.ViewPatient = function (PatientID) {
-            sessionStorage.Selected_PatientID = PatientID;
-        };
 
         $scope.SetConsultationID = function (ConsultationID) {
             sessionStorage.Selected_ConsultationID = ConsultationID;
@@ -68,7 +63,7 @@
             $scope.Seleceted_Gender = item.Char;
         };
         
-        var GetMedicalRecord = function () {
+        $scope.GetMedicalRecord = function () {
             PatientsService.GetMedicalRecord(sessionStorage.Selected_PatientID).then(function (result) {
                 $scope.ID = result.data["ID"];
                 $scope.FirstName = result.data["FirstName"];
@@ -105,8 +100,7 @@
                 angular.element(".disable_View_readonly").prop("disabled", true);
             });
         };
-        GetMedicalRecord();        
-
+        
         $scope.GetMedical_Aid = function () {
             PatientsService.GetMedical_Aid().then(function (result) {
                 $scope.Medical_Aid = result.data;
@@ -180,12 +174,12 @@
         $scope.IntakeRoutez = [{ "Route": "PO (by mouth)" }, { "Route": "PR (per rectum)" }, { "Route": "IM (intramuscular)" }, { "Route": "IV (intravenous)", }, { "Route": "ID (intradermal)" }, { "Route": "IN (intranasal)" }, { "Route": "TP (topical)" }, { "Route": "SL (sublingual)" }, { "Route": "BUCC (buccal)" }, { "Route": "IP (intraperitoneal)" }];
         $scope.Frequencyz = [{ "Freq": "Daily" }, { "Freq": "Every other day" }, { "Freq": "BID/b.i.d. (Twice a Day)" }, { "Freq": "TID/t.id. (Three Times a Day)" }, { "Freq": "QID/q.i.d. (Four Times a Day)" }, { "Freq": "QHS (Every Bedtime)" }, { "Freq": "Q4h (Every 4 hours)" }, { "Freq": "Q4-6h (Every 4 to 6 hours)" }]
         
-        var GetPrescription = function () {
+        $scope.GetPrescription = function () {
             PatientsService.GetPrescription(sessionStorage.Selected_PatientID).then(function (result) {
                 $scope.PrescriptionDetails = result.data;                
             });
         };
-        GetPrescription();
+        
 
         //Insert Prescription Notes Funtion ##Patient_ID, Doctor_ID, Consultation_ID
         $scope.InsertPrescription = function (DrugName, Strength, DispenseNumber, RefillNumber) {
@@ -244,13 +238,12 @@
 
         //---#region Consultation Notes------------------------------------------------------------------------------------------------------------/
         
-        var GetConsultationNotes = function () {
+        $scope.GetConsultationNotes = function () {
             PatientsService.GetConsultationNotes(sessionStorage.Selected_PatientID).then(function (result) {
                 $scope.ConsultationNotes = result.data;
             });
         };
-        GetConsultationNotes();
-
+        
         //Insert Consultation Notes Funtion ##Remember to add Patient_ID, Doctor_ID, 
         $scope.InsertConsultation = function (ReasonForConsultation, Symptoms, ClinicalFindings, Diagnosis, TestResultSummary, TreatmentPlan) {
             PatientsService.InsertConsultation(sessionStorage.Selected_PatientID, ReasonForConsultation, Symptoms, ClinicalFindings, Diagnosis, TestResultSummary, TreatmentPlan, 1, 1).success(function () {

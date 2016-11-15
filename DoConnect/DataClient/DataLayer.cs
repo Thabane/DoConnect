@@ -15,8 +15,8 @@ namespace DataClient
     {
         private DataAccess access; 
         private List<SqlParameter> _parameters = new List<SqlParameter>();
-        //private string Conn = @"Data Source=DESKTOP-6Gu3I3G\SQLEXPRESS;Initial Catalog=DoConnect;Integrated Security=True";
-        private string Conn = @"Server=tcp:doconnect.database.windows.net,1433;Initial Catalog=DoConnect;Persist Security Info=False;User ID=teamCogent;Password=DoConnect1;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+        private string Conn = @"Data Source=DESKTOP-6Gu3I3G\SQLEXPRESS;Initial Catalog=DoConnect;Integrated Security=True";
+        //private string Conn = @"Server=tcp:doconnect.database.windows.net,1433;Initial Catalog=DoConnect;Persist Security Info=False;User ID=teamCogent;Password=DoConnect1;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
         public DataLayer()
         {
             access = new DataAccess();            
@@ -87,7 +87,7 @@ namespace DataClient
             return Login;
         }
 
-        public static int LoggedIn_User_PRACTICE_ID, LoggedIn_User_AccessLevel, COUNT = 0; public static string LoggedIn_Name, LoggedIn_User_strAccessLevel;
+        public static int LoggedIn_User_PRACTICE_ID, LoggedIn_User_AccessLevel, LoggedIn_ID, COUNT = 0; public static string LoggedIn_Name, LoggedIn_User_strAccessLevel;
         public Staff GetUserDetailsByUser_ID()
         {
             List<SqlParameter> _parameters = new List<SqlParameter>();
@@ -96,50 +96,44 @@ namespace DataClient
             _parameters.Add(User_IDParameter);
 
             Staff List = new Staff();
-            try
+            using (var reader = access.ExecuteReader(Conn, "[GetUserDetailsByUser_ID]", _parameters))
             {
-                using (var reader = access.ExecuteReader(Conn, "[GetUserDetailsByUser_ID]", _parameters))
+                if (reader.Read())
                 {
-                    if (reader.Read())
+                    LoggedIn_ID = reader.GetInt32(reader.GetOrdinal("ID"));
+                    LoggedIn_Name = reader.GetString(reader.GetOrdinal("FirstName"))+" "+ reader.GetString(reader.GetOrdinal("LastName"))+" "+ reader.GetString(reader.GetOrdinal("Email"));
+                    LoggedIn_User_AccessLevel = reader.GetInt32(reader.GetOrdinal("AccessLevel"));
+
+                    if (LoggedIn_User_AccessLevel == 1)
                     {
-                        LoggedIn_Name = reader.GetString(reader.GetOrdinal("FirstName"))+" "+ reader.GetString(reader.GetOrdinal("LastName"))+" "+ reader.GetString(reader.GetOrdinal("Email"));
-                        LoggedIn_User_PRACTICE_ID = reader.GetInt32(reader.GetOrdinal("Practice_ID"));
-                        LoggedIn_User_AccessLevel = reader.GetInt32(reader.GetOrdinal("AccessLevel"));
-
-                        if (LoggedIn_User_AccessLevel == 1)
-                        {
-                            LoggedIn_User_strAccessLevel = "Admin";
-                        }
-                        else if (LoggedIn_User_AccessLevel == 2)
-                        {
-                            LoggedIn_User_strAccessLevel = "Doctor";
-                        }
-                        else if (LoggedIn_User_AccessLevel == 3)
-                        {
-                            LoggedIn_User_strAccessLevel = "Receptionist";
-                        }
-                        else if (LoggedIn_User_AccessLevel == 5)
-                        {
-                            LoggedIn_User_strAccessLevel = "Nurse";
-                        }
-                        else
-                        {
-                            LoggedIn_User_strAccessLevel = "Assistant";
-                        }
-
-                        List = new Staff().GetLogginUser(reader);
-                        if (COUNT == 0)
-                        {
-                            //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Logged in");
-                            COUNT = 1;
-                        }                        
+                        LoggedIn_User_strAccessLevel = "Admin";
                     }
+                    else if (LoggedIn_User_AccessLevel == 2)
+                    {
+                        LoggedIn_User_strAccessLevel = "Doctor";
+                    }
+                    else if (LoggedIn_User_AccessLevel == 3)
+                    {
+                        LoggedIn_User_strAccessLevel = "Patient";
+                    }
+                    else if (LoggedIn_User_AccessLevel == 5)
+                    {
+                        LoggedIn_User_strAccessLevel = "Nurse";
+                    }
+                    else
+                    {
+                        LoggedIn_User_strAccessLevel = "Assistant";
+                    }
+
+                    List = new Staff().GetLogginUser(reader);
+                    if (COUNT == 0)
+                    {
+                        //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Logged in");
+                        COUNT = 1;
+                    }                        
                 }
             }
-            catch (Exception)
-            {
-                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed: " + ex.ToString());
-            }
+            
             return List;
         }
 
@@ -443,9 +437,9 @@ namespace DataClient
         public List<Appointments> GetAppointments()
         {
             List<SqlParameter> _parameters = new List<SqlParameter>();
-            SqlParameter Practice_IDParameter = new SqlParameter("@Practice_ID", SqlDbType.Int);
-            Practice_IDParameter.Value = LoggedIn_User_PRACTICE_ID;
-            _parameters.Add(Practice_IDParameter);
+            SqlParameter Patient_IDParameter = new SqlParameter("@Patient_ID", SqlDbType.Int);
+            Patient_IDParameter.Value = LoggedIn_ID;
+            _parameters.Add(Patient_IDParameter);
 
             DateTime Today = DateTime.Now;
             DateTime Today0 = DateTime.Today.AddDays(0);
@@ -456,109 +450,54 @@ namespace DataClient
             Appointments AppointmentInfo = new Appointments(); int numYesterdayApps = 0; int numTodayApps = 0; int numTomorrowApps = 0;
             List<Appointments> AppointmentsInfo = new List<Appointments>();
            
-                if (LoggedIn_User_AccessLevel == 1)
+            using (var reader = access.ExecuteReader(Conn, "[GetAllAppointments]", _parameters))
+            {
+                while (reader.Read())
                 {
-                    using (var reader = access.ExecuteReader(Conn, "[GetAllAppointments]", new List<SqlParameter>()))
+                    AppointmentInfo.Appointments_ID = reader.GetInt32(reader.GetOrdinal("Appointments_ID"));
+                    AppointmentInfo.Appointments_App_Status = reader.GetInt32(reader.GetOrdinal("Appointments_App_Status"));
+                    AppointmentInfo.Appointments_Date_Time = reader.GetString(reader.GetOrdinal("Appointments_Date_Time"));
+                    AppointmentInfo.Appointments_Details = reader.GetString(reader.GetOrdinal("Appointments_Details"));
+                    AppointmentInfo.Patient_ID = reader.GetInt32(reader.GetOrdinal("Patient_ID"));
+                    AppointmentInfo.Patient_FirstName = reader.GetString(reader.GetOrdinal("Patient_FirstName"));
+                    AppointmentInfo.Patient_LastName = reader.GetString(reader.GetOrdinal("Patient_LastName"));
+                    AppointmentInfo.Patient_Cell_Number = reader.GetString(reader.GetOrdinal("Patient_Cell_Number"));
+                    AppointmentInfo.Patient_Email = reader.GetString(reader.GetOrdinal("Patient_Email"));
+                    AppointmentInfo.Doctors_Email = reader.GetString(reader.GetOrdinal("Doctors_Email"));
+                    AppointmentInfo.Doctors_FirstName = reader.GetString(reader.GetOrdinal("Doctors_FirstName"));
+                    AppointmentInfo.Doctors_LastName = reader.GetString(reader.GetOrdinal("Doctors_LastName"));
+                    AppointmentInfo.Doctors_ID = reader.GetInt32(reader.GetOrdinal("Doctors_ID"));
+                    AppointmentInfo.Doctors_Job_Title = reader.GetString(reader.GetOrdinal("Doctors_Job_Title"));
+                    AppointmentInfo.Practice_ID = reader.GetInt32(reader.GetOrdinal("Practice_ID"));
+                    AppointmentInfo.Practice_Name = reader.GetString(reader.GetOrdinal("Practice_Name"));
+                    AppointmentInfo.Practice_Phone_Number = reader.GetString(reader.GetOrdinal("Practice_Phone_Number"));
+                    AppointmentInfo.Practice_Fax_Number = reader.GetString(reader.GetOrdinal("Practice_Fax_Number"));
+                    AppointmentInfo.Practice_Address = reader.GetString(reader.GetOrdinal("Practice_Address"));
+
+                    DateTime Appointments_Date_Time = Convert.ToDateTime(reader.GetString(reader.GetOrdinal("Appointments_Date_Time")));
+                    
+                    if ((Appointments_Date_Time > Today0) && (Appointments_Date_Time < Tomorrow))
                     {
-                        while (reader.Read())
-                        {
-                            AppointmentInfo.Appointments_ID = reader.GetInt32(reader.GetOrdinal("Appointments_ID"));
-                            AppointmentInfo.Appointments_App_Status = reader.GetInt32(reader.GetOrdinal("Appointments_App_Status"));
-                            AppointmentInfo.Appointments_Date_Time = reader.GetString(reader.GetOrdinal("Appointments_Date_Time"));
-                            AppointmentInfo.Appointments_Details = reader.GetString(reader.GetOrdinal("Appointments_Details"));
-                            AppointmentInfo.Patient_ID = reader.GetInt32(reader.GetOrdinal("Patient_ID"));
-                            AppointmentInfo.Patient_FirstName = reader.GetString(reader.GetOrdinal("Patient_FirstName"));
-                            AppointmentInfo.Patient_LastName = reader.GetString(reader.GetOrdinal("Patient_LastName"));
-                            AppointmentInfo.Patient_Cell_Number = reader.GetString(reader.GetOrdinal("Patient_Cell_Number"));
-                            AppointmentInfo.Patient_Email = reader.GetString(reader.GetOrdinal("Patient_Email"));
-                            AppointmentInfo.Doctors_Email = reader.GetString(reader.GetOrdinal("Doctors_Email"));
-                            AppointmentInfo.Doctors_FirstName = reader.GetString(reader.GetOrdinal("Doctors_FirstName"));
-                            AppointmentInfo.Doctors_LastName = reader.GetString(reader.GetOrdinal("Doctors_LastName"));
-                            AppointmentInfo.Doctors_ID = reader.GetInt32(reader.GetOrdinal("Doctors_ID"));
-                            AppointmentInfo.Doctors_Job_Title = reader.GetString(reader.GetOrdinal("Doctors_Job_Title"));
-                            AppointmentInfo.Practice_ID = reader.GetInt32(reader.GetOrdinal("Practice_ID"));
-                            AppointmentInfo.Practice_Name = reader.GetString(reader.GetOrdinal("Practice_Name"));
-                            AppointmentInfo.Practice_Phone_Number = reader.GetString(reader.GetOrdinal("Practice_Phone_Number"));
-                            AppointmentInfo.Practice_Fax_Number = reader.GetString(reader.GetOrdinal("Practice_Fax_Number"));
-                            AppointmentInfo.Practice_Address = reader.GetString(reader.GetOrdinal("Practice_Address"));
-
-                            DateTime Appointments_Date_Time = Convert.ToDateTime(reader.GetString(reader.GetOrdinal("Appointments_Date_Time")));
-                                                     
-
-                            if ((Appointments_Date_Time > Today0) && (Appointments_Date_Time < Tomorrow))
-                            {
-                                AppointmentInfo.highlightTodayApps = 1;
-                                numTodayApps++;                            
-                            }                            
-                            else if ((Tomorrow < Appointments_Date_Time) && (Appointments_Date_Time < Tomorrow2))
-                            {
-                                AppointmentInfo.highlightTomorrowApps = 1;
-                                numTomorrowApps++;                            
-                            }
-                            else if ((Appointments_Date_Time > Yesterday) && (Appointments_Date_Time < Today0))
-                            {
-                                AppointmentInfo.highlightYesterdayApps = 1;
-                                numYesterdayApps++;
-                            }
-
-                            AppointmentInfo.numTodayApps = numTodayApps;
-                            AppointmentInfo.numYesterdayApps = numYesterdayApps;
-                            AppointmentInfo.numTomorrowApps = numTomorrowApps;
-                            AppointmentsInfo.Add(AppointmentInfo); AppointmentInfo = new Appointments();
-                        }
-                    }
-                }
-                else
-                {
-                    using (var reader = access.ExecuteReader(Conn, "[GetAllAppointmentsPrac]", _parameters))
+                        AppointmentInfo.highlightTodayApps = 1;
+                        numTodayApps++;                            
+                    }                            
+                    else if ((Tomorrow < Appointments_Date_Time) && (Appointments_Date_Time < Tomorrow2))
                     {
-                        while (reader.Read())
-                        {
-                            AppointmentInfo.Appointments_ID = reader.GetInt32(reader.GetOrdinal("Appointments_ID"));
-                            AppointmentInfo.Appointments_App_Status = reader.GetInt32(reader.GetOrdinal("Appointments_App_Status"));
-                            AppointmentInfo.Appointments_Date_Time = reader.GetString(reader.GetOrdinal("Appointments_Date_Time"));
-                            AppointmentInfo.Appointments_Details = reader.GetString(reader.GetOrdinal("Appointments_Details"));
-                            AppointmentInfo.Patient_ID = reader.GetInt32(reader.GetOrdinal("Patient_ID"));
-                            AppointmentInfo.Patient_FirstName = reader.GetString(reader.GetOrdinal("Patient_FirstName"));
-                            AppointmentInfo.Patient_LastName = reader.GetString(reader.GetOrdinal("Patient_LastName"));
-                            AppointmentInfo.Patient_Cell_Number = reader.GetString(reader.GetOrdinal("Patient_Cell_Number"));
-                            AppointmentInfo.Patient_Email = reader.GetString(reader.GetOrdinal("Patient_Email"));
-                            AppointmentInfo.Doctors_Email = reader.GetString(reader.GetOrdinal("Doctors_Email"));
-                            AppointmentInfo.Doctors_FirstName = reader.GetString(reader.GetOrdinal("Doctors_FirstName"));
-                            AppointmentInfo.Doctors_LastName = reader.GetString(reader.GetOrdinal("Doctors_LastName"));
-                            AppointmentInfo.Doctors_ID = reader.GetInt32(reader.GetOrdinal("Doctors_ID"));
-                            AppointmentInfo.Doctors_Job_Title = reader.GetString(reader.GetOrdinal("Doctors_Job_Title"));
-                            AppointmentInfo.Practice_ID = reader.GetInt32(reader.GetOrdinal("Practice_ID"));
-                            AppointmentInfo.Practice_Name = reader.GetString(reader.GetOrdinal("Practice_Name"));
-                            AppointmentInfo.Practice_Phone_Number = reader.GetString(reader.GetOrdinal("Practice_Phone_Number"));
-                            AppointmentInfo.Practice_Fax_Number = reader.GetString(reader.GetOrdinal("Practice_Fax_Number"));
-                            AppointmentInfo.Practice_Address = reader.GetString(reader.GetOrdinal("Practice_Address"));
-                            DateTime Appointments_Date_Time = Convert.ToDateTime(reader.GetString(reader.GetOrdinal("Appointments_Date_Time")));
-                        if ((Appointments_Date_Time > Today0) && (Appointments_Date_Time < Tomorrow))
-                        {
-                            AppointmentInfo.highlightTodayApps = 1;
-                            numTodayApps++;
-                        }
-                        else if ((Tomorrow < Appointments_Date_Time) && (Appointments_Date_Time < Tomorrow2))
-                        {
-                            AppointmentInfo.highlightTomorrowApps = 1;
-                            numTomorrowApps++;
-                        }
-                        else if ((Appointments_Date_Time > Yesterday) && (Appointments_Date_Time < Today0))
-                        {
-                            AppointmentInfo.highlightYesterdayApps = 1;
-                            numYesterdayApps++;
-                        }
+                        AppointmentInfo.highlightTomorrowApps = 1;
+                        numTomorrowApps++;                            
+                    }
+                    else if ((Appointments_Date_Time > Yesterday) && (Appointments_Date_Time < Today0))
+                    {
+                        AppointmentInfo.highlightYesterdayApps = 1;
+                        numYesterdayApps++;
+                    }
 
-                        AppointmentInfo.numTodayApps = numTodayApps;
-                        AppointmentInfo.numYesterdayApps = numYesterdayApps;
-                        AppointmentInfo.numTomorrowApps = numTomorrowApps;
-                        AppointmentsInfo.Add(AppointmentInfo); AppointmentInfo = new Appointments();
-                    }
-                    }
+                    AppointmentInfo.numTodayApps = numTodayApps;
+                    AppointmentInfo.numYesterdayApps = numYesterdayApps;
+                    AppointmentInfo.numTomorrowApps = numTomorrowApps;
+                    AppointmentsInfo.Add(AppointmentInfo); AppointmentInfo = new Appointments();
                 }
-                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Viewed appointments page");
-            
+            }
             return AppointmentsInfo;
         }
 
@@ -589,7 +528,7 @@ namespace DataClient
         public bool NewAppointment(string Date_Time, int Patient_ID, string Details, int App_Status, int DoctorID)
         {
             List<SqlParameter> parameters = new List<SqlParameter>();
-            SqlParameter App_StatusParameter = new SqlParameter("@App_Status", SqlDbType.Bit);
+            SqlParameter App_StatusParameter = new SqlParameter("@App_Status", SqlDbType.Int);
             SqlParameter DetailsParameter = new SqlParameter("@Details", SqlDbType.NVarChar);
             SqlParameter Date_TimeParameter = new SqlParameter("@Date_Time", SqlDbType.NVarChar);
             SqlParameter Patient_IDParameter = new SqlParameter("@Patient_ID", SqlDbType.Int);
@@ -939,92 +878,46 @@ namespace DataClient
         public List<Invoice> GetAllInvoices()
         {
             List<SqlParameter> _parameters = new List<SqlParameter>();
-            SqlParameter Practice_IDParameter = new SqlParameter("@Practice_ID", SqlDbType.Int);
-            Practice_IDParameter.Value = LoggedIn_User_PRACTICE_ID;
-            _parameters.Add(Practice_IDParameter);
+            SqlParameter Patient_IDParameter = new SqlParameter("@Patient_ID", SqlDbType.Int);
+            Patient_IDParameter.Value = LoggedIn_ID;
+            _parameters.Add(Patient_IDParameter);
 
             Invoice invoice = new Invoice(); int numOfUnPaid = 0; int numOfPatiallyPaid = 0;
             List<Invoice> invoiceInfo = new List<Invoice>();
-            try
+            
+            using (var reader = access.ExecuteReader(Conn, "[GetAllInvoices]", _parameters))
             {
-                if (LoggedIn_User_AccessLevel == 1)
+                while (reader.Read())
                 {
-                    using (var reader = access.ExecuteReader(Conn, "[GetAllInvoices]", new List<SqlParameter>()))
+                    invoice.ID = reader.GetInt32(reader.GetOrdinal("ID"));
+                    invoice.InvoiceSummary = reader.GetString(reader.GetOrdinal("InvoiceSummary"));
+                    invoice.Date = reader.GetString(reader.GetOrdinal("Date"));
+                    invoice.Total = reader.GetDecimal(reader.GetOrdinal("Total"));
+                    invoice.BalanceOwing = reader.GetDecimal(reader.GetOrdinal("BalanceOwing"));
+                    invoice.PaidStatus = reader.GetInt32(reader.GetOrdinal("PaidStatus"));
+                    invoice.Medical_Aid_ID = reader.GetInt32(reader.GetOrdinal("Medical_Aid_ID"));
+                    invoice.Patient_ID = reader.GetInt32(reader.GetOrdinal("Patient_ID"));
+                    invoice.Patient_FirstName = reader.GetString(reader.GetOrdinal("Patient_FirstName"));
+                    invoice.Patient_LastName = reader.GetString(reader.GetOrdinal("Patient_LastName"));
+                    invoice.Patient_Email = reader.GetString(reader.GetOrdinal("Patient_Email"));
+                    invoice.Doctor_ID = reader.GetInt32(reader.GetOrdinal("Doctor_ID"));
+                    invoice.Doctor_FirstName = reader.GetString(reader.GetOrdinal("Doctor_FirstName"));
+                    invoice.Doctor_LastName = reader.GetString(reader.GetOrdinal("Doctor_LastName"));
+                    invoice.Doctor_Email = reader.GetString(reader.GetOrdinal("Doctor_Email"));
+                        //0 == Unpaid, 1 == Fully-Paid, 2 == Partially-Paid
+                    if (reader.GetInt32(reader.GetOrdinal("PaidStatus")) == 0)
                     {
-                        while (reader.Read())
-                        {
-                            invoice.ID = reader.GetInt32(reader.GetOrdinal("ID"));
-                            invoice.InvoiceSummary = reader.GetString(reader.GetOrdinal("InvoiceSummary"));
-                            invoice.Date = reader.GetString(reader.GetOrdinal("Date"));
-                            invoice.Total = reader.GetDecimal(reader.GetOrdinal("Total"));
-                            invoice.BalanceOwing = reader.GetDecimal(reader.GetOrdinal("BalanceOwing"));
-                            invoice.PaidStatus = reader.GetInt32(reader.GetOrdinal("PaidStatus"));
-                            invoice.Medical_Aid_ID = reader.GetInt32(reader.GetOrdinal("Medical_Aid_ID"));
-                            invoice.Patient_ID = reader.GetInt32(reader.GetOrdinal("Patient_ID"));
-                            invoice.Patient_FirstName = reader.GetString(reader.GetOrdinal("Patient_FirstName"));
-                            invoice.Patient_LastName = reader.GetString(reader.GetOrdinal("Patient_LastName"));
-                            invoice.Patient_Email = reader.GetString(reader.GetOrdinal("Patient_Email"));
-                            invoice.Doctor_ID = reader.GetInt32(reader.GetOrdinal("Doctor_ID"));
-                            invoice.Doctor_FirstName = reader.GetString(reader.GetOrdinal("Doctor_FirstName"));
-                            invoice.Doctor_LastName = reader.GetString(reader.GetOrdinal("Doctor_LastName"));
-                            invoice.Doctor_Email = reader.GetString(reader.GetOrdinal("Doctor_Email"));
-                                //0 == Unpaid, 1 == Fully-Paid, 2 == Partially-Paid
-                            if (reader.GetInt32(reader.GetOrdinal("PaidStatus")) == 0)
-                            {
-                                numOfUnPaid++;
-                            }
-                            invoice.numOfUnPaid = numOfUnPaid;
-                            if (reader.GetInt32(reader.GetOrdinal("PaidStatus")) == 2)
-                            {
-                                numOfPatiallyPaid++;
-                            }
-                            invoice.numOfPatiallyPaid = numOfPatiallyPaid;
-                            invoiceInfo.Add(invoice); invoice = new Invoice();
-                        }
+                        numOfUnPaid++;
                     }
-                }
-                else
-                {
-                    using (var reader = access.ExecuteReader(Conn, "[GetAllInvoicesPrac]", _parameters))
+                    invoice.numOfUnPaid = numOfUnPaid;
+                    if (reader.GetInt32(reader.GetOrdinal("PaidStatus")) == 2)
                     {
-                        while (reader.Read())
-                        {
-                            invoice.ID = reader.GetInt32(reader.GetOrdinal("ID"));
-                            invoice.InvoiceSummary = reader.GetString(reader.GetOrdinal("InvoiceSummary"));
-                            invoice.Date = reader.GetString(reader.GetOrdinal("Date"));
-                            invoice.Total = reader.GetDecimal(reader.GetOrdinal("Total"));
-                            invoice.BalanceOwing = reader.GetDecimal(reader.GetOrdinal("BalanceOwing"));
-                            invoice.PaidStatus = reader.GetInt32(reader.GetOrdinal("PaidStatus"));
-                            invoice.Medical_Aid_ID = reader.GetInt32(reader.GetOrdinal("Medical_Aid_ID"));
-                            invoice.Patient_ID = reader.GetInt32(reader.GetOrdinal("Patient_ID"));
-                            invoice.Patient_FirstName = reader.GetString(reader.GetOrdinal("Patient_FirstName"));
-                            invoice.Patient_LastName = reader.GetString(reader.GetOrdinal("Patient_LastName"));
-                            invoice.Patient_Email = reader.GetString(reader.GetOrdinal("Patient_Email"));
-                            invoice.Doctor_ID = reader.GetInt32(reader.GetOrdinal("Doctor_ID"));
-                            invoice.Doctor_FirstName = reader.GetString(reader.GetOrdinal("Doctor_FirstName"));
-                            invoice.Doctor_LastName = reader.GetString(reader.GetOrdinal("Doctor_LastName"));
-                            invoice.Doctor_Email = reader.GetString(reader.GetOrdinal("Doctor_Email"));
-                        
-                            if (reader.GetInt32(reader.GetOrdinal("PaidStatus")) == 0)
-                            {
-                                numOfUnPaid++;
-                            }
-                            invoice.numOfUnPaid = numOfUnPaid;
-                            if (reader.GetInt32(reader.GetOrdinal("PaidStatus")) == 2)
-                            {
-                                numOfPatiallyPaid++;
-                            }
-                            invoice.numOfPatiallyPaid = numOfPatiallyPaid;
-                            invoiceInfo.Add(invoice); invoice = new Invoice();
-                        }
+                        numOfPatiallyPaid++;
                     }
+                    invoice.numOfPatiallyPaid = numOfPatiallyPaid;
+                    invoiceInfo.Add(invoice); invoice = new Invoice();
                 }
-                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Viewed invoice page");
-            }
-            catch (Exception)
-            {
-                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to view invoice page: " + ex.ToString());
-            }
+            }            
             return invoiceInfo;
         }
 
@@ -2965,20 +2858,6 @@ namespace DataClient
                 {
                     MessageInfo.ID = reader.GetInt32(reader.GetOrdinal("ID"));
                     MessageInfo.FirstName = reader.GetString(reader.GetOrdinal("FirstName")) +" "+ reader.GetString(reader.GetOrdinal("LastName")) + " : " + reader.GetString(reader.GetOrdinal("Email"));
-                    MessageInfo.LastName = reader.GetString(reader.GetOrdinal("LastName"));
-                    MessageInfo.User_ID = reader.GetInt32(reader.GetOrdinal("User_ID"));
-                    MessageInfo.Email = reader.GetString(reader.GetOrdinal("Email"));
-                    MessageInfo.AccessLevel = reader.GetInt32(reader.GetOrdinal("AccessLevel"));
-                    MessagesInfo.Add(MessageInfo);
-                    MessageInfo = new Staff();
-                }
-            }
-            using (var reader = access.ExecuteReader(Conn, "[GetRecepientPatients]", new List<SqlParameter>()))
-            {
-                while (reader.Read())
-                {
-                    MessageInfo.ID = reader.GetInt32(reader.GetOrdinal("ID"));
-                    MessageInfo.FirstName = reader.GetString(reader.GetOrdinal("FirstName")) + " " + reader.GetString(reader.GetOrdinal("LastName")) + " : " + reader.GetString(reader.GetOrdinal("Email"));
                     MessageInfo.LastName = reader.GetString(reader.GetOrdinal("LastName"));
                     MessageInfo.User_ID = reader.GetInt32(reader.GetOrdinal("User_ID"));
                     MessageInfo.Email = reader.GetString(reader.GetOrdinal("Email"));

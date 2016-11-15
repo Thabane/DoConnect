@@ -10,10 +10,6 @@ app.config(
                 templateUrl: "App/Views/Dashboard/dashboard.html",
                 controller: "DashboardController"
             })
-            .when("/DashboardSecretary", {
-                templateUrl: "App/Views/Dashboard/DashboardSecretary.html",
-                controller: "DashboardController"
-            })
             .when("/Patients", {
                 templateUrl: "App/Views/Patients/patients.html",
                 controller: "PatientsController"
@@ -34,23 +30,7 @@ app.config(
             .when("/PrescriptionDetails", {
                 templateUrl: "App/Views/Patients/PatientRecord/PrescriptionDetails.html",
                 controller: "PatientsController"
-            })
-            .when("/NewPrescription", {
-                templateUrl: "App/Views/Patients/PatientRecord/NewPrescription.html",
-                controller: "PatientsController"
-            })
-            .when("/NewPatient", {
-                templateUrl: "App/Views/Patients/NewPatient.html",
-                controller: "PatientsController"
-            })
-            .when("/Employees", {
-                templateUrl: "App/Views/Employees/Employees.html",
-                controller: "EmployeesController"
-            })
-            .when("/NewEmployee", {
-                templateUrl: "App/Views/Employees/NewEmployee.html",
-                controller: "EmployeesController"
-            })
+            })            
             .when("/Appointments", {
                 templateUrl: "App/Views/Appointments/Appointments.html",
                 controller: "AppointmentsController"
@@ -58,43 +38,20 @@ app.config(
             .when("/NewAppointment", {
                 templateUrl: "App/Views/Appointments/NewAppointment.html",
                 controller: "AppointmentsController"
-            })
-            .when("/MedicineInventory", {
-                templateUrl: "App/Views/MedicineInventory/MedicineInventory.html",
-                controller: "MedicineInventoryController"
-            })
-            .when("/NewMedicine", {
-                templateUrl: "App/Views/MedicineInventory/NewMedicine.html",
-                controller: "MedicineInventoryController"
-            })
+            })            
             .when("/MedicalAid", {
                 templateUrl: "App/Views/MedicalAid/MedicalAid.html",
                 controller: "MedicalAidController"
-            })
-            .when("/NewMedicalAidProvider", {
-                templateUrl: "App/Views/MedicalAid/NewMedicalAidProvider.html",
-                controller: "MedicalAidController"
-            })
+            })            
             .when("/Practices", {
                 templateUrl: "App/Views/Practices/Practices.html",
                 controller: "PracticesController"
             })
-            .when("/NewPractice", {
-                templateUrl: "App/Views/Practices/NewPractice.html",
-                controller: "PracticesController"
-            })
+            
             .when("/Accounting", {
                 templateUrl: "App/Views/Accounting/Accounting.html",
                 controller: "AccountingController"
-            })
-            .when("/Expenses", {
-                templateUrl: "App/Views/Accounting/Expenses.html",
-                controller: "AccountingController"
-            })
-            .when("/NewExpenceInvoice", {
-                templateUrl: "App/Views/Accounting/NewExpenceInvoice.html",
-                controller: "AccountingController"
-            })
+            })            
             .when("/NewPatientInvoice", {
                 templateUrl: "App/Views/Accounting/NewPatientInvoice.html",
                 controller: "AccountingController"
@@ -102,27 +59,11 @@ app.config(
             .when("/Events", {
                 templateUrl: "App/Views/Events/Events.html",
                 controller: "EventsController"
-            })
-            .when("/NewEvent", {
-                templateUrl: "App/Views/Events/NewEvent.html",
-                controller: "EventsController"
-            })
+            })            
             .when("/Messages", {
                 templateUrl: "App/Views/Messages/Messages.html",
                 controller: "MessagesController"
-            })
-            .when("/DiagnosisExpertSystem", {
-                templateUrl: "App/Views/DiagnosisExpertSystem/DiagnosisExpertSystem.html",
-                controller: "DiagnosisExpertSystemController"
-            })
-            .when("/Reports", {
-                templateUrl: "App/Views/Reports/Reports.html",
-                controller: "ReportsController"
-            })
-            .when("/Financial_Report", {
-                templateUrl: "App/Views/Reports/Financial_Report.html",
-                controller: "ReportsController"
-            })
+            })            
             .when("/UserProfile", {
                 templateUrl: "App/Views/UserProfile/UserProfile.html",
                 controller: "UserProfileController"
@@ -130,15 +71,7 @@ app.config(
             .when("/Login", {
                 templateUrl: "App/Views/Login/Login.html",
                 controller: "LoginController"
-            })
-            .when("/DiagnosisExpertSystemProcess", {
-                    templateUrl: "App/Views/DiagnosisExpertSystem/DiagnosisExpertSystemProcess.html",
-                    controller: "DiagnosisExpertSystemProcessController"
-            })
-            .when("/DiagnosisExpertSystemCondition/:conId", {
-               templateUrl: "App/Views/DiagnosisExpertSystem/DiagnosisExpertSystemCondition.html",
-               controller: "DiagnosisExpertSystemConditionsController"
-            })
+            })            
             .otherwise({
                 redirectTo: "/Dashboard"
             });

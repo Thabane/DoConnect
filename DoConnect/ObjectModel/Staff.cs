@@ -58,7 +58,6 @@ namespace ObjectModel
                 LastName = reader.GetString(reader.GetOrdinal("LastName")),                
                 User_ID = reader.GetInt32(reader.GetOrdinal("User_ID")),
                 Email = reader.GetString(reader.GetOrdinal("Email")),
-                PRACTICE_ID = reader.GetInt32(reader.GetOrdinal("Practice_ID")),
                 AccessLevel = reader.GetInt32(reader.GetOrdinal("AccessLevel"))
             };
         }

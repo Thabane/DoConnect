@@ -6,10 +6,6 @@
             return $http.get("/Data/SessionData");
         };
 
-        var GetAllPatients = function () {
-            return $http.get("api/Patients/GetAllPatients");
-        }
-
         var GetPatientByID = function (ID) {
             return $http.get("api/Patients/GetPatient/" + ID);
         }
@@ -172,7 +168,6 @@
 
         return {
             SessionData: SessionData,
-            GetAllPatients: GetAllPatients,
             GetPatientByID: GetPatientByID,
             DeletePatient: DeletePatient,
 
