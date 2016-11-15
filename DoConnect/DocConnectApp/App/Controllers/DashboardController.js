@@ -1,5 +1,5 @@
-﻿app.controller('DashboardController', ['$scope', '$interval', 'DashboardService',
-    function ($scope, $interval, DashboardService) {
+﻿app.controller('DashboardController', ['$scope', '$interval', 'DashboardService', "AppointmentsService",
+    function ($scope, $interval, DashboardService, AppointmentsService) {
         angular.element("#wrapper").show();
         
         $scope.SessionData = function () {
@@ -19,12 +19,12 @@
                     $scope.NumOfUnReadMessages = result.data["NumOfUnReadMessages"];
                 });
 
-                if (result["AccessLevel"] == '1' || result["AccessLevel"] == '2' || result["AccessLevel"] == '6') {
-                    angular.element("#doctor_AssistentControls").show();
-                }
-                else {
-                    angular.element("#doctor_AssistentControls").hide();
-                }
+                AppointmentsService.GetAllAppointments().then(function (result) {
+                    $scope.Appointments = result.data;
+                    $scope.numTodayApps = $scope.Appointments[$scope.Appointments.length - 1].numTodayApps;
+                    $scope.numTomorrowApps = $scope.Appointments[$scope.Appointments.length - 1].numTomorrowApps;
+                    $scope.numYesterdayApps = $scope.Appointments[$scope.Appointments.length - 1].numYesterdayApps;
+                });
                 
             });
         };
