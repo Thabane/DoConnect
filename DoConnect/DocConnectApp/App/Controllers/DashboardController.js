@@ -65,5 +65,23 @@
         };
         $scope.SessionData();
 
+        $scope.GetDoctors = function () {
+            AppointmentsService.GetAllDoctors().then(function (result) {
+                $scope.Doctors = result.data;
+            });
+        };
+        $scope.GetDoctors();
+
+        $scope.DoctorID = 0;
+        $scope.changedValueGetDoctors_ID = function (item) {
+            $scope.DoctorID = item.ID;
+        };
+
+        $scope.UpdatePreferedDoctor = function () {
+            if ($scope.DoctorID == 0) { $scope.DoctorID = $scope.Doctor_ID }
+            DashboardService.UpdatePreferedDoctor($scope.DoctorID).then(function (result) {
+                $scope.SessionData();
+            });
+        };
         
     }]);

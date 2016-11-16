@@ -303,3 +303,6 @@ function AddUninvoicedConsultations() {
     $("#AddUninvoicedConsultations").modal("show");
 };
 
+function ChangeDocModal() {
+    $("#ChangeDocModal").modal("show");
+};
