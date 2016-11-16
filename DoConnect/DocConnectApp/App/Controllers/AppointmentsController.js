@@ -71,8 +71,7 @@
         };
 
         $scope.GetDoctors = function () {
-            AppointmentsService.GetAllDoctors().then
-            (function (result) {
+            AppointmentsService.GetAllDoctors().then(function (result) {
                 $scope.Doctors = result.data;
             });
         };

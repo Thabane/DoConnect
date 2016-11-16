@@ -1,8 +1,9 @@
-﻿app.controller("UserProfileController", ["$scope", "UserProfileService", "$interval",
-    function ($scope, UserProfileService, $interval) {
+﻿app.controller("UserProfileController", ["$scope", "UserProfileService", "$interval", "PatientsService",
+    function ($scope, UserProfileService, $interval, PatientsService) {
         
         $scope.SessionData = function () {
             UserProfileService.SessionData().success(function (result) {
+                $scope.SessionData_ID = result["ID"];
                 $scope.SessionData_User_ID = result["User_ID"];
                 $scope.SessionData_FirstName = result["FirstName"];
                 $scope.SessionData_LastName = result["LastName"];
@@ -10,16 +11,7 @@
                 $scope.SessionData_Practice_ID = result["Practice_ID"];
                 $scope.SessionData_AccessLevel = result["AccessLevel"];
 
-                if (result["AccessLevel"] == '1' || result["AccessLevel"] == '2') {
-                    angular.element("#ProfileDetails_DoctorAdmin_div").show();
-                    angular.element("#ProfileDetails_Staff_div").hide();
-                }
-                else{
-                    angular.element("#ProfileDetails_DoctorAdmin_div").hide();
-                    angular.element("#ProfileDetails_Staff_div").show();
-                }
-
-                $scope.GetLoggedinUserProfile($scope.SessionData_User_ID, $scope.SessionData_AccessLevel);
+                $scope.GetLoggedinUserProfile();
             });
         };
         $scope.SessionData();
@@ -72,54 +64,34 @@
                 angular.element("input").val("");
         };
 
-        $scope.GetLoggedinUserProfile = function (SessionData_User_ID, SessionData_AccessLevel) {
-            UserProfileService.GetLoggedinUserProfile(SessionData_User_ID).success(function (result) {
-                if ((SessionData_AccessLevel == '1') || (SessionData_AccessLevel == '2')) {
-                    $scope.FirstName = result["FirstName"];
-                    $scope.LastName = result["LastName"];
-                    $scope.Email = result["Email"];
-                    if (result["Gender"] == 'M') {
-                        $scope.Gender = 'Male';
-                    }
-                    else {
-                        $scope.Gender = 'Female';
-                    }
-                    $scope.Address = result["Street_Address"];
-                    $scope.Employee_Type = result["Employee_Type"];
-                    $scope.Practice_Name = result["Practice_Name"];
-                    $scope.Practice_Phone_Number = result["Practice_Phone_Number"];
-                    $scope.Practice_Fax_Number = result["Practice_Fax_Number"];
-                    $scope.Practice_Street_Address = result["Practice_Street_Address"];
-                    $scope.Practice_Suburb = result["Practice_Suburb"];
-                    $scope.Practice_City = result["Practice_City"];
-                    $scope.Practice_Country = result["Practice_Country"];
-                }
-                else{
-                    $scope.FirstName = result["FirstName"];
-                    $scope.LastName = result["LastName"];
-                    $scope.ID_Number = result["ID_Number"];
-                    if (result["Gender"] == 'M') {
-                        $scope.Gender = 'Male';
-                    }
-                    else {
-                        $scope.Gender = 'Female';
-                    }
-                    $scope.DOB = result["DOB"];
-                    $scope.Phone = result["Phone"];
-                    $scope.Street_Address = result["Street_Address"];
-                    $scope.Suburb = result["Suburb"];
-                    $scope.City = result["City"];
-                    $scope.Country = result["Country"];
-                    $scope.Employee_Type = result["Employee_Type"];
-                    $scope.Email = result["Email"];
-                    $scope.Practice_Name = result["Practice_Name"];
-                    $scope.Practice_Phone_Number = result["Practice_Phone_Number"];
-                    $scope.Practice_Fax_Number = result["Practice_Fax_Number"];
-                    $scope.Practice_Street_Address = result["Practice_Street_Address"];
-                    $scope.Practice_Suburb = result["Practice_Suburb"];
-                    $scope.Practice_City = result["Practice_City"];
-                    $scope.Practice_Country = result["Practice_Country"];
-                }
-            });
+        $scope.GetLoggedinUserProfile = function () {
+            PatientsService.GetProfileByPatientID($scope.SessionData_ID).then(function (result) {
+                $scope.ID = result.data["ID"];
+                $scope.FirstName = result.data["FirstName"];
+                $scope.LastName = result.data["LastName"];
+                $scope.ID_Number = result.data["ID_Number"];
+                if (result.data["Gender"] == 'M') { $scope.Gender = 'Male'; } else { $scope.Gender = 'Female'; }
+                $scope.DOB = result.data["DOB"];
+                $scope.Cell_Number = result.data["Cell_Number"];
+                $scope.Street_Address = result.data["Street_Address"];
+                $scope.Suburb = result.data["Suburb"];
+                $scope.City = result.data["City"];
+                $scope.Country = result.data["Country"];
+                $scope.Medical_Aid_ID = result.data["Medical_Aid_ID"];
+                $scope.Medical_Aid_Name = result.data["Name"];
+                $scope.Doctor_ID = result.data["Doctor_ID"];
+                $scope.Scheme_Name = result.data["Scheme_Name"];
+                $scope.Membership_Number = result.data["Membership_Number"];
+                if (result.data["Status"])
+                { $scope.Status = "Valid"; }
+                else { $scope.Status = "Invalid"; }
+                $scope.Registration_Date = result.data["Registration_Date"];
+                $scope.Deregistration_Date = result.data["Deregistration_Date"];
+                $scope.Patient_ID = result.data["Patient_ID"];
+                $scope.Medical_Aid_Name =   result.data["Medical_Aid_Name"];
+                $scope.Doctors_FirstName =  result.data["Doctors_FirstName"];
+                $scope.Doctors_LastName =   result.data["Doctors_LastName"];
+                $scope.Practice_Aid_Name =  result.data["Practice_Aid_Name"];
+            });             
         };
     }]);

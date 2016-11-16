@@ -53,6 +53,14 @@ namespace DocConnectApp.Controllers
             return dtLayer.GetMedicalRecordByPatientID(ID);
         }
 
+        [HttpGet]
+        [Route("api/Patients/GetProfileByPatientID/{ID}")]
+        public MedicalRecord GetProfileByPatientID(int ID)
+        {
+            DataLayer dtLayer = new DataLayer();
+            return dtLayer.GetProfileByPatientID(ID);
+        }
+
         [HttpPost]
         [Route("api/Patients/InsertMedicalRecord")]
         public bool InsertMedicalRecord(MedicalRecord medicalRecord)

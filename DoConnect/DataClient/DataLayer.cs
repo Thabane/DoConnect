@@ -1725,6 +1725,23 @@ namespace DataClient
             return MedicalRecordInfo;
         }
 
+        public MedicalRecord GetProfileByPatientID(int id)
+        {
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
+            idParameter.Value = id;
+            _parameters.Add(idParameter);
+            MedicalRecord MedicalRecordInfo = new MedicalRecord();
+            using (var reader = access.ExecuteReader(Conn, "[JC_GetMedicalRecord]", _parameters))
+            {
+                if (reader.Read())
+                {
+                    MedicalRecordInfo = new MedicalRecord().GetProfileByPatientID(reader);
+                }
+            }
+            return MedicalRecordInfo;
+        }
+
         public List<Medical_Aid> GetMedical_Aid()
         {
             List<SqlParameter> _parameters = new List<SqlParameter>();

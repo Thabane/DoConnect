@@ -20,7 +20,7 @@
                         <a href="/Appointments">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-calendar-o fa-5x" style="color: #337ab7"></i>
+                                    <i class="fa fa-calendar-o fa-4x" style="color: #337ab7"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge">{{numTodayApps}}</div>
@@ -44,7 +44,7 @@
                         <a href="/Appointments">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-calendar-o fa-5x" style="color: #337ab7"></i>
+                                    <i class="fa fa-calendar-o fa-4x" style="color: #337ab7"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge">{{numTomorrowApps}}</div>
@@ -65,10 +65,10 @@
                         </div>
                     </div>
                     <div class="portlet-body">
-                        <a href="/Profile">
+                        <a href="/UserProfile">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-user fa-5x" style="color: #337ab7"></i>
+                                    <i class="fa fa-user fa-4x" style="color: #337ab7"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge">{{SessionData_FirstName}} {{SessionData_LastName}}</div>
@@ -91,10 +91,10 @@
                         </div>
                     </div>
                     <div class="portlet-body">
-                        <a href="/Profile">
+                        <a href="/Messages">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-envelope-o fa-5x" style="color: #337ab7"></i>
+                                    <i class="fa fa-envelope-o fa-4x" style="color: #337ab7"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge">{{NumOfUnReadMessages}}</div>
@@ -111,13 +111,21 @@
                     <div class="portlet-title">
                         <div class="caption caption-md">
                             <i class="icon-bar-chart font-dark hide"></i>
-                            <span class="caption-subject font-green-steel uppercase bold">Invoices</span>
+                            <span class="caption-subject font-green-steel uppercase bold">Medical Aid</span>
                         </div>
                     </div>
                     <div class="portlet-body">
-                        <div class="row">
-                            
-                        </div>
+                        <a href="#">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-medkit fa-4x" style="color: #337ab7"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div>Medical aid: {{Medical_Aid_Name}}</div><br>
+                                    <div>Validity status: {{Status}}</div>
+                                </div>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -131,11 +139,18 @@
                         </div>
                     </div>
                     <div class="portlet-body">
-                        <div class="row">
-                            <div>
-
+                        <a href="#">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-user-md fa-4x" style="color: #337ab7"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div>Dr. {{Doctors_FirstName}} {{Doctors_LastName}}</div>
+                                    <br>
+                                    <div>Practice: {{Practice_Aid_Name}}</div>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -154,7 +169,7 @@
                         <a href="/Accounting">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-money fa-5x" style="color: #337ab7"></i>
+                                    <i class="fa fa-money fa-4x" style="color: #337ab7"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge">{{numOfPatiallyPaid}}</div>
@@ -178,7 +193,7 @@
                         <a href="/Accounting">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-money fa-5x" style="color: #337ab7"></i>
+                                    <i class="fa fa-money fa-4x" style="color: #337ab7"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge">{{numOfUnPaid}}</div>
@@ -195,13 +210,25 @@
                     <div class="portlet-title">
                         <div class="caption caption-md">
                             <i class="icon-bar-chart font-dark hide"></i>
-                            <span class="caption-subject font-green-steel uppercase bold">Monthly Income Stats</span>
+                            <span class="caption-subject font-green-steel uppercase bold">Medical Record</span>
                         </div>
                     </div>
                     <div class="portlet-body">
                         <div class="row">
-                            <div>
+                            <a href="/MedicalHistory">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-heartbeat fa-4x" style="color: #337ab7"></i>
+                                </div>
+                            </a>
 
+                            <div class="col-xs-9 text-right">
+                                <div class="row">
+                                    <a href="/PrescriptionDetails"><div>Prescriptions <i class="fa fa-arrow-circle-right fa-fw" style="color: #337ab7"></i></div></a>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <a href="/ConsultationNotes"><div>Consultation Notes <i class="fa fa-arrow-circle-right fa-fw" style="color: #337ab7"></i></div></a>
+                                </div>
                             </div>
                         </div>
                     </div>

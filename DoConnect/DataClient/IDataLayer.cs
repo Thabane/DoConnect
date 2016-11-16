@@ -83,6 +83,7 @@ namespace DataClient
         #region Medical Record
         List<Medical_Aid> GetMedical_Aid();
         MedicalRecord GetMedicalRecordByPatientID(int id);
+        MedicalRecord GetProfileByPatientID(int id);
         bool NewMedicalRecord(int Doctor_ID, string FirstName, string LastName, string Email, string ID_Number, string Cell_Number, string DOB, string Gender, string Street_Address, string Suburb, string City, string Country, int Patient_Medical_Aid_Medical_Aid_ID, string Scheme_Name, string Membership_Number, string Registration_Date, string Deregistration_Date, string Allergies, string PreviousIllnesses, string PreviousMedication, string RiskFactors, string SocialHistory, string FamilyHistory);
         bool UpdateMedicalRecord(int Patient_ID, string FirstName, string LastName, string Email, string ID_Number, string Cell_Number, string DOB, string Gender, string Street_Address, string Suburb, string City, string Country, int Patient_Medical_Aid_Medical_Aid_ID, string Scheme_Name, string Membership_Number, string Registration_Date, string Deregistration_Date, string Allergies, string PreviousIllnesses, string PreviousMedication, string RiskFactors, string SocialHistory, string FamilyHistory);
         #endregion

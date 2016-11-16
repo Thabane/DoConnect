@@ -23,6 +23,11 @@
             return $http.get("api/Patients/GetMedicalRecord/" + ID);
         }
 
+        var GetProfileByPatientID = function (ID) {
+            return $http.get("api/Patients/GetProfileByPatientID/" + ID);
+        }
+
+
         var InsertMedicalRecord = function (Doctor_ID, FirstName, LastName, Email, ID_Number, Cell_Number, DOB, Gender, Street_Address, Suburb, City, Country, Patient_Medical_Aid_Medical_Aid_ID, Scheme_Name, Membership_Number, Registration_Date, Deregistration_Date, Allergies, PreviousMedication, PreviousIllnesses, RiskFactors, SocialHistory, FamilyHistory) {
             return $http.post("api/Patients/InsertMedicalRecord",
             {
@@ -174,6 +179,7 @@
             //MedicalRecord Details
             GetMedical_Aid: GetMedical_Aid,
             GetMedicalRecord: GetMedicalRecord,
+            GetProfileByPatientID: GetProfileByPatientID,
             InsertMedicalRecord: InsertMedicalRecord,
             UpdateMedicalRecord: UpdateMedicalRecord,
 
