@@ -154,6 +154,7 @@ namespace DataClient
         bool RejectAppointment(int ID, int App_Status);
         List<Medicine_Inventory> MedicineInventoryStockCount(int Practice_ID);
         List<Consultation> NumOFPatientsPerMonthPerPractice(int Practice_ID);
+        bool UpdatePreferedDoctor(int Doctor_ID);
         #endregion
 
         #region User Profile

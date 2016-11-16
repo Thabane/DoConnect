@@ -80,7 +80,11 @@
         $scope.UpdatePreferedDoctor = function () {
             if ($scope.DoctorID == 0) { $scope.DoctorID = $scope.Doctor_ID }
             DashboardService.UpdatePreferedDoctor($scope.DoctorID).then(function (result) {
+                angular.element(".close").trigger("click");
                 $scope.SessionData();
+                btnSuccess("Prefered Doctor successfully updated.");
+            }, function (error) {
+                btnAlert("System Error Message", "Update unsuccessful.");
             });
         };
         

@@ -236,7 +236,7 @@
             </div>
         </div><!-- /.3rd row -->
 
-        <div id="View_Appointment_Modal" class="modal fade">
+        <div id="ChangeDocModal" class="modal fade">
             <form name="Form" novalidate>
                 <div class="modal-dialog" style="width:50%">
                     <div class="modal-content">
@@ -246,7 +246,7 @@
                         </div>
                         <div class="modal-body">                            
                             <div class="row" style="margin-top:4px; margin-bottom:0px;">
-                                <div class="col-md-3"><h5>Doctor Name:</h5></div>
+                                <div class="col-md-3"><h5>Select Doctor:</h5></div>
                                 <div class="col-md-8">
                                     <select class="form-control" ng-model="Doctors_ID" name="DoctorName" ng-required="true" ng-change="changedValueGetDoctors_ID(Doctors_ID)" data-ng-options="doctor as doctor.DoctorFullName for doctor in Doctors | orderBy:'DoctorFullName'">
                                         <option value="">{{Doctors_FirstName}} {{Doctors_LastName}}</option>
@@ -262,7 +262,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal" id="CloseModel">Cancel</button>
-                            <button type="button" class="btn btn-primary" ng-click="UpdatePreferedDoctor()">Delete</button>
+                            <button type="button" class="btn btn-primary" ng-click="UpdatePreferedDoctor()">Save</button>
                         </div>
                     </div>
                 </div>

@@ -24,6 +24,14 @@ namespace DocConnectApp.Controllers
             return dtLayer.GetUserDetailsByUser_ID();
         }
 
+        [HttpPost]
+        [Route("api/Dashboard/UpdatePreferedDoctor")]
+        public bool UpdatePreferedDoctor(Appointments appointment)
+        {
+            DataLayer dtLayer = new DataLayer();
+            return dtLayer.UpdatePreferedDoctor(appointment.Doctors_ID);
+        }
+
         [HttpGet]
         [Route("api/Dashboard/GetRevenueSummary_Today/{Practice_ID}")]
         public Invoice GetRevenueSummary_Today(int Practice_ID)

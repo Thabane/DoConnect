@@ -5,6 +5,13 @@
             return $http.get("api/Dashboard/SessionData");
         };
 
+        var UpdatePreferedDoctor = function (DoctorID) {
+            return $http.post("api/Dashboard/UpdatePreferedDoctor",
+            {
+                'Doctors_ID': DoctorID
+            });
+        };
+
         var GetAllPractices = function () {
             return $http.get("api/Practices/GetAllPractices");
         };
@@ -79,6 +86,7 @@
 
         return {
             SessionData: SessionData,
+            UpdatePreferedDoctor: UpdatePreferedDoctor,
             GetAllPractices: GetAllPractices,
             GetRevenueSummary_Today: GetRevenueSummary_Today,
             GetRevenueSummary_Week: GetRevenueSummary_Week,
