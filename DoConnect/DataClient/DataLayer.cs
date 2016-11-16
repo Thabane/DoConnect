@@ -59,7 +59,7 @@ namespace DataClient
             Login Login = new Login();
             try
             {
-                using (var reader = access.ExecuteReader(Conn, "[Login]", _parameters))
+                using (var reader = access.ExecuteReader(Conn, "[JC_Login]", _parameters))
                 {
                     if (reader.Read())
                     {
@@ -96,7 +96,7 @@ namespace DataClient
             _parameters.Add(User_IDParameter);
 
             Staff List = new Staff();
-            using (var reader = access.ExecuteReader(Conn, "[GetUserDetailsByUser_ID]", _parameters))
+            using (var reader = access.ExecuteReader(Conn, "[JC_GetUserDetailsByUser_ID]", _parameters))
             {
                 if (reader.Read())
                 {
@@ -450,7 +450,7 @@ namespace DataClient
             Appointments AppointmentInfo = new Appointments(); int numYesterdayApps = 0; int numTodayApps = 0; int numTomorrowApps = 0;
             List<Appointments> AppointmentsInfo = new List<Appointments>();
            
-            using (var reader = access.ExecuteReader(Conn, "[GetAllAppointments]", _parameters))
+            using (var reader = access.ExecuteReader(Conn, "[JC_GetAllAppointments]", _parameters))
             {
                 while (reader.Read())
                 {
@@ -885,7 +885,7 @@ namespace DataClient
             Invoice invoice = new Invoice(); int numOfUnPaid = 0; int numOfPatiallyPaid = 0;
             List<Invoice> invoiceInfo = new List<Invoice>();
             
-            using (var reader = access.ExecuteReader(Conn, "[GetAllInvoices]", _parameters))
+            using (var reader = access.ExecuteReader(Conn, "[JC_GetAllInvoices]", _parameters))
             {
                 while (reader.Read())
                 {

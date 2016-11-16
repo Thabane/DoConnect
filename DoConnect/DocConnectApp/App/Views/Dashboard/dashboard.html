@@ -1,11 +1,11 @@
-﻿<div id="page-wrapper">
-    <div>
-        <div class="row page-header">
-            <div class="col-md-8">
+﻿ <div>
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-md-12">
                 <h2 class="text-primary">Dashboard</h2>
             </div>
-        </div>  
-              
+        </div>
+
         <!-- 1st row -->
         <div class="row">
             <div class="col-md-4">
@@ -17,13 +17,41 @@
                         </div>
                     </div>
                     <div class="portlet-body">
-                        <div class="row">
-                            <div>
-                                <a class="info" href="/Appointments"><i class="fa fa-calendar-o fa-4x"></i></a>
-                                <p class="font-purple" ng-if="numTodayApps > '0'">Remember today's appointment</p>
-                                <p class="font-purple" ng-if="numTomorrowApps > '0'">Remember tommorrow's appointment</p>
+                        <a href="/Appointments">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-calendar-o fa-5x" style="color: #337ab7"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">{{numTodayApps}}</div>
+                                    <div>Today's Appointments</div>
+                                </div>
                             </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="portlet light" style="border: 1px solid #ddd; border-radius: 4px; height: 150px;">
+                    <div class="portlet-title">
+                        <div class="caption caption-md">
+                            <i class="icon-bar-chart font-dark hide"></i>
+                            <span class="caption-subject font-green-steel uppercase bold">Appointments</span>
                         </div>
+                    </div>
+                    <div class="portlet-body">
+                        <a href="/Appointments">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-calendar-o fa-5x" style="color: #337ab7"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">{{numTomorrowApps}}</div>
+                                    <div>Tomorrow's Appointments</div>
+                                </div>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -37,35 +65,21 @@
                         </div>
                     </div>
                     <div class="portlet-body">
-                        <div class="row">
-                            <div>
-
+                        <a href="/Profile">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-user fa-5x" style="color: #337ab7"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">{{SessionData_FirstName}} {{SessionData_LastName}}</div>
+                                    <div>{{SessionData_Email}}</div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="portlet light" style="border: 1px solid #ddd; border-radius: 4px; height: 150px;">
-                    <div class="portlet-title">
-                        <div class="caption caption-md">
-                            <i class="icon-bar-chart font-dark hide"></i>
-                            <span class="caption-subject font-green-steel uppercase bold">Notifications</span>
-                        </div>
-                    </div>
-                    <div class="portlet-body">
-                        <div class="row">
-                            <div>
-                                <i class="menu-icon icon-bullhorn huge"></i>
-                            </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
             </div>
         </div><!-- /.1st row -->
-
-
         <!-- 2nd row -->
         <div class="row">
             <div class="col-md-4">
@@ -77,14 +91,17 @@
                         </div>
                     </div>
                     <div class="portlet-body">
-                        <div class="row">
-                            <div class="col-md-4"></div>
-                            <div class="col-md-4">
-                                <a class="info" href="/Messages"><i class="fa fa-envelope-o fa-4x"></i></a>
+                        <a href="/Profile">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-envelope-o fa-5x" style="color: #337ab7"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">{{NumOfUnReadMessages}}</div>
+                                    <div>New Messages</div>
+                                </div>
                             </div>
-                            <div class="col-md-4"></div>
-                        </div>
-                        <p class="font-dark" ng-if="NumOfUnReadMessages > '0'">New Messages: {{NumOfUnReadMessages}}</p>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -94,14 +111,12 @@
                     <div class="portlet-title">
                         <div class="caption caption-md">
                             <i class="icon-bar-chart font-dark hide"></i>
-                            <span class="caption-subject font-green-steel uppercase bold">Doctor</span>
+                            <span class="caption-subject font-green-steel uppercase bold">Invoices</span>
                         </div>
                     </div>
                     <div class="portlet-body">
                         <div class="row">
-                            <div>
-                                <i class="icon-group"></i>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -112,7 +127,7 @@
                     <div class="portlet-title">
                         <div class="caption caption-md">
                             <i class="icon-bar-chart font-dark hide"></i>
-                            <span class="caption-subject font-green-steel uppercase bold">Monthly Income Stats</span>
+                            <span class="caption-subject font-green-steel uppercase bold">Prefered Doctor</span>
                         </div>
                     </div>
                     <div class="portlet-body">
@@ -125,7 +140,6 @@
                 </div>
             </div>
         </div><!-- /.2nd row -->
-
         <!-- 3rd row -->
         <div class="row">
             <div class="col-md-4">
@@ -133,15 +147,21 @@
                     <div class="portlet-title">
                         <div class="caption caption-md">
                             <i class="icon-bar-chart font-dark hide"></i>
-                            <span class="caption-subject font-green-steel uppercase bold">Medical History</span>
+                            <span class="caption-subject font-green-steel uppercase bold">Partially-Paid Invoices</span>
                         </div>
                     </div>
                     <div class="portlet-body">
-                        <div class="row">
-                            <div>
-
+                        <a href="/Accounting">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-money fa-5x" style="color: #337ab7"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">{{numOfPatiallyPaid}}</div>
+                                    <div>Partially-Paid Invoices</div>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -151,15 +171,21 @@
                     <div class="portlet-title">
                         <div class="caption caption-md">
                             <i class="icon-bar-chart font-dark hide"></i>
-                            <span class="caption-subject font-green-steel uppercase bold">Practices</span>
+                            <span class="caption-subject font-green-steel uppercase bold">Un-Paid Invoices</span>
                         </div>
                     </div>
                     <div class="portlet-body">
-                        <div class="row">
-                            <div>
-                                <i class="icon-map-marker"></i>
+                        <a href="/Accounting">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-money fa-5x" style="color: #337ab7"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">{{numOfUnPaid}}</div>
+                                    <div>Un-Paid Invoices</div>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
             </div>
