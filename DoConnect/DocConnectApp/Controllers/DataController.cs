@@ -38,6 +38,7 @@ namespace DocConnectApp.Controllers
             Session["Email"] = Staff.Email;
             Session["Practice_ID"] = Staff.PRACTICE_ID;
             Session["AccessLevel"] = Staff.AccessLevel;
+            UserData.ID = Staff.ID;
             UserData.FirstName = Convert.ToString(Session["FirstName"]);
             UserData.LastName = Convert.ToString(Session["LastName"]);
             UserData.Email = Convert.ToString(Session["Email"]);

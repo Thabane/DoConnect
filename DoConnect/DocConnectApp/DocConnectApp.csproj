@@ -19,9 +19,9 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
-    <IISExpressAnonymousAuthentication />
-    <IISExpressWindowsAuthentication />
-    <IISExpressUseClassicPipelineMode />
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>enabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -190,9 +190,6 @@
     <Content Include="App\Services\userPersistenceService.js" />
     <Content Include="App\Services\UserProfileService.js" />
     <Content Include="App\Views\Accounting\Accounting.html" />
-    <Content Include="App\Views\Accounting\Expenses.html" />
-    <Content Include="App\Views\Accounting\NewExpenceInvoice.html" />
-    <Content Include="App\Views\Accounting\NewPatientInvoice.html" />
     <Content Include="App\Views\Appointments\Appointments.html" />
     <Content Include="App\Views\Appointments\NewAppointment.html" />
     <Content Include="App\Views\Dashboard\dashboard.html" />
@@ -210,17 +207,11 @@
     <Content Include="App\Views\MedicineInventory\MedicineInventory.html" />
     <Content Include="App\Views\MedicineInventory\NewMedicine.html" />
     <Content Include="App\Views\Messages\Messages.html" />
-    <Content Include="App\Views\Patients\NewPatient.html" />
     <Content Include="App\Views\Patients\PatientRecord\ConsultationNotes.html" />
     <Content Include="App\Views\Patients\PatientRecord\MedicalHistory.html" />
-    <Content Include="App\Views\Patients\PatientRecord\NewConsultationNotes.html" />
-    <Content Include="App\Views\Patients\PatientRecord\NewPrescription.html" />
     <Content Include="App\Views\Patients\PatientRecord\PrescriptionDetails.html" />
     <Content Include="App\Views\Patients\patients.html" />
-    <Content Include="App\Views\Practices\NewPractice.html" />
     <Content Include="App\Views\Practices\Practices.html" />
-    <Content Include="App\Views\Reports\Financial_Report.html" />
-    <Content Include="App\Views\Reports\Reports.html" />
     <Content Include="App\Views\UserProfile\UserProfile.html" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />

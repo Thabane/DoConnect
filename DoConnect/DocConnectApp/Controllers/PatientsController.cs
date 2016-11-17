@@ -53,6 +53,14 @@ namespace DocConnectApp.Controllers
             return dtLayer.GetMedicalRecordByPatientID(ID);
         }
 
+        [HttpGet]
+        [Route("api/Patients/GetProfileByPatientID/{ID}")]
+        public MedicalRecord GetProfileByPatientID(int ID)
+        {
+            DataLayer dtLayer = new DataLayer();
+            return dtLayer.GetProfileByPatientID(ID);
+        }
+
         [HttpPost]
         [Route("api/Patients/InsertMedicalRecord")]
         public bool InsertMedicalRecord(MedicalRecord medicalRecord)
@@ -120,12 +128,20 @@ namespace DocConnectApp.Controllers
             return dtLayer.NewConsultationNote(consultation.Consultation_Patient_ID, 4, consultation.Consultation_ReasonForConsultation, consultation.Consultation_Symptoms, consultation.Consultation_ClinicalFindings, consultation.Consultation_Diagnosis, consultation.Consultation_TestResultSummary, consultation.Consultation_TreatmentPlan, consultation.Consultation_Presciption_ID, consultation.Consultation_Referral_ID);
         }
 
-        [HttpPost]//Update Employee
+        [HttpPost]
         [Route("api/Patients/UpdateConsultationNote")]
         public bool UpdateConsultationNote(Consultation consultation)
         {
             DataLayer dtLayer = new DataLayer();
             return dtLayer.UpdateConsultationNote(consultation.Consultation_ID, consultation.Consultation_ReasonForConsultation, consultation.Consultation_Symptoms, consultation.Consultation_ClinicalFindings, consultation.Consultation_Diagnosis, consultation.Consultation_TestResultSummary, consultation.Consultation_TreatmentPlan);
+        }
+
+        [HttpPost]
+        [Route("api/Patients/UpdateConsultation_AddAdditionalFee")]
+        public bool UpdateConsultation_AddAdditionalFee(Consultation consultation)
+        {
+            DataLayer dtLayer = new DataLayer();
+            return dtLayer.UpdateConsultation_AddAdditionalFee(consultation.Additionalfee, consultation.InvoiceDocMessage);
         }
 
         [HttpPost]

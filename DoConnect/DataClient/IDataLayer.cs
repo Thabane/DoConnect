@@ -35,9 +35,12 @@ namespace DataClient
 
         #region Consultation
         List<Consultation> GetAllConsultations();
+        List<Consultation> ViewUnInvoicedConsultations();
         List<Consultation> GetConsultationByPatientId(int id);
         bool NewConsultationNote(int patient_ID, int doctor_ID, string reasonForConsulta, string symptoms, string clinicalFindings, string diagnosis, string testResultSummary, string treatmentPlan, int presciption_ID, int referral_ID);
         bool UpdateConsultationNote(int consultationID, string reasonForConsulta, string symptoms, string clinicalFindings, string diagnosis, string testResultSummary, string treatmentPlan);
+        bool UpdateUnInvoicedConsultations(int consultationID);
+        bool UpdateConsultation_AddAdditionalFee(decimal Additionalfee, string InvoiceDocMessage);
         bool DeleteConsultation(int id);
         #endregion
 
@@ -80,6 +83,7 @@ namespace DataClient
         #region Medical Record
         List<Medical_Aid> GetMedical_Aid();
         MedicalRecord GetMedicalRecordByPatientID(int id);
+        MedicalRecord GetProfileByPatientID(int id);
         bool NewMedicalRecord(int Doctor_ID, string FirstName, string LastName, string Email, string ID_Number, string Cell_Number, string DOB, string Gender, string Street_Address, string Suburb, string City, string Country, int Patient_Medical_Aid_Medical_Aid_ID, string Scheme_Name, string Membership_Number, string Registration_Date, string Deregistration_Date, string Allergies, string PreviousIllnesses, string PreviousMedication, string RiskFactors, string SocialHistory, string FamilyHistory);
         bool UpdateMedicalRecord(int Patient_ID, string FirstName, string LastName, string Email, string ID_Number, string Cell_Number, string DOB, string Gender, string Street_Address, string Suburb, string City, string Country, int Patient_Medical_Aid_Medical_Aid_ID, string Scheme_Name, string Membership_Number, string Registration_Date, string Deregistration_Date, string Allergies, string PreviousIllnesses, string PreviousMedication, string RiskFactors, string SocialHistory, string FamilyHistory);
         #endregion
@@ -150,6 +154,7 @@ namespace DataClient
         bool RejectAppointment(int ID, int App_Status);
         List<Medicine_Inventory> MedicineInventoryStockCount(int Practice_ID);
         List<Consultation> NumOFPatientsPerMonthPerPractice(int Practice_ID);
+        bool UpdatePreferedDoctor(int Doctor_ID);
         #endregion
 
         #region User Profile

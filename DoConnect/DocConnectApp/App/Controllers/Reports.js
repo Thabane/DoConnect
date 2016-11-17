@@ -1,5 +1,5 @@
-﻿app.controller("ReportsController", ["$scope", "ReportsService", "$interval",
-    function ($scope, ReportsService, $interval) {
+﻿app.controller("ReportsController", ["$scope", "ReportsService", "$interval", "$filter",
+    function ($scope, ReportsService, $interval, $filter) {
 
         $scope.sort = function (keyname) {
             $scope.sortKey = keyname;
@@ -215,7 +215,32 @@
                     });
                 }
             }           
-        };      
+        };
+
+        var myDate = new Date();
+
+        $scope.year_0 = $filter('date')(myDate, 'yyyy');
+        $scope.month_0 = $scope.year_0 + "-" + $filter('date')(myDate, 'MM'); $scope.Total_month_0 = 0; $scope.AmountPaid_month_0 = 0; $scope.BalanceOwing_month_0 = 0;
+
+        var month_1 = new Date(myDate);
+        month_1.setMonth(myDate.getMonth() - 1);
+        $scope.month_1 = $scope.year_0 + "-" + $filter('date')(month_1, 'MM'); $scope.Total_month_1 = 0; $scope.AmountPaid_month_1 = 0; $scope.BalanceOwing_month_1 = 0;
+
+        var month_2 = new Date(myDate);
+        month_2.setMonth(myDate.getMonth() - 2);
+        $scope.month_2 = $scope.year_0 + "-" + $filter('date')(month_2, 'MM'); $scope.Total_month_2 = 0; $scope.AmountPaid_month_2 = 0; $scope.BalanceOwing_month_2 = 0;
+
+        var month_3 = new Date(myDate);
+        month_3.setMonth(myDate.getMonth() - 3);
+        $scope.month_3 = $scope.year_0 + "-" + $filter('date')(month_3, 'MM'); $scope.Total_month_3 = 0; $scope.AmountPaid_month_3 = 0; $scope.BalanceOwing_month_3 = 0;
+
+        var month_4 = new Date(myDate);
+        month_4.setMonth(myDate.getMonth() - 4);
+        $scope.month_4 = $scope.year_0 + "-" + $filter('date')(month_4, 'MM'); $scope.Total_month_4 = 0; $scope.AmountPaid_month_4 = 0; $scope.BalanceOwing_month_4 = 0;
+
+        var month_5 = new Date(myDate);
+        month_5.setMonth(myDate.getMonth() - 5);
+        $scope.month_5 = $scope.year_0 + "-" + $filter('date')(month_5, 'MM'); $scope.Total_month_5 = 0; $scope.AmountPaid_month_5 = 0; $scope.BalanceOwing_month_5 = 0;
         
         $scope.DisplayFinancialReportData = function (result) {
             var num_Consultations = 0; var num_ConsultationsPerGroup = 0;
@@ -228,7 +253,7 @@
 
             $scope.FinancialReportData = [];
             $scope.Summary = [];
-            var PrintSummary = 'false';
+            var PrintSummary = 'false';            
 
             for (var i = 0; i < result.data.length; i++) {
                 Date = result.data[i]["Date"].split('-');
@@ -239,6 +264,26 @@
                     num_Consultations++; num_ConsultationsPerGroup++;
                     $scope.Total = +result.data[i]["Total"]; $scope.AmountPaid = +result.data[i]["AmountPaid"]; $scope.BalanceOwing = +result.data[i]["BalanceOwing"];
                     $scope.Total_Footer = ($scope.Total_Footer + result.data[i]["Total"]); $scope.AmountPaid_Footer = ($scope.AmountPaid_Footer + result.data[i]["AmountPaid"]); $scope.BalanceOwing_Footer = ($scope.BalanceOwing_Footer + result.data[i]["BalanceOwing"]);
+
+                    if (Year_Month == $scope.month_0) {
+                        $scope.Total_month_0 = $scope.Total_month_0 + result.data[i]["Total"]; $scope.AmountPaid_month_0 = $scope.AmountPaid_month_0 + result.data[i]["AmountPaid"]; $scope.BalanceOwing_month_0 = $scope.BalanceOwing_month_0 + result.data[i]["BalanceOwing"];
+                    }
+                    else if (Year_Month == $scope.month_1) {
+                        $scope.Total_month_1 = $scope.Total_month_1 + result.data[i]["Total"]; $scope.AmountPaid_month_1 = $scope.AmountPaid_month_1 + result.data[i]["AmountPaid"]; $scope.BalanceOwing_month_1 = $scope.BalanceOwing_month_1 + result.data[i]["BalanceOwing"];
+                    }
+                    else if (Year_Month == $scope.month_2) {
+                        $scope.Total_month_2 = $scope.Total_month_2 + result.data[i]["Total"]; $scope.AmountPaid_month_2 = $scope.AmountPaid_month_2 + result.data[i]["AmountPaid"]; $scope.BalanceOwing_month_2 = $scope.BalanceOwing_month_2 + result.data[i]["BalanceOwing"];
+                    }
+                    else if (Year_Month == $scope.month_3) {
+                        $scope.Total_month_3 = $scope.Total_month_3 + result.data[i]["Total"]; $scope.AmountPaid_month_3 = $scope.AmountPaid_month_3 + result.data[i]["AmountPaid"]; $scope.BalanceOwing_month_3 = $scope.BalanceOwing_month_3 + result.data[i]["BalanceOwing"];
+                    }
+                    else if (Year_Month == $scope.month_4) {
+                        $scope.Total_month_4 = $scope.Total_month_4 + result.data[i]["Total"]; $scope.AmountPaid_month_4 = $scope.AmountPaid_month_4 + result.data[i]["AmountPaid"]; $scope.BalanceOwing_month_4 = $scope.BalanceOwing_month_4 + result.data[i]["BalanceOwing"];
+                    }
+                    else if (Year_Month == $scope.month_5) {
+                        $scope.Total_month_5 = $scope.Total_month_5 + result.data[i]["Total"]; $scope.AmountPaid_month_5 = $scope.AmountPaid_month_5 + result.data[i]["AmountPaid"]; $scope.BalanceOwing_month_5 = $scope.BalanceOwing_month_5 + result.data[i]["BalanceOwing"];
+                    }
+
                 }
                 else {
                     Date = result.data[i]["Date"].split('-');
@@ -338,7 +383,7 @@
                 ]);
 
                 var options_Age = {
-                    pieHole: 0.6, width: 500, height: 300
+                    pieHole: 0.6, width: 500, height: '220'
                 };
 
                 var chart_Age = new google.visualization.PieChart(document.getElementById('donutchart_Gender'));
@@ -364,19 +409,51 @@
                 chart.draw(data, options);
 
                 //Financial Bar Graph - Totals (Consulation Fee, Amount Owing, Amount Paid) Over the selected period over a selected period of time.
-                var data_Finance = new google.visualization.arrayToDataTable([
-                  ['Income Type', 'Amount (R)'],
-                  ["Gross Income", $scope.Total_Footer],
-                  ["Income Received", $scope.AmountPaid_Footer],
-                  ["Income Outstanding", $scope.BalanceOwing_Footer]
+                var data = google.visualization.arrayToDataTable([
+                    ["Income Type", "Amount (R)", { role: "style" }],
+                    ["Gross Income", $scope.Total_Footer, "blue"],
+                    ["Received", $scope.AmountPaid_Footer, "red"],
+                    ["Outstanding", $scope.BalanceOwing_Footer, "gold"]
                 ]);
 
-                var options_Finance = {
-                    width: 900, height: 500, legend: { position: 'none' }, axes: { x: { 0: { side: 'top', label: 'White to move' } } }, bar: { groupWidth: "20px" }
+                var options = {
+                    title: "Total income in (R)",
+                    width: 500,
+                    height: 400,
+                    bar: { groupWidth: "95%" },
+                    legend: { position: "none" },
                 };
 
-                var chart_Finance = new google.charts.Bar(document.getElementById('top_x_div'));
-                chart_Finance.draw(data_Finance, google.charts.Bar.convertOptions(options_Finance));
+                var chart = new google.visualization.ColumnChart(document.getElementById('curve_chart_IncomeStats'));
+                chart.draw(data, options);
+
+                //Financial Line Graph: Income Stats over last 6 Months
+                var data = google.visualization.arrayToDataTable([
+                  ['Year-Month', 'Income', 'Received', 'Outstanding'],
+                  [$scope.month_5, $scope.Total_month_5, $scope.AmountPaid_month_5, $scope.BalanceOwing_month_5],
+                  [$scope.month_4, $scope.Total_month_4, $scope.AmountPaid_month_4, $scope.BalanceOwing_month_4],
+                  [$scope.month_3, $scope.Total_month_3, $scope.AmountPaid_month_3, $scope.BalanceOwing_month_3],
+                  [$scope.month_2, $scope.Total_month_2, $scope.AmountPaid_month_2, $scope.BalanceOwing_month_2],
+                  [$scope.month_1, $scope.Total_month_1, $scope.AmountPaid_month_1, $scope.BalanceOwing_month_1],
+                  [$scope.month_0, $scope.Total_month_0, $scope.AmountPaid_month_0, $scope.BalanceOwing_month_0] 
+                ]);
+
+                console.log($scope.month_5, +" " + $scope.Total_month_5, +" " + $scope.AmountPaid_month_5, +" " + $scope.BalanceOwing_month_5);
+                console.log($scope.month_4, +" " + $scope.Total_month_4, +" " + $scope.AmountPaid_month_4, +" " + $scope.BalanceOwing_month_4);
+                console.log($scope.month_3, +" " + $scope.Total_month_3, +" " + $scope.AmountPaid_month_3, +" " + $scope.BalanceOwing_month_3);
+                console.log($scope.month_2, +" " + $scope.Total_month_2, +" " + $scope.AmountPaid_month_2, +" " + $scope.BalanceOwing_month_2);
+                console.log($scope.month_1, +" " + $scope.Total_month_1, +" " + $scope.AmountPaid_month_1, +" " + $scope.BalanceOwing_month_1);
+                console.log($scope.month_0, +" " + $scope.Total_month_0, +" " + $scope.AmountPaid_month_0, +" " + $scope.BalanceOwing_month_0);
+                var options = {
+                    title: 'Company Performance',
+                    curveType: 'function',
+                    legend: { position: 'right' },
+                    width: 1200,
+                    height: 380,
+                };
+
+                var chart = new google.visualization.LineChart(document.getElementById('curve_chart_Income_OverLast6Months'));
+                chart.draw(data, options);
             } 
         };
     }]);

@@ -7,8 +7,6 @@
         </div>
 
         <ul class="nav nav-tabs">
-            <li role="presentation"><a href="/Patients"><i class="fa fa-align-justify"></i>Patient List</a></li>
-            <li role="presentation"><a href="/NewPatient"><i class="fa fa-plus-circle"></i>New Patient</a></li>
             <li role="presentation" class="active"><a href="/MedicalHistory"><i class="fa fa-align-justify"></i>Patient Record</a></li>
         </ul>
 
@@ -20,7 +18,6 @@
                         <li role="presentation"><a href="/MedicalHistory">Medical Record</a></li>
                         <li role="presentation" ng-show="ConsultationNotes.length != '0'" class="active"><a href="/PrescriptionDetails">Prescriptions</a></li>
                         <li role="presentation" ng-show="ConsultationNotes.length != '0'"><a href="/ConsultationNotes">Consultation Notes</a></li>
-                        <li role="presentation" ng-show="ConsultationNotes.length == '0'"><a href="/NewConsultationNotes">New Consultation Notes</a></li>
                     </ul>                    
                 </div>
                 <div class="panel panel-default">
@@ -46,18 +43,6 @@
                                 <div class="col-md-2"><h5>Drug Name:</h5></div>
                                 <div class="col-md-4"><input class="form-control readonly_ViewPrescription" type="text" ng-model="Prescription.Prescription_DrugDetails_DrugName" name="DrugName" ng-required="true" ng-pattern="/^[0-9a-zA-Z'.,'-'\s]{3,}$/"></div>
                             </div>
-                            <div class="row" style="margin-top:0px; margin-bottom:8px;">
-                                <div class="col-md-2"></div>
-                                <div class="col-md-4">
-                                    <small ng-show="Form.Diagnosis.$invalid && Form.Diagnosis.$touched && Form.Diagnosis.$error.required">Required field.<br></small>
-                                    <small ng-show="Form.Diagnosis.$invalid && Form.Diagnosis.$touched && Form.Diagnosis.$error.pattern">Only alphabetic letters allowed and atleast 3 charactors long.</small>
-                                </div>
-                                <div class="col-md-2"></div>
-                                <div class="col-md-4">
-                                    <small ng-show="Form.DrugName.$invalid && Form.DrugName.$touched && Form.DrugName.$error.required">Required field.<br></small>
-                                    <small ng-show="Form.DrugName.$invalid && Form.DrugName.$touched && Form.DrugName.$error.pattern">Only alphabetic letters allowed and atleast 3 charactors long.</small>
-                                </div>
-                            </div>
                             <div class="row" style="margin-top:8px; margin-bottom:0px;">
                                 <div class="col-md-2"><h5 class="form-control-label">Drug Strength:</h5></div>
                                 <div class="col-md-4"><input class="form-control readonly_ViewPrescription" type="text" ng-model="Prescription.Prescription_DrugDetails_Strength" name="Strength" ng-required="true" ng-pattern="/^[0-9a-zA-Z'.,'-'\s]{3,}$/"></div>
@@ -66,17 +51,6 @@
                                     <select class="form-control disable_ViewPrescription readonly_ViewPrescription" ng-model="Prescription.Prescription_DrugDetails_IntakeRoute" name="IntakeRoute" ng-required="true" ng-change="changedValueGetIntakeRoute(Prescription.Prescription_DrugDetails_IntakeRoute)" data-ng-options="IntakeRoute as IntakeRoute.Route for IntakeRoute in IntakeRoutez | orderBy:'Route'">
                                         <option value="">{{Prescription.Prescription_DrugDetails_IntakeRoute}}</option>
                                     </select>
-                                </div>
-                            </div>
-                            <div class="row" style="margin-top:0px; margin-bottom:8px;">
-                                <div class="col-md-2"></div>
-                                <div class="col-md-4">
-                                    <small ng-show="Form.Strength.$invalid && Form.Strength.$touched && Form.Strength.$error.required">Required field.<br></small>
-                                    <small ng-show="Form.Strength.$invalid && Form.Strength.$touched && Form.Strength.$error.pattern">Only alphabetic letters allowed and atleast 3 charactors long.</small>
-                                </div>
-                                <div class="col-md-2"></div>
-                                <div class="col-md-4">
-                                    <small ng-show="Form.IntakeRoute.$invalid && Form.IntakeRoute.$touched && Form.IntakeRoute.$error.required">Required field.<br></small>
                                 </div>
                             </div>
                             <div class="row" style="margin-top:8px; margin-bottom:0px;">
@@ -89,32 +63,10 @@
                                 <div class="col-md-2"><h5>Dispense Number:</h5></div>
                                 <div class="col-md-4"><input class="form-control readonly_ViewPrescription" type="text" ng-model="Prescription.Prescription_DrugDetails_DispenseNumber" name="DispenseNumber" ng-required="true" ng-pattern="/^[0-9]{1,}$/"></div>
                             </div>
-                            <div class="row" style="margin-top:0px; margin-bottom:8px;">
-                                <div class="col-md-2"></div>
-                                <div class="col-md-4">
-                                    <small ng-show="Form.Frequency.$invalid && Form.Frequency.$touched && Form.Frequency.$error.required">Required field.<br></small>
-                                </div>
-                                <div class="col-md-2"></div>
-                                <div class="col-md-4">
-                                    <small ng-show="Form.DispenseNumber.$invalid && Form.DispenseNumber.$touched && Form.DispenseNumber.$error.required">Required field.<br></small>
-                                    <small ng-show="Form.DispenseNumber.$invalid && Form.DispenseNumber.$touched && Form.DispenseNumber.$error.pattern">Only numeric letters allowed.</small>
-                                </div>
-                            </div>
                             <div class="row" style="margin-top:8px; margin-bottom:0px;">
                                 <div class="col-md-2"><h5>Refill Number:</h5></div>
                                 <div class="col-md-4"><input class="form-control readonly_ViewPrescription" type="text" ng-model="Prescription.Prescription_DrugDetails_RefillNumber" name="RefillNumber" ng-required="true" ng-pattern="/^[0-9]{1,}$/" /></div>
                             </div>
-                            <div class="row" style="margin-top:0px; margin-bottom:8px;">
-                                <div class="col-md-2"></div>
-                                <div class="col-md-4">
-                                    <small ng-show="Form.RefillNumber.$invalid && Form.RefillNumber.$touched && Form.RefillNumber.$error.required">Required field.<br></small>
-                                    <small ng-show="Form.RefillNumber.$invalid && Form.RefillNumber.$touched && Form.RefillNumber.$error.pattern">Only numeric letters allowed.</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" ng-click="btnUpdatePrescription(Prescription.Prescription_ID, Prescription.Consultation_Diagnosis, Prescription.Prescription_DrugDetails_DrugName,Prescription.Prescription_DrugDetails_Strength,Prescription.Prescription_DrugDetails_IntakeRoute,Prescription.Prescription_DrugDetails_Frequency,Prescription.Prescription_DrugDetails_DispenseNumber,Prescription.Prescription_DrugDetails_RefillNumber)" id="btnUpdatePrescription">Update</button>
-                            <button type="button" class="btn btn-danger" ng-click="DeletePrescription(Prescription.Prescription_ID)">Delete</button>
                         </div>
                     </div>
                 </div>
@@ -125,90 +77,5 @@
                 </div>
              </div>
         </form><!-- Show Prescriptions Ends -->
-        <!-- Show Update Prescription Modal -->
-        <div id="div_Prescriptions_Update" class="modal fadeout" style="display: none;">
-            <form id="frmPrescription">
-                <div class="modal-dialog" style="width:75%">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h4 class="modal-title ">Update Prescription Details</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
-                                <div class="col-md-2"><h5 class="form-control-label">Treatment for:</h5></div>
-                                <div class="col-md-4"><input type="text" class="form-control" name="P_Treatmentfor"></div>
-                                <div class="col-md-2"><h5 class="form-control-label">Medicine Name:</h5></div>
-                                <div class="col-md-4"><input type="text" class="form-control" name="PMedicineName"></div>
-                            </div>
-                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
-                                <div class="col-md-2"><h5>Drug Strength:</h5></div>
-                                <div class="col-md-4"><input type="text" class="form-control" name="P_DrugStrength"></div>
-                                <div class="col-md-2"><h5>Intake Route:</h5></div>
-                                <div class="col-md-4">
-                                    <select class="form-control required input-sm" name="P_IntakeRoute">
-                                        <option value="">Please choose intake route</option>
-                                        <option value="1">PO (By mouth)</option>
-                                        <option value="2">PR (Per rectum)</option>
-                                        <option value="3">IM (Intramuscular)</option>
-                                        <option value="4">IV (Intravenous)</option>
-                                        <option value="5">ID (Intradermal)</option>
-                                        <option value="6">IN (Intranasal)</option>
-                                        <option value="7">TP (Topical)</option>
-                                        <option value="8">SL (Sublingual)</option>
-                                        <option value="9">BUCC (Buccal)</option>
-                                        <option value="10">IP (Intraperitoneal)</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
-                                <div class="col-md-2"><h5>Intake Frequency:</h5></div>
-                                <div class="col-md-4">
-                                    <select class="form-control required input-sm" name="P_Frequency">
-                                        <option value="">Please choose Intake Frequency</option>
-                                        <option value="1">Daily</option>
-                                        <option value="2">Every other day</option>
-                                        <option value="3">BID/b.i.d. (Twice a Day)</option>
-                                        <option value="4">TID/t.id. (Three Times a Day)</option>
-                                        <option value="5">QID/q.i.d. (Four Times a Day)</option>
-                                        <option value="6">QHS (Every Bedtime)</option>
-                                        <option value="7">Q4h (Every 4 hours))</option>
-                                        <option value="8">Q4-6h (Every 4 to 6 hours)</option>
-                                        <option value="9">QWK (Every Week))</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-2"><h5>Dispence Amount:</h5></div>
-                                <div class="col-md-4"><input type="text" class="form-control" name="P_Dispence Amount"></div>
-                            </div>
-                            <div class="row" style="margin-top:4px; margin-bottom:4px;">
-                                <div class="col-md-2"><h5>Number of Refills:</h5></div>
-                                <div class="col-md-4">
-                                    <select class="form-control required input-sm" name="P_NumberOfRefills">
-                                        <option value="">Please choose Number of Refills</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
-                                        <option value="10">10</option>
-                                        <option value="10">11</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-2"></div>
-                                <div class="col-md-4"></div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button class="btn btn-primary" ng-click="myFunctionPrescriptions_Save()" type="submit">Save</button>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div><!-- Show Update Prescription Modal Ends -->
     </div>
 </div>
