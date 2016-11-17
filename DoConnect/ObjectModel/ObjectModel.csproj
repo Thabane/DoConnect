@@ -57,6 +57,7 @@
     <Compile Include="Invoice.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Login.cs" />
+    <Compile Include="MedicalHistory.cs" />
     <Compile Include="MedicalRecord.cs" />
     <Compile Include="Medical_Aid.cs" />
     <Compile Include="Medicine_Inventory.cs" />
@@ -71,6 +72,17 @@
     <Compile Include="Staff.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserProfile.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\jquery-1.4.4-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.4.4.js" />
+    <Content Include="Scripts\jquery-1.4.4.min.js" />
+    <Content Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

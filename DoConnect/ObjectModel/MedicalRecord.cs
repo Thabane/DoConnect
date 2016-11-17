@@ -40,7 +40,12 @@ namespace ObjectModel
         public int Patient_Medical_Aid_Medical_Aid_ID { get; set; }
         public string Name { get; set; }
 
-    public MedicalRecord Create(SqlDataReader reader)
+        public string Medical_Aid_Name      { get; set; }
+        public string Doctors_FirstName     { get; set; }
+        public string Doctors_LastName      { get; set; }
+        public string Practice_Aid_Name     { get; set; }
+
+        public MedicalRecord Create(SqlDataReader reader)
         {
             return new MedicalRecord
             {
@@ -74,6 +79,46 @@ namespace ObjectModel
                 Patient_ID                            = reader.GetInt32(reader.GetOrdinal("Patient_ID")),
                 Patient_Medical_Aid_Medical_Aid_ID    = reader.GetInt32(reader.GetOrdinal("Patient_Medical_Aid_Medical_Aid_ID")),
                 Name                                  = reader.GetString(reader.GetOrdinal("Name"))
+            };
+        }
+        
+        public MedicalRecord GetProfileByPatientID(SqlDataReader reader)
+        {
+            return new MedicalRecord
+            {
+                ID = reader.GetInt32(reader.GetOrdinal("ID")),
+                FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
+                LastName = reader.GetString(reader.GetOrdinal("LastName")),
+                ID_Number = reader.GetString(reader.GetOrdinal("ID_Number")),
+                Gender = reader.GetString(reader.GetOrdinal("Gender")),
+                DOB = reader.GetString(reader.GetOrdinal("DOB")),
+                Cell_Number = reader.GetString(reader.GetOrdinal("Cell_Number")),
+                Street_Address = reader.GetString(reader.GetOrdinal("Street_Address")),
+                Suburb = reader.GetString(reader.GetOrdinal("Suburb")),
+                City = reader.GetString(reader.GetOrdinal("City")),
+                Country = reader.GetString(reader.GetOrdinal("Country")),
+                Medical_Aid_ID = reader.GetInt32(reader.GetOrdinal("Medical_Aid_ID")),
+                Doctor_ID = reader.GetInt32(reader.GetOrdinal("Doctor_ID")),
+                User_ID = reader.GetInt32(reader.GetOrdinal("User_ID")),
+                Allergies = reader.GetString(reader.GetOrdinal("Allergies")),
+                PreviousIllnesses = reader.GetString(reader.GetOrdinal("PreviousIllnesses")),
+                PreviousMedication = reader.GetString(reader.GetOrdinal("PreviousMedication")),
+                RiskFactors = reader.GetString(reader.GetOrdinal("RiskFactors")),
+                SocialHistory = reader.GetString(reader.GetOrdinal("SocialHistory")),
+                FamilyHistory = reader.GetString(reader.GetOrdinal("FamilyHistory")),
+                Email = reader.GetString(reader.GetOrdinal("Email")),
+                Patient_Medical_Aid_ID = reader.GetInt32(reader.GetOrdinal("Patient_Medical_Aid_ID")),
+                Scheme_Name = reader.GetString(reader.GetOrdinal("Scheme_Name")),
+                Membership_Number = reader.GetString(reader.GetOrdinal("Membership_Number")),
+                Status = reader.GetBoolean(reader.GetOrdinal("Status")),
+                Registration_Date = reader.GetString(reader.GetOrdinal("Registration_Date")),
+                Deregistration_Date = reader.GetString(reader.GetOrdinal("Deregistration_Date")),
+                Patient_ID = reader.GetInt32(reader.GetOrdinal("Patient_ID")),
+                Patient_Medical_Aid_Medical_Aid_ID = reader.GetInt32(reader.GetOrdinal("Patient_Medical_Aid_Medical_Aid_ID")),
+                Medical_Aid_Name   = reader.GetString(reader.GetOrdinal("Medical_Aid_Name")),
+                Doctors_FirstName  = reader.GetString(reader.GetOrdinal("Doctors_FirstName")),
+                Doctors_LastName   = reader.GetString(reader.GetOrdinal("Doctors_LastName")),
+                Practice_Aid_Name  = reader.GetString(reader.GetOrdinal("Practice_Aid_Name")),
             };
         }
     }

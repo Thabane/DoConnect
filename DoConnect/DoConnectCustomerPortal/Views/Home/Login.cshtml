@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "Login";
+}
+@section scripts{
+    <script src="~/App/Controllers/LoginController.js"></script>
+}
+<div ng-controller="LoginController">
+    <div class="row">
+        <h1 class="text-primary text-center" style="width:50%; margin-top:70px; margin-left:auto; margin-right:auto;">DoConnect Customer Portal</h1>
+    </div>
+    <div class="span4"></div>
+    <div class="span4">
+        <form novalidate name="Form" href="Home/Index">@*Login()*@
+            <div class="panel panel-info">
+                <div class="panel-heading"><h4 class="text-info text-center" style="background-color:transparent;">Please login</h4></div>
+                <div class="panel-body">
+                    <div class="alert alert-danger" ng-if="InvalidCredential != 'null'">Invalid username or password<br>Please enter a valid username and password</div>
+                    <div class="form-group">
+                        <label for="username">Username</label>&nbsp<i class="fa fa-key"></i>
+                        <input type="text" name="username" id="username" class="form-control" ng-model="LoginData.Username" required />
+                        <span ng-show="Form.username.$dirty && Form.username.$error.required" class="help-block">Username is required</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>&nbsp<i class="fa fa-lock"></i>
+                        <input type="password" name="password" id="password" class="form-control" ng-model="LoginData.Password" required />
+                        <span ng-show="Form.password.$dirty && Form.password.$error.required" class="help-block">Password is required</span>
+                    </div>
+                    <div class="form-actions">
+                        <div class="span4"></div>
+                        <div class="span4"><button type="submit" ng-disabled="Form.$invalid || dataLoading" class="btn btn-primary" @{Response.Redirect("~/Home/Index"); }>Login</button></div>
+                        <div class="span4"><img ng-if="dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" /></div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="span4"></div>
+</div>

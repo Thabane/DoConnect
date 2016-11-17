@@ -1,0 +1,218 @@
+﻿<div>
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="span12">
+                <h2 class="page-header text-primary">Messages</h2>
+            </div>
+        </div>
+        <div class="right_side message">
+            <div class="row mailbox-header">
+                <div class="span2"><a class="btn btn-info btn-block" href="#" ng-click="FunctionComposeMessage()">Compose</a></div>
+                <div class="span6"><h2 style="margin-top:0px;" id="h2_ContentHeading">Inbox</h2></div>
+                <div class="span4 SearchDiv">
+                    <div class="span2"><h5 class="pull-right">Search:</h5></div>
+                    <div class="span10"><input class="form-control" type="text" style="font-size:13px;" ng-model="search"></div>
+                </div>
+            </div>
+            <div class="span2">
+                <ul class="list-unstyled mailbox-nav">
+                    <li><a href="#" ng-click="FunctionInbox()"><i class="fa fa-inbox"></i> Inbox<span class="badge badge-success pull-right">{{NumOfUnReadMessages}}</span></a></li>
+                    <li><a href="#" ng-click="FunctionSent()"><i class="fa fa-sign-out"></i> Sent</a></li>
+                </ul>
+            </div>
+            <!--Message list (Inbox Table) -->
+            <div id="div_Message_list" class="span10">
+                <div class="panel panel-default">
+                    <div class="table-responsive table-bordered">
+                        <table class="table table-hover">
+                            <thead style="background-color: #f8f8f8;">
+                                <tr>
+                                    <th ng-click="sort('SenderEmail')">From<span class="fa sort-icon" ng-show="sortKey=='SenderEmail'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                                    <th ng-click="sort('Subject')">Subject<span class="fa sort-icon" ng-show="sortKey=='Subject'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                                    <th ng-click="sort('Description')">Message<span class="fa sort-icon" ng-show="sortKey=='Description'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                                    <th class="span2" ng-click="sort('Date')">Date<span class="fa sort-icon" ng-show="sortKey=='Date'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr dir-paginate="Message in Messages | filter:search | orderBy:sortKey:reverse | itemsPerPage:8" ng-class="{'info': Message.ReadStatus == '1'}">
+                                    <td>{{Message.SenderEmail}}</td>
+                                    <td>{{Message.Subject}}</td>
+                                    <td>{{Message.Description}}</td>
+                                    <td>{{Message.Date}}</td>
+                                    <td>
+                                        <button class="btn btn-primary btn-xs" ng-click="ViewInboxMessage(Message.ID)" onclick="ViewInboxMessage()"><i class="glyphicon glyphicon-new-window"></i></button>
+                                        <button class="btn btn-danger btn-xs" ng-click="DeleteMessage1(Message.ID)"><i class="fa fa-trash-o"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="row">
+                            <div class="span12">
+                                <dir-pagination-controls class="pull-right" max-size="5" direction-links="true" boundary-links="true" style="margin-right: 20px;"></dir-pagination-controls>
+                            </div>
+                        </div>
+                    </div><!--Message list (Inbox Table) Ends -->
+                </div>
+            </div>
+            <!--Compose message div begins-->
+            <div id="div_Compose_Message" class="span10">
+                <div class="panel panel-default span10" style="padding-right:20px; border:0px;">
+                    <form role="form" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="span2">To</label>
+                            <div class="span10">
+                                <select class="form-control" ng-model="FirstName" name="FirstName" ng-change="changedValueGetReceiver_UserID(FirstName)" data-ng-options="Recepient as Recepient.FirstName for Recepient in AllRecepients | orderBy:'FirstName'">
+                                    <option value="">Select Recepient</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="span2" for="inputSubject">Subject</label>
+                            <div class="span10"><input class="form-control insert" ng-model="_Subject" placeholder="Subject" type="text"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="span12" for="inputBody">Message</label>
+                            <div class="span12"><textarea class="form-control insert" ng-model="Message" rows="8"></textarea></div>
+                        </div>
+                    </form>
+                    <div class="modal-footer">
+                        <div class="form-group">
+                            <div class="span4">
+                                <button type="button" class="btn btn-primary" ng-click="SendMessage(_Subject, Message)">Send <i class="fa fa-arrow-circle-right fa-lg"></i></button>
+                            </div>
+                            <div class="span8"></div>
+                        </div>
+                    </div>
+                </div>
+            </div><!--Compose message div Ends-->
+        </div>
+        <!--View_SelectedInboxMail Modal-->
+        <div id="View_SelectedInboxMail" class="modal fade">
+            <form>
+                <div class="modal-dialog" style="width:50%">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close CloseModel" data-dismiss="modal" aria-hidden="true" id="CloseViewMessageModel">&times;</button>
+                            <h4 class="modal-title">View Message</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group row">
+                                <label class="span2">From:</label>
+                                <div class="span10">{{SenderEmail}}</div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="span2">Subject:</label>
+                                <div class="span10">{{Subject}}</div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="span12">Message:</label>
+                                <div class="span12">{{Description}}</div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-info btn-xs" onclick="ShowReplyMessageModel()" ng-click="CloseViewMessageModel()"><i class="fa fa-reply"></i></button>
+                            <button class="btn btn-danger btn-xs" ng-click="DeleteMessage2(ID)"><i class="fa fa-trash-o"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div><!--View_SelectedInboxMail Modal Ends  -->
+        <!--ReplyMessage Modal-->
+        <div id="ShowReplyMessageModel" class="modal fade">
+            <form>
+                <div class="modal-dialog" style="width:50%">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="CloseViewMessageModel2">&times;</button>
+                            <h4 class="modal-title">Reply Message</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group row">
+                                <label class="span2">To:</label>
+                                <div class="span10">{{SenderEmail}}</div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="span2">Subject:</label>
+                                <div class="span10"><input class="form-control" type="text" ng-model="Subject"></div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="span12">Message:</label>
+                                <div class="span12"><textarea class="form-control " rows="8" ng-model="_Description"></textarea></div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" ng-click="ReplyMessage(Subject, _Description)">Send <i class="fa fa-arrow-circle-right fa-lg"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!--ReplyMessage Modal Ends  -->
+        <!--Sent Modal-->
+        <div id="div_Sent_list" class="span10">
+            <div class="panel panel-default">
+                <div class="table-responsive table-bordered">
+                    <table class="table table-hover">
+                        <thead style="background-color: #f8f8f8;">
+                            <tr>
+                                <th ng-click="sort('ReceiverEmail')">Recipient<span class="fa sort-icon" ng-show="sortKey=='ReceiverEmail'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                                <th ng-click="sort('Subject')">Subject<span class="fa sort-icon" ng-show="sortKey=='Subject'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                                <th ng-click="sort('Description')">Message<span class="fa sort-icon" ng-show="sortKey=='Description'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                                <th ng-click="sort('Date')">Date<span class="fa sort-icon" ng-show="sortKey=='Date'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr dir-paginate="SentMessage in SentMessages | filter:search | orderBy:sortKey:reverse | itemsPerPage:8">
+                                <td>{{SentMessage.ReceiverEmail}}</td>
+                                <td>{{SentMessage.Subject}}</td>
+                                <td>{{SentMessage.Description}}</td>
+                                <td>{{SentMessage.Date}}</td>
+                                <td>
+                                    <button class="btn btn-primary btn-xs" ng-click="ViewSentMessage(SentMessage.ID)" onclick="ViewSentMessage()"><i class="glyphicon glyphicon-new-window"></i></button>
+                                    <button class="btn btn-danger btn-xs" ng-click="DeleteMessage1(SentMessage.ID)"><i class="fa fa-trash-o"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="row">
+                        <div class="span12">
+                            <dir-pagination-controls class="pull-right" max-size="5" direction-links="true" boundary-links="true" style="margin-right: 20px;"></dir-pagination-controls>
+                        </div>
+                    </div>
+                </div><!--Sent Modal Ends  -->
+            </div>
+        </div>
+        <!--ViewSentMessage Modal-->
+        <div id="ViewSentMessage" class="modal fade">
+            <form>
+                <div class="modal-dialog" style="width:50%">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close CloseModel" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">View Message</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group row">
+                                <label class="span2">Recipient:</label>
+                                <div class="span10">{{ReceiverEmail}}</div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="span2">Subject:</label>
+                                <div class="span10">{{Subject}}</div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="span12">Message:</label>
+                                <div class="span12">{{Description}}</div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-danger btn-xs" ng-click="DeleteMessage2(ID)"><i class="fa fa-trash-o"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div><!--View_SelectedInboxMail Modal Ends  -->
+    </div>
+</div>

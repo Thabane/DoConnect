@@ -9,6 +9,10 @@
             return $http.get("api/Accounting/GetAllInvoices");
         };
 
+        var ViewUnInvoicedConsultations = function () {
+            return $http.get("api/Accounting/ViewUnInvoicedConsultations");
+        };
+
         var GetInvoiceByID = function (ID) {
             return $http.get("api/Accounting/GetInvoice/" + ID);
         };
@@ -35,6 +39,13 @@
                 'Medical_Aid_ID': Medical_Aid_ID,
                 'Patient_ID': Patient_ID,
                 'Doctor_ID': Doctor_ID
+            });
+        };
+
+        var UpdateUnInvoicedConsultations = function (Consultation_ID) {
+            return $http.post("api/Accounting/UpdateUnInvoicedConsultations",
+            {
+                'Consultation_ID': Consultation_ID
             });
         };
 
@@ -99,11 +110,13 @@
         return {
             SessionData: SessionData,
             GetAllInvoices: GetAllInvoices,
+            ViewUnInvoicedConsultations: ViewUnInvoicedConsultations,
             GetInvoiceByID: GetInvoiceByID,
             GetAllPatients: GetAllPatients,
             GetAllDoctors: GetAllDoctors,
             GetAllDiagnosisByPatientID: GetAllDiagnosisByPatientID,
             InsertInvoice: InsertInvoice,
+            UpdateUnInvoicedConsultations: UpdateUnInvoicedConsultations,
             UpdateInvoice: UpdateInvoice,
             DeleteInvoice: DeleteInvoice,
 

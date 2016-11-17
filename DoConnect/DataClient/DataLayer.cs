@@ -15,7 +15,8 @@ namespace DataClient
     {
         private DataAccess access; 
         private List<SqlParameter> _parameters = new List<SqlParameter>();
-        private string Conn;
+        //private string Conn = @"Data Source=DESKTOP-6Gu3I3G\SQLEXPRESS;Initial Catalog=DoConnect;Integrated Security=True";
+        private string Conn = @"Server=tcp:doconnect.database.windows.net,1433;Initial Catalog=DoConnect;Persist Security Info=False;User ID=teamCogent;Password=DoConnect1;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
         public DataLayer()
         {
             access = new DataAccess();            
@@ -59,7 +60,7 @@ namespace DataClient
             Login Login = new Login();
             try
             {
-                using (var reader = access.ExecuteReader(Conn, "[Login]", _parameters))
+                using (var reader = access.ExecuteReader(Conn, "[JC_Login]", _parameters))
                 {
                     if (reader.Read())
                     {
@@ -87,7 +88,7 @@ namespace DataClient
             return Login;
         }
 
-        public static int LoggedIn_User_PRACTICE_ID, LoggedIn_User_AccessLevel, COUNT = 0; public static string LoggedIn_Name, LoggedIn_User_strAccessLevel;
+        public static int LoggedIn_User_PRACTICE_ID, LoggedIn_User_AccessLevel, LoggedIn_ID, COUNT = 0; public static string LoggedIn_Name, LoggedIn_User_strAccessLevel;
         public Staff GetUserDetailsByUser_ID()
         {
             List<SqlParameter> _parameters = new List<SqlParameter>();
@@ -96,14 +97,12 @@ namespace DataClient
             _parameters.Add(User_IDParameter);
 
             Staff List = new Staff();
-            try
+            using (var reader = access.ExecuteReader(Conn, "[JC_GetUserDetailsByUser_ID]", _parameters))
             {
-                using (var reader = access.ExecuteReader(Conn, "[GetUserDetailsByUser_ID]", _parameters))
-                {
                     if (reader.Read())
                     {
+                    LoggedIn_ID = reader.GetInt32(reader.GetOrdinal("ID"));
                         LoggedIn_Name = reader.GetString(reader.GetOrdinal("FirstName"))+" "+ reader.GetString(reader.GetOrdinal("LastName"))+" "+ reader.GetString(reader.GetOrdinal("Email"));
-                        LoggedIn_User_PRACTICE_ID = reader.GetInt32(reader.GetOrdinal("Practice_ID"));
                         LoggedIn_User_AccessLevel = reader.GetInt32(reader.GetOrdinal("AccessLevel"));
 
                         if (LoggedIn_User_AccessLevel == 1)
@@ -116,7 +115,7 @@ namespace DataClient
                         }
                         else if (LoggedIn_User_AccessLevel == 3)
                         {
-                            LoggedIn_User_strAccessLevel = "Receptionist";
+                        LoggedIn_User_strAccessLevel = "Patient";
                         }
                         else if (LoggedIn_User_AccessLevel == 5)
                         {
@@ -135,11 +134,7 @@ namespace DataClient
                         }                        
                     }
                 }
-            }
-            catch (Exception)
-            {
-                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed: " + ex.ToString());
-            }
+            
             return List;
         }
 
@@ -443,22 +438,21 @@ namespace DataClient
         public List<Appointments> GetAppointments()
         {
             List<SqlParameter> _parameters = new List<SqlParameter>();
-            SqlParameter Practice_IDParameter = new SqlParameter("@Practice_ID", SqlDbType.Int);
-            Practice_IDParameter.Value = LoggedIn_User_PRACTICE_ID;
-            _parameters.Add(Practice_IDParameter);
+            SqlParameter Patient_IDParameter = new SqlParameter("@Patient_ID", SqlDbType.Int);
+            Patient_IDParameter.Value = LoggedIn_ID;
+            _parameters.Add(Patient_IDParameter);
 
             DateTime Today = DateTime.Now;
+            DateTime Today0 = DateTime.Today.AddDays(0);
+            DateTime Yesterday2 = DateTime.Today.AddDays(-2);
+            DateTime Yesterday = DateTime.Today.AddDays(-1);
             DateTime Tomorrow = DateTime.Today.AddDays(+1);
             DateTime Tomorrow2 = DateTime.Today.AddDays(+2);
-            Appointments AppointmentInfo = new Appointments(); int numTodayApps = 0; int numTomorrowApps = 0;
+            Appointments AppointmentInfo = new Appointments(); int numYesterdayApps = 0; int numTodayApps = 0; int numTomorrowApps = 0;
             List<Appointments> AppointmentsInfo = new List<Appointments>();
 
-            try
+            using (var reader = access.ExecuteReader(Conn, "[JC_GetAllAppointments]", _parameters))
             {            
-                if (LoggedIn_User_AccessLevel == 1)
-                {
-                    using (var reader = access.ExecuteReader(Conn, "[GetAllAppointments]", new List<SqlParameter>()))
-                    {
                         while (reader.Read())
                         {
                             AppointmentInfo.Appointments_ID = reader.GetInt32(reader.GetOrdinal("Appointments_ID"));
@@ -482,69 +476,28 @@ namespace DataClient
                             AppointmentInfo.Practice_Address = reader.GetString(reader.GetOrdinal("Practice_Address"));
 
                             DateTime Appointments_Date_Time = Convert.ToDateTime(reader.GetString(reader.GetOrdinal("Appointments_Date_Time")));
-                            if ((Today < Appointments_Date_Time) && (Appointments_Date_Time < Tomorrow))
+                    
+                    if ((Appointments_Date_Time > Today0) && (Appointments_Date_Time < Tomorrow))
                             {
                                 AppointmentInfo.highlightTodayApps = 1;
                                 numTodayApps++;                            
                             }
-                            AppointmentInfo.numTodayApps = numTodayApps;
-                            if ((Tomorrow < Appointments_Date_Time) && (Appointments_Date_Time < Tomorrow2))
+                    else if ((Tomorrow < Appointments_Date_Time) && (Appointments_Date_Time < Tomorrow2))
                             {
                                 AppointmentInfo.highlightTomorrowApps = 1;
                                 numTomorrowApps++;                            
                             }
-                            AppointmentInfo.numTomorrowApps = numTomorrowApps;
-                            AppointmentsInfo.Add(AppointmentInfo); AppointmentInfo = new Appointments();
-                        }
-                    }
-                }
-                else
+                    else if ((Appointments_Date_Time > Yesterday) && (Appointments_Date_Time < Today0))
                 {
-                    using (var reader = access.ExecuteReader(Conn, "[GetAllAppointmentsPrac]", _parameters))
-                    {
-                        while (reader.Read())
-                        {
-                            AppointmentInfo.Appointments_ID = reader.GetInt32(reader.GetOrdinal("Appointments_ID"));
-                            AppointmentInfo.Appointments_App_Status = reader.GetInt32(reader.GetOrdinal("Appointments_App_Status"));
-                            AppointmentInfo.Appointments_Date_Time = reader.GetString(reader.GetOrdinal("Appointments_Date_Time"));
-                            AppointmentInfo.Appointments_Details = reader.GetString(reader.GetOrdinal("Appointments_Details"));
-                            AppointmentInfo.Patient_ID = reader.GetInt32(reader.GetOrdinal("Patient_ID"));
-                            AppointmentInfo.Patient_FirstName = reader.GetString(reader.GetOrdinal("Patient_FirstName"));
-                            AppointmentInfo.Patient_LastName = reader.GetString(reader.GetOrdinal("Patient_LastName"));
-                            AppointmentInfo.Patient_Cell_Number = reader.GetString(reader.GetOrdinal("Patient_Cell_Number"));
-                            AppointmentInfo.Patient_Email = reader.GetString(reader.GetOrdinal("Patient_Email"));
-                            AppointmentInfo.Doctors_Email = reader.GetString(reader.GetOrdinal("Doctors_Email"));
-                            AppointmentInfo.Doctors_FirstName = reader.GetString(reader.GetOrdinal("Doctors_FirstName"));
-                            AppointmentInfo.Doctors_LastName = reader.GetString(reader.GetOrdinal("Doctors_LastName"));
-                            AppointmentInfo.Doctors_ID = reader.GetInt32(reader.GetOrdinal("Doctors_ID"));
-                            AppointmentInfo.Doctors_Job_Title = reader.GetString(reader.GetOrdinal("Doctors_Job_Title"));
-                            AppointmentInfo.Practice_ID = reader.GetInt32(reader.GetOrdinal("Practice_ID"));
-                            AppointmentInfo.Practice_Name = reader.GetString(reader.GetOrdinal("Practice_Name"));
-                            AppointmentInfo.Practice_Phone_Number = reader.GetString(reader.GetOrdinal("Practice_Phone_Number"));
-                            AppointmentInfo.Practice_Fax_Number = reader.GetString(reader.GetOrdinal("Practice_Fax_Number"));
-                            AppointmentInfo.Practice_Address = reader.GetString(reader.GetOrdinal("Practice_Address"));
-                            DateTime Appointments_Date_Time = Convert.ToDateTime(reader.GetString(reader.GetOrdinal("Appointments_Date_Time")));
-                            if ((Today < Appointments_Date_Time) && (Appointments_Date_Time < Tomorrow))
-                            {
-                                AppointmentInfo.highlightTodayApps = 1;
-                                numTodayApps++;
+                        AppointmentInfo.highlightYesterdayApps = 1;
+                        numYesterdayApps++;
                             }
+
                             AppointmentInfo.numTodayApps = numTodayApps;
-                            if ((Tomorrow < Appointments_Date_Time) && (Appointments_Date_Time < Tomorrow2))
-                            {
-                                AppointmentInfo.highlightTomorrowApps = 1;
-                                numTomorrowApps++;
-                            }
+                    AppointmentInfo.numYesterdayApps = numYesterdayApps;
                             AppointmentInfo.numTomorrowApps = numTomorrowApps;
                             AppointmentsInfo.Add(AppointmentInfo); AppointmentInfo = new Appointments();
                         }
-                    }
-                }
-                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Viewed appointments page");
-            }
-            catch (Exception)
-            {
-                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to view selected appointment " + ex.ToString());
             }
             return AppointmentsInfo;
         }
@@ -576,7 +529,7 @@ namespace DataClient
         public bool NewAppointment(string Date_Time, int Patient_ID, string Details, int App_Status, int DoctorID)
         {
             List<SqlParameter> parameters = new List<SqlParameter>();
-            SqlParameter App_StatusParameter = new SqlParameter("@App_Status", SqlDbType.Bit);
+            SqlParameter App_StatusParameter = new SqlParameter("@App_Status", SqlDbType.Int);
             SqlParameter DetailsParameter = new SqlParameter("@Details", SqlDbType.NVarChar);
             SqlParameter Date_TimeParameter = new SqlParameter("@Date_Time", SqlDbType.NVarChar);
             SqlParameter Patient_IDParameter = new SqlParameter("@Patient_ID", SqlDbType.Int);
@@ -693,6 +646,26 @@ namespace DataClient
             {
                 //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed retrive consulation details: " + ex.ToString());
             }
+            return consultationInfo;
+        }
+
+        public List<Consultation> ViewUnInvoicedConsultations()
+        {
+            List<Consultation> consultationInfo = new List<Consultation>();
+            //try
+            //{
+                using (var reader = access.ExecuteReader(Conn, "[ViewUnInvoicedConsultations]", new List<SqlParameter>()))
+                {
+                    while (reader.Read())
+                    {
+                        consultationInfo.Add(new Consultation().ViewUnInvoicedConsultations(reader));
+                    }
+                }
+            //}
+            //catch (Exception)
+            //{
+            //    //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed retrive consulation details: " + ex.ToString());
+            //}
             return consultationInfo;
         }
 
@@ -829,6 +802,51 @@ namespace DataClient
             }
         }
 
+
+        public bool UpdateUnInvoicedConsultations(int consultationID)
+        {
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            SqlParameter consultationIDParameter = new SqlParameter("@ID", SqlDbType.Int);
+            consultationIDParameter.Value = consultationID;
+            _parameters.Add(consultationIDParameter);
+
+            using (var reader = access.ExecuteReader(Conn, "[UpdateUnInvoicedConsultations]", _parameters))
+            {
+
+            }
+                return true; 
+        }
+
+        public bool UpdateConsultation_AddAdditionalFee(decimal Additionalfee, string InvoiceDocMessage)
+        {
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            SqlParameter AdditionalfeeParameter = new SqlParameter("@Additionalfee", SqlDbType.Decimal);
+            SqlParameter InvoiceDocMessageParameter = new SqlParameter("@InvoiceDocMessage", SqlDbType.NVarChar);
+            AdditionalfeeParameter.Value = Additionalfee;
+            InvoiceDocMessageParameter.Value = InvoiceDocMessage;
+            _parameters.Add(AdditionalfeeParameter);
+            _parameters.Add(InvoiceDocMessageParameter);
+
+            int lastConsultationID = 0;
+            using (var reader = access.ExecuteReader(Conn, "[lastAddedConsultation]", new List<SqlParameter>()))
+            {
+                if (reader.Read())
+                {
+                    lastConsultationID = reader.GetInt32(reader.GetOrdinal("ID"));
+                    
+                    SqlParameter lastConsultationIDParameter = new SqlParameter("@lastConsultationID", SqlDbType.Int);
+                    lastConsultationIDParameter.Value = lastConsultationID;
+                    _parameters.Add(lastConsultationIDParameter);
+
+                    using (var readerupdate = access.ExecuteReader(Conn, "[UpdateConsultation_AddAdditionalFee]", _parameters))
+                    {
+
+                    }
+                }
+            }            
+            return true;
+        }
+
         public bool DeleteConsultation(int id)
         {
             List<SqlParameter> _parameters = new List<SqlParameter>();
@@ -861,17 +879,14 @@ namespace DataClient
         public List<Invoice> GetAllInvoices()
         {
             List<SqlParameter> _parameters = new List<SqlParameter>();
-            SqlParameter Practice_IDParameter = new SqlParameter("@Practice_ID", SqlDbType.Int);
-            Practice_IDParameter.Value = LoggedIn_User_PRACTICE_ID;
-            _parameters.Add(Practice_IDParameter);
+            SqlParameter Patient_IDParameter = new SqlParameter("@Patient_ID", SqlDbType.Int);
+            Patient_IDParameter.Value = LoggedIn_ID;
+            _parameters.Add(Patient_IDParameter);
 
             Invoice invoice = new Invoice(); int numOfUnPaid = 0; int numOfPatiallyPaid = 0;
             List<Invoice> invoiceInfo = new List<Invoice>();
-            try
-            {
-                if (LoggedIn_User_AccessLevel == 1)
-                {
-                    using (var reader = access.ExecuteReader(Conn, "[GetAllInvoices]", new List<SqlParameter>()))
+            
+            using (var reader = access.ExecuteReader(Conn, "[JC_GetAllInvoices]", _parameters))
                     {
                         while (reader.Read())
                         {
@@ -904,49 +919,6 @@ namespace DataClient
                             invoiceInfo.Add(invoice); invoice = new Invoice();
                         }
                     }
-                }
-                else
-                {
-                    using (var reader = access.ExecuteReader(Conn, "[GetAllInvoicesPrac]", _parameters))
-                    {
-                        while (reader.Read())
-                        {
-                            invoice.ID = reader.GetInt32(reader.GetOrdinal("ID"));
-                            invoice.InvoiceSummary = reader.GetString(reader.GetOrdinal("InvoiceSummary"));
-                            invoice.Date = reader.GetString(reader.GetOrdinal("Date"));
-                            invoice.Total = reader.GetDecimal(reader.GetOrdinal("Total"));
-                            invoice.BalanceOwing = reader.GetDecimal(reader.GetOrdinal("BalanceOwing"));
-                            invoice.PaidStatus = reader.GetInt32(reader.GetOrdinal("PaidStatus"));
-                            invoice.Medical_Aid_ID = reader.GetInt32(reader.GetOrdinal("Medical_Aid_ID"));
-                            invoice.Patient_ID = reader.GetInt32(reader.GetOrdinal("Patient_ID"));
-                            invoice.Patient_FirstName = reader.GetString(reader.GetOrdinal("Patient_FirstName"));
-                            invoice.Patient_LastName = reader.GetString(reader.GetOrdinal("Patient_LastName"));
-                            invoice.Patient_Email = reader.GetString(reader.GetOrdinal("Patient_Email"));
-                            invoice.Doctor_ID = reader.GetInt32(reader.GetOrdinal("Doctor_ID"));
-                            invoice.Doctor_FirstName = reader.GetString(reader.GetOrdinal("Doctor_FirstName"));
-                            invoice.Doctor_LastName = reader.GetString(reader.GetOrdinal("Doctor_LastName"));
-                            invoice.Doctor_Email = reader.GetString(reader.GetOrdinal("Doctor_Email"));
-                        
-                            if (reader.GetInt32(reader.GetOrdinal("PaidStatus")) == 0)
-                            {
-                                numOfUnPaid++;
-                            }
-                            invoice.numOfUnPaid = numOfUnPaid;
-                            if (reader.GetInt32(reader.GetOrdinal("PaidStatus")) == 2)
-                            {
-                                numOfPatiallyPaid++;
-                            }
-                            invoice.numOfPatiallyPaid = numOfPatiallyPaid;
-                            invoiceInfo.Add(invoice); invoice = new Invoice();
-                        }
-                    }
-                }
-                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Viewed invoice page");
-            }
-            catch (Exception)
-            {
-                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to view invoice page: " + ex.ToString());
-            }
             return invoiceInfo;
         }
 
@@ -977,8 +949,7 @@ namespace DataClient
         public List<GetAllPatients> GetAllPatientsForInvoice()
         {
             List<GetAllPatients> patientInfo = new List<GetAllPatients>();
-            try
-            {
+            
                 using (var reader = access.ExecuteReader(Conn, "[GetAllPatientsForInvoice]", new List<SqlParameter>()))
                 {
                     while (reader.Read())
@@ -986,11 +957,6 @@ namespace DataClient
                         patientInfo.Add(new GetAllPatients().Create(reader));
                     }
                 }
-            }
-            catch (Exception)
-            {
-
-            }
             return patientInfo;
         }
 
@@ -1021,7 +987,7 @@ namespace DataClient
         public bool NewInvoice(string Date, string InvoiceSummary, decimal Total, decimal AmountPaid, int Medical_Aid_ID, int Patient_ID, int Doctor_ID)
         {
             List<SqlParameter> _parameters = new List<SqlParameter>();
-            SqlParameter dateParameter = new SqlParameter("@Date", SqlDbType.DateTime);
+            SqlParameter dateParameter = new SqlParameter("@Date", SqlDbType.NVarChar);
             SqlParameter invoiceSummaryParameter = new SqlParameter("@InvoiceSummary", SqlDbType.NVarChar);
             SqlParameter totalParameter = new SqlParameter("@Total", SqlDbType.Decimal);
             SqlParameter AmountPaidParameter = new SqlParameter("@AmountPaid", SqlDbType.Decimal);
@@ -1066,7 +1032,7 @@ namespace DataClient
                     if (reader.Read())
                     {
                         insertedID = reader.GetInt32(reader.GetOrdinal("ID"));                        
-                        Email.SendEmail("josephine.chivinge@gmail.com", "Consultation Invoice", "Here is your email", "");
+                        Email.SendEmail("josephine.chivinge@gmail.com", "Consultation Invoice", "Your account has been billed with the consultation fee amount of R "+ Total+ ".\nA total amount of R "+Convert.ToDecimal(Total - AmountPaid)+" has been credited to your account.","");
                     }
                 }
                 //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Recorded new invoice entry");
@@ -1248,6 +1214,31 @@ namespace DataClient
             try
             {
                 using (var reader = access.ExecuteReader(Conn, "[GetAllPatients]", new List<SqlParameter>()))
+                {
+                    while (reader.Read())
+                    {
+                        patientInfo.Add(new GetAllPatients().Create(reader));
+                    }
+                }
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "Viewed patients page");
+            }
+            catch (Exception)
+            {
+                //access.LogEntry(LoggedIn_User_ID, LoggedIn_Name, LoggedIn_User_strAccessLevel, "System failed to view patients list: " + ex.ToString());
+            }
+            return patientInfo;
+        }
+
+        public List<GetAllPatients> GetAllPatientsByPracticeID(int PracticeID)
+        {
+            _parameters = new List<SqlParameter>();
+            SqlParameter PracticeIDParameter = new SqlParameter("@PracticeID", SqlDbType.Int);
+            PracticeIDParameter.Value = PracticeID;
+            _parameters.Add(PracticeIDParameter);
+            List<GetAllPatients> patientInfo = new List<GetAllPatients>();
+            try
+            {
+                using (var reader = access.ExecuteReader(Conn, "[GetAllPatientsByPracticeID]", _parameters))
                 {
                     while (reader.Read())
                     {
@@ -1730,6 +1721,23 @@ namespace DataClient
                 if (reader.Read())
                 {
                     MedicalRecordInfo = new MedicalRecord().Create(reader);
+                }
+            }
+            return MedicalRecordInfo;
+        }
+
+        public MedicalRecord GetProfileByPatientID(int id)
+        {
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            SqlParameter idParameter = new SqlParameter("@ID", SqlDbType.Int);
+            idParameter.Value = id;
+            _parameters.Add(idParameter);
+            MedicalRecord MedicalRecordInfo = new MedicalRecord();
+            using (var reader = access.ExecuteReader(Conn, "[JC_GetMedicalRecord]", _parameters))
+            {
+                if (reader.Read())
+                {
+                    MedicalRecordInfo = new MedicalRecord().GetProfileByPatientID(reader);
                 }
             }
             return MedicalRecordInfo;
@@ -2610,6 +2618,7 @@ namespace DataClient
             }
             return true;
         }
+
         public bool UpdateMedicalAid(int ID, string Name, string Cell_Number, string Fax_Number, string Email_Address, string Address)
         {
             List<SqlParameter> _parameters = new List<SqlParameter>();
@@ -2846,7 +2855,6 @@ namespace DataClient
 
         public List<Staff> GetAllRecepients()
         {
-
             Staff MessageInfo = new Staff();
             List<Staff> MessagesInfo = new List<Staff>();
             using (var reader = access.ExecuteReader(Conn, "[GetRecepientDoctors]", new List<SqlParameter>()))
@@ -2858,6 +2866,7 @@ namespace DataClient
                     MessageInfo.LastName = reader.GetString(reader.GetOrdinal("LastName"));
                     MessageInfo.User_ID = reader.GetInt32(reader.GetOrdinal("User_ID"));
                     MessageInfo.Email = reader.GetString(reader.GetOrdinal("Email"));                    
+                    MessageInfo.AccessLevel = reader.GetInt32(reader.GetOrdinal("AccessLevel"));
                     MessagesInfo.Add(MessageInfo);
                     MessageInfo = new Staff();
                 }
@@ -2871,19 +2880,7 @@ namespace DataClient
                     MessageInfo.LastName = reader.GetString(reader.GetOrdinal("LastName"));
                     MessageInfo.User_ID = reader.GetInt32(reader.GetOrdinal("User_ID"));
                     MessageInfo.Email = reader.GetString(reader.GetOrdinal("Email"));
-                    MessagesInfo.Add(MessageInfo);
-                    MessageInfo = new Staff();
-                }
-            }
-            using (var reader = access.ExecuteReader(Conn, "[GetRecepientPatients]", new List<SqlParameter>()))
-            {
-                while (reader.Read())
-                {
-                    MessageInfo.ID = reader.GetInt32(reader.GetOrdinal("ID"));
-                    MessageInfo.FirstName = reader.GetString(reader.GetOrdinal("FirstName")) + " " + reader.GetString(reader.GetOrdinal("LastName")) + " : " + reader.GetString(reader.GetOrdinal("Email"));
-                    MessageInfo.LastName = reader.GetString(reader.GetOrdinal("LastName"));
-                    MessageInfo.User_ID = reader.GetInt32(reader.GetOrdinal("User_ID"));
-                    MessageInfo.Email = reader.GetString(reader.GetOrdinal("Email"));
+                    MessageInfo.AccessLevel = reader.GetInt32(reader.GetOrdinal("AccessLevel"));
                     MessagesInfo.Add(MessageInfo);
                     MessageInfo = new Staff();
                 }
@@ -3668,6 +3665,24 @@ namespace DataClient
             return List;
         }
 
+        
+        public bool UpdatePreferedDoctor(int Doctor_ID)
+        {
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            SqlParameter Doctor_IDParameter = new SqlParameter("@Doctor_ID", SqlDbType.Int);
+            Doctor_IDParameter.Value = Doctor_ID;
+            _parameters.Add(Doctor_IDParameter);
+
+            SqlParameter Patient_IDParameter = new SqlParameter("@Patient_ID", SqlDbType.Int);
+            Patient_IDParameter.Value = LoggedIn_ID;
+            _parameters.Add(Patient_IDParameter);
+            
+            using (var reader = access.ExecuteReader(Conn, "[UpdatePreferedDoctor]", _parameters))
+            {
+                
+            }
+            return true;
+        }
         #endregion
 
         #region User Profile
@@ -3840,6 +3855,57 @@ namespace DataClient
                LoadList.Add(Data); Data = new Log();
             }
             return LogData;
+        }
+        #endregion
+
+        #region
+        public List<Consultation> FinancialReport_All(string StartDate, string EndDate)
+        {
+            List<SqlParameter> _parameters = new List<SqlParameter>();
+            SqlParameter StartDateParameter = new SqlParameter("@DateStart", SqlDbType.NVarChar);
+            SqlParameter EndDateParameter = new SqlParameter("@DateEnd", SqlDbType.NVarChar);
+            
+            StartDateParameter.Value = StartDate;
+            EndDateParameter.Value = EndDate;
+            
+            _parameters.Add(StartDateParameter);
+            _parameters.Add(EndDateParameter);
+
+            List<Consultation> FinancialInfo = new List<Consultation>();
+            using (var reader = access.ExecuteReader(Conn, "[FinancialReport_All]", _parameters))
+            {
+                while (reader.Read())
+                {
+                    FinancialInfo.Add(new Consultation().FinancialReportByPracticeID(reader));
+                }
+            }
+            return FinancialInfo;
+        }
+
+        public List<Consultation> FinancialReportByPracticeID(int Practice_ID, string StartDate, string EndDate)
+        {
+            List<SqlParameter> _parameters = new List<SqlParameter>(); 
+            SqlParameter Practice_IDParameter = new SqlParameter("@PracticeID", SqlDbType.Int);
+            SqlParameter StartDateParameter = new SqlParameter("@DateStart", SqlDbType.NVarChar);
+            SqlParameter EndDateParameter = new SqlParameter("@DateEnd", SqlDbType.NVarChar);
+
+            Practice_IDParameter.Value = Practice_ID;
+            StartDateParameter.Value = StartDate;
+            EndDateParameter.Value = EndDate;
+
+            _parameters.Add(Practice_IDParameter);
+            _parameters.Add(StartDateParameter);
+            _parameters.Add(EndDateParameter);
+
+            List<Consultation> FinancialInfo = new List<Consultation>();
+            using (var reader = access.ExecuteReader(Conn, "[FinancialReportByPracticeID]", _parameters))
+            {
+                while (reader.Read())
+                {
+                    FinancialInfo.Add(new Consultation().FinancialReportByPracticeID(reader));
+                }
+            }
+            return FinancialInfo;
         }
         #endregion
     }

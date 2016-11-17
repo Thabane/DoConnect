@@ -7,8 +7,6 @@
         </div>
 
         <ul class="nav nav-tabs">
-            <li role="presentation"><a href="/Patients"><i class="fa fa-align-justify"></i>Patient List</a></li>
-            <li role="presentation"><a href="/NewPatient"><i class="fa fa-plus-circle"></i>New Patient</a></li>
             <li role="presentation" class="active"><a href="/MedicalHistory"><i class="fa fa-align-justify"></i>Patient Record</a></li>
         </ul>
 
@@ -18,9 +16,8 @@
                 <div class="modal-header" style="border-bottom:0px;">
                     <ul class="nav nav-pills">
                         <li role="presentation" class="active"><a href="/MedicalHistory">Medical Record</a></li>
-                        <li role="presentation" class="doctorControls" ng-show="ConsultationNotes.length != '0'"><a href="/PrescriptionDetails">Prescriptions</a></li>
-                        <li role="presentation" class="doctorControls" ng-show="ConsultationNotes.length != '0'"><a href="/ConsultationNotes">Consultation Notes</a></li>
-                        <li role="presentation" class="doctorControls" ng-show="ConsultationNotes.length == '0'"><a href="/NewConsultationNotes">New Consultation Notes</a></li>
+                        <li role="presentation" ng-show="ConsultationNotes.length != '0'"><a href="/PrescriptionDetails">Prescriptions</a></li>
+                        <li role="presentation" ng-show="ConsultationNotes.length != '0'"><a href="/ConsultationNotes">Consultation Notes</a></li>
                     </ul>
                 </div>
                 <div class="panel panel-default">
@@ -34,20 +31,6 @@
                             <div class="col-md-1"><h5 class="form-control-label">Email:</h5></div>
                             <div class="col-md-3"><input type="email" class="form-control" name="Email" ng-model="Email" ng-readonly="true" style="background-color: transparent"></div>
                         </div>
-                        <div class="row" style="margin-top:0px; margin-bottom:8px;">
-                            <div class="col-md-1"></div>
-                            <div class="col-md-3">
-                                <small ng-show="Form.FirstName.$invalid && Form.FirstName.$touched && Form.FirstName.$error.required">Required field.<br></small>
-                                <small ng-show="Form.FirstName.$invalid && Form.FirstName.$touched && Form.FirstName.$error.pattern">Only alphabetic letters allowed and atleast 3 charactors long.</small>
-                            </div>
-                            <div class="col-md-1"></div>
-                            <div class="col-md-3">
-                                <small ng-show="Form.LastName.$invalid && Form.LastName.$touched && Form.LastName.$error.required">Required field.<br></small>
-                                <small ng-show="Form.LastName.$invalid && Form.LastName.$touched && Form.LastName.$error.pattern">Only alphabetic letters allowed and atleast 3 charactors long.</small>
-                            </div>
-                            <div class="col-md-1"></div>
-                            <div class="col-md-3"></div>
-                        </div>
                         <div class="row" style="margin-top:8px; margin-bottom:0px;">
                             <div class="col-md-1"><h5>ID Number:</h5></div>
                             <div class="col-md-3"><input type="text" class="form-control  View_readonly" name="ID_Number" ng-model="ID_Number" ng-required="true" ng-pattern="/^[0-9]{13,13}$/"></div>
@@ -57,23 +40,6 @@
                             <div class="col-md-3"><div class="input-group date datepicker" style="padding:0px;">
                                                        <input class="form-control" type="text" ng-model="DOB" id="DOB" name="DOB" data-date-format="yyyy-mm-dd" ng-required="true" ng-readonly="true" style="background-color: transparent;"><span class="input-group-addon"><span class="fa fa-calendar"></span></span>
                                                   </div></div>
-                        </div>
-                        <div class="row" style="margin-top:0px; margin-bottom:8px;">
-                            <div class="col-md-1"></div>
-                            <div class="col-md-3">
-                                <small ng-show="Form.ID_Number.$invalid && Form.ID_Number.$touched && Form.ID_Number.$error.required">Required field.<br></small>
-                                <small ng-show="Form.ID_Number.$invalid && Form.ID_Number.$touched && Form.ID_Number.$error.pattern">Only numeric letters allowed and 13 charactors long.</small>
-                            </div>
-                            <div class="col-md-1"></div>
-                            <div class="col-md-3">
-                                <small ng-show="Form.Cell_Number.$invalid && Form.Cell_Number.$touched && Form.Cell_Number.$error.required">Required field.<br></small>
-                                <small ng-show="Form.Cell_Number.$invalid && Form.Cell_Number.$touched && Form.Cell_Number.$error.pattern">Only numeric letters allowed and 10 charactors long.</small>
-                            </div>
-                            <div class="col-md-1"></div>
-                            <div class="col-md-3">
-                                <small ng-show="Form.DOB.$invalid && Form.DOB.$touched && Form.DOB.$error.required">Required field.<br></small>
-                                <small ng-show="Form.DOB.$invalid && Form.DOB.$touched && Form.DOB.$error.pattern">Valid date fomart is ("yyyy-mm-dd").</small>
-                            </div>
                         </div>
                         <div class="row" style="margin-top:8px; margin-bottom:0px;">
                             <div class="col-md-1"><h5>Gender:</h5></div>
@@ -87,39 +53,12 @@
                             <div class="col-md-1"><h5>Suburb:</h5></div>
                             <div class="col-md-3"><input type="text" class="form-control  View_readonly" name="Suburb" ng-model="Suburb" ng-required="true" ng-pattern="/^[a-zA-Z''-'\s]{3,40}$/"></div>
                         </div>
-                        <div class="row" style="margin-top:0px; margin-bottom:8px;">
-                            <div class="col-md-1"></div>
-                            <div class="col-md-3"><small ng-show="Form.Gender.$invalid && Form.Gender.$touched && Form.Gender.$error.required">Required field.<br></small></div>
-                            <div class="col-md-1"></div>
-                            <div class="col-md-3">
-                                <small ng-show="Form.Street_Address.$invalid && Form.Street_Address.$touched && Form.Street_Address.$error.required">Required field.<br></small>
-                                <small ng-show="Form.Street_Address.$invalid && Form.Street_Address.$touched && Form.Street_Address.$error.pattern">Only alphabetic letters allowed and atleast 3 charactors long.</small>
-                            </div>
-                            <div class="col-md-1"></div>
-                            <div class="col-md-3">
-                                <small ng-show="Form.Suburb.$invalid && Form.Suburb.$touched && Form.Suburb.$error.required">Required field.<br></small>
-                                <small ng-show="Form.Suburb.$invalid && Form.Suburb.$touched && Form.Suburb.$error.pattern">Only alphabetic letters allowed and atleast 3 charactors long.</small>
-                            </div>
-                        </div>
                         <div class="row" style="margin-top:8px; margin-bottom:15px; padding-bottom:15px; border-bottom: 1px solid #ddd;">
                             <div class="col-md-1"><h5>City:</h5></div>
                             <div class="col-md-3"><input type="text" class="form-control View_readonly" name="City" ng-model="City" ng-required="true" ng-pattern="/^[a-zA-Z''-'\s]{3,40}$/"></div>
                             <div class="col-md-1"><h5>Country:</h5></div>
                             <div class="col-md-3"><input type="text" class="form-control View_readonly" name="Country" ng-model="Country" ng-required="true" ng-pattern="/^[a-zA-Z''-'\s]{3,40}$/"></div>
                         </div>
-                        <div class="row" style="margin-top:0px; margin-bottom:8px;">
-                            <div class="col-md-1"></div>
-                            <div class="col-md-3">
-                                <small ng-show="Form.City.$invalid && Form.City.$touched && Form.City.$error.required">Required field.<br></small>
-                                <small ng-show="Form.City.$invalid && Form.City.$touched && Form.City.$error.pattern">Only alphabetic letters allowed and atleast 3 charactors long.</small>
-                            </div>
-                            <div class="col-md-1"></div>
-                            <div class="col-md-3">
-                                <small ng-show="Form.Country.$invalid && Form.Country.$touched && Form.Country.$error.required">Required field.<br></small>
-                                <small ng-show="Form.Country.$invalid && Form.Country.$touched && Form.Country.$error.pattern">Only alphabetic letters allowed and atleast 3 charactors long.</small>
-                            </div><div class="col-md-1"></div><div class="col-md-3"></div>
-                        </div>
-
                         <div class="row col-md-12" style="margin-top:6px; margin-bottom:10px;"><label class="caption-subject font-green-steel uppercase bold">Insurance Information</label></div>
                         <div class="row" style="margin-top:8px; margin-bottom:0px;">
                             <div class="col-md-1"><h5>Medical Aid Provider:</h5></div>
@@ -131,20 +70,6 @@
                             <div class="col-md-3"><input type="text" class="form-control View_readonly" name="Scheme_Name" ng-model="Scheme_Name" ng-required="true" ng-pattern="/^[a-zA-Z''-'\s]{3,40}$/"></div>
                             <div class="col-md-1"><h5>Membership Number:</h5></div>
                             <div class="col-md-3"><input type="text" class="form-control View_readonly" name="Membership_Number" ng-model="Membership_Number" ng-required="true" ng-pattern="/[0-9]{3,}/"></div>
-                        </div>
-                        <div class="row" style="margin-top:0px; margin-bottom:8px;">
-                            <div class="col-md-1"></div>
-                            <div class="col-md-3"><small ng-show="Form.Medical_Aid_Name.$invalid && Form.Medical_Aid_Name.$touched && Form.Medical_Aid_Name.$error.required">Required field.<br></small></div>
-                            <div class="col-md-1"></div>
-                            <div class="col-md-3">
-                                <small ng-show="Form.Scheme_Name.$invalid && Form.Scheme_Name.$touched && Form.Scheme_Name.$error.required">Required field.<br></small>
-                                <small ng-show="Form.Scheme_Name.$invalid && Form.Scheme_Name.$touched && Form.Scheme_Name.$error.pattern">Only alphabetic letters allowed and atleast 3 charactors long.</small>
-                            </div>
-                            <div class="col-md-1"></div>
-                            <div class="col-md-3">
-                                <small ng-show="Form.Membership_Number.$invalid && Form.Membership_Number.$touched && Form.Membership_Number.$error.required">Required field.<br></small>
-                                <small ng-show="Form.Membership_Number.$invalid && Form.Membership_Number.$touched && Form.Membership_Number.$error.pattern">Only numeric letters allowed.</small>
-                            </div>
                         </div>
                         <div class="row" style="margin-top:8px; margin-bottom:15px; border-bottom: 1px solid #ddd;">
                             <div class="col-md-1"><h5>Registration Date:</h5></div>
@@ -158,62 +83,20 @@
                             <div class="col-md-1"><h5>Account Status:</h5></div>
                             <div class="col-md-3"><input ng-class="{'font-green-steel bold' : Status}" type="text" class="form-control" name="Status" ng-model="Status" ng-readonly="true" style="background-color: transparent"></div>
                         </div>
-                        <div class="row" style="margin-top:0px; margin-bottom:8px;">
-                            <div class="col-md-1"></div>
-                            <div class="col-md-3"><small ng-show="Form.Registration_Date.$invalid && Form.Registration_Date.$touched && Form.Registration_Date.$error.required">Required field.<br></small></div>
-                            <div class="col-md-1"></div>
-                            <div class="col-md-3"><small ng-show="Form.Deregistration_Date.$invalid && Form.Deregistration_Date.$touched && Form.Deregistration_Date.$error.required">Required field.<br></small></div><div class="col-md-1"></div><div class="col-md-3"></div>
-                        </div>
-
                         <div class="row col-md-12" style="margin-top:6px; margin-bottom:10px;"><label class="caption-subject font-green-steel uppercase bold">Health Summary</label></div>
                         <div class="row" style="margin-top:8px; margin-bottom:0px;">
                             <div class="col-md-4"><h5>Allergies:</h5> <textarea class="form-control View_readonly" name="Allergies" ng-model="Allergies" rows="3" cols="20" ng-required="true" ng-pattern="/^[a-zA-Z.,''-'\s]{3,40}$/"></textarea></div>
                             <div class="col-md-4"><h5>Previous Medication:</h5> <textarea class="form-control View_readonly" name="PreviousIllnesses" ng-model="PreviousIllnesses" rows="3" cols="20" ng-required="true" ng-pattern="/^[a-zA-Z.,''-'\s]{3,40}$/"></textarea></div>
                             <div class="col-md-4"><h5>Previous Illnesses:</h5> <textarea class="form-control View_readonly" name="PreviousMedication" ng-model="PreviousMedication" rows="3" cols="20" ng-required="true" ng-pattern="/^[a-zA-Z.,''-'\s]{3,40}$/"></textarea></div>
                         </div>
-                        <div class="row" style="margin-top:0px; margin-bottom:8px;">
-                            <div class="col-md-4">
-                                <small ng-show="Form.Allergies.$invalid && Form.Allergies.$touched && Form.Allergies.$error.required">Required field.<br></small>
-                                <small ng-show="Form.Allergies.$invalid && Form.Allergies.$touched && Form.Allergies.$error.pattern">Only alphabetic letters allowed and atleast 3 charactors long.</small>
-                            </div>
-                            <div class="col-md-4">
-                                <small ng-show="Form.PreviousIllnesses.$invalid && Form.PreviousIllnesses.$touched && Form.PreviousIllnesses.$error.required">Required field.<br></small>
-                                <small ng-show="Form.PreviousIllnesses.$invalid && Form.PreviousIllnesses.$touched && Form.PreviousIllnesses.$error.pattern">Only alphabetic letters allowed and atleast 3 charactors long.</small>
-                            </div>
-                            <div class="col-md-4">
-                                <small ng-show="Form.PreviousMedication.$invalid && Form.PreviousMedication.$touched && Form.PreviousMedication.$error.required">Required field.<br></small>
-                                <small ng-show="Form.PreviousMedication.$invalid && Form.PreviousMedication.$touched && Form.PreviousMedication.$error.pattern">Only alphabetic letters allowed and atleast 3 charactors long.</small>
-                            </div>
-                        </div>
                         <div class="row" style="margin-top:8px;">
                             <div class="col-md-4"><h5>Risk Factors:</h5> <textarea class="form-control View_readonly" name="RiskFactors" ng-model="RiskFactors" rows="3" cols="20" ng-required="true" ng-pattern="/^[a-zA-Z.,''-'\s]{3,40}$/"></textarea></div>
                             <div class="col-md-4"><h5>Social History:</h5> <textarea class="form-control View_readonly" name="SocialHistory" ng-model="SocialHistory" rows="3" cols="20" ng-required="true" ng-pattern="/^[a-zA-Z.,''-'\s]{3,40}$/"></textarea></div>
                             <div class="col-md-4"><h5>Family History:</h5> <textarea class="form-control View_readonly" name="FamilyHistory" ng-model="FamilyHistory" rows="3" cols="20" ng-required="true" ng-pattern="/^[a-zA-Z.,''-'\s]{3,40}$/"></textarea></div>
                         </div>
-                        <div class="row" style="margin-top:0px; margin-bottom:8px;">
-                            <div class="col-md-4">
-                                <small ng-show="Form.RiskFactors.$invalid && Form.RiskFactors.$touched && Form.RiskFactors.$error.required">Required field.<br></small>
-                                <small ng-show="Form.RiskFactors.$invalid && Form.RiskFactors.$touched && Form.RiskFactors.$error.pattern">Only alphabetic letters allowed and atleast 3 charactors long.</small>
-                            </div>
-                            <div class="col-md-4">
-                                <small ng-show="Form.SocialHistory.$invalid && Form.SocialHistory.$touched && Form.SocialHistory.$error.required">Required field.<br></small>
-                                <small ng-show="Form.SocialHistory.$invalid && Form.SocialHistory.$touched && Form.SocialHistory.$error.pattern">Only alphabetic letters allowed and atleast 3 charactors long.</small>
-                            </div>
-                            <div class="col-md-4">
-                                <small ng-show="Form.FamilyHistory.$invalid && Form.FamilyHistory.$touched && Form.FamilyHistory.$error.required">Required field.<br></small>
-                                <small ng-show="Form.FamilyHistory.$invalid && Form.FamilyHistory.$touched && Form.FamilyHistory.$error.pattern">Only alphabetic letters allowed and atleast 3 charactors long.</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" ng-click="btnUpdateMedicalRecord(ID)" id="btnUpdateMedicalRecord">Update</button>
-                        <button type="button" class="btn btn-danger" ng-click="DeleteMedicalRecord()">Delete</button>
                     </div>
                 </div>
             </div>
         </form>
     </div><!-- Show Medical History ~ View Patient Record Ends-->     
 </div>
-<script>
-    $(".datepicker").datepicker({ format: 'yyyy-mm-dd' });
-</script>

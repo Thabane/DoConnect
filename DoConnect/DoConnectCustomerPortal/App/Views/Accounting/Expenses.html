@@ -1,0 +1,148 @@
+﻿<div>
+    <div id="page-wrapper" ng-controller="AccountingController">
+        <!--Expenses Section Begins-->
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header text-primary">{{PageTitleExpenses}}</h2>
+            </div>
+        </div>
+
+        <ul class="nav nav-tabs">
+            <li role="presentation"><a href="/Accounting"><i class="fa fa-align-justify"></i>Invoice List</a></li>
+            <li role="presentation"><a href="/NewPatientInvoice"><i class="fa fa-plus-circle"></i>New Invoice</a></li>
+            <li role="presentation" class="active"><a href="/Expenses"><i class="fa fa-align-justify"></i>Expense List</a></li>
+            <li role="presentation"><a href="/NewExpenceInvoice"><i class="fa fa-plus-circle"></i>New Expense</a></li>
+        </ul>       
+
+        <div class="panel panel-default">
+            <div class="row" style="margin-top: 10px; margin-right: 10px;">
+                <div class="col-md-4"></div><div class="col-md-4"><h5 class="pull-right">Search:</h5></div>
+                <div class="form-group col-md-4">
+                    <input class="form-control" type="text" style="font-size:13px;" ng-model="search">
+                </div>
+            </div>
+
+            <table class="table table-hover">
+                <thead style="background-color: #f8f8f8;">
+                    <tr>
+                        <th style="width: 50%;" ng-click="sort('Description')">Expense Description<span class="fa sort-icon" ng-show="sortKey=='Description'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                        <th style="width: 15%;" ng-click="sort('Date')">Date<span class="fa sort-icon" ng-show="sortKey=='Date'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                        <th style="width: 15%;" ng-click="sort('Amount')">Amount (R)<span class="fa sort-icon" ng-show="sortKey=='Amount'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                        <th style="width: 15%;">Action
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr dir-paginate="Expense in Expenses | filter:search | orderBy:sortKey:reverse | itemsPerPage:5">
+                        <td>{{Expense.Description}}</td>
+                        <td>{{Expense.Date}}</td>
+                        <td>{{Expense.Amount}}</td>
+                        <td>
+                            <button class="btn btn-primary btn-xs" ng-click="ViewExpense(Expense.ID)" onclick="ViewExpense()"><i class="glyphicon glyphicon-new-window"></i></button>
+                            <button class="btn btn-danger btn-xs" ng-click="DeleteExpense(Expense.ID)"><i class="fa fa-trash-o"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <dir-pagination-controls class="pull-right" max-size="5" direction-links="true" boundary-links="true" style="margin-right: 20px;"></dir-pagination-controls>
+                </div>
+            </div>
+        </div>
+        <!--Expenses Section Ends -->   
+
+        <!--View  Expenses Invoice Modal-->
+        <div id="View_ExpensesInvoice_Modal" class="modal fade">
+            <form>
+                <div class="modal-dialog" style="width:70%;">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title text-primary">Expense Invoice</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div id="invoice_print">
+                                <table style="width:100%; border:0px;">
+                                    <tbody>
+                                        <tr>
+                                            <td style="width:70%;">
+                                                <img style="max-height:80px;" src="http://www.mobilewebs.net/mojoomla/extend/wordpress/hospital/wp-content/plugins/hospital-management/assets/images/Thumbnail-img.png">
+                                            </td>
+                                            <td align="right" style="width:24%;">
+                                                <h4>Invoice number : 16071794 </h4>
+                                                <h5>Issue Date : 2016-07-17</h5>
+                                                <h5>Status : Part Paid</h5>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <hr>
+                                <table style="width:100%; border:0px;">
+                                    <tbody>
+                                        <tr>
+                                            <td align="left"><h4>Payment To:</h4></td>
+                                            <td align="left"><h4>Medical Aid Details:</h4></td>
+                                            <td align="left"><h4>Bill To:</h4></td>
+                                        </tr>
+                                        <tr>
+                                            <td valign="top" align="left">@Practice Address<br>@Practice Address<br>@Practice Address<br></td>
+                                            <td valign="top" align="left">@Medical Aid Address<br>@Medical Aid Details<br>@Medical Aid<br></td>
+                                            <td valign="top" align="left">@Patient Address<br>@Patient Address<br>@Patient Address<br></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <hr>
+                                <h4>Invoice Entries</h4>
+                                <table class="table table-bordered" style="width:100%; border:1px; border-collapse:collapse;">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">#</th>
+                                            <th class="text-center">Date</th>
+                                            <th style="width:60%;">Treatment Details</th>
+                                            <th class="text-center">Doctor</th>
+                                            <th style="width:8%;">Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-center">1</td>
+                                            <td class="text-center">2016-07-17</td>
+                                            <td>Cough...</td>
+                                            <td class="text-center">Adrian Dadlani</td>
+                                            <td class="text-right">200.00</td>
+
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                                <table style="width:100%; border:0px;">
+                                    <tbody>
+                                        <tr>
+                                            <td style="width:80%;" align="right">Sub Total:</td>
+                                            <td align="right">200</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:80%;" align="right">Discount:</td>
+                                            <td align="right">0.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2"><hr style="margin:0px;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:80%;" align="right">Grand Total:</td>
+                                            <td align="right"><h4>200</h4></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="print-button pull-left"><a href="#" target="_blank" class="btn btn-success">Print</a></div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div><!--View Expense Invoice Modal Ends-->
+    </div>
+</div>

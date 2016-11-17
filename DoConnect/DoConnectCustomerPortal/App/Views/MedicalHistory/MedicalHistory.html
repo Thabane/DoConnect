@@ -1,0 +1,103 @@
+﻿<div>
+    <div id="page-wrapper" ng-controller="MedicalHistoryController">
+        <div class="row">
+            <div class="span4" />
+            <div class="span4  center-block">
+                <h2 class="page-header text-primary center-block">Medical History</h2>
+            </div>
+            <div class="span4" />
+        </div>
+        <div class="row">
+            <ul class="nav nav-tabs">
+                <li role="presentation">
+                    <label for="searchKey">Search here: </label>
+                    <input type="text" class="form-control" ng-model="searchKey" placeholder="Johannesburg">
+                </li>
+
+                <li role="presentation">
+                    <label for="disabledSelect">Disabled select menu</label>
+                    <select id="disabledSelect" class="form-control">
+                        <option>Name</option>
+                        <option>Phone_Number</option>
+                        <option>Fax Number</option>
+                        <option>Physical Address</option>
+                        <option>Trading Times</option>
+                    </select>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <table class="table table-hover">
+                <thead style="background-color: #f8f8f8;">
+                    <tr>
+                        <th style="width: 10%;" ng-click="sort('Date')">Date<span class="fa sort-icon" ng-show="sortKey=='Name'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                        <th style="width: 40%;" ng-click="sort('Symptoms')">Symptoms<span class="fa sort-icon" ng-show="sortKey=='Phone_Number'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                        <th style="width: 40%;" ng-click="sort('ClinicalFindings')">Clinical Findings<span class="fa sort-icon" ng-show="sortKey=='Fax_Number'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                        <th style="width: 10%;">View Diagnosis</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="MedicalHistory in MedicalRecord | filter : searchKey | limitTo : getlimitTo() | orderBy : getSortKey()">
+                        <td>{{MedicalRecord.Date}}</td>
+                        <td>{{MedicalRecord.Symptoms}}</td>
+                        <td>{{MedicalRecord.ClinicalFindings}}</td>
+                        <td>
+                            <button class="btn btn-primary btn-xs" ng-click="ViewDiagnosis(MedicalRecord.ID)"><i class="icon-eye-open"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            <div class="span8 pull-left">
+                <div class="pagination">
+                    <ul>
+                        <li><a ng-click="setlimitTo(5)">5</a></li>
+                        <li><a ng-click="setlimitTo(10)">10</a></li>
+                        <li><a ng-click="setlimitTo(50)">50</a></li>
+                        <li><a ng-click="setlimitTo(100)">100</a></li>
+                        <li><a ng-click="setlimitTo(1000000)">all</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!--View Diagnosis Modal-->
+        <div id="View_Diagnosis_Modal" class="modal fade">
+            <form name="Form">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title text-primary">Diagnosis Details</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form class="form-horizontal">
+                                <div class="control-group">
+                                    <label class="control-label" for="Diagnosis">Diagnosis</label>
+                                    <div class="controls"> <input type="text" ng-value="Diagnosis" ng-model="Diagnosis" placeholder="Diagnosis"> </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="TestResultSummary">Test Result Summary</label>
+                                    <div class="controls"> <input type="text" ng-value="TestResultSummary" ng-model="TestResultSummary" placeholder="test result summary"> </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="TreatmentPlan">Treatment Plan</label>
+                                    <div class="controls"> <input type="text" ng-value="TreatmentPlan" ng-model="TreatmentPlan" placeholder="treatment plan"> </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="Presciption_ID">Presciption ID</label>
+                                    <div class="controls"> <input type="text" ng-value="Presciption_ID" ng-model="Presciption_ID" placeholder="Presciption ID"> </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div><!--View Diagnosis Modal Ends-->
+
+    </div>
+</div>

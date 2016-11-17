@@ -8,55 +8,52 @@
 
         <ul class="nav nav-tabs">
             <li role="presentation" class="active"><a href="/Accounting"><i class="fa fa-align-justify"></i>Invoice List</a></li>
-            <li role="presentation"><a href="/NewPatientInvoice"><i class="fa fa-plus-circle"></i>New Invoice</a></li>
-            <li role="presentation"><a href="/Expenses"><i class="fa fa-align-justify"></i>Expenses List</a></li>
-            <li role="presentation"><a href="/NewExpenceInvoice"><i class="fa fa-plus-circle"></i>New Expense</a></li>
         </ul>
 
         <div class="panel panel-default">
             <div class="row" style="margin-top: 10px; margin-right: 10px;">
-                <div class="col-md-6">
+                <div class="col-md-8">
                     <div class="row" style="padding-top: 10px; padding-left: 7px;">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <small class="font-dark">Un-Paid Invoices </small> <span class="label label-pill label-danger">{{numOfUnPaid}}</span>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <small class="font-dark">Partially-Paid Invoices </small> <span class="label label-pill label-warning">{{numOfPatiallyPaid}}</span>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-2"><h5 class="pull-right">Search:</h5></div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-2">
                     <input class="form-control" type="text" style="font-size:13px;" ng-model="search">
                 </div>
             </div>
-
-            <table class="table table-hover">
-                <thead style="background-color: #f8f8f8;">
-                    <tr>
-                        <th style="width: 15%;" ng-click="sort('Date')">Date<span class="fa sort-icon" ng-show="sortKey=='Date'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
-                        <th style="width: 25%;" ng-click="sort('TreatmentsDetails')">Treatments Details<span class="fa sort-icon" ng-show="sortKey=='TreatmentsDetails'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
-                        <th style="width: 20%;" ng-click="sort('Patient')">Patient<span class="fa sort-icon" ng-show="sortKey=='Patient'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
-                        <th style="width: 10%;" ng-click="sort('Total')">Amount (R)<span class="fa sort-icon" ng-show="sortKey=='Total'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
-                        <th style="width: 20%;" ng-click="sort('Doctor')">Doctor<span class="fa sort-icon" ng-show="sortKey=='Doctor'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
-                        <th style="width: 15%;">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-show="Invoices.length > 0" ng-class="{'danger': Invoice.PaidStatus == '0', 'warning': Invoice.PaidStatus == '2'}" dir-paginate="Invoice in Invoices | filter:search | orderBy:sortKey:reverse | itemsPerPage:7">
-                        <td>{{Invoice.Date}}</td>
-                        <td>{{Invoice.InvoiceSummary}}</td>
-                        <td>{{Invoice.Patient_FirstName}} {{Invoice.Patient_LastName}}</td>
-                        <td>{{Invoice.Total}}</td>
-                        <td>{{Invoice.Doctor_FirstName}} {{Invoice.Doctor_LastName}}</td>
-                        <td>
-                            <button class="btn btn-primary btn-xs" ng-click="ViewInvoice(Invoice.ID)" onclick="ViewInvoice()"><i class="glyphicon glyphicon-new-window"></i></button>
-                            <button class="btn btn-danger btn-xs" ng-click="DeleteInvoice1(Invoice.ID)"><i class="fa fa-trash-o"></i></button>
-                        </td>
-                    </tr>
-                    <tr class="row alert alert-info text-center" ng-show="Invoices.length == 0"><td colspan="4"><b>System Message!</b> No invoice records to display.</td></tr>
-                </tbody>
-            </table>
+            <div class="table-responsive table-bordered">
+                <table class="table table-hover">
+                    <thead style="background-color: #f8f8f8;">
+                        <tr>
+                            <th ng-click="sort('Date')">Date<span class="fa sort-icon" ng-show="sortKey=='Date'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                            <th ng-click="sort('TreatmentsDetails')">Treatments Details<span class="fa sort-icon" ng-show="sortKey=='TreatmentsDetails'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                            <th ng-click="sort('Patient')">Patient<span class="fa sort-icon" ng-show="sortKey=='Patient'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                            <th ng-click="sort('Total')">Amount (R)<span class="fa sort-icon" ng-show="sortKey=='Total'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                            <th ng-click="sort('Doctor')">Doctor<span class="fa sort-icon" ng-show="sortKey=='Doctor'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-show="Invoices.length > 0" ng-class="{'danger': Invoice.PaidStatus == '0', 'warning': Invoice.PaidStatus == '2'}" dir-paginate="Invoice in Invoices | filter:search | orderBy:sortKey:reverse | itemsPerPage:7">
+                            <td>{{Invoice.Date}}</td>
+                            <td>{{Invoice.InvoiceSummary}}</td>
+                            <td>{{Invoice.Patient_FirstName}} {{Invoice.Patient_LastName}}</td>
+                            <td>{{Invoice.Total}}</td>
+                            <td>{{Invoice.Doctor_FirstName}} {{Invoice.Doctor_LastName}}</td>
+                            <td>
+                                <button class="btn btn-primary btn-xs" ng-click="ViewInvoice(Invoice.ID)" onclick="ViewInvoice()"><i class="glyphicon glyphicon-new-window"></i></button>
+                            </td>
+                        </tr>
+                        <tr class="row alert alert-info text-center" ng-show="Invoices.length == 0"><td colspan="4"><b>System Message!</b> No invoice records to display.</td></tr>
+                    </tbody>
+                </table>                
+            </div>
             <div class="row">
                 <div class="col-md-12">
                     <dir-pagination-controls class="pull-right" max-size="5" direction-links="true" boundary-links="true" style="margin-right: 20px;"></dir-pagination-controls>
@@ -76,8 +73,8 @@
                         <div class="row">
                             <div class="col-md-4"><img style="max-height:80px;" src="../../../Images/Logo/doctorIcon.png" /></div>
                             <div class="col-md-8"><div class="col-md-4"><h5>Invoice number: {{ID}}</h5></div>
-                                                  <div class="col-md-4"><h5>Issue Date : {{Date}}</h5></div>
-                                                  <div class="col-md-4"><h5>Status : {{PaidStatus}}</h5></div>
+                                                  <div class="col-md-4"><h5>Issue Date: {{Date}}</h5></div>
+                                                  <div class="col-md-4"><h5>Status: {{PaidStatus}}</h5></div>
                             </div>
                         </div>
                         <div class="row">
@@ -90,49 +87,70 @@
                             <div class="col-md-4 pull-left"><b>{{Medical_Aid_Name}}</b><br>{{Medical_Aid_Address}}<br>{{Medical_Aid_Cell_Number}}<br></div>
                             <div class="col-md-4 pull-left"><b>{{Patient_Street_Address}}</b><br>{{Patient_Suburb}}<br>{{Patient_City}}<br>{{Practice_City}},{{Patient_Country}}<br>{{Patient_Phone_Number}}<br></div>
                         </div>
-                        <div class="row"></div>
-                        <div class="caption-subject font-green-steel bold">Invoice Details</div>
-                        <div class="row line-bottom" style="background-color: #f8f8f8;">
-                            <div class="col-md-1 pull-left"><b>#</b></div>
-                            <div class="col-md-2 pull-left"><b>Date</b></div>
-                            <div class="col-md-3 pull-left"><b>Treatment Details</b></div>
-                            <div class="col-md-4 pull-left"><b>Doctor</b></div>
-                            <div class="col-md-2 pull-left"><b>Amount</b></div>
-                        </div>
                         <div class="row">
-                            <div class="col-md-1 pull-left line">{{ID}}</div>
-                            <div class="col-md-2 pull-left line">{{Date}}</div>
-                            <div class="col-md-3 pull-left line">{{InvoiceSummary}}</div>
-                            <div class="col-md-4 pull-left line">{{Practice_Name}}: DR. {{Doctor_FirstName}} {{Doctor_LastName}}</div>
-                            <div class="col-md-2 pull-left line">{{Total}}</div>
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4 caption-subject font-green-steel bold" style="padding-top: 15px;">Invoice Details</div>
+                            <div class="col-md-4"></div>  
                         </div>
-                        <div class="row">
-                            <div class="col-md-6"></div>
-                            <div class="col-md-4 pull-right">
-                                <div class="row">
-                                    <div class="col-md-6 pull-left">Sub Total:</div>
-                                    <div class="col-md-2 pull-left">{{Total}}</div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 pull-left">Amount Paid:</div>
-                                    <div class="col-md-2 pull-left line-bottom">{{AmountPaid}}</div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 pull-left">Balance Owing:</div>
-                                    <div class="col-md-2 pull-left line-bottom">{{BalanceOwing}}</div>
-                                </div>
-                            </div>
+                        
+                        <div class="table-responsive table-bordered">
+                            <table class="table table-hover">
+                                <thead style="background-color: #f8f8f8;">
+                                    <tr>
+                                        <th ng-click="sort('ID')">#<span class="fa sort-icon" ng-show="sortKey=='ID'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                                        <th ng-click="sort('Date')">Date<span class="fa sort-icon" ng-show="sortKey=='Date'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                                        <th ng-click="sort('InvoiceSummary')">Treatment Details<span class="fa sort-icon" ng-show="sortKey=='InvoiceSummary'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                                        <th ng-click="sort('Practice_Name')">Doctor<span class="fa sort-icon" ng-show="sortKey=='Practice_Name'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                                        <th ng-click="sort('Total')">Amount (R)<span class="fa sort-icon" ng-show="sortKey=='Total'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="border: 0px;">{{ID}}</td>
+                                        <td style="border: 0px;">{{Date}}</td>
+                                        <td style="border: 0px;">{{InvoiceSummary}}</td>
+                                        <td style="border: 0px;">{{Practice_Name}}: DR. {{Doctor_FirstName}} {{Doctor_LastName}}</td>
+                                        <td style="border: 0px;">{{Total}}</td>
+                                    </tr> 
+                                    <tr>
+                                        <td style="border: 0px;"></td>
+                                        <td style="border: 0px;"></td>
+                                        <td style="border: 0px;"></td>
+                                        <td style="border: 0px;"></td>
+                                        <td style="border: 0px;"></td>
+                                    </tr>                                     
+                                    <tr>
+                                        <td style="border: 0px;"></td>
+                                        <td style="border: 0px;"></td>
+                                        <td style="border: 0px;"></td>
+                                        <td style="border: 0px;" class="text-right">Sub Total:</td>
+                                        <td style="border: 0px;">{{Total}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border: 0px;"></td>
+                                        <td style="border: 0px;"></td>
+                                        <td style="border: 0px;"></td>
+                                        <td style="border: 0px;" class="text-right">Amount Paid:</td>
+                                        <td style="border: 0px;">{{AmountPaid}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border: 0px;"></td>
+                                        <td style="border: 0px;"></td>
+                                        <td style="border: 0px;"></td>
+                                        <td  style="border: 0px;" class="text-right">Balance Owing:</td>
+                                        <td style="border-bottom: 3px double black; border-top: 1px solid black "><b>{{BalanceOwing}}</b></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <div class="print-button pull-left"><a href="#" target="_blank" class="btn btn-success">Print</a></div>
                         <div class="print-button pull-right">
                             <button type="button" class="btn btn-default" data-dismiss="modal" id="CloseModel">Close</button>
-                            <button type="button" class="btn btn-danger" ng-click="DeleteInvoice2()">Delete</button>
                         </div>
                     </div>
                 </div>
             </div>
-        </div><!--View Invoice Modal Ends-->
-    </div>
+        </div><!--View Invoice Modal Ends-->        
+     </div>
 </div>

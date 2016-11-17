@@ -1,0 +1,180 @@
+﻿<div ng-controller="MasterController">
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container" style="margin-top:50px;">
+                <a class="brand" href="#"><img src="~/Content/images/doctorIcon.png" class="nav-avatar">DoConnect </a>
+                <div class="nav-collapse collapse navbar-inverse-collapse">
+                    <ul class="nav pull-right">
+                        <li class="nav-user dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <img src="~/Content/images/user.png" class="nav-avatar">
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#ProfileModal" role="button" data-toggle="modal"><i class="icon-user"></i>Your Profile</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#Logout" role="button" data-toggle="modal"><i class="icon icon-off"></i> Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.nav-collapse -->
+            </div>
+        </div>
+        <!-- /navbar-inner -->
+    </div>
+    <!-- /navbar -->
+    <div class="wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="span3">
+                    <div class="sidebar">
+                        <ul class="widget widget-menu unstyled">
+                            <li class="active">
+                                <a href="/Dashboard">
+                                    <i class="menu-icon icon-dashboard" style="color: #FFFFFF"></i><strong style="color: #FFFFFF"> Dashboard</strong>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Messages">
+                                    <i class="menu-icon icon-bullhorn" style="color: #FFFFFF"></i>
+                                    <strong style="color: #FFFFFF"> Messages</strong>
+                                    <b class="label green pull-right">
+                                        {{NumOfUnReadMessages}}
+                                    </b>
+                                </a>
+                            </li>
+                        </ul>
+                        <!--/.widget-nav-->
+
+
+                        <ul class="widget widget-menu unstyled">
+                            <li><a href="/AppointmentsCalendar"><i class="menu-icon icon-table" style="color: #FFFFFF"></i><strong style="color: #FFFFFF"> Appointments</strong></a></li>
+                            <li><a href="/Doctors"><i class="menu-icon icon-group" style="color: #FFFFFF"></i><strong style="color: #FFFFFF"> Doctors</strong></a></li>
+                            <li><a href="/Practices"><i class="menu-icon icon-map-marker" style="color: #FFFFFF"></i><strong style="color: #FFFFFF"> Practices</strong></a></li>
+                            <li><a href="/PatientMedicalHistory"><i class="menu-icon icon-table" style="color: #FFFFFF"></i><strong style="color: #FFFFFF"> Medical History</strong></a></li>
+                        </ul>
+                        <!--/.widget-nav-->
+                        <ul class="widget widget-menu unstyled">
+                            <li>
+                                <a class="collapsed" data-toggle="collapse" href="/#togglePages" style="color: #FFFFFF">
+                                    <i class="menu-icon icon-cog" style="color: #FFFFFF">
+                                    </i><i class="icon-chevron-down pull-right"></i><i class="icon-chevron-up pull-right" style="color: #FFFFFF">
+                                    </i><strong style="color: #FFFFFF"> Account</strong>
+                                </a>
+                                <ul id="togglePages" class="collapse unstyled">
+                                    <li><a href="/UserProfile"><i class="icon-user" style="color: #FFFFFF"></i>Your Profile</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#Logout" role="button" data-toggle="modal"><i class="menu-icon icon-off" style="color: #FFFFFF"></i><strong style="color: #FFFFFF"> Logout</strong></a></li>
+                        </ul>
+                    </div>
+                    <!--/.sidebar-->
+                </div>
+                <!--/.span3-->
+                <div class="span9">
+                    <div ng-view>
+
+                    </div>
+                </div>
+                <!--/.content-->
+            </div>
+            <!--/.span9-->
+        </div>
+    </div>
+    <!--/.container-->
+    <!--/.wrapper-->
+    <div class="footer">
+        <div class="container">
+            <b class="copyright">© 2016 DoConnect - doconnect.com </b>All rights reserved.
+        </div>
+    </div>
+
+    <!----------------------------------------MODALS------------------------------------------------>
+    <!-- Modal -->
+    <div id="ProfileModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Profile Details</h3>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <form class="form-horizontal">
+                    <div class="control-group">
+                        <label class="control-label" for="FirstName">First Name</label>
+                        <div class="controls"> <input type="text" ng-value="FirstName" ng-model="FirstName" placeholder="first name"> </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="LastName">Last Name</label>
+                        <div class="controls"> <input type="text" ng-model="LastName" placeholder="last name"> </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="Email">Email</label>
+                        <div class="controls"> <input type="text" ng-model="Email" placeholder="email"> </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="Gender">Gender</label>
+                        <div class="controls"> <input type="text" ng-model="Gender" placeholder="gender"> </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="DOB">Date of Birth</label>
+                        <div class="controls date" id="date"> <input type="text" ng-model="DOB" placeholder="Date of Birth"> </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="Cell_Number">Cell Number</label>
+                        <div class="controls"> <input type="text" ng-model="Cell_Number" placeholder="cell number"> </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="Street_Address">Street Address</label>
+                        <div class="controls"> <input type="text" ng-model="Street_Address" placeholder="street address"> </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="Suburb">Suburb</label>
+                        <div class="controls"> <input type="text" ng-model="Suburb" placeholder="suburb"> </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="City">City</label>
+                        <div class="controls"> <input type="text" ng-model="City" placeholder="city"> </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="Country">Country</label>
+                        <div class="controls"> <input type="text" ng-model="Country" placeholder="country"> </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+            <button class="btn btn-primary">Save changes</button>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="Logout" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Logging Out</h3>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="span4"></div>
+                <div class="span4">
+                    <h3>Are you sure you want to logout ?</h3>
+                </div>
+                <div class="span4"></div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+            <button class="btn btn-warning" onclick="logout();">Yes</button>
+        </div>
+    </div>
+    <script>
+    $("#date").datepicker({
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+        orientation: "bottom",
+        minDate: 0
+    });
+    </script>
+</div>

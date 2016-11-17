@@ -101,14 +101,11 @@
 
         $scope.today = $filter('date')(new Date(), 'yyyy-MM-dd');
 
-        
-
         $scope.Receiver_UserID = 0;
         $scope.changedValueGetReceiver_UserID = function (item) {
-            console.log(item);
             $scope.Receiver_UserID = item.User_ID;
         };
-
+        
         $scope.SendMessage = function (_Subject, _Description) {
             MessagesService.InsertMessage($scope.Receiver_UserID, $scope.SessionData_User_ID, _Subject, _Description, $scope.today).success(function () {
                 $scope.GetAllMessages();

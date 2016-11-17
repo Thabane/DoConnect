@@ -2,6 +2,8 @@
     function ($scope, DiagnosisExpertSystemService, $interval, $location) {
 
         $scope.Symptoms = [];
+        $scope.Gender = "";
+        $scope.GenderSelector = "Select a Gender";
 
         $scope.GetAllSymptoms = function () {
             DiagnosisExpertSystemService.getAllSymptoms().then
@@ -11,14 +13,28 @@
             });
         };
 
-        $scope.DianosePatient = function (symptoms, age, gender) {
-            
-            var evidence = {
-                sex: gender,
-                age: age,
-                evidence: symptoms
-            }
+        $scope.DianosePatient = function (symptoms, age, gender, adv) {
 
+            var evidence;
+
+            if (adv) {
+                 evidence = {
+                    sex: gender,
+                    age: age,
+                    evidence: symptoms
+                }
+            } else {
+                evidence = {
+                    sex: gender,
+                    age: age,
+                    evidence: symptoms,
+                    extras: {
+                        "ignore_groups": true
+                    }
+                }
+            }
+            console.log(evidence);
+            
             DiagnosisExpertSystemService.patientDiagnosis(evidence).then
             (function () {
             });
@@ -47,6 +63,24 @@
             (function (result) {
                 $scope.RiskBank = result.data;
             });
+        };
+
+        $scope.SetGender = function (num) {
+            if (num === 1) {
+                $scope.Gender = "male";
+                $scope.GenderSelector = $scope.Gender;
+            }
+            if (num === 2) {
+                $scope.Gender = "female";
+                $scope.GenderSelector = $scope.Gender;
+            }
+            if (num !== 1 && num !== 2) {
+                $scope.Gender = "both";
+                $scope.GenderSelector = "Select a Gender";
+            }
+        };
+        $scope.GetGender = function () {
+            return $scope.Gender;
         };
 
     }]);

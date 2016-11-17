@@ -26,9 +26,11 @@ namespace ObjectModel
         public string Practice_Fax_Number   { get; set; }
         public string Practice_Address      { get; set; }
 
+        public int highlightYesterdayApps { get; set; }
         public int highlightTodayApps       { get; set; }
         public int highlightTomorrowApps    { get; set; }
-        public int numTodayApps             { get; set; }
+        public int numTodayApps { get; set; }
+        public int numYesterdayApps { get; set; }
         public int numTomorrowApps          { get; set; }
 
         public Appointments Create(SqlDataReader reader)
@@ -59,6 +61,8 @@ namespace ObjectModel
                 highlightTomorrowApps = reader.GetInt32(reader.GetOrdinal("highlightTomorrowApps")),
                 numTodayApps          = reader.GetInt32(reader.GetOrdinal("numTodayApps")),
                 numTomorrowApps = reader.GetInt32(reader.GetOrdinal("numTomorrowApps")),
+                highlightYesterdayApps = reader.GetInt32(reader.GetOrdinal("highlightYesterdayApps")),
+                numYesterdayApps = reader.GetInt32(reader.GetOrdinal("numYesterdayApps")),
 
             };
         }

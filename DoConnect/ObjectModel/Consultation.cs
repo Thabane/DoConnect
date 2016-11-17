@@ -33,6 +33,22 @@ namespace ObjectModel
         public int TotalNumOfVisits { get; set; }
         public int TotalPatientsCount { get; set; }
         public string Month { get; set; }
+
+        public string PatientFullName   { get; set; }
+        public string Email             { get; set; }
+        public string Gender            { get; set; }
+        public string DOB               { get; set; }
+        public string Date              { get; set; }
+        public string Diagnosis         { get; set; }
+        public decimal Total             { get; set; }
+        public decimal AmountPaid        { get; set; }
+        public decimal BalanceOwing { get; set; }
+
+        public string DoctorFullName { get; set; }
+        public string InvoiceDocMessage { get; set; }
+        public decimal Additionalfee { get; set; }
+        public int Medical_Aid_ID { get; set; }
+
         public Consultation Create(SqlDataReader reader)
         {
             return new Consultation
@@ -68,6 +84,39 @@ namespace ObjectModel
             {
                 TotalNumOfVisits = reader.GetInt32(reader.GetOrdinal("TotalNumOfVisits")),
                 Month = reader.GetString(reader.GetOrdinal("Month"))
+            };
+        }
+
+        public Consultation FinancialReportByPracticeID(SqlDataReader reader)
+        {
+            return new Consultation
+            {
+                PatientFullName  = reader.GetString(reader.GetOrdinal("PatientFullName")),
+                Email            = reader.GetString(reader.GetOrdinal("Email")),
+                Gender           = reader.GetString(reader.GetOrdinal("Gender")),
+                DOB              = reader.GetString(reader.GetOrdinal("DOB")),
+                Date             = reader.GetString(reader.GetOrdinal("Date")),
+                Diagnosis        = reader.GetString(reader.GetOrdinal("Diagnosis")),
+                Total            = reader.GetDecimal(reader.GetOrdinal("Total")),
+                AmountPaid       = reader.GetDecimal(reader.GetOrdinal("AmountPaid")),
+                BalanceOwing     = reader.GetDecimal(reader.GetOrdinal("BalanceOwing")),
+            };
+        }
+
+        public Consultation ViewUnInvoicedConsultations(SqlDataReader reader)
+        {
+            return new Consultation
+            {
+                Consultation_ID = reader.GetInt32(reader.GetOrdinal("ID")),
+                PatientFullName = reader.GetString(reader.GetOrdinal("PatientFullName")),
+                DoctorFullName = reader.GetString(reader.GetOrdinal("DoctorFullName")),
+                Patient_ID = reader.GetInt32(reader.GetOrdinal("Patient_ID")),
+                Doctors_ID = reader.GetInt32(reader.GetOrdinal("Doctor_ID")),
+                InvoiceDocMessage = reader.GetString(reader.GetOrdinal("InvoiceDocMessage")),
+                Consultation_Date = reader.GetString(reader.GetOrdinal("Date")),
+                Additionalfee = reader.GetDecimal(reader.GetOrdinal("Additionalfee")),
+                Medical_Aid_ID = reader.GetInt32(reader.GetOrdinal("Medical_Aid_ID")),
+                Diagnosis = reader.GetString(reader.GetOrdinal("Diagnosis")),
             };
         }
     }

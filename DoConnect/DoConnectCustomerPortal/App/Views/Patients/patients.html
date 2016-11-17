@@ -1,0 +1,58 @@
+﻿<div>
+    <div  class="span9" id="page-wrapper" ng-controller="PatientsController">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header text-primary">{{PageTitle_Patients}}</h2>
+            </div>
+        </div>
+        
+        <ul class="nav nav-tabs">
+          <li role="presentation" class="active"><a href="/Patients"><i class="fa fa-align-justify"></i>Patient List</a></li>
+          <li role="presentation"><a href="/NewPatient"><i class="fa fa-plus-circle"></i>New Patient</a></li>
+        </ul>
+
+        <div class="panel panel-default">
+            <div class="row" style="margin-top: 10px; margin-right: 10px;">
+                <div class="col-md-4"></div><div class="col-md-4"><h5 class="pull-right">Search:</h5></div>
+                <div class="form-group col-md-4">
+                    <input class="form-control" type="text" style="font-size:13px;" ng-model="search">
+                </div>
+            </div>
+
+            <table class="table table-hover">
+                <thead style="background-color: #f8f8f8;">
+                    <tr>
+                        <th style="width: 15%;" ng-click="sort('FirstName')">Firstname<span class="fa sort-icon" ng-show="sortKey=='FirstName'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                        <th style="width: 15%;" ng-click="sort('LastName')">Lastname<span class="fa sort-icon" ng-show="sortKey=='LastName'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                        <th style="width: 15%;" ng-click="sort('Email')">Email Address<span class="fa sort-icon" ng-show="sortKey=='Email'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                        <th style="width: 15%;" ng-click="sort('ID_Number')">ID Number<span class="fa sort-icon" ng-show="sortKey=='ID_Number'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                        <th style="width: 10%;" ng-click="sort('Cell_Number')">Cell Number<span class="fa sort-icon" ng-show="sortKey=='Cell_Number'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                        <th style="width: 15%;">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr dir-paginate="Patient in Patients | filter:search | orderBy:sortKey:reverse | itemsPerPage:5">
+                        <td>{{Patient.FirstName}}</td>
+                        <td>{{Patient.LastName}}</td>
+                        <td>{{Patient.Email}}</td>
+                        <td>{{Patient.ID_Number}}</td>
+                        <td>{{Patient.Cell_Number}}</td>
+                        <td><!-- onclick="ViewPatient()"-->
+                            <!--<button class="btn btn-primary btn-xs" ng-click="ViewPatient(Patient.ID)" onclick="ViewPatient()"><i class="glyphicon glyphicon-new-window"></i></button>-->
+                            <!--<a class="btn btn-primary btn-xs" href="/MedicalHistory/{{Patient.ID}}" ng-click="selectedPatient(Patient.ID)"><i class="glyphicon glyphicon-new-window"></i></a> -->  
+                            <a class="btn btn-primary btn-xs" href="/MedicalHistory/{{Patient.ID}}" ng-click="selectedPatient(Patient.ID)"><i class="glyphicon glyphicon-new-window"></i></a>
+                        
+                            <button class="btn btn-danger btn-xs" ng-click="DeletePatient(Patient.ID)"><i class="fa fa-trash-o"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="row">
+                <div class="col-md-12">
+                    <dir-pagination-controls class="pull-right" max-size="5" direction-links="true" boundary-links="true" style="margin-right: 20px;"></dir-pagination-controls>
+                </div>
+            </div>
+        </div>               
+    </div>
+</div>
+

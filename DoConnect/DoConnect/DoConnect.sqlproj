@@ -111,5 +111,6 @@
     <None Include="Data\dbo.Staff.data.sql" />
     <None Include="Data\dbo.Users.data.sql" />
     <None Include="Stored Procedures\NewUpdateExpense.sql" />
+    <None Include="Stored Procedures\PatientPortal_JC.sql" />
   </ItemGroup>
 </Project>

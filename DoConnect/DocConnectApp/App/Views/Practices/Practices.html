@@ -8,156 +8,97 @@
 
         <ul class="nav nav-tabs">
             <li role="presentation" class="active"><a href="/Practices"><i class="fa fa-align-justify"></i>Practice List</a></li>
-            <li role="presentation"><a href="/NewPractice"><i class="fa fa-plus-circle"></i>New Practice</a></li>
         </ul>
 
         <div class="panel panel-default">
             <div class="row" style="margin-top: 10px; margin-right: 10px;">
                 <div class="col-md-4"></div><div class="col-md-4"><h5 class="pull-right">Search:</h5></div>
-                <div class="form-group col-md-4">                    
+                <div class="form-group col-md-4">
                     <input class="form-control" type="text" style="font-size:13px;" ng-model="search">
                 </div>
             </div>
 
-            <table class="table table-hover">
-                <thead style="background-color: #f8f8f8;">
-                    <tr>
-                        <th style="width: 15%;" ng-click="sort('Name')">Name<span class="fa sort-icon" ng-show="sortKey=='Name'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
-                        <th style="width: 15%;" ng-click="sort('Phone_Number')">Phone Number<span class="fa sort-icon" ng-show="sortKey=='Phone_Number'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
-                        <th style="width: 15%;" ng-click="sort('Fax_Number')">Fax Number<span class="fa sort-icon" ng-show="sortKey=='Fax_Number'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
-                        <th style="width: 20%;" ng-click="sort('Street_Address')">Physical Address<span class="fa sort-icon" ng-show="sortKey=='Street_Address'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
-                        <th style="width: 20%;" ng-click="sort('Trading_Times')">Trading Times<span class="fa sort-icon" ng-show="sortKey=='Trading_Times'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
-                        <th style="width: 10%;">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-show="Practices.length > 0" dir-paginate="Practice in Practices | filter:search | orderBy:sortKey:reverse | itemsPerPage:5">
-                        <td>{{Practice.Name}}</td>
-                        <td>{{Practice.Phone_Number}}</td>
-                        <td>{{Practice.Fax_Number}}</td>
-                        <td>{{Practice.Street_Address}} {{Practice.Suburb}} {{Practice.City}} {{Practice.Country}}</td>
-                        <td>{{Practice.Trading_Times}}</td>
-                        <td>
-                            <button class="btn btn-primary btn-xs" ng-click="ViewPractice(Practice.ID)" onclick="ViewPractice()"><i class="glyphicon glyphicon-new-window"></i></button>
-                            <button class="btn btn-danger btn-xs doctorControls" ng-click="DeletePractice1(Practice.ID, Practice.Name)"><i class="fa fa-trash-o"></i></button>
-                        </td>
-                    </tr>
-                    <tr class="row alert alert-info text-center" ng-show="Practices.length == 0"><td colspan="4"><b>System Message!</b> No practice records to display.</td></tr>
-                </tbody>
-            </table>
-            <div class="row">
-                <div class="col-md-12">
-                    <dir-pagination-controls class="pull-right" max-size="5" direction-links="true" boundary-links="true" style="margin-right: 20px;"></dir-pagination-controls>
+            <div class="table-responsive table-bordered">
+                <table class="table table-hover">
+                    <thead style="background-color: #f8f8f8;">
+                        <tr>
+                            <th ng-click="sort('Name')">Name<span class="fa sort-icon" ng-show="sortKey=='Name'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                            <th ng-click="sort('Phone_Number')">Phone Number<span class="fa sort-icon" ng-show="sortKey=='Phone_Number'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                            <th ng-click="sort('Fax_Number')">Fax Number<span class="fa sort-icon" ng-show="sortKey=='Fax_Number'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                            <th ng-click="sort('Street_Address')">Physical Address<span class="fa sort-icon" ng-show="sortKey=='Street_Address'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                            <th ng-click="sort('Trading_Times')">Trading Times<span class="fa sort-icon" ng-show="sortKey=='Trading_Times'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-show="Practices.length > 0" dir-paginate="Practice in Practices | filter:search | orderBy:sortKey:reverse | itemsPerPage:5">
+                            <td>{{Practice.Name}}</td>
+                            <td>{{Practice.Phone_Number}}</td>
+                            <td>{{Practice.Fax_Number}}</td>
+                            <td>{{Practice.Street_Address}} {{Practice.Suburb}} {{Practice.City}} {{Practice.Country}}</td>
+                            <td>{{Practice.Trading_Times}}</td>
+                            <td>
+                                <button class="btn btn-primary btn-xs" ng-click="ViewPractice(Practice.ID)" onclick="ViewPractice()"><i class="glyphicon glyphicon-new-window"></i></button>
+                            </td>
+                        </tr>
+                        <tr class="row alert alert-info text-center" ng-show="Practices.length == 0"><td colspan="4"><b>System Message!</b> No practice records to display.</td></tr>
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-md-12">
+                        <dir-pagination-controls class="pull-right" max-size="5" direction-links="true" boundary-links="true" style="margin-right: 20px;"></dir-pagination-controls>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!--View Pratice Modal-->
         <div id="View_Practice_Modal" class="modal fade">
-            <form name="Form" novalidate>
-                <div class="modal-dialog" style="width:40%;">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title text-primary">Practice Details</h4>
+            <div class="modal-dialog" style="width:40%;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title text-primary">Practice Details</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row" style="margin-top:4px; margin-bottom:0px;">
+                            <h5 class="col-md-3">Name:</h5>
+                            <div class="col-md-8"><input class="form-control readonly_ViewPractice" type="text" ng-model="Name" name="Name" ng-pattern="/^[a-zA-Z''-'\s]{3,40}$/" ng-required="true"></div>
                         </div>
-                        <div class="modal-body">
-                            <div class="row" style="margin-top:4px; margin-bottom:0px;">
-                                <h5 class="col-md-3">Name:</h5>
-                                <div class="col-md-8"><input class="form-control readonly_ViewPractice" type="text" ng-model="Name" name="Name" ng-pattern="/^[a-zA-Z''-'\s]{3,40}$/" ng-required="true"></div>
-                            </div>
-                            <div class="row" style="margin-top:0px; margin-bottom:8px;">
-                                <div class="col-md-3"></div>
-                                <div class="col-md-8">
-                                    <small ng-show="Form.Name.$invalid && Form.Name.$touched && Form.Name.$error.required">Required field.<br></small>
-                                    <small ng-show="Form.Name.$invalid && Form.Name.$touched && Form.Name.$error.pattern">Only alphabetic letters allowed and atleast 3 charactors long.</small>
-                                </div>
-                            </div>
-                            <div class="row" style="margin-top:4px; margin-bottom:0px;">
-                                <h5 class="col-md-3">Phone Number:</h5>
-                                <div class="col-md-8"><input class="form-control readonly_ViewPractice" type="text"  ng-value="Phone_Number" ng-model="Phone_Number" name="Phone_Number" ng-pattern="/^[0-9]{10,10}$/" ng-placeholder="0899999999" ng-required="true"></div>
-                            </div>
-                            <div class="row" style="margin-top:0px; margin-bottom:8px;">
-                                <div class="col-md-3"></div>
-                                <div class="col-md-8">
-                                    <small ng-show="Form.Phone_Number.$invalid && Form.Phone_Number.$touched && Form.Phone_Number.$error.required">Required field.<br></small>
-                                    <small ng-show="Form.Phone_Number.$invalid && Form.Phone_Number.$touched && Form.Phone_Number.$error.pattern">Only numeric letters allowed and 10 charactors long.</small>
-                                </div>
-                            </div>
-                            <div class="row" style="margin-top:4px; margin-bottom:0px;">
-                                <h5 class="col-md-3">Fax Number:</h5>
-                                <div class="col-md-8"><input class="form-control readonly_ViewPractice" type="text" ng-value="Fax_Number" ng-model="Fax_Number" name="Fax_Number" ng-pattern="/^[0-9]{10,10}$/" ng-placeholder="0119999999" ng-required="true"></div>
-                            </div>
-                            <div class="row" style="margin-top:0px; margin-bottom:8px;">
-                                <div class="col-md-3"></div>
-                                <div class="col-md-8">
-                                    <small ng-show="Form.Fax_Number.$invalid && Form.Fax_Number.$touched && Form.Fax_Number.$error.required">Required field.<br></small>
-                                    <small ng-show="Form.Fax_Number.$invalid && Form.Fax_Number.$touched && Form.Fax_Number.$error.pattern">Only numeric letters allowed and 10 charactors long.</small>
-                                </div>
-                            </div>
-                            <div class="row" style="margin-top:4px; margin-bottom:0px;">
-                                <h5 class="col-md-3">Street Address:</h5>
-                                <div class="col-md-8"><input class="form-control readonly_ViewPractice" rows="3" cols="20" type="text" ng-value="Street_Address"  ng-model="Street_Address" name="Street_Address" ng-pattern="/^[0-9a-zA-Z','-'\s]{3,}$/" ng-required="true"></div>
-                            </div>
-                            <div class="row" style="margin-top:0px; margin-bottom:8px;">
-                                <div class="col-md-3"></div>
-                                <div class="col-md-8">
-                                    <small ng-show="Form.Street_Address.$invalid && Form.Street_Address.$touched && Form.Street_Address.$error.required">Required field.<br></small>
-                                    <small ng-show="Form.Street_Address.$invalid && Form.Street_Address.$touched && Form.Street_Address.$error.pattern">Only alphabetic and numeric letters allowed and atleast 3 charactors long.</small>
-                                </div>
-                            </div>
-                            <div class="row" style="margin-top:4px; margin-bottom:0px;">
-                                <h5 class="col-md-3">Suburb:</h5>
-                                <div class="col-md-8"><input class="form-control readonly_ViewPractice" type="text" ng-value="Suburb" ng-model="Suburb" name="Suburb" ng-pattern="/^[a-zA-Z''-'\s]{3,40}$/" ng-required="true"></div>
-                            </div>
-                            <div class="row" style="margin-top:0px; margin-bottom:8px;">
-                                <div class="col-md-3"></div>
-                                <div class="col-md-8">
-                                    <small ng-show="Form.Suburb.$invalid && Form.Suburb.$touched && Form.Suburb.$error.required">Required field.<br></small>
-                                    <small ng-show="Form.Suburb.$invalid && Form.Suburb.$touched && Form.Suburb.$error.pattern">Only alphabetic letters allowed and atleast 3 charactors long.</small>
-                                </div>
-                            </div>
-                            <div class="row" style="margin-top:4px; margin-bottom:0px;">
-                                <h5 class="col-md-3">City:</h5>
-                                <div class="col-md-8"><input class="form-control readonly_ViewPractice" type="text" ng-value="City" ng-model="City" name="City" ng-pattern="/^[a-zA-Z''-'\s]{3,40}$/" ng-required="true"></div>
-                            </div>
-                            <div class="row" style="margin-top:0px; margin-bottom:8px;">
-                                <div class="col-md-3"></div>
-                                <div class="col-md-8">
-                                    <small ng-show="Form.City.$invalid && Form.City.$touched && Form.City.$error.required">Required field.<br></small>
-                                    <small ng-show="Form.City.$invalid && Form.City.$touched && Form.City.$error.pattern">Only alphabetic letters allowed and atleast 3 charactors long.</small>
-                                </div>
-                            </div>
-                            <div class="row" style="margin-top:4px; margin-bottom:0px;">
-                                <h5 class="col-md-3">Country:</h5>
-                                <div class="col-md-8"><input class="form-control readonly_ViewPractice" type="text" ng-value="Country" ng-model="Country" name="Country" ng-pattern="/^[a-zA-Z''-'\s]{3,40}$/" ng-required="true"></div>
-                            </div>
-                            <div class="row" style="margin-top:0px; margin-bottom:8px;">
-                                <div class="col-md-3"></div>
-                                <div class="col-md-8">
-                                    <small ng-show="Form.Country.$invalid && Form.Country.$touched && Form.Country.$error.required">Required field.<br></small>
-                                    <small ng-show="Form.Country.$invalid && Form.Country.$touched && Form.Country.$error.pattern">Only alphabetic letters allowed and atleast 3 charactors long.</small>
-                                </div>
-                            </div>
-                            <div class="row" style="margin-top:4px; margin-bottom:0px;">
-                                <h5 class="col-md-3">Trading Times:</h5>                                                                      
-                                <div class="col-md-8"><textarea class="form-control readonly_ViewPractice" rows="3" cols="20" type="text"  ng-value="Trading_Times" ng-model="Trading_Times" name="Trading_Times" ng-required="true"></textarea></div>
-                            </div>
-                            <div class="row" style="margin-top:0px; margin-bottom:8px;">
-                                <div class="col-md-3"></div>
-                                <div class="col-md-8">
-                                    <small ng-show="Form.Trading_Times.$invalid && Form.Trading_Times.$touched && Form.Trading_Times.$error.required">Required field.<br></small>
-                                </div>
-                            </div>
+                        <div class="row" style="margin-top:4px; margin-bottom:0px;">
+                            <h5 class="col-md-3">Phone Number:</h5>
+                            <div class="col-md-8"><input class="form-control readonly_ViewPractice" type="text"  ng-value="Phone_Number" ng-model="Phone_Number" name="Phone_Number" ng-pattern="/^[0-9]{10,10}$/" ng-placeholder="0899999999" ng-required="true"></div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal" id="CloseModel">Close</button>
-                            <button type="button" class="btn btn-primary" ng-click="function_btnUpdatePractice(ID)" id="function_btnUpdatePractice">Update</button>
-                            <button type="button" class="btn btn-danger doctorControls" ng-click="DeletePractice2()">Delete</button>
+                        <div class="row" style="margin-top:4px; margin-bottom:0px;">
+                            <h5 class="col-md-3">Fax Number:</h5>
+                            <div class="col-md-8"><input class="form-control readonly_ViewPractice" type="text" ng-value="Fax_Number" ng-model="Fax_Number" name="Fax_Number" ng-pattern="/^[0-9]{10,10}$/" ng-placeholder="0119999999" ng-required="true"></div>
+                        </div>
+                        <div class="row" style="margin-top:4px; margin-bottom:0px;">
+                            <h5 class="col-md-3">Street Address:</h5>
+                            <div class="col-md-8"><input class="form-control readonly_ViewPractice" rows="3" cols="20" type="text" ng-value="Street_Address"  ng-model="Street_Address" name="Street_Address" ng-pattern="/^[0-9a-zA-Z','-'\s]{3,}$/" ng-required="true"></div>
+                        </div>
+                        <div class="row" style="margin-top:4px; margin-bottom:0px;">
+                            <h5 class="col-md-3">Suburb:</h5>
+                            <div class="col-md-8"><input class="form-control readonly_ViewPractice" type="text" ng-value="Suburb" ng-model="Suburb" name="Suburb" ng-pattern="/^[a-zA-Z''-'\s]{3,40}$/" ng-required="true"></div>
+                        </div>
+                        <div class="row" style="margin-top:4px; margin-bottom:0px;">
+                            <h5 class="col-md-3">City:</h5>
+                            <div class="col-md-8"><input class="form-control readonly_ViewPractice" type="text" ng-value="City" ng-model="City" name="City" ng-pattern="/^[a-zA-Z''-'\s]{3,40}$/" ng-required="true"></div>
+                        </div>
+                        <div class="row" style="margin-top:4px; margin-bottom:0px;">
+                            <h5 class="col-md-3">Country:</h5>
+                            <div class="col-md-8"><input class="form-control readonly_ViewPractice" type="text" ng-value="Country" ng-model="Country" name="Country" ng-pattern="/^[a-zA-Z''-'\s]{3,40}$/" ng-required="true"></div>
+                        </div>
+                        <div class="row" style="margin-top:4px; margin-bottom:0px;">
+                            <h5 class="col-md-3">Trading Times:</h5>                                                                      
+                            <div class="col-md-8"><textarea class="form-control readonly_ViewPractice" rows="3" cols="20" type="text"  ng-value="Trading_Times" ng-model="Trading_Times" name="Trading_Times" ng-required="true"></textarea></div>
                         </div>
                     </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" id="CloseModel">Close</button>
+                    </div>
                 </div>
-            </form>
+            </div>
         </div><!--View Pratice Modal Ends-->
     </div>
 </div>

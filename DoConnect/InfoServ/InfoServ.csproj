@@ -44,7 +44,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-      <Reference Include="DataClient, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="DataClient, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\Source\Repos\DoConnect\DoConnect\DataClient\bin\Debug\DataClient.dll</HintPath>
     </Reference>
@@ -116,6 +116,12 @@
     <Content Include="InfoServ.asmx" />
     <Content Include="scripts\ai.0.15.0-build58334.js" />
     <Content Include="scripts\ai.0.15.0-build58334.min.js" />
+    <None Include="scripts\jquery-1.4.4-vsdoc.js" />
+    <Content Include="scripts\jquery-1.4.4.js" />
+    <Content Include="scripts\jquery-1.4.4.min.js" />
+    <None Include="scripts\jquery.validate-vsdoc.js" />
+    <Content Include="scripts\jquery.validate.js" />
+    <Content Include="scripts\jquery.validate.min.js" />
     <Content Include="ServiceCall.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

@@ -6,10 +6,6 @@
             return $http.get("/Data/SessionData");
         };
 
-        var GetAllPatients = function () {
-            return $http.get("api/Patients/GetAllPatients");
-        }
-
         var GetPatientByID = function (ID) {
             return $http.get("api/Patients/GetPatient/" + ID);
         }
@@ -26,6 +22,11 @@
         var GetMedicalRecord = function (ID) {
             return $http.get("api/Patients/GetMedicalRecord/" + ID);
         }
+
+        var GetProfileByPatientID = function (ID) {
+            return $http.get("api/Patients/GetProfileByPatientID/" + ID);
+        }
+
 
         var InsertMedicalRecord = function (Doctor_ID, FirstName, LastName, Email, ID_Number, Cell_Number, DOB, Gender, Street_Address, Suburb, City, Country, Patient_Medical_Aid_Medical_Aid_ID, Scheme_Name, Membership_Number, Registration_Date, Deregistration_Date, Allergies, PreviousMedication, PreviousIllnesses, RiskFactors, SocialHistory, FamilyHistory) {
             return $http.post("api/Patients/InsertMedicalRecord",
@@ -91,7 +92,6 @@
         }
         
         var InsertPrescription = function (Patient_ID, Doctor_ID, Consultation_ID, Prescription_DrugDetails_DrugName, Prescription_DrugDetails_Strength, Prescription_DrugDetails_IntakeRoute, Prescription_DrugDetails_Frequency, Prescription_DrugDetails_DispenseNumber, Prescription_DrugDetails_RefillNumber) {
-            console.log(Patient_ID, Doctor_ID, Consultation_ID, Prescription_DrugDetails_DrugName, Prescription_DrugDetails_Strength, Prescription_DrugDetails_IntakeRoute, Prescription_DrugDetails_Frequency, Prescription_DrugDetails_DispenseNumber, Prescription_DrugDetails_RefillNumber);
             return $http.post("api/Patients/InsertPrescription",
             {
                 'Patient_ID': Patient_ID,
@@ -107,7 +107,6 @@
         };
 
         var UpdatePrescription = function (Prescription_ID, Consultation_Diagnosis, Prescription_DrugDetails_DrugName, Prescription_DrugDetails_Strength, IntakeRoute, Frequency, Prescription_DrugDetails_DispenseNumber, Prescription_DrugDetails_RefillNumber) {
-            console.log(Prescription_ID, Consultation_Diagnosis, Prescription_DrugDetails_DrugName, Prescription_DrugDetails_Strength, IntakeRoute, Frequency, Prescription_DrugDetails_DispenseNumber, Prescription_DrugDetails_RefillNumber)
             return $http.post("api/Patients/UpdatePrescription",
             {
                 'Prescription_ID': Prescription_ID,
@@ -132,7 +131,6 @@
 
         //Insert new record ##Patient_ID, Doctor_ID,
         var InsertConsultation = function (Patient_ID, ReasonForConsultation, Symptoms, ClinicalFindings, Diagnosis, TestResultSummary, TreatmentPlan, Presciption_ID, Referral_ID) {
-            console.log(ReasonForConsultation, Symptoms, ClinicalFindings, Diagnosis, TestResultSummary, TreatmentPlan, Presciption_ID, Referral_ID);
             return $http.post("api/Patients/InsertConsultation",
             {
                 'Consultation_Patient_ID': Patient_ID,
@@ -145,6 +143,14 @@
                 'Consultation_TreatmentPlan': TreatmentPlan,
                 'Consultation_Presciption_ID': Presciption_ID,
                 'Consultation_Referral_ID': Referral_ID
+            });
+        };
+
+        var UpdateConsultation_AddAdditionalFee = function (Additionalfee, InvoiceDocMessage) {
+            return $http.post("api/Patients/UpdateConsultation_AddAdditionalFee",
+            {
+                'Additionalfee': Additionalfee,
+                'InvoiceDocMessage': InvoiceDocMessage
             });
         };
 
@@ -167,13 +173,13 @@
 
         return {
             SessionData: SessionData,
-            GetAllPatients: GetAllPatients,
             GetPatientByID: GetPatientByID,
             DeletePatient: DeletePatient,
 
             //MedicalRecord Details
             GetMedical_Aid: GetMedical_Aid,
             GetMedicalRecord: GetMedicalRecord,
+            GetProfileByPatientID: GetProfileByPatientID,
             InsertMedicalRecord: InsertMedicalRecord,
             UpdateMedicalRecord: UpdateMedicalRecord,
 
@@ -186,6 +192,7 @@
             //Consultation Notes
             GetConsultationNotes: GetConsultationNotes,
             InsertConsultation: InsertConsultation,
+            UpdateConsultation_AddAdditionalFee: UpdateConsultation_AddAdditionalFee,
             UpdateConsultationNote: UpdateConsultationNote,
             DeleteConsultationNote: DeleteConsultationNote
         };

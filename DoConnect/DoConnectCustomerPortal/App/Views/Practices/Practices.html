@@ -1,0 +1,175 @@
+﻿<div>
+    <div id="page-wrapper" ng-controller="PracticesController">
+        <div class="row">
+            <div class="span4" />
+            <div class="span4  center-block">
+                <h2 class="page-header text-primary center-block">{{PageTitle_Practices}}</h2>
+            </div>
+            <div class="span4" />
+        </div>
+
+        <div class="panel panel-default">
+            <ul class="nav nav-tabs">
+                <li role="presentation">
+                    <label for="searchKey">Search here: </label>
+                    <input type="text" class="form-control" ng-model="searchKey" placeholder="Johannesburg">
+                </li>
+
+                <li role="presentation">
+                    <label for="disabledSelect">Disabled select menu</label>
+                    <select id="disabledSelect" class="form-control">
+                        <option>Name</option>
+                        <option>Phone_Number</option>
+                        <option>Fax Number</option>
+                        <option>Physical Address</option>
+                        <option>Trading Times</option>
+                    </select>
+                </li>
+            </ul>
+
+            <div class="row"></div>
+
+            <div class="row">
+                <table class="table table-hover">
+                    <thead style="background-color: #f8f8f8;">
+                        <tr>
+                            <th style="width: 20%;" ng-click="sort('Name')">Name<span class="fa sort-icon" ng-show="sortKey=='Name'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                            <th style="width: 10%;" ng-click="sort('Phone_Number')">Phone Number<span class="fa sort-icon" ng-show="sortKey=='Phone_Number'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                            <th style="width: 10%;" ng-click="sort('Fax_Number')">Fax Number<span class="fa sort-icon" ng-show="sortKey=='Fax_Number'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                            <th style="width: 20%;" ng-click="sort('Street_Address')">Physical Address<span class="fa sort-icon" ng-show="sortKey=='Street_Address'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                            <th style="width: 20%;" ng-click="sort('Trading_Times')">Trading Times<span class="fa sort-icon" ng-show="sortKey=='Trading_Times'" ng-class="{'fa-chevron-up':reverse,'fa-chevron-down':!reverse}"></span></th>
+                            <th style="width: 10%;">View on Map</th>
+                            <th style="width: 10%;">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="Practice in Practices | filter : searchKey | limitTo : getlimitTo() | orderBy : getSortKey()">
+                            <td>{{Practice.Name}}</td>
+                            <td>{{Practice.Phone_Number}}</td>
+                            <td>{{Practice.Fax_Number}}</td>
+                            <td>{{Practice.Street_Address}} {{Practice.Suburb}} {{Practice.City}} {{Practice.Country}}</td>
+                            <td>{{Practice.Trading_Times}}</td>
+                            <td>
+                                <a onclick="ShowMap()" role="button" class="btn" data-toggle="modal">View</a>
+                            </td>
+                            <td>
+                                <button class="btn btn-primary btn-xs" ng-click="ViewPractice(Practice.ID)"><i class="icon-eye-open"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="row">
+                <div class="span8 pull-left">
+                    <div class="pagination">
+                        <ul>
+                            <li><a ng-click="setlimitTo(5)">5</a></li>
+                            <li><a ng-click="setlimitTo(10)">10</a></li>
+                            <li><a ng-click="setlimitTo(50)">50</a></li>
+                            <li><a ng-click="setlimitTo(100)">100</a></li>
+                            <li><a ng-click="setlimitTo(1000000)">all</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--View Pratice Modal-->
+        <div id="View_Practice_Modal" class="modal fade">
+            <form name="Form">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title text-primary">Practice Details</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form class="form-horizontal">
+                                <div class="control-group">
+                                    <label class="control-label" for="FirstName">Name</label>
+                                    <div class="controls"> <input type="text" ng-value="Name" ng-model="Name" disabled placeholder="name"> </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="Phone_Number">Phone Number</label>
+                                    <div class="controls"> <input type="text" ng-value="Phone_Number" ng-model="Phone_Number" disabled placeholder="phone number"> </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="Fax_Number">Fax Number</label>
+                                    <div class="controls"> <input type="text" ng-value="Fax_Number" ng-model="Fax_Number" disabled placeholder="fax nNumber"> </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="Street_Address">Street Address</label>
+                                    <div class="controls"> <input type="text" ng-value="Street_Address" ng-model="Street_Address" disabled placeholder="street address"> </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="Suburb">Suburb</label>
+                                    <div class="controls"> <input type="text" ng-value="Suburb" ng-model="Suburb" disabled placeholder="suburb"> </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="City">City</label>
+                                    <div class="controls"> <input type="text" ng-value="City" ng-model="City" disabled placeholder="city"> </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="Country">Country</label>
+                                    <div class="controls"> <input type="text" ng-value="Country" ng-model="Country" disabled placeholder="country"> </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="Trading_Times">Trading Times</label>
+                                    <div class="controls"> <input type="text" ng-value="Trading_Times" ng-model="Trading_Times" disabled placeholder="trading times"> </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div><!--View Pratice Modal Ends-->
+        <!----------------------------------------MODALS------------------------------------------------>
+        <!-- Modal PracticeLocation -->
+        <div id="PracticeLocation" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myModalLabel">View Practice Location</h3>
+            </div>
+            <div class="modal-body">
+                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4i42FpvJBzv1GLcwi8xPf2gGYR74I3XA&callback=initMap" async defer></script>
+                <div class="row">
+                    <div id="map"></div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div id="PracticeMap" style="width:555px; height:400px;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+            </div>
+        </div>
+        <script>
+            function ShowMap() {
+                console.log();
+                $("#PracticeLocation").modal('show');
+                $('#PracticeLocation').on('shown', function () {
+                    google.maps.event.trigger(map, "resize");
+                    initMap();
+                });
+            }
+
+            function initMap() {
+                var uluru = { lat: -26.189106, lng: 28.016523 };
+                var map = new google.maps.Map(document.getElementById('PracticeMap'), {
+                    zoom: 10,
+                    center: uluru
+                });
+                var marker = new google.maps.Marker({
+                    position: uluru,
+                    map: map
+                });
+            }
+        </script>
+    </div>
+</div>
