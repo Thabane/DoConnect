@@ -1573,6 +1573,19 @@ namespace DataClient
             return PracticeInfo;
         }
 
+        public List<Practice> GetPracticeName()
+        {
+            List<Practice> PracticeInfo = new List<Practice>();
+            using (var reader = access.ExecuteReader(Conn, "[GetPracticeName]", new List<SqlParameter>()))
+            {
+                while (reader.Read())
+                {
+                    PracticeInfo.Add(new Practice().PracticeName(reader));
+                }
+            }
+            return PracticeInfo;
+        }
+
         public Practice GetPracticeById(int id)
         {
             List<SqlParameter> _parameters = new List<SqlParameter>();

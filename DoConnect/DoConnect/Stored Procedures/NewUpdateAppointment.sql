@@ -4,7 +4,8 @@
 		@Date_Time DATETIME,
 		@Details NVARCHAR(50),
 		@Patient_ID INT,
-		@Doctor_ID INT
+		@Doctor_ID INT,
+		@Practice_ID INT
 AS
 BEGIN
 
@@ -19,7 +20,8 @@ BEGIN
 			@Date_Time,
 			@Details,
 			@Patient_ID,
-			@Doctor_ID
+			@Doctor_ID,
+			@Practice_ID
 	)
 	AS
     [SOURCE]
@@ -30,6 +32,7 @@ BEGIN
       ,[Details]
       ,[Patient_ID]
       ,[Doctor_ID]
+	  ,[Practice_ID]
 	)
 	ON
 		[TARGET].[ID] = [SOURCE].[ID]
@@ -41,6 +44,7 @@ BEGIN
       ,[Details] = @Details
       ,[Patient_ID] = @Patient_ID
       ,[Doctor_ID] = @Doctor_ID
+	  ,[Practice_ID] = @Practice_ID
 	WHEN NOT MATCHED THEN
 	INSERT
 	(
@@ -48,7 +52,8 @@ BEGIN
 		[Date_Time],	
 		[Details],	
 		[Patient_ID],	
-		[Doctor_ID]
+		[Doctor_ID],
+		[Practice_ID]
 	)
 	VALUES        
 	(
@@ -56,7 +61,8 @@ BEGIN
 		@Date_Time,
 		@Details,
 		@Patient_ID,
-		@Doctor_ID
+		@Doctor_ID,
+		@Practice_ID
 	);
 
 END

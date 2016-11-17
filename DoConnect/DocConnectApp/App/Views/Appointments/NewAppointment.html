@@ -72,6 +72,23 @@
                         </div>
                     </div>
                 </div>
+                <!-- Practice-->
+                <div class="row" style="margin-top:4px; margin-bottom:0px;">
+                    <div class="col-md-3"><h5>Practice Name:</h5></div>
+                    <div class="col-md-8">
+                        <select class="form-control" ng-model="Practice_ID" name="Name" ng-required="true" ng-change="changedValueGetPractices_ID(Practice_ID)" data-ng-options="practice as practice.Name for practice in Practices | orderBy:'Name'">
+                            <option value="">Select Practice</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row" style="margin-top:0px; margin-bottom:8px;">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-8">
+                        <small ng-show="Form.Name.$invalid && Form.Name.$touched && Form.Name.$error.required">Required field.<br></small>
+                    </div>
+                </div>
+            <!--</div>-->
+            <!--Practice-->
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" ng-click="NewAppointment(Details)" ng-disabled="Form.$invalid">Add Appointment</button>
                 </div>

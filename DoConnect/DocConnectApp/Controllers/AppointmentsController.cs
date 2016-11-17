@@ -27,6 +27,14 @@ namespace DoConnectAdmin.Controllers
             return dtLayer.GetAllDoctors();
         }
 
+        [HttpGet]
+        [Route("api/Appointments/GetAllPractices")]
+        public List<Practice> GetAllPractices()
+        {
+            DataLayer dtLayer = new DataLayer();
+            return dtLayer.GetAllPractices();
+        }
+
         [HttpGet] //Select Appointment by ID
         [Route("api/Appointments/GetAppointment/{ID}")]
         public Appointments GetAppointmentByID(int ID)

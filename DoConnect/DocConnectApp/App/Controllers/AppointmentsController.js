@@ -82,6 +82,18 @@
             $scope.DoctorID = item.ID;
         };
 
+        $scope.GetAllPractices = function () {
+            AppointmentsService.getAllPractices().then(function (result) {
+                $scope.Practices = result.data;
+            });
+        };
+        $scope.GetAllPractices();
+
+        $scope.PracticeID = 0;
+        $scope.changedValueGetPractices_ID = function (item) {
+            $scope.PracticeID = item.ID;
+        };
+
         $scope.Seleceted_App_Status = 0;
         $scope.changedValueGetApp_Status = function (item) {
             $scope.Seleceted_App_Status = item.bool;

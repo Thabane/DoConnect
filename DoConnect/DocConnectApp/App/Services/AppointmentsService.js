@@ -14,6 +14,10 @@
             return $http.get("api/Appointments/GetAllDoctors");
         }
 
+        var GetAllPractices = function () {
+            return $http.get("api/Appointments/GetAllPractices");
+        }
+
         var GetAppointmentByID = function (ID) {
             return $http.get("api/Appointments/GetAppointment/" + ID);
         };
@@ -52,7 +56,8 @@
             GetAppointmentByID: GetAppointmentByID,
             InsertAppointment: InsertAppointment,
             UpdateAppointment: UpdateAppointment,
-            DeleteAppointment: DeleteAppointment
+            DeleteAppointment: DeleteAppointment,
+            getAllPractices: GetAllPractices
         };
     }
 ]);

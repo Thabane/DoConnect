@@ -35,5 +35,13 @@ namespace ObjectModel
                 Trading_Times = reader.GetString(reader.GetOrdinal("Trading_Times")),
             };
         }
+
+        public Practice PracticeName(SqlDataReader reader)
+        {
+            return new Practice
+            {
+                Name = reader.GetString(reader.GetOrdinal("Name"))
+            };
+        }
     }
 }
