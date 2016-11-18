@@ -32,7 +32,7 @@ namespace ObjectModel
         public int numTodayApps { get; set; }
         public int numYesterdayApps { get; set; }
         public int numTomorrowApps          { get; set; }
-
+        public int t = 0;
         public Appointments Create(SqlDataReader reader)
         {
             return new Appointments
