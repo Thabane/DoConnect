@@ -208,6 +208,36 @@
                 </div>
             </div>
         </div><!-- /.2nd row -->
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <div class="portlet light" style="border: 1px solid #ddd; border-radius: 4px;" ng-init="GetMedicineInventoryStockCount(Practice.ID)">
+                    <div class="portlet-title">
+                        <div class="caption caption-md">
+                            <i class="icon-bar-chart font-dark hide"></i>
+                            <span class="caption-subject font-green-steel uppercase bold">Appointment by doctor</span>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <div class="row">
+                            <div>
+                                <i>Total income is: R{{Total}}</i>
+                            </div>
+                        </div>
+                        <div class="row" id="" style="width: 100%; height: 190px;"></div>
+                    </div>
+                </div>
+                </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="portlet light" style="border: 1px solid #ddd; border-radius: 4px;" ng-init="GetMedicineInventoryStockCount(Practice.ID)">
+                    <div class="portlet-title">
+                        <div class="caption caption-md">
+                            <i class="icon-bar-chart font-dark hide"></i>
+                            <span class="caption-subject font-green-steel uppercase bold">Appointment by Practice</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!--AppointmentsModal-->
         <div id="AppointmentsModal" class="modal fade">
             <form>
